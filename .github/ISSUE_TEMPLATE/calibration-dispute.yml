@@ -1,0 +1,67 @@
+name: Calibration dispute
+description: A published accuracy number is wrong.
+title: 'calibration: dispute '
+labels: ['type:calibration-dispute', 'track:calibration']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The published number being wrong is a defect in the thing this project is for, so this
+        outranks a feature request.
+
+        If you cannot reproduce `calibration/table.json` from a clean clone with `pnpm calibrate`,
+        that is the same issue and possibly a worse one. Say so.
+  - type: input
+    id: act-id
+    attributes:
+      label: ACT rule identifier
+      placeholder: c487ae
+    validations:
+      required: true
+  - type: dropdown
+    id: engine
+    attributes:
+      label: Engine
+      options:
+        - marlo
+        - axe-core
+        - alfa
+        - htmlcs
+        - the routing choice between them
+    validations:
+      required: true
+  - type: input
+    id: published
+    attributes:
+      label: What the table says
+      placeholder: 'strict recall 0.62, ACT consistency: partial'
+    validations:
+      required: true
+  - type: input
+    id: measured
+    attributes:
+      label: What you measured
+      placeholder: 'strict recall 0.88'
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: How you measured it
+      description: >
+        The command, the corpus revision, and the environment. If you used a different corpus or a
+        different grading protocol, that is important and probably the explanation.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledge
+    attributes:
+      label: Which view
+      description: >
+        The table publishes two views. ACT consistency follows the official protocol, in which
+        cantTell is an allowed outcome everywhere. Strict precision and recall count cantTell as no
+        detection. They disagree on purpose. See DECISIONS.md D-004.
+      options:
+        - label: I am disputing the ACT consistency verdict
+        - label: I am disputing strict precision or recall
+        - label: I am disputing the cantTell counts

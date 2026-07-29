@@ -1,0 +1,59 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'deps'
+      prefix-development: 'deps(dev)'
+    labels: ['type:chore', 'track:infra']
+    groups:
+      # Grouped so a routine week is one pull request rather than nine. Ungrouped
+      # updates get ignored in batches, which is how a project ends up with a
+      # year of unreviewed bumps.
+      engines:
+        patterns: ['axe-core', '@siteimprove/*', 'html_codesniffer']
+        update-types: ['minor', 'patch']
+      toolchain:
+        patterns:
+          - 'typescript'
+          - 'typescript-eslint'
+          - 'eslint*'
+          - 'prettier'
+          - 'vitest'
+          - '@vitest/*'
+          - 'dependency-cruiser'
+        update-types: ['minor', 'patch']
+      cloudflare:
+        patterns: ['wrangler', '@cloudflare/*']
+      types:
+        patterns: ['@types/*']
+    ignore:
+      # An engine major is a calibration event, not a dependency bump: the table
+      # has to be regenerated and the diff reviewed rule by rule. Those arrive as
+      # a deliberate pull request.
+      - dependency-name: 'axe-core'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@siteimprove/*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'html_codesniffer'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Etc/UTC
+    commit-message:
+      prefix: 'ci'
+    labels: ['type:chore', 'track:infra']
+    groups:
+      actions:
+        patterns: ['*']

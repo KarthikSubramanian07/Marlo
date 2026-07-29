@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/KarthikSubramanian07/Marlo/security/advisories/new
+    about: Report privately. Do not open a public issue. A way to make Marlo report a fix as verified when it is not belongs here.
+  - name: Question about using Marlo
+    url: https://github.com/KarthikSubramanian07/Marlo/discussions
+    about: Ask in Discussions. If the answer turns out to be a documentation gap, we will open the issue ourselves.

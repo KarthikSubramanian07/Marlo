@@ -1,0 +1,90 @@
+# The label taxonomy as committed configuration, so it is reviewable and
+# reproducible rather than living only in the repository settings.
+#
+# Apply with:  node scripts/sync-labels.mjs
+#
+# Three axes, deliberately orthogonal so a query like
+# "label:track:detection label:type:false-positive label:effort:small" is useful.
+#
+#   track:  which of the four workstreams owns it. See WORKSTREAMS.md.
+#   type:   what kind of thing it is.
+#   effort: how big, for someone picking work up cold.
+#
+# Plus two that are not on an axis and earn their place:
+#
+#   needs:human-judgment marks work a capable model should not do alone. The
+#   standard is in HANDOFF.md: if a model could do it correctly with the
+#   information available, it should already have been done.
+#
+#   honesty marks a case where Marlo was wrong. Those end up in HONESTY.md.
+
+- name: 'track:detection'
+  color: '1d4ed8'
+  description: Engines, adapters, ACT rule implementations, the accessibility tree
+- name: 'track:calibration'
+  color: '7c3aed'
+  description: The corpus, the harness, the table, accuracy claims
+- name: 'track:repair'
+  color: 'b45309'
+  description: Locating source, generating edits, verification
+- name: 'track:surfaces'
+  color: '0f766e'
+  description: CLI, MCP server, GitHub Action, library, site
+- name: 'track:infra'
+  color: '525252'
+  description: CI, tooling, release, supply chain
+
+- name: 'type:bug'
+  color: 'b91c1c'
+  description: Marlo does something incorrect
+- name: 'type:false-positive'
+  color: 'dc2626'
+  description: Marlo reported a violation that is not one. The highest-value report we receive
+- name: 'type:false-negative'
+  color: 'ea580c'
+  description: Marlo missed a violation a peer engine or a human found
+- name: 'type:new-rule'
+  color: '15803d'
+  description: Implement an ACT rule Marlo does not yet cover
+- name: 'type:calibration-dispute'
+  color: '9333ea'
+  description: A published accuracy number is claimed to be wrong
+- name: 'type:wcag-interpretation'
+  color: '0891b2'
+  description: A question about what a success criterion requires
+- name: 'type:feature'
+  color: '0284c7'
+  description: New capability
+- name: 'type:docs'
+  color: '0369a1'
+  description: Documentation only
+- name: 'type:chore'
+  color: '6b7280'
+  description: Maintenance, no behaviour change
+
+- name: 'needs:human-judgment'
+  color: 'be185d'
+  description: Requires taste, authority, or a decision a model should not make alone
+- name: 'needs:decision'
+  color: 'a21caf'
+  description: Blocked on a maintainer decision recorded in DECISIONS.md
+- name: 'blocked'
+  color: '78350f'
+  description: Waiting on another issue
+
+- name: 'effort:small'
+  color: 'e5e7eb'
+  description: Under half a day
+- name: 'effort:medium'
+  color: 'd1d5db'
+  description: One to three days
+- name: 'effort:large'
+  color: '9ca3af'
+  description: More than three days, or needs a design first
+
+- name: 'good first issue'
+  color: '7057ff'
+  description: One rule, one function, one fixture set. Start here
+- name: 'honesty'
+  color: '000000'
+  description: A case where Marlo was wrong. Goes in HONESTY.md
