@@ -32,7 +32,7 @@ Two artifacts are load-bearing and everything else is a consumer of them:
 
 The decision worth defending is that the codemod core is TypeScript rather than Rust compiled to WASM. The brief explicitly permitted Rust and asked for the tradeoff.
 
-Against Rust: the four engineers who inherit this are being handed a project whose contribution funnel is *new ACT rule implementations*. A rule is a pure function over a DOM. The single most important property of this repository is that a contributor can add a rule without reading the pipeline. A Rust-to-WASM core means a contributor adding a rule needs a Rust toolchain, needs to understand the WASM boundary, and cannot use the same DOM types the rest of the codebase uses. That cost is paid on every contribution, forever.
+Against Rust: the four engineers who inherit this are being handed a project whose contribution funnel is _new ACT rule implementations_. A rule is a pure function over a DOM. The single most important property of this repository is that a contributor can add a rule without reading the pipeline. A Rust-to-WASM core means a contributor adding a rule needs a Rust toolchain, needs to understand the WASM boundary, and cannot use the same DOM types the rest of the codebase uses. That cost is paid on every contribution, forever.
 
 For Rust: parser performance, and memory safety in the edit-application path.
 
@@ -50,15 +50,15 @@ The measurement that settles it: the whole pipeline against the demo app, includ
 
 ### Cost, stated as a claim that can be checked
 
-| Component | Where it runs | Cost at any scale |
-|---|---|---|
-| CLI, library, MCP server | The caller's machine | Zero |
-| Engines, static renderer | In-process | Zero |
-| Calibration regeneration | GitHub Actions, public repo | Zero, unmetered |
-| Browser renderer, screenshots | The caller's machine or their CI | Zero, unmetered on public repos |
-| Site | Cloudflare Pages, static | Zero, no egress charge |
-| Calibration API | One Worker, free tier | Zero within 100k requests/day |
-| `RemoteRenderer` | Cloudflare Browser Rendering | **The first dollar.** Seam only. [D-007](DECISIONS.md#d-007) |
+| Component                     | Where it runs                    | Cost at any scale                                            |
+| ----------------------------- | -------------------------------- | ------------------------------------------------------------ |
+| CLI, library, MCP server      | The caller's machine             | Zero                                                         |
+| Engines, static renderer      | In-process                       | Zero                                                         |
+| Calibration regeneration      | GitHub Actions, public repo      | Zero, unmetered                                              |
+| Browser renderer, screenshots | The caller's machine or their CI | Zero, unmetered on public repos                              |
+| Site                          | Cloudflare Pages, static         | Zero, no egress charge                                       |
+| Calibration API               | One Worker, free tier            | Zero within 100k requests/day                                |
+| `RemoteRenderer`              | Cloudflare Browser Rendering     | **The first dollar.** Seam only. [D-007](DECISIONS.md#d-007) |
 
 No fixed monthly floor. Nothing that becomes a bill when the project gets popular except the one component that is deliberately not built.
 
@@ -68,21 +68,21 @@ No fixed monthly floor. Nothing that becomes a bill when the project gets popula
 
 Pure logic is separated from I/O by package boundary, not by convention. `schema`, `act`, and `rules` have no I/O and no framework imports at all; a test asserting that is part of the lint step.
 
-| Package | I/O | Responsibility |
-|---|---|---|
-| `@marlo/schema` | none | Every artifact type, and its Zod validator. The vocabulary. |
-| `@marlo/act` | reads corpus at init | The 94 rules, WCAG mappings, the official grading protocol, coverage arithmetic. |
-| `@marlo/rules` | none | Marlo's own ACT rule implementations. One rule, one function, one fixture set. The contribution surface. |
-| `@marlo/render` | DOM, browser | The renderer seam and the capability model. |
-| `@marlo/engines` | via render | Peer engine adapters and the hand-written engine-rule to ACT-rule mappings. |
-| `@marlo/calibrate` | fs | Runs engines over the corpus, produces the table, computes both accuracy views. |
-| `@marlo/repair` | fs | Locate, generate byte-range edits, apply, verify. Property-tested. |
-| `@marlo/report` | none | SARIF, terminal output, PR body, JSON. The one-directional invariant. |
-| `@marlo/cli` | everything | `marlo scan`, `marlo fix`, `marlo calibrate`, `marlo explain`. |
-| `@marlo/mcp` | stdio | `marlo_check`, `marlo_repair`, `marlo_explain`, `marlo_calibration`. |
-| `@marlo/action` | GitHub | CI gate and PR comment. |
-| `apps/demo` | fixtures | The deliberately broken app. Fixtures with a story. |
-| `apps/site` | Cloudflare | `trymarlo.pages.dev`. |
+| Package            | I/O                  | Responsibility                                                                                           |
+| ------------------ | -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `@marlo/schema`    | none                 | Every artifact type, and its Zod validator. The vocabulary.                                              |
+| `@marlo/act`       | reads corpus at init | The 94 rules, WCAG mappings, the official grading protocol, coverage arithmetic.                         |
+| `@marlo/rules`     | none                 | Marlo's own ACT rule implementations. One rule, one function, one fixture set. The contribution surface. |
+| `@marlo/render`    | DOM, browser         | The renderer seam and the capability model.                                                              |
+| `@marlo/engines`   | via render           | Peer engine adapters and the hand-written engine-rule to ACT-rule mappings.                              |
+| `@marlo/calibrate` | fs                   | Runs engines over the corpus, produces the table, computes both accuracy views.                          |
+| `@marlo/repair`    | fs                   | Locate, generate byte-range edits, apply, verify. Property-tested.                                       |
+| `@marlo/report`    | none                 | SARIF, terminal output, PR body, JSON. The one-directional invariant.                                    |
+| `@marlo/cli`       | everything           | `marlo scan`, `marlo fix`, `marlo calibrate`, `marlo explain`.                                           |
+| `@marlo/mcp`       | stdio                | `marlo_check`, `marlo_repair`, `marlo_explain`, `marlo_calibration`.                                     |
+| `@marlo/action`    | GitHub               | CI gate and PR comment.                                                                                  |
+| `apps/demo`        | fixtures             | The deliberately broken app. Fixtures with a story.                                                      |
+| `apps/site`        | Cloudflare           | `trymarlo.pages.dev`.                                                                                    |
 
 `@marlo/rules` importing anything from `@marlo/engines` would invert the dependency and make Marlo's own engine unmeasurable against its peers on equal terms. Enforced by a dependency-cruiser rule, not by asking nicely.
 
@@ -92,27 +92,27 @@ Pure logic is separated from I/O by package boundary, not by convention. `schema
 
 Dependency order, so `main` stays deployable at every merge.
 
-| # | Branch | Delivers | Depends on |
-|---|---|---|---|
-| 1 | `docs/research-gate` | RESEARCH.md, PLAN.md, DECISIONS.md, licence ledger | nothing |
-| 2 | `chore/repo-foundation` | Workspace, strict TS, lint, format, hooks, CI skeleton, community health files, labels, templates | 1 |
-| 3 | `feat/act-corpus` | Vendored corpus, `@marlo/act`, grading protocol, coverage arithmetic | 2 |
-| 4 | `feat/schema` | `@marlo/schema` | 2 |
-| 5 | `feat/render-seam` | `@marlo/render`, capability model | 4 |
-| 6 | `feat/engines` | `@marlo/engines`, three adapters, ACT mappings | 3, 5 |
-| 7 | `feat/marlo-rules` | `@marlo/rules`, accessible name computation, the rule set | 3, 4 |
-| 8 | `feat/calibration` | `@marlo/calibrate`, `calibration/table.json`, the CI job that asserts it | 6, 7 |
-| 9 | `feat/routing` | Routing, one-directional invariant, confidence scoring | 8 |
-| 10 | `feat/repair` | Locate, edits, codemods, alt-text policy, property tests | 7, 9 |
-| 11 | `feat/verify` | The verification loop | 10 |
-| 12 | `feat/report` | SARIF, terminal, PR body, forbidden-claims check | 9, 11 |
-| 13 | `feat/cli` | `@marlo/cli` | 12 |
-| 14 | `feat/mcp` | `@marlo/mcp` | 12 |
-| 15 | `feat/action` | `@marlo/action`, safety boundary in scopes | 12 |
-| 16 | `feat/demo-app` | `apps/demo`, end-to-end test, golden diff and PR body | 13 |
-| 17 | `feat/site` | `apps/site`, SEO, OG images, no-theatre tests | 8 |
-| 18 | `ci/hardening` | Full pipeline, coverage gate, perf budget, self-audit, supply chain | 16, 17 |
-| 19 | `docs/handoff` | HANDOFF, WORKSTREAMS, HONESTY, screenshots, README | 18 |
+| #   | Branch                  | Delivers                                                                                          | Depends on |
+| --- | ----------------------- | ------------------------------------------------------------------------------------------------- | ---------- |
+| 1   | `docs/research-gate`    | RESEARCH.md, PLAN.md, DECISIONS.md, licence ledger                                                | nothing    |
+| 2   | `chore/repo-foundation` | Workspace, strict TS, lint, format, hooks, CI skeleton, community health files, labels, templates | 1          |
+| 3   | `feat/act-corpus`       | Vendored corpus, `@marlo/act`, grading protocol, coverage arithmetic                              | 2          |
+| 4   | `feat/schema`           | `@marlo/schema`                                                                                   | 2          |
+| 5   | `feat/render-seam`      | `@marlo/render`, capability model                                                                 | 4          |
+| 6   | `feat/engines`          | `@marlo/engines`, three adapters, ACT mappings                                                    | 3, 5       |
+| 7   | `feat/marlo-rules`      | `@marlo/rules`, accessible name computation, the rule set                                         | 3, 4       |
+| 8   | `feat/calibration`      | `@marlo/calibrate`, `calibration/table.json`, the CI job that asserts it                          | 6, 7       |
+| 9   | `feat/routing`          | Routing, one-directional invariant, confidence scoring                                            | 8          |
+| 10  | `feat/repair`           | Locate, edits, codemods, alt-text policy, property tests                                          | 7, 9       |
+| 11  | `feat/verify`           | The verification loop                                                                             | 10         |
+| 12  | `feat/report`           | SARIF, terminal, PR body, forbidden-claims check                                                  | 9, 11      |
+| 13  | `feat/cli`              | `@marlo/cli`                                                                                      | 12         |
+| 14  | `feat/mcp`              | `@marlo/mcp`                                                                                      | 12         |
+| 15  | `feat/action`           | `@marlo/action`, safety boundary in scopes                                                        | 12         |
+| 16  | `feat/demo-app`         | `apps/demo`, end-to-end test, golden diff and PR body                                             | 13         |
+| 17  | `feat/site`             | `apps/site`, SEO, OG images, no-theatre tests                                                     | 8          |
+| 18  | `ci/hardening`          | Full pipeline, coverage gate, perf budget, self-audit, supply chain                               | 16, 17     |
+| 19  | `docs/handoff`          | HANDOFF, WORKSTREAMS, HONESTY, screenshots, README                                                | 18         |
 
 ---
 
