@@ -1,0 +1,70 @@
+name: False positive report
+description: Marlo flagged something that is not a violation. This is the most useful report we receive.
+title: 'False positive: '
+labels: ['type:false-positive', 'track:detection']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. A false positive is worse than a miss, because it costs a developer time and
+        teaches them to ignore the tool.
+
+        You do not need to know which ACT rule fired, which engine reported it, or why. If you have
+        `marlo scan --json` output, paste it in the last field and skip everything else.
+
+        Every confirmed false positive becomes a negative fixture, so the same mistake fails the
+        build in future.
+  - type: textarea
+    id: markup
+    attributes:
+      label: The markup
+      description: The smallest snippet that reproduces it. Trim anything not needed.
+      render: html
+      placeholder: |
+        <img src="logo.svg" alt="" role="presentation">
+    validations:
+      required: true
+  - type: textarea
+    id: reported
+    attributes:
+      label: What Marlo said
+      description: Paste the terminal output, the pull request comment, or the JSON.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is not a violation
+      description: >
+        In your own words. "Because the image is decorative and I said so twice" is a complete
+        answer. If you are quoting a success criterion or an ACT rule, even better, but it is not
+        required.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Marlo version
+      description: '`marlo --version`, or the commit if you are running from source.'
+    validations:
+      required: false
+  - type: dropdown
+    id: renderer
+    attributes:
+      label: Renderer
+      description: Default is static unless you passed --renderer.
+      options:
+        - static (default)
+        - browser
+        - not sure
+    validations:
+      required: false
+  - type: textarea
+    id: json
+    attributes:
+      label: Full JSON output, if you have it
+      description: '`marlo scan --json`. This makes the fixture almost automatic.'
+      render: json
+    validations:
+      required: false

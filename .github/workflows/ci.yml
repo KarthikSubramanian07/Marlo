@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+
+# A slow pipeline gets bypassed and becomes worthless, so superseded runs are
+# cancelled rather than queued.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+# Least privilege by default. Jobs that need more say so themselves.
+permissions:
+  contents: read
+
+env:
+  # Turn off the interactive noise and the update nag. Both slow CI and neither
+  # tells anyone anything.
+  CI: 'true'
+  DO_NOT_TRACK: '1'
+  PNPM_HOME: ${{ github.workspace }}/.pnpm
+
+jobs:
+  # One job installs and caches; everything else reuses it. Splitting into a
+  # matrix of installs would triple the network time for no signal.
+  static:
+    name: Typecheck, lint, format
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # check-signoff needs the branch's commits, not a single squashed one.
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint:code
+
+      - name: Architecture rules
+        # DECISIONS.md D-008: @marlo/rules must not be able to see its peers.
+        # This is the job that enforces it.
+        run: pnpm run lint:deps
+
+      - name: Format
+        run: pnpm run format:check
+
+  claims:
+    name: Claims and prose
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Forbidden claims
+        # "certified", "guaranteed compliant", "fully accessible" and the rest,
+        # anywhere in the repository including generated output. No suppression
+        # comment exists, by design.
+        run: node scripts/check-claims.mjs
+
+      - name: Prose rules
+        run: node scripts/check-prose.mjs
+
+  test:
+    name: Test (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        # The floor from package.json engines, and current, so a break on either
+        # side is visible.
+        node: ['22.11.0', '24']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Unit tests
+        # No network, no API keys, no browser binary. If this needs any of them,
+        # that is the bug.
+        run: pnpm vitest run --project unit
+
+  dco:
+    name: DCO sign-off
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Every commit is signed off
+        # Marlo uses the DCO rather than a CLA. DECISIONS.md D-001.
+        run: |
+          node scripts/check-signoff.mjs --range \
+            "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
