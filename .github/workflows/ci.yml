@@ -72,9 +72,11 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Forbidden claims
-        # "certified", "guaranteed compliant", "fully accessible" and the rest,
-        # anywhere in the repository including generated output. No suppression
-        # comment exists, by design.
+        # Every claim Marlo is not entitled to make, anywhere in the
+        # repository including generated output. The list lives in
+        # scripts/lib/rule-data.mjs, which is the one file the scanner skips,
+        # because a checker cannot scan the file defining the phrase it
+        # forbids. No suppression comment exists, by design.
         run: node scripts/check-claims.mjs
 
       - name: Prose rules
