@@ -16,7 +16,7 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 - The research gate: `RESEARCH.md`, `PLAN.md`, `DECISIONS.md`, and the third-party licence ledger.
 - Repository foundation: pnpm workspace, TypeScript in strict mode with `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`, ESLint, Prettier, dependency-cruiser rules that assert the architecture, pre-commit hooks that mirror CI.
-- The forbidden-claims check. Fails the build if "certified", "guaranteed compliant", "fully accessible", "eliminates risk", or a hard-coded perfect score appears anywhere in the repository, including in generated output. There is no suppression comment.
+- The forbidden-claims check. Nine phrases Marlo is not entitled to say, each with the reason it is refused, listed in `scripts/lib/rule-data.mjs`. Fails the build if any appears anywhere in the repository, including in generated output. There is no suppression comment.
 - The prose check. No em dashes, no AI slop vocabulary.
 - DCO sign-off enforcement, locally in a commit hook and in CI as a required status.
 - Issue templates that route: false positive, false negative, new rule, calibration dispute, WCAG interpretation, bug. The false positive path is the shortest one in the repository, on purpose.
