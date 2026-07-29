@@ -22,6 +22,12 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - Issue templates that route: false positive, false negative, new rule, calibration dispute, WCAG interpretation, bug. The false positive path is the shortest one in the repository, on purpose.
 - Label taxonomy as committed configuration in `.github/labels.yml`, applied by `scripts/sync-labels.mjs`.
 
+- The ACT-Rules Community corpus vendored into `corpus/act/`: 1134 official test cases across 91 rules, under the W3C Software and Document Licence with the notice and a SHA-256 manifest. `pnpm corpus:verify` fails on a modified byte, on an unlisted file, and on a drift in the documented totals.
+
+### Coverage
+
+- Denominator established: **94 published ACT rules**, 91 of which carry official test cases. Nothing is implemented yet, so the fraction is 0 of 94.
+
 ### Notes
 
 - `trymarlo.pages.dev` is the canonical URL. `marlo.pages.dev` was taken: Cloudflare assigned a suffixed subdomain, which is not the documented target, so the project was recreated under the fallback name from the build brief.
