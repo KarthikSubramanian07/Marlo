@@ -1,0 +1,40 @@
+# Pre-commit hooks mirror CI. If a hook passes and CI fails, one of them is
+# lying, and the hook is the one that gets ignored afterwards.
+#
+# Everything here is fast. The calibration job and the browser tests are not
+# here on purpose: a hook that takes a minute gets bypassed with --no-verify
+# within a week and then protects nothing.
+
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: '*.{ts,js,mjs,cjs,json,md,yml,yaml,css,html}'
+      run: pnpm prettier --check {staged_files}
+    lint:
+      glob: '*.ts'
+      run: pnpm eslint --max-warnings 0 {staged_files}
+    prose:
+      glob: '*.{md,ts,js,mjs,html}'
+      run: node scripts/check-prose.mjs {staged_files}
+    claims:
+      glob: '*.{md,ts,js,mjs,html,json,yml}'
+      run: node scripts/check-claims.mjs {staged_files}
+    corpus-is-immutable:
+      glob: 'corpus/**'
+      run: node scripts/verify-act-corpus.mjs
+
+pre-push:
+  parallel: false
+  commands:
+    typecheck:
+      run: pnpm typecheck
+    test:
+      run: pnpm vitest run --project unit
+
+commit-msg:
+  commands:
+    dco:
+      # The DCO check is a required status on GitHub. Catching it here saves a
+      # push, a red check, and an amend.
+      run: node scripts/check-signoff.mjs {1}
