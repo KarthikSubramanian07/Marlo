@@ -1,0 +1,37 @@
+# Review ownership. Until there are more maintainers, everything routes to one
+# person; the structure is here so adding the four engineers is one line each
+# rather than a reorganisation.
+#
+# The reason this file is granular rather than a single catch-all: the two things
+# most damaging to get wrong are the accuracy claims and the safety boundary, and
+# both should be impossible to change without the right person looking.
+
+*                               @KarthikSubramanian07
+
+# The load-bearing artifact. Every downstream claim rests on it, and a hand edit
+# here is how a published error rate becomes a marketing number.
+/calibration/                   @KarthikSubramanian07
+/packages/calibrate/            @KarthikSubramanian07
+/packages/act/                  @KarthikSubramanian07
+
+# The grading protocol and the invariant. An uncovered branch in either is a path
+# where Marlo reports clean while a peer reported a failure.
+/packages/report/src/invariant.ts  @KarthikSubramanian07
+
+# Vendored under the W3C Software and Document Licence and digest-verified.
+# A change here should be a regeneration commit, never a hand edit.
+/corpus/                        @KarthikSubramanian07
+
+# The safety boundary. Marlo never merges, never pushes to a default branch,
+# never deploys. Encoded in scopes and asserted in tests.
+/packages/action/               @KarthikSubramanian07
+/SECURITY.md                    @KarthikSubramanian07
+
+# Claims about what Marlo does. Wording here is a product promise.
+/README.md                      @KarthikSubramanian07
+/HONESTY.md                     @KarthikSubramanian07
+/DECISIONS.md                   @KarthikSubramanian07
+/docs/licenses.md               @KarthikSubramanian07
+
+# A tool that can edit its own CI can disable the checks that constrain it.
+/.github/                       @KarthikSubramanian07

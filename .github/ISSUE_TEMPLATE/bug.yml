@@ -1,0 +1,61 @@
+name: Bug
+description: Marlo does something incorrect that is not a detection accuracy problem.
+title: 'bug: '
+labels: ['type:bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a wrong finding use the false positive or false negative template instead: those route
+        to the corpus and become fixtures. This one is for everything else, including a repair that
+        produced a bad diff, a crash, or a surface behaving wrongly.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: A command and an input. A repository link is fine.
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - CLI
+        - MCP server
+        - GitHub Action
+        - Library
+        - Site
+        - Calibration pipeline
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: '`marlo --version`, Node version, operating system, renderer.'
+      render: text
+    validations:
+      required: true
+  - type: checkboxes
+    id: verified-fix
+    attributes:
+      label: One thing worth flagging separately
+      options:
+        - label: >
+            Marlo reported a fix as verified and the criterion was still failing. If this is
+            checked, please close this and report it privately instead: a forged verification is a
+            security issue, not a bug. See SECURITY.md.
