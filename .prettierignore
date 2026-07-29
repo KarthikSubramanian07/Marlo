@@ -1,0 +1,11 @@
+# Vendored under the W3C Software and Document Licence. Reformatting it would be
+# an unmarked modification, which the licence forbids, and would change digests.
+corpus/
+
+pnpm-lock.yaml
+dist/
+coverage/
+docs/screenshots/
+tests/golden/
+calibration/table.json
+calibration/history/
