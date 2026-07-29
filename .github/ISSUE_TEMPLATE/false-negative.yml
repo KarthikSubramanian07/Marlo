@@ -1,0 +1,46 @@
+name: False negative report
+description: Marlo said clean, and it was not. A gap rather than a lie, but still worth fixing.
+title: 'False negative: '
+labels: ['type:false-negative', 'track:detection']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing, one thing worth checking: if the violation is contrast, visible focus, zoom
+        clipping, orientation, or a keyboard trap, Marlo reports those as `unsupported` rather than
+        as passing when the default renderer is active, because they need CSS layout. Try
+        `--renderer browser`. If it still says clean, that is a real false negative and this is the
+        right place.
+  - type: textarea
+    id: markup
+    attributes:
+      label: The markup with the violation
+      render: html
+    validations:
+      required: true
+  - type: textarea
+    id: criterion
+    attributes:
+      label: What is wrong with it
+      description: The success criterion, the ACT rule, or a plain description of what a user would hit.
+    validations:
+      required: true
+  - type: input
+    id: other-tool
+    attributes:
+      label: Did another tool find it
+      description: >
+        If axe, Alfa, HTML CodeSniffer, or a manual audit caught this and Marlo did not, say which.
+        That is a one-directional invariant violation and it is more serious than a plain gap.
+    validations:
+      required: false
+  - type: dropdown
+    id: renderer
+    attributes:
+      label: Renderer used
+      options:
+        - static (default)
+        - browser
+        - both
+    validations:
+      required: true

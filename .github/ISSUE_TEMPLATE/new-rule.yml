@@ -1,0 +1,73 @@
+name: New ACT rule proposal
+description: Implement an ACT rule Marlo does not yet cover.
+title: 'rules: implement '
+labels: ['type:new-rule', 'track:detection']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Marlo implements a fraction of the 94 published ACT rules, and the fraction is printed in
+        the README with its denominator. Closing that gap is the primary contribution path.
+
+        One rule is one file, one registry entry, and one fixture set. See
+        [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#add-an-act-rule). You should not need to read
+        the pipeline; if you do, that is a bug in the rule interface and worth its own issue.
+  - type: input
+    id: act-id
+    attributes:
+      label: ACT rule identifier
+      description: Six characters, from https://act-rules.github.io/rules/
+      placeholder: b5c3f8
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Rule name
+      placeholder: HTML page has lang attribute
+    validations:
+      required: true
+  - type: input
+    id: criteria
+    attributes:
+      label: WCAG success criteria
+      description: As listed in the ACT rule's own metadata, not your reading of it.
+      placeholder: 3.1.1
+    validations:
+      required: true
+  - type: dropdown
+    id: capability
+    attributes:
+      label: Renderer capability required
+      description: >
+        If the rule reads a computed style, a bounding box, paint order, or anything that needs CSS
+        to have been applied, it requires layout. Declaring dom when you need layout produces a
+        false negative Marlo cannot see, which is worse than not implementing the rule.
+      options:
+        - dom
+        - dom and layout
+        - dom and paint
+        - dom and script
+        - not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: fixable
+    attributes:
+      label: Is a fix verifiable
+      options:
+        - Auto-fixable, the correct repair is unambiguous
+        - Fixable only where the page supplies the meaning
+        - Detect and locate, never auto-fix
+        - Not sure yet
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything tricky
+      description: >
+        Cases where the ACT rule's applicability is narrower than it looks, or where the official
+        test cases disagree with intuition. This field is where the value of the issue usually is.
+    validations:
+      required: false
