@@ -27,8 +27,11 @@
  * scripts/lib/rule-data.test.mjs, which asserts the skip list is exactly this
  * one path. Adding a second file to it fails the build.
  *
- * Dash patterns use escapes rather than literal characters, so those two rules
- * would be self-clean even without the exclusion.
+ * Every rule carries its own `example`, a string that must trip its pattern. The
+ * examples live here rather than in the test for the same reason the patterns do:
+ * a test file full of worked examples of forbidden phrases is a file the scanners
+ * would have to skip as well, and then there would be two holes instead of one.
+ * The test iterates over `example` rather than keeping its own copies.
  */
 
 /** The one path both checkers skip. Asserted by rule-data.test.mjs. */
@@ -42,11 +45,13 @@ export const SELF = 'scripts/lib/rule-data.mjs';
 export const FORBIDDEN_CLAIMS = [
   {
     id: 'wcag-certified',
+    example: 'Marlo is WCAG certified.',
     pattern: /\bwcag[\s-]*certified\b/gi,
     reason: 'No body issues WCAG conformance certificates. There is nothing to be certified by.',
   },
   {
     id: 'certified',
+    example: 'Our output is certified by us.',
     pattern: /\bcertified\b/gi,
     reason:
       'Marlo provides automated analysis and verified repair, not legal certification. ' +
@@ -54,17 +59,20 @@ export const FORBIDDEN_CLAIMS = [
   },
   {
     id: 'guaranteed-compliance',
+    example: 'guaranteed compliance with the standard',
     pattern: /\bguarantee(?:d|s)?\s+(?:wcag\s+)?compliance?\b|\bguaranteed\s+compliant\b/gi,
     reason: 'Automation reaches a minority of WCAG criteria. A guarantee would be a lie.',
   },
   {
     id: 'fully-accessible',
+    example: 'your site is fully accessible',
     pattern: /\bfully\s+(?:accessible|compliant|conformant)\b/gi,
     reason:
       'A tool cannot establish full accessibility. Publish the fraction with its denominator.',
   },
   {
     id: 'perfect-score',
+    example: 'scored 100% compliant',
     pattern: /\b100\s*%\s*(?:compliant|accessible|conformant|conformance|coverage)\b/gi,
     reason:
       'The sibling PDF project printed exactly this while producing documents no validator ' +
@@ -72,21 +80,25 @@ export const FORBIDDEN_CLAIMS = [
   },
   {
     id: 'eliminates-risk',
+    example: 'eliminates ADA risk',
     pattern: /\beliminates?\s+(?:ada\s+|legal\s+|litigation\s+)?risk\b/gi,
     reason: 'Marlo reduces specific measurable defects. It does not eliminate legal exposure.',
   },
   {
     id: 'zero-risk',
+    example: 'zero legal risk',
     pattern: /\bzero\s+(?:legal|ada|litigation)\s+risk\b/gi,
     reason: 'The same claim phrased the other way round.',
   },
   {
     id: 'lawsuit-proof',
+    example: 'lawsuit-proof your product',
     pattern: /\blawsuit[\s-]*proof\b|\bada[\s-]*proof\b/gi,
     reason: 'Overlay vendor language. A regulator has already intervened over claims like this.',
   },
   {
     id: 'comprehensive-coverage',
+    example: 'comprehensive WCAG coverage',
     pattern: /\bcomprehensive\s+(?:wcag|accessibility)\s+(?:coverage|testing|compliance)\b/gi,
     reason:
       'Marlo is not comprehensive and says so. Coverage is a fraction with a visible denominator.',
@@ -97,17 +109,20 @@ export const FORBIDDEN_CLAIMS = [
 export const PROSE_RULES = [
   {
     id: 'em-dash',
+    example: 'one thing—another thing',
     // — rather than the character, so this rule is self-clean.
     pattern: /—/g,
     message: 'Em dash. Use a colon, a comma, parentheses, or a full stop.',
   },
   {
     id: 'horizontal-bar',
+    example: 'one thing―another thing',
     pattern: /―/g,
     message: 'Horizontal bar, which is an em dash wearing a hat.',
   },
   {
     id: 'slop-vocabulary',
+    example: 'we leverage the platform',
     pattern: new RegExp(
       '\\b(?:' +
         [
@@ -140,12 +155,14 @@ export const PROSE_RULES = [
   },
   {
     id: 'not-just-x-but-y',
+    example: 'It is not just a checker, it is a fixer',
     pattern:
       /\b(?:it|this|that|marlo|we)(?:'s| is| are|'re)? not (?:just|only|merely|simply)\b[^.!?\n]{0,90}?(?:,|—|;)\s*(?:it|this|that|they)(?:'s| is| are|'re)\b/gi,
     message: 'The "not just X, it is Y" construction. Delete the first half, state the second.',
   },
   {
     id: 'empty-intensifier',
+    example: 'truly powerful',
     pattern:
       /\b(?:truly|really|very|extremely|incredibly) (?:powerful|simple|easy|fast|robust)\b/gi,
     message: 'Intensifier plus vague adjective. Give the number or the mechanism.',
