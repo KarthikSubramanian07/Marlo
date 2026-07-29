@@ -1,0 +1,13 @@
+* text=auto eol=lf
+
+# Vendored corpus: byte-exact, digest-verified. Never normalise.
+corpus/** -text -diff linguist-vendored
+
+# Golden files. A diff here is the point, so keep them readable in review.
+tests/golden/** text eol=lf
+docs/screenshots/** binary
+*.png binary
+*.woff2 binary
+
+pnpm-lock.yaml linguist-generated merge=binary
+calibration/table.json linguist-generated
