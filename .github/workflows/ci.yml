@@ -82,6 +82,25 @@ jobs:
       - name: Prose rules
         run: node scripts/check-prose.mjs
 
+  corpus:
+    name: Corpus is unmodified
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Verify digests and totals
+        # The corpus is the ground truth for every accuracy number Marlo
+        # publishes. If a test case could be edited, an inconvenient result
+        # could be made convenient by changing the question rather than the
+        # answer, and nothing downstream would notice. No network: the corpus
+        # is vendored, per DECISIONS.md D-012.
+        run: pnpm run corpus:verify
+
   test:
     name: Test (node ${{ matrix.node }})
     runs-on: ubuntu-latest
