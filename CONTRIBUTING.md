@@ -182,7 +182,7 @@ Typecheck, lint, format, unit, integration, end to end, build, coverage threshol
 Plus three that are specific to this project:
 
 - **Calibration.** The table is regenerated and compared. A false positive rate regression or a coverage claim that drifts from the registry fails the build. This is a required check, not an advisory one.
-- **Forbidden claims.** `scripts/check-claims.mjs` fails on "certified", "guaranteed compliant", "fully accessible", "eliminates risk", and the rest, anywhere in the repository including generated output and golden files. There is no suppression comment, by design. If you need to discuss one of those phrases in order to argue against it, write the argument so the literal string does not appear.
+- **Forbidden claims.** `scripts/check-claims.mjs` fails on any of the nine phrases in `scripts/lib/rule-data.mjs`, anywhere in the repository including generated output and golden files. Each is listed there with the reason it is refused, and the script prints that reason at you rather than just saying no. There is no suppression comment, by design. If you need to discuss one of those phrases in order to argue against it, write the argument so the literal string does not appear. This paragraph is written that way, and so is the entry in `CHANGELOG.md`.
 - **Prose.** No em dashes, and no AI slop vocabulary. `scripts/check-prose.mjs` has the list.
 
 ---
