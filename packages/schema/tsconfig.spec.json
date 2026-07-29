@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.spec-base.json",
+  "compilerOptions": {
+    "outDir": "../../node_modules/.cache/tsc-spec/schema",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.test.ts"],
+  "references": [{ "path": "./tsconfig.json" }]
+}

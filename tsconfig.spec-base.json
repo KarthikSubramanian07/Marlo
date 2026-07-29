@@ -1,0 +1,8 @@
+{
+  "//": "Base for per-package test projects. Tests are excluded from the build configs so they never reach dist, which means the type checker and ESLint's project service would not see them at all. That is worse: a test is code, and an unchecked test can assert something the types already forbid and pass by accident. Each package gets a tsconfig.spec.json extending this. Output goes to node_modules/.cache rather than being suppressed, because a composite project may not disable declaration emit.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node"]
+  }
+}
