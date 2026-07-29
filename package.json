@@ -1,0 +1,57 @@
+{
+  "name": "marlo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fixes accessibility violations and proves it.",
+  "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=22.11.0",
+    "pnpm": ">=9.15.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --build --verbose",
+    "lint": "pnpm run lint:code && pnpm run lint:deps && pnpm run lint:prose && pnpm run lint:claims",
+    "lint:code": "eslint .",
+    "lint:deps": "depcruise --config .dependency-cruiser.cjs packages apps",
+    "lint:prose": "node scripts/check-prose.mjs",
+    "lint:claims": "node scripts/check-claims.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run --project unit",
+    "test:watch": "vitest --project unit",
+    "test:coverage": "vitest run --coverage",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test",
+    "hooks": "lefthook install",
+    "prepare": "lefthook install || true"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.2",
+    "@vitest/coverage-v8": "4.1.10",
+    "dependency-cruiser": "18.1.0",
+    "eslint": "10.8.0",
+    "eslint-plugin-import-x": "4.17.1",
+    "lefthook": "2.1.10",
+    "prettier": "3.9.6",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.65.0",
+    "vitest": "4.1.10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "lefthook",
+      "workerd"
+    ]
+  }
+}

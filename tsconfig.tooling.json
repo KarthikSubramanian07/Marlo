@@ -1,0 +1,13 @@
+{
+  "//": "The configuration files and the plain scripts. Not a package, but still code that can be wrong, and a reference here keeps the solution build non-empty from the first branch.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": true,
+    "outDir": "./node_modules/.cache/tsc-tooling",
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["node"]
+  },
+  "include": ["vitest.config.ts"]
+}
