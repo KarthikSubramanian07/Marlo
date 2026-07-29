@@ -1,5 +1,15 @@
 {
   "//": "Solution file. Each package adds its own reference in the branch that creates it, so tsc --build only ever names projects that exist.",
   "files": [],
-  "references": [{ "path": "tsconfig.tooling.json" }]
+  "references": [
+    {
+      "path": "tsconfig.tooling.json"
+    },
+    {
+      "path": "packages/schema"
+    },
+    {
+      "path": "packages/schema/tsconfig.spec.json"
+    }
+  ]
 }
