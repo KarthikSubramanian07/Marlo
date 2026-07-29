@@ -32,20 +32,20 @@ Copied into this repository, so the obligations are live.
 
 Shipped in the published packages.
 
-| Package | Licence | Obligation | How satisfied |
-|---|---|---|---|
-| `axe-core` | MPL-2.0 | File-level copyleft: anyone who modifies axe-core's own source files must make those files available under MPL-2.0. Does not reach code that merely uses it. | Consumed as an unmodified npm dependency. Marlo does not patch, fork, or vendor it, so the obligation is not triggered. The adapter in `packages/engines/src/axe/` is Marlo's own code and is MIT. |
-| `@siteimprove/alfa-*` | MIT | Preserve copyright and permission notice. | Notice preserved in `node_modules` as installed and attributed here. |
-| `html_codesniffer` | BSD-3-Clause | Preserve copyright notice, list of conditions, and disclaimer. The third clause forbids using Squiz Labs' name to endorse derived products. | Attributed here and in `README.md`; Marlo makes no endorsement claim. |
-| `happy-dom` | MIT | Preserve notice. | Attributed here. |
-| `zod` | MIT | Preserve notice. | Attributed here. |
-| `@modelcontextprotocol/sdk` | MIT | Preserve notice. | Attributed here. |
+| Package                     | Licence      | Obligation                                                                                                                                                   | How satisfied                                                                                                                                                                                      |
+| --------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `axe-core`                  | MPL-2.0      | File-level copyleft: anyone who modifies axe-core's own source files must make those files available under MPL-2.0. Does not reach code that merely uses it. | Consumed as an unmodified npm dependency. Marlo does not patch, fork, or vendor it, so the obligation is not triggered. The adapter in `packages/engines/src/axe/` is Marlo's own code and is MIT. |
+| `@siteimprove/alfa-*`       | MIT          | Preserve copyright and permission notice.                                                                                                                    | Notice preserved in `node_modules` as installed and attributed here.                                                                                                                               |
+| `html_codesniffer`          | BSD-3-Clause | Preserve copyright notice, list of conditions, and disclaimer. The third clause forbids using Squiz Labs' name to endorse derived products.                  | Attributed here and in `README.md`; Marlo makes no endorsement claim.                                                                                                                              |
+| `happy-dom`                 | MIT          | Preserve notice.                                                                                                                                             | Attributed here.                                                                                                                                                                                   |
+| `zod`                       | MIT          | Preserve notice.                                                                                                                                             | Attributed here.                                                                                                                                                                                   |
+| `@modelcontextprotocol/sdk` | MIT          | Preserve notice.                                                                                                                                             | Attributed here.                                                                                                                                                                                   |
 
 ### On MPL-2.0 and shipping under MIT
 
 Worth stating explicitly because it is the licence question a downstream user will ask.
 
-MPL-2.0 is file-scoped. It obliges publication of *modifications to the covered files*, not of code that links against them. Section 3.3 permits distributing a larger work under other terms provided the covered files remain under MPL-2.0. axe-core arrives from npm unmodified and stays that way, so:
+MPL-2.0 is file-scoped. It obliges publication of _modifications to the covered files_, not of code that links against them. Section 3.3 permits distributing a larger work under other terms provided the covered files remain under MPL-2.0. axe-core arrives from npm unmodified and stays that way, so:
 
 - Marlo's own source is MIT.
 - axe-core's files remain MPL-2.0 and are obtainable from Deque and from npm.
@@ -57,17 +57,17 @@ MPL-2.0 is file-scoped. It obliges publication of *modifications to the covered 
 
 Not shipped. Listed because a build-time dependency with an unusual licence is still a supply chain fact.
 
-| Package | Licence |
-|---|---|
-| `typescript` | Apache-2.0 |
-| `vitest`, `@vitest/coverage-v8` | MIT |
-| `eslint`, `typescript-eslint` | MIT |
-| `prettier` | MIT |
-| `playwright` | Apache-2.0 |
-| `fast-check` | MIT |
-| `dependency-cruiser` | MIT |
-| `wrangler` | MIT and Apache-2.0 |
-| `lefthook` | MIT |
+| Package                         | Licence            |
+| ------------------------------- | ------------------ |
+| `typescript`                    | Apache-2.0         |
+| `vitest`, `@vitest/coverage-v8` | MIT                |
+| `eslint`, `typescript-eslint`   | MIT                |
+| `prettier`                      | MIT                |
+| `playwright`                    | Apache-2.0         |
+| `fast-check`                    | MIT                |
+| `dependency-cruiser`            | MIT                |
+| `wrangler`                      | MIT and Apache-2.0 |
+| `lefthook`                      | MIT                |
 
 Playwright downloads Chromium, which is BSD-3-Clause with a large set of third-party notices of its own. It is an optional dependency, is not required for `pnpm test`, and nothing Marlo publishes contains it.
 
@@ -77,15 +77,15 @@ Playwright downloads Chromium, which is BSD-3-Clause with a large set of third-p
 
 No obligation, recorded because the reader of a licence ledger is often looking for whether something was copied.
 
-| Work | Licence | Relationship |
-|---|---|---|
-| [`krishaygarg/ada_pdf_remediation`](https://github.com/krishaygarg/ada_pdf_remediation) | MIT | Design and epistemology cited throughout [RESEARCH.md](../RESEARCH.md) and [DECISIONS.md](../DECISIONS.md). Two of its tests are reimplemented from their description in `apps/site/test/no-theatre.test.ts`. No code copied. |
-| [`jrpool/testaro`](https://github.com/jrpool/testaro), [`jrpool/testilo`](https://github.com/jrpool/testilo) | MIT | Studied for its failure mode. No code copied. |
-| [`priyankark/a11y-mcp`](https://github.com/priyankark/a11y-mcp) | MPL-2.0 | Studied for MCP tool surface. No code copied, which also means no MPL obligation. |
-| [`ronantakizawa/a11ymcp`](https://github.com/ronantakizawa/a11ymcp) | MIT | Studied for MCP tool surface. Its `test_html_string` primitive influenced Marlo's decision to accept source directly. No code copied. |
-| [`IBMa/equal-access`](https://github.com/IBMa/equal-access) | Apache-2.0 | Deferred adapter. Apache-2.0 requires a NOTICE file be propagated if one is present; that obligation arrives with the adapter, not before. |
-| [`qualweb/core`](https://github.com/qualweb/core) | ISC | Deferred adapter. |
-| [`validator/validator`](https://github.com/validator/validator) | MIT | Deferred. |
+| Work                                                                                                         | Licence    | Relationship                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`krishaygarg/ada_pdf_remediation`](https://github.com/krishaygarg/ada_pdf_remediation)                      | MIT        | Design and epistemology cited throughout [RESEARCH.md](../RESEARCH.md) and [DECISIONS.md](../DECISIONS.md). Two of its tests are reimplemented from their description in `apps/site/test/no-theatre.test.ts`. No code copied. |
+| [`jrpool/testaro`](https://github.com/jrpool/testaro), [`jrpool/testilo`](https://github.com/jrpool/testilo) | MIT        | Studied for its failure mode. No code copied.                                                                                                                                                                                 |
+| [`priyankark/a11y-mcp`](https://github.com/priyankark/a11y-mcp)                                              | MPL-2.0    | Studied for MCP tool surface. No code copied, which also means no MPL obligation.                                                                                                                                             |
+| [`ronantakizawa/a11ymcp`](https://github.com/ronantakizawa/a11ymcp)                                          | MIT        | Studied for MCP tool surface. Its `test_html_string` primitive influenced Marlo's decision to accept source directly. No code copied.                                                                                         |
+| [`IBMa/equal-access`](https://github.com/IBMa/equal-access)                                                  | Apache-2.0 | Deferred adapter. Apache-2.0 requires a NOTICE file be propagated if one is present; that obligation arrives with the adapter, not before.                                                                                    |
+| [`qualweb/core`](https://github.com/qualweb/core)                                                            | ISC        | Deferred adapter.                                                                                                                                                                                                             |
+| [`validator/validator`](https://github.com/validator/validator)                                              | MIT        | Deferred.                                                                                                                                                                                                                     |
 
 ---
 
