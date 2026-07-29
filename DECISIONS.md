@@ -56,15 +56,15 @@ So: where several engines implement the same ACT rule, the calibration table say
 
 W3C defines how to grade an implementation against a rule's official test cases, in `pages/implementations/mapping.md` of the ACT rules repository:
 
-| Example type | Allowed outcomes |
-|---|---|
-| Passed | `passed`, `cantTell`, `inapplicable` |
-| Failed | `failed`, `cantTell` |
+| Example type | Allowed outcomes                     |
+| ------------ | ------------------------------------ |
+| Passed       | `passed`, `cantTell`, `inapplicable` |
+| Failed       | `failed`, `cantTell`                 |
 | Inapplicable | `inapplicable`, `cantTell`, `passed` |
 
 `cantTell` is allowed everywhere. A tool that returns `cantTell` on all 1134 test cases is, under the official protocol, a correct implementation of all 91 rules that have test cases.
 
-That is not a flaw in the protocol. It grades whether a tool *misleads*, and a tool that says "I do not know" has not misled anyone. It is simply not the question a developer is asking, which is whether the violation will be found and whether a clean report means clean.
+That is not a flaw in the protocol. It grades whether a tool _misleads_, and a tool that says "I do not know" has not misled anyone. It is simply not the question a developer is asking, which is whether the violation will be found and whether a clean report means clean.
 
 So the table carries both, per rule per engine, side by side:
 
