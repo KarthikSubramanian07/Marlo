@@ -18,17 +18,17 @@ The answers changed the design twice. Both changes are recorded in [DECISIONS.md
 
 Measured from a shallow clone of `act-rules/act-rules.github.io` at `HEAD` on 2026-07-29, and from `https://act-rules.github.io/testcases.json`:
 
-| Quantity | Value |
-|---|---|
-| Published ACT rules | **94** |
-| Atomic rules | 86 |
-| Composite rules | 8 |
-| Rules carrying official test cases | **91** |
-| Rules with no test cases yet | 3 (`kb1m8s`, `in6db8`, `2t702h`) |
-| Official test cases | **1134** |
-| Expected `passed` | 448 |
-| Expected `failed` | 358 |
-| Expected `inapplicable` | 328 |
+| Quantity                           | Value                            |
+| ---------------------------------- | -------------------------------- |
+| Published ACT rules                | **94**                           |
+| Atomic rules                       | 86                               |
+| Composite rules                    | 8                                |
+| Rules carrying official test cases | **91**                           |
+| Rules with no test cases yet       | 3 (`kb1m8s`, `in6db8`, `2t702h`) |
+| Official test cases                | **1134**                         |
+| Expected `passed`                  | 448                              |
+| Expected `failed`                  | 358                              |
+| Expected `inapplicable`            | 328                              |
 
 Re-derive with `pnpm corpus:verify`, which fails if the vendored corpus disagrees with these counts.
 
@@ -40,17 +40,17 @@ This is the most important thing found in the research, and it reshaped the cali
 
 W3C defines how to grade an implementation against a rule's test cases. From `pages/implementations/mapping.md`:
 
-| Example type | Outcomes the protocol allows |
-|---|---|
-| Passed | `passed`, `cantTell`, `inapplicable` |
-| Failed | `failed`, `cantTell` |
+| Example type | Outcomes the protocol allows         |
+| ------------ | ------------------------------------ |
+| Passed       | `passed`, `cantTell`, `inapplicable` |
+| Failed       | `failed`, `cantTell`                 |
 | Inapplicable | `inapplicable`, `cantTell`, `passed` |
 
 An implementation returning an allowed outcome on every test case is a **correct implementation**. One that gets every `passed` and `inapplicable` case right but only some `failed` cases is a **partial implementation**.
 
 `cantTell` is allowed everywhere. A tool that returns `cantTell` for all 1134 test cases is, under the official protocol, a correct implementation of all 91 rules.
 
-That is defensible for the purpose W3C had: the protocol grades whether a tool *misleads*, not whether it *helps*, and a tool that says "I do not know" has not misled anyone. It is useless for the purpose Marlo has. A developer wants to know whether a violation will be found and whether a clean report means clean.
+That is defensible for the purpose W3C had: the protocol grades whether a tool _misleads_, not whether it _helps_, and a tool that says "I do not know" has not misled anyone. It is useless for the purpose Marlo has. A developer wants to know whether a violation will be found and whether a clean report means clean.
 
 **So the calibration table publishes two numbers per rule per engine, side by side:**
 
@@ -69,14 +69,14 @@ The corpus is under the [W3C Software and Document Licence](https://act-rules.gi
 
 Every candidate was checked for licence compatibility with MIT distribution, maintenance signal, and whether it can run in Node without a browser binary. The last one turned out to matter more than expected. Measured with `gh api repos/OWNER/NAME` and `npm view` on 2026-07-29.
 
-| Engine | Licence | npm | Stars | Last push | Verdict |
-|---|---|---|---|---|---|
-| [axe-core](https://github.com/dequelabs/axe-core) | MPL-2.0 | `axe-core@4.12.1` | 7353 | 2026-07-29 | **Adopted.** Peer engine. |
-| [Alfa](https://github.com/Siteimprove/alfa) | MIT | `@siteimprove/alfa-rules@0.119.0` | 130 | 2026-07-29 | **Adopted.** Peer engine, and the reference for ACT outcome vocabulary. |
-| [HTML CodeSniffer](https://github.com/squizlabs/HTML_CodeSniffer) | BSD-3-Clause | `html_codesniffer@2.5.1` | 1146 | 2024-01-07 | **Adopted, with a maintenance note.** Peer engine. |
-| [IBM Equal Access](https://github.com/IBMa/equal-access) | Apache-2.0 | `accessibility-checker@4.0.29` | 768 | 2026-07-27 | **Deferred.** Reason below. |
-| [QualWeb](https://github.com/qualweb/core) | ISC | `@qualweb/core@0.9.4` | 12 | 2024-12-30, **archived** | **Deferred.** Reason below. |
-| [Nu Html Checker](https://github.com/validator/validator) | MIT | `vnu-jar@26.7.25` | 1964 | 2026-07-25 | **Deferred.** Reason below. |
+| Engine                                                            | Licence      | npm                               | Stars | Last push                | Verdict                                                                 |
+| ----------------------------------------------------------------- | ------------ | --------------------------------- | ----- | ------------------------ | ----------------------------------------------------------------------- |
+| [axe-core](https://github.com/dequelabs/axe-core)                 | MPL-2.0      | `axe-core@4.12.1`                 | 7353  | 2026-07-29               | **Adopted.** Peer engine.                                               |
+| [Alfa](https://github.com/Siteimprove/alfa)                       | MIT          | `@siteimprove/alfa-rules@0.119.0` | 130   | 2026-07-29               | **Adopted.** Peer engine, and the reference for ACT outcome vocabulary. |
+| [HTML CodeSniffer](https://github.com/squizlabs/HTML_CodeSniffer) | BSD-3-Clause | `html_codesniffer@2.5.1`          | 1146  | 2024-01-07               | **Adopted, with a maintenance note.** Peer engine.                      |
+| [IBM Equal Access](https://github.com/IBMa/equal-access)          | Apache-2.0   | `accessibility-checker@4.0.29`    | 768   | 2026-07-27               | **Deferred.** Reason below.                                             |
+| [QualWeb](https://github.com/qualweb/core)                        | ISC          | `@qualweb/core@0.9.4`             | 12    | 2024-12-30, **archived** | **Deferred.** Reason below.                                             |
+| [Nu Html Checker](https://github.com/validator/validator)         | MIT          | `vnu-jar@26.7.25`                 | 1964  | 2026-07-25               | **Deferred.** Reason below.                                             |
 
 All six licences are compatible with shipping Marlo under MIT. MPL-2.0 is file-level copyleft: it obliges anyone modifying axe-core's own files to publish those files, and does not reach Marlo's code. axe-core is consumed as an unmodified npm dependency, so the obligation is not triggered. Recorded in [`docs/licenses.md`](docs/licenses.md) with the reasoning per dependency.
 
@@ -133,27 +133,27 @@ MIT, Python, the same problem shape one document format over. It is the epistemo
 
 **Carried across.**
 
-*The one-directional invariant.* Its auditor is cross-checked against veraPDF with the rule that if the reference implementation rejects a document, the project's own engine may not call it clean. Marlo's version: **if any peer engine reports a failure for an ACT rule, Marlo may not report clean for that rule.** It may dissent, and the dissent is recorded on the finding with the engine that disagreed. Implemented in `packages/report/src/invariant.ts`, asserted by property test rather than by example, because an invariant tested by three examples is an anecdote.
+_The one-directional invariant._ Its auditor is cross-checked against veraPDF with the rule that if the reference implementation rejects a document, the project's own engine may not call it clean. Marlo's version: **if any peer engine reports a failure for an ACT rule, Marlo may not report clean for that rule.** It may dissent, and the dissent is recorded on the finding with the engine that disagreed. Implemented in `packages/report/src/invariant.ts`, asserted by property test rather than by example, because an invariant tested by three examples is an anecdote.
 
-*The reason it needed the invariant at all.* Its worst defect was a PDF/UA identifier written to `.../pdfuaid/ns/id/` where ISO 14289-1 specifies `.../pdfua/ns/id/`. Every document it had ever produced was unidentifiable to a conforming validator. It survived because **the auditor searched for the same wrong URI the writer emitted, so it confirmed its own defect and reported full compliance.** Two checkers agreed with each other and both were wrong; veraPDF disagreed and was right. An engine audited only by its own authors is not evidence. This is why Marlo has three peer engines rather than a very good one.
+_The reason it needed the invariant at all._ Its worst defect was a PDF/UA identifier written to `.../pdfuaid/ns/id/` where ISO 14289-1 specifies `.../pdfua/ns/id/`. Every document it had ever produced was unidentifiable to a conforming validator. It survived because **the auditor searched for the same wrong URI the writer emitted, so it confirmed its own defect and reported full compliance.** Two checkers agreed with each other and both were wrong; veraPDF disagreed and was right. An engine audited only by its own authors is not evidence. This is why Marlo has three peer engines rather than a very good one.
 
-*Refusing to generate alt text.* Its position is that a confident wrong description is worse than an absent one, because a reader can detect an absence and cannot detect an error. Marlo adopts this wholesale, with the same narrow exception: describe only where the page itself supplies the meaning (a `figcaption`, a heading, a link target, adjacent text), mark decorative confidently, and refuse the rest with the evidence attached. `packages/repair/src/alt-text.ts`.
+_Refusing to generate alt text._ Its position is that a confident wrong description is worse than an absent one, because a reader can detect an absence and cannot detect an error. Marlo adopts this wholesale, with the same narrow exception: describe only where the page itself supplies the meaning (a `figcaption`, a heading, a link target, adjacent text), mark decorative confidently, and refuse the rest with the evidence attached. `packages/repair/src/alt-text.ts`.
 
-*Coverage as a fraction, with a test that prevents drift.* It states 34 of 87 software-determinable conditions out of 136 in the protocol, and has a test asserting the implemented count stays below the determinable count, so the engine cannot quietly start claiming completeness. Marlo's equivalent asserts the implemented rule count against the vendored corpus and fails the build when README and registry disagree. `packages/act/src/coverage.test.ts` and `scripts/check-claims.mjs`.
+_Coverage as a fraction, with a test that prevents drift._ It states 34 of 87 software-determinable conditions out of 136 in the protocol, and has a test asserting the implemented count stays below the determinable count, so the engine cannot quietly start claiming completeness. Marlo's equivalent asserts the implemented rule count against the vendored corpus and fails the build when README and registry disagree. `packages/act/src/coverage.test.ts` and `scripts/check-claims.mjs`.
 
-*A check that crashed must not look like a check that passed.* Its rule engine makes a report non-conformant when a rule throws. Marlo's engine result carries `status: 'ok' | 'error' | 'unsupported'` per rule per engine, and a rule that errored is never counted as a pass anywhere, including in the calibration table, where it is counted as a distinct outcome so the denominator stays honest.
+_A check that crashed must not look like a check that passed._ Its rule engine makes a report non-conformant when a rule throws. Marlo's engine result carries `status: 'ok' | 'error' | 'unsupported'` per rule per engine, and a rule that errored is never counted as a pass anywhere, including in the calibration table, where it is counted as a distinct outcome so the denominator stays honest.
 
-*Truncated output states how much it withheld.* A report listing twelve contrast failures on a page with three hundred implies the page has twelve.
+_Truncated output states how much it withheld._ A report listing twelve contrast failures on a page with three hundred implies the page has twelve.
 
-*The interface renders results rather than asserting them.* Its third defect was a web page with a hard-coded scorecard reading one hundred percent and a progress indicator advancing on `setTimeout` while nothing happened; the real audit result came back from the API and was never read. It now has two tests that exist purely because of that: the script must contain no `setTimeout`, and the markup must contain no static tick. **Marlo copies both tests directly**, in `apps/site/test/no-theatre.test.ts`, because Marlo's site shows accuracy numbers and the failure mode is identical.
+_The interface renders results rather than asserting them._ Its third defect was a web page with a hard-coded scorecard reading one hundred percent and a progress indicator advancing on `setTimeout` while nothing happened; the real audit result came back from the API and was never read. It now has two tests that exist purely because of that: the script must contain no `setTimeout`, and the markup must contain no static tick. **Marlo copies both tests directly**, in `apps/site/test/no-theatre.test.ts`, because Marlo's site shows accuracy numbers and the failure mode is identical.
 
 **Where Marlo differs.**
 
-*Marlo opens pull requests; the sibling writes files.* That is a permission boundary the sibling does not need, so it is designed here from scratch rather than borrowed. See [SECURITY.md](SECURITY.md).
+_Marlo opens pull requests; the sibling writes files._ That is a permission boundary the sibling does not need, so it is designed here from scratch rather than borrowed. See [SECURITY.md](SECURITY.md).
 
-*The sibling has one reference implementation, veraPDF, and it is authoritative.* Marlo has three peers and none of them is authoritative. Cross-checking against a reference is a different problem from cross-checking against disagreeing equals, and it is why Marlo needs a calibration table where the sibling needs only an invariant.
+_The sibling has one reference implementation, veraPDF, and it is authoritative._ Marlo has three peers and none of them is authoritative. Cross-checking against a reference is a different problem from cross-checking against disagreeing equals, and it is why Marlo needs a calibration table where the sibling needs only an invariant.
 
-*Verification is cheaper here.* Re-rendering an HTML page and re-scanning it costs milliseconds, so Marlo can afford to verify every fix by re-running the full engine set on the result. That is what makes "verified or flagged, never guessed" enforceable rather than aspirational.
+_Verification is cheaper here._ Re-rendering an HTML page and re-scanning it costs milliseconds, so Marlo can afford to verify every fix by re-running the full engine set on the result. That is what makes "verified or flagged, never guessed" enforceable rather than aspirational.
 
 ### Testaro and Testilo: the failure to not repeat
 
@@ -219,11 +219,11 @@ They are the rules that need CSS layout, paint order, or script execution: text 
 
 **So the design is a renderer seam with three implementations and an honest capability model.** A `Renderer` declares which capabilities it provides (`dom`, `layout`, `paint`, `script`). A rule declares which it requires. A rule whose requirements are not met by the active renderer returns `status: 'unsupported'`, which is reported as unsupported, never as a pass. This is the sibling project's crashed-check principle applied to a missing capability, and it is the difference between "Marlo found no contrast problems" and "Marlo did not look for contrast problems".
 
-| Renderer | Capabilities | Cost | Default |
-|---|---|---|---|
-| `StaticRenderer` (happy-dom) | `dom`, `script` | Free. In-process, no binary, offline, deterministic. | **Yes** |
-| `BrowserRenderer` (Playwright + Chromium) | `dom`, `layout`, `paint`, `script` | Free on compute the caller already pays for: their laptop, or their CI. Public-repo GitHub Actions minutes are unmetered. | Opt-in, `--renderer browser` |
-| `RemoteRenderer` (Cloudflare Browser Rendering) | `dom`, `layout`, `paint`, `script` | Metered. Seam only, no adapter in this pass. | No |
+| Renderer                                        | Capabilities                       | Cost                                                                                                                      | Default                      |
+| ----------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `StaticRenderer` (happy-dom)                    | `dom`, `script`                    | Free. In-process, no binary, offline, deterministic.                                                                      | **Yes**                      |
+| `BrowserRenderer` (Playwright + Chromium)       | `dom`, `layout`, `paint`, `script` | Free on compute the caller already pays for: their laptop, or their CI. Public-repo GitHub Actions minutes are unmetered. | Opt-in, `--renderer browser` |
+| `RemoteRenderer` (Cloudflare Browser Rendering) | `dom`, `layout`, `paint`, `script` | Metered. Seam only, no adapter in this pass.                                                                              | No                           |
 
 **The relocation, stated plainly.** Layout-dependent rules run on compute somebody already pays for. On a developer's machine that is their machine. In CI that is Actions minutes, unmetered for public repositories, which is one of the reasons the repository is public. Marlo's own hosted surface never runs a browser, which is why it has no fixed monthly floor and no egress bill.
 
@@ -235,25 +235,25 @@ They are the rules that need CSS layout, paint order, or script execution: text 
 
 Every candidate considered, in one table, per the brief's requirement. Maintenance signal measured 2026-07-29.
 
-| Candidate | What it is | Licence | Signal | Used for | Verdict |
-|---|---|---|---|---|---|
-| ACT-Rules corpus | 94 rules, 1134 test cases | W3C Software and Document | Active, pushed 2026-07-29 | The denominator and the calibration ground truth | **Vendored** into `corpus/act/`, notice included |
-| ACT Rules Format 1.1 | W3C Recommendation, royalty-free | W3C Document | Recommendation | Rule interface shape, outcome vocabulary, grading protocol | **Adopted** as specification |
-| axe-core | Deque's engine | MPL-2.0 | 7353 stars, daily | Peer engine | **Dependency**, unmodified |
-| Alfa | Siteimprove's engine | MIT | 130 stars, daily | Peer engine, ACT outcome vocabulary | **Dependency** |
-| HTML CodeSniffer | Squiz's engine | BSD-3-Clause | 1146 stars, quiet since 2024-01 | Peer engine, third opinion | **Dependency**, maintenance risk noted |
-| happy-dom | Node DOM implementation | MIT | Active | The default renderer | **Dependency**, load-bearing |
-| Playwright | Browser automation | Apache-2.0 | Active | `BrowserRenderer`, screenshots, site E2E | **Optional dependency** |
-| IBM Equal Access | IBM's engine | Apache-2.0 | 768 stars, active | Fourth peer engine | **Deferred**, integration shape |
-| QualWeb | Lisbon's ACT-native engine | ISC | **Archived 2024-12-30** | Would remove hand-mapping | **Deferred**, dead dependency risk |
-| Nu Html Checker | W3C validator | MIT | 1964 stars, active | HTML parse conformance | **Deferred**, JVM cost for two rules |
-| WAVE API | WebAIM's hosted engine | Proprietary | Active | nothing | **Rejected**, paid per page |
-| Testaro / Testilo | 10-engine ensemble, hand-graded | MIT | Low adoption | Read for its failure mode | **Studied, not used** |
-| `a11y-mcp`, `a11ymcp` | Single-engine MCP servers | MPL-2.0 / MIT | 48 / 89 stars | Read for tool surface design | **Studied, not used** |
-| `ada_pdf_remediation` | Sibling PDF project | MIT | Active | Epistemology, invariant, alt-text policy, five tests | **Studied and cited throughout** |
-| linkedom | Lighter Node DOM | ISC | Active | nothing | **Rejected**, no `getComputedStyle`, which several rules need |
-| fast-check | Property testing | MIT | Active | Codemod property tests | **Dependency** |
-| Zod | Runtime schema validation | MIT | Active | Every trust boundary | **Dependency** |
+| Candidate             | What it is                       | Licence                   | Signal                          | Used for                                                   | Verdict                                                       |
+| --------------------- | -------------------------------- | ------------------------- | ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------- |
+| ACT-Rules corpus      | 94 rules, 1134 test cases        | W3C Software and Document | Active, pushed 2026-07-29       | The denominator and the calibration ground truth           | **Vendored** into `corpus/act/`, notice included              |
+| ACT Rules Format 1.1  | W3C Recommendation, royalty-free | W3C Document              | Recommendation                  | Rule interface shape, outcome vocabulary, grading protocol | **Adopted** as specification                                  |
+| axe-core              | Deque's engine                   | MPL-2.0                   | 7353 stars, daily               | Peer engine                                                | **Dependency**, unmodified                                    |
+| Alfa                  | Siteimprove's engine             | MIT                       | 130 stars, daily                | Peer engine, ACT outcome vocabulary                        | **Dependency**                                                |
+| HTML CodeSniffer      | Squiz's engine                   | BSD-3-Clause              | 1146 stars, quiet since 2024-01 | Peer engine, third opinion                                 | **Dependency**, maintenance risk noted                        |
+| happy-dom             | Node DOM implementation          | MIT                       | Active                          | The default renderer                                       | **Dependency**, load-bearing                                  |
+| Playwright            | Browser automation               | Apache-2.0                | Active                          | `BrowserRenderer`, screenshots, site E2E                   | **Optional dependency**                                       |
+| IBM Equal Access      | IBM's engine                     | Apache-2.0                | 768 stars, active               | Fourth peer engine                                         | **Deferred**, integration shape                               |
+| QualWeb               | Lisbon's ACT-native engine       | ISC                       | **Archived 2024-12-30**         | Would remove hand-mapping                                  | **Deferred**, dead dependency risk                            |
+| Nu Html Checker       | W3C validator                    | MIT                       | 1964 stars, active              | HTML parse conformance                                     | **Deferred**, JVM cost for two rules                          |
+| WAVE API              | WebAIM's hosted engine           | Proprietary               | Active                          | nothing                                                    | **Rejected**, paid per page                                   |
+| Testaro / Testilo     | 10-engine ensemble, hand-graded  | MIT                       | Low adoption                    | Read for its failure mode                                  | **Studied, not used**                                         |
+| `a11y-mcp`, `a11ymcp` | Single-engine MCP servers        | MPL-2.0 / MIT             | 48 / 89 stars                   | Read for tool surface design                               | **Studied, not used**                                         |
+| `ada_pdf_remediation` | Sibling PDF project              | MIT                       | Active                          | Epistemology, invariant, alt-text policy, five tests       | **Studied and cited throughout**                              |
+| linkedom              | Lighter Node DOM                 | ISC                       | Active                          | nothing                                                    | **Rejected**, no `getComputedStyle`, which several rules need |
+| fast-check            | Property testing                 | MIT                       | Active                          | Codemod property tests                                     | **Dependency**                                                |
+| Zod                   | Runtime schema validation        | MIT                       | Active                          | Every trust boundary                                       | **Dependency**                                                |
 
 Full licence ledger with obligations per dependency: [`docs/licenses.md`](docs/licenses.md).
 
