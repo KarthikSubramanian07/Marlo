@@ -1,7 +1,7 @@
 {
-  "name": "@marlo/cli",
+  "name": "@marlo/repair",
   "version": "0.1.0",
-  "description": "The marlo command.",
+  "description": "Source location, minimal diffs, and the verification that makes a fix a fix.",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,18 +22,13 @@
   },
   "dependencies": {
     "@marlo/act": "workspace:*",
-    "@marlo/calibrate": "workspace:*",
     "@marlo/engines": "workspace:*",
     "@marlo/render": "workspace:*",
-    "@marlo/repair": "workspace:*",
-    "@marlo/report": "workspace:*",
     "@marlo/rules": "workspace:*",
-    "@marlo/schema": "workspace:*"
+    "@marlo/schema": "workspace:*",
+    "parse5": "8.0.0"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "bin": {
-    "marlo": "./dist/bin.js"
   }
 }

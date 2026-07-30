@@ -32,6 +32,8 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - The website at [trymarlo.pages.dev](https://trymarlo.pages.dev), five pages generated from `calibration/table.json` by `apps/site/src/build.mjs`. Every numeral on the site goes through one function that requires a field name in the table, so a hand-typed figure cannot reach a page. No client-side script at all.
 - `pnpm screenshots`: the dogfood gate. Serves the built site over HTTP, captures it at 390, 834 and 1440 CSS pixels in both colour schemes, and runs axe-core, a tap target check and a horizontal overflow measurement against every page. Currently zero critical or serious violations, zero overflow.
 - `HONESTY.md`, `ARCHITECTURE.md`, `SETUP.md`, `HANDOFF.md`, `WORKSTREAMS.md`.
+- `@marlo/repair`: source location backed by parse5 with per-attribute byte ranges, mechanical codemods for seven rules, and the verification loop. `marlo fix` and `marlo fix --write`.
+- Six property-based tests over the codemod layer. One of them found a real defect before any of this shipped: renaming one of two identical invalid ARIA attributes unmasked the second copy, turning one violation into a different one and breaking idempotence. No codemod now edits an attribute that is written more than once, because the parser only shows it one of them.
 - `@marlo/mcp`: Marlo over the Model Context Protocol, three read-only tools, JSON-RPC over stdio. There is no `fix` tool and there will not be one: a tool call has no human between the decision and the edit, so repair arrives as a pull request somebody approves. Asking for a write tool returns the reason rather than a not-found, and a test asserts the package does not import `writeFileSync` or `execSync` at all.
 - The GitHub Action, at `.github/actions/marlo`. Its first step refuses a token with `contents: write` and stops, because inside an Action "Marlo never pushes" is a statement about a permission rather than about the code. Where the runner does not expose the permission set, the step says the scopes were **not** checked rather than reporting a pass it did not earn.
 - `apps/demo/clean.html`: a page with nothing wrong with it. A scanner only ever pointed at broken markup has never been tested for a false positive. CI runs the Action against both, and the clean one has to pass while still reporting the two rules it could not evaluate.
@@ -75,6 +77,21 @@ Three entries are officially `consistent` under W3C's protocol while missing mor
 - The coverage gate had never run. `vitest.config.ts` declared 85/80/85/85 and no CI job invoked it, so it failed on its first invocation. Thresholds are now the measured figures rounded down (86 statements, 87 lines, 90 functions, 72 branches) with a CI job that runs them, `pull-request.ts` went from 0 percent to 16 tests, and `invariant.ts` is back at 100 on every metric. Two of its uncovered branches were deleted rather than tested: one guarded a routing state the schema now forbids, the other narrowed a value the logic had already narrowed. See [HONESTY.md](HONESTY.md#8-the-coverage-gate-had-never-run-and-failed-the-first-time-it-did).
 
 - `marlo scan page.html --renderer static` tried to open a file named `static`. The file list was built by filtering argv for anything not starting with a dash, which catches every flag value too. Found by writing the GitHub Action, which passes `--renderer` on every call; no test in the CLI had ever passed a value to a flag.
+
+### Coverage
+
+Repair is measured by the same gate as everything else, and the gate refuses most of it.
+
+|                                                     |     |
+| --------------------------------------------------- | --- |
+| Rules with a mechanical codemod                     | 7   |
+| Of those, cleared for auto-fix on the current table | 2   |
+| Verified fixes on `apps/demo/checkout.html`         | 3   |
+| Flagged for a human on the same file                | 31  |
+
+`24afc2`, `78fd32` and `9e45ec` are refused with the measurement attached: Marlo's own detection for them is right between 29 and 33 percent of the time, against a threshold of 0.95. The generated change travels with the flag and is not applied.
+
+`e6952f` has a working codemod and no engine that detects it, so nothing calls it. Source location is what makes that rule visible at all, which is now the shortest path from written code to a working fix.
 
 ### Notes
 

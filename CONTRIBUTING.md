@@ -122,7 +122,7 @@ No API keys, no browser download, no network after install. If any of that is un
 
 ### The coverage number and why it is that number
 
-Global thresholds are 86 percent statements, 87 lines, 90 functions, and 72 branches. Those are the measured figures rounded down, not targets: the gate fails on any regression and an improvement is a one-line pull request to raise the number.
+Global thresholds are 87 percent statements, 88 lines, 90 functions, and 73 branches. Those are the measured figures rounded down, not targets: the gate fails on any regression and an improvement is a one-line pull request to raise the number.
 
 They were 85/80/85/85 until the coverage job was written, at which point they failed on the first run. Nothing had ever invoked them. A threshold nothing checks is a claim, and this repository contains a script whose entire job is to fail the build on claims like that, so the episode is in [HONESTY.md](HONESTY.md).
 

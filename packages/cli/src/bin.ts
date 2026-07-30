@@ -1,9 +1,13 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import type { ActRuleId, EngineReport, Repair } from '@marlo/schema';
 import { CalibrationTable, EXIT_CODES } from '@marlo/schema';
 import { StaticRenderer } from '@marlo/render';
+import { peerEngines } from '@marlo/engines';
+import { MarloEngine } from '@marlo/calibrate';
 import { renderSarif, renderTerminal, shouldUseColour } from '@marlo/report';
+import { repairFinding, repairedText } from '@marlo/repair';
 import { exitCodeFor, scan } from './pipeline.js';
 
 /**
@@ -53,6 +57,7 @@ const HELP = `marlo ${version()}
 
 USAGE
   marlo scan <file...> [options]
+  marlo fix <file...> [--write]
   marlo explain <act-rule-id>
   marlo coverage
 
@@ -64,6 +69,8 @@ OPTIONS
   --rule <act-id>     Evaluate one rule. Repeatable.
   --fail-on-skipped   Exit 3 when a rule could not be evaluated. Off by default, because
                       most callers want to know about findings first.
+  --write             fix only. Apply the verified fixes to the files. Without it, fix
+                      prints what it would do and changes nothing.
   --no-color          Also honours NO_COLOR. Severity is never colour alone, so removing
                       colour loses nothing.
   -h, --help          This.
@@ -75,9 +82,18 @@ EXIT CODES
   2  Marlo could not run: bad arguments, unreadable file
   3  incomplete: a rule crashed, or was skipped and you asked to fail on that
 
+FIX
+  marlo fix applies only changes it has verified: the target rule closed, nothing else
+  broke, and applying the edits twice is the same as applying them once. Anything it
+  cannot verify comes back as a flag with the generated change attached and not applied.
+
+  A rule is only eligible if the engine reporting it clears the published accuracy
+  threshold. Seven rules have a mechanical fix; on the current table two of them clear it.
+  marlo explain <rule> says which, and why.
+
 NOT YET
-  marlo fix         The repair layer is not merged. There is deliberately no --fix flag
-                    that does nothing.
+  Repair does not open pull requests. That surface is opt-in, off by default, and lands
+  with the GitHub Action rather than here.
 
   Coverage, accuracy per rule, and which engine reports what: calibration/README.md.
 `;
@@ -275,11 +291,96 @@ async function main(): Promise<void> {
       return;
     }
 
-    case 'fix':
-      fail(
-        'the repair layer is not merged yet, so there is nothing to fix with.\n' +
-          '  `marlo scan` reports findings and how much to trust each one.',
+    case 'fix': {
+      if (files.length === 0) fail('fix needs at least one file');
+      const table = loadTable();
+      const renderer = new StaticRenderer();
+      const write = flags.has('--write');
+      let fixed = 0;
+      let flagged = 0;
+
+      try {
+        for (const file of files) {
+          const path = resolve(process.cwd(), file);
+          const html = readFileSync(path, 'utf8');
+          const report = await scan({
+            targets: [{ label: file, path }],
+            renderer,
+            table,
+            marloVersion: version(),
+            ...(rules.length === 0 ? {} : { rules }),
+          });
+
+          const evaluate = async (
+            source: string,
+            only: readonly ActRuleId[],
+          ): Promise<readonly EngineReport[]> => {
+            const page = await renderer.render({ html: source });
+            try {
+              const engines = [new MarloEngine(), ...peerEngines()];
+              return await Promise.all(engines.map(async (e) => await e.evaluate(page, only)));
+            } finally {
+              await page.close();
+            }
+          };
+
+          const repairs: Repair[] = [];
+          for (const finding of report.pages.flatMap((p) => p.findings)) {
+            repairs.push(await repairFinding(finding, { html, file, renderer, table, evaluate }));
+          }
+
+          const fixes = repairs.filter(
+            (r): r is Extract<Repair, { kind: 'fixed' }> => r.kind === 'fixed',
+          );
+          const flagged2 = repairs.filter(
+            (r): r is Extract<Repair, { kind: 'flagged' }> => r.kind === 'flagged',
+          );
+          fixed += fixes.length;
+          flagged += flagged2.length;
+
+          console.log(`\n${file}`);
+          console.log(
+            `  ${String(fixes.length)} verified, ${String(flagged2.length)} flagged for a human`,
+          );
+          for (const repair of fixes) {
+            console.log(`\n  FIXED  ${repair.actRuleId}  ${repair.finding.actRuleName}`);
+            console.log(`      ${repair.summary}`);
+            for (const edit of repair.edits) {
+              console.log(`      - ${edit.before.trim()}`);
+              console.log(`      + ${edit.after.trim()}`);
+            }
+            console.log(
+              '      verified: target closed, nothing else broke, applying twice is the same ' +
+                'as once',
+            );
+          }
+          for (const repair of flagged2) {
+            console.log(`\n  FLAG   ${repair.finding.actRuleId}  ${repair.finding.actRuleName}`);
+            console.log(`      not fixed: ${repair.reason}`);
+            console.log(`      ${repair.explanation}`);
+            console.log(`      you decide: ${repair.humanDecision}`);
+          }
+
+          const repaired = repairedText(html, repairs);
+          if (repaired === null) continue;
+          if (write) {
+            writeFileSync(path, repaired, 'utf8');
+            console.log(`\n  written: ${file}`);
+          } else {
+            console.log('\n  nothing was written. Pass --write to apply the verified fixes.');
+          }
+        }
+      } finally {
+        await renderer.dispose();
+      }
+
+      console.log(
+        `\n${String(fixed)} verified fix(es), ${String(flagged)} flagged. ` +
+          'Only changes Marlo verified are ever applied.',
       );
+      finish(fixed > 0 || flagged > 0 ? EXIT_CODES.findings : EXIT_CODES.clean);
+      return;
+    }
 
     default:
       fail(`unknown command "${verb}"`);

@@ -54,6 +54,12 @@
       "path": "packages/cli/tsconfig.spec.json"
     },
     {
+      "path": "packages/repair"
+    },
+    {
+      "path": "packages/repair/tsconfig.spec.json"
+    },
+    {
       "path": "packages/mcp"
     },
     {
