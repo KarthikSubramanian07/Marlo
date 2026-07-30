@@ -8,6 +8,10 @@ coverage/
 docs/screenshots/
 apps/site/dist/
 tests/golden/
+# Deliberately broken markup. Its exact shape is the fixture: Prettier rewrapped a style
+# attribute across four lines, and a formatter that tidies a duplicate attribute would delete
+# the defect the file exists to carry.
+apps/demo/
 # Generated. Its format is the generator's responsibility, and letting Prettier
 # reformat it makes `pnpm act:index:check` fail on a clean tree.
 packages/act/src/rules.generated.ts

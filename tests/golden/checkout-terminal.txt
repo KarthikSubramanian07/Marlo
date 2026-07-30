@@ -1,0 +1,211 @@
+
+apps/demo/checkout.html
+  static renderer  dom, script
+
+  NOT EXAMINED  2 rules need layout and paint, which this renderer does not provide.
+                09o5cg afw4f7
+                This is not a pass. Use --renderer browser to evaluate them.
+
+  ▲▲▲ critical 59796f  Image button has non-empty accessible name
+      WCAG 1.1.1, 4.1.2  marlo precision 1.00 over 12 official test cases
+      input (not located in source)
+        An image button with no alt text is announced as "button" or as its filename. It is the submit control, so this usually blocks the form entirely.
+
+  ▲▲▲ critical 97a4e1  Button has non-empty accessible name
+      WCAG 4.1.2  axe-core precision 1.00 over 17 official test cases
+      button (not located in source)
+        Buttons must have discernible text
+
+  ▲▲▲ critical b4f0c3  Meta viewport allows for zoom
+      WCAG 1.4.10, 1.4.4  axe-core precision 1.00 over 11 official test cases
+      meta[name="viewport"] (not located in source)
+        Zooming and scaling must not be disabled
+
+  ▲▲▲ critical c487ae  Link has non-empty accessible name
+      WCAG 1.1.1, 2.4.4, 2.4.9, 4.1.2  axe-core precision 1.00 over 28 official test cases
+      disagreement: marlo says cantTell
+      disagreement: htmlcs says passed
+      img[src$="product-8842.jpg"] (not located in source)
+        Images must have alternative text
+      a[href="/"] (not located in source)
+        Links must have discernible text
+
+  ▲▲▲ critical e086e5  Form field has non-empty accessible name
+      WCAG 1.3.1, 2.5.3, 4.1.2  axe-core precision 1.00 over 17 official test cases
+      div[role="slider"] (not located in source)
+        ARIA input fields must have an accessible name
+      input[name="postcode"] (not located in source)
+        Form elements must have labels
+      input[name="postcode-confirm"] (not located in source)
+        Form elements must have labels
+      input[name="city"] (not located in source)
+        Form elements must have labels
+      input[type="tel"] (not located in source)
+        Form elements must have labels
+
+  ▲▲  serious  23a2a8  Image has non-empty accessible name
+      WCAG 1.1.1  axe-core precision 1.00 over 18 official test cases
+      img[src$="product-8842.jpg"] (not located in source)
+        Images must have alternative text
+
+  ▲▲  serious  2779a5  HTML page has non-empty title
+      WCAG 2.4.2  axe-core precision 1.00 over 11 official test cases
+      html (not located in source)
+        Documents must have <title> element to aid in navigation
+
+  ▲▲  serious  4e8ab6  Element with role attribute has required states and properties
+      WCAG 1.3.1, 4.1.2  axe-core precision 1.00 over 8 official test cases
+      div[role="slider"] (not located in source)
+        Required ARIA attributes must be provided
+
+  ▲▲  serious  674b10  Role attribute has valid value
+      WCAG 1.3.1, 4.1.2  marlo precision 1.00 over 10 official test cases
+      div (not located in source)
+        role="buton" contains no valid ARIA role, so the element keeps its native semantics and the author's intent is lost silently.
+
+  ▲▲  serious  6a7281  ARIA state or property has valid value
+      WCAG 1.3.1, 4.1.2  alfa precision 1.00 over 24 official test cases
+      :root (not located in source)
+        Alfa sia-r19
+
+  ▲▲  serious  6cfa84  Element with aria-hidden has no content in sequential focus navigation
+      WCAG 4.1.2  axe-core precision 1.00 over 14 official test cases
+      div[aria-hidden="true"] (not located in source)
+        ARIA hidden element must not be focusable or contain focusable elements
+
+  ▲▲  serious  7d6734  SVG element with explicit role has non-empty accessible name
+      WCAG 1.1.1  axe-core precision 1.00 over 10 official test cases
+      svg (not located in source)
+        <svg> elements with an img role must have alternative text
+
+  ▲▲  serious  8fc3b6  Object element rendering non-text content has non-empty accessible name
+      WCAG 1.1.1  axe-core precision 1.00 over 14 official test cases
+      disagreement: htmlcs says passed
+      object (not located in source)
+        <object> elements must have alternative text
+
+  ▲▲  serious  afw4f7  Text has minimum contrast
+      WCAG 1.4.3, 1.4.6  alfa precision 0.83 over 28 official test cases
+      INVARIANT alfa reported a failure the routed engine did not, so Marlo may not report clean.
+      disagreement: alfa says failed
+      disagreement: htmlcs says passed
+      :root (not located in source)
+        Alfa sia-r69
+
+  ▲▲  serious  b5c3f8  HTML page has lang attribute
+      WCAG 3.1.1  marlo precision 1.00 over 7 official test cases
+      html (not located in source)
+        The html element has no lang attribute, so assistive technology has to guess the language and will often pick the wrong voice.
+
+  ▲▲  serious  bc659a  Meta element has no refresh delay
+      WCAG 2.2.1, 2.2.4, 3.2.5  marlo precision 1.00 over 15 official test cases
+      disagreement: htmlcs says passed
+      meta (not located in source)
+        The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it.
+
+  ▲▲  serious  bisz58  Meta element has no refresh delay (no exception)
+      WCAG 2.2.1, 2.2.4, 3.2.5  marlo precision 1.00 over 14 official test cases
+      meta (not located in source)
+        The page refreshes after 30 seconds. This rule allows no exception for a long delay.
+
+  ▲▲  serious  cae760  Iframe element has non-empty accessible name
+      WCAG 4.1.2  axe-core precision 1.00 over 10 official test cases
+      iframe (not located in source)
+        Frames must have an accessible name
+
+  ▲▲  serious  ffd0e9  Heading has non-empty accessible name
+      no mapped success criterion  axe-core precision 1.00 over 15 official test cases
+      h1 (not located in source)
+        Headings should not be empty
+
+  ▲   moderate 24afc2  Important letter spacing in style attributes is wide enough
+      WCAG 1.4.12  marlo precision 0.29 over 16 official test cases
+      INVARIANT marlo reported a failure the routed engine did not, so Marlo may not report clean.
+      disagreement: marlo says failed
+      disagreement: axe-core says failed
+      p (not located in source)
+        letter-spacing: 0.01em !important cannot be overridden by a user stylesheet, and it is below 0.12 times the font size. Removing !important is usually the whole fix.
+
+  ▲   moderate 3ea0c8  Id attribute value is unique
+      WCAG 4.1.1  marlo precision 1.00 over 10 official test cases
+      disagreement: axe-core says inapplicable
+      disagreement: alfa says inapplicable
+      input#postcode (not located in source)
+        id="postcode" appears 2 times. Every reference to it, including a label's for and any aria-labelledby, resolves to the first one only.
+      input#postcode (not located in source)
+        id="postcode" appears 2 times. Every reference to it, including a label's for and any aria-labelledby, resolves to the first one only.
+
+  ▲   moderate 46ca7f  Element marked as decorative is not exposed
+      WCAG 1.1.1  marlo precision 1.00 over 10 official test cases
+      disagreement: axe-core says passed
+      div (not located in source)
+        This element is marked decorative but tabindex="0" puts it in the focus order, which puts it back in the accessibility tree with its role stripped. It ends up announced as a generic element.
+
+  ▲   moderate 5c01ea  ARIA state or property is permitted
+      WCAG 1.3.1, 4.1.2  alfa precision 1.00 over 15 official test cases
+      disagreement: marlo says cantTell
+      :root (not located in source)
+        Alfa sia-r18
+
+  ▲   moderate 5f99a7  ARIA attribute is defined in WAI-ARIA
+      WCAG 1.3.1, 4.1.2  marlo precision 1.00 over 7 official test cases
+      input (not located in source)
+        aria-labeledby is not defined in ARIA 1.2, so assistive technology ignores it. Usually a typo.
+
+  ▲   moderate 78fd32  Important line height in style attributes is wide enough
+      WCAG 1.4.12  accuracy not measured for this rule
+      form > p (not located in source)
+        Inline text spacing must be adjustable with custom stylesheets
+
+  ▲   moderate 9e45ec  Important word spacing in style attributes is wide enough
+      WCAG 1.4.12  marlo precision 0.29 over 16 official test cases
+      INVARIANT marlo reported a failure the routed engine did not, so Marlo may not report clean.
+      disagreement: marlo says failed
+      disagreement: axe-core says failed
+      p (not located in source)
+        word-spacing: 0.05em !important cannot be overridden by a user stylesheet, and it is below 0.16 times the font size. Removing !important is usually the whole fix.
+
+  ▲   moderate bc4a75  ARIA required owned elements
+      WCAG 1.3.1  axe-core precision 0.88 over 19 official test cases
+      INVARIANT axe-core reported a failure the routed engine did not, so Marlo may not report clean.
+      disagreement: marlo says cantTell
+      disagreement: axe-core says failed
+      div[role="list"] (not located in source)
+        Certain ARIA roles must contain particular children
+
+  ▲   moderate ff89c9  ARIA required context role
+      WCAG 1.3.1  axe-core precision 1.00 over 15 official test cases
+      disagreement: marlo says cantTell
+      div[role="listitem"] (not located in source)
+        Certain ARIA roles must be contained by particular parents
+
+
+apps/demo/settings.html
+  static renderer  dom, script
+
+  NOT EXAMINED  2 rules need layout and paint, which this renderer does not provide.
+                09o5cg afw4f7
+                This is not a pass. Use --renderer browser to evaluate them.
+
+  ▲   moderate 5b7ae0  HTML page lang and xml:lang attributes have matching values
+      WCAG 3.1.1  marlo precision 1.00 over 12 official test cases
+      disagreement: axe-core says inapplicable
+      html (not located in source)
+        lang="engRish" and xml:lang="en" declare different languages. Which one wins depends on how the document is served, so the two have to agree.
+
+  ▲   moderate bf051a  HTML page lang attribute has valid language tag
+      WCAG 3.1.1  axe-core precision 1.00 over 7 official test cases
+      disagreement: htmlcs says passed
+      html (not located in source)
+        <html> element must have a valid value for the lang attribute
+
+  ▲   moderate de46e4  Element with lang attribute has valid language tag
+      WCAG 3.1.2  axe-core precision 1.00 over 19 official test cases
+      p (not located in source)
+        lang attribute must have a valid value
+
+  ------------------------------------------------------------------------
+  37 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
+  coverage: 35 of 94 published ACT rules
+  one-directional invariant enforced on 4 rule(s): a peer reported a failure the routed engine did not.
+  calibration 2026-07-30, corpus 2026-07-29

@@ -1,0 +1,152 @@
+<!doctype html>
+<!--
+  Deliberately broken. Every defect below is annotated with the ACT rule it is there to
+  trip, and apps/demo/expected.json lists them again in a form the end to end test reads.
+
+  Two things this page is not. It is not a corpus: the official test cases are in corpus/act
+  and they are what accuracy is measured against. And it is not a demonstration of how bad
+  markup can get, because a page with a hundred defects proves nothing that a page with
+  thirty does not.
+
+  What it is for: proving the whole pipeline runs on a real file. Three of the defects in
+  HONESTY.md were found by pointing the command line at markup shaped like this, and none of
+  them were found by a unit test.
+
+  Read as a page rather than as a list of violations, it is a plausible checkout form. That
+  is on purpose too. A synthetic page of isolated elements does not produce the interactions
+  between rules that break adapters.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
+    <!-- bc659a and bisz58: a refresh with a delay over zero and under twenty hours moves the
+         page under the reader. bisz58 is the same rule with no exception at all. -->
+    <meta http-equiv="refresh" content="30" />
+    <!-- 2779a5: no title element. -->
+    <link rel="stylesheet" href="./checkout.css" />
+  </head>
+  <!-- b5c3f8: the html element has no lang attribute, so a screen reader guesses the
+       pronunciation of the whole document. -->
+  <body>
+    <header>
+      <!-- c487ae: a link whose only content is an image with an empty alt has no accessible
+           name, so it is announced as "link" and nothing else. -->
+      <a href="/"><img src="logo.svg" alt="" /></a>
+
+      <nav>
+        <!-- 5c01ea: aria-checked is not permitted on a link. -->
+        <a href="/cart" aria-checked="true">Cart</a>
+        <!-- 9eb3f6: the accessible name is the filename, which tells the reader the name of
+             a file rather than what the image is. -->
+        <img src="IMG_20240117_cart.png" alt="IMG_20240117_cart.png" />
+      </nav>
+    </header>
+
+    <main>
+      <!-- ffd0e9: a heading with no text content. The document outline has a rung with
+           nothing written on it. -->
+      <h1></h1>
+
+      <h2>Your order</h2>
+
+      <!-- 23a2a8: an informative image with no alt attribute at all. The product is
+           identified only by a picture. -->
+      <img src="product-8842.jpg" width="120" height="120" />
+
+      <!-- 46ca7f: role="presentation" is overridden by the tabindex, which puts the element
+           in the focus order while claiming it is decorative. -->
+      <div role="presentation" tabindex="0">Gift wrapping</div>
+
+      <!-- e88epe: aria-hidden on an image that carries meaning. Marlo returns cantTell here
+           rather than guessing, and the terminal output says so. -->
+      <img src="delivery-van.png" alt="Arrives Tuesday" aria-hidden="true" />
+
+      <form action="/pay" method="post">
+        <!-- e086e5: a placeholder is not a label. It disappears on focus and is not
+             reliably announced. -->
+        <input type="email" placeholder="Email" name="email" />
+
+        <!-- e086e5 again, from the other direction: the label is not associated with the
+             field, because the for attribute names an id that does not exist. -->
+        <label for="postcode-field">Postcode</label>
+        <input type="text" id="postcode" name="postcode" />
+
+        <!-- 3ea0c8: id="postcode" appears twice in the document, so every reference to it
+             resolves to whichever the browser saw first. -->
+        <input type="text" id="postcode" name="postcode-confirm" />
+
+        <!-- e6952f: name is given twice on the same element. -->
+        <input type="text" name="city" name="town" />
+
+        <!-- 5f99a7: aria-labeledby is not an ARIA attribute. It is aria-labelledby, with two
+             l characters, and the misspelling fails silently in every browser. -->
+        <input type="tel" aria-labeledby="phone-hint" />
+        <span id="phone-hint">Mobile number</span>
+
+        <!-- 6a7281: aria-required takes true or false, not yes. -->
+        <input type="text" aria-required="yes" aria-label="Card number" />
+
+        <!-- 674b10: buton is not a role. -->
+        <div role="buton">Apply discount</div>
+
+        <!-- 4e8ab6: role="slider" requires aria-valuenow, and neither it nor an accessible
+             name is here. -->
+        <div role="slider" tabindex="0"></div>
+
+        <!-- 24afc2, 78fd32 and 9e45ec: three text spacing overrides marked important, so a
+             reader who needs wider spacing cannot get it. -->
+        <p style="letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important">
+          By paying you agree to the terms.
+        </p>
+
+        <!-- 97a4e1: a button whose only content is an icon font glyph, with no accessible
+             name. This is the single most common critical defect on real checkout pages. -->
+        <button type="button" class="icon"><span class="glyph"></span></button>
+
+        <!-- 59796f: an image input with no alt. Announced as "submit button" at best. -->
+        <input type="image" src="pay-now.png" />
+      </form>
+
+      <h2>Delivery options</h2>
+
+      <!-- ff89c9: a listitem role with no list ancestor, so the reader is told it is item
+           one of a list that does not exist. -->
+      <div role="listitem">Standard delivery</div>
+
+      <!-- bc4a75: role="list" requires owned listitem children, and there are none. -->
+      <div role="list">
+        <p>Express delivery is unavailable to this postcode.</p>
+      </div>
+
+      <!-- 6cfa84: aria-hidden hides the container from the accessibility tree while the
+           link inside it stays in the focus order, so a keyboard user lands on something a
+           screen reader will not announce. -->
+      <div aria-hidden="true">
+        <a href="/saver">Saver delivery</a>
+      </div>
+
+      <!-- 7d6734: an SVG with role="img" and no accessible name. -->
+      <svg role="img" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M4 12h16" stroke="currentColor" />
+      </svg>
+
+      <!-- 8fc3b6: an object rendering non-text content with no accessible name. -->
+      <object type="image/svg+xml" data="progress.svg" width="200" height="8"></object>
+
+      <!-- afw4f7 and 09o5cg: contrast. Marlo locates the text and names the declared
+           colours, and reports cantTell for the ratio, because computing it correctly needs
+           the effective background behind the transparency and that is a paint order walk
+           this version does not do. The static renderer has no layout at all, so both rules
+           come back as not evaluated rather than as a pass. -->
+      <p style="color: #8a8a8a; background-color: #ffffff">Free returns within 30 days.</p>
+    </main>
+
+    <footer>
+      <!-- cae760: an iframe with no title. The reader is told there is a frame and nothing
+           about what is in it. -->
+      <iframe src="./terms.html" width="300" height="120"></iframe>
+    </footer>
+  </body>
+</html>
