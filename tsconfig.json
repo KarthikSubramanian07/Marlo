@@ -52,6 +52,9 @@
     },
     {
       "path": "packages/cli/tsconfig.spec.json"
+    },
+    {
+      "path": "apps/site"
     }
   ]
 }

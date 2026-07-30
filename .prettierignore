@@ -6,6 +6,7 @@ pnpm-lock.yaml
 dist/
 coverage/
 docs/screenshots/
+apps/site/dist/
 tests/golden/
 # Generated. Its format is the generator's responsibility, and letting Prettier
 # reformat it makes `pnpm act:index:check` fail on a clean tree.
