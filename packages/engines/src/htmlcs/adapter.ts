@@ -68,7 +68,25 @@ interface HtmlcsMessage {
   readonly type: number;
   readonly code: string;
   readonly msg: string;
-  readonly element: string;
+  /**
+   * The DOM element, not a string.
+   *
+   * The first version typed this as `string` and passed it straight to
+   * truncateSnippet, which crashed with "html.replace is not a function" on
+   * thirteen rules at once. HTML CodeSniffer hands back the live node, so the
+   * snippet has to be read off it.
+   */
+  readonly element: unknown;
+}
+
+/** Reads an evidence snippet off whatever HTML CodeSniffer put in `element`. */
+function snippetOf(element: unknown): string {
+  if (typeof element === 'string') return element;
+  if (typeof element !== 'object' || element === null) return '';
+  const outer: unknown = Reflect.get(element, 'outerHTML');
+  if (typeof outer === 'string') return outer;
+  const tag: unknown = Reflect.get(element, 'tagName');
+  return typeof tag === 'string' ? `<${tag.toLowerCase()}>` : '';
 }
 
 function narrowMessages(value: unknown): readonly HtmlcsMessage[] {
@@ -133,7 +151,7 @@ export class HtmlcsEngine implements Engine {
               engineRuleId: normalised,
               outcome,
               selector: ':root',
-              snippet: truncateSnippet(message.element),
+              snippet: truncateSnippet(snippetOf(message.element)),
               message: message.msg,
             });
             verdicts.set(entry.actId, list);
