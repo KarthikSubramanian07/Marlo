@@ -1,5 +1,5 @@
 {
-  "//": "Base for per-package test projects. Tests are excluded from the build configs so they never reach dist, which means the type checker and ESLint's project service would not see them at all. That is worse: a test is code, and an unchecked test can assert something the types already forbid and pass by accident. Each package gets a tsconfig.spec.json extending this. Output goes to node_modules/.cache rather than being suppressed, because a composite project may not disable declaration emit.",
+  "//": "Base for per-package test projects. Tests are excluded from the build configs so they never reach dist, which means the type checker and ESLint's project service would not see them at all. That is worse: a test is code, and an unchecked test can assert something the types already forbid and pass by accident. Each package gets a tsconfig.spec.json extending this. Output goes to node_modules/.cache rather than being suppressed, because a composite project may not disable declaration emit. Each package sets its own tsBuildInfoFile: the default is derived from the config file name, which is tsconfig.spec.json in every package, so they all shared one buildinfo and each invalidated the others on every build.",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
