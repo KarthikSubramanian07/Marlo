@@ -54,7 +54,20 @@ The Pages project is `trymarlo`, already created, serving [trymarlo.pages.dev](h
 
 Exactly four, and all of them are things a person has to decide rather than a script.
 
-1. **Branch protection on `main`.** Required checks, required review, linear history, no force push. Settings → Branches, or `gh api`. Not enabled by the build, because enabling required review while merging the initial stack would have blocked the merge.
+1. **Nothing, for branch protection.** It is on, as two rulesets, and it is worth knowing which is which because they are enforced differently.
+
+   `main: history and checks, no exceptions` has **no bypass actors at all**. Nobody can force push, delete the branch, merge a non-linear history, or land anything without all ten required checks green. That includes the repository owner, and it has been tested by attempting a force push and being refused.
+
+   `main: one review, repository admin exempt` requires one approving review. The bypass is the part GitHub cannot express on a personal repository: `bypass_actors` accepts `RepositoryRole: admin`, which does not cover the owner, and `OrganizationAdmin`, which needs an organization. So the review requirement applies to everyone, and the owner overrides it per merge:
+
+   ```bash
+   gh pr merge <n> --rebase --admin
+   ```
+
+   In the web interface that is the "Merge without waiting for requirements" button. It bypasses the review, and it does **not** get you past the required checks or the force-push rule, because those live in the ruleset with no bypass. Which is the split that was wanted: one review for contributors, none for the owner, and history that nobody can rewrite.
+
+   If this repository ever moves into an organization, replace the override with a real `bypass_actors` entry and delete this paragraph.
+
 2. **`marlo.pages.dev` was taken.** Cloudflare assigned a suffixed subdomain, so the documented fallback `trymarlo.pages.dev` is used consistently everywhere. If you acquire the shorter name, it appears in `apps/site/src/build.mjs` (`ORIGIN`), `README.md`, `package.json` and `SECURITY.md`.
 3. **Publishing to npm.** Nothing is published. `pnpm -r publish` when you want it, and note the brief's instruction that a public release should not be tagged without asking.
 4. **A language provider, if you ever want generated alt text.** `ANTHROPIC_API_KEY` plus `MARLO_LANGUAGE_PROVIDER=anthropic`. The default is a deterministic stub and there is no fallback that quietly upgrades to a network call.
