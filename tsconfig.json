@@ -16,6 +16,12 @@
     },
     {
       "path": "packages/act/tsconfig.spec.json"
+    },
+    {
+      "path": "packages/render"
+    },
+    {
+      "path": "packages/render/tsconfig.spec.json"
     }
   ]
 }
