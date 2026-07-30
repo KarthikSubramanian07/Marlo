@@ -104,7 +104,39 @@ One finding was rejected rather than fixed: the harness flagged links inline in 
 
 ---
 
-## 6. Three checks that could not fail
+## 6. The site's own decoration failed the site's own contrast bar
+
+**What it claimed.** The redesign reveals each section as it scrolls into view, fading it in and lifting it a few pixels. No JavaScript, driven by `animation-timeline: view()`.
+
+**What was true.** The audit failed it. axe composites a partial opacity into the effective foreground colour, and it caught body copy at **4.22:1** and an eyebrow at **3.39:1** against the 4.5:1 floor.
+
+axe was right, and the distinction is worth writing down because it is not obvious. A time-based animation finishes on its own in under half a second, so text is briefly faint and then correct. A **scroll-linked** animation has no clock: it sits at whatever progress the reader's scroll position puts it at, and a section straddling the fold can hold 30 percent opacity for as long as the page is left alone. Text at 30 percent opacity is not a transition. It is the contrast of the page.
+
+**What reported success.** The 27 site tests, again. They read the markup and the stylesheet, and neither can see a composited colour, because contrast needs layout. This is the same limitation Marlo publishes about itself, and this is the third time in this file that it has been the thing that let something through.
+
+**What changed.** Two things, in order. First the reveal was made transform-only, which cannot affect contrast at all. That passed, and it also did not read as anything appearing, which was the point of it. Then the animation range was shortened to `entry 0% entry 35%`, so a section is fully opaque well before it is somewhere a reader would stop, and the fade came back. The audit passes with the fade in place, which is the only reason it is there.
+
+**The rule, generalised:** an animation that a reader can pause by not scrolling is a state, not a transition, and every state has to pass on its own.
+
+---
+
+## 7. Four things found by looking at the page at full size
+
+None of these were caught by 27 passing tests, a clean axe run, or a zero-overflow measurement. They were caught by taking a screenshot at 1440 by 900 and one at 390 by 844 and actually reading them. Recorded together because the lesson is the shared one.
+
+**The scoreboard printed "best" next to the engine that detects nothing.** HTML CodeSniffer's false positive rate is 0.0%, so a sort by false positive rate put it first, and the badge generator wrote `best`. Its recall is 0.000: it never returns a definite failure for anything. So the front page of a site whose entire argument is that a tool which says nothing cannot be scored well was scoring it first. An engine now only enters the ranking if it detects something, and that one is labelled `no detections`.
+
+**There was no navigation on a phone.** The nav row was `display: none` below 48em, so four of the five pages were unreachable from a handset. The masthead is a grid now, with one `nav` landmark that becomes a scrolling row. The first attempt shipped two copies of the links and the site test caught it as two landmarks on one page.
+
+**The GitHub glyph filled a button.** The icon SVGs carried a `viewBox` and no `width` or `height`. Inside a full-width button on a phone the glyph expanded to about 350 pixels across with the label shoved into the remaining space. `img, svg { max-width: 100% }` caps the damage at the container and does nothing to prevent it. Icons carry intrinsic dimensions now, and a test measures the largest rendered SVG on every page.
+
+**The browser tab was a different brand from the page.** The stylesheet rendered its accent as one cyan and `favicon.svg` was drawn in another, because an SVG file cannot read a CSS custom property and the two had been written independently. The palette is now recorded once as sRGB hex in `style.css`, `build.mjs` reads from the same list, and a test fails if either asset uses a colour the stylesheet does not record.
+
+None of the four is an accessibility defect except the second. All four shipped, twice, past a green build.
+
+---
+
+## 8. Three checks that could not fail
 
 Not wrong answers, but checks that would have reported success no matter what.
 
@@ -116,7 +148,7 @@ Not wrong answers, but checks that would have reported success no matter what.
 
 ---
 
-## 7. Standing limitations
+## 9. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 

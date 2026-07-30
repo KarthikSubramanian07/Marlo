@@ -183,7 +183,7 @@ A rule that measures badly still gets merged. It is published with its real numb
 | ---------------------------------------------- | -------------------------------------------------------------------------------- |
 | [RESEARCH.md](RESEARCH.md)                     | What was measured before any code was written, and the eight things it rules out |
 | [DECISIONS.md](DECISIONS.md)                   | Twelve decisions, each stating what would make it wrong                          |
-| [HONESTY.md](HONESTY.md)                       | Every defect found during the build, with what reported success at the time      |
+| [HONESTY.md](HONESTY.md)                       | Nine entries. Every defect found during the build, with what reported success    |
 | [calibration/README.md](calibration/README.md) | The generated table, per rule, per engine                                        |
 | [ARCHITECTURE.md](ARCHITECTURE.md)             | How a page moves through the pipeline                                            |
 | [HANDOFF.md](HANDOFF.md)                       | What is real, what is stubbed, what is deferred, and the traps                   |
