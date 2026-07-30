@@ -63,10 +63,21 @@ export function isAllowed(expected: ExpectedOutcome, actual: Outcome | null): bo
 export function consistencyOf(cases: readonly GradedCase[]): ActConsistency {
   if (cases.length === 0) return 'unmapped';
 
+  // A case the environment could not evaluate is excluded from the verdict, and a case
+  // the implementation crashed on is not.
+  //
+  // The distinction is the point. A crash is a defect in the implementation and the
+  // protocol should hold it against it. `unsupported` means the measurement was never
+  // taken: the renderer could not represent the document, or lacked a capability the rule
+  // needs. Counting that as a disallowed outcome would record a defect the implementation
+  // does not have, which is what the first harness run did to all four engines at once.
+  const gradable = cases.filter((c) => c.unsupported !== true);
+  if (gradable.length === 0) return 'unmapped';
+
   let allNegativesAllowed = true;
   let allPositivesAllowed = true;
 
-  for (const graded of cases) {
+  for (const graded of gradable) {
     const allowed = isAllowed(graded.expected, graded.actual);
     if (graded.expected === 'failed') {
       if (!allowed) allPositivesAllowed = false;
@@ -89,8 +100,9 @@ export function consistencyOf(cases: readonly GradedCase[]): ActConsistency {
  * very different products, and the official reports publish only the first word.
  */
 export function automationOf(cases: readonly GradedCase[]): AutomationLevel {
-  if (cases.length === 0) return 'not-applicable';
-  return cases.some((c) => c.actual === 'cantTell') ? 'semi-automated' : 'automated';
+  const gradable = cases.filter((c) => c.unsupported !== true);
+  if (gradable.length === 0) return 'not-applicable';
+  return gradable.some((c) => c.actual === 'cantTell') ? 'semi-automated' : 'automated';
 }
 
 /**
@@ -100,7 +112,9 @@ export function automationOf(cases: readonly GradedCase[]): AutomationLevel {
  * and `incorrect` on twenty-nine are the same word.
  */
 export function disallowedCount(cases: readonly GradedCase[]): number {
-  return cases.filter((c) => !isAllowed(c.expected, c.actual)).length;
+  // Same exclusion as consistencyOf, for the same reason.
+  return cases.filter((c) => c.unsupported !== true).filter((c) => !isAllowed(c.expected, c.actual))
+    .length;
 }
 
 /**
