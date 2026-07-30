@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 /**
@@ -97,6 +97,39 @@ describe('the site has no theatre', () => {
     }
   });
 
+  it('shows recorded output, and proves it by matching the committed golden file', () => {
+    // The terminal block on the home page is the one place a numeral reaches the site
+    // without going through num(). This is what makes that acceptable: the text comes from
+    // apps/site/src/recorded-scan.txt, and every line of it has to appear verbatim in the
+    // golden file that tests/e2e/scan.e2e.test.ts regenerates from a real scan.
+    //
+    // So its numbers are permitted because they were recorded. If somebody edits the excerpt
+    // to read better, or nudges "37 findings" upward, this fails.
+    const excerpt = readFileSync(
+      resolve(import.meta.dirname, '..', 'src', 'recorded-scan.txt'),
+      'utf8',
+    );
+    const goldenPath = resolve(ROOT, 'tests/golden/checkout-terminal.txt');
+    expect(existsSync(goldenPath), 'run pnpm test:e2e to generate the golden output').toBe(true);
+    const golden = readFileSync(goldenPath, 'utf8');
+
+    const lines = excerpt
+      .split('\n')
+      .filter((line) => line.trim() !== '')
+      // The command line is not part of stdout, for obvious reasons.
+      .filter((line) => !line.startsWith('$ marlo'));
+    expect(lines.length).toBeGreaterThan(10);
+    for (const line of lines) {
+      expect(golden, `not in the recorded output: ${line.trim()}`).toContain(line);
+    }
+
+    // And the excerpt actually reaches the page, escaped, rather than being dead weight.
+    const index = pages.find((p) => p.path.endsWith(`dist${sep}index.html`));
+    expect(index).toBeDefined();
+    expect(index?.html).toContain('37 findings');
+    expect(index?.html).toContain('0 crashed');
+  });
+
   it('traces every number on the site to the calibration table', () => {
     // THE test. Collect every numeral rendered in prose, and require each to be derivable
     // from the table, the corpus manifest, or a small allow-list of structural numbers that
@@ -122,6 +155,7 @@ describe('the site has no theatre', () => {
     add(table.corpus.retrieved);
     add(table.generated);
     add(table.aggregate.falsePositiveRate);
+    add(table.entries.length);
     for (const entry of table.entries) {
       add(entry.testCaseCount);
       for (const value of Object.values(entry.strict)) add(value);
@@ -156,6 +190,17 @@ describe('the site has no theatre', () => {
     for (const engine of ['marlo', 'axe-core', 'alfa', 'htmlcs', null]) {
       add(table.routing.filter((r) => r.chosen === engine).length);
     }
+
+    // Numerals from the recorded scan. Permitted because the test above proves every line of
+    // that excerpt is verbatim from a real run committed to tests/golden, which is a stronger
+    // provenance than a table lookup: it is an artifact of the tool doing its job.
+    const excerpt = readFileSync(
+      resolve(import.meta.dirname, '..', 'src', 'recorded-scan.txt'),
+      'utf8',
+    );
+    for (const numeral of excerpt.matchAll(/(?<![\w.])\d+(?:\.\d+)?%?(?!\w)/g)) {
+      permitted.add(numeral[0]);
+    }
     add(table.routing.filter((r) => r.chosen !== null).length);
 
     /**
@@ -179,6 +224,16 @@ describe('the site has no theatre', () => {
       '1200',
       '65526',
       '80',
+      // Facts about Marlo's own audit and its own test suite, from HONESTY.md: 48 tap
+      // targets under 24 CSS pixels, 24 pixels, a 2.18:1 contrast failure, 26 site tests
+      // that passed while all of that shipped, and 13 rules that crashed on a real page.
+      // Not accuracy claims, and each one is written down in HONESTY.md where it can be
+      // checked against the audit output in docs/screenshots/audit.json.
+      '48',
+      '24',
+      '26',
+      '13',
+      '2.18',
       '256',
       '0',
       '22.13',
@@ -264,14 +319,28 @@ describe('the site is accessible by construction', () => {
     }
   });
 
-  it('gives every image an accessible name', () => {
+  it('gives every image and every graphic an accessible name, or hides it', () => {
     for (const page of pages) {
       for (const img of page.html.matchAll(/<img\b[^>]*>/gi)) {
         expect(img[0], page.path).toMatch(/\balt=/);
       }
-      // The terminal sample is an image of text, so it carries role and a label.
+      // Every inline SVG here is decoration: a logo mark beside the word "marlo", a GitHub
+      // glyph beside the word "Source", an arrow beside a link's own text. Each is
+      // aria-hidden, because a graphic that duplicates adjacent text is noise in a screen
+      // reader rather than information. focusable="false" is there for older engines that
+      // put SVG in the tab order regardless.
+      for (const svg of page.html.matchAll(/<svg\b[^>]*>/gi)) {
+        const tag = svg[0];
+        const hidden = tag.includes('aria-hidden="true"');
+        const named = tag.includes('role="img"') && /aria-label="[^"]{8,}"/.test(tag);
+        expect(hidden || named, `${page.path}: ${tag.slice(0, 80)}`).toBe(true);
+        if (hidden) expect(tag, page.path).toContain('focusable="false"');
+      }
+      // The recorded terminal output is wide, scrollable and reachable by keyboard.
       if (page.html.includes('class="terminal"')) {
-        expect(page.html).toMatch(/role="img"[^>]*aria-label="[^"]{40,}"/);
+        expect(page.html).toMatch(
+          /class="terminal__body" role="region" aria-label="[^"]{20,}" tabindex="0"/,
+        );
       }
     }
   });
@@ -295,25 +364,63 @@ describe('the site is accessible by construction', () => {
 });
 
 describe('severity and state are never colour alone', () => {
-  it('pairs every tinted row and callout with a text mark', () => {
+  it('pairs every tinted element with something a greyscale reader can still read', () => {
     const css = readFileSync(resolve(import.meta.dirname, '..', 'src', 'style.css'), 'utf8');
-    // The tinted classes exist, and so does a text mark class to accompany them.
-    expect(css).toContain('.mark');
+    // Marks carry a border in currentColor, so they are visible shapes and not just tints.
+    for (const cls of ['.callout__mark', '.rank', '.bullet']) {
+      expect(css, `${cls} is missing`).toContain(cls);
+    }
+    expect(/\.rank\s*\{[^}]*border: 1px solid currentcolor/.test(css)).toBe(true);
+
     for (const page of pages) {
-      if (!page.html.includes('callout--warn')) continue;
-      // A warning callout carries a mark glyph, so the distinction survives greyscale.
-      expect(page.html, page.path).toMatch(/class="mark mark--flag"/);
+      // Every callout, whatever its tint, carries a glyph.
+      const callouts = [...page.html.matchAll(/<div class="callout[^"]*"[^>]*>([\s\S]*?)<\/p>/g)];
+      for (const callout of callouts) {
+        expect(callout[1] ?? '', `${page.path} callout without a mark`).toContain(
+          'class="callout__mark"',
+        );
+      }
+      // The engine ranking is a word before it is a colour: "best", "2nd", "3rd", "4th".
+      if (page.html.includes('class="rank')) {
+        expect(page.html, page.path).toMatch(
+          /class="rank rank--(ok|warn|bad)">(best|2nd|3rd|4th|no detections)</,
+        );
+        // An engine that never returns a failure has a false positive rate of zero, and the
+        // first version of the ranking printed "best" beside it. Nothing on this site may
+        // rank an engine well for declining to answer.
+        const silent = table.entries.some((e) => e.engine === 'htmlcs');
+        if (silent && page.html.includes('HTML CodeSniffer')) {
+          const cell = /HTML CodeSniffer<span class="rank[^>]*>([^<]*)</.exec(page.html)?.[1];
+          if (cell !== undefined) expect(cell).toBe('no detections');
+        }
+      }
     }
   });
 
-  it('respects reduced motion and both colour schemes', () => {
+  it('respects reduced motion, forced colours, and commits to one colour scheme', () => {
     const css = readFileSync(resolve(import.meta.dirname, '..', 'src', 'style.css'), 'utf8');
     expect(css).toContain('prefers-reduced-motion: reduce');
-    expect(css).toContain('prefers-color-scheme: light');
     expect(css).toContain('forced-colors: active');
+
+    // The site is dark only, declared rather than implied, so the browser styles its own
+    // scrollbars and form controls to match. An earlier version supported both schemes and
+    // that is where the 2.18:1 contrast failure came from: a light theme reached into the
+    // always-dark terminal and swapped its colours. One scheme, stated once, cannot do that.
+    expect(css).toContain('color-scheme: dark');
+    expect(css, 'a light theme block would reintroduce the terminal contrast bug').not.toContain(
+      'prefers-color-scheme',
+    );
+    for (const page of pages) {
+      expect(page.html, page.path).toContain('<meta name="color-scheme" content="dark" />');
+    }
+
     // Focus is never removed.
     expect(css).not.toMatch(/outline:\s*(none|0)/);
     expect(css).toContain(':focus-visible');
+
+    // Animation is opt-out and every animation is short or purely decorative. The one that
+    // repeats forever is a terminal caret, which is 7 pixels wide.
+    expect(css).toMatch(/animation-iteration-count: 1 !important/);
   });
 });
 
@@ -347,7 +454,7 @@ describe('the site is responsive by construction', () => {
     expect(style).toContain('overflow-x: hidden');
     // Wide content scrolls inside its own box instead.
     expect(style).toMatch(/\.scroller\s*\{[^}]*overflow-x:\s*auto/);
-    expect(style).toMatch(/\.terminal\s*\{[^}]*overflow-x:\s*auto/);
+    expect(style).toMatch(/\.terminal__body\s*\{[^}]*overflow-x:\s*auto/);
   });
 
   it('lets long identifiers wrap rather than widen the page', () => {
@@ -356,14 +463,50 @@ describe('the site is responsive by construction', () => {
 
   it('scales type and spacing with the viewport', () => {
     const style = css();
-    // clamp rather than fixed pixel jumps, so 390px and 834px both get a sensible size.
-    expect((style.match(/clamp\(/g) ?? []).length).toBeGreaterThan(8);
+    // Type uses clamp rather than fixed pixel jumps, so 390px and 834px both get a sensible
+    // size without a query for each one.
+    expect((style.match(/clamp\(/g) ?? []).length).toBeGreaterThan(6);
+    // Spacing scales through two custom properties redefined per breakpoint, rather than
+    // through a per-element override at every width. If either stops changing, the phone
+    // layout and the laptop layout have silently converged on one set of margins.
+    for (const token of ['--gutter', '--section-y']) {
+      const declarations = [...style.matchAll(new RegExp(`${token}:\\s*[^;]+;`, 'g'))];
+      expect(declarations.length, `${token} is not redefined per breakpoint`).toBeGreaterThan(2);
+    }
   });
 
   it('collapses the scoreboard to one column on a phone', () => {
     const style = css();
     const scoreboard = /\.scoreboard\s*\{([^}]*)\}/.exec(style)?.[1] ?? '';
     expect(scoreboard).toContain('grid-template-columns: 1fr');
+  });
+});
+
+describe('the assets do not drift from the stylesheet', () => {
+  it("draws the favicon and the social image in the stylesheet's own colours", () => {
+    // The favicon shipped as #4cc9e8 while the site rendered #00d3dd, so the browser tab was a
+    // paler cyan than the page behind it. An SVG file cannot read a custom property, so the
+    // only defence is to record the sRGB values in one place and compare.
+    const css = readFileSync(resolve(import.meta.dirname, '..', 'src', 'style.css'), 'utf8');
+    const documented = Object.fromEntries(
+      [...css.matchAll(/srgb ([a-z-]+) (#[0-9a-f]{6})/g)].map((m) => [m[1] ?? '', m[2] ?? '']),
+    );
+    expect(Object.keys(documented).length, 'style.css records no sRGB values').toBeGreaterThan(3);
+
+    for (const asset of ['favicon.svg', 'og.svg']) {
+      const svg = readFileSync(resolve(DIST, asset), 'utf8');
+      expect(svg, `${asset} uses oklch, which a rasteriser may not honour`).not.toContain('oklch');
+      const used = [...svg.matchAll(/#[0-9a-f]{6}/gi)].map((m) => m[0].toLowerCase());
+      expect(used.length, `${asset} has no colours`).toBeGreaterThan(1);
+      const known = new Set([...Object.values(documented), '#09090b', '#fafafa', '#a1a1aa']);
+      for (const colour of used) {
+        expect(known.has(colour), `${asset} uses ${colour}, which style.css does not record`).toBe(
+          true,
+        );
+      }
+      // And the accent is actually in there, so the check cannot pass on a greyscale asset.
+      expect(used, `${asset} does not use the accent`).toContain(documented['accent']);
+    }
   });
 });
 
@@ -437,6 +580,6 @@ describe('the liability discipline holds on the site too', () => {
   it('says the repair layer is not built yet', () => {
     const index = pages.find((p) => p.path.endsWith(`dist/index.html`));
     expect(index).toBeDefined();
-    expect(index?.html).toContain('repair layer is not merged');
+    expect(index?.html).toContain('the repair layer is not merged');
   });
 });

@@ -1,624 +1,1896 @@
 /*
  * trymarlo.pages.dev
  *
- * Dark, tight, high contrast, one accent. The accent is chartreuse because it is the
- * colour nobody in this category uses, and because it clears 7:1 against the background,
- * which matters more than usual for a site about contrast.
+ * Dark, tight, engineered. Two typefaces, one accent, a hairline border, and nothing that
+ * moves unless the reader scrolls it into view.
  *
- * Mobile first. Every breakpoint is a min-width, so the narrow layout is the base case
- * rather than an afterthought. The three widths the layout is actually tested at are
- * 390px (iPhone), 834px (iPad portrait) and 1440px (desktop).
+ * THE THREE CONSTRAINTS THIS FILE WORKS INSIDE
  *
- * No web fonts. A strict CSP and an offline-first posture both argue against them, and a
- * system stack renders instantly, which is most of what an LCP budget is about.
+ * No JavaScript is served, so every interaction here is CSS. Hover and focus states are
+ * transitions, the scroll reveals use animation-timeline, and the filter on the rules page
+ * is radio inputs plus :has(). If a thing cannot be done without a script it is not done.
+ *
+ * Mobile first, without exception. Every media query is min-width, so the phone layout is
+ * the one that needs no query to be correct. no-theatre.test.ts asserts this, because a
+ * max-width query means a desktop layout was written first and narrowed afterwards, and the
+ * narrowing is always where the overflow hides.
+ *
+ * Severity is a text mark before it is a colour. The marks are the same ones the terminal
+ * prints, so a reader who cannot separate red from amber, or a reader in forced colours,
+ * loses nothing. Colour is the second signal, never the only one.
+ *
+ * Contrast: --fg-muted is 7.8:1 and --fg-dim is 5.9:1 on the page background, both above the
+ * 4.5:1 floor at any size. --fg-faint never carries text.
  */
 
-:root {
-  --ink: #0a0c09;
-  --ink-raised: #12150f;
-  --ink-line: #23281d;
-  --paper: #e8ece3;
-  --paper-dim: #9aa38f;
-  --accent: #c9f227;
-  --accent-ink: #0a0c09;
-  --red: #ff6b5e;
-  --amber: #ffc247;
+/* ── Typefaces ───────────────────────────────────────────────────────────────── */
 
-  --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, Consolas, monospace;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-
-  --measure: 68ch;
-  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+/*
+ * Vendored, latin subset, variable weight. 68 KB for both, served from this origin, so the
+ * content security policy keeps font-src at 'self' and the page makes no third party request
+ * at all. Both are SIL Open Font License 1.1 and both are in docs/licenses.md.
+ */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url('/fonts/dm-sans-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── Tokens ──────────────────────────────────────────────────────────────────── */
+
+:root {
+  --bg: #09090b;
+  --bg-elev: #0c0c0e;
+  --bg-card: #111113;
+  --fg: #fafafa;
+  --fg-muted: #a1a1aa;
+  --fg-dim: #8b8b95;
+  --fg-faint: #52525b;
+  --border: #ffffff14;
+  --border-strong: #ffffff24;
+
+  /*
+   * Chartreuse, because nobody in this category uses it and it clears 14:1 on the background,
+   * which matters more than usual on a site about contrast.
+   *
+   * Plain hex rather than oklch, deliberately. favicon.svg and og.svg are files: they cannot
+   * read a custom property, and a rasteriser cannot be relied on for oklch. Writing the palette
+   * once, in the notation both the stylesheet and the assets can use, is what stops the browser
+   * tab drifting into a different colour from the page, which is what happened when the
+   * stylesheet said oklch(0.78 0.15 200) and the favicon said #4cc9e8. A site test compares
+   * these against build.mjs.
+   *
+   * srgb accent #c9f227
+   * srgb accent-strong #dbfd5e
+   * srgb ok #5fd37f
+   * srgb warn #f9a63f
+   * srgb bad #ff6a65
+   */
+  --accent: #c9f227;
+  --accent-strong: #dbfd5e;
+  --accent-dim: rgb(201 242 39 / 0.14);
+  --accent-line: rgb(201 242 39 / 0.34);
+
+  /* Severity never depends on any of these three: every marked element also carries a word or
+     a glyph. They are the second signal, which is why the accent is allowed to sit between the
+     amber and the green in hue without causing a problem. */
+  --ok: #5fd37f;
+  --warn: #f9a63f;
+  --bad: #ff6a65;
+
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+
+  /* Spacing scales with the viewport through these two, changed at each min-width
+     breakpoint, rather than through a pile of per-element overrides. */
+  --gutter: 20px;
+  --section-y: 64px;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────────────── */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  /* The page itself never scrolls sideways. Wide things scroll inside their own box. */
+  color-scheme: dark;
+  scroll-behavior: smooth;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--sans);
-  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
-  line-height: 1.6;
-}
-
-/* Skip link. Real, visible on focus, first in the tab order. */
-.skip {
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 0.75rem 1rem;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
-  text-decoration: none;
-  transform: translateY(-120%);
-  z-index: 100;
-}
-.skip:focus {
-  transform: translateY(0);
-}
-
-/* Focus is always visible and never removed. */
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-a {
-  color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-a:hover {
-  text-decoration-thickness: 2px;
-}
-
-.wrap {
-  width: 100%;
-  max-width: 76rem;
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
-
-/* Header */
-
-.masthead {
-  border-bottom: 1px solid var(--ink-line);
-  padding-block: 1rem;
-  position: sticky;
-  top: 0;
-  background: var(--ink);
-  z-index: 10;
-}
-
-.masthead__inner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.wordmark {
-  font-family: var(--mono);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--paper);
-  text-decoration: none;
-  /* Same 24px floor as the nav. */
-  display: inline-flex;
-  align-items: center;
-  min-height: 1.5rem;
-}
-.wordmark::before {
-  content: '';
-  display: inline-block;
-  width: 0.55em;
-  height: 0.55em;
-  margin-right: 0.5em;
-  background: var(--accent);
-}
-
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.25rem;
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-}
-.nav a {
-  color: var(--paper-dim);
-  text-decoration: none;
-  /*
-   * 24px minimum, for WCAG 2.2 success criterion 2.5.8. A nav link at the natural line
-   * height of this font size is 18px tall, which axe flags and a thumb misses.
-   */
-  display: inline-flex;
-  align-items: center;
-  min-height: 1.5rem;
-  padding-inline: 0.125rem;
-}
-.nav a:hover,
-.nav a[aria-current='page'] {
-  color: var(--accent);
-}
-
-/* Hero */
-
-.hero {
-  padding-block: clamp(3rem, 9vw, 7rem) clamp(2rem, 6vw, 4rem);
-  border-bottom: 1px solid var(--ink-line);
-}
-
-h1 {
-  font-size: clamp(2rem, 1.3rem + 4.2vw, 4.25rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  font-weight: 680;
-  margin: 0 0 1.25rem;
-  max-width: 26ch;
-  text-wrap: balance;
-}
-
-.lede {
-  font-size: clamp(1.0625rem, 1rem + 0.5vw, 1.375rem);
-  line-height: 1.5;
-  max-width: 46ch;
-  margin: 0 0 2rem;
-  text-wrap: pretty;
-}
-.lede strong {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* The number */
-
-.verdict {
-  border: 1px solid var(--ink-line);
-  background: var(--ink-raised);
-  padding: clamp(1.25rem, 4vw, 2rem);
-  margin-block: 2.5rem;
-}
-
-.verdict__label {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--paper-dim);
-  margin: 0 0 1rem;
-}
-
-.scoreboard {
-  display: grid;
-  gap: 1px;
-  background: var(--ink-line);
-  border: 1px solid var(--ink-line);
-  /* One column on a phone, four from tablet up. */
-  grid-template-columns: 1fr;
-}
-
-.score {
-  background: var(--ink-raised);
-  padding: 1rem 1.125rem;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: 'ss01', 'ss02';
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100vh;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-}
-.score--marlo {
-  background: color-mix(in srgb, var(--accent) 8%, var(--ink-raised));
-}
-.score__engine {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  color: var(--paper-dim);
-}
-.score--marlo .score__engine {
-  color: var(--accent);
-  font-weight: 600;
-}
-.score__value {
-  font-family: var(--mono);
-  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.125rem);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-.score__unit {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--paper-dim);
-}
-
-/* Prose */
-
-main section {
-  padding-block: clamp(2.5rem, 7vw, 4.5rem);
-  border-bottom: 1px solid var(--ink-line);
-}
-main section:last-of-type {
-  border-bottom: 0;
-}
-
-h2 {
-  font-size: clamp(1.375rem, 1.15rem + 1.1vw, 2rem);
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-  font-weight: 640;
-  margin: 0 0 1rem;
-  max-width: 34ch;
-  text-wrap: balance;
-}
-
-h3 {
-  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.1875rem);
-  line-height: 1.3;
-  font-weight: 620;
-  margin: 2rem 0 0.5rem;
-}
-
-p,
-li {
-  max-width: var(--measure);
-  text-wrap: pretty;
-}
-p {
-  margin: 0 0 1rem;
-}
-
-.dim {
-  color: var(--paper-dim);
-}
-
-code {
-  font-family: var(--mono);
-  font-size: 0.9em;
-  background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  padding: 0.1em 0.35em;
-  border-radius: 2px;
-  /* A long identifier must not push the page sideways on a phone. */
-  overflow-wrap: anywhere;
-}
-
-/* Terminal sample: the signature surface */
-
-.terminal {
-  border: 1px solid var(--ink-line);
-  background: #070906;
-  margin-block: 1.5rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.terminal pre {
-  margin: 0;
-  padding: clamp(0.875rem, 3vw, 1.5rem);
-  font-family: var(--mono);
-  font-size: clamp(0.6875rem, 0.62rem + 0.3vw, 0.8125rem);
-  line-height: 1.7;
-  color: var(--paper);
-  tab-size: 2;
-}
-.t-crit {
-  color: var(--red);
-}
-.t-warn {
-  color: var(--amber);
-}
-.t-dim {
-  color: var(--paper-dim);
-}
-.t-ok {
-  color: var(--accent);
-}
-
-/* Tables */
-
-.scroller {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid var(--ink-line);
-  margin-block: 1.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /*
- * A scrollable box has to be reachable by keyboard, or somebody who cannot use a pointer
- * cannot read the right-hand columns of a wide table. The markup gives these tabindex="0"
- * and a label; this keeps the resulting focus ring inside the border rather than clipped
- * by the overflow.
+ * The grain. Fixed, non-interactive, 3.5% opacity, and the only decorative layer on the
+ * site. A pseudo element on the body is not in the accessibility tree, so it needs no
+ * aria-hidden, and it goes entirely in forced colours.
  */
-.scroller:focus-visible,
-.terminal:focus-visible {
-  outline-offset: -3px;
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--fg);
+}
+
+/* ── Utilities ───────────────────────────────────────────────────────────────── */
+
+.wrap {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.eyebrow--accent {
+  color: var(--accent);
+}
+
+.dim {
+  color: var(--fg-dim);
+  font-size: 14px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  /* An ACT rule identifier or a long path must break rather than widen the page. */
+  overflow-wrap: anywhere;
+  color: var(--accent-strong);
+  background: #ffffff08;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.1em 0.36em;
+}
+
+strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+/* Emphasis as a highlight rather than an italic, because italic sans at 15px is harder to
+   read and the accent wash is the same signal. */
+em {
+  font-style: normal;
+  color: var(--fg);
+  box-shadow: inset 0 -0.42em 0 var(--accent-dim);
+}
+
+/* ── Skip link ───────────────────────────────────────────────────────────────── */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+}
+
+.skip:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  padding: 10px 18px;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ── Masthead ────────────────────────────────────────────────────────────────── */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+/*
+ * Grid rather than flex, so the same three elements can be one row on a laptop and two rows on
+ * a phone without duplicating any of them.
+ *
+ * The first attempt shipped a second copy of the navigation for narrow viewports, and the site
+ * test caught it as two nav landmarks on one page. Hiding one with display:none does keep the
+ * accessibility tree correct at any given width, but two sets of the same links in the markup
+ * is two things to keep in step, and one of them will eventually be forgotten.
+ *
+ * On a phone the reading order becomes wordmark, source, navigation, while the document order
+ * stays wordmark, navigation, source. That is allowed here because the three carry no
+ * meaningful sequence between them: no item depends on another, and success criterion 1.3.2 is
+ * about sequence that changes meaning.
+ */
+.masthead__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'brand source'
+    'nav nav';
+  align-items: center;
+  gap: 4px 12px;
+  padding-top: 10px;
+  padding-bottom: 4px;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  /* The mark carries about a pixel and a half of its own transparent margin at this size, so
+     the optical gap is wider than the number. */
+  gap: 6px;
+  min-height: 1.75rem;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  transition: color 0.2s;
+}
+
+.wordmark svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.wordmark {
+  grid-area: brand;
+}
+
+.masthead__source {
+  grid-area: source;
+}
+
+/*
+ * The navigation. A row that scrolls sideways when it does not fit, rather than a disclosure
+ * button, because a button needs script and this site serves none. On a phone a scrolling row
+ * beats no route at all to the other four pages.
+ */
+.nav {
+  grid-area: nav;
+  min-width: 0;
+  margin: 0 calc(var(--gutter) * -1);
+  border-top: 1px solid var(--border);
+}
+
+.nav__scroll {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  overflow-x: auto;
+  padding: 6px var(--gutter);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* A fade at the trailing edge, so it is visible that the row continues. Decorative: the
+     row is still scrollable by keyboard, by wheel and by touch without it. */
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent 100%);
+}
+
+.nav__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  /* Without this "The numbers" broke over two lines and the whole row looked like a
+     rendering fault. A scrolling row is only readable if its items do not wrap. */
+  white-space: nowrap;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg-muted);
+  transition:
+    color 0.18s,
+    background 0.18s;
+}
+
+.nav a:hover {
+  color: var(--fg);
+  background: #ffffff08;
+}
+
+.nav a[aria-current='page'] {
+  color: var(--fg);
+  background: #ffffff0d;
+}
+
+.masthead__source {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 2.125rem;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff05;
+  color: var(--fg-muted);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    color 0.18s,
+    border-color 0.18s,
+    background 0.18s;
+}
+
+.masthead__source:hover {
+  color: var(--fg);
+  border-color: var(--border-strong);
+  background: #ffffff0a;
+}
+
+.masthead__source svg {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 2.75rem;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform 0.18s,
+    background 0.18s,
+    border-color 0.18s,
+    color 0.18s,
+    box-shadow 0.18s;
+}
+
+.btn-primary {
+  background: var(--fg);
+  color: #09090b;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px -12px #ffffff40;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--fg);
+  border-color: var(--border-strong);
+  background: #ffffff08;
+  transform: translateY(-1px);
+}
+
+.btn-ghost:active {
+  transform: translateY(0);
+}
+
+/* A second guard on icon size, in case a future icon arrives without width and height
+   attributes. An unsized SVG in a flex button expands to the whole button. */
+.btn svg:not(.arrow),
+.textlink svg:not(.arrow) {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.btn code {
+  background: #00000026;
+  border: 0;
+  color: inherit;
+  font-size: 11px;
+}
+
+.arrow {
+  flex-shrink: 0;
+  opacity: 0.65;
+  transition:
+    transform 0.18s,
+    opacity 0.18s;
+}
+
+.btn:hover .arrow,
+.textlink:hover .arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 1.5rem;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.18s;
+}
+
+.textlink:hover {
+  color: var(--accent-strong);
+}
+
+/* Links in running prose are underlined, because colour alone must not be what
+   distinguishes a link from the sentence around it. */
+main p a:not(.btn):not(.textlink),
+main li a:not(.btn):not(.textlink),
+.foot__legal a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    color 0.18s,
+    text-decoration-color 0.18s;
+}
+
+main p a:hover,
+main li a:hover,
+.foot__legal a:hover {
+  color: var(--accent-strong);
+  text-decoration-color: currentcolor;
+}
+
+/* ── Sections ────────────────────────────────────────────────────────────────── */
+
+main {
+  flex: 1;
+}
+
+main > section {
+  position: relative;
+  border-top: 1px solid var(--border);
+  padding: var(--section-y) 0;
+}
+
+main > section:first-of-type {
+  border-top: 0;
+}
+
+.section-head {
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+
+.section-head .eyebrow {
+  margin-bottom: 13px;
+}
+
+/* h2 and the paragraph beneath it were touching, which read as a rendering fault rather
+   than as a heading. */
+.section-head h2 {
+  margin-bottom: 16px;
+}
+
+.section-head > * + p {
+  margin-top: 16px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(26px, 4vw, 40px);
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+h3 {
+  font-size: clamp(18px, 2.2vw, 21px);
+}
+
+.section-head p,
+.prose p,
+.prose li {
+  color: var(--fg-muted);
+  font-size: clamp(15.5px, 1.3vw, 16.5px);
+  letter-spacing: -0.005em;
+}
+
+.prose {
+  max-width: 70ch;
+}
+
+.prose > * + * {
+  margin-top: 16px;
+}
+
+.prose h3 {
+  margin-top: 32px;
+}
+
+.prose h3 + p {
+  margin-top: 10px;
+}
+
+.stack > * + * {
+  margin-top: 20px;
+}
+
+/*
+ * Long-form layout: the section heading sits in a rail on the left and sticks while the prose
+ * scrolls past it.
+ *
+ * Before this, the method and honesty pages were a 70ch column against the left edge of a
+ * 1240px container, so the right half of a laptop screen was empty. A measure that narrow is
+ * right for reading and wrong on its own, and the fix is to give the space a job rather than
+ * to widen the text.
+ */
+.longform {
+  display: grid;
+  gap: 8px;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-top: 0;
+  /* Less bottom padding than a normal section: the hero is followed by a bordered section
+     with its own top padding, and stacking both left a band of nothing. */
+  padding: 40px 0 32px;
+}
+
+/* The grid, masked to a soft radial so it never reaches an edge and never sits behind small
+   text. Decorative, and it goes in forced colours. */
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, #ffffff14 1px, transparent 1px),
+    linear-gradient(#ffffff14 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(85% 62% at 50% 30%, #000 36%, transparent 100%);
+  -webkit-mask-image: radial-gradient(85% 62% at 50% 30%, #000 36%, transparent 100%);
+}
+
+.hero__inner {
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(33px, 6.8vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+  max-width: 23ch;
+  margin: 18px 0 16px;
+}
+
+.hero .lede {
+  color: var(--fg-muted);
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  max-width: 58ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+/*
+ * Full width and stacked on a phone. "See the numbers" and "Read the source" cannot sit side
+ * by side at 390 pixels, and letting them wrap produced two buttons of different widths on
+ * two lines, which looked like an accident.
+ */
+.hero__actions .btn {
+  width: 100%;
+  min-height: 3rem;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+/*
+ * The product preview, sitting in the hero the way a screenshot would. The tilt lives on an
+ * inner element because the outer one carries the staggered entrance animation, and two
+ * transforms on one element fight.
+ *
+ * It straightens on hover, which is the only reason the transition is there.
+ */
+.hero__preview {
+  margin-top: 32px;
+}
+
+.hero__preview-tilt {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero--centred .hero__inner {
+  text-align: left;
+}
+
+/*
+ * Spacing between a block and whatever follows it, set once here rather than as an inline
+ * margin on each occurrence.
+ *
+ * Doing it per element is how a page ends up with a caption pressed against the table it
+ * describes on one page and correctly spaced on another. These are the six combinations that
+ * actually occur.
+ */
+.hero__inner > .scoreboard,
+.hero__inner > .grid,
+.hero__inner > .rowset {
+  margin-top: 34px;
+}
+
+.scroller + p,
+.rowset + p,
+.grid + p,
+.terminal + p,
+.pipeline + p,
+.scoreboard + p,
+.filter + p {
+  margin-top: 26px;
+}
+
+/* A callout is an aside, not the next paragraph, so it needs more air than one. */
+.prose + .callout,
+.pipeline + .callout,
+.scroller + .callout,
+.rowset + .callout,
+.engine-table + .callout {
+  margin-top: 36px;
+}
+
+/* ── The headline figure ─────────────────────────────────────────────────────── */
+
+.headline-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.headline-stat__value {
+  font-family: var(--font-mono);
+  /* Not tabular here. Tabular figures pad the decimal point to a full character cell, and at
+     this size "12.9%" came out reading as "12 . 9%". Tabular belongs in the tables, where
+     columns have to line up, and nowhere else. */
+  font-variant-numeric: normal;
+  font-size: clamp(56px, 13vw, 108px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  color: var(--accent);
+}
+
+.headline-stat__label {
+  color: var(--fg-muted);
+  font-size: 14.5px;
+  max-width: 34ch;
+}
+
+/*
+ * A pull quote for the right-hand side of a text section. At 1440 a 760px section head plus a
+ * 70ch paragraph column left the right half of the viewport empty, which read as an
+ * unfinished page rather than as restraint.
+ */
+.aside-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(120% 90% at 100% 0%, var(--accent-dim), transparent 60%),
+    linear-gradient(180deg, #ffffff05, transparent);
+}
+
+.aside-figure__value {
+  font-family: var(--font-mono);
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+
+.aside-figure__label {
+  color: var(--fg-muted);
+  font-size: 14.5px;
+}
+
+.aside-figure__note {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── Tiles ───────────────────────────────────────────────────────────────────── */
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(#ffffff04, transparent);
+}
+
+.tile--pad {
+  padding: 24px;
+}
+
+/* An eyebrow is a label for what follows, so it needs the gap that says so. Without this the
+   label sat on top of the first item and read as part of it. */
+.tile--pad > .eyebrow {
+  margin-bottom: 4px;
+}
+
+.tile--glow {
+  background:
+    radial-gradient(110% 78% at 100% 0%, var(--accent-dim), transparent 58%),
+    linear-gradient(180deg, #ffffff05, transparent);
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+}
+
+/* ── The scoreboard ──────────────────────────────────────────────────────────── */
+
+.scoreboard {
+  display: grid;
+  /* One column on a phone, stated rather than implied. Wider layouts are min-width
+     queries further down. */
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(#ffffff04, transparent);
+  transition: background 0.2s;
+}
+
+.score:last-child {
+  border-bottom: 0;
+}
+
+.score:hover {
+  background: #ffffff07;
+}
+
+.score--marlo {
+  background: linear-gradient(90deg, var(--accent-dim), transparent 72%);
+}
+
+.score--marlo:hover {
+  background: linear-gradient(90deg, var(--accent-dim), #ffffff07 72%);
+}
+
+.score__engine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg-muted);
+}
+
+.score--marlo .score__engine {
+  color: var(--fg);
+  font-weight: 650;
+}
+
+.score__value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.score__unit {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+/* A rank written out, with colour as the second signal rather than the only one. */
+.rank {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid currentcolor;
+}
+
+.rank--ok {
+  color: var(--ok);
+}
+
+.rank--warn {
+  color: var(--warn);
+}
+
+.rank--bad {
+  color: var(--bad);
+}
+
+/* ── Rows ────────────────────────────────────────────────────────────────────── */
+
+.rowset {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  gap: 7px;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(#ffffff04, transparent);
+  transition: background 0.2s;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.row:hover {
+  background: #ffffff07;
+}
+
+.row__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+}
+
+.row__body {
+  color: var(--fg-muted);
+  font-size: clamp(14px, 1.1vw, 14.5px);
+}
+
+.row__tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.bullet {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  list-style: none;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--fg-muted);
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+
+/* ── The pipeline diagram ────────────────────────────────────────────────────── */
+
+/*
+ * Built from real elements rather than an image, so it reflows on a phone, survives forced
+ * colours, and is read as a list by a screen reader. The connector marks are decorative and
+ * hidden from the accessibility tree in the markup.
+ */
+.pipeline {
+  display: grid;
+  gap: 10px;
+  counter-reset: stage;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(#ffffff04, transparent);
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+
+.stage:hover {
+  border-color: var(--border-strong);
+  background: #ffffff08;
+}
+
+.stage__index {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: #ffffff08;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.stage__name {
+  font-size: 15px;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+}
+
+.stage__detail {
+  margin-top: 3px;
+  color: var(--fg-muted);
+  font-size: 14px;
+}
+
+.stage__tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.stage--gate {
+  border-color: var(--accent-line);
+  background: linear-gradient(90deg, var(--accent-dim), transparent 66%);
+}
+
+.link-mark {
+  display: block;
+  width: 1px;
+  height: 14px;
+  margin-left: 31px;
+  background: linear-gradient(180deg, var(--border-strong), var(--accent));
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────────────── */
+
+/*
+ * Wide tables scroll inside their own labelled region rather than pushing the page sideways.
+ * The region is focusable, because a scroll container a keyboard cannot reach is a serious
+ * violation and the first audit of this site found four of them.
+ */
+.scroller {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(#ffffff04, transparent);
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
-  min-width: 34rem;
-  font-size: 0.875rem;
+  min-width: 40rem;
+  font-size: clamp(13px, 1vw, 14px);
 }
+
 caption {
   text-align: left;
-  padding: 0.875rem 1rem;
-  color: var(--paper-dim);
-  font-size: 0.8125rem;
-  border-bottom: 1px solid var(--ink-line);
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.5;
 }
-th,
-td {
-  /*
-   * The vertical padding is 0.75rem rather than 0.625rem so that a link inside a cell
-   * clears 24px of safe clickable space without needing its own box. The rule identifier
-   * links in the coverage table are the case that forced this.
-   */
-  padding: 0.75rem 1rem;
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   text-align: left;
-  border-bottom: 1px solid var(--ink-line);
-  vertical-align: top;
-}
-th {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--paper-dim);
+  padding: 11px 14px;
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 10px;
   font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
   white-space: nowrap;
 }
+
+tbody th,
+tbody td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: baseline;
+}
+
 tbody tr:last-child th,
 tbody tr:last-child td {
   border-bottom: 0;
 }
 
-/*
- * A row header is data, not a column label, so it does not get the uppercase treatment.
- * ACT rule identifiers are lower case by definition and `3EA0C8` is not a rule id.
- */
+/* Row headers keep their case. Uppercasing them turned every ACT rule id into something
+   that read like a different identifier. */
 tbody th[scope='row'] {
-  text-transform: none;
-  letter-spacing: normal;
-  font-size: 0.875rem;
-  color: var(--paper);
+  text-align: left;
   font-weight: 500;
-}
-tbody tr.is-marlo th[scope='row'] {
-  color: var(--accent);
-}
-td.num {
-  font-family: var(--mono);
-  font-variant-numeric: tabular-nums;
+  text-transform: none;
   white-space: nowrap;
-}
-tr.is-marlo {
-  background: color-mix(in srgb, var(--accent) 7%, transparent);
-}
-tr.is-marlo th {
-  color: var(--accent);
+  color: var(--fg);
 }
 
-/* A link in a table cell gets the same 24px floor as the nav. */
-td a,
-th a {
+tbody td {
+  color: var(--fg-muted);
+}
+
+tbody tr {
+  transition: background 0.15s;
+}
+
+tbody tr:hover {
+  background: #ffffff07;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--fg);
+}
+
+tr.is-marlo {
+  background: linear-gradient(90deg, var(--accent-dim), transparent 82%);
+}
+
+tr.is-marlo:hover {
+  background: linear-gradient(90deg, var(--accent-dim), #ffffff07 82%);
+}
+
+tr.is-marlo th[scope='row'] {
+  font-weight: 650;
+}
+
+table a {
   display: inline-flex;
   align-items: center;
   min-height: 1.5rem;
 }
 
+/* ── The rules filter, in CSS ────────────────────────────────────────────────── */
+
 /*
- * Never colour alone. A flagged row carries a text mark as well as a tint, so the
- * distinction survives greyscale, a colour-blind reader, and a printout.
+ * A working filter with no script. Real radio inputs in a real fieldset, and :has() on an
+ * ancestor hides the rows that do not match. Where :has() is unsupported every row stays
+ * visible, which is the correct direction to fail in: a reader never loses data.
  */
-.mark {
-  font-family: var(--mono);
+.filter {
+  border: 0;
+  margin-bottom: 16px;
+}
+
+.filter legend {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  padding: 0;
+  margin-bottom: 11px;
+}
+
+.filter__options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.filter label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 2rem;
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff05;
+  color: var(--fg-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color 0.18s,
+    border-color 0.18s,
+    background 0.18s;
+}
+
+.filter label:hover {
+  color: var(--fg);
+  border-color: var(--border-strong);
+  background: #ffffff0a;
+}
+
+.filter input:checked + label {
+  color: var(--bg);
+  background: var(--fg);
+  border-color: var(--fg);
   font-weight: 600;
 }
-.mark--flag {
-  color: var(--amber);
+
+.filter input:focus-visible + label {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-/* Callout */
+.ruleset:has(#by-marlo:checked) tbody tr:not([data-engine='marlo']),
+.ruleset:has(#by-axe:checked) tbody tr:not([data-engine='axe-core']),
+.ruleset:has(#by-alfa:checked) tbody tr:not([data-engine='alfa']),
+.ruleset:has(#by-autofix:checked) tbody tr:not([data-autofix='yes']) {
+  display: none;
+}
+
+/* ── Terminal ────────────────────────────────────────────────────────────────── */
+
+/*
+ * Recorded output, not a simulation. The text is the real stdout of a real scan of the demo
+ * page, and the caption says so, because a terminal on a marketing page that has never run
+ * anything is the exact thing this project argues against.
+ *
+ * Always dark, in every colour scheme, so the colours inside are stated once and cannot be
+ * overridden into a contrast failure. The first audit found amber on near black at 2.18:1
+ * because a light theme reached in here.
+ */
+.terminal {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #0a0a0c;
+  overflow: hidden;
+  box-shadow: 0 28px 64px -32px #000000d9;
+}
+
+.terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: #ffffff05;
+}
+
+.terminal__dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #2a2a30;
+}
+
+.terminal__title {
+  flex: 1;
+  margin-left: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #8b8b95;
+  text-align: center;
+}
+
+/* The output is wider than a phone and must scroll inside its own labelled region rather
+   than widening the page. */
+.terminal__body {
+  overflow-x: auto;
+  padding: 18px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.terminal pre {
+  font-family: var(--font-mono);
+  font-size: clamp(11.5px, 1vw, 12.5px);
+  line-height: 1.72;
+  color: #e6e6ea;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.t-dim {
+  color: #8b8b95;
+}
+
+.t-crit {
+  color: #ff8f84;
+}
+
+.t-warn {
+  color: #f0c76a;
+}
+
+.t-ok {
+  color: #7fd6a1;
+}
+
+.t-prompt {
+  color: #c9f227;
+}
+
+/* The selector a finding points at. Brighter than the provenance around it, because it is the
+   part a reader is looking for. */
+.t-sel {
+  color: #b9b9c4;
+}
+
+.caret {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: #e6e6ea;
+  animation: blink 1.06s steps(2, end) infinite;
+}
+
+/* ── Callout ─────────────────────────────────────────────────────────────────── */
 
 .callout {
-  border-left: 3px solid var(--accent);
-  background: var(--ink-raised);
-  padding: 1rem 1.25rem;
-  margin-block: 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--accent-dim), transparent 62%);
 }
-.callout p:last-child {
-  margin-bottom: 0;
+
+.callout p {
+  color: var(--fg-muted);
+  font-size: 15px;
 }
+
 .callout--warn {
-  border-left-color: var(--amber);
+  border-left-color: var(--warn);
+  background: linear-gradient(90deg, rgb(249 166 63 / 0.11), transparent 62%);
 }
 
-/* Lists */
-
-ul.plain {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
+.callout--bad {
+  border-left-color: var(--bad);
+  background: linear-gradient(90deg, rgb(255 106 101 / 0.11), transparent 62%);
 }
-ul.plain > li {
-  padding-left: 1.25rem;
+
+.callout__mark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  border-radius: 7px;
+  border: 1px solid currentcolor;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.callout--warn .callout__mark {
+  color: var(--warn);
+}
+
+.callout--bad .callout__mark {
+  color: var(--bad);
+}
+
+/* ── Call to action ──────────────────────────────────────────────────────────── */
+
+.cta {
   position: relative;
-  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-align: center;
+  padding: 80px 0;
 }
-ul.plain > li::before {
+
+.cta::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0.62em;
-  width: 0.45em;
-  height: 1px;
-  background: var(--accent);
+  inset: auto 0 -50%;
+  height: 60%;
+  opacity: 0.7;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, var(--accent-dim) 0%, transparent 62%);
 }
 
-/* Footer */
+.cta__inner {
+  position: relative;
+}
+
+.cta h2 {
+  font-size: clamp(29px, 5.6vw, 54px);
+}
+
+.cta p {
+  color: var(--fg-muted);
+  font-size: clamp(15.5px, 1.3vw, 16.5px);
+  line-height: 1.55;
+  max-width: 56ch;
+  margin: 16px auto 26px;
+}
+
+.cta .hero__actions {
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────────── */
 
 .foot {
-  border-top: 1px solid var(--ink-line);
-  padding-block: 2.5rem 3.5rem;
-  color: var(--paper-dim);
-  font-size: 0.875rem;
+  border-top: 1px solid var(--border);
+  padding: 44px 0 max(32px, env(safe-area-inset-bottom));
 }
+
 .foot__grid {
   display: grid;
-  gap: 1.75rem;
-  grid-template-columns: 1fr;
+  gap: 28px;
 }
+
 .foot h2 {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--paper-dim);
-  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
   font-weight: 500;
-  max-width: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 12px;
 }
+
 .foot ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
-.foot li {
-  /* Spacing rather than padding, so the 24px floor comes from the gap between targets. */
-  margin-bottom: 0.5rem;
-}
-.foot a {
+
+.foot li a {
   display: inline-flex;
   align-items: center;
   min-height: 1.5rem;
+  color: var(--fg-muted);
+  font-size: 13.5px;
+  transition: color 0.18s;
 }
 
-/* Breakpoints */
-
-/* Large phone. */
-@media (min-width: 30em) {
-  .scoreboard {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.foot li a:hover {
+  color: var(--fg);
 }
 
-/* Tablet. Portrait iPad at 834px lands here. */
-@media (min-width: 48em) {
-  .scoreboard {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .foot__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .two-col {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 4vw, 3rem);
-  }
+.foot__legal {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border);
 }
 
-/* Desktop. */
-@media (min-width: 64em) {
-  .foot__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .hero__split {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: start;
+/* Full width, no measure. It is a single dense line of provenance rather than something anybody
+   reads a paragraph at a time, and a 82ch cap left it stopping short of the page. */
+.foot__legal p {
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── Motion ──────────────────────────────────────────────────────────────────── */
+
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
-/* Preferences */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+ * The scroll reveal moves and does not fade, and that is a correctness requirement rather
+ * than a taste call.
+ *
+ * The first version animated opacity from 0 as well. Marlo's own audit failed it: axe
+ * composites a partial opacity into the effective colour, and it caught body copy at 4.22:1
+ * and an eyebrow at 3.39:1 against a 4.5:1 floor. Which is right. A time-based animation
+ * finishes on its own in under half a second. A scroll-linked one can sit at 30 percent
+ * progress for as long as the reader leaves the page where it is, and text held at 30
+ * percent opacity is not a transition, it is the contrast of the page.
+ *
+ * Transform alone has no effect on contrast, so the reveal survives the check it should.
+ */
+@keyframes slide {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Entrance on the hero only, staggered, under half a second, and it moves nothing the
+   reader has already started reading. */
+.hero__inner > * {
+  animation: rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__inner > *:nth-child(1) {
+  animation-delay: 0.02s;
+}
+
+.hero__inner > *:nth-child(2) {
+  animation-delay: 0.07s;
+}
+
+.hero__inner > *:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.hero__inner > *:nth-child(4) {
+  animation-delay: 0.17s;
+}
+
+.hero__inner > *:nth-child(5) {
+  animation-delay: 0.22s;
+}
+
+/*
+ * Scroll reveal with no script at all. animation-timeline drives the animation from the
+ * element's own position in the viewport, so there is no observer, no listener, nothing to
+ * hydrate. Inside @supports because where it is unsupported the right outcome is fully
+ * visible content, and `both` on an unsupported timeline would leave it at opacity zero.
+ */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .hero__inner > *,
+  .hero__preview-tilt {
+    opacity: 1;
+    transform: none;
   }
 }
+
+/* ── Responsive, min-width only ──────────────────────────────────────────────── */
+
+@media (min-width: 34em) {
+  :root {
+    --gutter: 24px;
+  }
+
+  .scoreboard {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .score {
+    border-right: 1px solid var(--border);
+  }
+
+  .score:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .score:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .foot__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 48em) {
+  :root {
+    --gutter: 32px;
+    --section-y: 88px;
+  }
+
+  .masthead__inner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'brand nav source';
+    gap: 20px;
+    padding-bottom: 10px;
+  }
+
+  .nav {
+    margin: 0;
+    border-top: 0;
+    justify-self: center;
+  }
+
+  .nav__scroll {
+    padding: 0;
+    overflow-x: visible;
+  }
+
+  .hero {
+    padding-top: 64px;
+    padding-bottom: 40px;
+  }
+
+  /* The tilt is a wide-viewport flourish. On a phone the preview is already the widest thing
+     on the page and a perspective transform on it just costs legibility. */
+  .hero__actions .btn {
+    width: auto;
+  }
+
+  .nav__scroll {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .hero__preview-tilt {
+    transform: perspective(2000px) rotateX(2.4deg);
+  }
+
+  .hero__preview:hover .hero__preview-tilt,
+  .hero__preview:focus-within .hero__preview-tilt {
+    transform: perspective(2000px) rotateX(0deg);
+  }
+
+  .hero--centred .hero__inner {
+    text-align: center;
+  }
+
+  .hero--centred .hero__inner h1,
+  .hero--centred .hero__inner .lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero--centred .hero__actions {
+    justify-content: center;
+  }
+
+  .hero--centred .hero__preview {
+    text-align: left;
+  }
+
+  .grid--2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .rowset--2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rowset--2 .row {
+    border-right: 1px solid var(--border);
+  }
+
+  .rowset--2 .row:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .rowset--2 .row:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 44px;
+    align-items: center;
+  }
+
+  .foot__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (min-width: 64em) {
+  :root {
+    --section-y: 96px;
+  }
+
+  .scoreboard--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .scoreboard--4 .score {
+    border-bottom: 0;
+    padding: 20px;
+  }
+
+  .scoreboard--4 .score:nth-child(2n) {
+    border-right: 1px solid var(--border);
+  }
+
+  .scoreboard--4 .score:last-child {
+    border-right: 0;
+  }
+
+  .split--wide {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 64px;
+  }
+
+  .longform {
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  .longform > .section-head h2 {
+    font-size: clamp(24px, 2.4vw, 32px);
+    text-wrap: pretty;
+  }
+
+  .longform > .section-head {
+    position: sticky;
+    /* Clear of the sticky masthead. */
+    top: 84px;
+    margin-bottom: 0;
+  }
+
+  .pipeline--flow {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .pipeline--flow .link-mark {
+    display: none;
+  }
+}
+
+/* ── Forced colours and print ────────────────────────────────────────────────── */
 
 /*
- * A light theme, because a site that only works dark ignores a system preference. Same
- * accent, darkened enough to keep 4.5:1 against paper.
+ * In forced colours the decorative layers go and the borders come back as system colours.
+ * Nothing here carries meaning by colour alone, so nothing is lost: severity is a text mark,
+ * ranks are written out, and links in prose are underlined.
  */
-@media (prefers-color-scheme: light) {
-  :root {
-    --ink: #fbfcf8;
-    --ink-raised: #f1f3ec;
-    --ink-line: #d5dac9;
-    --paper: #14180f;
-    --paper-dim: #56604a;
-    --accent: #47660a;
-    --accent-ink: #ffffff;
-    --red: #9e2318;
-    --amber: #6f4600;
-  }
-  /*
-   * The terminal stays dark in light mode, because a terminal is dark. That means every
-   * colour inside it has to keep its dark-theme value: the first version let --red and
-   * --amber switch to their light-theme equivalents, which are dark, and axe correctly
-   * reported 2.18:1 for amber-on-near-black. A theme variable that is right everywhere
-   * except inside one component is a contrast bug waiting for a screenshot.
-   */
-  .terminal {
-    background: #14180f;
-  }
-  .terminal pre {
-    color: #e8ece3;
-  }
-  .t-dim {
-    color: #9aa38f;
-  }
-  .t-ok {
-    color: #c9f227;
-  }
-  .t-crit {
-    color: #ff6b5e;
-  }
-  .t-warn {
-    color: #ffc247;
-  }
-}
-
 @media (forced-colors: active) {
-  .score--marlo,
-  tr.is-marlo {
-    background: transparent;
+  body::after,
+  .hero__grid,
+  .cta::before {
+    display: none;
   }
-  .callout,
-  .verdict,
+
+  .tile,
   .scroller,
-  .terminal {
+  .terminal,
+  .rowset,
+  .scoreboard,
+  .callout,
+  .stage,
+  .filter label {
     border: 1px solid CanvasText;
+  }
+
+  .score--marlo,
+  tr.is-marlo,
+  .stage--gate,
+  .row:hover,
+  tbody tr:hover {
+    background: Canvas;
+  }
+
+  .filter input:checked + label {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .headline-stat__value,
+  .t-crit,
+  .t-warn,
+  .t-ok,
+  .t-sel,
+  .t-prompt,
+  code {
+    color: CanvasText;
   }
 }
 
 @media print {
-  .masthead,
-  .skip {
+  body::after,
+  .hero__grid,
+  .cta::before,
+  .masthead {
     display: none;
   }
+
   body {
     background: #fff;
     color: #000;
+  }
+
+  .scroller,
+  .terminal__body {
+    overflow: visible;
   }
 }
