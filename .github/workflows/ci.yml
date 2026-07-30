@@ -99,7 +99,12 @@ jobs:
         # could be made convenient by changing the question rather than the
         # answer, and nothing downstream would notice. No network: the corpus
         # is vendored, per DECISIONS.md D-012.
-        run: pnpm run corpus:verify
+        # node directly rather than through pnpm. This job installs no
+        # dependencies and the script needs none, and the first version called
+        # `pnpm run corpus:verify` in a job with no pnpm, which failed with
+        # "pnpm: command not found". A check that cannot fail for the reason it
+        # exists is worse than no check.
+        run: node scripts/verify-act-corpus.mjs
 
   test:
     name: Test (node ${{ matrix.node }})
