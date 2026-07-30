@@ -125,6 +125,13 @@ export default defineConfig({
        * They now sit just under the measured figures, so any regression fails and any
        * improvement is a one-line pull request. There is a CI job.
        *
+       * `test:coverage` names the two projects it measures rather than running all of them.
+       * It used to run every project, which was harmless only for as long as the browser
+       * project was empty: the first test added to it made the coverage job need a Chromium
+       * it does not install, and the gate failed for a reason that had nothing to do with
+       * coverage. The thresholds below were measured against the offline suite, so that is
+       * what the gate measures.
+       *
        * Branches run 14 points below statements, and that gap is structural rather than
        * neglect. Under noUncheckedIndexedAccess every array index produces `T | undefined`,
        * so every `?.` and `??` guarding one is a branch, and a good number of them are
