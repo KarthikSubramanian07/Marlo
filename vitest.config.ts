@@ -82,6 +82,8 @@ export default defineConfig({
         test: {
           name: 'browser',
           include: ['**/*.browser.test.ts'],
+          // The e2e project's include would otherwise pick these up too, and they would fail on
+          // a machine with no Chromium. Splitting by filename keeps `pnpm check` offline.
           environment: 'node',
           testTimeout: 120_000,
           hookTimeout: 120_000,
