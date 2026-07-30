@@ -282,6 +282,41 @@ describe('the marlo command', () => {
     expect(out).toContain('strict');
   });
 
+  /*
+   * `marlo scan page.html --renderer static` used to try to open a file called `static` and
+   * fail with ENOENT on a path nobody had typed. The file list was built by filtering argv for
+   * anything not starting with a dash, which catches every flag value too.
+   *
+   * Nothing in this file caught it, because no test had ever passed a value to a flag. The
+   * GitHub Action did, on its first run.
+   */
+  it('does not treat a flag value as a file to scan', () => {
+    if (!built) return;
+    const dir = mkdtempSync(join(tmpdir(), 'marlo-cli-'));
+    const file = join(dir, 'broken.html');
+    writeFileSync(file, BROKEN, 'utf8');
+
+    const { code, err } = run(['scan', file, '--renderer', 'static']);
+    expect(err).not.toContain('ENOENT');
+    expect(err).not.toContain("open '");
+    // Exit 1 because the page has findings, which is the scan having worked.
+    expect(code).toBe(EXIT_CODES.findings);
+  });
+
+  it('rejects a value flag with nothing after it', () => {
+    if (!built) return;
+    const { code, err } = run(['scan', 'x.html', '--renderer']);
+    expect(code).toBe(EXIT_CODES.usage);
+    expect(err).toContain('needs a value');
+  });
+
+  it('rejects a value flag followed by another flag', () => {
+    if (!built) return;
+    const { code, err } = run(['scan', 'x.html', '--renderer', '--json']);
+    expect(code).toBe(EXIT_CODES.usage);
+    expect(err).toContain('needs a value');
+  });
+
   it('rejects the browser renderer rather than silently using the static one', () => {
     if (!built) return;
     // Silently downgrading would report layout rules as not evaluated while the caller
