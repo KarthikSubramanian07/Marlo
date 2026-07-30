@@ -66,8 +66,12 @@ Not shipped. Listed because a build-time dependency with an unusual licence is s
 | `playwright`                    | Apache-2.0         |
 | `fast-check`                    | MIT                |
 | `dependency-cruiser`            | MIT                |
+| `parse5`                        | MIT                |
+| `fast-check`                    | MIT                |
 | `wrangler`                      | MIT and Apache-2.0 |
 | `lefthook`                      | MIT                |
+
+`parse5` is the only production dependency added since the foundation, and it is worth one line of justification. It is the HTML tokeniser jsdom uses, and the repair layer needs per-attribute byte offsets. The alternative was a hand-written scanner, and the failure mode of getting HTML tokenising subtly wrong is an edit applied to the wrong range, which is the single worst thing this codebase could do.
 
 Playwright downloads Chromium, which is BSD-3-Clause with a large set of third-party notices of its own. It is not a declared dependency at all: `pnpm screenshots` prints the one-line install command when it is absent, and `pnpm check` never needs it.
 

@@ -234,11 +234,14 @@ describe('the marlo command', () => {
     expect(out).toContain('NOT YET');
   });
 
-  it('refuses `fix` rather than pretending', () => {
+  it('reports an unreadable file for `fix` rather than a stack', () => {
+    // `fix` used to be a stub that refused. It is implemented now, so the interesting assertion
+    // is that a missing file is still a clean usage error.
     if (!built) return;
-    const { code, err } = run(['fix', 'x.html']);
+    const { code, err } = run(['fix', 'does-not-exist.html']);
     expect(code).toBe(EXIT_CODES.usage);
-    expect(err).toContain('repair layer is not merged');
+    expect(err).toContain('marlo:');
+    expect(err).not.toContain('at Object.');
   });
 
   it('exits 1 on a page with findings', () => {
@@ -316,6 +319,57 @@ describe('the marlo command', () => {
     expect(code).toBe(EXIT_CODES.usage);
     expect(err).toContain('needs a value');
   });
+
+  it('fixes only what it can verify, and writes nothing without --write', () => {
+    if (!built) return;
+    const dir = mkdtempSync(join(tmpdir(), 'marlo-fix-'));
+    const file = join(dir, 'broken.html');
+    const original =
+      '<!doctype html><html lang="en"><head><title>t</title>' +
+      '<meta name="viewport" content="width=device-width, user-scalable=no"></head>' +
+      '<body><input aria-labeledby="x" aria-label="n"><span id="x">n</span></body></html>';
+    writeFileSync(file, original, 'utf8');
+
+    const dry = run(['fix', file]);
+    expect(dry.out).toContain('FIXED');
+    expect(dry.out).toContain('nothing was written');
+    // The whole point of a dry run.
+    expect(readFileSync(file, 'utf8')).toBe(original);
+
+    const applied = run(['fix', file, '--write']);
+    expect(applied.out).toContain('written:');
+    const after = readFileSync(file, 'utf8');
+    expect(after).not.toBe(original);
+    expect(after).toContain('aria-labelledby');
+    expect(after).not.toContain('user-scalable');
+  }, 90_000);
+
+  it('refuses to apply a mechanical fix for a rule measured below the threshold', () => {
+    if (!built) return;
+    const dir = mkdtempSync(join(tmpdir(), 'marlo-fix-'));
+    const file = join(dir, 'spacing.html');
+    const original =
+      '<!doctype html><html lang="en"><head><title>t</title></head>' +
+      '<body><p style="letter-spacing: 0.01em !important">x</p></body></html>';
+    writeFileSync(file, original, 'utf8');
+
+    const result = run(['fix', file, '--write']);
+    // The gate biting on a fix that is mechanically correct. The measurement is printed rather
+    // than the refusal alone, so a reader can disagree with the number.
+    expect(result.out).toContain('below-threshold');
+    expect(result.out).toMatch(/strict precision 0\.\d+ over \d+ official test cases/);
+    expect(readFileSync(file, 'utf8')).toContain('!important');
+  }, 90_000);
+
+  it('says so, rather than nothing, when it will not fix a rule', () => {
+    if (!built) return;
+    const dir = mkdtempSync(join(tmpdir(), 'marlo-fix-'));
+    const file = join(dir, 'lang.html');
+    writeFileSync(file, '<html><head><title>t</title></head><body><p>x</p></body></html>', 'utf8');
+    const result = run(['fix', file]);
+    expect(result.out).toContain('FLAG');
+    expect(result.out).toContain('you decide:');
+  }, 90_000);
 
   it('rejects the browser renderer rather than silently using the static one', () => {
     if (!built) return;

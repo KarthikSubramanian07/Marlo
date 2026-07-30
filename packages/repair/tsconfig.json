@@ -22,15 +22,6 @@
     },
     {
       "path": "../engines"
-    },
-    {
-      "path": "../calibrate"
-    },
-    {
-      "path": "../report"
-    },
-    {
-      "path": "../repair"
     }
   ]
 }

@@ -133,10 +133,10 @@ export default defineConfig({
        * construct impossible inputs would make the number better and the suite worse.
        */
       thresholds: {
-        statements: 86,
-        branches: 72,
+        statements: 87,
+        branches: 73,
         functions: 90,
-        lines: 87,
+        lines: 88,
         'packages/act/src/**/*.ts': {
           statements: 100,
           branches: 100,
