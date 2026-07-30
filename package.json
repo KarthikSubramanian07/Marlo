@@ -33,6 +33,7 @@
     "corpus:verify": "node scripts/verify-act-corpus.mjs",
     "act:index": "node scripts/generate-act-index.mjs",
     "act:index:check": "node scripts/generate-act-index.mjs --check",
+    "mappings:discover": "node scripts/discover-mappings.mjs",
     "test": "vitest run --project unit",
     "test:watch": "vitest --project unit",
     "test:coverage": "vitest run --coverage",
