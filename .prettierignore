@@ -7,5 +7,9 @@ dist/
 coverage/
 docs/screenshots/
 tests/golden/
+# Generated. Its format is the generator's responsibility, and letting Prettier
+# reformat it makes `pnpm act:index:check` fail on a clean tree.
+packages/act/src/rules.generated.ts
+
 calibration/table.json
 calibration/history/

@@ -31,10 +31,12 @@
     "format:check": "prettier --check .",
     "corpus:fetch": "node scripts/fetch-act-corpus.mjs",
     "corpus:verify": "node scripts/verify-act-corpus.mjs",
+    "act:index": "node scripts/generate-act-index.mjs",
+    "act:index:check": "node scripts/generate-act-index.mjs --check",
     "test": "vitest run --project unit",
     "test:watch": "vitest --project unit",
     "test:coverage": "vitest run --coverage",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run test",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run act:index:check && pnpm run test",
     "hooks": "lefthook install",
     "prepare": "lefthook install || true"
   },
