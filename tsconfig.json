@@ -40,6 +40,18 @@
     },
     {
       "path": "packages/calibrate/tsconfig.spec.json"
+    },
+    {
+      "path": "packages/report"
+    },
+    {
+      "path": "packages/report/tsconfig.spec.json"
+    },
+    {
+      "path": "packages/cli"
+    },
+    {
+      "path": "packages/cli/tsconfig.spec.json"
     }
   ]
 }

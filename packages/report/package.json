@@ -1,0 +1,30 @@
+{
+  "name": "@marlo/report",
+  "version": "0.1.0",
+  "description": "SARIF, the terminal surface, and the generated pull request body.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@marlo/act": "workspace:*",
+    "@marlo/schema": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
