@@ -139,6 +139,10 @@ Raising a threshold is a normal pull request. Lowering one needs a reason in the
 
 ---
 
+## Merging
+
+`main` requires ten green checks, a linear history, and one approving review. The first two have no exceptions and no bypass: a force push to `main` is refused for everybody, including the repository owner.
+
 ## Sign-off
 
 Marlo uses the [Developer Certificate of Origin](https://developercertificate.org/), not a contributor licence agreement. Commit with `-s`:
