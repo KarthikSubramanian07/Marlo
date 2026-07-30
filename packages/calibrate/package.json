@@ -1,7 +1,7 @@
 {
-  "name": "@marlo/act",
+  "name": "@marlo/calibrate",
   "version": "0.1.0",
-  "description": "The ACT rule corpus as data, the W3C grading protocol, and the accuracy arithmetic.",
+  "description": "Measures every engine against the official ACT test cases and publishes the calibration table.",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -13,6 +13,9 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "marlo-calibrate": "./dist/bin.js"
+  },
   "files": [
     "dist",
     "README.md"
@@ -21,10 +24,14 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@marlo/schema": "workspace:*"
+    "@marlo/act": "workspace:*",
+    "@marlo/engines": "workspace:*",
+    "@marlo/render": "workspace:*",
+    "@marlo/rules": "workspace:*",
+    "@marlo/schema": "workspace:*",
+    "zod": "4.4.3"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "sideEffects": false
+  }
 }
