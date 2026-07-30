@@ -91,7 +91,7 @@ jobs:
       matrix:
         # The floor from package.json engines, and current, so a break on either
         # side is visible.
-        node: ['22.11.0', '24']
+        node: ['22.13.0', '24']
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
