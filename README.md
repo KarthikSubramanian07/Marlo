@@ -104,12 +104,31 @@ If any of that needs the network after `install`, it is a bug. The whole suite r
 
 ## How it actually works
 
+```mermaid
+flowchart LR
+  SRC[HTML source]:::io --> R{{render}}:::seam
+  R --> AXE[axe-core]:::eng
+  R --> ALF[Alfa]:::eng
+  R --> HCS[HTML CodeSniffer]:::eng
+  R --> MAR[Marlo, 35 rules]:::eng
+  AXE --> N[normalise to<br/>ACT rule ids]:::pure
+  ALF --> N
+  HCS --> N
+  MAR --> N
+  N --> RT{{route}}:::seam
+  TBL[(calibration<br/>table)]:::data -.-> RT
+  RT --> INV[one-directional<br/>invariant]:::gate
+  INV --> OUT[terminal · JSON<br/>SARIF · PR body]:::io
+
+  classDef io fill:#111113,stroke:#3f3f46,color:#fafafa
+  classDef eng fill:#0c0c0e,stroke:#3f3f46,color:#a1a1aa
+  classDef pure fill:#0c0c0e,stroke:#3f3f46,color:#fafafa
+  classDef seam fill:#141410,stroke:#c9f227,color:#fafafa
+  classDef gate fill:#1a1a10,stroke:#c9f227,stroke-width:2px,color:#fafafa
+  classDef data fill:#0c0c0e,stroke:#71717a,color:#a1a1aa
 ```
-source -> render -> 4 engines -> normalise to ACT ids -> route -> invariant -> report
-              |                                            |          |
-        happy-dom (default)                          calibration   "may not
-        Playwright (opt-in)                             table      report clean"
-```
+
+The two accented boxes are the seams, and the thick one is the rule that can override everything upstream of it.
 
 **Marlo routes. It does not pile findings up and call the pile thorough.**
 
@@ -117,9 +136,42 @@ There was a project that integrated ten engines and around a thousand rules. Pub
 
 So the calibration table decides which engine reports each rule, and you get one finding with provenance attached. [D-003](DECISIONS.md#d-003).
 
-**Routing decides who speaks. It does not let anyone silence a peer.** If any engine reports a failure, Marlo may not report clean. It can dissent, on the record, with the disagreeing engine named. Tested over all 256 combinations of four engines and four outcomes, because an invariant checked by three examples is an anecdote.
+**Routing decides who speaks. It does not let anyone silence a peer.** If any engine reports a failure, Marlo may not report clean. It can dissent, on the record, with the disagreeing engine named.
 
-**A rule declares what it needs; a renderer declares what it has.** A rule that needs CSS layout, on a renderer that has none, reports `unsupported`. Never a pass. That single rule is what lets the default path run with no browser at all without quietly claiming coverage it does not have. [D-005](DECISIONS.md#d-005).
+| The routed engine says | A peer says | Marlo reports |                                        |
+| ---------------------- | ----------- | ------------- | -------------------------------------- |
+| failed                 | anything    | **failed**    | agreement, or the routed engine alone  |
+| passed                 | **failed**  | **failed**    | the invariant fires, the peer is named |
+| cantTell               | **failed**  | **failed**    | the invariant fires                    |
+| passed                 | cantTell    | passed        | caution is not evidence                |
+| unsupported            | anything    | never a pass  | the renderer could not look            |
+
+Tested over all **256** combinations of four engines and four outcomes, because an invariant checked by three examples is an anecdote. The file is held at 100 percent coverage on every metric, and two of its branches were deleted rather than tested when they turned out to guard states the schema now forbids.
+
+**A rule declares what it needs; a renderer declares what it has.** A rule whose needs are unmet reports `unsupported`, which is never a pass anywhere in the codebase. That one rule is what lets the default path run with no browser at all without quietly claiming coverage it does not have. [D-005](DECISIONS.md#d-005).
+
+```mermaid
+flowchart TD
+  Q{"does the renderer<br/>provide what the<br/>rule needs?"}:::seam
+  Q -->|yes| E[evaluate]:::pure
+  E --> P[passed]:::ok
+  E --> F[failed]:::bad
+  E --> C[cantTell]:::warn
+  Q -->|no| U["unsupported<br/><i>not a pass</i>"]:::gate
+  U --> S["printed above the findings,<br/>with the capability it lacked"]:::io
+
+  classDef io fill:#111113,stroke:#3f3f46,color:#fafafa
+  classDef pure fill:#0c0c0e,stroke:#3f3f46,color:#fafafa
+  classDef seam fill:#141410,stroke:#c9f227,color:#fafafa
+  classDef gate fill:#1a1a10,stroke:#c9f227,stroke-width:2px,color:#fafafa
+  classDef ok fill:#0c0c0e,stroke:#5fd37f,color:#5fd37f
+  classDef warn fill:#0c0c0e,stroke:#f9a63f,color:#f9a63f
+  classDef bad fill:#0c0c0e,stroke:#ff6a65,color:#ff6a65
+```
+
+There is no arrow from the right-hand branch back to `passed`. That absence is the whole design: the type system has no way to turn "could not look" into "looked and it was fine".
+
+It is enforced structurally rather than by review. The suite runs every rule twice, once with resolved styles and once without, and fails if a rule that did not declare `layout` changes its verdict.
 
 axe-core reached the same conclusion independently, which was a pleasant surprise: run over all 19 test cases for the minimum-contrast rule under the same Node DOM, it returned "cannot tell" every time and "failed" never, because the colours cannot be resolved without layout.
 
@@ -142,6 +194,20 @@ So the calibration table publishes **both** views and computes the gap. Three en
 | `3ea0c8` | axe-core  | consistent  | 0.000         |
 
 Two of the three are ours. Under the protocol W3C publishes implementation reports against, Marlo is a **correct implementation** of `5c01ea` while detecting nothing at all. [D-004](DECISIONS.md#d-004).
+
+---
+
+## Five ways in, one set of numbers
+
+|                   |                                                  |                                                                  |
+| ----------------- | ------------------------------------------------ | ---------------------------------------------------------------- |
+| **CLI**           | `marlo scan`, `explain`, `coverage`              | Exits 1 on findings, 3 on a rule it could not evaluate           |
+| **Library**       | `@marlo/cli`, `@marlo/report`                    | The pipeline and the surfaces, importable                        |
+| **SARIF 2.1.0**   | `--sarif`                                        | Per-engine provenance on every result, for the code scanning tab |
+| **GitHub Action** | [`.github/actions/marlo`](.github/actions/marlo) | Refuses a token with `contents: write` before it does any work   |
+| **MCP**           | [`@marlo/mcp`](packages/mcp)                     | Three read-only tools. No `fix` tool, and there will not be one  |
+
+The last two are where the safety promise stops being prose. In an Action, "Marlo never pushes" is a statement about a permission, so the Action reads the permissions it was handed and stops if they exceed the job. Over MCP, a model calls tools with no human in between, so the server has no tool that writes and a test asserts the package does not import `writeFileSync` at all.
 
 ---
 
