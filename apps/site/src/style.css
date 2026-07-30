@@ -740,13 +740,31 @@ h3 {
   margin-top: 26px;
 }
 
+/* One bordered block sitting directly under another needs more than a paragraph does, or the
+   two read as one box with a line through it. */
+.split + .grid,
+.split + .rowset,
+.split + .scroller,
+.grid + .grid,
+.rowset + .grid,
+.scoreboard + .grid,
+.terminal + .grid {
+  margin-top: 40px;
+}
+
 /* A callout is an aside, not the next paragraph, so it needs more air than one. */
 .prose + .callout,
 .pipeline + .callout,
 .scroller + .callout,
 .rowset + .callout,
-.engine-table + .callout {
+.grid + .callout {
   margin-top: 36px;
+}
+
+.prose + .scroller,
+.callout + .scroller,
+.section-head + .scroller {
+  margin-top: 24px;
 }
 
 /* ── The headline figure ─────────────────────────────────────────────────────── */
@@ -1654,6 +1672,11 @@ table a {
     grid-template-columns: 1fr 1fr;
   }
 
+  .score__engine {
+    align-items: flex-start;
+    min-height: 2.9em;
+  }
+
   .score {
     border-right: 1px solid var(--border);
   }
@@ -1784,6 +1807,14 @@ table a {
   .scoreboard--4 .score {
     border-bottom: 0;
     padding: 20px;
+  }
+
+  /* "HTML CodeSniffer" plus its rank chip wraps to two lines where the other three names do
+     not, which pushed one figure out of line with the other three. Reserving the second line
+     for every cell keeps the four numbers on one baseline. */
+  .scoreboard--4 .score__engine {
+    align-items: flex-start;
+    min-height: 2.9em;
   }
 
   .scoreboard--4 .score:nth-child(2n) {
