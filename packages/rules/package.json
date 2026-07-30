@@ -1,0 +1,30 @@
+{
+  "name": "@marlo/rules",
+  "version": "0.1.0",
+  "description": "Marlo's own ACT rule implementations. One rule, one function, one fixture set.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@marlo/act": "workspace:*",
+    "@marlo/schema": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

@@ -24,6 +24,12 @@
       "path": "packages/render/tsconfig.spec.json"
     },
     {
+      "path": "packages/rules"
+    },
+    {
+      "path": "packages/rules/tsconfig.spec.json"
+    },
+    {
       "path": "packages/engines"
     },
     {
