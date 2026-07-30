@@ -136,7 +136,31 @@ None of the four is an accessibility defect except the second. All four shipped,
 
 ---
 
-## 8. Three checks that could not fail
+## 8. The coverage gate had never run, and failed the first time it did
+
+**What it claimed.** `vitest.config.ts` declared global thresholds of 85 percent statements, lines and functions and 80 percent branches, with `packages/act` and `packages/report/src/invariant.ts` held at 100. CONTRIBUTING.md explained why those were the right numbers. README and ARCHITECTURE both cite the 100.
+
+**What was true.** No CI job invoked it. `pnpm test` runs the unit project without `--coverage`, and `pnpm check` did not call `test:coverage` at all. The first time anything ran it, it failed on four counts: statements at 80.55, branches at 70.04, lines at 81.36, and `invariant.ts` branches at 92.72.
+
+**What reported success.** Every push, for the entire build. And, worse, the documentation: a paragraph explaining why 85 was defensible, next to a figure nothing had measured.
+
+This is the same shape as the corpus job that called `pnpm` in a job with no `pnpm`, and it is a worse instance of it, because that one was loud and this one was silent.
+
+**What changed.** Three things, in this order.
+
+The gaps that were real work got tests. `pull-request.ts` was at **0 percent**: the generated pull request body, one of the two surfaces developers judge Marlo by, had no test at all. It has 16 now, including one that plants a triple backtick in a snippet and asserts the fence around it grows to contain it.
+
+`invariant.ts` went back to 100 on every metric, and two of its uncovered branches turned out not to be missing tests. One guarded a routing entry that named an engine while claiming nobody implements the rule, which is a contradiction; the schema now refuses to parse it and the branch is gone. The other was a second `??` fallback narrowing a value the logic had already narrowed. Both were deleted rather than covered.
+
+Then the global thresholds were set to the measured figures rounded down: 86, 87, 90, and 72 for branches. And a CI job runs them.
+
+**Why branches sit 14 points below statements**, since a reader is entitled to ask. Under `noUncheckedIndexedAccess` every array index produces `T | undefined`, so every `?.` and `??` guarding one is a branch, and a good number are unreachable by construction. The two found here were both of that kind. Writing tests that construct impossible inputs to reach a defensive line would make the number better and the suite worse.
+
+**The rule:** a threshold nothing runs is not a threshold. This repository contains a script whose entire job is to fail the build on claims it cannot support, and it had been shipping one.
+
+---
+
+## 9. Three checks that could not fail
 
 Not wrong answers, but checks that would have reported success no matter what.
 
@@ -148,7 +172,7 @@ Not wrong answers, but checks that would have reported success no matter what.
 
 ---
 
-## 9. Standing limitations
+## 10. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 

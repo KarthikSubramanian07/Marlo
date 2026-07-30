@@ -105,16 +105,25 @@ export function decideRule(
   const failing = results.filter((r) => collapse(r) === 'failed');
 
   const baseOutcome: Outcome = routedOutcome ?? 'cantTell';
+  // `no-implementer` is not in this union because the schema forbids a `no-implementer`
+  // routing from naming an engine, so by the time chosen is non-null the reason cannot be it.
+  // That used to be a nested ternary here, guarding a table state that cannot exist. See the
+  // refinement on RoutingDecision.
   const baseReason: RuleVerdict['routingReason'] =
-    chosen === null || routing === undefined
+    chosen === null || routing === undefined || routing.reason === 'no-implementer'
       ? 'uncalibrated'
-      : routing.reason === 'no-implementer'
-        ? 'uncalibrated'
-        : routing.reason;
+      : routing.reason;
 
   // The invariant. A peer said failed and the routed verdict did not.
+  //
+  // The dissenting engine is read out here rather than at the point of use, because
+  // `dissenting[0]` is `RuleResult | undefined` under noUncheckedIndexedAccess and inlining
+  // it forced a second fallback that no input can reach. An unreachable fallback is a branch
+  // no test can cover, which is how a file held at 100 percent stops being at 100 percent for
+  // a reason that has nothing to do with the logic.
   const dissenting = failing.filter((r) => r.engine !== chosen);
-  const mustNotReportClean = dissenting.length > 0 && baseOutcome !== 'failed';
+  const firstDissenter: EngineId | null = dissenting[0]?.engine ?? null;
+  const mustNotReportClean = firstDissenter !== null && baseOutcome !== 'failed';
 
   const disagreements: Disagreement[] = [];
   for (const result of results) {
@@ -133,9 +142,12 @@ export function decideRule(
   }
 
   const outcome: Outcome = mustNotReportClean ? 'failed' : baseOutcome;
-  const reportedBy: EngineId = mustNotReportClean
-    ? (dissenting[0]?.engine ?? chosen ?? 'marlo')
-    : (chosen ?? 'marlo');
+  // `mustNotReportClean` is defined as `firstDissenter !== null && ...`, so the checker has
+  // already narrowed firstDissenter here and a second guard would be dead. Reading the
+  // dissenter into a variable above is what makes that narrowing possible: inlining
+  // `dissenting[0]?.engine` needed a fallback for an index the logic had already established
+  // exists, and that fallback was a branch no input could reach.
+  const reportedBy: EngineId = mustNotReportClean ? firstDissenter : (chosen ?? 'marlo');
 
   const agreedBy = results
     .filter((r) => collapse(r) === outcome)
