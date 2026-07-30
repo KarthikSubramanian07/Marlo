@@ -26,3 +26,12 @@ blob-report/
 # Scratch. Golden files live in tests/golden and are committed on purpose.
 tmp/
 *.local
+
+# Sync-tool duplicates. A file-syncing tool watching the working directory produces
+# `name 2.ext` when a file is rewritten faster than the tool settles. Four of these were
+# committed before anyone noticed. Ignored here and failed by lint:duplicates, because
+# ignoring them alone would leave them lying around to be opened by mistake.
+* [0-9].*
+* [0-9]
+*copy.*
+*copy [0-9].*
