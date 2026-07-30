@@ -41,6 +41,7 @@
     "test:watch": "vitest --project unit",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "vitest run --project e2e",
+    "test:browser": "vitest run --project browser",
     "site:build": "node apps/site/src/build.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "deploy": "node scripts/deploy.mjs",

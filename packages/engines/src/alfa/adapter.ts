@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@marlo/schema';
 import type { RenderedPage } from '@marlo/render';
 import { withDomGlobals } from '@marlo/render';
+import { asWindow } from '../dom.js';
 import type { Engine, RawVerdict } from '../engine.js';
 import { assembleReport, truncateSnippet } from '../engine.js';
 import { ALFA_MAPPING } from './mapping.js';
@@ -104,6 +105,17 @@ export class AlfaEngine implements Engine {
     }
 
     try {
+      // The same guard the axe-core and HTML CodeSniffer adapters use, and this one did not.
+      //
+      // Alfa reaches `globalThis.document` through withDomGlobals rather than taking a window
+      // directly, so a handle it cannot read did not fail here: it failed several frames deeper
+      // with "Cannot read properties of undefined (reading 'createRange')", which tells a reader
+      // nothing about what went wrong or what to do.
+      //
+      // Found by the first test that ever handed any adapter a Playwright page. Two of the three
+      // peers explained themselves and this one did not.
+      asWindow(page.handle, 'alfa');
+
       const outcomes = await withDomGlobals(page.handle, async () => {
         // Every one of these has to be imported after the globals are installed.
         const { Native } = await import('@siteimprove/alfa-dom/native');
