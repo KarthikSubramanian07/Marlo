@@ -1,0 +1,20 @@
+{
+  "//": "The end to end tests are typechecked like everything else. An unchecked test can assert something impossible and pass by accident. Project references rather than path mappings, the same as every package's tsconfig.spec.json, so the checker reads the real declaration output instead of a second copy of the source.",
+  "extends": "../tsconfig.spec-base.json",
+  "compilerOptions": {
+    "outDir": "../node_modules/.cache/tsc-spec/e2e",
+    "tsBuildInfoFile": "../node_modules/.cache/tsc-spec/e2e/.tsbuildinfo",
+    "rootDir": "./e2e"
+  },
+  "include": ["e2e/**/*.ts"],
+  "references": [
+    { "path": "../packages/schema" },
+    { "path": "../packages/act" },
+    { "path": "../packages/render" },
+    { "path": "../packages/rules" },
+    { "path": "../packages/engines" },
+    { "path": "../packages/calibrate" },
+    { "path": "../packages/report" },
+    { "path": "../packages/cli" }
+  ]
+}
