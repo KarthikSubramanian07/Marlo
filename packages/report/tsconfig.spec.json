@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.spec-base.json",
+  "compilerOptions": {
+    "outDir": "../../node_modules/.cache/tsc-spec/report",
+    "tsBuildInfoFile": "../../node_modules/.cache/tsc-spec/report/.tsbuildinfo",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "./tsconfig.json"
+    },
+    {
+      "path": "../schema"
+    },
+    {
+      "path": "../act"
+    }
+  ]
+}
