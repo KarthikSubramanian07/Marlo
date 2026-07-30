@@ -22,13 +22,18 @@ import { defineConfig } from 'vitest/config';
  * The list is read from disk rather than hard-coded, because packages arrive branch by
  * branch and a hard-coded name that does not exist yet makes the whole config throw.
  */
+const packagesDir = resolve(import.meta.dirname, 'packages');
 const workspaceAliases: Record<string, string> = {};
-for (const entry of readdirSync(resolve(import.meta.dirname, 'packages'), {
-  withFileTypes: true,
-})) {
-  if (!entry.isDirectory()) continue;
-  const source = resolve(import.meta.dirname, 'packages', entry.name, 'src', 'index.ts');
-  if (existsSync(source)) workspaceAliases['@marlo/' + entry.name] = source;
+
+// existsSync before readdirSync: git does not track empty directories, so on a branch that
+// has not created a package yet there is no packages directory at all, and readdirSync
+// throws ENOENT before a single test runs.
+if (existsSync(packagesDir)) {
+  for (const entry of readdirSync(packagesDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const source = resolve(packagesDir, entry.name, 'src', 'index.ts');
+    if (existsSync(source)) workspaceAliases['@marlo/' + entry.name] = source;
+  }
 }
 
 /**
