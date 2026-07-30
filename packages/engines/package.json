@@ -1,0 +1,40 @@
+{
+  "name": "@marlo/engines",
+  "version": "0.1.0",
+  "description": "Peer engine adapters, and the hand-written mapping from each engine's rule identifiers to ACT rule identifiers.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@marlo/act": "workspace:*",
+    "@marlo/render": "workspace:*",
+    "@marlo/schema": "workspace:*",
+    "@siteimprove/alfa-act": "0.119.0",
+    "@siteimprove/alfa-device": "0.119.0",
+    "@siteimprove/alfa-dom": "0.119.0",
+    "@siteimprove/alfa-http": "0.119.0",
+    "@siteimprove/alfa-rules": "0.119.0",
+    "@siteimprove/alfa-url": "0.119.0",
+    "@siteimprove/alfa-web": "0.119.0",
+    "axe-core": "4.12.1",
+    "html_codesniffer": "2.5.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}
