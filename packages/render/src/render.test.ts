@@ -324,7 +324,7 @@ describe('BrowserRenderer', () => {
     await new BrowserRenderer().dispose();
   });
 
-  it('explains how to install Playwright rather than throwing a module error', async () => {
+  it('explains how to install Playwright rather than throwing a module error', () => {
     // A caller who asked for --renderer browser without the dependency should get
     // the two commands that fix it, not ERR_MODULE_NOT_FOUND.
     const error = new PlaywrightMissingError(new Error('not found'));
