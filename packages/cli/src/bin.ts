@@ -143,14 +143,30 @@ function loadTable(): CalibrationTable {
 async function main(): Promise<void> {
   const verb = argv[0] ?? '';
   const flags = new Set(argv.filter((a) => a.startsWith('--')));
-  const files = argv.slice(1).filter((a) => !a.startsWith('-'));
+
+  /*
+   * Flags that consume the next argument. Their values are not files, and the first version of
+   * this treated them as files: `marlo scan page.html --renderer static` tried to open a file
+   * named `static` and failed with ENOENT on a path nobody had typed.
+   *
+   * Found by writing the GitHub Action, which passes `--renderer` on every invocation. Nothing
+   * in the CLI's own tests passed a value to a flag.
+   */
+  const VALUE_FLAGS = new Set(['--renderer', '--rule']);
+
+  const files: string[] = [];
   const rules: string[] = [];
-  for (let i = 0; i < argv.length; i += 1) {
-    if (argv[i] === '--rule') {
+  for (let i = 1; i < argv.length; i += 1) {
+    const arg = argv[i] ?? '';
+    if (VALUE_FLAGS.has(arg)) {
       const value = argv[i + 1];
-      if (value === undefined) fail('--rule needs an ACT rule id');
-      rules.push(value);
+      if (value === undefined || value.startsWith('-')) fail(`${arg} needs a value`);
+      if (arg === '--rule') rules.push(value);
+      i += 1;
+      continue;
     }
+    if (arg.startsWith('-')) continue;
+    files.push(arg);
   }
 
   switch (verb) {
