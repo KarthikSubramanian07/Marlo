@@ -24,6 +24,9 @@ importers:
       '@marlo/engines':
         specifier: workspace:*
         version: link:packages/engines
+      '@marlo/mcp':
+        specifier: workspace:*
+        version: link:packages/mcp
       '@marlo/render':
         specifier: workspace:*
         version: link:packages/render
@@ -161,6 +164,24 @@ importers:
       html_codesniffer:
         specifier: 2.5.1
         version: 2.5.1
+
+  packages/mcp:
+    dependencies:
+      '@marlo/act':
+        specifier: workspace:*
+        version: link:../act
+      '@marlo/cli':
+        specifier: workspace:*
+        version: link:../cli
+      '@marlo/render':
+        specifier: workspace:*
+        version: link:../render
+      '@marlo/rules':
+        specifier: workspace:*
+        version: link:../rules
+      '@marlo/schema':
+        specifier: workspace:*
+        version: link:../schema
 
   packages/render:
     dependencies:

@@ -1,0 +1,73 @@
+<!doctype html>
+<!--
+  The other half of the demo, and the reason it exists: an action or a scanner that only ever
+  gets shown broken markup has never been tested for a false positive.
+
+  Every rule Marlo implements either passes here or reports as not evaluated. Nothing on this
+  page should produce a finding, and the CI job that runs the Action against it asserts exactly
+  that, alongside asserting that it still reports the two contrast rules as not evaluated. A
+  clean result that does not mention what it skipped is the thing this project argues against.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Order confirmed</title>
+  </head>
+  <body>
+    <header>
+      <a href="/"><img src="logo.svg" alt="Marlo" /></a>
+      <nav aria-label="Primary">
+        <a href="/orders">Orders</a>
+        <a href="/help">Help</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Order confirmed</h1>
+
+      <h2>What happens next</h2>
+      <p>Your order will arrive on Tuesday. We will send an email when it ships.</p>
+
+      <img src="product-8842.jpg" alt="A blue enamel kettle" width="120" height="120" />
+
+      <!-- Decorative, and empty alt says so confidently. -->
+      <img src="divider.svg" alt="" />
+
+      <h2>Delivery address</h2>
+      <ul>
+        <li>14 Example Street</li>
+        <li>London</li>
+      </ul>
+
+      <form action="/orders" method="post">
+        <label for="reference">Order reference</label>
+        <input type="text" id="reference" name="reference" value="MRL-8842" />
+
+        <label for="notes">Delivery notes</label>
+        <textarea id="notes" name="notes" rows="3"></textarea>
+
+        <label for="contact">Contact by</label>
+        <select id="contact" name="contact">
+          <option value="email">Email</option>
+          <option value="sms">Text message</option>
+        </select>
+
+        <button type="submit">Save changes</button>
+      </form>
+
+      <p lang="fr">Merci pour votre commande.</p>
+
+      <svg role="img" aria-label="Delivered" width="24" height="24" viewBox="0 0 24 24">
+        <title>Delivered</title>
+        <path d="M4 12l5 5 11-11" fill="none" stroke="currentColor" stroke-width="2" />
+      </svg>
+
+      <iframe src="./receipt.html" title="Your receipt" width="300" height="120"></iframe>
+    </main>
+
+    <footer>
+      <p>Marlo Example Shop</p>
+    </footer>
+  </body>
+</html>

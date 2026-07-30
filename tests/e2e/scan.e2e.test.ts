@@ -143,6 +143,41 @@ describe('the pipeline against the demo pages', () => {
   });
 });
 
+describe('the page with nothing wrong with it', () => {
+  /*
+   * The other half of the demo. A scanner only ever pointed at broken markup has never been
+   * tested for a false positive, and a false positive is the defect this project is named for.
+   *
+   * apps/demo/clean.html is written so every rule Marlo implements either passes or reports as
+   * not evaluated.
+   */
+  it('reports nothing, and still says what it did not check', async () => {
+    const renderer = new StaticRenderer();
+    const clean = await scan({
+      targets: [{ label: 'apps/demo/clean.html', path: resolve(ROOT, 'apps/demo/clean.html') }],
+      renderer,
+      table,
+      marloVersion: '0.1.0',
+    });
+
+    const findings = clean.pages.flatMap((p) => p.findings);
+    expect(
+      findings.map((f) => `${f.actRuleId} ${f.verdict.target.selector}`),
+      'a false positive on the clean page',
+    ).toEqual([]);
+
+    // Zero findings is only honest alongside the two rules that could not be evaluated.
+    expect(clean.coverage.notEvaluated.length).toBeGreaterThan(0);
+
+    const rendered = renderTerminal(clean, { colour: false });
+    expect(rendered).toContain('NOT EXAMINED');
+    expect(rendered.indexOf('NOT EXAMINED')).toBeLessThan(rendered.indexOf('no findings'));
+
+    const errored = clean.pages.flatMap((p) => p.results).filter((r) => r.status === 'error');
+    expect(errored).toEqual([]);
+  });
+});
+
 describe('the committed output', () => {
   it('matches the terminal golden file', () => {
     golden('checkout-terminal.txt', `${stabilise(renderTerminal(report, { colour: false }))}\n`);
