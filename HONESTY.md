@@ -160,7 +160,29 @@ Then the global thresholds were set to the measured figures rounded down: 86, 87
 
 ---
 
-## 9. Three checks that could not fail
+## 9. A renderer with no engine behind it, and nobody had noticed
+
+**What it claimed.** `BrowserRenderer` declares the capabilities `dom`, `script`, `layout` and `paint`. Two ACT rules report `unsupported` on the default renderer because they need the last two, and the fix documented everywhere, including in the CLI's own output, is to use the browser renderer.
+
+**What was true.** No engine can evaluate a Playwright page. Every adapter runs its engine's script inside the same JavaScript realm as the document, and a Playwright page is a handle to a document in another process. So the browser renderer renders, declares two capabilities truthfully about itself, and nothing downstream can consume it. It is a rendering seam with no adapter behind it.
+
+**What reported success.** Nothing, and this one is genuinely the architecture working. `asWindow` was written for exactly this case and its comment says why: a thrown error rather than a silent null, because an adapter handed the wrong kind of handle would otherwise return a report full of `inapplicable` that reads as a clean page. The peer adapters catch it and report `status: 'error'` per rule, and `error` is never a pass anywhere in this codebase.
+
+**So what was wrong.** The guard had never once been reached. `marlo scan --renderer browser` refuses before it gets there, and no test had ever asked any adapter for a browser page. A guard nothing reaches protects nothing, and the limitation it guards against was in no document: not in HANDOFF, not in the standing limitations below, not on the website. A reader following the advice to use the browser renderer would have found out by trying it.
+
+**Two things it found on the way.**
+
+`MarloEngine` throws synchronously where the peers report an error status. Both are honest and the difference is worth knowing, because a caller that only catches rejections would miss one of them.
+
+**Alfa's adapter had no guard at all.** It reaches `globalThis.document` through `withDomGlobals` rather than taking a window, so a handle it could not read failed several frames deeper with `Cannot read properties of undefined (reading 'createRange')`. Correct in the sense that it failed, useless in the sense that it told a reader nothing. Two of three peers explained themselves and one did not, and nothing had ever compared them because nothing had ever run this path.
+
+**What changed.** Alfa gets the same guard as the other two. `tests/e2e/browser.browser.test.ts` asserts the whole shape: the renderer declares what it declares, resolves a style a Node DOM cannot, and **no engine returns a verdict it could not have earned**. It fails the day somebody makes the browser path work, which is the point of it. The remaining work is [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37): run each engine inside the page rather than beside it.
+
+**The lesson, and it is the one this file keeps relearning:** a check that has never run is not a check, and this is the third instance in this document. The others were a coverage gate no job invoked and a corpus job that called a binary it did not have.
+
+---
+
+## 10. Three checks that could not fail
 
 Not wrong answers, but checks that would have reported success no matter what.
 
@@ -172,7 +194,7 @@ Not wrong answers, but checks that would have reported success no matter what.
 
 ---
 
-## 10. Standing limitations
+## 11. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 
@@ -181,6 +203,8 @@ Not defects. Things Marlo cannot currently do, written here so their absence is 
 **Contrast never gets a ratio**, even with a real browser. Computing it correctly needs the effective background behind any transparency, which is a paint-order walk this version does not implement. Marlo locates the text and names the declared colours. Asserting a ratio it has not correctly computed would be a future entry on this page.
 
 **Source locations are not implemented.** Findings carry a DOM selector and state plainly that the source location arrives with the repair layer, rather than reporting a byte offset nobody computed.
+
+**The browser renderer cannot be evaluated by any engine.** It renders and declares `layout` and `paint`, and every adapter needs an in-process DOM window, so nothing can consume it. The static renderer is the only one that produces a report, and the rules needing layout come back as not evaluated rather than as passing. Entry 9 above, and [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37).
 
 **Two of the three engine mappings are unverified.** Only the axe-core mapping was derived by measurement over the corpus. Alfa's and HTML CodeSniffer's are documentation matches, and every entry in both is marked `partial` for that reason, with a test asserting no Alfa entry claims `exact`.
 
