@@ -34,7 +34,15 @@ module.exports = {
       comment:
         'PLAN.md §3: schema, act and rules are pure. No filesystem, no network, no child ' +
         'processes. A rule that reads a file cannot be run as a pure function over a fixture.',
-      from: { path: '^packages/(schema|act|rules)/src' },
+      from: {
+        path: '^packages/(schema|act|rules)/src',
+        // One narrow exception, and it earns itself. @marlo/act's rule index is
+        // generated into source from corpus/act/MANIFEST.json, and the only thing
+        // standing between the two is a test that reads the manifest and asserts
+        // they agree field by field. Without filesystem access in that test, the
+        // check would be a comment in the generator rather than a check.
+        pathNot: '\\.test\\.ts$',
+      },
       to: {
         dependencyTypes: ['core'],
         path: '^(fs|fs/promises|node:fs|node:fs/promises|http|https|node:http|node:https|net|node:net|child_process|node:child_process|dns|node:dns|worker_threads|node:worker_threads)$',
