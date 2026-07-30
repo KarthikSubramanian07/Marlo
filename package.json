@@ -40,6 +40,9 @@
     "test": "vitest run --project unit",
     "test:watch": "vitest --project unit",
     "test:coverage": "vitest run --coverage",
+    "site:build": "node apps/site/src/build.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "deploy": "node scripts/deploy.mjs",
     "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run act:index:check && pnpm run test",
     "hooks": "lefthook install",
     "prepare": "lefthook install || true"
@@ -54,7 +57,8 @@
     "prettier": "3.9.6",
     "typescript": "6.0.3",
     "typescript-eslint": "8.65.0",
-    "vitest": "4.1.10"
+    "vitest": "4.1.10",
+    "wrangler": "4.115.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

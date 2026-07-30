@@ -1,0 +1,11 @@
+{
+  "name": "@marlo/site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "trymarlo.pages.dev. Generated static HTML that reads its numbers from the calibration table.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs"
+  }
+}
