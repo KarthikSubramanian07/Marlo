@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.spec-base.json",
   "compilerOptions": {
     "outDir": "../../node_modules/.cache/tsc-spec/schema",
+    "tsBuildInfoFile": "../../node_modules/.cache/tsc-spec/schema/.tsbuildinfo",
     "rootDir": "./src"
   },
   "include": ["src/**/*.test.ts"],
