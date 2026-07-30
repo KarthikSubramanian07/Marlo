@@ -1,0 +1,121 @@
+name: 'Marlo accessibility scan'
+description: >-
+  Check changed HTML against the official ACT rules, with the measured accuracy of every
+  finding attached. Read-only: this action never commits, pushes, merges or deploys.
+author: 'Marlo contributors'
+
+branding:
+  icon: 'check-square'
+  color: 'gray-dark'
+
+inputs:
+  files:
+    description: >-
+      Space-separated paths to scan. Defaults to every .html file changed in the pull request,
+      or every .html file in the repository on a push.
+    required: false
+    default: ''
+  renderer:
+    description: >-
+      `static` (default, no browser) or `browser`. The browser renderer needs Playwright
+      installed in the job and evaluates the layout-dependent rules that `static` reports as
+      not evaluated.
+    required: false
+    default: 'static'
+  fail-on:
+    description: >-
+      Minimum severity that fails the job: `critical`, `serious`, `moderate`, `advisory`, or
+      `never` to report without failing.
+    required: false
+    default: 'serious'
+  fail-on-not-evaluated:
+    description: >-
+      Fail when a rule could not be evaluated at all. Off by default, because the honest
+      default on a renderer with no layout is to report the gap rather than to block on it.
+    required: false
+    default: 'false'
+  sarif-file:
+    description: 'Where to write SARIF 2.1.0. Empty to skip.'
+    required: false
+    default: ''
+  comment:
+    description: >-
+      Post the report as a pull request comment. Needs `pull-requests: write`, which is the
+      only write permission this action can use, and it is off by default.
+    required: false
+    default: 'false'
+
+outputs:
+  findings:
+    description: 'Number of findings at or above `fail-on`.'
+    value: ${{ steps.scan.outputs.findings }}
+  not-evaluated:
+    description: 'Number of rules that could not be evaluated on the chosen renderer.'
+    value: ${{ steps.scan.outputs.not-evaluated }}
+  coverage:
+    description: 'Coverage as a fraction with its denominator, for a job summary.'
+    value: ${{ steps.scan.outputs.coverage }}
+  sarif:
+    description: 'Path to the SARIF file, when one was requested.'
+    value: ${{ steps.scan.outputs.sarif }}
+
+runs:
+  using: 'composite'
+  steps:
+    # ────────────────────────────────────────────────────────────────────────────────────
+    # The safety boundary, asserted before anything else runs.
+    #
+    # Marlo's standing promise is that it never merges, never pushes to a default branch,
+    # never force pushes, never rewrites history and never deploys. Inside a GitHub Action
+    # that promise is not a matter of what the code does: it is a matter of what the token
+    # can do. So this step reads the permissions it was handed and stops if they exceed what
+    # the work needs.
+    #
+    # It is first on purpose. A check that runs after the scan is a check that has already
+    # let a job with `contents: write` do whatever it wanted for thirty seconds.
+    # ────────────────────────────────────────────────────────────────────────────────────
+    - name: Refuse a token that can write to the repository
+      shell: bash
+      env:
+        MARLO_COMMENT: ${{ inputs.comment }}
+      run: |
+        set -euo pipefail
+        node "${GITHUB_ACTION_PATH}/check-scopes.mjs"
+
+    - name: Resolve which files to scan
+      id: files
+      shell: bash
+      env:
+        MARLO_FILES: ${{ inputs.files }}
+      run: |
+        set -euo pipefail
+        node "${GITHUB_ACTION_PATH}/resolve-files.mjs" >> "$GITHUB_OUTPUT"
+
+    - name: Scan
+      id: scan
+      shell: bash
+      env:
+        MARLO_TARGETS: ${{ steps.files.outputs.targets }}
+        MARLO_RENDERER: ${{ inputs.renderer }}
+        MARLO_FAIL_ON: ${{ inputs.fail-on }}
+        MARLO_FAIL_ON_NOT_EVALUATED: ${{ inputs.fail-on-not-evaluated }}
+        MARLO_SARIF_FILE: ${{ inputs.sarif-file }}
+      run: |
+        set -euo pipefail
+        node "${GITHUB_ACTION_PATH}/run.mjs"
+
+    # Only ever a comment, and only when asked. There is no step here that pushes a commit,
+    # opens a pull request, or approves one. Adding one would need `contents: write`, which
+    # the first step refuses.
+    - name: Comment on the pull request
+      if: ${{ inputs.comment == 'true' && github.event_name == 'pull_request' && always() }}
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        MARLO_REPORT: ${{ steps.scan.outputs.report-file }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      run: |
+        set -euo pipefail
+        if [ -s "$MARLO_REPORT" ]; then
+          gh pr comment "$PR_NUMBER" --body-file "$MARLO_REPORT"
+        fi
