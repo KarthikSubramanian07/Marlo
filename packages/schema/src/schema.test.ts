@@ -449,6 +449,51 @@ describe('configuration', () => {
     expect(redactConfig(parsed).language.apiKey).toBeNull();
   });
 
+  it('reads a boolean from the environment the way a shell writes one', () => {
+    for (const truthy of ['1', 'true', 'TRUE', 'yes', 'on']) {
+      const result = parseEnvironment({ MARLO_FAIL_ON_NOT_EVALUATED: truthy });
+      expect(result.ok, `${truthy} should parse`).toBe(true);
+      if (result.ok) expect(result.config.failOnNotEvaluated).toBe(true);
+    }
+    for (const falsy of ['0', 'false', 'no', 'off', '']) {
+      const result = parseEnvironment({ MARLO_FAIL_ON_NOT_EVALUATED: falsy });
+      expect(result.ok, `${falsy} should parse`).toBe(true);
+      if (result.ok) expect(result.config.failOnNotEvaluated).toBe(false);
+    }
+  });
+
+  it('splits a comma-separated engine list and trims it', () => {
+    const result = parseEnvironment({ MARLO_ENGINES: ' marlo , axe-core ,, alfa ' });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.config.engines).toEqual(['marlo', 'axe-core', 'alfa']);
+  });
+
+  it('rejects an engine name it does not know rather than ignoring it', () => {
+    // Silently dropping an unknown engine would mean a caller who asked for four
+    // engines gets three and a clean report they believe covers four.
+    const result = parseEnvironment({ MARLO_ENGINES: 'marlo,pa11y' });
+    expect(result.ok).toBe(false);
+    if (result.ok) return;
+    expect(result.problems.join(' ')).toContain('engines');
+  });
+
+  it('rejects an empty engine list, since running nothing reports nothing', () => {
+    const result = parseEnvironment({ MARLO_ENGINES: ' , , ' });
+    expect(result.ok).toBe(false);
+  });
+
+  it('rejects a threshold outside zero to one', () => {
+    expect(parseEnvironment({ MARLO_MIN_STRICT_PRECISION: '1.5' }).ok).toBe(false);
+    expect(parseEnvironment({ MARLO_MIN_STRICT_PRECISION: '-0.1' }).ok).toBe(false);
+    expect(parseEnvironment({ MARLO_MIN_STRICT_PRECISION: '0.9' }).ok).toBe(true);
+  });
+
+  it('rejects a non-positive sample size floor', () => {
+    expect(parseEnvironment({ MARLO_MIN_SAMPLE_SIZE: '0' }).ok).toBe(false);
+    expect(parseEnvironment({ MARLO_MIN_SAMPLE_SIZE: '3' }).ok).toBe(true);
+  });
+
   it('defaults the auto-fix threshold to precision rather than recall', () => {
     // A missed violation is a gap. A wrong fix is a change to somebody's code
     // that they did not ask for. The threshold guards the second.
