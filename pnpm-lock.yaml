@@ -70,6 +70,30 @@ importers:
         specifier: 4.4.3
         version: 4.4.3
 
+  packages/cli:
+    dependencies:
+      '@marlo/act':
+        specifier: workspace:*
+        version: link:../act
+      '@marlo/calibrate':
+        specifier: workspace:*
+        version: link:../calibrate
+      '@marlo/engines':
+        specifier: workspace:*
+        version: link:../engines
+      '@marlo/render':
+        specifier: workspace:*
+        version: link:../render
+      '@marlo/report':
+        specifier: workspace:*
+        version: link:../report
+      '@marlo/rules':
+        specifier: workspace:*
+        version: link:../rules
+      '@marlo/schema':
+        specifier: workspace:*
+        version: link:../schema
+
   packages/engines:
     dependencies:
       '@marlo/act':
@@ -117,6 +141,15 @@ importers:
       happy-dom:
         specifier: 20.11.1
         version: 20.11.1
+
+  packages/report:
+    dependencies:
+      '@marlo/act':
+        specifier: workspace:*
+        version: link:../act
+      '@marlo/schema':
+        specifier: workspace:*
+        version: link:../schema
 
   packages/rules:
     dependencies:
