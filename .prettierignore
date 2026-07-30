@@ -12,4 +12,5 @@ tests/golden/
 packages/act/src/rules.generated.ts
 
 calibration/table.json
+calibration/README.md
 calibration/history/
