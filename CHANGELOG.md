@@ -32,6 +32,9 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - The website at [trymarlo.pages.dev](https://trymarlo.pages.dev), five pages generated from `calibration/table.json` by `apps/site/src/build.mjs`. Every numeral on the site goes through one function that requires a field name in the table, so a hand-typed figure cannot reach a page. No client-side script at all.
 - `pnpm screenshots`: the dogfood gate. Serves the built site over HTTP, captures it at 390, 834 and 1440 CSS pixels in both colour schemes, and runs axe-core, a tap target check and a horizontal overflow measurement against every page. Currently zero critical or serious violations, zero overflow.
 - `HONESTY.md`, `ARCHITECTURE.md`, `SETUP.md`, `HANDOFF.md`, `WORKSTREAMS.md`.
+- `apps/demo`: two deliberately broken pages, with every defect annotated by the ACT rule it trips and `apps/demo/expected.json` naming the rules that must fire, the rules that must report as not evaluated, and three defects Marlo cannot detect with the reason for each.
+- `pnpm test:e2e`: the whole pipeline against real files, with committed golden output for the terminal surface, SARIF and the JSON report. Asserts 31 of 35 rules fire, zero crashes, no peer failure swallowed, and that `--json` through a pipe parses.
+- Vendored DM Sans and JetBrains Mono, latin subset, 68 KB for the pair, so the site's content security policy keeps `font-src` at `'self'`.
 
 ### Accuracy
 
@@ -60,6 +63,11 @@ Three entries are officially `consistent` under W3C's protocol while missing mor
 - `marlo scan --json` truncated at 65526 bytes when stdout was a pipe, producing a file that looked like a report and would not parse. `process.exit()` after `console.log` killed the process before the write drained. See [HONESTY.md](HONESTY.md#2-a-report-file-that-looked-complete-and-was-not).
 - The HTML CodeSniffer adapter typed `message.element` as a string and crashed 13 rules on the first real page it saw.
 - Marlo's own site failed Marlo's own bar on the first audit: 48 tap targets under 24 CSS pixels, a 2.18:1 contrast failure in light mode, and four scrollable regions unreachable by keyboard. All fixed, and the audit harness that missed them was fixed too, since it had been loading pages over `file://` with no stylesheet.
+- The site's scroll reveal held text at partial opacity for as long as a reader left a section straddling the fold, which axe measured at 4.22:1 and 3.39:1. A scroll-linked animation has no clock, so every point in its range is a state that has to pass on its own. See [HONESTY.md](HONESTY.md#6-the-sites-own-decoration-failed-the-sites-own-contrast-bar).
+- The scoreboard ranked HTML CodeSniffer first, labelled `best`, because an engine that never reports a failure has a false positive rate of zero. On a site whose argument is that saying nothing is not the same as being right. An engine now only enters the ranking if it detects something.
+- The site had no navigation at all below 48em, so four of five pages were unreachable from a phone.
+- Icon SVGs carried no intrinsic dimensions, so the GitHub glyph expanded to fill a full-width button.
+- `favicon.svg` was drawn in a different cyan from the one the stylesheet rendered, so the browser tab did not match its own page. The palette is recorded once and a test compares the assets against it.
 
 ### Notes
 
