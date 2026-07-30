@@ -69,7 +69,20 @@ Not shipped. Listed because a build-time dependency with an unusual licence is s
 | `wrangler`                      | MIT and Apache-2.0 |
 | `lefthook`                      | MIT                |
 
-Playwright downloads Chromium, which is BSD-3-Clause with a large set of third-party notices of its own. It is an optional dependency, is not required for `pnpm test`, and nothing Marlo publishes contains it.
+Playwright downloads Chromium, which is BSD-3-Clause with a large set of third-party notices of its own. It is not a declared dependency at all: `pnpm screenshots` prints the one-line install command when it is absent, and `pnpm check` never needs it.
+
+---
+
+## Typefaces, vendored into the site
+
+Both are served from `trymarlo.pages.dev` itself rather than from a font CDN, which is what lets the site's content security policy keep `font-src` at `'self'` and make no third-party request from any page.
+
+| File                                             | Family         | Licence                                                                                   | Obligation                                                                                                                                                                                                   |
+| ------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `apps/site/src/fonts/dm-sans-latin.woff2`        | DM Sans        | [SIL Open Font License 1.1](https://openfontlicense.org/open-font-license-official-text/) | Redistribution is permitted, including as part of a larger work, and the licence travels with the font. The font is not sold on its own and is not renamed, so the reserved font name clause is not engaged. |
+| `apps/site/src/fonts/jetbrains-mono-latin.woff2` | JetBrains Mono | [SIL Open Font License 1.1](https://openfontlicense.org/open-font-license-official-text/) | Same terms. Used for the accuracy figures, the rule identifiers and the recorded terminal output.                                                                                                            |
+
+Both are the latin subset only, 68 KB for the pair, variable weight. The subset is the unmodified upstream file as served by Google Fonts, not a re-subset, so nothing is a derivative work and no name change is required.
 
 ---
 
