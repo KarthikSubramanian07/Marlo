@@ -217,10 +217,12 @@ jobs:
         # browser is optional and `pnpm check` needs none, and a devDependency
         # would make that sentence untrue for everybody who clones the
         # repository. It is installed here, in the one job that needs a real
-        # browser, and --no-frozen-lockfile is required precisely because this
-        # is not in the lockfile.
+        # browser, and the lockfile it writes is thrown away with the runner.
+        #
+        # No --no-frozen-lockfile: that is an `install` flag and `pnpm add`
+        # rejects it, which is how the first version of this job failed.
         run: |
-          pnpm add -D -w playwright@1.62.0 --no-frozen-lockfile
+          pnpm add -D -w playwright@1.62.0
           pnpm exec playwright install --with-deps chromium
 
       - name: Build the site
