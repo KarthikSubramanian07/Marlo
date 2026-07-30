@@ -1,0 +1,48 @@
+<!doctype html>
+<!--
+  The second demo page, and it exists because of a conflict that only shows up once you try
+  to put every defect on one page.
+
+  Three of the language rules cannot fail together. b5c3f8 asks whether the html element has
+  a lang attribute at all, and bf051a asks whether the value it has is a valid language tag.
+  A page with no lang cannot have an invalid one, so checkout.html covers the first and this
+  page covers the second. Scanning two files rather than one also exercises the multiple
+  target path in the pipeline, which had never been run against real files.
+-->
+<html lang="engRish" xml:lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show
+         that a pass is reported differently from a rule that was never evaluated. -->
+    <title>Account settings</title>
+  </head>
+  <body>
+    <main>
+      <h1>Account settings</h1>
+
+      <!-- bf051a: engRish is not a language tag. The value looks like a language to a human
+           reading the source and is meaningless to a speech synthesiser.
+
+           5b7ae0: lang and xml:lang disagree, so the two ways of asking the same question
+           get two different answers. -->
+
+      <h2>Notifications</h2>
+
+      <!-- de46e4: xyzzy is not a language tag either, on an element rather than on the
+           document. -->
+      <p lang="xyzzy">Envoyer les notifications par courriel.</p>
+
+      <!-- These pass. A demo file that only contains failures gives the golden output
+           nothing to prove about the difference between passed and unsupported. -->
+      <label for="digest">Weekly digest</label>
+      <input type="checkbox" id="digest" name="digest" checked />
+
+      <button type="submit">Save changes</button>
+
+      <img src="avatar.png" alt="" />
+
+      <a href="/help">Read the help pages</a>
+    </main>
+  </body>
+</html>

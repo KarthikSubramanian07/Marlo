@@ -1,0 +1,50 @@
+{
+  "//": "What apps/demo is built to produce. tests/e2e/scan.e2e.test.ts reads this file, so a defect that stops being detected fails the build rather than quietly disappearing from the output.",
+
+  "mustFail": {
+    "23a2a8": "informative img with no alt attribute",
+    "24afc2": "letter-spacing under 0.12em marked important in a style attribute",
+    "2779a5": "no title element",
+    "3ea0c8": "id=\"postcode\" on two elements",
+    "46ca7f": "role=presentation on an element that tabindex puts in the focus order",
+    "4e8ab6": "role=slider with no aria-valuenow",
+    "59796f": "input type=image with no alt",
+    "5b7ae0": "lang=\"engRish\" against xml:lang=\"en\"",
+    "5c01ea": "aria-checked on a link, where it is not permitted",
+    "5f99a7": "aria-labeledby, which is not an ARIA attribute",
+    "674b10": "role=\"buton\"",
+    "6a7281": "aria-required=\"yes\"",
+    "6cfa84": "aria-hidden container with a focusable link inside it",
+    "78fd32": "line-height 1.1 marked important",
+    "7d6734": "svg role=img with no accessible name",
+    "8fc3b6": "object rendering non-text content with no accessible name",
+    "97a4e1": "button whose only content is an icon glyph",
+    "9e45ec": "word-spacing under 0.16em marked important",
+    "afw4f7": "grey on white below the contrast floor",
+    "b4f0c3": "user-scalable=no and maximum-scale=1",
+    "b5c3f8": "html element with no lang attribute",
+    "bc4a75": "role=list owning no listitem",
+    "bc659a": "meta refresh with a 30 second delay",
+    "bf051a": "lang=\"engRish\", which is not a language tag",
+    "bisz58": "the same refresh, under the rule that allows no exception",
+    "c487ae": "link whose only content is an image with an empty alt",
+    "cae760": "iframe with no title",
+    "de46e4": "lang=\"xyzzy\" on a paragraph",
+    "e086e5": "placeholder used as a label, and a label whose for names no id",
+    "ff89c9": "role=listitem with no list ancestor",
+    "ffd0e9": "empty h1"
+  },
+
+  "mustNotEvaluate": {
+    "09o5cg": "enhanced contrast needs layout and paint, and the static renderer has neither",
+    "afw4f7": "minimum contrast, same reason. It appears in mustFail as well because a peer engine reports it from the declared colours and the invariant forces that through"
+  },
+
+  "cannotDetect": {
+    "//": "Defects that are in the markup and that Marlo does not report. Listed here rather than removed from the page, because an undetected defect that nobody wrote down looks exactly like a defect that is not there.",
+
+    "e6952f": "The page has name=\"city\" name=\"town\" on one input. Every HTML parser drops the second attribute before any DOM exists, so a DOM-based check cannot see it. Detecting this needs the source bytes, which arrive with the repair layer.",
+    "9eb3f6": "The page has alt=\"IMG_20240117_cart.png\" matching its own src. Marlo returns cantTell rather than failed, because deciding that a name is a filename rather than a description is a judgment it is not confident enough to make. That caution is why its recall on the naming rules is below its peers'.",
+    "e88epe": "aria-hidden on an image with meaningful alt text. Marlo answers cantTell by design: whether the image is decorative is a question about intent, and the rule is advisory for that reason."
+  }
+}

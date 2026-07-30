@@ -12,6 +12,30 @@ importers:
         specifier: 4.4.3
         version: 4.4.3
     devDependencies:
+      '@marlo/act':
+        specifier: workspace:*
+        version: link:packages/act
+      '@marlo/calibrate':
+        specifier: workspace:*
+        version: link:packages/calibrate
+      '@marlo/cli':
+        specifier: workspace:*
+        version: link:packages/cli
+      '@marlo/engines':
+        specifier: workspace:*
+        version: link:packages/engines
+      '@marlo/render':
+        specifier: workspace:*
+        version: link:packages/render
+      '@marlo/report':
+        specifier: workspace:*
+        version: link:packages/report
+      '@marlo/rules':
+        specifier: workspace:*
+        version: link:packages/rules
+      '@marlo/schema':
+        specifier: workspace:*
+        version: link:packages/schema
       '@types/node':
         specifier: 26.1.2
         version: 26.1.2
