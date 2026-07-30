@@ -24,7 +24,7 @@
     "build": "pnpm -r --filter './packages/*' run build",
     "lint": "pnpm run lint:code && pnpm run lint:deps && pnpm run lint:prose && pnpm run lint:claims",
     "lint:code": "eslint .",
-    "lint:deps": "depcruise --config .dependency-cruiser.cjs packages apps",
+    "lint:deps": "node scripts/lint-deps.mjs",
     "lint:prose": "node scripts/check-prose.mjs",
     "lint:claims": "node scripts/check-claims.mjs",
     "format": "prettier --write .",
