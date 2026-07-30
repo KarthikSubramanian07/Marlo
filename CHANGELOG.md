@@ -69,6 +69,8 @@ Three entries are officially `consistent` under W3C's protocol while missing mor
 - Icon SVGs carried no intrinsic dimensions, so the GitHub glyph expanded to fill a full-width button.
 - `favicon.svg` was drawn in a different cyan from the one the stylesheet rendered, so the browser tab did not match its own page. The palette is recorded once and a test compares the assets against it.
 
+- The coverage gate had never run. `vitest.config.ts` declared 85/80/85/85 and no CI job invoked it, so it failed on its first invocation. Thresholds are now the measured figures rounded down (86 statements, 87 lines, 90 functions, 72 branches) with a CI job that runs them, `pull-request.ts` went from 0 percent to 16 tests, and `invariant.ts` is back at 100 on every metric. Two of its uncovered branches were deleted rather than tested: one guarded a routing state the schema now forbids, the other narrowed a value the logic had already narrowed. See [HONESTY.md](HONESTY.md#8-the-coverage-gate-had-never-run-and-failed-the-first-time-it-did).
+
 ### Notes
 
 - `trymarlo.pages.dev` is the canonical URL. `marlo.pages.dev` was taken: Cloudflare assigned a suffixed subdomain, which is not the documented target, so the project was recreated under the fallback name from the build brief.

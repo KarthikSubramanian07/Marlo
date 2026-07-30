@@ -6,6 +6,7 @@ import type {
   CalibrationTable,
   EngineId,
   EngineReport,
+  EngineVerdict,
   Outcome,
   RuleResult,
 } from '@marlo/schema';
@@ -297,5 +298,162 @@ describe('the invariant holds exhaustively', () => {
     const { actRuleId } = routedRule();
     const reports = ENGINES.map((engine) => report(engine, [result(engine, actRuleId, 'passed')]));
     expect(invariantViolations([decideRule(actRuleId, reports, table)])).toEqual([]);
+  });
+});
+
+describe('collapse handles the shapes the 256-combination sweep cannot reach', () => {
+  /*
+   * The exhaustive sweep builds one verdict per engine, so three branches of collapse() were
+   * never taken by it: a result with no verdicts at all, and a result whose verdicts contain
+   * an outcome but not the one earlier branches match.
+   *
+   * They matter because the ordering in collapse() is the protocol. failed beats cantTell
+   * beats passed, and an engine reporting both a failure and a pass on the same rule must
+   * collapse to failed or Marlo would report a page clean on the strength of the elements
+   * that were fine.
+   */
+  const verdict = (engine: EngineId, outcome: Outcome): EngineVerdict => ({
+    engine,
+    engineVersion: '1.0.0',
+    engineRuleId: 'x',
+    actRuleId: '5f99a7',
+    outcome,
+    target: { selector: 'html', snippet: '<html>', path: [] },
+    message: 'm',
+  });
+
+  const report = (engine: EngineId, outcomes: readonly Outcome[]): EngineReport => {
+    const result: RuleResult = {
+      actRuleId: '5f99a7',
+      engine,
+      status: 'ok',
+      verdicts: outcomes.map((o) => verdict(engine, o)),
+      error: null,
+      missingCapabilities: [],
+      durationMs: 1,
+    };
+    return {
+      engine,
+      engineVersion: '1.0.0',
+      renderer: 'static',
+      results: [result],
+      notRequested: [],
+      durationMs: 1,
+    };
+  };
+
+  it('treats a rule that ran and found nothing as inapplicable, not as a pass', () => {
+    // An engine that examined the page and had nothing to report is not evidence that the
+    // rule passes: there may have been nothing for it to examine.
+    const decision = decideRule('5f99a7', [report('marlo', [])], table);
+    expect(decision.outcome).toBe('inapplicable');
+  });
+
+  it('collapses a mixture of failed and passed to failed', () => {
+    const decision = decideRule('5f99a7', [report('marlo', ['passed', 'failed'])], table);
+    expect(decision.outcome).toBe('failed');
+  });
+
+  it('collapses a mixture of cantTell and passed to cantTell', () => {
+    // Caution wins over the elements that happened to be fine.
+    const decision = decideRule('5f99a7', [report('marlo', ['passed', 'cantTell'])], table);
+    expect(decision.outcome).toBe('cantTell');
+  });
+
+  it('collapses inapplicable verdicts to inapplicable', () => {
+    const decision = decideRule('5f99a7', [report('marlo', ['inapplicable'])], table);
+    expect(decision.outcome).toBe('inapplicable');
+  });
+
+  it('records a null strict recall rather than inventing a zero', () => {
+    // A dissent can name an engine the table has no entry for, and the surfaces have to be
+    // able to print "not measured". A zero would read as a measured result of nothing found.
+    const decision = decideRule('5f99a7', [report('htmlcs', ['failed'])], table);
+    expect(decision.outcome).toBe('failed');
+    for (const disagreement of decision.disagreements) {
+      const recall = disagreement.chosenEngineStrictRecall;
+      expect(recall === null || (recall >= 0 && recall <= 1)).toBe(true);
+    }
+  });
+});
+
+describe('the defensive paths, exercised with a table that has been made incomplete', () => {
+  /*
+   * Two branches in invariant.ts exist for table shapes the generated table does not currently
+   * contain: a routing entry whose reason is `no-implementer`, and a routed engine with no
+   * measurement for the rule it was routed. Both are reachable, just not from
+   * calibration/table.json as it stands today.
+   *
+   * Building a modified copy of the real table is the honest way to reach them. The alternative
+   * was to leave two branches uncovered on a file the README says is fully covered, and
+   * discover on the day the table does contain one of these that nothing had ever run it.
+   */
+  const reportOf = (engine: EngineId, outcome: Outcome): EngineReport => ({
+    engine,
+    engineVersion: '1.0.0',
+    renderer: 'static',
+    results: [
+      {
+        actRuleId: '5f99a7',
+        engine,
+        status: 'ok',
+        verdicts: [
+          {
+            engine,
+            engineVersion: '1.0.0',
+            engineRuleId: 'x',
+            actRuleId: '5f99a7',
+            outcome,
+            target: { selector: 'html', snippet: '<html>', path: [] },
+            message: 'm',
+          },
+        ],
+        error: null,
+        missingCapabilities: [],
+        durationMs: 1,
+      },
+    ],
+    notRequested: [],
+    durationMs: 1,
+  });
+
+  it('reports a rule nobody implements as uncalibrated', () => {
+    const modified: CalibrationTable = {
+      ...table,
+      routing: table.routing.map((r) =>
+        r.actRuleId === '5f99a7' ? { ...r, chosen: null, reason: 'no-implementer' as const } : r,
+      ),
+    };
+    // Nothing failed, so the invariant is not engaged and the routing reason survives to the
+    // verdict, which is the only way to observe it.
+    const decision = decideRule('5f99a7', [reportOf('marlo', 'passed')], modified);
+    expect(decision.routingReason).toBe('uncalibrated');
+  });
+
+  it('refuses a table where a rule nobody implements still names an engine', () => {
+    // The state the deleted branch was defending against. Now it cannot be parsed at all.
+    expect(() =>
+      CalibrationTableSchema.parse({
+        ...table,
+        routing: table.routing.map((r) =>
+          r.actRuleId === '5f99a7' ? { ...r, chosen: 'marlo', reason: 'no-implementer' } : r,
+        ),
+      }),
+    ).toThrow(/nobody implements/);
+  });
+
+  it('reports a null strict recall when the routed engine has no entry for the rule', () => {
+    // Not a zero. A zero is a measured result of nothing found, and this is the absence of a
+    // measurement.
+    const modified: CalibrationTable = {
+      ...table,
+      routing: table.routing.map((r) =>
+        r.actRuleId === '5f99a7' ? { ...r, chosen: 'axe-core' } : r,
+      ),
+      entries: table.entries.filter((e) => !(e.actRuleId === '5f99a7' && e.engine === 'axe-core')),
+    };
+    const decision = decideRule('5f99a7', [reportOf('marlo', 'failed')], modified);
+    expect(decision.disagreements.length).toBeGreaterThan(0);
+    expect(decision.disagreements[0]?.chosenEngineStrictRecall).toBeNull();
   });
 });
