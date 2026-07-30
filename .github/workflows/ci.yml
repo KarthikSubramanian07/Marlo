@@ -168,6 +168,38 @@ jobs:
         # `--json` through a pipe still parses.
         run: pnpm run test:e2e
 
+  browser:
+    name: The browser renderer, in a real browser
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Add Playwright, for this job only
+        # Same reasoning as the dogfood job: SETUP.md says a browser is optional and
+        # `pnpm check` needs none, so a devDependency would make that untrue for
+        # everybody who clones the repository.
+        run: |
+          pnpm add -D -w playwright@1.62.0
+          pnpm exec playwright install --with-deps chromium
+
+      - name: What the browser renderer can and cannot do
+        # The job that writes down a limitation rather than assuming it. No engine can
+        # evaluate a Playwright page, and this asserts that none of them returns a verdict
+        # it could not have earned. It fails the day somebody makes the browser path work,
+        # which is issue #37 and the point of the test.
+        run: pnpm run test:browser
+
   coverage:
     name: Coverage thresholds
     runs-on: ubuntu-latest

@@ -58,6 +58,8 @@ HTML CodeSniffer's strict recall is zero: it never returns `failed` for any rule
 
 Three entries are officially `consistent` under W3C's protocol while missing more than half the violations, two of them Marlo's own (`5c01ea`, `c487ae`) and one axe-core's (`3ea0c8`). That gap is the reason the table has two halves.
 
+- `tests/e2e/browser.browser.test.ts` and a CI job for it. The browser renderer renders and declares `layout` and `paint`, and no engine can evaluate a Playwright page, so nothing downstream can consume it. The test asserts no engine returns a verdict it could not have earned, and it fails the day somebody makes that path work. See [HONESTY.md](HONESTY.md#9-a-renderer-with-no-engine-behind-it-and-nobody-had-noticed).
+
 ### Coverage
 
 - Denominator established: **94 published ACT rules**, 91 of which carry official test cases.
@@ -78,6 +80,8 @@ Three entries are officially `consistent` under W3C's protocol while missing mor
 
 - `marlo scan page.html --renderer static` tried to open a file named `static`. The file list was built by filtering argv for anything not starting with a dash, which catches every flag value too. Found by writing the GitHub Action, which passes `--renderer` on every call; no test in the CLI had ever passed a value to a flag.
 
+- `tests/e2e/browser.browser.test.ts` and a CI job for it. The browser renderer renders and declares `layout` and `paint`, and no engine can evaluate a Playwright page, so nothing downstream can consume it. The test asserts no engine returns a verdict it could not have earned, and it fails the day somebody makes that path work. See [HONESTY.md](HONESTY.md#9-a-renderer-with-no-engine-behind-it-and-nobody-had-noticed).
+
 ### Coverage
 
 Repair is measured by the same gate as everything else, and the gate refuses most of it.
@@ -92,6 +96,8 @@ Repair is measured by the same gate as everything else, and the gate refuses mos
 `24afc2`, `78fd32` and `9e45ec` are refused with the measurement attached: Marlo's own detection for them is right between 29 and 33 percent of the time, against a threshold of 0.95. The generated change travels with the flag and is not applied.
 
 `e6952f` has a working codemod and no engine that detects it, so nothing calls it. Source location is what makes that rule visible at all, which is now the shortest path from written code to a working fix.
+
+- Alfa's adapter had no handle guard, so a renderer it could not read failed with `Cannot read properties of undefined (reading 'createRange')` rather than the explanation the other two adapters give. Two of three peers explained themselves and nothing had compared them, because nothing had ever run that path.
 
 ### Notes
 
