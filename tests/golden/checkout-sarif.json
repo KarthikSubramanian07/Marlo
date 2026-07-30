@@ -1,0 +1,3515 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Marlo",
+          "version": "0.1.0",
+          "informationUri": "https://trymarlo.pages.dev",
+          "rules": [
+            {
+              "id": "23a2a8",
+              "name": "Image has non-empty accessible name",
+              "shortDescription": {
+                "text": "Image has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule 23a2a8. Image has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/23a2a8",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 18
+              }
+            },
+            {
+              "id": "24afc2",
+              "name": "Important letter spacing in style attributes is wide enough",
+              "shortDescription": {
+                "text": "Important letter spacing in style attributes is wide enough"
+              },
+              "fullDescription": {
+                "text": "ACT rule 24afc2. Important letter spacing in style attributes is wide enough"
+              },
+              "helpUri": "https://act-rules.github.io/rules/24afc2",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.4.12"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 16
+              }
+            },
+            {
+              "id": "2779a5",
+              "name": "HTML page has non-empty title",
+              "shortDescription": {
+                "text": "HTML page has non-empty title"
+              },
+              "fullDescription": {
+                "text": "ACT rule 2779a5. HTML page has non-empty title"
+              },
+              "helpUri": "https://act-rules.github.io/rules/2779a5",
+              "properties": {
+                "wcag-success-criteria": [
+                  "2.4.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 11
+              }
+            },
+            {
+              "id": "3ea0c8",
+              "name": "Id attribute value is unique",
+              "shortDescription": {
+                "text": "Id attribute value is unique"
+              },
+              "fullDescription": {
+                "text": "ACT rule 3ea0c8. Id attribute value is unique"
+              },
+              "helpUri": "https://act-rules.github.io/rules/3ea0c8",
+              "properties": {
+                "wcag-success-criteria": [
+                  "4.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 10
+              }
+            },
+            {
+              "id": "46ca7f",
+              "name": "Element marked as decorative is not exposed",
+              "shortDescription": {
+                "text": "Element marked as decorative is not exposed"
+              },
+              "fullDescription": {
+                "text": "ACT rule 46ca7f. Element marked as decorative is not exposed"
+              },
+              "helpUri": "https://act-rules.github.io/rules/46ca7f",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 10
+              }
+            },
+            {
+              "id": "4e8ab6",
+              "name": "Element with role attribute has required states and properties",
+              "shortDescription": {
+                "text": "Element with role attribute has required states and properties"
+              },
+              "fullDescription": {
+                "text": "ACT rule 4e8ab6. Element with role attribute has required states and properties"
+              },
+              "helpUri": "https://act-rules.github.io/rules/4e8ab6",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 8
+              }
+            },
+            {
+              "id": "59796f",
+              "name": "Image button has non-empty accessible name",
+              "shortDescription": {
+                "text": "Image button has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule 59796f. Image button has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/59796f",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.1.1",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 12
+              }
+            },
+            {
+              "id": "5b7ae0",
+              "name": "HTML page lang and xml:lang attributes have matching values",
+              "shortDescription": {
+                "text": "HTML page lang and xml:lang attributes have matching values"
+              },
+              "fullDescription": {
+                "text": "ACT rule 5b7ae0. HTML page lang and xml:lang attributes have matching values"
+              },
+              "helpUri": "https://act-rules.github.io/rules/5b7ae0",
+              "properties": {
+                "wcag-success-criteria": [
+                  "3.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 12
+              }
+            },
+            {
+              "id": "5c01ea",
+              "name": "ARIA state or property is permitted",
+              "shortDescription": {
+                "text": "ARIA state or property is permitted"
+              },
+              "fullDescription": {
+                "text": "ACT rule 5c01ea. ARIA state or property is permitted"
+              },
+              "helpUri": "https://act-rules.github.io/rules/5c01ea",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 15
+              }
+            },
+            {
+              "id": "5f99a7",
+              "name": "ARIA attribute is defined in WAI-ARIA",
+              "shortDescription": {
+                "text": "ARIA attribute is defined in WAI-ARIA"
+              },
+              "fullDescription": {
+                "text": "ACT rule 5f99a7. ARIA attribute is defined in WAI-ARIA"
+              },
+              "helpUri": "https://act-rules.github.io/rules/5f99a7",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 7
+              }
+            },
+            {
+              "id": "674b10",
+              "name": "Role attribute has valid value",
+              "shortDescription": {
+                "text": "Role attribute has valid value"
+              },
+              "fullDescription": {
+                "text": "ACT rule 674b10. Role attribute has valid value"
+              },
+              "helpUri": "https://act-rules.github.io/rules/674b10",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 10
+              }
+            },
+            {
+              "id": "6a7281",
+              "name": "ARIA state or property has valid value",
+              "shortDescription": {
+                "text": "ARIA state or property has valid value"
+              },
+              "fullDescription": {
+                "text": "ACT rule 6a7281. ARIA state or property has valid value"
+              },
+              "helpUri": "https://act-rules.github.io/rules/6a7281",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 24
+              }
+            },
+            {
+              "id": "6cfa84",
+              "name": "Element with aria-hidden has no content in sequential focus navigation",
+              "shortDescription": {
+                "text": "Element with aria-hidden has no content in sequential focus navigation"
+              },
+              "fullDescription": {
+                "text": "ACT rule 6cfa84. Element with aria-hidden has no content in sequential focus navigation"
+              },
+              "helpUri": "https://act-rules.github.io/rules/6cfa84",
+              "properties": {
+                "wcag-success-criteria": [
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 14
+              }
+            },
+            {
+              "id": "78fd32",
+              "name": "Important line height in style attributes is wide enough",
+              "shortDescription": {
+                "text": "Important line height in style attributes is wide enough"
+              },
+              "fullDescription": {
+                "text": "ACT rule 78fd32. Important line height in style attributes is wide enough"
+              },
+              "helpUri": "https://act-rules.github.io/rules/78fd32",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.4.12"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 21
+              }
+            },
+            {
+              "id": "7d6734",
+              "name": "SVG element with explicit role has non-empty accessible name",
+              "shortDescription": {
+                "text": "SVG element with explicit role has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule 7d6734. SVG element with explicit role has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/7d6734",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 10
+              }
+            },
+            {
+              "id": "8fc3b6",
+              "name": "Object element rendering non-text content has non-empty accessible name",
+              "shortDescription": {
+                "text": "Object element rendering non-text content has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule 8fc3b6. Object element rendering non-text content has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/8fc3b6",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 14
+              }
+            },
+            {
+              "id": "97a4e1",
+              "name": "Button has non-empty accessible name",
+              "shortDescription": {
+                "text": "Button has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule 97a4e1. Button has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/97a4e1",
+              "properties": {
+                "wcag-success-criteria": [
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 17
+              }
+            },
+            {
+              "id": "9e45ec",
+              "name": "Important word spacing in style attributes is wide enough",
+              "shortDescription": {
+                "text": "Important word spacing in style attributes is wide enough"
+              },
+              "fullDescription": {
+                "text": "ACT rule 9e45ec. Important word spacing in style attributes is wide enough"
+              },
+              "helpUri": "https://act-rules.github.io/rules/9e45ec",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.4.12"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 16
+              }
+            },
+            {
+              "id": "afw4f7",
+              "name": "Text has minimum contrast",
+              "shortDescription": {
+                "text": "Text has minimum contrast"
+              },
+              "fullDescription": {
+                "text": "ACT rule afw4f7. Text has minimum contrast"
+              },
+              "helpUri": "https://act-rules.github.io/rules/afw4f7",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.4.3",
+                  "1.4.6"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 28
+              }
+            },
+            {
+              "id": "b4f0c3",
+              "name": "Meta viewport allows for zoom",
+              "shortDescription": {
+                "text": "Meta viewport allows for zoom"
+              },
+              "fullDescription": {
+                "text": "ACT rule b4f0c3. Meta viewport allows for zoom"
+              },
+              "helpUri": "https://act-rules.github.io/rules/b4f0c3",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.4.10",
+                  "1.4.4"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 11
+              }
+            },
+            {
+              "id": "b5c3f8",
+              "name": "HTML page has lang attribute",
+              "shortDescription": {
+                "text": "HTML page has lang attribute"
+              },
+              "fullDescription": {
+                "text": "ACT rule b5c3f8. HTML page has lang attribute"
+              },
+              "helpUri": "https://act-rules.github.io/rules/b5c3f8",
+              "properties": {
+                "wcag-success-criteria": [
+                  "3.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 7
+              }
+            },
+            {
+              "id": "bc4a75",
+              "name": "ARIA required owned elements",
+              "shortDescription": {
+                "text": "ARIA required owned elements"
+              },
+              "fullDescription": {
+                "text": "ACT rule bc4a75. ARIA required owned elements"
+              },
+              "helpUri": "https://act-rules.github.io/rules/bc4a75",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 19
+              }
+            },
+            {
+              "id": "bc659a",
+              "name": "Meta element has no refresh delay",
+              "shortDescription": {
+                "text": "Meta element has no refresh delay"
+              },
+              "fullDescription": {
+                "text": "ACT rule bc659a. Meta element has no refresh delay"
+              },
+              "helpUri": "https://act-rules.github.io/rules/bc659a",
+              "properties": {
+                "wcag-success-criteria": [
+                  "2.2.1",
+                  "2.2.4",
+                  "3.2.5"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 15
+              }
+            },
+            {
+              "id": "bf051a",
+              "name": "HTML page lang attribute has valid language tag",
+              "shortDescription": {
+                "text": "HTML page lang attribute has valid language tag"
+              },
+              "fullDescription": {
+                "text": "ACT rule bf051a. HTML page lang attribute has valid language tag"
+              },
+              "helpUri": "https://act-rules.github.io/rules/bf051a",
+              "properties": {
+                "wcag-success-criteria": [
+                  "3.1.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 7
+              }
+            },
+            {
+              "id": "bisz58",
+              "name": "Meta element has no refresh delay (no exception)",
+              "shortDescription": {
+                "text": "Meta element has no refresh delay (no exception)"
+              },
+              "fullDescription": {
+                "text": "ACT rule bisz58. Meta element has no refresh delay (no exception)"
+              },
+              "helpUri": "https://act-rules.github.io/rules/bisz58",
+              "properties": {
+                "wcag-success-criteria": [
+                  "2.2.1",
+                  "2.2.4",
+                  "3.2.5"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 14
+              }
+            },
+            {
+              "id": "c487ae",
+              "name": "Link has non-empty accessible name",
+              "shortDescription": {
+                "text": "Link has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule c487ae. Link has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/c487ae",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.1.1",
+                  "2.4.4",
+                  "2.4.9",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 28
+              }
+            },
+            {
+              "id": "cae760",
+              "name": "Iframe element has non-empty accessible name",
+              "shortDescription": {
+                "text": "Iframe element has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule cae760. Iframe element has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/cae760",
+              "properties": {
+                "wcag-success-criteria": [
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 10
+              }
+            },
+            {
+              "id": "de46e4",
+              "name": "Element with lang attribute has valid language tag",
+              "shortDescription": {
+                "text": "Element with lang attribute has valid language tag"
+              },
+              "fullDescription": {
+                "text": "ACT rule de46e4. Element with lang attribute has valid language tag"
+              },
+              "helpUri": "https://act-rules.github.io/rules/de46e4",
+              "properties": {
+                "wcag-success-criteria": [
+                  "3.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 19
+              }
+            },
+            {
+              "id": "e086e5",
+              "name": "Form field has non-empty accessible name",
+              "shortDescription": {
+                "text": "Form field has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule e086e5. Form field has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/e086e5",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1",
+                  "2.5.3",
+                  "4.1.2"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 17
+              }
+            },
+            {
+              "id": "ff89c9",
+              "name": "ARIA required context role",
+              "shortDescription": {
+                "text": "ARIA required context role"
+              },
+              "fullDescription": {
+                "text": "ACT rule ff89c9. ARIA required context role"
+              },
+              "helpUri": "https://act-rules.github.io/rules/ff89c9",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.3.1"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 15
+              }
+            },
+            {
+              "id": "ffd0e9",
+              "name": "Heading has non-empty accessible name",
+              "shortDescription": {
+                "text": "Heading has non-empty accessible name"
+              },
+              "fullDescription": {
+                "text": "ACT rule ffd0e9. Heading has non-empty accessible name"
+              },
+              "helpUri": "https://act-rules.github.io/rules/ffd0e9",
+              "properties": {
+                "wcag-success-criteria": [],
+                "act-rule-type": "atomic",
+                "official-test-cases": 15
+              }
+            }
+          ],
+          "properties": {
+            "act-rules-implemented": 35,
+            "act-rules-published": 94,
+            "act-rules-calibrated": 35,
+            "act-rules-unmeasurable": [],
+            "calibration-generated": "2026-07-30",
+            "calibration-commit": null,
+            "corpus-retrieved": "2026-07-29",
+            "engines": [
+              "marlo@0.1.0",
+              "axe-core@4.12.1",
+              "alfa@0.119.0",
+              "htmlcs@2.5.1"
+            ]
+          }
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "startTimeUtc": "<time>",
+          "properties": {
+            "runId": "<run>"
+          },
+          "toolExecutionNotifications": [
+            {
+              "level": "warning",
+              "message": {
+                "text": "09o5cg was not evaluated by marlo: the static renderer does not provide layout and paint. This is not a pass."
+              },
+              "descriptor": {
+                "id": "09o5cg"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "marlo",
+                "missing-capabilities": [
+                  "layout",
+                  "paint"
+                ]
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "afw4f7 was not evaluated by marlo: the static renderer does not provide layout and paint. This is not a pass."
+              },
+              "descriptor": {
+                "id": "afw4f7"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "marlo",
+                "missing-capabilities": [
+                  "layout",
+                  "paint"
+                ]
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9eb3f6 was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9eb3f6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e6952f was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e88epe was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e88epe"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "09o5cg was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "09o5cg"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "24afc2 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "24afc2"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "46ca7f was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "46ca7f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "59796f was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "59796f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5b7ae0 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5b7ae0"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "78fd32 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "78fd32"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9e45ec was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9e45ec"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9eb3f6 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9eb3f6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "b4f0c3 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "b4f0c3"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bc659a was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bc659a"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bisz58 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bisz58"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e6952f was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e88epe was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e88epe"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "ff89c9 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "ff89c9"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "24afc2 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "24afc2"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "3ea0c8 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "3ea0c8"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "46ca7f was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "46ca7f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "4e8ab6 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "4e8ab6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "59796f was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "59796f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5b7ae0 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5b7ae0"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5c01ea was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5c01ea"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5f99a7 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5f99a7"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "674b10 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "674b10"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "6a7281 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "6a7281"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "6cfa84 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "6cfa84"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "78fd32 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "78fd32"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "7d6734 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "7d6734"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9e45ec was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9e45ec"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9eb3f6 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9eb3f6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "b4f0c3 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "b4f0c3"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bc4a75 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bc4a75"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "cae760 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "cae760"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "de46e4 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "de46e4"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e6952f was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "ff89c9 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "ff89c9"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "ffd0e9 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "ffd0e9"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "09o5cg was not evaluated by marlo: the static renderer does not provide layout and paint. This is not a pass."
+              },
+              "descriptor": {
+                "id": "09o5cg"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "marlo",
+                "missing-capabilities": [
+                  "layout",
+                  "paint"
+                ]
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "afw4f7 was not evaluated by marlo: the static renderer does not provide layout and paint. This is not a pass."
+              },
+              "descriptor": {
+                "id": "afw4f7"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "marlo",
+                "missing-capabilities": [
+                  "layout",
+                  "paint"
+                ]
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9eb3f6 was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9eb3f6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e6952f was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e88epe was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e88epe"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "09o5cg was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "09o5cg"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "24afc2 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "24afc2"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "46ca7f was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "46ca7f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "59796f was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "59796f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5b7ae0 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5b7ae0"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "78fd32 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "78fd32"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9e45ec was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9e45ec"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9eb3f6 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9eb3f6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "b4f0c3 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "b4f0c3"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bc659a was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bc659a"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bisz58 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bisz58"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e6952f was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e88epe was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e88epe"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "ff89c9 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "ff89c9"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "24afc2 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "24afc2"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "3ea0c8 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "3ea0c8"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "46ca7f was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "46ca7f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "4e8ab6 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "4e8ab6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "59796f was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "59796f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5b7ae0 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5b7ae0"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5c01ea was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5c01ea"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "5f99a7 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "5f99a7"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "674b10 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "674b10"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "6a7281 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "6a7281"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "6cfa84 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "6cfa84"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "78fd32 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "78fd32"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "7d6734 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "7d6734"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9e45ec was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9e45ec"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "9eb3f6 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "9eb3f6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "b4f0c3 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "b4f0c3"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bc4a75 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bc4a75"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "cae760 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "cae760"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "de46e4 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "de46e4"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e6952f was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "ff89c9 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "ff89c9"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "ffd0e9 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "ffd0e9"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            }
+          ]
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "23a2a8",
+          "level": "error",
+          "message": {
+            "text": "Images must have alternative text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "img[src$=\"product-8842.jpg\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "img[src$=\"product-8842.jpg\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "23a2a8:img[src$=\"product-8842.jpg\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "image-alt",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 18,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "24afc2",
+          "level": "warning",
+          "message": {
+            "text": "letter-spacing: 0.01em !important cannot be overridden by a user stylesheet, and it is below 0.12 times the font size. Removing !important is usually the whole fix."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "p"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "p",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "24afc2:p"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/24afc2",
+            "engine-version": "0.1.0",
+            "routing-reason": "invariant",
+            "agreed-by": [
+              "axe-core"
+            ],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": null
+              },
+              {
+                "engine": "axe-core",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": null
+              }
+            ],
+            "measured-precision": 0.2857142857142857,
+            "measured-recall": 0.5,
+            "official-test-cases-behind-measurement": 16,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "2779a5",
+          "level": "error",
+          "message": {
+            "text": "Documents must have <title> element to aid in navigation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "html"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "html",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "2779a5:html"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "document-title",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 11,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "3ea0c8",
+          "level": "warning",
+          "message": {
+            "text": "id=\"postcode\" appears 2 times. Every reference to it, including a label's for and any aria-labelledby, resolves to the first one only."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input#postcode"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input#postcode",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "3ea0c8:input#postcode"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/3ea0c8",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "axe-core",
+                "outcome": "inapplicable",
+                "chosen-engine-strict-recall": 1
+              },
+              {
+                "engine": "alfa",
+                "outcome": "inapplicable",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 10,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "3ea0c8",
+          "level": "warning",
+          "message": {
+            "text": "id=\"postcode\" appears 2 times. Every reference to it, including a label's for and any aria-labelledby, resolves to the first one only."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input#postcode"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input#postcode",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "3ea0c8:input#postcode"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/3ea0c8",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "axe-core",
+                "outcome": "inapplicable",
+                "chosen-engine-strict-recall": 1
+              },
+              {
+                "engine": "alfa",
+                "outcome": "inapplicable",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 10,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "46ca7f",
+          "level": "warning",
+          "message": {
+            "text": "This element is marked decorative but tabindex=\"0\" puts it in the focus order, which puts it back in the accessibility tree with its role stripped. It ends up announced as a generic element."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "46ca7f:div"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/46ca7f",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "axe-core",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 10,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "4e8ab6",
+          "level": "error",
+          "message": {
+            "text": "Required ARIA attributes must be provided"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div[role=\"slider\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div[role=\"slider\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "4e8ab6:div[role=\"slider\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "aria-required-attr",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 8,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "59796f",
+          "level": "error",
+          "message": {
+            "text": "An image button with no alt text is announced as \"button\" or as its filename. It is the submit control, so this usually blocks the form entirely."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "59796f:input"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/59796f",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 12,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "5c01ea",
+          "level": "warning",
+          "message": {
+            "text": "Alfa sia-r18"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ":root"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": ":root",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "5c01ea::root"
+          },
+          "properties": {
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r18",
+            "engine-version": "0.119.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core"
+            ],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "cantTell",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 15,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "5f99a7",
+          "level": "warning",
+          "message": {
+            "text": "aria-labeledby is not defined in ARIA 1.2, so assistive technology ignores it. Usually a typo."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "5f99a7:input"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/5f99a7",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 7,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "674b10",
+          "level": "error",
+          "message": {
+            "text": "role=\"buton\" contains no valid ARIA role, so the element keeps its native semantics and the author's intent is lost silently."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "674b10:div"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/674b10",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 10,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "6a7281",
+          "level": "error",
+          "message": {
+            "text": "Alfa sia-r19"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ":root"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": ":root",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "6a7281::root"
+          },
+          "properties": {
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r19",
+            "engine-version": "0.119.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "axe-core"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 24,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "6cfa84",
+          "level": "error",
+          "message": {
+            "text": "ARIA hidden element must not be focusable or contain focusable elements"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div[aria-hidden=\"true\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div[aria-hidden=\"true\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "6cfa84:div[aria-hidden=\"true\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "aria-hidden-focus",
+            "engine-version": "4.12.1",
+            "routing-reason": "sole-implementer",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 0.8333333333333334,
+            "official-test-cases-behind-measurement": 14,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "78fd32",
+          "level": "warning",
+          "message": {
+            "text": "Inline text spacing must be adjustable with custom stylesheets"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "form > p"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "form > p",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "78fd32:form > p"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "avoid-inline-spacing",
+            "engine-version": "4.12.1",
+            "routing-reason": "uncalibrated",
+            "agreed-by": [
+              "marlo"
+            ],
+            "disagreements": [],
+            "measured-precision": null,
+            "measured-recall": 0,
+            "official-test-cases-behind-measurement": 21,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "7d6734",
+          "level": "error",
+          "message": {
+            "text": "<svg> elements with an img role must have alternative text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "svg"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "svg",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "7d6734:svg"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "svg-img-alt",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 10,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "8fc3b6",
+          "level": "error",
+          "message": {
+            "text": "<object> elements must have alternative text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "object"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "object",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "8fc3b6:object"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "object-alt",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 14,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "97a4e1",
+          "level": "error",
+          "message": {
+            "text": "Buttons must have discernible text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "button"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "button",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "97a4e1:button"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "button-name",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "9e45ec",
+          "level": "warning",
+          "message": {
+            "text": "word-spacing: 0.05em !important cannot be overridden by a user stylesheet, and it is below 0.16 times the font size. Removing !important is usually the whole fix."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "p"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "p",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "9e45ec:p"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/9e45ec",
+            "engine-version": "0.1.0",
+            "routing-reason": "invariant",
+            "agreed-by": [
+              "axe-core"
+            ],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": null
+              },
+              {
+                "engine": "axe-core",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": null
+              }
+            ],
+            "measured-precision": 0.2857142857142857,
+            "measured-recall": 0.5,
+            "official-test-cases-behind-measurement": 16,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "afw4f7",
+          "level": "error",
+          "message": {
+            "text": "Alfa sia-r69"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ":root"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": ":root",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "afw4f7::root"
+          },
+          "properties": {
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r69",
+            "engine-version": "0.119.0",
+            "routing-reason": "invariant",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "alfa",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": 0
+              },
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 0
+              }
+            ],
+            "measured-precision": 0.8333333333333334,
+            "measured-recall": 0.625,
+            "official-test-cases-behind-measurement": 28,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "b4f0c3",
+          "level": "error",
+          "message": {
+            "text": "Zooming and scaling must not be disabled"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "meta[name=\"viewport\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "meta[name=\"viewport\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "b4f0c3:meta[name=\"viewport\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "meta-viewport",
+            "engine-version": "4.12.1",
+            "routing-reason": "sole-implementer",
+            "agreed-by": [
+              "marlo"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 11,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "b5c3f8",
+          "level": "error",
+          "message": {
+            "text": "The html element has no lang attribute, so assistive technology has to guess the language and will often pick the wrong voice."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "html"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "html",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "b5c3f8:html"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/b5c3f8",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 7,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "bc4a75",
+          "level": "warning",
+          "message": {
+            "text": "Certain ARIA roles must contain particular children"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div[role=\"list\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div[role=\"list\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "bc4a75:div[role=\"list\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "aria-required-children",
+            "engine-version": "4.12.1",
+            "routing-reason": "invariant",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "cantTell",
+                "chosen-engine-strict-recall": 0
+              },
+              {
+                "engine": "axe-core",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": 0
+              }
+            ],
+            "measured-precision": 0.875,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 19,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "bc659a",
+          "level": "error",
+          "message": {
+            "text": "The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "meta"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "meta",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "bc659a:meta"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/bc659a",
+            "engine-version": "0.1.0",
+            "routing-reason": "sole-implementer",
+            "agreed-by": [
+              "axe-core"
+            ],
+            "disagreements": [
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 0.5
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 0.5,
+            "official-test-cases-behind-measurement": 15,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "bisz58",
+          "level": "error",
+          "message": {
+            "text": "The page refreshes after 30 seconds. This rule allows no exception for a long delay."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "meta"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "meta",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "bisz58:meta"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/bisz58",
+            "engine-version": "0.1.0",
+            "routing-reason": "sole-implementer",
+            "agreed-by": [
+              "axe-core",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 0.5,
+            "official-test-cases-behind-measurement": 14,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "c487ae",
+          "level": "error",
+          "message": {
+            "text": "Images must have alternative text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "img[src$=\"product-8842.jpg\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "img[src$=\"product-8842.jpg\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "c487ae:img[src$=\"product-8842.jpg\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "image-alt",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "alfa"
+            ],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "cantTell",
+                "chosen-engine-strict-recall": 1
+              },
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 28,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "c487ae",
+          "level": "error",
+          "message": {
+            "text": "Links must have discernible text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "a[href=\"/\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "a[href=\"/\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "c487ae:a[href=\"/\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "link-name",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "alfa"
+            ],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "cantTell",
+                "chosen-engine-strict-recall": 1
+              },
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 28,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "cae760",
+          "level": "error",
+          "message": {
+            "text": "Frames must have an accessible name"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "iframe"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "iframe",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "cae760:iframe"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "frame-title",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 10,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "ARIA input fields must have an accessible name"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div[role=\"slider\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div[role=\"slider\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:div[role=\"slider\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "aria-input-field-name",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "Form elements must have labels"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input[name=\"postcode\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input[name=\"postcode\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:input[name=\"postcode\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "label",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "Form elements must have labels"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input[name=\"postcode-confirm\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input[name=\"postcode-confirm\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:input[name=\"postcode-confirm\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "label",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "Form elements must have labels"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input[name=\"city\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input[name=\"city\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:input[name=\"city\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "label",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "Form elements must have labels"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input[type=\"tel\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input[type=\"tel\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:input[type=\"tel\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "label",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "ff89c9",
+          "level": "warning",
+          "message": {
+            "text": "Certain ARIA roles must be contained by particular parents"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "div[role=\"listitem\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "div[role=\"listitem\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "ff89c9:div[role=\"listitem\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "aria-required-parent",
+            "engine-version": "4.12.1",
+            "routing-reason": "sole-implementer",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "marlo",
+                "outcome": "cantTell",
+                "chosen-engine-strict-recall": 0.5
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 0.5,
+            "official-test-cases-behind-measurement": 15,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "ffd0e9",
+          "level": "error",
+          "message": {
+            "text": "Headings should not be empty"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "h1"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "h1",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "ffd0e9:h1"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "empty-heading",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 15,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "5b7ae0",
+          "level": "warning",
+          "message": {
+            "text": "lang=\"engRish\" and xml:lang=\"en\" declare different languages. Which one wins depends on how the document is served, so the two have to agree."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "html"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "html",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "5b7ae0:html"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/5b7ae0",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "axe-core",
+                "outcome": "inapplicable",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 12,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "bf051a",
+          "level": "warning",
+          "message": {
+            "text": "<html> element must have a valid value for the lang attribute"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "html"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "html",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "bf051a:html"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "html-lang-valid",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 7,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "de46e4",
+          "level": "warning",
+          "message": {
+            "text": "lang attribute must have a valid value"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "p"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "p",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "de46e4:p"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "valid-lang",
+            "engine-version": "4.12.1",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 19,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        }
+      ]
+    }
+  ]
+}
