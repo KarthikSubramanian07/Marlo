@@ -137,6 +137,114 @@ jobs:
         # that is the bug.
         run: pnpm vitest run --project unit
 
+  e2e:
+    name: End to end (real files, real process)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        # The end to end suite runs the compiled binary through a real pipe, so
+        # it needs dist. Everything else in it imports source through Vitest's
+        # workspace aliases.
+        run: pnpm run build
+
+      - name: Golden files match
+        # Two of the three defects in HONESTY.md were found by a real file and a
+        # real process, and neither would have been caught by a unit test. This
+        # is the job that keeps that true: it asserts 31 rules fire on
+        # apps/demo, zero adapters crash, no peer failure is swallowed, and
+        # `--json` through a pipe still parses.
+        run: pnpm run test:e2e
+
+  coverage:
+    name: Coverage thresholds
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Coverage
+        # The global figure is 85/80/85/85 and is defensible rather than round;
+        # the reasoning is in CONTRIBUTING.md. The per-path overrides matter
+        # more: @marlo/act and the one-directional invariant are held at 100,
+        # because an uncovered branch in either is an unmeasured accuracy claim
+        # or a path where Marlo reports clean while a peer reported a failure.
+        # The thresholds live in vitest.config.ts, so this job fails on its own
+        # without a flag here.
+        run: pnpm run test:coverage
+
+  dogfood:
+    name: Marlo's own site passes Marlo's own bar
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Add Playwright, for this job only
+        # Playwright is deliberately not a declared dependency: SETUP.md says a
+        # browser is optional and `pnpm check` needs none, and a devDependency
+        # would make that sentence untrue for everybody who clones the
+        # repository. It is installed here, in the one job that needs a real
+        # browser, and --no-frozen-lockfile is required precisely because this
+        # is not in the lockfile.
+        run: |
+          pnpm add -D -w playwright@1.62.0 --no-frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+
+      - name: Build the site
+        run: pnpm run site:build
+
+      - name: Audit every page at three widths in both colour schemes
+        # The hard gate. Marlo has no standing to report a violation it ships,
+        # so this job fails the build on any critical or serious axe violation,
+        # any horizontal overflow, and any tap target under 24 CSS pixels.
+        #
+        # It has to run in a browser because contrast needs layout. The 27 site
+        # tests read markup and CSS and cannot see a composited colour, which is
+        # how a 2.18:1 failure and a 4.22:1 failure both shipped past them. See
+        # HONESTY.md.
+        run: pnpm run screenshots
+
+      - name: Keep the audit output even when it fails
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-audit
+          path: docs/screenshots/
+          retention-days: 14
+
   dco:
     name: DCO sign-off
     runs-on: ubuntu-latest

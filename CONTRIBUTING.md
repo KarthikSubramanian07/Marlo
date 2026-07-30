@@ -122,7 +122,13 @@ No API keys, no browser download, no network after install. If any of that is un
 
 ### The coverage number and why it is that number
 
-Global thresholds are 85 percent statements, lines, and functions, 80 percent branches. That is not a round number chosen to look serious: it is where the suite sits once the parts that should not be covered are excluded, which are `index.ts` re-exports, `bin.ts` entry points, and the deliberately empty remote renderer seam.
+Global thresholds are 86 percent statements, 87 lines, 90 functions, and 72 branches. Those are the measured figures rounded down, not targets: the gate fails on any regression and an improvement is a one-line pull request to raise the number.
+
+They were 85/80/85/85 until the coverage job was written, at which point they failed on the first run. Nothing had ever invoked them. A threshold nothing checks is a claim, and this repository contains a script whose entire job is to fail the build on claims like that, so the episode is in [HONESTY.md](HONESTY.md).
+
+**Branch coverage runs about 14 points below statement coverage, and that gap is structural.** Under `noUncheckedIndexedAccess` every array index yields `T | undefined`, so each `?.` and `??` guarding one is a branch, and many are unreachable by construction. Two were found while raising these numbers. One guarded a routing state the schema now forbids outright; the other was a second fallback narrowing something the logic had already narrowed. Both were deleted rather than tested, which is the right move: a test that constructs an impossible input to reach a defensive line makes the number better and the suite worse.
+
+If you find another, prefer making the state unrepresentable over covering it.
 
 Two modules are held at 100 with no exceptions:
 

@@ -147,22 +147,38 @@ export const CalibrationEntry = z.object({
 export type CalibrationEntry = z.infer<typeof CalibrationEntry>;
 
 /** Which engine the router will use for a rule, and why. */
-export const RoutingDecision = z.object({
-  actRuleId: ActRuleId,
-  chosen: EngineId.nullable(),
-  reason: z.enum(['best-measured', 'sole-implementer', 'uncalibrated', 'no-implementer']),
-  /** Engines that implement the rule at all, best first. */
-  candidates: z.array(
-    z.object({
-      engine: EngineId,
-      strictRecall: z.number().min(0).max(1).nullable(),
-      strictPrecision: z.number().min(0).max(1).nullable(),
-      consistency: ActConsistency,
-    }),
-  ),
-  /** True when the chosen engine's measurement clears the auto-fix threshold. */
-  autoFixPermitted: z.boolean(),
-});
+export const RoutingDecision = z
+  .object({
+    actRuleId: ActRuleId,
+    chosen: EngineId.nullable(),
+    reason: z.enum(['best-measured', 'sole-implementer', 'uncalibrated', 'no-implementer']),
+    /** Engines that implement the rule at all, best first. */
+    candidates: z.array(
+      z.object({
+        engine: EngineId,
+        strictRecall: z.number().min(0).max(1).nullable(),
+        strictPrecision: z.number().min(0).max(1).nullable(),
+        consistency: ActConsistency,
+      }),
+    ),
+    /** True when the chosen engine's measurement clears the auto-fix threshold. */
+    autoFixPermitted: z.boolean(),
+  })
+  /*
+   * Two reasons mean nobody was chosen, so they may not name an engine. This started as a
+   * defensive branch in @marlo/report's decideRule, checking for a `no-implementer` routing
+   * that also named an engine. No valid table can contain that, so the branch was a line no
+   * test could reach, and an unreachable branch on a file the README says is fully covered is
+   * either a false coverage claim or a state the schema should have forbidden.
+   *
+   * It was the second. Making the state unrepresentable deleted the branch.
+   */
+  .refine((r) => !(r.reason === 'no-implementer' && r.chosen !== null), {
+    message: 'a rule nobody implements cannot have a chosen engine',
+  })
+  .refine((r) => !(r.reason === 'uncalibrated' && r.chosen !== null && r.candidates.length === 0), {
+    message: 'an uncalibrated routing that names an engine must say which candidates it saw',
+  });
 export type RoutingDecision = z.infer<typeof RoutingDecision>;
 
 /**
