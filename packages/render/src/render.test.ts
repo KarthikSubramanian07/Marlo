@@ -1,6 +1,6 @@
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import type { Capability } from '@marlo/schema';
 
@@ -313,6 +313,23 @@ describe('RemoteRenderer', () => {
 });
 
 describe('BrowserRenderer', () => {
+  it('typechecks and constructs with no Playwright installed', () => {
+    // The reason the module specifier is a variable rather than a literal. TypeScript
+    // resolves a literal dynamic import at compile time, which made `pnpm typecheck` pass
+    // on a machine with a global Playwright and fail in CI with "Cannot find module
+    // 'playwright'". An optional peer dependency has to be optional to the type checker
+    // too, or the offline requirement is not real.
+    // Comments stripped first: the comment explaining why the literal is absent quotes
+    // the literal, which is the test checking prose rather than code.
+    const code = readFileSync(resolve(import.meta.dirname, 'browser.ts'), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/\/\/[^\n]*/g, '');
+
+    expect(code).not.toContain("import('playwright')");
+    expect(code).toContain('const OPTIONAL_PLAYWRIGHT');
+    expect(code).toContain('await import(specifier)');
+  });
+
   it('constructs without needing Playwright installed', () => {
     // Construction has to be free. `pnpm install && pnpm test` must be green with no
     // browser binary, so the import is dynamic and happens on first render.

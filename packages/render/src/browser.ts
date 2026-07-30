@@ -25,6 +25,14 @@ import { DEFAULT_URL, validateRequest } from './renderer.js';
 
 const BROWSER_CAPABILITIES: ReadonlySet<Capability> = new Set(RENDERER_CAPABILITIES.browser);
 
+/**
+ * The module specifier for Playwright, kept out of a literal import.
+ *
+ * See the comment at the import site. A literal would be resolved by the type checker and
+ * turn an optional peer dependency into a required one.
+ */
+const OPTIONAL_PLAYWRIGHT = 'playwright';
+
 export interface BrowserRendererOptions {
   /** Defaults to 1280x800, matching the static renderer so widths are comparable. */
   readonly viewport?: { readonly width: number; readonly height: number };
@@ -124,11 +132,17 @@ export class BrowserRenderer implements Renderer {
 
     let chromium: ChromiumLauncher;
     try {
-      // The import is typed as unknown and narrowed at runtime rather than typed
-      // against Playwright's own declarations. Referring to those declarations would
-      // make Playwright a real dependency of the type check, and the requirement is
-      // that a clean install with no browser still typechecks and tests green.
-      const loaded: unknown = await import('playwright');
+      // The specifier is held in a variable rather than written inline, and that is
+      // load-bearing rather than stylistic. TypeScript resolves a literal dynamic
+      // import at compile time, so `await import('playwright')` makes Playwright a
+      // dependency of the type check: it passed on a machine with a global copy and
+      // failed in CI with "Cannot find module 'playwright'". A non-literal specifier
+      // is resolved only at runtime, which is what an optional peer dependency means.
+      //
+      // The result is typed as unknown and narrowed by narrowChromium, so nothing is
+      // lost by not having the declarations.
+      const specifier = OPTIONAL_PLAYWRIGHT;
+      const loaded: unknown = await import(specifier);
       chromium = narrowChromium(loaded);
     } catch (error) {
       if (error instanceof PlaywrightMissingError) throw error;
