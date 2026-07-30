@@ -49,6 +49,27 @@ importers:
         specifier: workspace:*
         version: link:../schema
 
+  packages/calibrate:
+    dependencies:
+      '@marlo/act':
+        specifier: workspace:*
+        version: link:../act
+      '@marlo/engines':
+        specifier: workspace:*
+        version: link:../engines
+      '@marlo/render':
+        specifier: workspace:*
+        version: link:../render
+      '@marlo/rules':
+        specifier: workspace:*
+        version: link:../rules
+      '@marlo/schema':
+        specifier: workspace:*
+        version: link:../schema
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+
   packages/engines:
     dependencies:
       '@marlo/act':

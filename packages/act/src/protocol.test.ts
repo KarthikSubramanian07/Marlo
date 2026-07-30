@@ -135,6 +135,46 @@ describe('consistencyOf', () => {
     expect(consistencyOf([graded('failed', null)])).toBe('partial');
   });
 
+  it('excludes a case the environment could not evaluate, but not a crash', () => {
+    // A crash is a defect in the implementation and the protocol holds it against it. An
+    // unsupported case means the measurement was never taken: the renderer could not
+    // represent the document, or lacked a capability the rule needs.
+    //
+    // This distinction was found by the first calibration run. Every engine, including
+    // Marlo's, graded `incorrect` on b5c3f8 because the rule's two inapplicable examples
+    // have an svg and a math root element, which document.write wraps in an html
+    // element. Four independent engines failing identically is a harness defect, not four
+    // coincidences. Counting those cases recorded a false positive against all four for a
+    // defect none of them had.
+    const unsupported: GradedCase[] = [
+      graded('failed', 'failed'),
+      { expected: 'inapplicable', actual: null, unsupported: true },
+    ];
+    expect(consistencyOf(unsupported)).toBe('consistent');
+    expect(disallowedCount(unsupported)).toBe(0);
+
+    const crashed: GradedCase[] = [
+      graded('failed', 'failed'),
+      { expected: 'inapplicable', actual: null, errored: true },
+    ];
+    expect(consistencyOf(crashed)).toBe('incorrect');
+    expect(disallowedCount(crashed)).toBe(1);
+  });
+
+  it('is unmapped when every case was unevaluable', () => {
+    // Nothing was measured, so there is no verdict to give. Reporting `consistent`
+    // because nothing contradicted it would be the flattery this project argues against.
+    expect(
+      consistencyOf([
+        { expected: 'failed', actual: null, unsupported: true },
+        { expected: 'passed', actual: null, unsupported: true },
+      ]),
+    ).toBe('unmapped');
+    expect(automationOf([{ expected: 'failed', actual: null, unsupported: true }])).toBe(
+      'not-applicable',
+    );
+  });
+
   it('calls a tool that answers cantTell everywhere a correct implementation', () => {
     // THE test in this file. cantTell is allowed for every example type, so an
     // implementation that never commits grades as consistent under the official
