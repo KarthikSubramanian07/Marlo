@@ -25,6 +25,8 @@ Everything in this list runs with no API key, no network after `pnpm install` an
 
 ## Stubbed, on purpose, and honest about it
 
+**What repair will not do, which is most of it.** Seven rules have a mechanical codemod, and on the current table only two clear the measured auto-fix threshold. The other five come back as flags with the generated change attached and not applied, carrying the precision that disqualified them. That is the gate working: a codemod for a rule whose detection is right 29 percent of the time would apply four wrong edits for every right one. The list of rules with **no** codemod is longer still, and the comment at the top of `codemod.ts` says which kind of human decision each one needs.
+
 **The language provider.** Default is a deterministic stub returning fixed strings. Real provider behind `MARLO_LANGUAGE_PROVIDER=anthropic`. There is no silent upgrade path: the stub never falls through to a network call, and the tests run against the stub, so the suite is green offline by construction rather than by luck.
 
 **`RemoteRenderer`.** Constructs, declares its capabilities, and throws when you render. It exists to hold the shape of the seam and to name the first dollar of variable cost in one place. See [D-007](DECISIONS.md#d-007).
@@ -35,14 +37,15 @@ Everything in this list runs with no API key, no network after `pnpm install` an
 
 None of these are hidden behind a flag that does nothing.
 
-|                                                          | Issue                                                          | Why it is not here                                                                                                                                                            |
-| -------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repair, source location, minimal diff                    | [#10](https://github.com/KarthikSubramanian07/Marlo/issues/10) | The largest single piece of remaining work. `marlo fix` exits 2 with a message saying so. Nothing in the codebase claims to repair anything.                                  |
-| The verification loop                                    | [#11](https://github.com/KarthikSubramanian07/Marlo/issues/11) | Depends on repair. The type already forbids the failure mode: `Repair` is `VerifiedFix                                                                                        | Flag`, so an unverified fix has no representation. |
-| MCP server                                               | [#14](https://github.com/KarthikSubramanian07/Marlo/issues/14) | Thin wrapper over `@marlo/cli`'s pipeline once repair exists. Read-only tools would work today.                                                                               |
-| GitHub Action                                            | [#15](https://github.com/KarthikSubramanian07/Marlo/issues/15) | The safety boundary it enforces is already asserted in `packages/cli`; the Action is packaging.                                                                               |
-| The deliberately broken demo app                         | [#16](https://github.com/KarthikSubramanian07/Marlo/issues/16) | The CLI has been run against real broken markup, and that is how the HTML CodeSniffer crash and the JSON truncation were found. The committed golden files are not there yet. |
-| Coverage gate at a defensible number, performance budget | [#18](https://github.com/KarthikSubramanian07/Marlo/issues/18) | Thresholds are enforced (85/80/85/85, and 100% on two paths). A timing budget is not.                                                                                         |
+|                                       | Issue                                                          | Why it is not here                                                                                                                                                                                                                                                  |
+| ------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Golden files for the browser renderer | [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37) | The static path has committed golden output and a CI job. The browser path rests on manual runs, so a divergence between the two would show up as a mystery rather than as a diff.                                                                                  |
+| The other 59 ACT rules                | [#38](https://github.com/KarthikSubramanian07/Marlo/issues/38) | A backlog rather than a task, and it stays open on purpose: a public project needs a start-here issue. Four rules are currently routed to nobody at all, and those are the ones where an implementation changes what Marlo can see rather than only who reports it. |
+| A performance budget in CI            |                                                                | Accuracy and coverage are gated. Nothing gates time, so a rule that gets ten times slower passes.                                                                                                                                                                   |
+| A parse-only renderer                 |                                                                | The default renderer executes inline page script. [HONESTY.md](HONESTY.md#1-a-security-option-that-did-nothing) explains that and does not excuse it.                                                                                                               |
+| Repair over a pull request            |                                                                | `marlo fix` writes to files. The pull request surface is opt-in per [D-011](DECISIONS.md#d-011) and the body renderer is written and tested; nothing wires it to an API yet.                                                                                        |
+
+**Repair is no longer on this list.** `@marlo/repair` locates source, generates minimal diffs for seven rules, and verifies each one before applying it. What it will not do is the interesting part, and it is in the next section.
 
 ## Traps
 
@@ -72,9 +75,9 @@ Not a merge conflict to resolve. A result to investigate.
 
 ## What I would do first
 
-1. **The repair layer** ([#10](https://github.com/KarthikSubramanian07/Marlo/issues/10)). It is the difference between a measured scanner and the product described in the README. Start with source location, since every diff needs it, and start with the three rules whose strict precision is already above 0.95 so the auto-fix threshold has something to admit.
-2. **Verify `unsupported` end to end** with Playwright installed. The static path is well tested. The claim that the same rule set reports genuine results under a real browser deserves a committed golden file rather than a manual run.
-3. **Widen the corpus for the rules Marlo scores worst on.** `5c01ea` is officially consistent with a strict recall of 0.000, which is the flattery case the project was built to expose, and it is ours.
+1. **Raise the precision of the rules that already have a codemod.** Five of the seven are refused by the gate rather than by a missing implementation, and `24afc2`, `78fd32` and `9e45ec` are all Marlo's own rules measuring between 0.29 and 0.33. Every point of precision there converts a flag into a fix, which is a much better return than a new rule.
+2. **Make `e6952f` detectable.** The codemod for it exists and works, and no engine reports the rule, so nothing ever calls it. Source location is what makes the rule visible at all, and that now exists. This is the shortest path from written code to a working fix.
+3. **Browser renderer golden files** ([#37](https://github.com/KarthikSubramanian07/Marlo/issues/37)). The claim that the same rule set reports genuine results under a real browser deserves a committed file rather than a manual run.
 
 ## What needs a person, not a script
 

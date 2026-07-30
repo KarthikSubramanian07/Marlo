@@ -217,7 +217,7 @@ The last two are where the safety promise stops being prose. In an Action, "Marl
 - **It will not recolour your design.** Contrast is detected and located, never changed.
 - **It will not invent alt text.** Decorative images get an empty alt confidently. A description is written only where the page already supplies the meaning. Everything else comes back to you, because a confident wrong description is worse than an absent one: you can notice an absence. [D-009](DECISIONS.md#d-009).
 - **It cannot certify anything.** Nobody can. You get verified repair against named success criteria and a published error rate.
-- **The repair layer is not merged yet.** Detection, routing, calibration and reporting are. `marlo fix` exits with an error saying so, rather than being a flag that quietly does nothing.
+- **Repair covers seven rules, and applies two of them.** `marlo fix` has codemods for seven, and on the current table only two clear the accuracy gate. The other five arrive as flags with the generated change attached and the precision that disqualified it. A gate that admits everything is not a gate.
 
 ## What it will never do
 
