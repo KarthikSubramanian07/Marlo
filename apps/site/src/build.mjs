@@ -439,7 +439,7 @@ pages.push({
             </div>
             ${scoreboard({ wide: false })}
           </div>
-          <div class="grid grid--2" style="margin-top: 20px">
+          <div class="grid grid--2">
             <div class="tile tile--pad">
               <span class="eyebrow">Above the findings, not in a footnote</span>
               <p class="row__body" style="margin-top: 10px">
@@ -781,7 +781,7 @@ pages.push({
             </p>
           </div>
           ${engineTable()}
-          <div class="callout callout--warn" style="margin-top: 20px">
+          <div class="callout callout--warn">
             <span class="callout__mark" aria-hidden="true">!</span>
             <p>
               <strong>HTML CodeSniffer's recall is
@@ -828,7 +828,7 @@ pages.push({
               <strong>Two of the three are ours.</strong>
             </p>
           </div>
-          <div class="scroller" role="region" aria-label="Rules where the official protocol flatters an engine, scrollable" tabindex="0" style="margin-top: 20px">
+          <div class="scroller" role="region" aria-label="Rules where the official protocol flatters an engine, scrollable" tabindex="0">
             <table>
               <caption>Officially a correct implementation. In practice, missing most of it.</caption>
               <thead>
