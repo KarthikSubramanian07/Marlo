@@ -44,6 +44,7 @@
     "site:build": "node apps/site/src/build.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "deploy": "node scripts/deploy.mjs",
+    "mcp": "node packages/mcp/dist/bin.js",
     "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run act:index:check && pnpm run test && pnpm run test:e2e",
     "hooks": "lefthook install",
     "prepare": "lefthook install || true"
@@ -53,6 +54,7 @@
     "@marlo/calibrate": "workspace:*",
     "@marlo/cli": "workspace:*",
     "@marlo/engines": "workspace:*",
+    "@marlo/mcp": "workspace:*",
     "@marlo/render": "workspace:*",
     "@marlo/report": "workspace:*",
     "@marlo/rules": "workspace:*",

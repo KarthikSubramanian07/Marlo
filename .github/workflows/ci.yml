@@ -247,6 +247,67 @@ jobs:
           path: docs/screenshots/
           retention-days: 14
 
+  action:
+    name: The Action, run against this repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # The narrowest set that does the work, which is also what check-scopes.mjs enforces.
+    # A job here with contents: write would be refused by the action's own first step.
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Scan the deliberately broken demo pages
+        id: broken
+        continue-on-error: true
+        uses: ./.github/actions/marlo
+        with:
+          files: 'apps/demo/checkout.html apps/demo/settings.html'
+          fail-on: 'serious'
+          sarif-file: 'marlo.sarif'
+
+      - name: The demo pages must fail the Action
+        # An action that passes on apps/demo is an action that is not looking. This is the
+        # assertion that the composite steps are wired together, not just that they parse.
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.broken.outcome }}" != "failure" ]; then
+            echo "The Action passed on pages built to break 31 rules. It is not working."
+            exit 1
+          fi
+          echo "findings: ${{ steps.broken.outputs.findings }}"
+          echo "not evaluated: ${{ steps.broken.outputs.not-evaluated }}"
+          echo "coverage: ${{ steps.broken.outputs.coverage }}"
+          test -s marlo.sarif
+          node -e "const s=require('./marlo.sarif'); if (s.version!=='2.1.0') throw new Error('not SARIF 2.1.0'); if (!s.runs[0].results.length) throw new Error('no results')"
+
+      - name: Scan a page with nothing wrong with it
+        id: clean
+        uses: ./.github/actions/marlo
+        with:
+          files: 'apps/demo/clean.html'
+          fail-on: 'serious'
+
+      - name: A clean page must pass, and must still report what was not checked
+        run: |
+          set -euo pipefail
+          test "${{ steps.clean.outputs.findings }}" = "0"
+          test "${{ steps.clean.outputs.not-evaluated }}" != "0"
+
   dco:
     name: DCO sign-off
     runs-on: ubuntu-latest
