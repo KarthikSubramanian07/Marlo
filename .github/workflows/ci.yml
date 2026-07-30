@@ -293,7 +293,14 @@ jobs:
           echo "not evaluated: ${{ steps.broken.outputs.not-evaluated }}"
           echo "coverage: ${{ steps.broken.outputs.coverage }}"
           test -s marlo.sarif
-          node -e "const s=require('./marlo.sarif'); if (s.version!=='2.1.0') throw new Error('not SARIF 2.1.0'); if (!s.runs[0].results.length) throw new Error('no results')"
+          # readFileSync rather than require: Node resolves a .sarif extension as JavaScript
+          # and the file starts with a JSON object, so require() fails on the first colon.
+          node -e "
+            const s = JSON.parse(require('node:fs').readFileSync('marlo.sarif', 'utf8'));
+            if (s.version !== '2.1.0') throw new Error('not SARIF 2.1.0');
+            if (s.runs[0].results.length === 0) throw new Error('SARIF with no results');
+            console.log('sarif ' + s.version + ', ' + s.runs[0].results.length + ' results');
+          "
 
       - name: Scan a page with nothing wrong with it
         id: clean
