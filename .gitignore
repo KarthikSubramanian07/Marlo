@@ -35,3 +35,17 @@ tmp/
 * [0-9]
 *copy.*
 *copy [0-9].*
+
+# The generated site. Built by `pnpm site:build` from calibration/table.json, so committing
+# it would mean two sources of truth for the same numbers.
+apps/site/dist/
+
+# Screenshots. `pnpm screenshots` writes 17 full-page captures at three widths in both colour
+# schemes, which is 24 MB and regenerable. Five are committed as the record of what the layout
+# looks like, plus audit.json, which is the actual evidence the dogfood gate passed.
+docs/screenshots/*.png
+!docs/screenshots/home-iphone.png
+!docs/screenshots/home-ipad.png
+!docs/screenshots/home-desktop.png
+!docs/screenshots/accuracy-desktop.png
+!docs/screenshots/home-skip-link-focused.png
