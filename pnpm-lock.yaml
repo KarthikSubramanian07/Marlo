@@ -97,6 +97,15 @@ importers:
         specifier: 20.11.1
         version: 20.11.1
 
+  packages/rules:
+    dependencies:
+      '@marlo/act':
+        specifier: workspace:*
+        version: link:../act
+      '@marlo/schema':
+        specifier: workspace:*
+        version: link:../schema
+
   packages/schema:
     dependencies:
       zod:
