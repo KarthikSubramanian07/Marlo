@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "../schema"
+    },
+    {
+      "path": "../act"
+    },
+    {
+      "path": "../render"
+    },
+    {
+      "path": "../rules"
+    },
+    {
+      "path": "../engines"
+    },
+    {
+      "path": "../calibrate"
+    },
+    {
+      "path": "../report"
+    },
+    {
+      "path": "../cli"
+    }
+  ]
+}

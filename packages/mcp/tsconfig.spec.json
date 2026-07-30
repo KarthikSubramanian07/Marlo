@@ -1,0 +1,38 @@
+{
+  "extends": "../../tsconfig.spec-base.json",
+  "compilerOptions": {
+    "outDir": "../../node_modules/.cache/tsc-spec/mcp",
+    "tsBuildInfoFile": "../../node_modules/.cache/tsc-spec/mcp/.tsbuildinfo",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.test.ts"],
+  "references": [
+    {
+      "path": "./tsconfig.json"
+    },
+    {
+      "path": "../schema"
+    },
+    {
+      "path": "../act"
+    },
+    {
+      "path": "../render"
+    },
+    {
+      "path": "../rules"
+    },
+    {
+      "path": "../engines"
+    },
+    {
+      "path": "../calibrate"
+    },
+    {
+      "path": "../report"
+    },
+    {
+      "path": "../cli"
+    }
+  ]
+}
