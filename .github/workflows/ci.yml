@@ -82,6 +82,9 @@ jobs:
       - name: Prose rules
         run: node scripts/check-prose.mjs
 
+      - name: No sync-tool duplicates
+        run: node scripts/check-no-duplicates.mjs
+
   corpus:
     name: Corpus is unmodified
     runs-on: ubuntu-latest
