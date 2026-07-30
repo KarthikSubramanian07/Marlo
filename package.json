@@ -23,7 +23,7 @@
     "typecheck": "tsc --build --verbose",
     "build": "pnpm -r --filter './packages/*' run build",
     "lint": "pnpm run lint:code && pnpm run lint:deps && pnpm run lint:prose && pnpm run lint:claims && pnpm run lint:duplicates",
-    "lint:code": "eslint .",
+    "lint:code": "NODE_OPTIONS=--max-old-space-size=6144 eslint .",
     "lint:deps": "node scripts/lint-deps.mjs",
     "lint:prose": "node scripts/check-prose.mjs",
     "lint:claims": "node scripts/check-claims.mjs",

@@ -1,0 +1,38 @@
+{
+  "name": "@marlo/cli",
+  "version": "0.1.0",
+  "description": "The marlo command.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@marlo/act": "workspace:*",
+    "@marlo/calibrate": "workspace:*",
+    "@marlo/engines": "workspace:*",
+    "@marlo/render": "workspace:*",
+    "@marlo/report": "workspace:*",
+    "@marlo/rules": "workspace:*",
+    "@marlo/schema": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "marlo": "./dist/bin.js"
+  }
+}
