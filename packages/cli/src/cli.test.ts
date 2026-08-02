@@ -324,10 +324,15 @@ describe('the marlo command', () => {
     if (!built) return;
     const dir = mkdtempSync(join(tmpdir(), 'marlo-fix-'));
     const file = join(dir, 'broken.html');
+    // Two findings, one of each kind. 78fd32 is the one codemod rule that currently
+    // clears the auto-fix gate (precision 1.00 over 6 decision-bearing cases) and gets
+    // fixed; b4f0c3 measures well on precision but over only 4 such cases, below the
+    // sample floor, and stays flagged. The pairing is what "only what it can verify" means.
     const original =
       '<!doctype html><html lang="en"><head><title>t</title>' +
       '<meta name="viewport" content="width=device-width, user-scalable=no"></head>' +
-      '<body><input aria-labeledby="x" aria-label="n"><span id="x">n</span></body></html>';
+      '<body><p style="line-height: 1em !important; max-width: 200px;">' +
+      'The toy brought back fond memories of being lost in the rain forest.</p></body></html>';
     writeFileSync(file, original, 'utf8');
 
     const dry = run(['fix', file]);
@@ -340,8 +345,8 @@ describe('the marlo command', () => {
     expect(applied.out).toContain('written:');
     const after = readFileSync(file, 'utf8');
     expect(after).not.toBe(original);
-    expect(after).toContain('aria-labelledby');
-    expect(after).not.toContain('user-scalable');
+    expect(after).not.toContain('!important');
+    expect(after).toContain('user-scalable');
   }, 90_000);
 
   it('refuses to apply a mechanical fix for a rule measured below the threshold', () => {
@@ -354,10 +359,12 @@ describe('the marlo command', () => {
     writeFileSync(file, original, 'utf8');
 
     const result = run(['fix', file, '--write']);
-    // The gate biting on a fix that is mechanically correct. The measurement is printed rather
-    // than the refusal alone, so a reader can disagree with the number.
+    // The gate biting on a fix that is mechanically correct. 24afc2 measures perfect
+    // precision now, but over only 4 decision-bearing cases against a sample floor of 6,
+    // and the measurement is printed rather than the refusal alone, so a reader can
+    // disagree with either number.
     expect(result.out).toContain('below-threshold');
-    expect(result.out).toMatch(/strict precision 0\.\d+ over \d+ official test cases/);
+    expect(result.out).toMatch(/strict precision \d\.\d+ over \d+ official test cases/);
     expect(readFileSync(file, 'utf8')).toContain('!important');
   }, 90_000);
 
