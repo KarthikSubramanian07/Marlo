@@ -12,6 +12,7 @@ import type {
   VerifiedFix,
 } from '@marlo/schema';
 import type { Renderer } from '@marlo/render';
+import { meetsAutoFixThreshold } from '@marlo/act';
 import { applyEdits, isIdempotent } from './apply.js';
 import { runCodemod } from './codemod.js';
 
@@ -107,12 +108,19 @@ export function checkThreshold(
 ): ThresholdCheck {
   const entry = table.entries.find((e) => e.actRuleId === actRuleId && e.engine === engine);
   const threshold = table.autoFixThreshold.minStrictPrecision;
-  const minimumSample = table.autoFixThreshold.minSampleSize;
-  const precision = entry?.strict.precision ?? null;
-  const sampleSize = entry?.testCaseCount ?? 0;
+  // The decisions the precision above is actually computed from: true and false
+  // positives and false negatives. Not `entry.testCaseCount`, which also counts
+  // inapplicable and unsupported cases that never produced a judgment at all and would
+  // let a rule with a large corpus but almost no real examples look amply sampled. This
+  // has to be the same count `meetsAutoFixThreshold` uses to set `autoFixPermitted` in
+  // the calibration table, or this gate and the published table can disagree about a
+  // rule the table says is not safe to auto-fix.
+  const sampleSize = entry
+    ? entry.strict.truePositives + entry.strict.falsePositives + entry.strict.falseNegatives
+    : 0;
   return {
-    permitted: precision !== null && precision >= threshold && sampleSize >= minimumSample,
-    strictPrecision: precision,
+    permitted: entry !== undefined && meetsAutoFixThreshold(entry.strict, table.autoFixThreshold),
+    strictPrecision: entry?.strict.precision ?? null,
     strictRecall: entry?.strict.recall ?? null,
     threshold,
     sampleSize,

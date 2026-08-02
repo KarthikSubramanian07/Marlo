@@ -6,6 +6,7 @@ import type { ActRuleId, CalibrationTable, Edit, Finding } from '@marlo/schema';
 import { CalibrationTable as CalibrationTableSchema } from '@marlo/schema';
 import { StaticRenderer } from '@marlo/render';
 import { peerEngines } from '@marlo/engines';
+import { type SourceElement, buildDocument, evaluateRules } from '@marlo/rules';
 import {
   EditConflictError,
   applyEdits,
@@ -533,11 +534,29 @@ describe('the verification loop', () => {
       file: 'x.html',
       renderer,
       table,
+      // Mirrors packages/cli/src/bin.ts: Marlo's own engine plus the three peers, so a
+      // finding this package reports itself (reportedBy: 'marlo') can be re-verified the
+      // same way production does it, not just the findings peer engines reported.
       evaluate: async (source: string, rules: readonly ActRuleId[]) => {
         const page = await renderer.render({ html: source });
         try {
+          const window = page.handle as {
+            document: { documentElement: SourceElement; doctype: unknown };
+          };
+          const document = buildDocument(window.document.documentElement, {
+            url: page.url,
+            hasDoctype: window.document.doctype !== null && window.document.doctype !== undefined,
+            computedStyleFor: null,
+          });
+          const marlo = evaluateRules(rules, {
+            document,
+            renderer: page.renderer,
+            capabilities: page.capabilities,
+            version: '0.1.0-test',
+          });
           const engines = peerEngines();
-          return await Promise.all(engines.map(async (e) => await e.evaluate(page, rules)));
+          const peers = await Promise.all(engines.map(async (e) => await e.evaluate(page, rules)));
+          return [marlo, ...peers];
         } finally {
           await page.close();
         }
@@ -546,23 +565,34 @@ describe('the verification loop', () => {
   };
 
   it('produces a verified fix, with all three questions answered', async () => {
+    // 78fd32 is the one codemod rule that currently clears the auto-fix gate: precision
+    // 1.00 over 6 decision-bearing cases, both the precision floor and the sample floor.
     const html =
-      '<!doctype html><html lang="en"><head><title>t</title>' +
-      '<meta name="viewport" content="width=device-width, user-scalable=no"></head>' +
-      '<body><p>hi</p></body></html>';
-    const repair = await repairFinding(finding(), context(html));
+      '<!doctype html><html lang="en"><head><title>t</title></head>' +
+      '<body><p style="line-height: 1em !important; max-width: 200px;">' +
+      'The toy brought back fond memories of being lost in the rain forest.</p></body></html>';
+    const repair = await repairFinding(
+      finding({
+        actRuleId: '78fd32',
+        actRuleName: 'Important line height in style attributes is wide enough',
+        reportedBy: 'marlo',
+        verdict: { ...finding().verdict, engine: 'marlo', actRuleId: '78fd32' },
+      }),
+      context(html),
+    );
     expect(repair.kind).toBe('fixed');
     if (repair.kind !== 'fixed') return;
     expect(repair.verification.targetClosed).toBe(true);
     expect(repair.verification.noNewViolations).toBe(true);
     expect(repair.verification.idempotent).toBe(true);
     expect(repair.verification.enginesRun.length).toBeGreaterThan(0);
-    expect(applyEdits(html, repair.edits)).not.toContain('user-scalable');
+    expect(applyEdits(html, repair.edits)).not.toContain('!important');
   }, 60_000);
 
   it('flags rather than fixes when the engine measured below the threshold', async () => {
-    // The gate biting on a mechanically correct fix. Marlo generated the edit, attached it, and
-    // did not apply it, because the detection it rests on is right 29% of the time.
+    // The gate biting on a mechanically correct fix. Marlo generated the edit, attached it,
+    // and did not apply it: precision is 1.00, but over only 4 decision-bearing cases,
+    // below the sample floor the auto-fix policy requires.
     const html =
       '<!doctype html><html lang="en"><head><title>t</title></head>' +
       '<body><p style="letter-spacing: 0.01em !important">x</p></body></html>';
