@@ -388,7 +388,15 @@ describe('severity and state are never colour alone', () => {
         // An engine that never returns a failure has a false positive rate of zero, and the
         // first version of the ranking printed "best" beside it. Nothing on this site may
         // rank an engine well for declining to answer.
-        const silent = table.entries.some((e) => e.engine === 'htmlcs');
+        //
+        // Matches build.mjs's own rankMark: pooled true positives across every rule htmlcs is
+        // actually mapped to (mappingKind !== 'none'), not merely "does an entry exist for
+        // htmlcs anywhere in the table", which is true regardless of whether it ever detects
+        // anything.
+        const htmlcsTruePositives = table.entries
+          .filter((e) => e.engine === 'htmlcs' && e.mappingKind !== 'none')
+          .reduce((sum, e) => sum + (e.strict['truePositives'] ?? 0), 0);
+        const silent = htmlcsTruePositives === 0;
         if (silent && page.html.includes('HTML CodeSniffer')) {
           const cell = /HTML CodeSniffer<span class="rank[^>]*>([^<]*)</.exec(page.html)?.[1];
           if (cell !== undefined) expect(cell).toBe('no detections');
