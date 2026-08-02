@@ -239,7 +239,9 @@ const REQUIRED_CONTEXT: Readonly<Record<string, readonly string[]>> = Object.fre
 /** Required states and properties per role, from ARIA 1.2. */
 const REQUIRED_PROPERTIES: Readonly<Record<string, readonly string[]>> = Object.freeze({
   checkbox: ['aria-checked'],
-  combobox: ['aria-expanded'],
+  // ARIA 1.2 redefined combobox as a composite widget that always owns a popup, so
+  // both properties are unconditional rather than one implying the other.
+  combobox: ['aria-expanded', 'aria-controls'],
   heading: ['aria-level'],
   menuitemcheckbox: ['aria-checked'],
   menuitemradio: ['aria-checked'],
@@ -265,6 +267,43 @@ export function explicitRole(element: {
 
 function ariaAttributesOf(element: { attributes: readonly { name: string; value: string }[] }) {
   return element.attributes.filter((a) => a.name.startsWith('aria-'));
+}
+
+/**
+ * The role a host-language element carries without any `role` attribute at all, for the
+ * handful of elements whose implicit role can collide with one this file checks. Not a
+ * full HTML-AAM table: 4e8ab6 only needs to know when an explicit role is redundant with
+ * the native one, and a table that under-recognises native roles merely over-applies the
+ * rule rather than mis-grading a case, which is the safer gap to leave.
+ */
+function implicitRole(element: {
+  tag: string;
+  attributes: readonly { name: string; value: string }[];
+}): string | null {
+  switch (element.tag) {
+    case 'input': {
+      const type = (
+        element.attributes.find((a) => a.name === 'type')?.value ?? 'text'
+      ).toLowerCase();
+      if (type === 'checkbox') return 'checkbox';
+      if (type === 'radio') return 'radio';
+      if (type === 'range') return 'slider';
+      return null;
+    }
+    case 'option':
+      return 'option';
+    case 'hr':
+      return 'separator';
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6':
+      return 'heading';
+    default:
+      return null;
+  }
 }
 
 /** 5f99a7: every aria- attribute is defined in WAI-ARIA. */
@@ -506,7 +545,11 @@ export const roleRequiredProperties = defineRule({
     const targets = [];
     for (const element of walk(document.root)) {
       const role = explicitRole(element);
-      if (role !== null && Object.hasOwn(REQUIRED_PROPERTIES, role)) {
+      if (
+        role !== null &&
+        Object.hasOwn(REQUIRED_PROPERTIES, role) &&
+        implicitRole(element) !== role
+      ) {
         if (!isHiddenFromAssistiveTech(element)) targets.push({ element });
       }
     }
@@ -515,7 +558,12 @@ export const roleRequiredProperties = defineRule({
   expectation: ({ element }) => {
     const role = explicitRole(element) ?? '';
     const required = REQUIRED_PROPERTIES[role] ?? [];
-    const missing = required.filter((name) => attr(element, name) === null);
+    // "Set and not empty", per the rule's expectation text: an attribute present with an
+    // empty value has not supplied the property any more than an absent one has.
+    const missing = required.filter((name) => {
+      const value = attr(element, name);
+      return value === null || value === '';
+    });
     if (missing.length === 0) {
       return { outcome: 'passed', message: `role="${role}" has its required properties.` };
     }

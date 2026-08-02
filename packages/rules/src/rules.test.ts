@@ -237,6 +237,63 @@ describe('674b10 role values are valid', () => {
   });
 });
 
+describe('4e8ab6 role has required states and properties', () => {
+  it('fails a role missing its required property', () => {
+    expect(check('4e8ab6', '<html><body><div role="checkbox">x</div></body></html>').outcome).toBe(
+      'failed',
+    );
+  });
+
+  it('passes a role with its required property set', () => {
+    expect(
+      check('4e8ab6', '<html><body><div role="checkbox" aria-checked="false">x</div></body></html>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('fails a combobox with aria-expanded but no aria-controls', () => {
+    // ARIA 1.2 redefined combobox as always owning a popup, so both properties are
+    // required unconditionally rather than one implying the other.
+    expect(
+      check('4e8ab6', '<html><body><div role="combobox" aria-expanded="true">x</div></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('passes a combobox with both required properties set', () => {
+    expect(
+      check(
+        '4e8ab6',
+        '<html><body><div role="combobox" aria-expanded="false" aria-controls="list">x</div></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
+  it('treats an empty value as missing, not merely present', () => {
+    expect(
+      check(
+        '4e8ab6',
+        '<html><body><div role="combobox" aria-expanded="true" aria-controls="">x</div></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('does not apply when the explicit role matches the native one', () => {
+    // A native checkbox's required state is a host-language concern already, and the
+    // rule would otherwise fail every plain <input type="checkbox" role="checkbox">.
+    expect(
+      check('4e8ab6', '<html><body><input type="checkbox" role="checkbox" /></body></html>')
+        .outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('still applies when the explicit role differs from the native one', () => {
+    expect(
+      check('4e8ab6', '<html><body><input type="text" role="checkbox" /></body></html>').outcome,
+    ).toBe('failed');
+  });
+});
+
 describe('6cfa84 aria-hidden hides nothing focusable', () => {
   it('fails a hidden container with a focusable child', () => {
     const result = check(
