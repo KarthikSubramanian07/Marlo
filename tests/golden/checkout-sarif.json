@@ -588,8 +588,8 @@
             "act-rules-published": 94,
             "act-rules-calibrated": 35,
             "act-rules-unmeasurable": [],
-            "calibration-generated": "2026-07-30",
-            "calibration-commit": null,
+            "calibration-generated": "2026-08-02",
+            "calibration-commit": "618f66851b8309a5a0374bfd2a133cd4eefa48ee",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -1845,24 +1845,13 @@
             "reported-by": "marlo",
             "engine-rule-id": "marlo/24afc2",
             "engine-version": "0.1.0",
-            "routing-reason": "invariant",
+            "routing-reason": "sole-implementer",
             "agreed-by": [
               "axe-core"
             ],
-            "disagreements": [
-              {
-                "engine": "marlo",
-                "outcome": "failed",
-                "chosen-engine-strict-recall": null
-              },
-              {
-                "engine": "axe-core",
-                "outcome": "failed",
-                "chosen-engine-strict-recall": null
-              }
-            ],
-            "measured-precision": 0.2857142857142857,
-            "measured-recall": 0.5,
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 0.75,
             "official-test-cases-behind-measurement": 16,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": false,
@@ -2071,33 +2060,33 @@
           "ruleId": "4e8ab6",
           "level": "error",
           "message": {
-            "text": "Required ARIA attributes must be provided"
+            "text": "role=\"slider\" requires aria-valuenow. Without it the widget announces its role but not its state."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "div[role=\"slider\"]"
+                  "uri": "div"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "div[role=\"slider\"]",
+                  "name": "div",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "4e8ab6:div[role=\"slider\"]"
+            "marloFinding": "4e8ab6:div"
           },
           "properties": {
-            "reported-by": "axe-core",
-            "engine-rule-id": "aria-required-attr",
-            "engine-version": "4.12.1",
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/4e8ab6",
+            "engine-version": "0.1.0",
             "routing-reason": "best-measured",
             "agreed-by": [
-              "marlo",
+              "axe-core",
               "alfa"
             ],
             "disagreements": [],
@@ -2383,40 +2372,40 @@
           "ruleId": "78fd32",
           "level": "warning",
           "message": {
-            "text": "Inline text spacing must be adjustable with custom stylesheets"
+            "text": "line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "form > p"
+                  "uri": "p"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "form > p",
+                  "name": "p",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "78fd32:form > p"
+            "marloFinding": "78fd32:p"
           },
           "properties": {
-            "reported-by": "axe-core",
-            "engine-rule-id": "avoid-inline-spacing",
-            "engine-version": "4.12.1",
-            "routing-reason": "uncalibrated",
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/78fd32",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
             "agreed-by": [
-              "marlo"
+              "axe-core"
             ],
             "disagreements": [],
-            "measured-precision": null,
-            "measured-recall": 0,
+            "measured-precision": 1,
+            "measured-recall": 0.8333333333333334,
             "official-test-cases-behind-measurement": 21,
             "accuracy-source": "calibrated",
-            "meets-auto-fix-threshold": false,
+            "meets-auto-fix-threshold": true,
             "renderer": "static",
             "located-in-source": false,
             "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
@@ -2589,24 +2578,13 @@
             "reported-by": "marlo",
             "engine-rule-id": "marlo/9e45ec",
             "engine-version": "0.1.0",
-            "routing-reason": "invariant",
+            "routing-reason": "sole-implementer",
             "agreed-by": [
               "axe-core"
             ],
-            "disagreements": [
-              {
-                "engine": "marlo",
-                "outcome": "failed",
-                "chosen-engine-strict-recall": null
-              },
-              {
-                "engine": "axe-core",
-                "outcome": "failed",
-                "chosen-engine-strict-recall": null
-              }
-            ],
-            "measured-precision": 0.2857142857142857,
-            "measured-recall": 0.5,
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 0.75,
             "official-test-cases-behind-measurement": 16,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": false,

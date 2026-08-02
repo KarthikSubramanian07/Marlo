@@ -4,8 +4,8 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-07-30",
-    "commit": null,
+    "generated": "2026-08-02",
+    "commit": "618f66851b8309a5a0374bfd2a133cd4eefa48ee",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -86,7 +86,7 @@
           ],
           "severity": "moderate",
           "reportedBy": "marlo",
-          "routingReason": "invariant",
+          "routingReason": "sole-implementer",
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -103,26 +103,11 @@
           "agreedBy": [
             "axe-core"
           ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/24afc2",
-              "outcome": "failed",
-              "message": "letter-spacing: 0.01em !important cannot be overridden by a user stylesheet, and it is below 0.12 times the font size. Removing !important is usually the whole fix.",
-              "chosenEngineStrictRecall": null
-            },
-            {
-              "engine": "axe-core",
-              "engineRuleId": "avoid-inline-spacing",
-              "outcome": "failed",
-              "message": "Inline text spacing must be adjustable with custom stylesheets",
-              "chosenEngineStrictRecall": null
-            }
-          ],
+          "disagreements": [],
           "confidence": {
             "source": "calibrated",
-            "precision": 0.2857142857142857,
-            "recall": 0.5,
+            "precision": 1,
+            "recall": 0.75,
             "sampleSize": 16,
             "meetsAutoFixThreshold": false
           },
@@ -335,23 +320,23 @@
             "4.1.2"
           ],
           "severity": "serious",
-          "reportedBy": "axe-core",
+          "reportedBy": "marlo",
           "routingReason": "best-measured",
           "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.12.1",
-            "engineRuleId": "aria-required-attr",
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/4e8ab6",
             "actRuleId": "4e8ab6",
             "outcome": "failed",
             "target": {
-              "selector": "div[role=\"slider\"]",
+              "selector": "div",
               "snippet": "<div role=\"slider\" tabindex=\"0\"></div>",
               "path": []
             },
-            "message": "Required ARIA attributes must be provided"
+            "message": "role=\"slider\" requires aria-valuenow. Without it the widget announces its role but not its state."
           },
           "agreedBy": [
-            "marlo",
+            "axe-core",
             "alfa"
           ],
           "disagreements": [],
@@ -365,7 +350,7 @@
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Required ARIA attributes must be provided",
+          "help": "role=\"slider\" requires aria-valuenow. Without it the widget announces its role but not its state.",
           "helpUrl": "https://act-rules.github.io/rules/4e8ab6"
         },
         {
@@ -633,36 +618,36 @@
             "1.4.12"
           ],
           "severity": "moderate",
-          "reportedBy": "axe-core",
-          "routingReason": "uncalibrated",
+          "reportedBy": "marlo",
+          "routingReason": "best-measured",
           "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.12.1",
-            "engineRuleId": "avoid-inline-spacing",
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/78fd32",
             "actRuleId": "78fd32",
             "outcome": "failed",
             "target": {
-              "selector": "form > p",
+              "selector": "p",
               "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
               "path": []
             },
-            "message": "Inline text spacing must be adjustable with custom stylesheets"
+            "message": "line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix."
           },
           "agreedBy": [
-            "marlo"
+            "axe-core"
           ],
           "disagreements": [],
           "confidence": {
             "source": "calibrated",
-            "precision": null,
-            "recall": 0,
+            "precision": 1,
+            "recall": 0.8333333333333334,
             "sampleSize": 21,
-            "meetsAutoFixThreshold": false
+            "meetsAutoFixThreshold": true
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Inline text spacing must be adjustable with custom stylesheets",
+          "help": "line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix.",
           "helpUrl": "https://act-rules.github.io/rules/78fd32"
         },
         {
@@ -806,7 +791,7 @@
           ],
           "severity": "moderate",
           "reportedBy": "marlo",
-          "routingReason": "invariant",
+          "routingReason": "sole-implementer",
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -823,26 +808,11 @@
           "agreedBy": [
             "axe-core"
           ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/9e45ec",
-              "outcome": "failed",
-              "message": "word-spacing: 0.05em !important cannot be overridden by a user stylesheet, and it is below 0.16 times the font size. Removing !important is usually the whole fix.",
-              "chosenEngineStrictRecall": null
-            },
-            {
-              "engine": "axe-core",
-              "engineRuleId": "avoid-inline-spacing",
-              "outcome": "failed",
-              "message": "Inline text spacing must be adjustable with custom stylesheets",
-              "chosenEngineStrictRecall": null
-            }
-          ],
+          "disagreements": [],
           "confidence": {
             "source": "calibrated",
-            "precision": 0.2857142857142857,
-            "recall": 0.5,
+            "precision": 1,
+            "recall": 0.75,
             "sampleSize": 16,
             "meetsAutoFixThreshold": false
           },
@@ -9166,16 +9136,6 @@
     }
   },
   "invariantEnforced": [
-    {
-      "actRuleId": "24afc2",
-      "dissentingEngine": "marlo",
-      "chosenEngine": "marlo"
-    },
-    {
-      "actRuleId": "9e45ec",
-      "dissentingEngine": "marlo",
-      "chosenEngine": "marlo"
-    },
     {
       "actRuleId": "afw4f7",
       "dissentingEngine": "alfa",
