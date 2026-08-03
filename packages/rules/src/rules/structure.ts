@@ -3,6 +3,150 @@ import { attr, findAll, findFirst, normalise, walk } from '../dom.js';
 
 /** Structural and metadata rules. The most reliably auto-fixable group after language. */
 
+/** 36b590: Error message describes invalid form field value. */
+export const errorMessageDescribesInvalidValue = defineRule({
+  actId: '36b590',
+  name: 'Error message describes invalid form field value',
+  successCriteria: ['3.3.1'],
+  requires: ['dom'],
+  fixability: 'context-dependent',
+
+  applicability: (document) => {
+    const APPLICABLE_ROLES = new Set([
+      'checkbox',
+      'combobox',
+      'listbox',
+      'menuitemcheckbox',
+      'menuitemradio',
+      'radio',
+      'searchbox',
+      'slider',
+      'spinbutton',
+      'switch',
+      'textbox',
+    ]);
+
+    const targets: { element: typeof document.root }[] = [];
+    for (const element of walk(document.root)) {
+      let role = (attr(element, 'role') ?? '').toLowerCase();
+
+      // Infers the role for blank roles
+      if (!role) {
+        if (element.tag === 'select') role = 'combobox';
+        else if (element.tag === 'textarea') role = 'textbox';
+        else if (element.tag === 'input') {
+          const type = (attr(element, 'type') ?? 'text').toLowerCase();
+          if (type === 'checkbox') role = 'checkbox';
+          else if (type === 'radio') role = 'radio';
+          else if (type === 'search') role = 'searchbox';
+          else if (type === 'number') role = 'spinbutton';
+          else if (['text', 'email', 'password', 'tel', 'url'].includes(type)) role = 'textbox';
+        }
+      }
+
+      if (APPLICABLE_ROLES.has(role)) {
+        // Must have an associated error message to be applicable
+        const errorId = attr(element, 'aria-errormessage') ?? attr(element, 'aria-describedby');
+        if (!errorId) continue;
+
+        const ids = errorId.split(/\s+/);
+        let errorElementExists = false;
+        for (const node of walk(document.root)) {
+          const nodeVal = attr(node, 'id');
+          if (nodeVal && ids.includes(nodeVal)) {
+            errorElementExists = true;
+            break;
+          }
+        }
+
+        if (errorElementExists) {
+          targets.push({ element });
+        }
+      }
+    }
+    return targets;
+  },
+
+  expectation: ({ element }, document) => {
+    const errorId = attr(element, 'aria-errormessage') ?? attr(element, 'aria-describedby');
+
+    let errorElement = null;
+    if (errorId) {
+      const ids = errorId.split(/\s+/);
+      for (const node of walk(document.root)) {
+        const nodeVal = attr(node, 'id');
+        if (nodeVal && ids.includes(nodeVal)) {
+          errorElement = node;
+          break;
+        }
+      }
+    }
+
+    if (!errorElement) {
+      return {
+        outcome: 'inapplicable',
+        message: 'No associated error element found.',
+      };
+    }
+
+    // Checks if visible to screen-readers
+    if (attr(errorElement, 'aria-hidden') === 'true') {
+      return {
+        outcome: 'failed',
+        message:
+          'The associated error message is hidden from the accessibility tree via aria-hidden="true".',
+      };
+    }
+
+    // Checks for basic CSS visibility
+    const style = (attr(errorElement, 'style') ?? '').toLowerCase();
+    if (
+      style.includes('display: none') ||
+      style.includes('display:none') ||
+      style.includes('visibility: hidden')
+    ) {
+      return {
+        outcome: 'failed',
+        message:
+          'The associated error message is not visible (CSS display:none or visibility:hidden).',
+      };
+    }
+
+    // Message quality check
+    const errorText = normalise(errorElement.text);
+
+    // Heuristic patterns against various generic error phrases
+    const GENERIC_ERROR_PATTERNS = [
+      /^(error|invalid|warning|failed|alert|problem|wrong)\.?$/i,
+      /^(this\s+)?field\s+is\s+invalid\.?$/i,
+      /^invalid\s+(value|input|data|entry|format|selection)\.?$/i,
+      /^please\s+(fill|enter|provide|fix)\s+(the|this)?\s*(field|correct\s+text|correct\s+value|valid\s+data)\.?$/i,
+      /^please\s+enter\s+a\s+valid\s+value\.?$/i,
+      /^please\s+correct\s+the\s+error(s)?\.?$/i,
+      /^(this\s+field\s+is\s+)?required\.?$/i,
+      /^validation\s+failed\.?$/i,
+    ];
+
+    function isGenericErrorText(rawText: string): boolean {
+      const text = normalise(rawText).trim();
+      if (text.length <= 2) return true;
+      return GENERIC_ERROR_PATTERNS.some((pattern) => pattern.test(text));
+    }
+
+    if (isGenericErrorText(errorText)) {
+      return {
+        outcome: 'failed',
+        message: `Error message "${errorText}" is generic and does not describe the cause of the error or how to resolve it.`,
+      };
+    }
+
+    return {
+      outcome: 'passed',
+      message: 'The error message describes the error and is exposed to assistive technologies.',
+    };
+  },
+});
+
 /** 3ea0c8: every id attribute value is unique. */
 export const uniqueId = defineRule({
   actId: '3ea0c8',

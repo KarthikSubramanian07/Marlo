@@ -55,6 +55,64 @@ function check(
   return { outcome: 'inapplicable', messages };
 }
 
+describe('36b590 Error message describes invalid form field value', () => {
+  it('passes when field has visible error description (Passed Ex 1)', () => {
+    const html = `<form>
+      <label for="age">Age (years)</label>
+      <input type="number" id="age" aria-describedby="error" value="0" />
+      <span id="error">Invalid value for age. Age must be at least 1.</span>
+    </form>`;
+    expect(check('36b590', html).outcome).toBe('passed');
+  });
+
+  it('passes when field has no error indicator (Passed Ex 3)', () => {
+    const html = `<form>
+      <label for="filter">Product filter</label>
+      <input type="text" id="filter" />
+    </form>`;
+    expect(check('36b590', html).outcome).toBe('inapplicable');
+  });
+
+  it('fails when error message is generic (Failed Ex 1 & 2)', () => {
+    const html = `<form>
+      <label for="age">Age (years)</label>
+      <input type="number" id="age" aria-describedby="error" />
+      <span id="error">Please enter the correct text.</span>
+    </form>`;
+    expect(check('36b590', html).outcome).toBe('failed');
+  });
+
+  it('fails when error message has aria-hidden="true" (Failed Ex 4)', () => {
+    const html = `<form>
+      <label for="age">Age (years)</label>
+      <input type="number" id="age" aria-describedby="error" value="0" />
+      <span id="error" aria-hidden="true">Invalid value for age. Age must be at least 1.</span>
+    </form>`;
+    expect(check('36b590', html).outcome).toBe('failed');
+  });
+
+  it('is inapplicable when page has no applicable form controls (Inapplicable Ex 1)', () => {
+    const html = `<p>This is a paragraph.</p>`;
+    expect(check('36b590', html).outcome).toBe('inapplicable');
+  });
+
+  // Custom: <button> doesn't need error message
+  it('passes on non-applicable element types with aria-describedby (Custom Negative Case 1)', () => {
+    const html = `<div><button aria-describedby="info">Submit</button><span id="info">Submits the form.</span></div>`;
+    expect(check('36b590', html).outcome).toBe('inapplicable');
+  });
+
+  // Custom: Instructions, like password limits, are not bad error messages
+  it('passes when input has standard descriptive text rather than an error (Custom Negative Case 2)', () => {
+    const html = `<form>
+      <label for="pwd">Password</label>
+      <input type="password" id="pwd" aria-describedby="hint" />
+      <span id="hint">Must contain at least 8 characters.</span>
+    </form>`;
+    expect(check('36b590', html).outcome).toBe('passed');
+  });
+});
+
 describe('b5c3f8 page has lang', () => {
   it('fails a page with no lang', () => {
     expect(check('b5c3f8', '<html><body><p>x</p></body></html>').outcome).toBe('failed');
