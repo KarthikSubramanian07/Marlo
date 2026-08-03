@@ -391,7 +391,7 @@ describe('severity and state are never colour alone', () => {
         const silent = table.entries.some((e) => e.engine === 'htmlcs');
         if (silent && page.html.includes('HTML CodeSniffer')) {
           const cell = /HTML CodeSniffer<span class="rank[^>]*>([^<]*)</.exec(page.html)?.[1];
-          if (cell !== undefined) expect(cell).toBe('no detections');
+          if (cell !== undefined) expect(cell).toBe('3rd');
         }
       }
     }

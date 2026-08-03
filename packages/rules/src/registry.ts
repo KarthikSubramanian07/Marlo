@@ -31,6 +31,7 @@ import {
 import {
   decorativeImageNotExposed,
   decorativeNotExposed,
+  errorMessageDescribesInvalidValue,
   filenameNotName,
   metaRefreshNoDelay,
   metaRefreshStrict,
@@ -84,7 +85,7 @@ export const MARLO_RULES: readonly MarloRule[] = Object.freeze([
   imageButtonHasName,
   objectHasName,
   svgHasName,
-
+  errorMessageDescribesInvalidValue,
   // Structure and metadata.
   uniqueId,
   noDuplicateAttribute,
