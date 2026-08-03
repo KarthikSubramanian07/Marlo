@@ -4,8 +4,8 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-07-30",
-    "commit": null,
+    "generated": "2026-08-03",
+    "commit": "c01a2b1b340ab84df974ca8a0b8d7f0472914b32",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -1702,6 +1702,15 @@
               "message": "The page has no title element in its head. The title is the first thing a screen reader announces and the only label in a tab or a bookmark."
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -3473,6 +3482,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "axe-core",
           "status": "ok",
@@ -4663,6 +4681,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "alfa",
           "status": "ok",
@@ -5792,6 +5819,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -6434,6 +6470,15 @@
               "message": "The page is titled \"Account settings\"."
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7198,6 +7243,15 @@
               "message": "Documents must have <title> element to aid in navigation"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8016,6 +8070,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "alfa",
           "status": "ok",
@@ -8703,6 +8766,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -9127,9 +9199,9 @@
   ],
   "repairs": [],
   "coverage": {
-    "implemented": 35,
+    "implemented": 36,
     "publishedActRules": 94,
-    "calibrated": 35,
+    "calibrated": 36,
     "unmeasurable": [],
     "notEvaluated": [
       {
