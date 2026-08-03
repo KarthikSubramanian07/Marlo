@@ -100,7 +100,7 @@ describe('the capability boundary', () => {
 describe('what the tools return', () => {
   it('states coverage as a fraction with its denominator', async () => {
     const result = await callTool('marlo_coverage', {}, options);
-    expect(textOf(result)).toContain('35 of 94');
+    expect(textOf(result)).toContain('36 of 94');
     expect(result.isError).toBeFalsy();
   });
 

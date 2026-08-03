@@ -103,7 +103,7 @@ describe('the pipeline', () => {
 
   it('states coverage as a fraction of the published denominator', () => {
     expect(report.coverage.publishedActRules).toBe(94);
-    expect(report.coverage.implemented).toBe(35);
+    expect(report.coverage.implemented).toBe(36);
   });
 
   it('records where the invariant was enforced', () => {
