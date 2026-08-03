@@ -126,7 +126,7 @@ describe('the site has no theatre', () => {
     // And the excerpt actually reaches the page, escaped, rather than being dead weight.
     const index = pages.find((p) => p.path.endsWith(`dist${sep}index.html`));
     expect(index).toBeDefined();
-    expect(index?.html).toContain('37 findings');
+    expect(index?.html).toContain('39 findings');
     expect(index?.html).toContain('0 crashed');
   });
 

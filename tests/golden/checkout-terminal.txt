@@ -205,7 +205,7 @@ apps/demo/settings.html
         lang attribute must have a valid value
 
   ------------------------------------------------------------------------
-  37 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
-  coverage: 35 of 94 published ACT rules
+  39 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
+  coverage: 36 of 94 published ACT rules
   one-directional invariant enforced on 4 rule(s): a peer reported a failure the routed engine did not.
-  calibration 2026-07-30, corpus 2026-07-29
+  calibration 2026-08-03, corpus 2026-07-29
