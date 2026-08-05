@@ -237,6 +237,63 @@ describe('674b10 role values are valid', () => {
   });
 });
 
+describe('4e8ab6 role has required states and properties', () => {
+  it('fails a role missing its required property', () => {
+    expect(check('4e8ab6', '<html><body><div role="checkbox">x</div></body></html>').outcome).toBe(
+      'failed',
+    );
+  });
+
+  it('passes a role with its required property set', () => {
+    expect(
+      check('4e8ab6', '<html><body><div role="checkbox" aria-checked="false">x</div></body></html>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('fails a combobox with aria-expanded but no aria-controls', () => {
+    // ARIA 1.2 redefined combobox as always owning a popup, so both properties are
+    // required unconditionally rather than one implying the other.
+    expect(
+      check('4e8ab6', '<html><body><div role="combobox" aria-expanded="true">x</div></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('passes a combobox with both required properties set', () => {
+    expect(
+      check(
+        '4e8ab6',
+        '<html><body><div role="combobox" aria-expanded="false" aria-controls="list">x</div></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
+  it('treats an empty value as missing, not merely present', () => {
+    expect(
+      check(
+        '4e8ab6',
+        '<html><body><div role="combobox" aria-expanded="true" aria-controls="">x</div></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('does not apply when the explicit role matches the native one', () => {
+    // A native checkbox's required state is a host-language concern already, and the
+    // rule would otherwise fail every plain <input type="checkbox" role="checkbox">.
+    expect(
+      check('4e8ab6', '<html><body><input type="checkbox" role="checkbox" /></body></html>')
+        .outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('still applies when the explicit role differs from the native one', () => {
+    expect(
+      check('4e8ab6', '<html><body><input type="text" role="checkbox" /></body></html>').outcome,
+    ).toBe('failed');
+  });
+});
+
 describe('6cfa84 aria-hidden hides nothing focusable', () => {
   it('fails a hidden container with a focusable child', () => {
     const result = check(
@@ -366,6 +423,185 @@ describe('2779a5 page has a title', () => {
     // The distinction the ACT rule makes, and the negative case worth having.
     expect(
       check('2779a5', '<html><head></head><body><svg><title>Icon</title></svg></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+});
+
+describe('78fd32 line height is not important below the threshold', () => {
+  it('fails a value below 1.5x the font size', () => {
+    expect(
+      check('78fd32', '<html><body><p style="line-height: 1em !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('passes a value at or above 1.5x the font size', () => {
+    expect(
+      check('78fd32', '<html><body><p style="line-height: 2em !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('accepts a bare unitless number as a direct multiple of font size', () => {
+    // Unlike letter-spacing and word-spacing, a unitless line-height is valid CSS and
+    // means exactly this: a multiple of the element's own font size.
+    expect(
+      check('78fd32', '<html><body><p style="line-height: 1.6 !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('accepts a percentage as a multiple of font size', () => {
+    expect(
+      check('78fd32', '<html><body><p style="line-height: 160% !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('passed');
+    expect(
+      check('78fd32', '<html><body><p style="line-height: 120% !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('fails normal, whose used value is well below the threshold', () => {
+    expect(
+      check('78fd32', '<html><body><p style="line-height: normal !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('fails initial the same way as normal, since normal is its specified value', () => {
+    expect(
+      check('78fd32', '<html><body><p style="line-height: initial !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('passes inherit and unset, which defer to the ancestor rather than fixing a value', () => {
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="line-height: 1.2em"><span style="line-height: inherit !important; display: block;">x</span></p></body></html>',
+      ).outcome,
+    ).toBe('passed');
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="line-height: 1.2em"><span style="line-height: unset !important; display: block;">x</span></p></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
+  it('takes the later of two competing !important declarations', () => {
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="line-height: 1em !important; line-height: 2em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
+  it('does not apply to a hidden element', () => {
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="display: none; line-height: 1em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('does not apply to text positioned off-screen', () => {
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="position: absolute; top: -999em; line-height: 1em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('does not treat an ordinary small offset as off-screen', () => {
+    // The magnitude check exists for the -999em idiom, not for routine positioning.
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="position: absolute; top: -4px; line-height: 1em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('does not apply where the text cannot take a soft wrap break', () => {
+    expect(
+      check(
+        '78fd32',
+        '<html><body><div style="overflow-x: scroll;"><p style="line-height: 1em !important; width: 1000px;">x</p></div></body></html>',
+      ).outcome,
+    ).toBe('inapplicable');
+  });
+});
+
+describe('24afc2 letter spacing is not important below the threshold', () => {
+  it('fails a value below 0.12x the font size', () => {
+    expect(
+      check(
+        '24afc2',
+        '<html><body><p style="letter-spacing: 0.05em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('passes a value at or above 0.12x the font size', () => {
+    expect(
+      check(
+        '24afc2',
+        '<html><body><p style="letter-spacing: 0.15em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
+  it('fails normal, which computes to zero spacing', () => {
+    expect(
+      check(
+        '24afc2',
+        '<html><body><p style="letter-spacing: normal !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('passes inherit, which defers to the ancestor rather than fixing a value', () => {
+    expect(
+      check(
+        '24afc2',
+        '<html><body><p style="letter-spacing: 0.15em"><span style="letter-spacing: inherit !important;">x</span></p></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
+  it('does not accept a bare unitless number, which is not valid CSS for this property', () => {
+    expect(
+      check('24afc2', '<html><body><p style="letter-spacing: 2 !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+});
+
+describe('9e45ec word spacing is not important below the threshold', () => {
+  it('fails a value below 0.16x the font size', () => {
+    expect(
+      check('9e45ec', '<html><body><p style="word-spacing: 0.1em !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('failed');
+  });
+
+  it('passes a value at or above 0.16x the font size', () => {
+    expect(
+      check('9e45ec', '<html><body><p style="word-spacing: 0.2em !important;">x</p></body></html>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('fails normal, which computes to zero spacing', () => {
+    expect(
+      check('9e45ec', '<html><body><p style="word-spacing: normal !important;">x</p></body></html>')
         .outcome,
     ).toBe('failed');
   });
