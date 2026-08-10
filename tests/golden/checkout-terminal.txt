@@ -80,7 +80,6 @@ apps/demo/checkout.html
 
   ▲▲  serious  8fc3b6  Object element rendering non-text content has non-empty accessible name
       WCAG 1.1.1  axe-core precision 1.00 over 14 official test cases
-      disagreement: htmlcs says passed
       object (not located in source)
         <object> elements must have alternative text
 

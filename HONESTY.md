@@ -206,7 +206,19 @@ Not wrong answers, but checks that would have reported success no matter what.
 
 ---
 
-## 12. Standing limitations
+## 12. HTML CodeSniffer's mapping cited codes that never fired
+
+**What it claimed.** `packages/engines/src/htmlcs/mapping.ts` mapped every HTML CodeSniffer technique code by what its name and its ACT rule's title suggested, unmeasured: two entries as `exact`, one as `superset`, the rest `partial`, with no citation behind any of it.
+
+**What was true.** Running every mapped code over the corpus ([#43](https://github.com/KarthikSubramanian07/Marlo/issues/43)) found four entries that had never once matched their claimed ACT rule, for a structural reason each time, confirmed by reading `html_codesniffer@2.5.1`'s source: `H67.1` checks an unrelated accessible-name conflict (`alt=""` paired with a non-empty `title`), `H24` only fires on `<area>` elements while its ACT rule's corpus is entirely `<object>`, `H91.A.Empty` belongs to a WCAG2AAA-level sniff that this project's WCAG2AA request never reaches, and `H63.1` checks a `scope`-versus-header-id ambiguity, not whether a header cell has any data cell assigned to it at all. A fifth, `H43.HeadersRequired`, cited the wrong subcode in its own technique family; `H43.IncorrectAttr` is the one that actually fires on the ACT rule's failing examples. And two contrast entries, `G18.Fail` and `G17.Fail`, never fire at all on the static renderer: unlike Alfa and axe on the identical limitation, which report `cantTell`, HTML CodeSniffer emits nothing, not even a Warning, so the adapter's silence-means-passed inference turns every failing contrast example into a reported pass.
+
+**What reported success.** `exact` and `superset` labels with no citation behind them, on entries that, once measured, could not even hold `partial`'s own bar of "catches something." `partial`, unqualified, on the four wrong-target entries and the two contrast entries, reading as "catches some of it" when the true number was a clean, structural zero throughout.
+
+**So what was wrong.** The table was written from technique names and ACT rule titles, the same failure mode as entry 11's two Alfa rules, at a larger scale: five of seventeen entries named the wrong code entirely (four removed, one corrected to its sibling), because HTML CodeSniffer's technique codes are more numerous and more granular than Alfa's rules. Every remaining entry now cites a measured `f<n>/<n> p<n> i<n>` the same way Alfa's and axe's do, and the two contrast entries are kept specifically because their zero is the finding, not a reason to delete the row: this engine hides the same uncertainty its peers admit to.
+
+---
+
+## 13. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 
@@ -218,9 +230,9 @@ Not defects. Things Marlo cannot currently do, written here so their absence is 
 
 **The browser renderer cannot be evaluated by any engine.** It renders and declares `layout` and `paint`, and every adapter needs an in-process DOM window, so nothing can consume it. The static renderer is the only one that produces a report, and the rules needing layout come back as not evaluated rather than as passing. Entry 9 above, and [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37).
 
-**One of the three engine mappings is still unverified.** The axe-core mapping was derived by measurement over the corpus from the start. Alfa's now is too ([#43](https://github.com/KarthikSubramanian07/Marlo/issues/43)): every remaining entry cites what running it over the official test cases found, in the same f/p/i vocabulary discover-mappings.mjs and the axe table use, and three entries that never matched what they claimed were removed rather than reclassified (entry 11 above). HTML CodeSniffer's mapping is still a plain documentation match, and every entry in it is marked `partial` for that reason.
+**HTML CodeSniffer cannot compute a contrast ratio on the static renderer**, and unlike Alfa and axe on the identical limitation, it does not report `cantTell` when it cannot: it stays completely silent, and this project's silence-means-passed inference turns that into a reported pass on every failing contrast example. See entry 12.
 
-**HTML CodeSniffer's strict recall is zero.** It never returns a definite failure for any rule it claims, because its warnings and notices are advisory and the adapter reads its silence as a pass. That inference is the weakest step in the engines package, it is stated at the top of the adapter, and the calibration table put a number on it.
+**HTML CodeSniffer's mapping, even fully measured, tops out at `partial`.** Every entry in it now cites a corpus measurement ([#43](https://github.com/KarthikSubramanian07/Marlo/issues/43)), the same as Alfa's and axe's, but not one earned `exact` or `superset`: its checks are WCAG techniques, narrower and more literal than the ACT rules they sit beside, so something is always either missed or over-flagged. That is a property of the engine, not a gap in the measurement.
 
 ---
 
