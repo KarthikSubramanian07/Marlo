@@ -26,11 +26,41 @@ import { buildMapping } from '../engine.js';
  * i<n>` in the note the way discover-mappings.mjs and the axe table do. Two catch every
  * failing example but also flag a passing one and are `superset`, with the specific
  * false positive named. Two are genuinely `partial`, confirmed rather than assumed,
- * with the specific miss named. Three return `inapplicable` on every one of their
- * rule's failing examples rather than catching any of them, which is not what a
- * `partial` claims either, so their notes carry the same citation as an open question
- * rather than a resolved one. The rest have not been run through this yet, and their
+ * with the specific miss named. The rest have not been run through this yet, and their
  * notes still read as a documentation match.
+ *
+ * THREE ENTRIES ARE GONE RATHER THAN RECLASSIFIED, AND THE ABSENCE IS THE FINDING.
+ *
+ * All three returned `inapplicable` on every one of their rule's failing corpus
+ * examples, which read at first as a weak `partial`. It was not: reading the installed
+ * `@siteimprove/alfa-rules@0.119.0` source showed each entry named the wrong thing.
+ *
+ *   sia-r3   -> 3ea0c8  Does not exist. The rule was retired at some version between
+ *                       whenever this line was written and 0.119.0; the ids currently
+ *                       exported skip r3 along with r34, r36, r51, r52, r58, r82, r83,
+ *                       r88 and r89. axe-core still claims 3ea0c8 on its own, so the ACT
+ *                       rule is not left uncovered, only this entry is wrong.
+ *   sia-r28  -> 8fc3b6  sia-r28's applicability filters on `hasInputType('image')`: it
+ *                       checks `<input type="image">` accessible names, not `<object>`.
+ *                       It cannot ever fire on 8fc3b6's corpus, which is all `<object>`.
+ *                       The condition it does check is likely 59796f ("Image button has
+ *                       non-empty accessible name"), currently unclaimed by any engine,
+ *                       but that is a lead for the next measurement, not a claim made
+ *                       here.
+ *   sia-r33  -> bc4a75  sia-r33's applicability is `video(document, device, { audio: {
+ *                       has: false } })`: it checks silent video for a transcript
+ *                       (WCAG G159), not required owned ARIA elements. bc4a75's corpus
+ *                       is `role="list"` and similar, which sia-r33 never inspects. The
+ *                       likely correct target is one of the transcript rules (ee13b5 is
+ *                       the closest reading of "visual-only content"), unclaimed here
+ *                       for the same reason.
+ *
+ * Both were reachable by reading the rule source, `node_modules/.pnpm/@siteimprove+alfa-
+ * rules@0.119.0/node_modules/@siteimprove/alfa-rules/dist/sia-r28/rule.js` (and sia-r33
+ * alongside it), not by guessing from the corpus results. A `partial` label on either
+ * would have been another documentation match: plausible from the ACT rule's title,
+ * wrong about what the code evaluates, and exactly the kind of confident wrong answer
+ * #43 exists to catch.
  *
  * Alfa earns its place in the table regardless of how complete this file is, because
  * its outcome vocabulary is `passed | failed | cantTell | inapplicable`, which is
@@ -48,12 +78,6 @@ const ENTRIES: readonly MappingEntry[] = [
     actId: '23a2a8',
     kind: 'exact',
     note: 'f5/5 p0 i0. Alfa R2 checks images have an accessible name, exactly the ACT rule.',
-  },
-  {
-    engineRuleId: 'sia-r3',
-    actId: '3ea0c8',
-    kind: 'partial',
-    note: "f0/3 p0 i0. Alfa R3 checks id uniqueness. Worth having because axe removed its general duplicate-id rule, so Alfa may be the only engine covering this, but it returned inapplicable on all three of this rule's failing corpus examples rather than catching any of them, which #43 leaves as an open question rather than a settled partial.",
   },
   {
     engineRuleId: 'sia-r4',
@@ -132,18 +156,6 @@ const ENTRIES: readonly MappingEntry[] = [
     actId: '674b10',
     kind: 'superset',
     note: 'f2/2 p1 i0. Alfa R21 flags a role attribute if any of its space-separated tokens is invalid, but ACT 674b10 accepts the attribute once one token resolves to a valid role, per the ARIA role-list fallback. False positive on corpus case 674b10/22ce45f ("Passed Example 3", `role="searchfield searchbox"`), where "searchbox" is valid and the ACT rule passes, but Alfa flags it over the unrecognised "searchfield" token.',
-  },
-  {
-    engineRuleId: 'sia-r28',
-    actId: '8fc3b6',
-    kind: 'partial',
-    note: "f0/4 p0 i0. Alfa R28 checks object elements have an accessible name, but it returned inapplicable on all four of this rule's failing corpus examples rather than catching any of them, which #43 leaves as an open question rather than a settled partial.",
-  },
-  {
-    engineRuleId: 'sia-r33',
-    actId: 'bc4a75',
-    kind: 'partial',
-    note: "f0/7 p0 i0. Alfa R33 checks required owned elements are present, but it returned inapplicable on all seven of this rule's failing corpus examples rather than catching any of them, which #43 leaves as an open question rather than a settled partial.",
   },
   {
     engineRuleId: 'sia-r43',
