@@ -31,7 +31,7 @@
     "@siteimprove/alfa-rules": "0.119.0",
     "@siteimprove/alfa-url": "0.119.0",
     "@siteimprove/alfa-web": "0.119.0",
-    "axe-core": "4.12.1",
+    "axe-core": "4.13.0",
     "html_codesniffer": "2.5.1"
   },
   "publishConfig": {
