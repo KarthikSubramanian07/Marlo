@@ -26,8 +26,8 @@ import { buildMapping } from '../engine.js';
  * i<n>` in the note the way discover-mappings.mjs and the axe table do. Two catch every
  * failing example but also flag a passing one and are `superset`, with the specific
  * false positive named. Two are genuinely `partial`, confirmed rather than assumed,
- * with the specific miss named. The rest have not been run through this yet, and their
- * notes still read as a documentation match.
+ * with the specific miss named. Every remaining entry below has now been run through
+ * this; none still reads as a bare documentation match.
  *
  * THREE ENTRIES ARE GONE RATHER THAN RECLASSIFIED, AND THE ABSENCE IS THE FINDING.
  *

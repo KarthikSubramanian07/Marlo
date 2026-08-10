@@ -4,8 +4,8 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-09-11",
-    "commit": "b0a97dda3bc85c64b43e36359e329be9f5111841",
+    "generated": "2026-08-10",
+    "commit": "d1790799b39c86d68e5175aa605223e1806a1e6f",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -190,13 +190,6 @@
               "outcome": "inapplicable",
               "message": "IDs used in ARIA and labels must be unique",
               "chosenEngineStrictRecall": 1
-            },
-            {
-              "engine": "alfa",
-              "engineRuleId": "alfa",
-              "outcome": "inapplicable",
-              "message": "",
-              "chosenEngineStrictRecall": 1
             }
           ],
           "confidence": {
@@ -242,13 +235,6 @@
               "engineRuleId": "duplicate-id-aria",
               "outcome": "inapplicable",
               "message": "IDs used in ARIA and labels must be unique",
-              "chosenEngineStrictRecall": 1
-            },
-            {
-              "engine": "alfa",
-              "engineRuleId": "alfa",
-              "outcome": "inapplicable",
-              "message": "",
               "chosenEngineStrictRecall": 1
             }
           ],
@@ -715,8 +701,7 @@
             "message": "<object> elements must have alternative text"
           },
           "agreedBy": [
-            "marlo",
-            "alfa"
+            "marlo"
           ],
           "disagreements": [
             {
@@ -985,18 +970,11 @@
           "agreedBy": [],
           "disagreements": [
             {
-              "engine": "marlo",
-              "engineRuleId": "marlo/bc4a75",
-              "outcome": "cantTell",
-              "message": "role=\"list\" requires listitem. None of its children declare an explicit role, so the answer depends on implicit roles Marlo does not compute here.",
-              "chosenEngineStrictRecall": 0
-            },
-            {
               "engine": "axe-core",
               "engineRuleId": "aria-required-children",
               "outcome": "failed",
               "message": "Certain ARIA roles must contain particular children",
-              "chosenEngineStrictRecall": 0
+              "chosenEngineStrictRecall": null
             }
           ],
           "confidence": {
@@ -4635,7 +4613,7 @@
         {
           "actRuleId": "3ea0c8",
           "engine": "alfa",
-          "status": "ok",
+          "status": "unsupported",
           "verdicts": [],
           "error": null,
           "missingCapabilities": [],
@@ -5101,22 +5079,8 @@
         {
           "actRuleId": "8fc3b6",
           "engine": "alfa",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "alfa",
-              "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r28",
-              "actRuleId": "8fc3b6",
-              "outcome": "failed",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "Alfa sia-r28"
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5363,22 +5327,8 @@
         {
           "actRuleId": "bc4a75",
           "engine": "alfa",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "alfa",
-              "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r33",
-              "actRuleId": "bc4a75",
-              "outcome": "inapplicable",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "Alfa sia-r33"
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7988,7 +7938,7 @@
         {
           "actRuleId": "3ea0c8",
           "engine": "alfa",
-          "status": "ok",
+          "status": "unsupported",
           "verdicts": [],
           "error": null,
           "missingCapabilities": [],
@@ -8194,22 +8144,8 @@
         {
           "actRuleId": "8fc3b6",
           "engine": "alfa",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "alfa",
-              "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r28",
-              "actRuleId": "8fc3b6",
-              "outcome": "inapplicable",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "Alfa sia-r28"
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8378,22 +8314,8 @@
         {
           "actRuleId": "bc4a75",
           "engine": "alfa",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "alfa",
-              "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r33",
-              "actRuleId": "bc4a75",
-              "outcome": "inapplicable",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "Alfa sia-r33"
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -9144,7 +9066,7 @@
     {
       "actRuleId": "bc4a75",
       "dissentingEngine": "axe-core",
-      "chosenEngine": "alfa"
+      "chosenEngine": "marlo"
     }
   ]
 }

@@ -194,7 +194,19 @@ Not wrong answers, but checks that would have reported success no matter what.
 
 ---
 
-## 11. Standing limitations
+## 11. Two Alfa mappings named the wrong rule
+
+**What it claimed.** `packages/engines/src/alfa/mapping.ts` mapped `sia-r28` to ACT rule 8fc3b6 ("object element has accessible name") and `sia-r33` to bc4a75 ("ARIA required owned elements"), both `partial`, both described in the note as checking the condition their ACT rule names.
+
+**What was true.** Read from the installed rule source rather than from the note: `sia-r28`'s applicability filters on `hasInputType('image')`, so it checks `<input type="image">` accessible names and never inspects `<object>`. `sia-r33`'s applicability is `video(document, device, { audio: { has: false } })`, so it checks silent `<video>` elements for a transcript against WCAG technique G159 and never inspects ARIA required-owned-elements. Neither rule can fire on the corpus it was mapped to, by construction, not by bad luck on this particular sample.
+
+**What reported success.** `partial`, on both, for as long as anyone had been reading the label rather than the number. `Audit.evaluate()` returned `inapplicable` on every one of the corpus's failing examples rather than throwing or omitting the rule, so the calibration table showed a real, if damning, number: strict recall 0.00, not a missing measurement. A `partial` label reads as "catches some of it." Neither rule catches any of it, because neither rule is looking.
+
+**So what was wrong.** The notes described what the ACT rule's title says the check should do, not what the Alfa rule's `evaluate()` function filters on: a documentation match to the wrong document, since neither cited the rule source. It also skewed routing, and worse than simply being absent would have: `sia-r33` never contradicts a passing example, because it never applies to one, so it counted as a safer implementer than axe-core and Marlo's own rule, both of which try on bc4a75 and are sometimes `incorrect`. Silence was outranking an honest attempt. Both entries are removed rather than reclassified ([#43](https://github.com/KarthikSubramanian07/Marlo/issues/43)), `pnpm calibrate --check` now reports bc4a75 as correctly unroutable, and the likely correct targets (59796f for sia-r28, ee13b5 for sia-r33) are left as a lead for whoever measures them next, not claimed here.
+
+---
+
+## 12. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 
@@ -206,7 +218,7 @@ Not defects. Things Marlo cannot currently do, written here so their absence is 
 
 **The browser renderer cannot be evaluated by any engine.** It renders and declares `layout` and `paint`, and every adapter needs an in-process DOM window, so nothing can consume it. The static renderer is the only one that produces a report, and the rules needing layout come back as not evaluated rather than as passing. Entry 9 above, and [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37).
 
-**Two of the three engine mappings are unverified.** Only the axe-core mapping was derived by measurement over the corpus. Alfa's and HTML CodeSniffer's are documentation matches, and every entry in both is marked `partial` for that reason, with a test asserting no Alfa entry claims `exact`.
+**One of the three engine mappings is still unverified.** The axe-core mapping was derived by measurement over the corpus from the start. Alfa's now is too ([#43](https://github.com/KarthikSubramanian07/Marlo/issues/43)): every remaining entry cites what running it over the official test cases found, in the same f/p/i vocabulary discover-mappings.mjs and the axe table use, and three entries that never matched what they claimed were removed rather than reclassified (entry 11 above). HTML CodeSniffer's mapping is still a plain documentation match, and every entry in it is marked `partial` for that reason.
 
 **HTML CodeSniffer's strict recall is zero.** It never returns a definite failure for any rule it claims, because its warnings and notices are advisory and the adapter reads its silence as a pass. That inference is the weakest step in the engines package, it is stated at the top of the adapter, and the calibration table put a number on it.
 
