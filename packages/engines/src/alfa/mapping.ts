@@ -25,11 +25,12 @@ import { buildMapping } from '../engine.js';
  * failing example caught, nothing else flagged) and are `exact`, cited `f<n>/<n> p<n>
  * i<n>` in the note the way discover-mappings.mjs and the axe table do. Two catch every
  * failing example but also flag a passing one and are `superset`, with the specific
- * false positive named. Three return `inapplicable` on every one of their rule's
- * failing examples rather than catching any of them, which is not what a `partial`
- * claims either, so their notes carry the same citation as an open question rather than
- * a resolved one. The rest have not been run through this yet, and their notes still
- * read as a documentation match.
+ * false positive named. Two are genuinely `partial`, confirmed rather than assumed,
+ * with the specific miss named. Three return `inapplicable` on every one of their
+ * rule's failing examples rather than catching any of them, which is not what a
+ * `partial` claims either, so their notes carry the same citation as an open question
+ * rather than a resolved one. The rest have not been run through this yet, and their
+ * notes still read as a documentation match.
  *
  * Alfa earns its place in the table regardless of how complete this file is, because
  * its outcome vocabulary is `passed | failed | cantTell | inapplicable`, which is
@@ -94,7 +95,7 @@ const ENTRIES: readonly MappingEntry[] = [
     engineRuleId: 'sia-r13',
     actId: 'cae760',
     kind: 'partial',
-    note: 'Alfa R13 checks iframes have an accessible name.',
+    note: 'f3/4 p0 i0. Alfa R13 checks iframes have an accessible name, and catches three of four failing corpus examples. Misses cae760/38cee2a5 (an `<iframe title=" " role="none">`): a whitespace-only title is not a name, but Alfa reads role="none" as taking the element out of scope and returns inapplicable rather than failed, where the ACT rule still requires the name.',
   },
   {
     engineRuleId: 'sia-r16',
@@ -160,7 +161,7 @@ const ENTRIES: readonly MappingEntry[] = [
     engineRuleId: 'sia-r69',
     actId: 'afw4f7',
     kind: 'partial',
-    note: 'Alfa R69 checks text has sufficient contrast. Needs layout, so expect cantTell on the static renderer, the same as axe.',
+    note: 'f5/8 p1 i0 ct4. Alfa R69 checks text has sufficient contrast. Needs layout, so expect cantTell on the static renderer, the same as axe, which accounts for most of the shortfall. Also one false positive: afw4f7/0b212e48 ("Passed Example 7") is a decorative divider string of symbols on a low-contrast background, which the ACT rule exempts as non-meaningful text and Alfa flags anyway, so the gap is not layout alone.',
   },
 ];
 
