@@ -69,28 +69,32 @@ describe('every mapping entry is well formed', () => {
     });
   }
 
-  it('gives axe the largest table, since it is the only one derived by measurement', () => {
-    // The alfa and htmlcs tables are documentation matches pending harness
-    // confirmation. If one of them overtakes axe without a discovery run behind it,
-    // somebody has been guessing.
+  it('gives axe the largest table, since it is the only one built from a discovery run', () => {
+    // Alfa and htmlcs are measured now too (Issue #43), but axe's table was built by
+    // running discover-mappings.mjs over the whole corpus and reviewing every
+    // correlation, not just confirming a pre-existing guess against one rule at a time.
+    // If one of the other two overtakes it, somebody has been guessing at the same
+    // scale without the discovery run to back it up.
     expect(AXE_MAPPING.entries.length).toBeGreaterThan(ALFA_MAPPING.entries.length);
     expect(AXE_MAPPING.entries.length).toBeGreaterThan(HTMLCS_MAPPING.entries.length);
   });
 
-  it('requires a measured citation before an Alfa entry may claim more than partial', () => {
+  it('requires a measured citation before an Alfa or htmlcs entry may claim more than partial', () => {
     // A documentation match is not a measurement. Claiming `exact` or `superset` on the
     // strength of matching prose is exactly the overstatement this project argues
     // against. Once a human has actually run the rule over the corpus, the note says so
     // in the f/p/i vocabulary discover-mappings.mjs and the axe table use (Issue #43),
-    // and only then may the entry claim more than `partial`. Today every Alfa note still
-    // reads "documentation match", so this is equivalent to the old blanket check; it
-    // stops being one entry at a time, as the harness confirms each one.
+    // and only then may the entry claim more than `partial`. Every Alfa and htmlcs note
+    // now carries that citation or reads `partial`, so this stops being one entry at a
+    // time and becomes something the harness confirms on every run.
     const measured = /^f\d+\/\d+ p\d+ i\d+\.\s/;
-    for (const entry of ALFA_MAPPING.entries) {
-      if (entry.kind === 'partial') continue;
-      expect(entry.note, `${entry.engineRuleId} claims ${entry.kind} without a citation`).toMatch(
-        measured,
-      );
+    for (const mapping of [ALFA_MAPPING, HTMLCS_MAPPING]) {
+      for (const entry of mapping.entries) {
+        if (entry.kind === 'partial') continue;
+        expect(entry.note, `${entry.engineRuleId} claims ${entry.kind} without a citation`).toMatch(
+          measured,
+        );
+      }
     }
   });
 });
