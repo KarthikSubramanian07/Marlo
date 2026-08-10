@@ -5,7 +5,7 @@
   "startedAt": "<time>",
   "calibration": {
     "generated": "2026-08-10",
-    "commit": "d1790799b39c86d68e5175aa605223e1806a1e6f",
+    "commit": "d26e6bcc124969427d25bcc0bd009f9a315d1520",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -686,7 +686,7 @@
           ],
           "severity": "serious",
           "reportedBy": "axe-core",
-          "routingReason": "best-measured",
+          "routingReason": "sole-implementer",
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.12.1",
@@ -703,15 +703,7 @@
           "agreedBy": [
             "marlo"
           ],
-          "disagreements": [
-            {
-              "engine": "htmlcs",
-              "engineRuleId": "1_1_1.H24",
-              "outcome": "passed",
-              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass.",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
+          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1122,7 +1114,7 @@
             },
             {
               "engine": "htmlcs",
-              "engineRuleId": "4_1_2.H91.A.Empty",
+              "engineRuleId": "4_1_2.H91.A.NoContent",
               "outcome": "passed",
               "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass.",
               "chosenEngineStrictRecall": 1
@@ -1180,7 +1172,7 @@
             },
             {
               "engine": "htmlcs",
-              "engineRuleId": "4_1_2.H91.A.Empty",
+              "engineRuleId": "4_1_2.H91.A.NoContent",
               "outcome": "passed",
               "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass.",
               "chosenEngineStrictRecall": 1
@@ -5822,22 +5814,8 @@
         {
           "actRuleId": "8fc3b6",
           "engine": "htmlcs",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "htmlcs",
-              "engineVersion": "2.5.1",
-              "engineRuleId": "1_1_1.H24",
-              "actRuleId": "8fc3b6",
-              "outcome": "passed",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -6024,7 +6002,7 @@
             {
               "engine": "htmlcs",
               "engineVersion": "2.5.1",
-              "engineRuleId": "4_1_2.H91.A.Empty",
+              "engineRuleId": "4_1_2.H91.A.NoContent",
               "actRuleId": "c487ae",
               "outcome": "passed",
               "target": {
@@ -6118,22 +6096,8 @@
         {
           "actRuleId": "e88epe",
           "engine": "htmlcs",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "htmlcs",
-              "engineVersion": "2.5.1",
-              "engineRuleId": "1_1_1.H67.1",
-              "actRuleId": "e88epe",
-              "outcome": "passed",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8705,22 +8669,8 @@
         {
           "actRuleId": "8fc3b6",
           "engine": "htmlcs",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "htmlcs",
-              "engineVersion": "2.5.1",
-              "engineRuleId": "1_1_1.H24",
-              "actRuleId": "8fc3b6",
-              "outcome": "passed",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8907,7 +8857,7 @@
             {
               "engine": "htmlcs",
               "engineVersion": "2.5.1",
-              "engineRuleId": "4_1_2.H91.A.Empty",
+              "engineRuleId": "4_1_2.H91.A.NoContent",
               "actRuleId": "c487ae",
               "outcome": "passed",
               "target": {
@@ -8975,22 +8925,8 @@
         {
           "actRuleId": "e88epe",
           "engine": "htmlcs",
-          "status": "ok",
-          "verdicts": [
-            {
-              "engine": "htmlcs",
-              "engineVersion": "2.5.1",
-              "engineRuleId": "1_1_1.H67.1",
-              "actRuleId": "e88epe",
-              "outcome": "passed",
-              "target": {
-                "selector": ":root",
-                "snippet": "",
-                "path": []
-              },
-              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
-            }
-          ],
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0

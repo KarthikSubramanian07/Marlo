@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generated": "2026-08-10",
-  "commit": "d1790799b39c86d68e5175aa605223e1806a1e6f",
+  "commit": "d26e6bcc124969427d25bcc0bd009f9a315d1520",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -27,7 +27,7 @@
     {
       "id": "htmlcs",
       "version": "2.5.1",
-      "mappedRules": 15
+      "mappedRules": 12
     }
   ],
   "renderer": "static",
@@ -386,7 +386,7 @@
       "engineRuleIds": [
         "1_1_1.H37"
       ],
-      "mappingKind": "superset",
+      "mappingKind": "partial",
       "testCaseCount": 18,
       "matrix": {
         "passed": {
@@ -783,7 +783,7 @@
         "2_4_2.H25.1.EmptyTitle",
         "2_4_2.H25.1.NoTitleEl"
       ],
-      "mappingKind": "exact",
+      "mappingKind": "partial",
       "testCaseCount": 11,
       "matrix": {
         "passed": {
@@ -3732,49 +3732,47 @@
       "actRuleId": "8fc3b6",
       "engine": "htmlcs",
       "engineVersion": "2.5.1",
-      "engineRuleIds": [
-        "1_1_1.H24"
-      ],
-      "mappingKind": "partial",
+      "engineRuleIds": [],
+      "mappingKind": "none",
       "testCaseCount": 14,
       "matrix": {
         "passed": {
-          "passed": 4,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 4,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 6,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "errored": 0,
-        "unsupported": 0
+        "unsupported": 14
       },
       "act": {
-        "consistency": "partial",
-        "automation": "automated",
-        "disallowed": 4
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 0,
         "falsePositives": 0,
-        "falseNegatives": 4,
-        "trueNegatives": 10,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
         "precision": null,
-        "recall": 0,
+        "recall": null,
         "f1": null,
-        "falsePositiveRate": 0
+        "falsePositiveRate": null
       },
       "flatteredByProtocol": false
     },
@@ -3934,7 +3932,8 @@
       "engine": "htmlcs",
       "engineVersion": "2.5.1",
       "engineRuleIds": [
-        "4_1_2.H91.Button.Name"
+        "4_1_2.H91.Button.Name",
+        "4_1_2.H91.Span.Name"
       ],
       "mappingKind": "partial",
       "testCaseCount": 17,
@@ -3946,8 +3945,8 @@
           "inapplicable": 0
         },
         "failed": {
-          "passed": 1,
-          "failed": 4,
+          "passed": 0,
+          "failed": 5,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -3963,18 +3962,18 @@
       "act": {
         "consistency": "incorrect",
         "automation": "automated",
-        "disallowed": 3
+        "disallowed": 2
       },
       "strict": {
-        "truePositives": 4,
+        "truePositives": 5,
         "falsePositives": 2,
-        "falseNegatives": 1,
+        "falseNegatives": 0,
         "trueNegatives": 10,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": 0.6666666666666666,
-        "recall": 0.8,
-        "f1": 0.7272727272727272,
+        "precision": 0.7142857142857143,
+        "recall": 1,
+        "f1": 0.8333333333333333,
         "falsePositiveRate": 0.16666666666666666
       },
       "flatteredByProtocol": false
@@ -4520,20 +4519,20 @@
       "engine": "htmlcs",
       "engineVersion": "2.5.1",
       "engineRuleIds": [
-        "1_3_1.H43.HeadersRequired"
+        "1_3_1.H43.IncorrectAttr"
       ],
       "mappingKind": "partial",
       "testCaseCount": 17,
       "matrix": {
         "passed": {
-          "passed": 7,
-          "failed": 1,
+          "passed": 8,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 4,
-          "failed": 0,
+          "passed": 2,
+          "failed": 2,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -4547,21 +4546,21 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "incorrect",
+        "consistency": "partial",
         "automation": "automated",
-        "disallowed": 5
+        "disallowed": 2
       },
       "strict": {
-        "truePositives": 0,
-        "falsePositives": 1,
-        "falseNegatives": 4,
-        "trueNegatives": 12,
+        "truePositives": 2,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 13,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": 0,
-        "recall": 0,
-        "f1": 0,
-        "falsePositiveRate": 0.07692307692307693
+        "precision": 1,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
     },
@@ -5310,7 +5309,7 @@
       "engineRuleIds": [
         "3_1_1.H57.2"
       ],
-      "mappingKind": "exact",
+      "mappingKind": "partial",
       "testCaseCount": 7,
       "matrix": {
         "passed": {
@@ -6302,7 +6301,6 @@
       "engine": "htmlcs",
       "engineVersion": "2.5.1",
       "engineRuleIds": [
-        "4_1_2.H91.A.Empty",
         "4_1_2.H91.A.NoContent"
       ],
       "mappingKind": "partial",
@@ -6696,49 +6694,47 @@
       "actRuleId": "d0f69e",
       "engine": "htmlcs",
       "engineVersion": "2.5.1",
-      "engineRuleIds": [
-        "1_3_1.H63.1"
-      ],
-      "mappingKind": "partial",
+      "engineRuleIds": [],
+      "mappingKind": "none",
       "testCaseCount": 16,
       "matrix": {
         "passed": {
-          "passed": 6,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 3,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 7,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "errored": 0,
-        "unsupported": 0
+        "unsupported": 16
       },
       "act": {
-        "consistency": "partial",
-        "automation": "automated",
-        "disallowed": 3
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 0,
         "falsePositives": 0,
-        "falseNegatives": 3,
-        "trueNegatives": 13,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
         "precision": null,
-        "recall": 0,
+        "recall": null,
         "f1": null,
-        "falsePositiveRate": 0
+        "falsePositiveRate": null
       },
       "flatteredByProtocol": false
     },
@@ -7486,49 +7482,47 @@
       "actRuleId": "e88epe",
       "engine": "htmlcs",
       "engineVersion": "2.5.1",
-      "engineRuleIds": [
-        "1_1_1.H67.1"
-      ],
-      "mappingKind": "partial",
+      "engineRuleIds": [],
+      "mappingKind": "none",
       "testCaseCount": 20,
       "matrix": {
         "passed": {
-          "passed": 5,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 5,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 9,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "errored": 0,
-        "unsupported": 1
+        "unsupported": 20
       },
       "act": {
-        "consistency": "partial",
-        "automation": "automated",
-        "disallowed": 5
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 0,
         "falsePositives": 0,
-        "falseNegatives": 5,
-        "trueNegatives": 14,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
         "precision": null,
-        "recall": 0,
+        "recall": null,
         "f1": null,
-        "falsePositiveRate": 0
+        "falsePositiveRate": null
       },
       "flatteredByProtocol": false
     },
@@ -8539,7 +8533,7 @@
     {
       "actRuleId": "8fc3b6",
       "chosen": "axe-core",
-      "reason": "best-measured",
+      "reason": "sole-implementer",
       "candidates": [
         {
           "engine": "axe-core",
@@ -8552,12 +8546,6 @@
           "strictRecall": 1,
           "strictPrecision": 0.8,
           "consistency": "incorrect"
-        },
-        {
-          "engine": "htmlcs",
-          "strictRecall": 0,
-          "strictPrecision": null,
-          "consistency": "partial"
         }
       ],
       "autoFixPermitted": false
@@ -8587,8 +8575,8 @@
         },
         {
           "engine": "htmlcs",
-          "strictRecall": 0.8,
-          "strictPrecision": 0.6666666666666666,
+          "strictRecall": 1,
+          "strictPrecision": 0.7142857142857143,
           "consistency": "incorrect"
         }
       ],
@@ -8631,7 +8619,7 @@
     {
       "actRuleId": "a25f45",
       "chosen": "axe-core",
-      "reason": "sole-implementer",
+      "reason": "best-measured",
       "candidates": [
         {
           "engine": "axe-core",
@@ -8641,9 +8629,9 @@
         },
         {
           "engine": "htmlcs",
-          "strictRecall": 0,
-          "strictPrecision": 0,
-          "consistency": "incorrect"
+          "strictRecall": 0.5,
+          "strictPrecision": 1,
+          "consistency": "partial"
         }
       ],
       "autoFixPermitted": false
@@ -8912,12 +8900,6 @@
           "strictRecall": 0,
           "strictPrecision": null,
           "consistency": "partial"
-        },
-        {
-          "engine": "htmlcs",
-          "strictRecall": 0,
-          "strictPrecision": null,
-          "consistency": "partial"
         }
       ],
       "autoFixPermitted": false
@@ -9001,12 +8983,6 @@
       "candidates": [
         {
           "engine": "marlo",
-          "strictRecall": 0,
-          "strictPrecision": null,
-          "consistency": "partial"
-        },
-        {
-          "engine": "htmlcs",
           "strictRecall": 0,
           "strictPrecision": null,
           "consistency": "partial"
