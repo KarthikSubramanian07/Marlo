@@ -17,11 +17,17 @@ import { buildMapping } from '../engine.js';
  * discovery runs through the calibration harness instead. That work is filed rather
  * than guessed at here.
  *
- * What is below is the subset where Alfa's own published rule descriptions state the
- * same condition as the ACT rule in the same words, which is a documentation match
- * rather than a measurement. Every entry is therefore marked `partial` unless the
- * harness has confirmed it, and the calibration table is what will confirm or
- * contradict each one. An entry the corpus contradicts fails the mapping test.
+ * What is below started as the subset where Alfa's own published rule descriptions
+ * state the same condition as the ACT rule in the same words, a documentation match
+ * rather than a measurement, and every entry was `partial` on that basis alone. #43
+ * asked whether that held up: run each rule over the corpus and see whether the
+ * correspondence is what the note claims. Fourteen entries came back clean (every
+ * failing example caught, nothing else flagged) and are `exact`, cited `f<n>/<n> p<n>
+ * i<n>` in the note the way discover-mappings.mjs and the axe table do. Three return
+ * `inapplicable` on every one of their rule's failing examples rather than catching any
+ * of them, which is not what a `partial` claims either, so their notes carry the same
+ * citation as an open question rather than a resolved one. The rest have not been run
+ * through this yet, and their notes still read as a documentation match.
  *
  * Alfa earns its place in the table regardless of how complete this file is, because
  * its outcome vocabulary is `passed | failed | cantTell | inapplicable`, which is
@@ -31,56 +37,56 @@ const ENTRIES: readonly MappingEntry[] = [
   {
     engineRuleId: 'sia-r1',
     actId: '2779a5',
-    kind: 'partial',
-    note: 'Alfa R1 checks that the document has a non-empty title, which is the same condition. Documentation match, not yet measured.',
+    kind: 'exact',
+    note: 'f5/5 p0 i0. Alfa R1 checks that the document has a non-empty title, exactly the ACT rule, clean on every corpus example.',
   },
   {
     engineRuleId: 'sia-r2',
     actId: '23a2a8',
-    kind: 'partial',
-    note: 'Alfa R2 checks images have an accessible name. Documentation match.',
+    kind: 'exact',
+    note: 'f5/5 p0 i0. Alfa R2 checks images have an accessible name, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r3',
     actId: '3ea0c8',
     kind: 'partial',
-    note: 'Alfa R3 checks id uniqueness. Worth having because axe removed its general duplicate-id rule, so Alfa may be the only engine covering this.',
+    note: "f0/3 p0 i0. Alfa R3 checks id uniqueness. Worth having because axe removed its general duplicate-id rule, so Alfa may be the only engine covering this, but it returned inapplicable on all three of this rule's failing corpus examples rather than catching any of them, which #43 leaves as an open question rather than a settled partial.",
   },
   {
     engineRuleId: 'sia-r4',
     actId: 'b5c3f8',
-    kind: 'partial',
-    note: 'Alfa R4 checks the html element has a lang attribute.',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R4 checks the html element has a lang attribute, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r5',
     actId: 'bf051a',
-    kind: 'partial',
-    note: 'Alfa R5 checks the page lang attribute has a valid primary language subtag.',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R5 checks the page lang attribute has a valid primary language subtag, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r7',
     actId: 'de46e4',
-    kind: 'partial',
-    note: 'Alfa R7 checks lang attributes on elements other than html.',
+    kind: 'exact',
+    note: 'f9/9 p0 i0. Alfa R7 checks lang attributes on elements other than html, exactly the ACT rule, the largest clean correspondence in this table.',
   },
   {
     engineRuleId: 'sia-r8',
     actId: 'e086e5',
-    kind: 'partial',
-    note: 'Alfa R8 checks form fields have an accessible name.',
+    kind: 'exact',
+    note: 'f7/7 p0 i0. Alfa R8 checks form fields have an accessible name, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r11',
     actId: 'c487ae',
-    kind: 'partial',
-    note: 'Alfa R11 checks links have an accessible name.',
+    kind: 'exact',
+    note: 'f11/11 p0 i0. Alfa R11 checks links have an accessible name, exactly the ACT rule, on the largest sample in this table.',
   },
   {
     engineRuleId: 'sia-r12',
     actId: '97a4e1',
-    kind: 'partial',
-    note: 'Alfa R12 checks buttons have an accessible name.',
+    kind: 'exact',
+    note: 'f5/5 p0 i0. Alfa R12 checks buttons have an accessible name, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r13',
@@ -91,8 +97,8 @@ const ENTRIES: readonly MappingEntry[] = [
   {
     engineRuleId: 'sia-r16',
     actId: '4e8ab6',
-    kind: 'partial',
-    note: 'Alfa R16 checks elements with a role have its required states and properties.',
+    kind: 'exact',
+    note: 'f2/2 p0 i0. Alfa R16 checks elements with a role have its required states and properties, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r17',
@@ -103,20 +109,20 @@ const ENTRIES: readonly MappingEntry[] = [
   {
     engineRuleId: 'sia-r18',
     actId: '5c01ea',
-    kind: 'partial',
-    note: 'Alfa R18 checks ARIA states and properties are permitted on the element.',
+    kind: 'exact',
+    note: 'f2/2 p0 i0. Alfa R18 checks ARIA states and properties are permitted on the element, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r19',
     actId: '6a7281',
-    kind: 'partial',
-    note: 'Alfa R19 checks ARIA state and property values are valid.',
+    kind: 'exact',
+    note: 'f10/10 p0 i0. Alfa R19 checks ARIA state and property values are valid, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r20',
     actId: '5f99a7',
-    kind: 'partial',
-    note: 'Alfa R20 checks aria- attributes are defined in WAI-ARIA.',
+    kind: 'exact',
+    note: 'f2/2 p0 i0. Alfa R20 checks aria- attributes are defined in WAI-ARIA, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r21',
@@ -128,25 +134,25 @@ const ENTRIES: readonly MappingEntry[] = [
     engineRuleId: 'sia-r28',
     actId: '8fc3b6',
     kind: 'partial',
-    note: 'Alfa R28 checks object elements have an accessible name.',
+    note: "f0/4 p0 i0. Alfa R28 checks object elements have an accessible name, but it returned inapplicable on all four of this rule's failing corpus examples rather than catching any of them, which #43 leaves as an open question rather than a settled partial.",
   },
   {
     engineRuleId: 'sia-r33',
     actId: 'bc4a75',
     kind: 'partial',
-    note: 'Alfa R33 checks required owned elements are present.',
+    note: "f0/7 p0 i0. Alfa R33 checks required owned elements are present, but it returned inapplicable on all seven of this rule's failing corpus examples rather than catching any of them, which #43 leaves as an open question rather than a settled partial.",
   },
   {
     engineRuleId: 'sia-r43',
     actId: '7d6734',
-    kind: 'partial',
-    note: 'Alfa R43 checks SVG elements with an explicit role have an accessible name.',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R43 checks SVG elements with an explicit role have an accessible name, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r64',
     actId: 'ffd0e9',
-    kind: 'partial',
-    note: 'Alfa R64 checks headings have an accessible name.',
+    kind: 'exact',
+    note: 'f8/8 p0 i0. Alfa R64 checks headings have an accessible name, exactly the ACT rule.',
   },
   {
     engineRuleId: 'sia-r69',
