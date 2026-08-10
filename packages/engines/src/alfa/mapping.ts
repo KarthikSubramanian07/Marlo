@@ -23,11 +23,13 @@ import { buildMapping } from '../engine.js';
  * asked whether that held up: run each rule over the corpus and see whether the
  * correspondence is what the note claims. Fourteen entries came back clean (every
  * failing example caught, nothing else flagged) and are `exact`, cited `f<n>/<n> p<n>
- * i<n>` in the note the way discover-mappings.mjs and the axe table do. Three return
- * `inapplicable` on every one of their rule's failing examples rather than catching any
- * of them, which is not what a `partial` claims either, so their notes carry the same
- * citation as an open question rather than a resolved one. The rest have not been run
- * through this yet, and their notes still read as a documentation match.
+ * i<n>` in the note the way discover-mappings.mjs and the axe table do. Two catch every
+ * failing example but also flag a passing one and are `superset`, with the specific
+ * false positive named. Three return `inapplicable` on every one of their rule's
+ * failing examples rather than catching any of them, which is not what a `partial`
+ * claims either, so their notes carry the same citation as an open question rather than
+ * a resolved one. The rest have not been run through this yet, and their notes still
+ * read as a documentation match.
  *
  * Alfa earns its place in the table regardless of how complete this file is, because
  * its outcome vocabulary is `passed | failed | cantTell | inapplicable`, which is
@@ -103,8 +105,8 @@ const ENTRIES: readonly MappingEntry[] = [
   {
     engineRuleId: 'sia-r17',
     actId: '6cfa84',
-    kind: 'partial',
-    note: 'Alfa R17 checks aria-hidden elements contain no focusable content.',
+    kind: 'superset',
+    note: 'f6/6 p1 i0. Alfa R17 flags any focusable descendant of an aria-hidden element, but ACT 6cfa84 only requires the descendant to be invisible. False positive on corpus case 6cfa84/4cfb71f ("Passed Example 4"), an off-screen focus sentinel used to trap focus in a modal, which the ACT rule permits and Alfa flags.',
   },
   {
     engineRuleId: 'sia-r18',
@@ -127,8 +129,8 @@ const ENTRIES: readonly MappingEntry[] = [
   {
     engineRuleId: 'sia-r21',
     actId: '674b10',
-    kind: 'partial',
-    note: 'Alfa R21 checks role attribute values are valid.',
+    kind: 'superset',
+    note: 'f2/2 p1 i0. Alfa R21 flags a role attribute if any of its space-separated tokens is invalid, but ACT 674b10 accepts the attribute once one token resolves to a valid role, per the ARIA role-list fallback. False positive on corpus case 674b10/22ce45f ("Passed Example 3", `role="searchfield searchbox"`), where "searchbox" is valid and the ACT rule passes, but Alfa flags it over the unrecognised "searchfield" token.',
   },
   {
     engineRuleId: 'sia-r28',
