@@ -589,7 +589,7 @@
             "act-rules-calibrated": 35,
             "act-rules-unmeasurable": [],
             "calibration-generated": "2026-08-10",
-            "calibration-commit": "d1790799b39c86d68e5175aa605223e1806a1e6f",
+            "calibration-commit": "d26e6bcc124969427d25bcc0bd009f9a315d1520",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -1107,6 +1107,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "8fc3b6 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "8fc3b6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "9e45ec was not evaluated by htmlcs: this engine does not implement it."
               },
               "descriptor": {
@@ -1195,6 +1209,20 @@
               },
               "descriptor": {
                 "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e88epe was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e88epe"
               },
               "properties": {
                 "status": "unsupported",
@@ -1729,6 +1757,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "8fc3b6 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "8fc3b6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "9e45ec was not evaluated by htmlcs: this engine does not implement it."
               },
               "descriptor": {
@@ -1817,6 +1859,20 @@
               },
               "descriptor": {
                 "id": "e6952f"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "e88epe was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "e88epe"
               },
               "properties": {
                 "status": "unsupported",
@@ -2557,17 +2613,11 @@
             "reported-by": "axe-core",
             "engine-rule-id": "object-alt",
             "engine-version": "4.12.1",
-            "routing-reason": "best-measured",
+            "routing-reason": "sole-implementer",
             "agreed-by": [
               "marlo"
             ],
-            "disagreements": [
-              {
-                "engine": "htmlcs",
-                "outcome": "passed",
-                "chosen-engine-strict-recall": 1
-              }
-            ],
+            "disagreements": [],
             "measured-precision": 1,
             "measured-recall": 1,
             "official-test-cases-behind-measurement": 14,
