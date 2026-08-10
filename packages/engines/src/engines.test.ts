@@ -77,11 +77,20 @@ describe('every mapping entry is well formed', () => {
     expect(AXE_MAPPING.entries.length).toBeGreaterThan(HTMLCS_MAPPING.entries.length);
   });
 
-  it('marks every unmeasured Alfa entry as partial rather than exact', () => {
-    // A documentation match is not a measurement. Claiming `exact` on the strength of
-    // matching prose is exactly the overstatement this project argues against.
+  it('requires a measured citation before an Alfa entry may claim more than partial', () => {
+    // A documentation match is not a measurement. Claiming `exact` or `superset` on the
+    // strength of matching prose is exactly the overstatement this project argues
+    // against. Once a human has actually run the rule over the corpus, the note says so
+    // in the f/p/i vocabulary discover-mappings.mjs and the axe table use (Issue #43),
+    // and only then may the entry claim more than `partial`. Today every Alfa note still
+    // reads "documentation match", so this is equivalent to the old blanket check; it
+    // stops being one entry at a time, as the harness confirms each one.
+    const measured = /^f\d+\/\d+ p\d+ i\d+\.\s/;
     for (const entry of ALFA_MAPPING.entries) {
-      expect(entry.kind, `${entry.engineRuleId} claims ${entry.kind}`).toBe('partial');
+      if (entry.kind === 'partial') continue;
+      expect(entry.note, `${entry.engineRuleId} claims ${entry.kind} without a citation`).toMatch(
+        measured,
+      );
     }
   });
 });
