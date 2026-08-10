@@ -588,8 +588,8 @@
             "act-rules-published": 94,
             "act-rules-calibrated": 35,
             "act-rules-unmeasurable": [],
-            "calibration-generated": "2026-09-11",
-            "calibration-commit": "b0a97dda3bc85c64b43e36359e329be9f5111841",
+            "calibration-generated": "2026-08-10",
+            "calibration-commit": "d1790799b39c86d68e5175aa605223e1806a1e6f",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -715,6 +715,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "3ea0c8 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "3ea0c8"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "46ca7f was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
@@ -771,6 +785,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "8fc3b6 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "8fc3b6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "9e45ec was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
@@ -803,6 +831,20 @@
               },
               "descriptor": {
                 "id": "b4f0c3"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bc4a75 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bc4a75"
               },
               "properties": {
                 "status": "unsupported",
@@ -1295,6 +1337,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "3ea0c8 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "3ea0c8"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "46ca7f was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
@@ -1351,6 +1407,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "8fc3b6 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "8fc3b6"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "9e45ec was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
@@ -1383,6 +1453,20 @@
               },
               "descriptor": {
                 "id": "b4f0c3"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "bc4a75 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "bc4a75"
               },
               "properties": {
                 "status": "unsupported",
@@ -1940,11 +2024,6 @@
                 "engine": "axe-core",
                 "outcome": "inapplicable",
                 "chosen-engine-strict-recall": 1
-              },
-              {
-                "engine": "alfa",
-                "outcome": "inapplicable",
-                "chosen-engine-strict-recall": 1
               }
             ],
             "measured-precision": 1,
@@ -1990,11 +2069,6 @@
             "disagreements": [
               {
                 "engine": "axe-core",
-                "outcome": "inapplicable",
-                "chosen-engine-strict-recall": 1
-              },
-              {
-                "engine": "alfa",
                 "outcome": "inapplicable",
                 "chosen-engine-strict-recall": 1
               }
@@ -2485,8 +2559,7 @@
             "engine-version": "4.12.1",
             "routing-reason": "best-measured",
             "agreed-by": [
-              "marlo",
-              "alfa"
+              "marlo"
             ],
             "disagreements": [
               {
@@ -2765,14 +2838,9 @@
             "agreed-by": [],
             "disagreements": [
               {
-                "engine": "marlo",
-                "outcome": "cantTell",
-                "chosen-engine-strict-recall": 0
-              },
-              {
                 "engine": "axe-core",
                 "outcome": "failed",
-                "chosen-engine-strict-recall": 0
+                "chosen-engine-strict-recall": null
               }
             ],
             "measured-precision": 0.875,
