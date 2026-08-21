@@ -54,16 +54,34 @@ import { buildMapping } from '../engine.js';
  * TWO CONTRAST ENTRIES ARE KEPT DESPITE ZERO RECALL, BECAUSE THE ZERO ITSELF IS THE
  * FINDING.
  *
- * `G18.Fail -> afw4f7` and `G17.Fail -> 09o5cg` need a real layout and paint pipeline
- * to compute a contrast ratio, which the static renderer does not provide, so neither
- * ever fires. That alone matches Alfa's and axe's contrast rules on the same renderer.
- * What does not match: Alfa and axe report `cantTell` when they cannot compute
- * contrast, an honest admission of not knowing. HTML CodeSniffer stays completely
- * silent instead (confirmed by running it directly: no Error, no Warning, no Notice on
- * any contrast example), and this adapter reads silence on a claimed rule as `passed`.
- * So on every one of afw4f7 and 09o5cg's failing corpus examples, this engine's
- * column reports a pass it has no basis for. Removing the entries would hide that;
- * keeping them with the true zero on record is what #43 was for.
+ * `G18.Fail -> afw4f7` and `G17.Fail -> 09o5cg` are the definite-violation codes for
+ * the minimum- and enhanced-contrast techniques, and both need a real layout and paint
+ * pipeline to compute a contrast ratio, which the static renderer does not provide, so
+ * neither ever fires. That alone matches Alfa's and axe's contrast rules on the same
+ * renderer. What does not match: Alfa and axe report `cantTell` on every example they
+ * cannot compute contrast for, an honest admission of not knowing across the board.
+ * HTML CodeSniffer only gets there for a fraction of them: six of afw4f7's eight
+ * failing examples and eight of 09o5cg's ten get no signal whatsoever and are read as
+ * `passed` by this adapter's silence-means-passed inference. Removing the entries
+ * would hide that; keeping them with the true numbers on record is what #43 was for.
+ *
+ * #43 ALSO ASKED WHETHER A SUBSET OF NOTICES RELIABLY MEANS FAILURE. ONE DOES, BARELY.
+ *
+ * A sweep of every advisory (Warning or Notice) code HTML CodeSniffer emits across the
+ * whole 1134-case corpus, checking for one that fires on a failing example and never
+ * on a passing or inapplicable one, found `G18.Alpha`: an element whose background has
+ * alpha transparency, so a ratio cannot be computed automatically. It fired four times
+ * in the whole corpus, all four on failing examples of afw4f7 or 09o5cg, zero false
+ * positives. That is the source of the two-of-eight and two-of-ten cantTell verdicts
+ * above, not silence.
+ *
+ * It is not cited as a `failed` predictor here. Four examples in 1134 is too thin to
+ * justify carving an exception into `OUTCOME_BY_TYPE` in the adapter, which treats
+ * every Warning and Notice alike on purpose, stated at the top of that file: mapping a
+ * subset of advisories to `failed` on the strength of a four-case correlation is the
+ * same overstatement this issue exists to catch, just aimed at a code instead of a
+ * whole engine. Left here as a lead for whoever measures it against a larger sample,
+ * not claimed as a fix.
  *
  * Last upstream push January 2024. Carried as a risk in PLAN.md §6: it is a peer
  * rather than a dependency of the fix path, so dropping it would weaken the
@@ -134,13 +152,13 @@ const ENTRIES: readonly MappingEntry[] = [
     engineRuleId: '1_4_3.G18.Fail',
     actId: 'afw4f7',
     kind: 'partial',
-    note: "f0/8 p0 i0 ct0. Needs a real layout and paint pipeline to compute a contrast ratio, which the static renderer does not provide, so it never fires, not even the related G18.BgImage/G18.Alpha advisory codes that this same run does emit elsewhere on the corpus. Unlike Alfa and axe on the same limitation, which report cantTell, this engine's silence on a claimed rule is read as passed, so every failing contrast example in this corpus is reported as a pass with no basis for it. See HONESTY.md.",
+    note: 'f0/8 p0 i0 ct0. G18.Fail is the definite-violation code for the minimum-contrast technique, and it needs a real layout and paint pipeline to compute a ratio, which the static renderer does not provide, so it never fires. Six of the eight failing examples get no signal at all from this engine and are read as passed; two get an honest cantTell from the advisory sibling code G18.Alpha, which fires cleanly (zero false positives anywhere in the corpus) but only on the narrow alpha-transparency shape of the failure. See HONESTY.md.',
   },
   {
     engineRuleId: '1_4_6.G17.Fail',
     actId: '09o5cg',
     kind: 'partial',
-    note: 'f0/10 p0 i0 ct0. The enhanced-contrast counterpart to G18.Fail above, same cause, same silent-passed outcome on every failing example. See HONESTY.md.',
+    note: 'f0/10 p0 i0 ct0. The enhanced-contrast counterpart to G18.Fail above, same cause: needs layout the static renderer cannot give it. Eight of ten failing examples get no signal and are read as passed; two get an honest cantTell from the same G18.Alpha advisory code. See HONESTY.md.',
   },
   {
     engineRuleId: '2_2_1.F40.2',
