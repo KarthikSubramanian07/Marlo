@@ -397,9 +397,13 @@ describe('severity and state are never colour alone', () => {
           .filter((e) => e.engine === 'htmlcs' && e.mappingKind !== 'none')
           .reduce((sum, e) => sum + (e.strict['truePositives'] ?? 0), 0);
         const silent = htmlcsTruePositives === 0;
-        if (silent && page.html.includes('HTML CodeSniffer')) {
-          const cell = /HTML CodeSniffer<span class="rank[^>]*>([^<]*)</.exec(page.html)?.[1];
-          if (cell !== undefined) expect(cell).toBe('no detections');
+        const cell = /HTML CodeSniffer<span class="rank[^>]*>([^<]*)</.exec(page.html)?.[1];
+        if (cell !== undefined) {
+          // Both directions, so the assertion cannot be satisfied by the table changing
+          // under it: a silent engine is labelled as silent, and an engine that detects
+          // something is ranked by its false positive rate like the others.
+          if (silent) expect(cell).toBe('no detections');
+          else expect(['best', '2nd', '3rd', '4th']).toContain(cell);
         }
       }
     }
