@@ -39,13 +39,17 @@
  *   node scripts/discover-mappings.mjs --engine axe [--rule b5c3f8] [--json out.json]
  *   node scripts/discover-mappings.mjs --engine htmlcs
  *
- * Alfa is not supported here: it needs the DOM installed as globals before its
- * modules are imported, which is what @marlo/render's withDomGlobals does, so its
- * discovery runs through the calibration harness instead.
+ *   node scripts/discover-mappings.mjs --engine alfa
+ *
+ * Alfa goes through @marlo/render's StaticRenderer and withDomGlobals rather than a
+ * bare happy-dom window, because its modules read DOM globals at import time. That is
+ * the same path the calibration harness uses, so what this reports for Alfa is what the
+ * table will measure. It needs `pnpm build` to have run.
  */
 import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const require = createRequire(import.meta.url);
@@ -59,8 +63,8 @@ const engineName = arg('engine') ?? 'axe';
 const onlyRule = arg('rule');
 const jsonOut = arg('json');
 
-if (!['axe', 'htmlcs'].includes(engineName)) {
-  console.error(`--engine must be axe or htmlcs. Alfa runs through the calibration harness.`);
+if (!['axe', 'htmlcs', 'alfa'].includes(engineName)) {
+  console.error(`--engine must be axe, htmlcs or alfa.`);
   process.exit(2);
 }
 
@@ -75,10 +79,74 @@ const enginePaths = [resolve(ROOT, 'packages/engines')];
 const engineSource =
   engineName === 'axe'
     ? readFileSync(require.resolve('axe-core', { paths: enginePaths }), 'utf8')
-    : readFileSync(
-        require.resolve('html_codesniffer/build/HTMLCS.js', { paths: enginePaths }),
-        'utf8',
+    : engineName === 'htmlcs'
+      ? readFileSync(
+          require.resolve('html_codesniffer/build/HTMLCS.js', { paths: enginePaths }),
+          'utf8',
+        )
+      : null;
+
+// Alfa: the built render package, so the page is produced exactly as the harness
+// produces it. A missing dist is reported as the fix rather than as a stack trace.
+let render = null;
+let renderer = null;
+if (engineName === 'alfa') {
+  try {
+    render = await import(pathToFileURL(resolve(ROOT, 'packages/render/dist/index.js')).href);
+  } catch {
+    console.error('Alfa discovery needs the built workspace. Run `pnpm build` first.');
+    process.exit(2);
+  }
+  renderer = new render.StaticRenderer();
+}
+
+/** Imports an Alfa module from the engines package, after the DOM globals exist. */
+function alfa(spec) {
+  return import(pathToFileURL(require.resolve(spec, { paths: enginePaths })).href);
+}
+
+async function evaluateAlfa(html, url) {
+  const page = await renderer.render({ html, url });
+  try {
+    const outcomes = await render.withDomGlobals(page.handle, async () => {
+      const { Native } = await alfa('@siteimprove/alfa-dom/native');
+      const { Node } = await alfa('@siteimprove/alfa-dom');
+      const { Page } = await alfa('@siteimprove/alfa-web');
+      const { Request, Response } = await alfa('@siteimprove/alfa-http');
+      const { Device } = await alfa('@siteimprove/alfa-device');
+      const { Audit } = await alfa('@siteimprove/alfa-act');
+      const { URL } = await alfa('@siteimprove/alfa-url');
+      const rules = (await alfa('@siteimprove/alfa-rules')).default;
+
+      const device = Device.standard();
+      const serialised = await Native.fromNode(globalThis.document);
+      const document = Node.from(serialised, device);
+      const parsed = URL.parse(url).getUnsafe();
+      const alfaPage = Page.of(
+        Request.of('GET', parsed),
+        Response.of(parsed, 200),
+        document,
+        device,
       );
+      const result = await Audit.of(alfaPage, rules).evaluate();
+      return [...result].map((o) => ({ outcome: o.outcome, rule: o.rule.uri.split('/').pop() }));
+    });
+    // One verdict per rule, collapsed the way the adapter collapses: a failed outweighs
+    // a cantTell, which outweighs a pass.
+    const failed = new Set();
+    const cantTell = new Set();
+    for (const o of outcomes) {
+      if (o.outcome === 'failed') failed.add(o.rule);
+      else if (o.outcome === 'cantTell') cantTell.add(o.rule);
+    }
+    for (const rule of failed) cantTell.delete(rule);
+    return { failed: [...failed], cantTell: [...cantTell] };
+  } catch (error) {
+    return { error: String(error instanceof Error ? error.message : error).slice(0, 160) };
+  } finally {
+    await page.close();
+  }
+}
 
 const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus/act/MANIFEST.json'), 'utf8'));
 
@@ -104,6 +172,18 @@ const SETTINGS = {
   suppressInsecureJavaScriptEnvironmentWarning: true,
 };
 
+/** Root elements that make a document something other than an HTML document. */
+const FOREIGN_ROOTS = new Set(['svg', 'math']);
+
+/** The root element a test case declares, read from the bytes the parser loses. */
+function declaredRootElement(html) {
+  const withoutPreamble = html
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<!doctype[^>]*>/gi, '')
+    .replace(/<\?[^?]*\?>/g, '');
+  return /<\s*([a-zA-Z][\w:-]*)/.exec(withoutPreamble)?.[1]?.toLowerCase() ?? null;
+}
+
 /** Normalises an HTML CodeSniffer code to criterion plus technique. */
 function normaliseHtmlcsCode(code) {
   const parts = code.split('.');
@@ -111,7 +191,8 @@ function normaliseHtmlcsCode(code) {
   return `${parts[3] ?? ''}.${parts.slice(4).join('.')}`;
 }
 
-async function evaluate(html) {
+async function evaluate(html, url) {
+  if (engineName === 'alfa') return evaluateAlfa(html, url);
   const window = new Window({ url: 'https://marlo.invalid/', settings: SETTINGS });
   window.document.write(html);
   await Promise.race([
@@ -155,16 +236,25 @@ for (const [actRuleId, cases] of [...byRule].sort((a, b) => a[0].localeCompare(b
 
   for (const testCase of cases) {
     const html = readFileSync(resolve(ROOT, 'corpus/act', testCase.path), 'utf8');
-    const outcome = await evaluate(html);
+    // The same exclusion the harness applies. A document whose root is svg or math
+    // arrives at the engine as an HTML page containing that element, and every engine
+    // then correctly fails the html element that was never in the test case. Counting
+    // those would put an `i` against every candidate for a defect none of them has.
+    if (FOREIGN_ROOTS.has(declaredRootElement(html))) continue;
+    // The URL the harness uses, so rules that read the document URL see the same one.
+    const outcome = await evaluate(html, `https://act-rules.github.io/${testCase.path}`);
 
     if (outcome.error !== undefined) {
       errors.push(`${testCase.testcaseId}: ${outcome.error}`);
       continue;
     }
 
+    // Counts, and the cases behind them, so a mapping note can name the specific
+    // passing example an engine flagged rather than saying "one false positive".
     const bump = (id, field) => {
-      const stat = candidates.get(id) ?? { f: 0, p: 0, i: 0, ct: 0 };
+      const stat = candidates.get(id) ?? { f: 0, p: 0, i: 0, ct: 0, cases: {} };
       stat[field] += 1;
+      (stat.cases[field] ??= []).push(`${testCase.testcaseId.slice(0, 8)} ${testCase.title}`);
       candidates.set(id, stat);
     };
 
@@ -187,7 +277,10 @@ for (const [actRuleId, cases] of [...byRule].sort((a, b) => a[0].localeCompare(b
       clean: stat.p === 0 && stat.i === 0,
     }))
     .filter((c) => c.f > 0 || c.ct > 0)
-    .sort((a, b) => b.f - a.f || b.ct - a.ct);
+    // Clean candidates first, then by how much they caught. A candidate that fires on a
+    // passing example is a weaker proposal than one that fires on fewer failing ones and
+    // nothing else, because the second is a `partial` and the first is a false positive.
+    .sort((a, b) => Number(b.clean) - Number(a.clean) || b.f - a.f || b.ct - a.ct);
 
   report[actRuleId] = { counts, errors, candidates: ranked };
 
@@ -241,3 +334,5 @@ console.log(
   `\nNothing here is a mapping until a human writes the kind and the note. A rule that\n` +
     'happens to fire on the same pages may be checking something else entirely.',
 );
+
+if (renderer !== null) await renderer.dispose();
