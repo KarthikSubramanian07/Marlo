@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-08-02",
-  "commit": "618f66851b8309a5a0374bfd2a133cd4eefa48ee",
+  "generated": "2026-09-11",
+  "commit": "b0a97dda3bc85c64b43e36359e329be9f5111841",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -3211,8 +3211,8 @@
         "inapplicable": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 0,
-          "inapplicable": 4
+          "cantTell": 1,
+          "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 1
@@ -3228,7 +3228,7 @@
         "falseNegatives": 1,
         "trueNegatives": 14,
         "cantTellOnFailed": 1,
-        "cantTellOnPassed": 1,
+        "cantTellOnPassed": 2,
         "precision": 1,
         "recall": 0.8333333333333334,
         "f1": 0.9090909090909091,

@@ -588,8 +588,8 @@
             "act-rules-published": 94,
             "act-rules-calibrated": 35,
             "act-rules-unmeasurable": [],
-            "calibration-generated": "2026-08-02",
-            "calibration-commit": "618f66851b8309a5a0374bfd2a133cd4eefa48ee",
+            "calibration-generated": "2026-09-11",
+            "calibration-commit": "b0a97dda3bc85c64b43e36359e329be9f5111841",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
