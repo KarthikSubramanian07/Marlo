@@ -44,6 +44,7 @@ import {
   wordSpacingNotImportant,
 } from './rules/spacing.js';
 import { enhancedContrast, minimumContrast } from './rules/contrast.js';
+import { errorMessageDescribesValue } from './rules/forms.js';
 
 /**
  * Every rule Marlo implements.
@@ -94,6 +95,9 @@ export const MARLO_RULES: readonly MarloRule[] = Object.freeze([
   decorativeImageNotExposed,
   decorativeNotExposed,
   filenameNotName,
+
+  // Forms. Decides what the DOM can decide, and asks about the rest.
+  errorMessageDescribesValue,
 
   // Text spacing.
   lineHeightNotImportant,

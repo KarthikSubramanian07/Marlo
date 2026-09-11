@@ -13,7 +13,7 @@ Everything in this list runs with no API key, no network after `pnpm install` an
 | The ACT corpus, vendored                                   | 1134 test cases across 91 rules, SHA-256 per file, `pnpm corpus:verify`                 |
 | The grading protocol and both accuracy views               | `packages/act`, every line and branch covered                                           |
 | Three peer engine adapters                                 | axe-core, Alfa, HTML CodeSniffer, in-process                                            |
-| 35 of Marlo's own ACT rules                                | `packages/rules/src/registry.ts`                                                        |
+| 36 of Marlo's own ACT rules                                | `packages/rules/src/registry.ts`                                                        |
 | The calibration table                                      | 164 engine-rule measurements, `calibration/table.json`, regenerated in CI               |
 | Routing and the one-directional invariant                  | `packages/report/src/invariant.ts`, 256-case exhaustive test                            |
 | Terminal, JSON, SARIF 2.1.0 and pull request body surfaces | `packages/report`                                                                       |
