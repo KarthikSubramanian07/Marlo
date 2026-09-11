@@ -5,7 +5,7 @@
   "startedAt": "<time>",
   "calibration": {
     "generated": "2026-09-11",
-    "commit": "66d083feddd2efbd8e33f0986f5376e42eeec7cf",
+    "commit": "e2ee062c91545561da8a90f64ac4e73c02d6c94a",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -53,7 +53,7 @@
             "actRuleId": "09o5cg",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+              "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
               "snippet": "Free returns within 30 days.",
               "path": []
             },
@@ -456,11 +456,11 @@
             "actRuleId": "5c01ea",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+              "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
               "snippet": "aria-checked=\"true\"",
               "path": []
             },
-            "message": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
+            "message": "The attribute is not allowed for the element on which it is specified"
           },
           "agreedBy": [
             "axe-core"
@@ -484,7 +484,7 @@
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified",
+          "help": "The attribute is not allowed for the element on which it is specified",
           "helpUrl": "https://act-rules.github.io/rules/5c01ea"
         },
         {
@@ -589,7 +589,7 @@
             "actRuleId": "6a7281",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+              "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
               "snippet": "aria-required=\"yes\"",
               "path": []
             },
@@ -878,7 +878,7 @@
             "actRuleId": "afw4f7",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+              "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
               "snippet": "Free returns within 30 days.",
               "path": []
             },
@@ -1015,7 +1015,7 @@
             "actRuleId": "bc4a75",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/body[1]/main[1]/div[3]",
+              "selector": "xpath /html[1]/body[1]/main[1]/div[3]",
               "snippet": "<div role=\"list\"> <p> Express delivery is unavailable to this postcode. </p> </div>",
               "path": []
             },
@@ -1065,7 +1065,7 @@
             "actRuleId": "bc659a",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/head[1]/meta[3]",
+              "selector": "xpath /html[1]/head[1]/meta[3]",
               "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
               "path": []
             },
@@ -1116,7 +1116,7 @@
             "actRuleId": "bisz58",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/head[1]/meta[3]",
+              "selector": "xpath /html[1]/head[1]/meta[3]",
               "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
               "path": []
             },
@@ -1535,7 +1535,7 @@
             "actRuleId": "ff89c9",
             "outcome": "failed",
             "target": {
-              "selector": "/html[1]/body[1]/main[1]/div[2]",
+              "selector": "xpath /html[1]/body[1]/main[1]/div[2]",
               "snippet": "<div role=\"listitem\"> Standard delivery </div>",
               "path": []
             },
@@ -4715,7 +4715,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
                 "snippet": "Cart",
                 "path": []
               },
@@ -4728,7 +4728,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]/text()[1]",
                 "snippet": "Your order",
                 "path": []
               },
@@ -4741,7 +4741,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[1]/text()[1]",
                 "snippet": "Gift wrapping",
                 "path": []
               },
@@ -4754,7 +4754,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
                 "snippet": "Postcode",
                 "path": []
               },
@@ -4767,7 +4767,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
                 "snippet": "Mobile number",
                 "path": []
               },
@@ -4780,7 +4780,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/div[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/div[1]/text()[1]",
                 "snippet": "Apply discount",
                 "path": []
               },
@@ -4793,7 +4793,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/p[1]/text()[1]",
                 "snippet": "By paying you agree to the terms.",
                 "path": []
               },
@@ -4806,7 +4806,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[2]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[2]/text()[1]",
                 "snippet": "Delivery options",
                 "path": []
               },
@@ -4819,7 +4819,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[2]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[2]/text()[1]",
                 "snippet": "Standard delivery",
                 "path": []
               },
@@ -4832,7 +4832,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[3]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[3]/p[1]/text()[1]",
                 "snippet": "Express delivery is unavailable to this postcode.",
                 "path": []
               },
@@ -4845,7 +4845,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[4]/a[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[4]/a[1]/text()[1]",
                 "snippet": "Saver delivery",
                 "path": []
               },
@@ -4858,7 +4858,7 @@
               "actRuleId": "09o5cg",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
                 "snippet": "Free returns within 30 days.",
                 "path": []
               },
@@ -4881,7 +4881,7 @@
               "actRuleId": "23a2a8",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/img[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/img[1]",
                 "snippet": "<img src=\"IMG_20240117_cart.png\" alt=\"IMG_20240117_cart.png\">",
                 "path": []
               },
@@ -4894,7 +4894,7 @@
               "actRuleId": "23a2a8",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/img[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/img[1]",
                 "snippet": "<img src=\"product-8842.jpg\" width=\"120\" height=\"120\">",
                 "path": []
               },
@@ -4917,7 +4917,7 @@
               "actRuleId": "24afc2",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/p[1]",
                 "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
                 "path": []
               },
@@ -4940,11 +4940,11 @@
               "actRuleId": "2779a5",
               "outcome": "failed",
               "target": {
-                "selector": "/",
+                "selector": "xpath /",
                 "snippet": "#document <!doctype html> <html> <head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-sc…",
                 "path": []
               },
-              "message": "The document does not have a `<title>` element The first `<title>` element has no text content"
+              "message": "The document does not have a `<title>` element; The first `<title>` element has no text content"
             }
           ],
           "error": null,
@@ -4981,7 +4981,7 @@
               "actRuleId": "46ca7f",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/a[1]/img[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/a[1]/img[1]",
                 "snippet": "<img src=\"logo.svg\" alt=\"\">",
                 "path": []
               },
@@ -4994,7 +4994,7 @@
               "actRuleId": "46ca7f",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[1]",
                 "snippet": "<div role=\"presentation\" tabindex=\"0\"> Gift wrapping </div>",
                 "path": []
               },
@@ -5017,7 +5017,7 @@
               "actRuleId": "4e8ab6",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/div[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/div[2]",
                 "snippet": "<div role=\"slider\" tabindex=\"0\"></div>",
                 "path": []
               },
@@ -5030,7 +5030,7 @@
               "actRuleId": "4e8ab6",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[2]",
                 "snippet": "<div role=\"listitem\"> Standard delivery </div>",
                 "path": []
               },
@@ -5043,7 +5043,7 @@
               "actRuleId": "4e8ab6",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[3]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[3]",
                 "snippet": "<div role=\"list\"> <p> Express delivery is unavailable to this postcode. </p> </div>",
                 "path": []
               },
@@ -5056,7 +5056,7 @@
               "actRuleId": "4e8ab6",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/svg[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]",
                 "snippet": "<svg role=\"img\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <path d=\"M4 12h16\" stroke=\"currentColor\"></path> </svg>",
                 "path": []
               },
@@ -5079,7 +5079,7 @@
               "actRuleId": "59796f",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[7]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[7]",
                 "snippet": "<input type=\"image\" src=\"pay-now.png\">",
                 "path": []
               },
@@ -5111,11 +5111,11 @@
               "actRuleId": "5c01ea",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
                 "snippet": "aria-checked=\"true\"",
                 "path": []
               },
-              "message": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
+              "message": "The attribute is not allowed for the element on which it is specified"
             },
             {
               "engine": "alfa",
@@ -5124,11 +5124,11 @@
               "actRuleId": "5c01ea",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
                 "snippet": "aria-required=\"yes\"",
                 "path": []
               },
-              "message": "The attribute is allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
+              "message": "The attribute is allowed for the element on which it is specified; The attribute is not prohibited for the element on which it is specified"
             },
             {
               "engine": "alfa",
@@ -5137,11 +5137,11 @@
               "actRuleId": "5c01ea",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
                 "snippet": "aria-label=\"Card number\"",
                 "path": []
               },
-              "message": "The attribute is allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
+              "message": "The attribute is allowed for the element on which it is specified; The attribute is not prohibited for the element on which it is specified"
             }
           ],
           "error": null,
@@ -5160,7 +5160,7 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
                 "snippet": "aria-checked=\"true\"",
                 "path": []
               },
@@ -5173,7 +5173,7 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/img[2]/@aria-hidden",
+                "selector": "xpath /html[1]/body[1]/main[1]/img[2]/@aria-hidden",
                 "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
@@ -5186,7 +5186,7 @@
               "actRuleId": "5f99a7",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[5]/@aria-labeledby",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[5]/@aria-labeledby",
                 "snippet": "aria-labeledby=\"phone-hint\"",
                 "path": []
               },
@@ -5199,7 +5199,7 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
                 "snippet": "aria-required=\"yes\"",
                 "path": []
               },
@@ -5212,7 +5212,7 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
                 "snippet": "aria-label=\"Card number\"",
                 "path": []
               },
@@ -5225,7 +5225,7 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[4]/@aria-hidden",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[4]/@aria-hidden",
                 "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
@@ -5248,7 +5248,7 @@
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[1]/@role",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[1]/@role",
                 "snippet": "role=\"presentation\"",
                 "path": []
               },
@@ -5261,7 +5261,7 @@
               "actRuleId": "674b10",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/div[1]/@role",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/div[1]/@role",
                 "snippet": "role=\"buton\"",
                 "path": []
               },
@@ -5274,7 +5274,7 @@
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/div[2]/@role",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/div[2]/@role",
                 "snippet": "role=\"slider\"",
                 "path": []
               },
@@ -5287,7 +5287,7 @@
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[2]/@role",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[2]/@role",
                 "snippet": "role=\"listitem\"",
                 "path": []
               },
@@ -5300,7 +5300,7 @@
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[3]/@role",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[3]/@role",
                 "snippet": "role=\"list\"",
                 "path": []
               },
@@ -5313,7 +5313,7 @@
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/svg[1]/@role",
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]/@role",
                 "snippet": "role=\"img\"",
                 "path": []
               },
@@ -5336,7 +5336,7 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
                 "snippet": "aria-checked=\"true\"",
                 "path": []
               },
@@ -5349,7 +5349,7 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/img[2]/@aria-hidden",
+                "selector": "xpath /html[1]/body[1]/main[1]/img[2]/@aria-hidden",
                 "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
@@ -5362,7 +5362,7 @@
               "actRuleId": "6a7281",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
                 "snippet": "aria-required=\"yes\"",
                 "path": []
               },
@@ -5375,7 +5375,7 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
                 "snippet": "aria-label=\"Card number\"",
                 "path": []
               },
@@ -5388,7 +5388,7 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[4]/@aria-hidden",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[4]/@aria-hidden",
                 "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
@@ -5411,7 +5411,7 @@
               "actRuleId": "6cfa84",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/img[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/img[2]",
                 "snippet": "<img src=\"delivery-van.png\" alt=\"Arrives Tuesday\" aria-hidden=\"true\">",
                 "path": []
               },
@@ -5424,7 +5424,7 @@
               "actRuleId": "6cfa84",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[4]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[4]",
                 "snippet": "<div aria-hidden=\"true\"> <a href=\"/saver\"> Saver delivery </a> </div>",
                 "path": []
               },
@@ -5447,7 +5447,7 @@
               "actRuleId": "78fd32",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/p[1]",
                 "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
                 "path": []
               },
@@ -5470,7 +5470,7 @@
               "actRuleId": "7d6734",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/svg[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]",
                 "snippet": "<svg role=\"img\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <path d=\"M4 12h16\" stroke=\"currentColor\"></path> </svg>",
                 "path": []
               },
@@ -5493,7 +5493,7 @@
               "actRuleId": "8fc3b6",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/object[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/object[1]",
                 "snippet": "<object type=\"image/svg+xml\" data=\"progress.svg\" width=\"200\" height=\"8\"></object>",
                 "path": []
               },
@@ -5516,7 +5516,7 @@
               "actRuleId": "97a4e1",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/button[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/button[1]",
                 "snippet": "<button type=\"button\" class=\"icon\"> <span class=\"glyph\"></span> </button>",
                 "path": []
               },
@@ -5539,7 +5539,7 @@
               "actRuleId": "9e45ec",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/p[1]",
                 "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
                 "path": []
               },
@@ -5562,7 +5562,7 @@
               "actRuleId": "9eb3f6",
               "outcome": "cantTell",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/img[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/img[1]",
                 "snippet": "<img src=\"IMG_20240117_cart.png\" alt=\"IMG_20240117_cart.png\">",
                 "path": []
               },
@@ -5585,7 +5585,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
                 "snippet": "Cart",
                 "path": []
               },
@@ -5598,7 +5598,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]/text()[1]",
                 "snippet": "Your order",
                 "path": []
               },
@@ -5611,7 +5611,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[1]/text()[1]",
                 "snippet": "Gift wrapping",
                 "path": []
               },
@@ -5624,7 +5624,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
                 "snippet": "Postcode",
                 "path": []
               },
@@ -5637,7 +5637,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
                 "snippet": "Mobile number",
                 "path": []
               },
@@ -5650,7 +5650,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/div[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/div[1]/text()[1]",
                 "snippet": "Apply discount",
                 "path": []
               },
@@ -5663,7 +5663,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/p[1]/text()[1]",
                 "snippet": "By paying you agree to the terms.",
                 "path": []
               },
@@ -5676,7 +5676,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[2]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[2]/text()[1]",
                 "snippet": "Delivery options",
                 "path": []
               },
@@ -5689,7 +5689,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[2]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[2]/text()[1]",
                 "snippet": "Standard delivery",
                 "path": []
               },
@@ -5702,7 +5702,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[3]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[3]/p[1]/text()[1]",
                 "snippet": "Express delivery is unavailable to this postcode.",
                 "path": []
               },
@@ -5715,7 +5715,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[4]/a[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[4]/a[1]/text()[1]",
                 "snippet": "Saver delivery",
                 "path": []
               },
@@ -5728,7 +5728,7 @@
               "actRuleId": "afw4f7",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
                 "snippet": "Free returns within 30 days.",
                 "path": []
               },
@@ -5751,7 +5751,7 @@
               "actRuleId": "b4f0c3",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/head[1]/meta[2]",
+                "selector": "xpath /html[1]/head[1]/meta[2]",
                 "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\">",
                 "path": []
               },
@@ -5774,7 +5774,7 @@
               "actRuleId": "b5c3f8",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]",
+                "selector": "xpath /html[1]",
                 "snippet": "<html> <head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bi…",
                 "path": []
               },
@@ -5797,7 +5797,7 @@
               "actRuleId": "bc4a75",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[3]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[3]",
                 "snippet": "<div role=\"list\"> <p> Express delivery is unavailable to this postcode. </p> </div>",
                 "path": []
               },
@@ -5820,7 +5820,7 @@
               "actRuleId": "bc659a",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/head[1]/meta[3]",
+                "selector": "xpath /html[1]/head[1]/meta[3]",
                 "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
                 "path": []
               },
@@ -5866,7 +5866,7 @@
               "actRuleId": "bisz58",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/head[1]/meta[3]",
+                "selector": "xpath /html[1]/head[1]/meta[3]",
                 "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
                 "path": []
               },
@@ -5889,7 +5889,7 @@
               "actRuleId": "c487ae",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/a[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/a[1]",
                 "snippet": "<a href=\"/\"> <img src=\"logo.svg\" alt=\"\"> </a>",
                 "path": []
               },
@@ -5902,7 +5902,7 @@
               "actRuleId": "c487ae",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]",
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]",
                 "snippet": "<a href=\"/cart\" aria-checked=\"true\"> Cart </a>",
                 "path": []
               },
@@ -5925,7 +5925,7 @@
               "actRuleId": "cae760",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/footer[1]/iframe[1]",
+                "selector": "xpath /html[1]/body[1]/footer[1]/iframe[1]",
                 "snippet": "<iframe src=\"./terms.html\" width=\"300\" height=\"120\"></iframe>",
                 "path": []
               },
@@ -5971,7 +5971,7 @@
               "actRuleId": "e086e5",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[1]",
                 "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
                 "path": []
               },
@@ -5984,7 +5984,7 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[2]",
                 "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode\">",
                 "path": []
               },
@@ -5997,7 +5997,7 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[3]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[3]",
                 "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode-confirm\">",
                 "path": []
               },
@@ -6010,7 +6010,7 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[4]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[4]",
                 "snippet": "<input type=\"text\" name=\"city\">",
                 "path": []
               },
@@ -6023,7 +6023,7 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[5]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[5]",
                 "snippet": "<input type=\"tel\" aria-labeledby=\"phone-hint\">",
                 "path": []
               },
@@ -6036,7 +6036,7 @@
               "actRuleId": "e086e5",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]",
                 "snippet": "<input type=\"text\" aria-required=\"yes\" aria-label=\"Card number\">",
                 "path": []
               },
@@ -6049,7 +6049,7 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/form[1]/div[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/div[2]",
                 "snippet": "<div role=\"slider\" tabindex=\"0\"></div>",
                 "path": []
               },
@@ -6090,7 +6090,7 @@
               "actRuleId": "ff89c9",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/div[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/div[2]",
                 "snippet": "<div role=\"listitem\"> Standard delivery </div>",
                 "path": []
               },
@@ -6113,7 +6113,7 @@
               "actRuleId": "ffd0e9",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h1[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]",
                 "snippet": "<h1></h1>",
                 "path": []
               },
@@ -6126,7 +6126,7 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]",
                 "snippet": "<h2> Your order </h2>",
                 "path": []
               },
@@ -6139,7 +6139,7 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[2]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[2]",
                 "snippet": "<h2> Delivery options </h2>",
                 "path": []
               },
@@ -8413,7 +8413,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h1[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]/text()[1]",
                 "snippet": "Account settings",
                 "path": []
               },
@@ -8426,7 +8426,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]/text()[1]",
                 "snippet": "Notifications",
                 "path": []
               },
@@ -8439,7 +8439,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
                 "snippet": "Envoyer les notifications par courriel.",
                 "path": []
               },
@@ -8452,7 +8452,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/label[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/label[1]/text()[1]",
                 "snippet": "Weekly digest",
                 "path": []
               },
@@ -8465,7 +8465,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/button[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/button[1]/text()[1]",
                 "snippet": "Save changes",
                 "path": []
               },
@@ -8478,7 +8478,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/a[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/a[1]/text()[1]",
                 "snippet": "Read the help pages",
                 "path": []
               },
@@ -8547,11 +8547,11 @@
               "actRuleId": "2779a5",
               "outcome": "passed",
               "target": {
-                "selector": "/",
+                "selector": "xpath /",
                 "snippet": "#document <!doctype html> <html lang=\"engRish\" xml:lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cann…",
                 "path": []
               },
-              "message": "The document has at least one `<title>` element The first `<title>` element has text content"
+              "message": "The document has at least one `<title>` element; The first `<title>` element has text content"
             }
           ],
           "error": null,
@@ -8588,7 +8588,7 @@
               "actRuleId": "46ca7f",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/img[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/img[1]",
                 "snippet": "<img src=\"avatar.png\" alt=\"\">",
                 "path": []
               },
@@ -8850,7 +8850,7 @@
               "actRuleId": "97a4e1",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/button[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/button[1]",
                 "snippet": "<button type=\"submit\"> Save changes </button>",
                 "path": []
               },
@@ -8919,7 +8919,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h1[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]/text()[1]",
                 "snippet": "Account settings",
                 "path": []
               },
@@ -8932,7 +8932,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]/text()[1]",
                 "snippet": "Notifications",
                 "path": []
               },
@@ -8945,7 +8945,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
                 "snippet": "Envoyer les notifications par courriel.",
                 "path": []
               },
@@ -8958,7 +8958,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/label[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/label[1]/text()[1]",
                 "snippet": "Weekly digest",
                 "path": []
               },
@@ -8971,7 +8971,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/button[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/button[1]/text()[1]",
                 "snippet": "Save changes",
                 "path": []
               },
@@ -8984,7 +8984,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/a[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/a[1]/text()[1]",
                 "snippet": "Read the help pages",
                 "path": []
               },
@@ -9030,7 +9030,7 @@
               "actRuleId": "b5c3f8",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]",
+                "selector": "xpath /html[1]",
                 "snippet": "<html lang=\"engRish\" xml:lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is rep…",
                 "path": []
               },
@@ -9099,7 +9099,7 @@
               "actRuleId": "bf051a",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/@lang",
+                "selector": "xpath /html[1]/@lang",
                 "snippet": "lang=\"engRish\"",
                 "path": []
               },
@@ -9145,7 +9145,7 @@
               "actRuleId": "c487ae",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/a[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/a[1]",
                 "snippet": "<a href=\"/help\"> Read the help pages </a>",
                 "path": []
               },
@@ -9191,7 +9191,7 @@
               "actRuleId": "de46e4",
               "outcome": "failed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/p[1]/@lang",
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/@lang",
                 "snippet": "lang=\"xyzzy\"",
                 "path": []
               },
@@ -9214,7 +9214,7 @@
               "actRuleId": "e086e5",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/input[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/input[1]",
                 "snippet": "<input type=\"checkbox\" id=\"digest\" name=\"digest\" checked>",
                 "path": []
               },
@@ -9278,7 +9278,7 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h1[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]",
                 "snippet": "<h1> Account settings </h1>",
                 "path": []
               },
@@ -9291,7 +9291,7 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": "/html[1]/body[1]/main[1]/h2[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]",
                 "snippet": "<h2> Notifications </h2>",
                 "path": []
               },

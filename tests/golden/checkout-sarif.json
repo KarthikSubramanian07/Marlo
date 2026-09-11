@@ -608,7 +608,7 @@
             "act-rules-calibrated": 36,
             "act-rules-unmeasurable": [],
             "calibration-generated": "2026-09-11",
-            "calibration-commit": "66d083feddd2efbd8e33f0986f5376e42eeec7cf",
+            "calibration-commit": "e2ee062c91545561da8a90f64ac4e73c02d6c94a",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -1661,19 +1661,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/body[1]/main[1]/p[1]/text()[1]"
+                  "uri": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                  "name": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "09o5cg:/html[1]/body[1]/main[1]/p[1]/text()[1]"
+            "marloFinding": "09o5cg:xpath /html[1]/body[1]/main[1]/p[1]/text()[1]"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2072,25 +2072,25 @@
           "ruleId": "5c01ea",
           "level": "warning",
           "message": {
-            "text": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
+            "text": "The attribute is not allowed for the element on which it is specified"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
+                  "uri": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                  "name": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "5c01ea:/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
+            "marloFinding": "5c01ea:xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2215,19 +2215,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required"
+                  "uri": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                  "name": "xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "6a7281:/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required"
+            "marloFinding": "6a7281:xpath /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2524,19 +2524,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/body[1]/main[1]/p[1]/text()[1]"
+                  "uri": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                  "name": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "afw4f7:/html[1]/body[1]/main[1]/p[1]/text()[1]"
+            "marloFinding": "afw4f7:xpath /html[1]/body[1]/main[1]/p[1]/text()[1]"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2665,19 +2665,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/body[1]/main[1]/div[3]"
+                  "uri": "xpath /html[1]/body[1]/main[1]/div[3]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/body[1]/main[1]/div[3]",
+                  "name": "xpath /html[1]/body[1]/main[1]/div[3]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "bc4a75:/html[1]/body[1]/main[1]/div[3]"
+            "marloFinding": "bc4a75:xpath /html[1]/body[1]/main[1]/div[3]"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2714,19 +2714,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/head[1]/meta[3]"
+                  "uri": "xpath /html[1]/head[1]/meta[3]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/head[1]/meta[3]",
+                  "name": "xpath /html[1]/head[1]/meta[3]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "bc659a:/html[1]/head[1]/meta[3]"
+            "marloFinding": "bc659a:xpath /html[1]/head[1]/meta[3]"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2764,19 +2764,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/head[1]/meta[3]"
+                  "uri": "xpath /html[1]/head[1]/meta[3]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/head[1]/meta[3]",
+                  "name": "xpath /html[1]/head[1]/meta[3]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "bisz58:/html[1]/head[1]/meta[3]"
+            "marloFinding": "bisz58:xpath /html[1]/head[1]/meta[3]"
           },
           "properties": {
             "reported-by": "alfa",
@@ -3186,19 +3186,19 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "/html[1]/body[1]/main[1]/div[2]"
+                  "uri": "xpath /html[1]/body[1]/main[1]/div[2]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "/html[1]/body[1]/main[1]/div[2]",
+                  "name": "xpath /html[1]/body[1]/main[1]/div[2]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "ff89c9:/html[1]/body[1]/main[1]/div[2]"
+            "marloFinding": "ff89c9:xpath /html[1]/body[1]/main[1]/div[2]"
           },
           "properties": {
             "reported-by": "alfa",
