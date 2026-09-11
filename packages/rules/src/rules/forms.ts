@@ -47,19 +47,31 @@ const FIELD_ROLES: ReadonlySet<string> = new Set([
   'textbox',
 ]);
 
-/** Input types whose implicit role is one of the roles above, per HTML-AAM. */
-const INPUT_ROLES: Readonly<Record<string, string>> = Object.freeze({
-  checkbox: 'checkbox',
-  email: 'textbox',
-  number: 'spinbutton',
-  password: 'textbox',
-  radio: 'radio',
-  range: 'slider',
-  search: 'searchbox',
-  tel: 'textbox',
-  text: 'textbox',
-  url: 'textbox',
-});
+/**
+ * Input types whose implicit role is one of the roles above, per HTML-AAM.
+ *
+ * `password` is deliberately absent. HTML-AAM gives it no corresponding role, so it is
+ * not one of the roles 36b590 applies to, and treating it as a textbox would put a
+ * field the rule does not cover on the one path that can fail.
+ *
+ * Null prototype, because this is looked up with a value read out of the document. With
+ * an ordinary object literal, `<input type="constructor">` returns `Object` and
+ * `type="__proto__"` returns the prototype, from a function declared to return a string
+ * or null.
+ */
+const INPUT_ROLES: Readonly<Record<string, string>> = Object.freeze(
+  Object.assign(Object.create(null) as Record<string, string>, {
+    checkbox: 'checkbox',
+    email: 'textbox',
+    number: 'spinbutton',
+    radio: 'radio',
+    range: 'slider',
+    search: 'searchbox',
+    tel: 'textbox',
+    text: 'textbox',
+    url: 'textbox',
+  }),
+);
 
 /**
  * Input types with a role that is not a form field for this rule's purposes, listed
@@ -78,6 +90,7 @@ const NON_FIELD_INPUTS: ReadonlySet<string> = new Set([
   'hidden',
   'image',
   'month',
+  'password',
   'reset',
   'submit',
   'time',
@@ -122,18 +135,50 @@ function scopeOf(element: MarloElement, document: MarloDocument): MarloElement {
   return ancestors(element).find((a) => a.tag === 'form') ?? document.root;
 }
 
-/** Every element in the document carrying one of the given ids, in document order. */
-function referenced(ids: string, document: MarloDocument): MarloElement[] {
-  const wanted = new Set(
-    normalise(ids)
-      .split(' ')
-      .filter((id) => id !== ''),
-  );
-  if (wanted.size === 0) return [];
-  return [...walk(document.root)].filter((node) => {
+/**
+ * Every element in the document, indexed by id, built once per document.
+ *
+ * `referenced` used to walk the whole tree per lookup, and `candidatesFor` looks up
+ * every `aria-describedby` in scope, once per field. On a form of 200 labelled fields
+ * with the hint text that pattern recommends, that was 1800 nodes walked 200 times over
+ * and the rule took half a minute. AGENTS.md says to cap anything unbounded, and this
+ * was unbounded in the shape a well-marked-up page has most of.
+ *
+ * Keyed on the root element in a WeakMap, so it lives exactly as long as the document
+ * and no rule can see another document's index.
+ */
+const ID_INDEX = new WeakMap<MarloElement, ReadonlyMap<string, readonly MarloElement[]>>();
+
+function idIndex(document: MarloDocument): ReadonlyMap<string, readonly MarloElement[]> {
+  const cached = ID_INDEX.get(document.root);
+  if (cached !== undefined) return cached;
+  const index = new Map<string, MarloElement[]>();
+  for (const node of walk(document.root)) {
     const id = attr(node, 'id');
-    return id !== null && wanted.has(id);
-  });
+    if (id === null || id === '') continue;
+    const found = index.get(id);
+    if (found === undefined) index.set(id, [node]);
+    else found.push(node);
+  }
+  ID_INDEX.set(document.root, index);
+  return index;
+}
+
+/** The id tokens in an IDREF list attribute. Empty when the attribute names nothing. */
+function idTokens(ids: string): readonly string[] {
+  return normalise(ids)
+    .split(' ')
+    .filter((id) => id !== '');
+}
+
+/** Every element carrying one of the given ids, in document order. */
+function referenced(ids: string, document: MarloDocument): MarloElement[] {
+  const wanted = idTokens(ids);
+  if (wanted.length === 0) return [];
+  const index = idIndex(document);
+  const out: MarloElement[] = [];
+  for (const id of wanted) out.push(...(index.get(id) ?? []));
+  return out;
 }
 
 /** The `aria-invalid` values that mean this field is in error right now. */
@@ -153,11 +198,30 @@ function isVisuallyHidden(element: MarloElement): boolean {
   for (const node of [element, ...ancestors(element)]) {
     if (hasAttr(node, 'hidden')) return true;
     const style = attr(node, 'style');
-    if (
-      style !== null &&
-      /(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*hidden)\s*(?:;|$)/i.test(style)
-    ) {
-      return true;
+    if (style === null) continue;
+    // `display: none` removes the subtree and no descendant can undo it.
+    if (/(?:^|;)\s*display\s*:\s*none\s*(?:!\s*important)?\s*(?:;|$)/i.test(style)) return true;
+    // `visibility` inherits and a descendant may set it back to `visible`, so the
+    // nearest declaration wins rather than the first hidden one found on the way up.
+    const visibility = /(?:^|;)\s*visibility\s*:\s*([a-z]+)/i.exec(style);
+    if (visibility !== null) return visibility[1]?.toLowerCase() !== 'visible';
+  }
+  return false;
+}
+
+/**
+ * Whether an element carries text a reader could receive, counting text alternatives.
+ *
+ * `element.text` is concatenated descendant text and knows nothing about `alt`, so an
+ * error message rendered as an image with alt text read as having no text at all, and
+ * that was enough on its own to fail the field.
+ */
+function hasPerceivableText(element: MarloElement): boolean {
+  if (normalise(element.text) !== '') return true;
+  for (const node of walk(element)) {
+    for (const name of ['alt', 'aria-label', 'title']) {
+      const value = attr(node, name);
+      if (value !== null && normalise(value) !== '') return true;
     }
   }
   return false;
@@ -195,29 +259,39 @@ interface Candidate {
  * into after submission, and quoting that at a reader would mean quoting it on every
  * framework form on the web before anybody had typed anything.
  */
-function candidatesFor(field: MarloElement, document: MarloDocument): Candidate[] {
-  const scope = scopeOf(field, document);
+const SCOPE_CANDIDATES = new WeakMap<MarloElement, readonly Candidate[]>();
+
+/**
+ * The candidate error indicators inside one form, computed once for that form.
+ *
+ * Cached on the scope rather than on the field, because every field in a form produces
+ * the same list. The field's own exclusion is applied by the caller, after the cache,
+ * so the shared result stays correct for each of them.
+ */
+function candidatesInScope(scope: MarloElement, document: MarloDocument): readonly Candidate[] {
+  const cached = SCOPE_CANDIDATES.get(scope);
+  if (cached !== undefined) return cached;
+
   const seen = new Set<MarloElement>();
   const out: Candidate[] = [];
   const add = (element: MarloElement, how: string): void => {
-    if (element === field || element === scope || seen.has(element)) return;
-    if (normalise(element.text) === '') return;
+    if (element === scope || seen.has(element)) return;
+    if (!hasPerceivableText(element)) return;
     seen.add(element);
     out.push({ element, how });
   };
-
-  const errorMessage = attr(field, 'aria-errormessage');
-  if (errorMessage !== null && isInvalid(field)) {
-    for (const element of referenced(errorMessage, document)) {
-      add(element, 'aria-errormessage on the field');
-    }
-  }
 
   const describedInScope = new Set<MarloElement>();
   for (const node of walk(scope)) {
     const describedby = attr(node, 'aria-describedby');
     if (describedby !== null) {
       for (const element of referenced(describedby, document)) describedInScope.add(element);
+    }
+    const errorMessage = attr(node, 'aria-errormessage');
+    if (errorMessage !== null && isInvalid(node)) {
+      for (const element of referenced(errorMessage, document)) {
+        add(element, 'aria-errormessage on a field reporting itself invalid');
+      }
     }
   }
 
@@ -238,7 +312,26 @@ function candidatesFor(field: MarloElement, document: MarloDocument): Candidate[
     );
   }
 
+  SCOPE_CANDIDATES.set(scope, out);
   return out;
+}
+
+/**
+ * Content that may be a form field error indicator for this field.
+ *
+ * Three connections count, and each is something the author wrote rather than something
+ * inferred from prose: an `aria-errormessage` on a field reporting itself invalid, an
+ * alert or assertive live region inside the same form, and an element whose id or class
+ * names it as an error inside the same form.
+ *
+ * Content hidden from sight counts only when something references it through
+ * `aria-describedby`. A referenced hidden element is still read out as part of a
+ * description; an unreferenced one is usually the empty slot a form renders its message
+ * into after submission, and quoting that at a reader would mean quoting it on every
+ * framework form on the web before anybody had typed anything.
+ */
+function candidatesFor(field: MarloElement, document: MarloDocument): readonly Candidate[] {
+  return candidatesInScope(scopeOf(field, document), document).filter((c) => c.element !== field);
 }
 
 function quote(element: MarloElement): string {
@@ -279,19 +372,31 @@ export const errorMessageDescribesValue = defineRule({
     // `aria-invalid` is the ordinary pre-rendered validation message every form library
     // emits, waiting to be shown, and failing that would flag almost every form on the
     // web. `aria-invalid` is what distinguishes an error that is live now.
+    const candidates = candidatesFor(element, document);
     const errorMessage = attr(element, 'aria-errormessage');
-    if (errorMessage !== null && isInvalid(element)) {
-      const messages = referenced(errorMessage, document);
+    const named = errorMessage === null ? [] : idTokens(errorMessage);
+
+    // An attribute present with no id in it names nothing, so the field is in the same
+    // position as one with no attribute at all. `aria-errormessage={id ?? ''}` renders
+    // exactly that on every valid field in a great many frameworks, and reading it as a
+    // broken reference failed a whole form of correctly marked-up fields.
+    if (named.length > 0 && isInvalid(element)) {
+      const messages = referenced(errorMessage ?? '', document);
       const perceivable = messages.filter(
-        (m) => normalise(m.text) !== '' && unperceivable(m) === null,
+        (m) => hasPerceivableText(m) && unperceivable(m) === null,
       );
-      if (perceivable.length === 0) {
+      // And only when nothing else in the form is showing the error either. A typo in
+      // one IDREF, next to a live `role="alert"` carrying the text, is a broken
+      // reference rather than an error that reaches nobody, and which of those it is
+      // depends on reading the alert, which is the judgment this rule does not make.
+      const elsewhere = candidates.filter((c) => unperceivable(c.element) === null);
+      if (perceivable.length === 0 && elsewhere.length === 0) {
         const first = messages[0];
         const why =
           first === undefined
-            ? `aria-errormessage="${errorMessage}" refers to no element in this document`
-            : messages.every((m) => normalise(m.text) === '')
-              ? 'the element it refers to has no text'
+            ? `aria-errormessage="${errorMessage ?? ''}" refers to no element in this document`
+            : messages.every((m) => !hasPerceivableText(m))
+              ? 'the element it refers to has no text and no text alternative'
               : `the element it refers to is ${unperceivable(first) ?? 'hidden'}`;
         return {
           outcome: 'failed',
@@ -302,7 +407,6 @@ export const errorMessageDescribesValue = defineRule({
       }
     }
 
-    const candidates = candidatesFor(element, document);
     if (candidates.length === 0) {
       if (isInvalid(element)) {
         return {
