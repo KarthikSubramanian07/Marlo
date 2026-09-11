@@ -76,7 +76,7 @@ apps/demo/checkout.html
   ▲▲  serious  7d6734  SVG element with explicit role has non-empty accessible name
       WCAG 1.1.1  axe-core precision 1.00 over 10 official test cases
       svg (not located in source)
-        <svg> elements with an img role must have alternative text
+        <svg> elements with an img or image role must have alternative text
 
   ▲▲  serious  8fc3b6  Object element rendering non-text content has non-empty accessible name
       WCAG 1.1.1  axe-core precision 1.00 over 14 official test cases
