@@ -225,20 +225,20 @@ const ENTRIES: readonly MappingEntry[] = [
   {
     engineRuleId: 'sia-r45',
     actId: 'a25f45',
-    kind: 'exact',
-    note: 'f4/4 p0 i0. Alfa R45 checks that every id in a headers attribute refers to a cell in the same table (HeadersRefersToCellInTable), exactly the ACT rule. Not R77, which asks the reverse question of whether a data cell has a header and only correlates by accident.',
+    kind: 'superset',
+    note: 'f4/4 p0 i0. Alfa R45 checks that every id in a headers attribute refers to a cell in the same table, which is the ACT rule, and carries a second expectation the ACT rule does not: it also fails a cell whose headers attribute refers to itself (HeadersRefersToSelf). Nothing in this corpus exercises that, which is why the measurement is clean and the kind is not exact. Its first expectation is also a cardinality proxy, `cells.size === ids.size`, rather than a per-token resolution. Not R77, which asks the reverse question of whether a data cell has a header and only correlates by accident.',
   },
   {
     engineRuleId: 'sia-r86',
     actId: '46ca7f',
     kind: 'partial',
-    note: 'f2/3 p0 i0. Alfa R86 checks an element marked decorative with role none or presentation is not included in the accessibility tree. Misses 46ca7f/baa8fcdc ("Failed Example 3"), an svg with role="none" and an aria-label: the ACT rule holds that the global aria-label keeps the element exposed, and Alfa does not flag it. R67, the same check restricted to img and svg, catches a subset of what R86 catches and adds nothing, so it is not mapped.',
+    note: 'f2/3 p0 i0. Alfa R86 checks that an element marked decorative is not included in the accessibility tree. Marked decorative is `isMarkedDecorative`, which is broader than a role attribute: it covers role none or presentation on anything, and also an `img` carrying `alt=""` with no role at all. Misses 46ca7f/baa8fcdc ("Failed Example 3"), an svg with role="none" and an aria-label: the ACT rule holds that the global aria-label keeps the element exposed, and Alfa does not flag it. The alt-based branch is img-only, so it does not rescue that svg. R67 is the same expectation restricted to img and svg, so it catches a subset of what R86 catches and adds nothing.',
   },
   {
     engineRuleId: 'sia-r90',
     actId: '307n5z',
-    kind: 'exact',
-    note: 'f3/3 p0 i0. Alfa R90 checks an element whose role has presentational children contains no tabbable descendant, exactly the ACT rule.',
+    kind: 'partial',
+    note: 'f3/3 p0 i0. Alfa R90 checks that an element whose role has presentational children contains no descendant that is *tabbable*, and ACT 307n5z is about content that is *focusable*. Those differ: a descendant with tabindex="-1" is focusable and not tabbable, so the ACT rule fails it and R90 passes it. The corpus contains no example of that shape, which is why the measurement is clean, and a clean measurement over a corpus that never asks the question is not equivalence.',
   },
   {
     engineRuleId: 'sia-r28',
