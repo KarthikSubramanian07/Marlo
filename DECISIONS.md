@@ -190,3 +190,55 @@ The W3C Software and Document Licence permits it, with the notice travelling alo
 Two reasons it is not a convenience. CI has to be green with no network, which the brief required and which is also the only way the offline stub story is true rather than claimed. And a calibration number that silently changes because an upstream file changed is not a calibration number; it is a reading. Regeneration is a deliberate commit with a diff someone reviews, and `pnpm corpus:verify` fails if the vendored corpus does not match its recorded counts.
 
 **Wrong if:** the corpus starts changing often enough that vendoring produces constant churn, at which point pinning to an upstream tag would be better than a copy. It does not currently.
+
+---
+
+## Working agreements
+
+Outside the D-series numbering on purpose, because these are not architectural decisions. They are the things the code does not record: approaches already tried and refused, areas that are settled, and what finished means here. The file exists so the same proposal does not arrive twice.
+
+### Already tried and refused
+
+**An inline suppression comment for the forbidden-claims scanner**, and the variant that excludes the checker scripts from scanning. The first is an escape hatch on the whole check, and the first phrase anyone reaches for it with is the one that should not ship. The second leaves the checker's own explanatory comments unscanned, and a comment is where a claim would hide. The pattern data moved into one file instead, and that file is the only exclusion either checker has.
+
+**A `runScripts: false` option on the default renderer.** happy-dom 20 executes inline script under every combination of its flags, all four tested by hand. The option was deleted rather than documented, because an option that lies is worse than no option, and somebody would have relied on it. Reopening this needs a renderer that parses without executing, which is real work rather than a flag.
+
+**Tests that construct impossible inputs to reach defensive branches.** Two such branches were deleted instead. One guarded a routing state the schema now refuses to parse; the other was a second fallback narrowing a value the logic had already narrowed. Prefer making the state unrepresentable.
+
+**An audit check stricter than the criterion it implements.** The harness flagged links inline in a sentence, which WCAG 2.2 success criterion 2.5.8 exempts. Rejected as noise rather than rigour: a check the standard disagrees with produces reports nobody acts on.
+
+**Playwright as a declared dependency.** SETUP.md says a browser is optional and `pnpm check` needs none, and a devDependency would make that sentence untrue for everybody who clones the repository. It is installed inside the two CI jobs that need a real browser, and the lockfile they write is discarded with the runner.
+
+D-002 through D-012 record the other refusals already: a codemod core compiled to WASM, unioning findings across engines, publishing one accuracy view rather than two, generated alt text where the page does not supply the meaning, a framework for the site, and fetching the corpus at test time.
+
+### Settled, and not open for a redesign
+
+The corpus bytes, and the single-path exclusion in the prose and claims checkers.
+
+This project's own engine is graded in the same table as its peers with no exemption, and the table is published while it places third of four. That table is the product, and a table where the author's engine happened to win would be worth nothing. D-008.
+
+Branch protection on `main`. History and required checks have no bypass actor at all, including the repository owner, and that has been tested by attempting a force push and being refused. The review requirement is overridden per merge with `gh pr merge <n> --rebase --admin`, which gets past the review and not past the checks or the force-push rule.
+
+### What finished means here
+
+`pnpm check` green. It is what CI runs, and nothing CI runs sits outside it.
+
+Anything that ships is confirmed in the served artifact rather than in the source that was written, and anything visual is confirmed in a browser at real size.
+
+A fix for a class of defect arrives with a test for the class, not for the one instance that was reported.
+
+No figure is published unless something measured it. A measured figure that is unflattering is publishable. An estimate is not.
+
+When the environment is broken, that is said out loud rather than worked around, and it is never allowed to read as a code failure.
+
+### Working preferences, recorded because they are nowhere in the code
+
+One recommendation rather than a menu. Where alternatives were weighed, name the one chosen and the reason, in a sentence.
+
+Where the official or simplest path is asked for and none exists, say so plainly and say where you looked, rather than offering a workaround as though it were the answer.
+
+Report outcomes as they happened. Failing tests get their output pasted, a skipped step is stated, and nothing is called finished that was not verified.
+
+Quote paths, line numbers and command output rather than describing behaviour from memory.
+
+State an uncertainty in one line and continue on a stated assumption. Stop and ask only where a wrong guess would be unsafe or would waste the work.
