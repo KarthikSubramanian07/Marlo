@@ -608,7 +608,7 @@
             "act-rules-calibrated": 36,
             "act-rules-unmeasurable": [],
             "calibration-generated": "2026-09-11",
-            "calibration-commit": "a8ad12edfd15e4d3880070ad09c8bd4fe0064ae0",
+            "calibration-commit": "66d083feddd2efbd8e33f0986f5376e42eeec7cf",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
