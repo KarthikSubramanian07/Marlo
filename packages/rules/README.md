@@ -1,6 +1,6 @@
 # @marlo/rules
 
-Marlo's own ACT rule implementations. **35 of the 94 published ACT rules.**
+Marlo's own ACT rule implementations. **36 of the 94 published ACT rules.**
 
 ## One rule, one file, one registry line
 
