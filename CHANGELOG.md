@@ -12,6 +12,22 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ## [Unreleased]
 
+### Accuracy
+
+Three movements since the first published measurement, all from work under Phase 1.
+
+| Figure                      | Was   | Now   |
+| --------------------------- | ----- | ----- |
+| Marlo strict precision      | 0.714 | 0.840 |
+| Marlo strict recall         | 0.621 | 0.633 |
+| Marlo false positive rate   | 12.9% | 6.4%  |
+
+Precision and the false positive rate moved on the four text-spacing and ARIA rules the auto-fix gate had been refusing: `4e8ab6` from 0.00 to 1.00, `24afc2` and `9e45ec` from 0.29 to 1.00, `78fd32` from 0.33 to 1.00. `78fd32` now clears the gate and runs its codemod.
+
+**Recall moved twice and the second time it moved down.** Measuring the Alfa mapping over the whole corpus took it up, and implementing `36b590` took it from 0.654 back to 0.633. That rule answers `cantTell` on all five of its failing examples by design, because deciding whether an error message describes a cause is a question about language, and the strict view counts a `cantTell` on a failing example as a miss. It is the correct reading: a developer whose page ships broken did not receive partial credit. The entry grades `consistent` under the official protocol while missing every violation, so it appears in the `flatteredByProtocol` column, which is what that column is for.
+
+`36b590` records zero false positives and zero disallowed outcomes over its nine test cases.
+
 ### Added
 
 - The research gate: `RESEARCH.md`, `PLAN.md`, `DECISIONS.md`, and the third-party licence ledger.
