@@ -26,10 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Refuse to run on main
-        if: github.ref == 'refs/heads/main'
+      - name: Refuse to run anywhere but a branch that is not main
+        # Not only `refs/heads/main`. A dispatch on a tag gives `refs/tags/v1`, which the
+        # main-only test lets through, and this job would then commit against a detached
+        # tag ref.
+        if: github.ref == 'refs/heads/main' || !startsWith(github.ref, 'refs/heads/')
         run: |
-          echo "This writes generated files. Dispatch it on a branch, never on main." >&2
+          echo "This writes generated files. Dispatch it on a branch, never on main" >&2
+          echo "and never on a tag. Got: $GITHUB_REF" >&2
           exit 1
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -84,4 +88,15 @@ jobs:
           # typecheck and the unit suite, which the pull request checks run again on the
           # very next event. A hook failing here loses the regeneration and leaves the
           # branch with stale artifacts, which is the state this job exists to fix.
-          git push --no-verify origin HEAD:${{ github.ref_name }}
+          #
+          # The ref comes from the environment rather than from an Actions expression,
+          # because an expression is substituted as text before bash sees the line, which
+          # makes a branch name code:
+          # git permits `$`, backtick, `;`, `&` and `|` in a ref, and `${IFS}` supplies
+          # the spaces it forbids. A branch called `x$(...)` would have run its contents
+          # on a runner holding a token with write access. Reading `$GITHUB_REF_NAME`
+          # and quoting it keeps the name data.
+          #
+          # `refs/heads/` is explicit because a bare `HEAD:name` resolves against every
+          # namespace, and a dispatch on a tag would otherwise push into `refs/tags`.
+          git push --no-verify origin "HEAD:refs/heads/$GITHUB_REF_NAME"

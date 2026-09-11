@@ -99,11 +99,16 @@ function readTarget(target: unknown): { path: string | null; snippet: string } {
     const value: unknown = Reflect.apply(pathFn, target, []);
     if (typeof value === 'string' && value !== '') path = value;
   }
+  // Every object inherits `Object.prototype.toString`, so a `typeof` check on it and a
+  // `typeof` check on its result are both vacuous: they pass for anything and hand back
+  // "[object Object]". That string was reaching the snippet field, which is the evidence
+  // a reader is shown for the finding. Only an override counts, and a result still
+  // shaped like the default is refused.
   let snippet = '';
   const serialise: unknown = Reflect.get(target, 'toString');
-  if (typeof serialise === 'function') {
+  if (typeof serialise === 'function' && serialise !== Object.prototype.toString) {
     const value: unknown = Reflect.apply(serialise, target, []);
-    if (typeof value === 'string') snippet = value;
+    if (typeof value === 'string' && !/^\[object \w+\]$/.test(value)) snippet = value;
   }
   return { path, snippet };
 }
@@ -124,11 +129,18 @@ function readMessage(outcome: object): string | null {
   const expectations: unknown = Reflect.get(json, 'expectations');
   if (!Array.isArray(expectations)) return null;
 
+  // A failed outcome carries the expectations it satisfied alongside the one it did
+  // not. Reading all of them put the satisfied ones first, so the evidence for a
+  // failure opened by saying the element passed something. Alfa's own `Failed.toSARIF`
+  // filters to the erring results and this mirrors it, which also means the two
+  // renderings of one outcome cannot disagree about which clause failed.
+  const failed = Reflect.get(json, 'outcome') === 'failed';
   const messages: string[] = [];
   for (const entry of expectations as unknown[]) {
     if (!Array.isArray(entry)) continue;
     const result: unknown = entry[1];
     if (typeof result !== 'object' || result === null) continue;
+    if (failed && Reflect.get(result, 'type') !== 'err') continue;
     const inner: unknown = Reflect.get(result, 'error') ?? Reflect.get(result, 'value');
     const holder = typeof inner === 'object' && inner !== null ? inner : result;
     const message: unknown = Reflect.get(holder, 'message');
@@ -136,7 +148,9 @@ function readMessage(outcome: object): string | null {
       messages.push(message.replace(/\s+/g, ' ').trim());
     }
   }
-  return messages.length === 0 ? null : messages.join(' ');
+  // Several clauses of one rule, kept apart, because a bare space ran them together
+  // into a sentence Alfa never wrote.
+  return messages.length === 0 ? null : messages.join('; ');
 }
 
 export class AlfaEngine implements Engine {
@@ -228,17 +242,38 @@ export class AlfaEngine implements Engine {
       for (const item of outcomes) {
         // Alfa rule URIs look like https://alfa.siteimprove.com/rules/sia-r2.
         const engineRuleId = item.rule.uri.split('/').pop() ?? item.rule.uri;
-        for (const entry of this.mapping.engineToAct(engineRuleId)) {
-          if (!actRuleIds.includes(entry.actId)) continue;
+        const mapped = this.mapping
+          .engineToAct(engineRuleId)
+          .filter((entry) => actRuleIds.includes(entry.actId));
+        if (mapped.length === 0) continue;
+
+        // Narrowed once per outcome, and inside its own catch, so an outcome word this
+        // adapter does not know costs the rules that outcome speaks for rather than the
+        // whole page. `narrowOutcome` throws by design, and the outer catch marks every
+        // rule the engine claims as errored, which would discard verdicts already
+        // collected for rules that were fine.
+        let outcome;
+        try {
+          outcome = narrowOutcome(item.outcome, item.rule.uri);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          for (const entry of mapped) errors.set(entry.actId, message);
+          continue;
+        }
+
+        for (const entry of mapped) {
           const list = verdicts.get(entry.actId) ?? [];
           list.push({
             engineRuleId,
-            outcome: narrowOutcome(item.outcome, item.rule.uri),
-            // Alfa's path is an XPath-shaped locator rather than a CSS selector, and
-            // it is reported as Alfa wrote it rather than translated into a selector
-            // this adapter would then be guessing at. `:root` only when Alfa's target
-            // was the document itself.
-            selector: item.path ?? ':root',
+            outcome,
+            // Alfa locates by an XPath-shaped path rather than a CSS selector, and
+            // this field carries a CSS selector for every other engine. Reported
+            // with its notation named, because `/html[1]/body[1]/p[2]` on its own
+            // reads as a selector to a person and as an absolute file path to
+            // anything consuming the report: `sarif.ts` uses this field as the
+            // artifact URI when a finding has no source mapping. `:root` stays for
+            // a document-level target, which is the one case it is true of.
+            selector: item.path === null ? ':root' : `xpath ${item.path}`,
             snippet: truncateSnippet(item.snippet),
             message: item.message ?? `Alfa ${engineRuleId}`,
           });
