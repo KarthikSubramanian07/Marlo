@@ -244,9 +244,11 @@ describe('the adapters run against a real page', () => {
     expect(located.length).toBeGreaterThan(0);
 
     for (const verdict of located) {
-      // An element target gets Alfa's path, `/html[1]/body[1]/img[1]`. A document-level
-      // target has none and stays `:root`, which is the one honest use of it.
-      expect(verdict.target.selector, verdict.engineRuleId).toMatch(/^(:root|\/html\[\d+\])/);
+      // An element target gets Alfa's path with its notation named, because this field
+      // carries a CSS selector for every other engine and `sarif.ts` uses it as an
+      // artifact URI. A document-level target has no path and stays `:root`, which is
+      // the one case that is true of.
+      expect(verdict.target.selector, verdict.engineRuleId).toMatch(/^(:root|xpath \/html\[\d+\])/);
       // And the message is Alfa's diagnostic, not a restatement of which rule ran.
       expect(verdict.message, verdict.engineRuleId).not.toBe(`Alfa ${verdict.engineRuleId}`);
     }
@@ -254,6 +256,11 @@ describe('the adapters run against a real page', () => {
     const withPath = located.find((v) => v.target.selector !== ':root');
     expect(withPath, 'no alfa verdict carried a path').toBeDefined();
     expect(withPath?.target.snippet).not.toBe('');
+    // And never the default serialisation, which the guards used to let through
+    // because every object has a toString and it always returns a string.
+    for (const verdict of located) {
+      expect(verdict.target.snippet, verdict.engineRuleId).not.toMatch(/^\[object \w+\]$/);
+    }
     await page.close();
   });
 
