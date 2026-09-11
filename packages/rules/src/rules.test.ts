@@ -703,7 +703,8 @@ describe('36b590 error message describes the invalid value', () => {
         '<span id="e" style="display: none">Age must be at least 1.</span></form></body></html>',
     );
     expect(hidden.outcome).toBe('failed');
-    expect(hidden.messages.join(' ')).toContain('cannot be perceived');
+    expect(hidden.messages.join(' ')).toContain('not visible');
+    expect(hidden.messages.join(' ')).toContain('reaches nobody');
 
     const missing = check(
       '36b590',
