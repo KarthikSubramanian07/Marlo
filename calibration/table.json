@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generated": "2026-09-11",
-  "commit": "a8ad12edfd15e4d3880070ad09c8bd4fe0064ae0",
+  "commit": "66d083feddd2efbd8e33f0986f5376e42eeec7cf",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -935,7 +935,7 @@
       "engineRuleIds": [
         "sia-r90"
       ],
-      "mappingKind": "exact",
+      "mappingKind": "partial",
       "testCaseCount": 7,
       "matrix": {
         "passed": {
@@ -4881,7 +4881,7 @@
       "engineRuleIds": [
         "sia-r45"
       ],
-      "mappingKind": "exact",
+      "mappingKind": "superset",
       "testCaseCount": 17,
       "matrix": {
         "passed": {
