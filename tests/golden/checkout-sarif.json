@@ -10,6 +10,25 @@
           "informationUri": "https://trymarlo.pages.dev",
           "rules": [
             {
+              "id": "09o5cg",
+              "name": "Text has enhanced contrast",
+              "shortDescription": {
+                "text": "Text has enhanced contrast"
+              },
+              "fullDescription": {
+                "text": "ACT rule 09o5cg. Text has enhanced contrast"
+              },
+              "helpUri": "https://act-rules.github.io/rules/09o5cg",
+              "properties": {
+                "wcag-success-criteria": [
+                  "1.4.3",
+                  "1.4.6"
+                ],
+                "act-rule-type": "atomic",
+                "official-test-cases": 29
+              }
+            },
+            {
               "id": "23a2a8",
               "name": "Image has non-empty accessible name",
               "shortDescription": {
@@ -588,8 +607,8 @@
             "act-rules-published": 94,
             "act-rules-calibrated": 35,
             "act-rules-unmeasurable": [],
-            "calibration-generated": "2026-08-10",
-            "calibration-commit": "d26e6bcc124969427d25bcc0bd009f9a315d1520",
+            "calibration-generated": "2026-09-11",
+            "calibration-commit": null,
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -687,34 +706,6 @@
             {
               "level": "warning",
               "message": {
-                "text": "09o5cg was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "09o5cg"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "24afc2 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "24afc2"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
                 "text": "3ea0c8 was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
@@ -729,150 +720,10 @@
             {
               "level": "warning",
               "message": {
-                "text": "46ca7f was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "46ca7f"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "59796f was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "59796f"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
                 "text": "5b7ae0 was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
                 "id": "5b7ae0"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "78fd32 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "78fd32"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "8fc3b6 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "8fc3b6"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "9e45ec was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "9e45ec"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "9eb3f6 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "9eb3f6"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "b4f0c3 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "b4f0c3"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "bc4a75 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "bc4a75"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "bc659a was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "bc659a"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "bisz58 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "bisz58"
               },
               "properties": {
                 "status": "unsupported",
@@ -901,20 +752,6 @@
               },
               "descriptor": {
                 "id": "e88epe"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "ff89c9 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "ff89c9"
               },
               "properties": {
                 "status": "unsupported",
@@ -1337,34 +1174,6 @@
             {
               "level": "warning",
               "message": {
-                "text": "09o5cg was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "09o5cg"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "24afc2 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "24afc2"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
                 "text": "3ea0c8 was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
@@ -1379,150 +1188,10 @@
             {
               "level": "warning",
               "message": {
-                "text": "46ca7f was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "46ca7f"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "59796f was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "59796f"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
                 "text": "5b7ae0 was not evaluated by alfa: this engine does not implement it."
               },
               "descriptor": {
                 "id": "5b7ae0"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "78fd32 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "78fd32"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "8fc3b6 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "8fc3b6"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "9e45ec was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "9e45ec"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "9eb3f6 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "9eb3f6"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "b4f0c3 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "b4f0c3"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "bc4a75 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "bc4a75"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "bc659a was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "bc659a"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "bisz58 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "bisz58"
               },
               "properties": {
                 "status": "unsupported",
@@ -1551,20 +1220,6 @@
               },
               "descriptor": {
                 "id": "e88epe"
-              },
-              "properties": {
-                "status": "unsupported",
-                "engine": "alfa",
-                "missing-capabilities": []
-              }
-            },
-            {
-              "level": "warning",
-              "message": {
-                "text": "ff89c9 was not evaluated by alfa: this engine does not implement it."
-              },
-              "descriptor": {
-                "id": "ff89c9"
               },
               "properties": {
                 "status": "unsupported",
@@ -1913,6 +1568,58 @@
       ],
       "results": [
         {
+          "ruleId": "09o5cg",
+          "level": "warning",
+          "message": {
+            "text": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 7:1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/html[1]/body[1]/main[1]/p[1]/text()[1]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "09o5cg:/html[1]/body[1]/main[1]/p[1]/text()[1]"
+          },
+          "properties": {
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r66",
+            "engine-version": "0.119.0",
+            "routing-reason": "invariant",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "alfa",
+                "outcome": "failed",
+                "chosen-engine-strict-recall": 0
+              },
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 0
+              }
+            ],
+            "measured-precision": 0.875,
+            "measured-recall": 0.7,
+            "official-test-cases-behind-measurement": 29,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
           "ruleId": "23a2a8",
           "level": "error",
           "message": {
@@ -1987,7 +1694,8 @@
             "engine-version": "0.1.0",
             "routing-reason": "sole-implementer",
             "agreed-by": [
-              "axe-core"
+              "axe-core",
+              "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
@@ -2168,7 +1876,9 @@
             "engine-rule-id": "marlo/46ca7f",
             "engine-version": "0.1.0",
             "routing-reason": "best-measured",
-            "agreed-by": [],
+            "agreed-by": [
+              "alfa"
+            ],
             "disagreements": [
               {
                 "engine": "axe-core",
@@ -2260,7 +1970,8 @@
             "engine-version": "0.1.0",
             "routing-reason": "best-measured",
             "agreed-by": [
-              "axe-core"
+              "axe-core",
+              "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
@@ -2277,25 +1988,25 @@
           "ruleId": "5c01ea",
           "level": "warning",
           "message": {
-            "text": "Alfa sia-r18"
+            "text": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": ":root"
+                  "uri": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": ":root",
+                  "name": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "5c01ea::root"
+            "marloFinding": "5c01ea:/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2414,25 +2125,25 @@
           "ruleId": "6a7281",
           "level": "error",
           "message": {
-            "text": "Alfa sia-r19"
+            "text": "The attribute does not have a valid value"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": ":root"
+                  "uri": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": ":root",
+                  "name": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "6a7281::root"
+            "marloFinding": "6a7281:/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2528,7 +2239,8 @@
             "engine-version": "0.1.0",
             "routing-reason": "best-measured",
             "agreed-by": [
-              "axe-core"
+              "axe-core",
+              "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
@@ -2613,9 +2325,10 @@
             "reported-by": "axe-core",
             "engine-rule-id": "object-alt",
             "engine-version": "4.12.1",
-            "routing-reason": "sole-implementer",
+            "routing-reason": "best-measured",
             "agreed-by": [
-              "marlo"
+              "marlo",
+              "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
@@ -2703,7 +2416,8 @@
             "engine-version": "0.1.0",
             "routing-reason": "sole-implementer",
             "agreed-by": [
-              "axe-core"
+              "axe-core",
+              "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
@@ -2720,25 +2434,25 @@
           "ruleId": "afw4f7",
           "level": "error",
           "message": {
-            "text": "Alfa sia-r69"
+            "text": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 4.5:1"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": ":root"
+                  "uri": "/html[1]/body[1]/main[1]/p[1]/text()[1]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": ":root",
+                  "name": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "afw4f7::root"
+            "marloFinding": "afw4f7:/html[1]/body[1]/main[1]/p[1]/text()[1]"
           },
           "properties": {
             "reported-by": "alfa",
@@ -2796,9 +2510,10 @@
             "reported-by": "axe-core",
             "engine-rule-id": "meta-viewport",
             "engine-version": "4.12.1",
-            "routing-reason": "sole-implementer",
+            "routing-reason": "best-measured",
             "agreed-by": [
-              "marlo"
+              "marlo",
+              "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
@@ -2860,44 +2575,46 @@
           "ruleId": "bc4a75",
           "level": "warning",
           "message": {
-            "text": "Certain ARIA roles must contain particular children"
+            "text": "The element owns no elements as required by its semantic role"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "div[role=\"list\"]"
+                  "uri": "/html[1]/body[1]/main[1]/div[3]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "div[role=\"list\"]",
+                  "name": "/html[1]/body[1]/main[1]/div[3]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "bc4a75:div[role=\"list\"]"
+            "marloFinding": "bc4a75:/html[1]/body[1]/main[1]/div[3]"
           },
           "properties": {
-            "reported-by": "axe-core",
-            "engine-rule-id": "aria-required-children",
-            "engine-version": "4.12.1",
-            "routing-reason": "invariant",
-            "agreed-by": [],
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r68",
+            "engine-version": "0.119.0",
+            "routing-reason": "sole-implementer",
+            "agreed-by": [
+              "axe-core"
+            ],
             "disagreements": [
               {
-                "engine": "axe-core",
-                "outcome": "failed",
-                "chosen-engine-strict-recall": null
+                "engine": "marlo",
+                "outcome": "cantTell",
+                "chosen-engine-strict-recall": 0.8571428571428571
               }
             ],
-            "measured-precision": 0.875,
-            "measured-recall": 1,
+            "measured-precision": 1,
+            "measured-recall": 0.8571428571428571,
             "official-test-cases-behind-measurement": 19,
             "accuracy-source": "calibrated",
-            "meets-auto-fix-threshold": false,
+            "meets-auto-fix-threshold": true,
             "renderer": "static",
             "located-in-source": false,
             "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
@@ -2907,43 +2624,44 @@
           "ruleId": "bc659a",
           "level": "error",
           "message": {
-            "text": "The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it."
+            "text": "The refresh or redirect is delayed"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "meta"
+                  "uri": "/html[1]/head[1]/meta[3]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "meta",
+                  "name": "/html[1]/head[1]/meta[3]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "bc659a:meta"
+            "marloFinding": "bc659a:/html[1]/head[1]/meta[3]"
           },
           "properties": {
-            "reported-by": "marlo",
-            "engine-rule-id": "marlo/bc659a",
-            "engine-version": "0.1.0",
-            "routing-reason": "sole-implementer",
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r9",
+            "engine-version": "0.119.0",
+            "routing-reason": "best-measured",
             "agreed-by": [
+              "marlo",
               "axe-core"
             ],
             "disagreements": [
               {
                 "engine": "htmlcs",
                 "outcome": "passed",
-                "chosen-engine-strict-recall": 0.5
+                "chosen-engine-strict-recall": 1
               }
             ],
             "measured-precision": 1,
-            "measured-recall": 0.5,
+            "measured-recall": 1,
             "official-test-cases-behind-measurement": 15,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": false,
@@ -2956,38 +2674,39 @@
           "ruleId": "bisz58",
           "level": "error",
           "message": {
-            "text": "The page refreshes after 30 seconds. This rule allows no exception for a long delay."
+            "text": "The refresh or redirect is delayed"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "meta"
+                  "uri": "/html[1]/head[1]/meta[3]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "meta",
+                  "name": "/html[1]/head[1]/meta[3]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "bisz58:meta"
+            "marloFinding": "bisz58:/html[1]/head[1]/meta[3]"
           },
           "properties": {
-            "reported-by": "marlo",
-            "engine-rule-id": "marlo/bisz58",
-            "engine-version": "0.1.0",
-            "routing-reason": "sole-implementer",
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r96",
+            "engine-version": "0.119.0",
+            "routing-reason": "best-measured",
             "agreed-by": [
+              "marlo",
               "axe-core",
               "htmlcs"
             ],
             "disagreements": [],
             "measured-precision": 1,
-            "measured-recall": 0.5,
+            "measured-recall": 1,
             "official-test-cases-behind-measurement": 14,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": false,
@@ -3377,41 +3096,43 @@
           "ruleId": "ff89c9",
           "level": "warning",
           "message": {
-            "text": "Certain ARIA roles must be contained by particular parents"
+            "text": "The element is not owned by an element of its required context role"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "div[role=\"listitem\"]"
+                  "uri": "/html[1]/body[1]/main[1]/div[2]"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "div[role=\"listitem\"]",
+                  "name": "/html[1]/body[1]/main[1]/div[2]",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "ff89c9:div[role=\"listitem\"]"
+            "marloFinding": "ff89c9:/html[1]/body[1]/main[1]/div[2]"
           },
           "properties": {
-            "reported-by": "axe-core",
-            "engine-rule-id": "aria-required-parent",
-            "engine-version": "4.12.1",
-            "routing-reason": "sole-implementer",
-            "agreed-by": [],
+            "reported-by": "alfa",
+            "engine-rule-id": "sia-r42",
+            "engine-version": "0.119.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core"
+            ],
             "disagreements": [
               {
                 "engine": "marlo",
                 "outcome": "cantTell",
-                "chosen-engine-strict-recall": 0.5
+                "chosen-engine-strict-recall": 0.75
               }
             ],
             "measured-precision": 1,
-            "measured-recall": 0.5,
+            "measured-recall": 0.75,
             "official-test-cases-behind-measurement": 15,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": false,

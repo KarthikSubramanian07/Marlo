@@ -73,7 +73,70 @@ function narrowOutcome(value: unknown, ruleUri: string): Outcome {
 interface AlfaOutcome {
   readonly outcome: unknown;
   readonly rule: { readonly uri: string };
-  target?: unknown;
+  /** Alfa's path to the target, `/html[1]/body[1]/p[2]`, or null for a document-level one. */
+  readonly path: string | null;
+  /** The target serialised by Alfa, which for an element is its markup. */
+  readonly snippet: string;
+  /** What Alfa's expectation said, or null when it said nothing a reader could use. */
+  readonly message: string | null;
+}
+
+/**
+ * Reads the evidence off an Alfa target.
+ *
+ * Alfa targets are its own node objects, not selectors, and the first version of this
+ * adapter reported `:root` for every finding rather than fabricate a selector. Alfa
+ * does give a path, `/html[1]/head[1]/meta[3]`, and a serialisation, and both are read
+ * through `Reflect` because they arrive typed as the union of every Alfa node kind. A
+ * text-node target has a path and its text; a document-level target has neither, and
+ * `:root` remains the honest answer for that one.
+ */
+function readTarget(target: unknown): { path: string | null; snippet: string } {
+  if (typeof target !== 'object' || target === null) return { path: null, snippet: '' };
+  let path: string | null = null;
+  const pathFn: unknown = Reflect.get(target, 'path');
+  if (typeof pathFn === 'function') {
+    const value: unknown = Reflect.apply(pathFn, target, []);
+    if (typeof value === 'string' && value !== '') path = value;
+  }
+  let snippet = '';
+  const serialise: unknown = Reflect.get(target, 'toString');
+  if (typeof serialise === 'function') {
+    const value: unknown = Reflect.apply(serialise, target, []);
+    if (typeof value === 'string') snippet = value;
+  }
+  return { path, snippet };
+}
+
+/**
+ * What Alfa's expectations said, in its words.
+ *
+ * `toJSON()` on an outcome carries an `expectations` list of `[id, result]` pairs, and
+ * a result holds its diagnostic under `error` when it failed and under `value` when it
+ * passed. Both are read, so a passed verdict explains itself too. Anything that is not
+ * shaped like that yields null, and the caller falls back to naming the rule.
+ */
+function readMessage(outcome: object): string | null {
+  const toJSON: unknown = Reflect.get(outcome, 'toJSON');
+  if (typeof toJSON !== 'function') return null;
+  const json: unknown = Reflect.apply(toJSON, outcome, []);
+  if (typeof json !== 'object' || json === null) return null;
+  const expectations: unknown = Reflect.get(json, 'expectations');
+  if (!Array.isArray(expectations)) return null;
+
+  const messages: string[] = [];
+  for (const entry of expectations as unknown[]) {
+    if (!Array.isArray(entry)) continue;
+    const result: unknown = entry[1];
+    if (typeof result !== 'object' || result === null) continue;
+    const inner: unknown = Reflect.get(result, 'error') ?? Reflect.get(result, 'value');
+    const holder = typeof inner === 'object' && inner !== null ? inner : result;
+    const message: unknown = Reflect.get(holder, 'message');
+    if (typeof message === 'string' && message.trim() !== '') {
+      messages.push(message.replace(/\s+/g, ' ').trim());
+    }
+  }
+  return messages.length === 0 ? null : messages.join(' ');
 }
 
 export class AlfaEngine implements Engine {
@@ -144,10 +207,21 @@ export class AlfaEngine implements Engine {
 
         const result = await Audit.of(alfaPage, rules).evaluate();
         // Collected inside the globals scope, because reading a lazy Alfa value after
-        // the globals are gone throws.
+        // the globals are gone throws. That includes the path and the serialisation.
         return [...result].map((o): AlfaOutcome => {
-          const outcome = o as unknown as AlfaOutcome;
-          return { outcome: outcome.outcome, rule: { uri: outcome.rule.uri }, target: undefined };
+          const outcome = o as unknown as {
+            outcome: unknown;
+            rule: { uri: string };
+            target: unknown;
+          };
+          const { path, snippet } = readTarget(outcome.target);
+          return {
+            outcome: outcome.outcome,
+            rule: { uri: outcome.rule.uri },
+            path,
+            snippet,
+            message: readMessage(o),
+          };
         });
       });
 
@@ -160,12 +234,13 @@ export class AlfaEngine implements Engine {
           list.push({
             engineRuleId,
             outcome: narrowOutcome(item.outcome, item.rule.uri),
-            // Alfa targets are its own node objects rather than selectors. Reporting
-            // the rule scope honestly is better than fabricating a selector that a
-            // reader would try to paste into a console.
-            selector: ':root',
-            snippet: truncateSnippet(''),
-            message: `Alfa ${engineRuleId}`,
+            // Alfa's path is an XPath-shaped locator rather than a CSS selector, and
+            // it is reported as Alfa wrote it rather than translated into a selector
+            // this adapter would then be guessing at. `:root` only when Alfa's target
+            // was the document itself.
+            selector: item.path ?? ':root',
+            snippet: truncateSnippet(item.snippet),
+            message: item.message ?? `Alfa ${engineRuleId}`,
           });
           verdicts.set(entry.actId, list);
         }
