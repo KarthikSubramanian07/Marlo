@@ -63,7 +63,7 @@ Three entries are officially `consistent` under W3C's protocol while missing mor
 ### Coverage
 
 - Denominator established: **94 published ACT rules**, 91 of which carry official test cases.
-- Marlo implements **35 of 94**. Of those, 35 can be calibrated.
+- Marlo implements **36 of 94**. Of those, 36 can be calibrated.
 
 ### Fixed
 

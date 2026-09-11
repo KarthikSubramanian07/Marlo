@@ -653,6 +653,121 @@ describe('9e45ec word spacing is not important below the threshold', () => {
   });
 });
 
+describe('36b590 error message describes the invalid value', () => {
+  const FIELD = '<label for="age">Age</label><input type="number" id="age">';
+
+  it('passes a field with no error indicator anywhere in its form', () => {
+    // Passed Example 3. Nothing on the page claims an error, so there is nothing to
+    // judge, and the rule says so rather than staying silent.
+    expect(check('36b590', `<html><body><form>${FIELD}</form></body></html>`).outcome).toBe(
+      'passed',
+    );
+  });
+
+  it('is inapplicable to a page with no form fields', () => {
+    // Inapplicable Example 1.
+    expect(check('36b590', '<html><body><p>This is a paragraph.</p></body></html>').outcome).toBe(
+      'inapplicable',
+    );
+  });
+
+  it('quotes the candidate error text rather than judging the language', () => {
+    // Failed Example 2 in the corpus. Whether "Please enter the correct text." describes
+    // the cause is a question about English, so the rule hands the sentence back.
+    const result = check(
+      '36b590',
+      `<html><body><form>${FIELD}<span id="error">Please enter the correct text.</span></form></body></html>`,
+    );
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('Please enter the correct text.');
+    expect(result.messages.join(' ')).toContain('named as an error by its id or class');
+  });
+
+  it('says when a candidate is hidden, without failing on it', () => {
+    // The pre-rendered validation message every form library emits. Failing this would
+    // flag almost every form on the web, so the hidden state is reported and not graded.
+    const result = check(
+      '36b590',
+      `<html><body><form>${FIELD}<span id="error" style="display: none">Age must be at least 1.</span><button aria-describedby="error">Go</button></form></body></html>`,
+    );
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('not visible');
+  });
+
+  it('fails only when the field says it is invalid and its named message cannot be seen', () => {
+    // The one shape ARIA settles outright: aria-invalid says the error is live now, and
+    // aria-errormessage names a message nobody can perceive.
+    const hidden = check(
+      '36b590',
+      '<html><body><form><input id="a" aria-invalid="true" aria-errormessage="e">' +
+        '<span id="e" style="display: none">Age must be at least 1.</span></form></body></html>',
+    );
+    expect(hidden.outcome).toBe('failed');
+    expect(hidden.messages.join(' ')).toContain('cannot be perceived');
+
+    const missing = check(
+      '36b590',
+      '<html><body><form><input id="a" aria-invalid="true" aria-errormessage="nope"></form></body></html>',
+    );
+    expect(missing.outcome).toBe('failed');
+    expect(missing.messages.join(' ')).toContain('refers to no element');
+  });
+
+  it('does not fail the same markup once the message can be perceived', () => {
+    expect(
+      check(
+        '36b590',
+        '<html><body><form><input id="a" aria-invalid="true" aria-errormessage="e">' +
+          '<span id="e">Age must be at least 1.</span></form></body></html>',
+      ).outcome,
+    ).toBe('cantTell');
+  });
+
+  it('declines when a field reports itself invalid and nothing is wired to explain it', () => {
+    // An error shown by colour or an icon alone. The rule cannot see the colour, so it
+    // names the possibility rather than asserting either way.
+    const result = check(
+      '36b590',
+      '<html><body><form><input id="a" aria-invalid="true"></form></body></html>',
+    );
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('colour');
+  });
+
+  it('does not treat a button or a submit input as a form field', () => {
+    // The negative case that a partial input-type table gets wrong: an unrecognised type
+    // falls back to textbox per HTML, so the non-field types have to be listed.
+    expect(
+      check('36b590', '<html><body><form><input type="submit" value="Go"></form></body></html>')
+        .outcome,
+    ).toBe('inapplicable');
+    expect(
+      check('36b590', '<html><body><form><button type="button">Go</button></form></body></html>')
+        .outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('does not reach across forms for a candidate', () => {
+    // Two forms on one page. An error belonging to the first must not be quoted at a
+    // field in the second, which is the false positive an unscoped search would produce.
+    const html =
+      `<html><body><form id="one">${FIELD}<span id="error">Age must be at least 1.</span></form>` +
+      '<form id="two"><input id="b" type="text"></form></body></html>';
+    const messages = check('36b590', html).messages.join(' ');
+    expect(messages).toContain('Age must be at least 1.');
+    expect(messages).toContain('No error indicator is present');
+  });
+
+  it('ignores a field that is hidden from assistive technology', () => {
+    expect(
+      check(
+        '36b590',
+        '<html><body><form><input type="text" aria-hidden="true"></form></body></html>',
+      ).outcome,
+    ).toBe('inapplicable');
+  });
+});
+
 describe('the accessible name rules', () => {
   it('fails an unnamed link and passes a named one', () => {
     expect(check('c487ae', '<html><body><a href="/x"></a></body></html>').outcome).toBe('failed');

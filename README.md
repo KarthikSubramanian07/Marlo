@@ -3,7 +3,7 @@
 **Our false positive rate is 12.9%. Here is how we measured it, and why we are printing it.**
 
 [![CI](https://github.com/KarthikSubramanian07/Marlo/actions/workflows/ci.yml/badge.svg)](https://github.com/KarthikSubramanian07/Marlo/actions/workflows/ci.yml)
-[![coverage: 35 of 94 ACT rules](https://img.shields.io/badge/ACT_rules-35_of_94-c9f227?labelColor=0a0c09)](calibration/README.md)
+[![coverage: 36 of 94 ACT rules](https://img.shields.io/badge/ACT_rules-36_of_94-c9f227?labelColor=0a0c09)](calibration/README.md)
 [![false positive rate: 12.9%](https://img.shields.io/badge/false_positives-12.9%25-ff6b5e?labelColor=0a0c09)](calibration/README.md)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-9aa38f?labelColor=0a0c09)](LICENSE)
 
@@ -63,7 +63,7 @@ checkout.html
 
   ------------------------------------------------------------
   12 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
-  coverage: 35 of 94 published ACT rules
+  coverage: 36 of 94 published ACT rules
   calibration 2026-07-30, corpus 2026-07-29
 ```
 
@@ -213,7 +213,7 @@ The last two are where the safety promise stops being prose. In an Action, "Marl
 
 ## Where it will not help you
 
-- **It is not comprehensive and never says it is.** 35 of 94 published ACT rules, and automation reaches a minority of WCAG regardless.
+- **It is not comprehensive and never says it is.** 36 of 94 published ACT rules, and automation reaches a minority of WCAG regardless.
 - **It will not recolour your design.** Contrast is detected and located, never changed.
 - **It will not invent alt text.** Decorative images get an empty alt confidently. A description is written only where the page already supplies the meaning. Everything else comes back to you, because a confident wrong description is worse than an absent one: you can notice an absence. [D-009](DECISIONS.md#d-009).
 - **It cannot certify anything.** Nobody can. You get verified repair against named success criteria and a published error rate.
