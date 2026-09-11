@@ -5,7 +5,7 @@
   "startedAt": "<time>",
   "calibration": {
     "generated": "2026-09-11",
-    "commit": null,
+    "commit": "4db60fc48e12c07f9da0c5b146adc4db70f46610",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -1708,6 +1708,107 @@
                 "path": []
               },
               "message": "The page has no title element in its head. The title is the first thing a screen reader announces and the only label in a tab or a bookmark."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input",
+                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#postcode",
+                "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#postcode",
+                "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode-confirm\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input",
+                "snippet": "<input type=\"text\" name=\"city\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input",
+                "snippet": "<input type=\"tel\" aria-labeledby=\"phone-hint\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input",
+                "snippet": "<input type=\"text\" aria-required=\"yes\" aria-label=\"Card number\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "div",
+                "snippet": "<div role=\"slider\" tabindex=\"0\"></div>",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
             }
           ],
           "error": null,
@@ -3481,6 +3582,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "axe-core",
           "status": "ok",
@@ -4842,6 +4952,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "alfa",
           "status": "unsupported",
@@ -6110,6 +6229,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -6722,6 +6850,29 @@
                 "path": []
               },
               "message": "The page is titled \"Account settings\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#digest",
+                "snippet": "<input type=\"checkbox\" id=\"digest\" name=\"digest\" checked=\"\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
             }
           ],
           "error": null,
@@ -7488,6 +7639,15 @@
               "message": "Documents must have <title> element to aid in navigation"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8399,6 +8559,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "alfa",
           "status": "unsupported",
@@ -9212,6 +9381,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "36b590",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "3ea0c8",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -9608,9 +9786,9 @@
   ],
   "repairs": [],
   "coverage": {
-    "implemented": 35,
+    "implemented": 36,
     "publishedActRules": 94,
-    "calibrated": 35,
+    "calibrated": 36,
     "unmeasurable": [],
     "notEvaluated": [
       {

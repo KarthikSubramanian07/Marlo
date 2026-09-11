@@ -603,12 +603,12 @@
             }
           ],
           "properties": {
-            "act-rules-implemented": 35,
+            "act-rules-implemented": 36,
             "act-rules-published": 94,
-            "act-rules-calibrated": 35,
+            "act-rules-calibrated": 36,
             "act-rules-unmeasurable": [],
             "calibration-generated": "2026-09-11",
-            "calibration-commit": null,
+            "calibration-commit": "4db60fc48e12c07f9da0c5b146adc4db70f46610",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -664,6 +664,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "36b590 was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "36b590"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "9eb3f6 was not evaluated by axe-core: this engine does not implement it."
               },
               "descriptor": {
@@ -700,6 +714,20 @@
               "properties": {
                 "status": "unsupported",
                 "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "36b590 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "36b590"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
                 "missing-capabilities": []
               }
             },
@@ -766,6 +794,20 @@
               },
               "descriptor": {
                 "id": "24afc2"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "36b590 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "36b590"
               },
               "properties": {
                 "status": "unsupported",
@@ -1132,6 +1174,20 @@
             {
               "level": "warning",
               "message": {
+                "text": "36b590 was not evaluated by axe-core: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "36b590"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
                 "text": "9eb3f6 was not evaluated by axe-core: this engine does not implement it."
               },
               "descriptor": {
@@ -1168,6 +1224,20 @@
               "properties": {
                 "status": "unsupported",
                 "engine": "axe-core",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "36b590 was not evaluated by alfa: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "36b590"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "alfa",
                 "missing-capabilities": []
               }
             },
@@ -1234,6 +1304,20 @@
               },
               "descriptor": {
                 "id": "24afc2"
+              },
+              "properties": {
+                "status": "unsupported",
+                "engine": "htmlcs",
+                "missing-capabilities": []
+              }
+            },
+            {
+              "level": "warning",
+              "message": {
+                "text": "36b590 was not evaluated by htmlcs: this engine does not implement it."
+              },
+              "descriptor": {
+                "id": "36b590"
               },
               "properties": {
                 "status": "unsupported",

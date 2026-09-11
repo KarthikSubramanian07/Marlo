@@ -124,7 +124,11 @@ function scopeOf(element: MarloElement, document: MarloDocument): MarloElement {
 
 /** Every element in the document carrying one of the given ids, in document order. */
 function referenced(ids: string, document: MarloDocument): MarloElement[] {
-  const wanted = new Set(normalise(ids).split(' ').filter((id) => id !== ''));
+  const wanted = new Set(
+    normalise(ids)
+      .split(' ')
+      .filter((id) => id !== ''),
+  );
   if (wanted.size === 0) return [];
   return [...walk(document.root)].filter((node) => {
     const id = attr(node, 'id');
