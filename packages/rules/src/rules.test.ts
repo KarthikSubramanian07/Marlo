@@ -759,6 +759,108 @@ describe('36b590 error message describes the invalid value', () => {
     expect(messages).toContain('No error indicator is present');
   });
 
+  // Six defects an adversarial review found after this rule first merged. Four of them
+  // returned `failed` on markup that is fine, which is the worst thing this rule can do,
+  // and each one is a shape a real form produces rather than a contrived input.
+
+  it('treats an empty aria-errormessage as naming nothing, not as a broken reference', () => {
+    // `aria-errormessage={errorId ?? ''}` renders this on every valid field in a great
+    // many frameworks. Reading it as a dangling IDREF failed a whole form of good markup.
+    for (const value of ['', '   ']) {
+      const result = check(
+        '36b590',
+        `<html><body><form><input id="a" aria-invalid="true" aria-errormessage="${value}"></form></body></html>`,
+      );
+      expect(result.outcome, `aria-errormessage="${value}"`).not.toBe('failed');
+    }
+  });
+
+  it('does not fail when the error message is an image with alt text', () => {
+    // element.text is concatenated descendant text and knows nothing about alt, so the
+    // message read as empty even though both sighted and screen reader users receive it.
+    expect(
+      check(
+        '36b590',
+        '<html><body><form><input id="a" aria-invalid="true" aria-errormessage="e">' +
+          '<span id="e"><img alt="Age must be at least 1"></span></form></body></html>',
+      ).outcome,
+    ).not.toBe('failed');
+  });
+
+  it('lets a descendant set visibility back to visible', () => {
+    // visibility inherits and is overridable, unlike display, so the nearest declaration
+    // decides. The span here is on screen.
+    expect(
+      check(
+        '36b590',
+        '<html><body><form><input id="a" aria-invalid="true" aria-errormessage="e">' +
+          '<div style="visibility: hidden"><span id="e" style="visibility: visible">Age must be at least 1.</span></div>' +
+          '</form></body></html>',
+      ).outcome,
+    ).not.toBe('failed');
+  });
+
+  it('still catches display: none carrying an important flag', () => {
+    // The opposite direction of the same regex: this one has to keep failing.
+    expect(
+      check(
+        '36b590',
+        '<html><body><form><input id="a" aria-invalid="true" aria-errormessage="e">' +
+          '<span id="e" style="display: none !important">Age must be at least 1.</span></form></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('does not fail a dangling reference when a live alert is showing the error', () => {
+    // A typo in one IDREF beside a role="alert" carrying the text is a broken reference,
+    // not an error that reaches nobody, and telling those apart means reading the alert.
+    const result = check(
+      '36b590',
+      '<html><body><form><input aria-invalid="true" aria-errormessage="typo">' +
+        '<div role="alert">Age must be at least 1.</div></form></body></html>',
+    );
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('Age must be at least 1.');
+  });
+
+  it('does not treat a password input as a field this rule covers', () => {
+    // HTML-AAM gives password no corresponding role, so it is not one of the roles
+    // 36b590 applies to.
+    expect(
+      check('36b590', '<html><body><form><input type="password" id="p"></form></body></html>')
+        .outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('does not read an input type off Object.prototype', () => {
+    // A null-prototype lookup table. With an object literal these returned Object and
+    // Object.prototype from a function declared to return a string or null.
+    for (const type of ['constructor', '__proto__', 'toString']) {
+      expect(
+        check('36b590', `<html><body><form><input type="${type}"></form></body></html>`).outcome,
+        `type="${type}"`,
+      ).toBe('passed');
+    }
+  });
+
+  it('stays fast on a form with hundreds of described fields', () => {
+    // The accessible pattern of a label, an input and a hint joined by aria-describedby,
+    // at a size real admin forms reach. Before the id index this walked the whole
+    // document once per lookup per field and took half a minute.
+    const fields = Array.from(
+      { length: 200 },
+      (_, i) =>
+        `<label for="f${String(i)}">Field ${String(i)}</label>` +
+        `<input id="f${String(i)}" aria-describedby="h${String(i)}">` +
+        `<span id="h${String(i)}">Enter a value for field ${String(i)}.</span>`,
+    ).join('');
+    const started = Date.now();
+    const result = check('36b590', `<html><body><form>${fields}</form></body></html>`);
+    const elapsed = Date.now() - started;
+    expect(result.outcome).not.toBe('error');
+    expect(elapsed, `${String(elapsed)}ms for 200 described fields`).toBeLessThan(4000);
+  });
+
   it('ignores a field that is hidden from assistive technology', () => {
     expect(
       check(
