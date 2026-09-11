@@ -1,10 +1,10 @@
 # Marlo
 
-**Our false positive rate is 12.9%. Here is how we measured it, and why we are printing it.**
+**Our false positive rate is 6.4%. Here is how we measured it, and why we are printing it.**
 
 [![CI](https://github.com/KarthikSubramanian07/Marlo/actions/workflows/ci.yml/badge.svg)](https://github.com/KarthikSubramanian07/Marlo/actions/workflows/ci.yml)
 [![coverage: 36 of 94 ACT rules](https://img.shields.io/badge/ACT_rules-36_of_94-c9f227?labelColor=0a0c09)](calibration/README.md)
-[![false positive rate: 12.9%](https://img.shields.io/badge/false_positives-12.9%25-ff6b5e?labelColor=0a0c09)](calibration/README.md)
+[![false positive rate: 6.4%](https://img.shields.io/badge/false_positives-6.4%25-ff6b5e?labelColor=0a0c09)](calibration/README.md)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-9aa38f?labelColor=0a0c09)](LICENSE)
 
 Every accessibility tool claims to be accurate. Not one of them will tell you how often it is wrong.
@@ -17,16 +17,16 @@ Marlo will. It checks pages against the [official W3C ACT rule corpus](https://a
 
 ## The table nobody else publishes
 
-Four engines, 447 official test case outcomes, one code path, no exemptions.
+Four engines, 456 official test case outcomes, one code path, no exemptions.
 
-| Engine           | Rules  | Precision    | Recall    | False positives |
-| ---------------- | ------ | ------------ | --------- | --------------- |
-| Alfa             | 21     | 0.969        | 0.839     | **1.6%**        |
-| axe-core         | 38     | 0.952        | 0.777     | 2.0%            |
-| **Marlo**        | **35** | **0.714**    | **0.621** | **12.9%**       |
-| HTML CodeSniffer | 15     | not measured | 0.000     | 0.0%            |
+| Engine           | Rules  | Precision | Recall    | False positives |
+| ---------------- | ------ | --------- | --------- | --------------- |
+| Alfa             | 40     | 0.964     | 0.835     | **1.5%**        |
+| axe-core         | 38     | 0.952     | 0.777     | 2.0%            |
+| **Marlo**        | **36** | **0.840** | **0.633** | **6.4%**        |
+| HTML CodeSniffer | 12     | 0.684     | 0.366     | 9.4%            |
 
-Marlo is third of four. Alfa and axe-core are both more precise and more sensitive, and the router sends 22 rules to axe-core against 12 to Marlo's own engine.
+Marlo is third of four. Alfa and axe-core are both more precise and more sensitive, and the router sends 18 rules to axe-core against 15 to Marlo's own engine.
 
 Nobody edited that. Marlo's engine goes through the same harness, on the same corpus, with no special case, because a table where the author's own engine happened to win would be worth exactly nothing. That is [D-008](DECISIONS.md#d-008), and it is the reason to believe any other number here.
 
@@ -185,15 +185,19 @@ So a tool that answers "cannot tell" to all 1134 test cases is, officially, a co
 
 That is not a flaw in the protocol. It grades whether a tool _misleads_ you, and "I don't know" misleads nobody. It is simply not the question a developer is asking, which is whether the violation will actually be found.
 
-So the calibration table publishes **both** views and computes the gap. Three entries currently grade as officially `consistent` while missing more than half the violations a real user would hit:
+So the calibration table publishes **both** views and computes the gap. Seven entries currently grade as officially `consistent` while missing more than half the violations a real user would hit:
 
 | ACT rule | Engine    | W3C verdict | Strict recall |
 | -------- | --------- | ----------- | ------------- |
+| `36b590` | **Marlo** | consistent  | 0.000         |
 | `5c01ea` | **Marlo** | consistent  | 0.000         |
 | `c487ae` | **Marlo** | consistent  | 0.273         |
 | `3ea0c8` | axe-core  | consistent  | 0.000         |
+| `4b1c6c` | Alfa      | consistent  | 0.000         |
+| `b20e66` | Alfa      | consistent  | 0.000         |
+| `fd3a94` | Alfa      | consistent  | 0.000         |
 
-Two of the three are ours. Under the protocol W3C publishes implementation reports against, Marlo is a **correct implementation** of `5c01ea` while detecting nothing at all. [D-004](DECISIONS.md#d-004).
+Three of the seven are ours. Under the protocol W3C publishes implementation reports against, Marlo is a **correct implementation** of `5c01ea` while detecting nothing at all. [D-004](DECISIONS.md#d-004).
 
 ---
 
