@@ -4,8 +4,8 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-08-10",
-    "commit": "d26e6bcc124969427d25bcc0bd009f9a315d1520",
+    "generated": "2026-09-11",
+    "commit": null,
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -35,6 +35,60 @@
         "script"
       ],
       "findings": [
+        {
+          "id": "09o5cg-0",
+          "actRuleId": "09o5cg",
+          "actRuleName": "Text has enhanced contrast",
+          "successCriteria": [
+            "1.4.3",
+            "1.4.6"
+          ],
+          "severity": "moderate",
+          "reportedBy": "alfa",
+          "routingReason": "invariant",
+          "verdict": {
+            "engine": "alfa",
+            "engineVersion": "0.119.0",
+            "engineRuleId": "sia-r66",
+            "actRuleId": "09o5cg",
+            "outcome": "failed",
+            "target": {
+              "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+              "snippet": "Free returns within 30 days.",
+              "path": []
+            },
+            "message": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 7:1"
+          },
+          "agreedBy": [],
+          "disagreements": [
+            {
+              "engine": "alfa",
+              "engineRuleId": "sia-r66",
+              "outcome": "failed",
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 7:1",
+              "chosenEngineStrictRecall": 0
+            },
+            {
+              "engine": "htmlcs",
+              "engineRuleId": "1_4_6.G17.Fail",
+              "outcome": "passed",
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass.",
+              "chosenEngineStrictRecall": 0
+            }
+          ],
+          "confidence": {
+            "source": "calibrated",
+            "precision": 0.875,
+            "recall": 0.7,
+            "sampleSize": 29,
+            "meetsAutoFixThreshold": false
+          },
+          "source": null,
+          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
+          "renderer": "static",
+          "help": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 7:1",
+          "helpUrl": "https://act-rules.github.io/rules/09o5cg"
+        },
         {
           "id": "23a2a8-0",
           "actRuleId": "23a2a8",
@@ -101,7 +155,8 @@
             "message": "letter-spacing: 0.01em !important cannot be overridden by a user stylesheet, and it is below 0.12 times the font size. Removing !important is usually the whole fix."
           },
           "agreedBy": [
-            "axe-core"
+            "axe-core",
+            "alfa"
           ],
           "disagreements": [],
           "confidence": {
@@ -274,7 +329,9 @@
             },
             "message": "This element is marked decorative but tabindex=\"0\" puts it in the focus order, which puts it back in the accessibility tree with its role stripped. It ends up announced as a generic element."
           },
-          "agreedBy": [],
+          "agreedBy": [
+            "alfa"
+          ],
           "disagreements": [
             {
               "engine": "axe-core",
@@ -364,7 +421,8 @@
             "message": "An image button with no alt text is announced as \"button\" or as its filename. It is the submit control, so this usually blocks the form entirely."
           },
           "agreedBy": [
-            "axe-core"
+            "axe-core",
+            "alfa"
           ],
           "disagreements": [],
           "confidence": {
@@ -398,11 +456,11 @@
             "actRuleId": "5c01ea",
             "outcome": "failed",
             "target": {
-              "selector": ":root",
-              "snippet": "",
+              "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+              "snippet": "aria-checked=\"true\"",
               "path": []
             },
-            "message": "Alfa sia-r18"
+            "message": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
           },
           "agreedBy": [
             "axe-core"
@@ -426,7 +484,7 @@
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Alfa sia-r18",
+          "help": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified",
           "helpUrl": "https://act-rules.github.io/rules/5c01ea"
         },
         {
@@ -531,11 +589,11 @@
             "actRuleId": "6a7281",
             "outcome": "failed",
             "target": {
-              "selector": ":root",
-              "snippet": "",
+              "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+              "snippet": "aria-required=\"yes\"",
               "path": []
             },
-            "message": "Alfa sia-r19"
+            "message": "The attribute does not have a valid value"
           },
           "agreedBy": [
             "marlo",
@@ -552,7 +610,7 @@
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Alfa sia-r19",
+          "help": "The attribute does not have a valid value",
           "helpUrl": "https://act-rules.github.io/rules/6a7281"
         },
         {
@@ -620,7 +678,8 @@
             "message": "line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix."
           },
           "agreedBy": [
-            "axe-core"
+            "axe-core",
+            "alfa"
           ],
           "disagreements": [],
           "confidence": {
@@ -686,7 +745,7 @@
           ],
           "severity": "serious",
           "reportedBy": "axe-core",
-          "routingReason": "sole-implementer",
+          "routingReason": "best-measured",
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.12.1",
@@ -701,7 +760,8 @@
             "message": "<object> elements must have alternative text"
           },
           "agreedBy": [
-            "marlo"
+            "marlo",
+            "alfa"
           ],
           "disagreements": [],
           "confidence": {
@@ -783,7 +843,8 @@
             "message": "word-spacing: 0.05em !important cannot be overridden by a user stylesheet, and it is below 0.16 times the font size. Removing !important is usually the whole fix."
           },
           "agreedBy": [
-            "axe-core"
+            "axe-core",
+            "alfa"
           ],
           "disagreements": [],
           "confidence": {
@@ -817,11 +878,11 @@
             "actRuleId": "afw4f7",
             "outcome": "failed",
             "target": {
-              "selector": ":root",
-              "snippet": "",
+              "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+              "snippet": "Free returns within 30 days.",
               "path": []
             },
-            "message": "Alfa sia-r69"
+            "message": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 4.5:1"
           },
           "agreedBy": [],
           "disagreements": [
@@ -829,7 +890,7 @@
               "engine": "alfa",
               "engineRuleId": "sia-r69",
               "outcome": "failed",
-              "message": "Alfa sia-r69",
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 4.5:1",
               "chosenEngineStrictRecall": 0
             },
             {
@@ -850,7 +911,7 @@
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Alfa sia-r69",
+          "help": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 4.5:1",
           "helpUrl": "https://act-rules.github.io/rules/afw4f7"
         },
         {
@@ -863,7 +924,7 @@
           ],
           "severity": "critical",
           "reportedBy": "axe-core",
-          "routingReason": "sole-implementer",
+          "routingReason": "best-measured",
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.12.1",
@@ -878,7 +939,8 @@
             "message": "Zooming and scaling must not be disabled"
           },
           "agreedBy": [
-            "marlo"
+            "marlo",
+            "alfa"
           ],
           "disagreements": [],
           "confidence": {
@@ -944,42 +1006,44 @@
             "1.3.1"
           ],
           "severity": "moderate",
-          "reportedBy": "axe-core",
-          "routingReason": "invariant",
+          "reportedBy": "alfa",
+          "routingReason": "sole-implementer",
           "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.12.1",
-            "engineRuleId": "aria-required-children",
+            "engine": "alfa",
+            "engineVersion": "0.119.0",
+            "engineRuleId": "sia-r68",
             "actRuleId": "bc4a75",
             "outcome": "failed",
             "target": {
-              "selector": "div[role=\"list\"]",
-              "snippet": "<div role=\"list\"> <p>Express delivery is unavailable to this postcode.</p> </div>",
+              "selector": "/html[1]/body[1]/main[1]/div[3]",
+              "snippet": "<div role=\"list\"> <p> Express delivery is unavailable to this postcode. </p> </div>",
               "path": []
             },
-            "message": "Certain ARIA roles must contain particular children"
+            "message": "The element owns no elements as required by its semantic role"
           },
-          "agreedBy": [],
+          "agreedBy": [
+            "axe-core"
+          ],
           "disagreements": [
             {
-              "engine": "axe-core",
-              "engineRuleId": "aria-required-children",
-              "outcome": "failed",
-              "message": "Certain ARIA roles must contain particular children",
-              "chosenEngineStrictRecall": null
+              "engine": "marlo",
+              "engineRuleId": "marlo/bc4a75",
+              "outcome": "cantTell",
+              "message": "role=\"list\" requires listitem. None of its children declare an explicit role, so the answer depends on implicit roles Marlo does not compute here.",
+              "chosenEngineStrictRecall": 0.8571428571428571
             }
           ],
           "confidence": {
             "source": "calibrated",
-            "precision": 0.875,
-            "recall": 1,
+            "precision": 1,
+            "recall": 0.8571428571428571,
             "sampleSize": 19,
-            "meetsAutoFixThreshold": false
+            "meetsAutoFixThreshold": true
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Certain ARIA roles must contain particular children",
+          "help": "The element owns no elements as required by its semantic role",
           "helpUrl": "https://act-rules.github.io/rules/bc4a75"
         },
         {
@@ -992,22 +1056,23 @@
             "3.2.5"
           ],
           "severity": "serious",
-          "reportedBy": "marlo",
-          "routingReason": "sole-implementer",
+          "reportedBy": "alfa",
+          "routingReason": "best-measured",
           "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/bc659a",
+            "engine": "alfa",
+            "engineVersion": "0.119.0",
+            "engineRuleId": "sia-r9",
             "actRuleId": "bc659a",
             "outcome": "failed",
             "target": {
-              "selector": "meta",
+              "selector": "/html[1]/head[1]/meta[3]",
               "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
               "path": []
             },
-            "message": "The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it."
+            "message": "The refresh or redirect is delayed"
           },
           "agreedBy": [
+            "marlo",
             "axe-core"
           ],
           "disagreements": [
@@ -1016,20 +1081,20 @@
               "engineRuleId": "2_2_1.F40.2",
               "outcome": "passed",
               "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass.",
-              "chosenEngineStrictRecall": 0.5
+              "chosenEngineStrictRecall": 1
             }
           ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
-            "recall": 0.5,
+            "recall": 1,
             "sampleSize": 15,
             "meetsAutoFixThreshold": false
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it.",
+          "help": "The refresh or redirect is delayed",
           "helpUrl": "https://act-rules.github.io/rules/bc659a"
         },
         {
@@ -1042,22 +1107,23 @@
             "3.2.5"
           ],
           "severity": "serious",
-          "reportedBy": "marlo",
-          "routingReason": "sole-implementer",
+          "reportedBy": "alfa",
+          "routingReason": "best-measured",
           "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/bisz58",
+            "engine": "alfa",
+            "engineVersion": "0.119.0",
+            "engineRuleId": "sia-r96",
             "actRuleId": "bisz58",
             "outcome": "failed",
             "target": {
-              "selector": "meta",
+              "selector": "/html[1]/head[1]/meta[3]",
               "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
               "path": []
             },
-            "message": "The page refreshes after 30 seconds. This rule allows no exception for a long delay."
+            "message": "The refresh or redirect is delayed"
           },
           "agreedBy": [
+            "marlo",
             "axe-core",
             "htmlcs"
           ],
@@ -1065,14 +1131,14 @@
           "confidence": {
             "source": "calibrated",
             "precision": 1,
-            "recall": 0.5,
+            "recall": 1,
             "sampleSize": 14,
             "meetsAutoFixThreshold": false
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "The page refreshes after 30 seconds. This rule allows no exception for a long delay.",
+          "help": "The refresh or redirect is delayed",
           "helpUrl": "https://act-rules.github.io/rules/bisz58"
         },
         {
@@ -1460,42 +1526,44 @@
             "1.3.1"
           ],
           "severity": "moderate",
-          "reportedBy": "axe-core",
-          "routingReason": "sole-implementer",
+          "reportedBy": "alfa",
+          "routingReason": "best-measured",
           "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.12.1",
-            "engineRuleId": "aria-required-parent",
+            "engine": "alfa",
+            "engineVersion": "0.119.0",
+            "engineRuleId": "sia-r42",
             "actRuleId": "ff89c9",
             "outcome": "failed",
             "target": {
-              "selector": "div[role=\"listitem\"]",
-              "snippet": "<div role=\"listitem\">Standard delivery</div>",
+              "selector": "/html[1]/body[1]/main[1]/div[2]",
+              "snippet": "<div role=\"listitem\"> Standard delivery </div>",
               "path": []
             },
-            "message": "Certain ARIA roles must be contained by particular parents"
+            "message": "The element is not owned by an element of its required context role"
           },
-          "agreedBy": [],
+          "agreedBy": [
+            "axe-core"
+          ],
           "disagreements": [
             {
               "engine": "marlo",
               "engineRuleId": "marlo/ff89c9",
               "outcome": "cantTell",
               "message": "role=\"listitem\" requires a context of list. No ancestor declares an explicit role, so the context would come from implicit roles, which Marlo does not compute for every element.",
-              "chosenEngineStrictRecall": 0.5
+              "chosenEngineStrictRecall": 0.75
             }
           ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
-            "recall": 0.5,
+            "recall": 0.75,
             "sampleSize": 15,
             "meetsAutoFixThreshold": false
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "Certain ARIA roles must be contained by particular parents",
+          "help": "The element is not owned by an element of its required context role",
           "helpUrl": "https://act-rules.github.io/rules/ff89c9"
         },
         {
@@ -4528,8 +4596,165 @@
         {
           "actRuleId": "09o5cg",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
+                "snippet": "Cart",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "snippet": "Your order",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[1]/text()[1]",
+                "snippet": "Gift wrapping",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
+                "snippet": "Postcode",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "snippet": "Mobile number",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/div[1]/text()[1]",
+                "snippet": "Apply discount",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]/text()[1]",
+                "snippet": "By paying you agree to the terms.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/h2[2]/text()[1]",
+                "snippet": "Delivery options",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[2]/text()[1]",
+                "snippet": "Standard delivery",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[3]/p[1]/text()[1]",
+                "snippet": "Express delivery is unavailable to this postcode.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[4]/a[1]/text()[1]",
+                "snippet": "Saver delivery",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "snippet": "Free returns within 30 days.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 7:1"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -4546,11 +4771,11 @@
               "actRuleId": "23a2a8",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/img[1]",
+                "snippet": "<img src=\"IMG_20240117_cart.png\" alt=\"IMG_20240117_cart.png\">",
                 "path": []
               },
-              "message": "Alfa sia-r2"
+              "message": "The image has an accessible name"
             },
             {
               "engine": "alfa",
@@ -4559,11 +4784,11 @@
               "actRuleId": "23a2a8",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/img[1]",
+                "snippet": "<img src=\"product-8842.jpg\" width=\"120\" height=\"120\">",
                 "path": []
               },
-              "message": "Alfa sia-r2"
+              "message": "The image does not have an accessible name"
             }
           ],
           "error": null,
@@ -4573,8 +4798,22 @@
         {
           "actRuleId": "24afc2",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r91",
+              "actRuleId": "24afc2",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]",
+                "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
+                "path": []
+              },
+              "message": "letter-spacing is less than 0.12 times the font-size"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -4591,11 +4830,11 @@
               "actRuleId": "2779a5",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/",
+                "snippet": "#document <!doctype html> <html> <head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-sc…",
                 "path": []
               },
-              "message": "Alfa sia-r1"
+              "message": "The document does not have a `<title>` element The first `<title>` element has no text content"
             }
           ],
           "error": null,
@@ -4614,8 +4853,35 @@
         {
           "actRuleId": "46ca7f",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r86",
+              "actRuleId": "46ca7f",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/header[1]/a[1]/img[1]",
+                "snippet": "<img src=\"logo.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "The element is marked as decorative and is not exposed"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r86",
+              "actRuleId": "46ca7f",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[1]",
+                "snippet": "<div role=\"presentation\" tabindex=\"0\"> Gift wrapping </div>",
+                "path": []
+              },
+              "message": "The element is marked as decorative but is exposed"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -4632,11 +4898,11 @@
               "actRuleId": "4e8ab6",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/div[2]",
+                "snippet": "<div role=\"slider\" tabindex=\"0\"></div>",
                 "path": []
               },
-              "message": "Alfa sia-r16"
+              "message": "The element does not have all required states and properties"
             },
             {
               "engine": "alfa",
@@ -4645,11 +4911,11 @@
               "actRuleId": "4e8ab6",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[2]",
+                "snippet": "<div role=\"listitem\"> Standard delivery </div>",
                 "path": []
               },
-              "message": "Alfa sia-r16"
+              "message": "The element has all required states and properties"
             },
             {
               "engine": "alfa",
@@ -4658,11 +4924,11 @@
               "actRuleId": "4e8ab6",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[3]",
+                "snippet": "<div role=\"list\"> <p> Express delivery is unavailable to this postcode. </p> </div>",
                 "path": []
               },
-              "message": "Alfa sia-r16"
+              "message": "The element has all required states and properties"
             },
             {
               "engine": "alfa",
@@ -4671,11 +4937,11 @@
               "actRuleId": "4e8ab6",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/svg[1]",
+                "snippet": "<svg role=\"img\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <path d=\"M4 12h16\" stroke=\"currentColor\"></path> </svg>",
                 "path": []
               },
-              "message": "Alfa sia-r16"
+              "message": "The element has all required states and properties"
             }
           ],
           "error": null,
@@ -4685,8 +4951,22 @@
         {
           "actRuleId": "59796f",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r28",
+              "actRuleId": "59796f",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[7]",
+                "snippet": "<input type=\"image\" src=\"pay-now.png\">",
+                "path": []
+              },
+              "message": "The `<input type=\"image\">` element does not have an accessible name"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -4712,11 +4992,11 @@
               "actRuleId": "5c01ea",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                "snippet": "aria-checked=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r18"
+              "message": "The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
             },
             {
               "engine": "alfa",
@@ -4725,11 +5005,11 @@
               "actRuleId": "5c01ea",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                "snippet": "aria-required=\"yes\"",
                 "path": []
               },
-              "message": "Alfa sia-r18"
+              "message": "The attribute is allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
             },
             {
               "engine": "alfa",
@@ -4738,11 +5018,11 @@
               "actRuleId": "5c01ea",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
+                "snippet": "aria-label=\"Card number\"",
                 "path": []
               },
-              "message": "Alfa sia-r18"
+              "message": "The attribute is allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified"
             }
           ],
           "error": null,
@@ -4761,11 +5041,11 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                "snippet": "aria-checked=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r20"
+              "message": "The attribute is defined"
             },
             {
               "engine": "alfa",
@@ -4774,11 +5054,11 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/img[2]/@aria-hidden",
+                "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r20"
+              "message": "The attribute is defined"
             },
             {
               "engine": "alfa",
@@ -4787,11 +5067,11 @@
               "actRuleId": "5f99a7",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[5]/@aria-labeledby",
+                "snippet": "aria-labeledby=\"phone-hint\"",
                 "path": []
               },
-              "message": "Alfa sia-r20"
+              "message": "The attribute is not defined"
             },
             {
               "engine": "alfa",
@@ -4800,11 +5080,11 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                "snippet": "aria-required=\"yes\"",
                 "path": []
               },
-              "message": "Alfa sia-r20"
+              "message": "The attribute is defined"
             },
             {
               "engine": "alfa",
@@ -4813,11 +5093,11 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
+                "snippet": "aria-label=\"Card number\"",
                 "path": []
               },
-              "message": "Alfa sia-r20"
+              "message": "The attribute is defined"
             },
             {
               "engine": "alfa",
@@ -4826,11 +5106,11 @@
               "actRuleId": "5f99a7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[4]/@aria-hidden",
+                "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r20"
+              "message": "The attribute is defined"
             }
           ],
           "error": null,
@@ -4845,80 +5125,80 @@
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[1]/@role",
+                "snippet": "role=\"presentation\"",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "The element has a at least one valid role"
             },
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/div[1]/@role",
+                "snippet": "role=\"buton\"",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "The element does not have a valid role"
             },
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/div[2]/@role",
+                "snippet": "role=\"slider\"",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "The element has a at least one valid role"
             },
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[2]/@role",
+                "snippet": "role=\"listitem\"",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "The element has a at least one valid role"
             },
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[3]/@role",
+                "snippet": "role=\"list\"",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "The element has a at least one valid role"
             },
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/svg[1]/@role",
+                "snippet": "role=\"img\"",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "The element has a at least one valid role"
             }
           ],
           "error": null,
@@ -4937,11 +5217,11 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                "snippet": "aria-checked=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r19"
+              "message": "The attribute has a valid value"
             },
             {
               "engine": "alfa",
@@ -4950,11 +5230,11 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/img[2]/@aria-hidden",
+                "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r19"
+              "message": "The attribute has a valid value"
             },
             {
               "engine": "alfa",
@@ -4963,11 +5243,11 @@
               "actRuleId": "6a7281",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required",
+                "snippet": "aria-required=\"yes\"",
                 "path": []
               },
-              "message": "Alfa sia-r19"
+              "message": "The attribute does not have a valid value"
             },
             {
               "engine": "alfa",
@@ -4976,11 +5256,11 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]/@aria-label",
+                "snippet": "aria-label=\"Card number\"",
                 "path": []
               },
-              "message": "Alfa sia-r19"
+              "message": "The attribute has a valid value"
             },
             {
               "engine": "alfa",
@@ -4989,11 +5269,11 @@
               "actRuleId": "6a7281",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[4]/@aria-hidden",
+                "snippet": "aria-hidden=\"true\"",
                 "path": []
               },
-              "message": "Alfa sia-r19"
+              "message": "The attribute has a valid value"
             }
           ],
           "error": null,
@@ -5012,11 +5292,11 @@
               "actRuleId": "6cfa84",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/img[2]",
+                "snippet": "<img src=\"delivery-van.png\" alt=\"Arrives Tuesday\" aria-hidden=\"true\">",
                 "path": []
               },
-              "message": "Alfa sia-r17"
+              "message": "The element is neither tabbable nor has tabbable descendants"
             },
             {
               "engine": "alfa",
@@ -5025,11 +5305,11 @@
               "actRuleId": "6cfa84",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[4]",
+                "snippet": "<div aria-hidden=\"true\"> <a href=\"/saver\"> Saver delivery </a> </div>",
                 "path": []
               },
-              "message": "Alfa sia-r17"
+              "message": "The element is either tabbable or has tabbable descendants"
             }
           ],
           "error": null,
@@ -5039,8 +5319,22 @@
         {
           "actRuleId": "78fd32",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r93",
+              "actRuleId": "78fd32",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]",
+                "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
+                "path": []
+              },
+              "message": "line-height is less than 1.5 times the font-size"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5057,11 +5351,11 @@
               "actRuleId": "7d6734",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/svg[1]",
+                "snippet": "<svg role=\"img\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <path d=\"M4 12h16\" stroke=\"currentColor\"></path> </svg>",
                 "path": []
               },
-              "message": "Alfa sia-r43"
+              "message": "The `<svg>` element does not have an accessible name"
             }
           ],
           "error": null,
@@ -5071,8 +5365,22 @@
         {
           "actRuleId": "8fc3b6",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r63",
+              "actRuleId": "8fc3b6",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/object[1]",
+                "snippet": "<object type=\"image/svg+xml\" data=\"progress.svg\" width=\"200\" height=\"8\"></object>",
+                "path": []
+              },
+              "message": "The `<object>` element does not have an accessible name"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5089,11 +5397,11 @@
               "actRuleId": "97a4e1",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/button[1]",
+                "snippet": "<button type=\"button\" class=\"icon\"> <span class=\"glyph\"></span> </button>",
                 "path": []
               },
-              "message": "Alfa sia-r12"
+              "message": "The button does not have an accessible name"
             }
           ],
           "error": null,
@@ -5103,8 +5411,22 @@
         {
           "actRuleId": "9e45ec",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r92",
+              "actRuleId": "9e45ec",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]",
+                "snippet": "<p style=\"letter-spacing: 0.01em !important; line-height: 1.1 !important; word-spacing: 0.05em !important\"> By paying you agree to the terms. </p>",
+                "path": []
+              },
+              "message": "word-spacing is less than 0.16 times the font-size"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5112,8 +5434,22 @@
         {
           "actRuleId": "9eb3f6",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r39",
+              "actRuleId": "9eb3f6",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/img[1]",
+                "snippet": "<img src=\"IMG_20240117_cart.png\" alt=\"IMG_20240117_cart.png\">",
+                "path": []
+              },
+              "message": "Alfa sia-r39"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5130,11 +5466,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
+                "snippet": "Cart",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5143,11 +5479,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "snippet": "Your order",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
             },
             {
               "engine": "alfa",
@@ -5156,11 +5492,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[1]/text()[1]",
+                "snippet": "Gift wrapping",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5169,11 +5505,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
+                "snippet": "Postcode",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5182,11 +5518,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "snippet": "Mobile number",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5195,11 +5531,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/div[1]/text()[1]",
+                "snippet": "Apply discount",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5208,11 +5544,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/p[1]/text()[1]",
+                "snippet": "By paying you agree to the terms.",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5221,11 +5557,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h2[2]/text()[1]",
+                "snippet": "Delivery options",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
             },
             {
               "engine": "alfa",
@@ -5234,11 +5570,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[2]/text()[1]",
+                "snippet": "Standard delivery",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5247,11 +5583,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[3]/p[1]/text()[1]",
+                "snippet": "Express delivery is unavailable to this postcode.",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5260,11 +5596,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/div[4]/a[1]/text()[1]",
+                "snippet": "Saver delivery",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -5273,11 +5609,11 @@
               "actRuleId": "afw4f7",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "snippet": "Free returns within 30 days.",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 3.45:1 which is below the required contrast of 4.5:1"
             }
           ],
           "error": null,
@@ -5287,8 +5623,22 @@
         {
           "actRuleId": "b4f0c3",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r47",
+              "actRuleId": "b4f0c3",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/head[1]/meta[2]",
+                "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\">",
+                "path": []
+              },
+              "message": "The `<meta>` element restricts the ability to zoom"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5305,11 +5655,11 @@
               "actRuleId": "b5c3f8",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]",
+                "snippet": "<html> <head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bi…",
                 "path": []
               },
-              "message": "Alfa sia-r4"
+              "message": "The `lang` attribute is either missing, empty, or only whitespace"
             }
           ],
           "error": null,
@@ -5319,8 +5669,22 @@
         {
           "actRuleId": "bc4a75",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r68",
+              "actRuleId": "bc4a75",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[3]",
+                "snippet": "<div role=\"list\"> <p> Express delivery is unavailable to this postcode. </p> </div>",
+                "path": []
+              },
+              "message": "The element owns no elements as required by its semantic role"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5328,8 +5692,22 @@
         {
           "actRuleId": "bc659a",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r9",
+              "actRuleId": "bc659a",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/head[1]/meta[3]",
+                "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
+                "path": []
+              },
+              "message": "The refresh or redirect is delayed"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5360,8 +5738,22 @@
         {
           "actRuleId": "bisz58",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r96",
+              "actRuleId": "bisz58",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/head[1]/meta[3]",
+                "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
+                "path": []
+              },
+              "message": "The refresh or redirect is delayed"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5378,11 +5770,11 @@
               "actRuleId": "c487ae",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/a[1]",
+                "snippet": "<a href=\"/\"> <img src=\"logo.svg\" alt=\"\"> </a>",
                 "path": []
               },
-              "message": "Alfa sia-r11"
+              "message": "The link does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -5391,11 +5783,11 @@
               "actRuleId": "c487ae",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/header[1]/nav[1]/a[1]",
+                "snippet": "<a href=\"/cart\" aria-checked=\"true\"> Cart </a>",
                 "path": []
               },
-              "message": "Alfa sia-r11"
+              "message": "The link has an accessible name"
             }
           ],
           "error": null,
@@ -5414,11 +5806,11 @@
               "actRuleId": "cae760",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/footer[1]/iframe[1]",
+                "snippet": "<iframe src=\"./terms.html\" width=\"300\" height=\"120\"></iframe>",
                 "path": []
               },
-              "message": "Alfa sia-r13"
+              "message": "The `<iframe>` does not have an accessible name"
             }
           ],
           "error": null,
@@ -5460,11 +5852,11 @@
               "actRuleId": "e086e5",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[1]",
+                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field has an accessible name"
             },
             {
               "engine": "alfa",
@@ -5473,11 +5865,11 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[2]",
+                "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode\">",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -5486,11 +5878,11 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[3]",
+                "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode-confirm\">",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -5499,11 +5891,11 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[4]",
+                "snippet": "<input type=\"text\" name=\"city\">",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -5512,11 +5904,11 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[5]",
+                "snippet": "<input type=\"tel\" aria-labeledby=\"phone-hint\">",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -5525,11 +5917,11 @@
               "actRuleId": "e086e5",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/input[6]",
+                "snippet": "<input type=\"text\" aria-required=\"yes\" aria-label=\"Card number\">",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field has an accessible name"
             },
             {
               "engine": "alfa",
@@ -5538,11 +5930,11 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/form[1]/div[2]",
+                "snippet": "<div role=\"slider\" tabindex=\"0\"></div>",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field does not have an accessible name"
             }
           ],
           "error": null,
@@ -5570,8 +5962,22 @@
         {
           "actRuleId": "ff89c9",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r42",
+              "actRuleId": "ff89c9",
+              "outcome": "failed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/div[2]",
+                "snippet": "<div role=\"listitem\"> Standard delivery </div>",
+                "path": []
+              },
+              "message": "The element is not owned by an element of its required context role"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5588,11 +5994,11 @@
               "actRuleId": "ffd0e9",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h1[1]",
+                "snippet": "<h1></h1>",
                 "path": []
               },
-              "message": "Alfa sia-r64"
+              "message": "The heading does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -5601,11 +6007,11 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h2[1]",
+                "snippet": "<h2> Your order </h2>",
                 "path": []
               },
-              "message": "Alfa sia-r64"
+              "message": "The heading has an accessible name"
             },
             {
               "engine": "alfa",
@@ -5614,11 +6020,11 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h2[2]",
+                "snippet": "<h2> Delivery options </h2>",
                 "path": []
               },
-              "message": "Alfa sia-r64"
+              "message": "The heading has an accessible name"
             }
           ],
           "error": null,
@@ -7838,8 +8244,87 @@
         {
           "actRuleId": "09o5cg",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/h1[1]/text()[1]",
+                "snippet": "Account settings",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "snippet": "Notifications",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "snippet": "Envoyer les notifications par courriel.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/label[1]/text()[1]",
+                "snippet": "Weekly digest",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/button[1]/text()[1]",
+                "snippet": "Save changes",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 18.43:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/a[1]/text()[1]",
+                "snippet": "Read the help pages",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 7:1"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7870,8 +8355,22 @@
         {
           "actRuleId": "24afc2",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r91",
+              "actRuleId": "24afc2",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r91"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7888,11 +8387,11 @@
               "actRuleId": "2779a5",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/",
+                "snippet": "#document <!doctype html> <html lang=\"engRish\" xml:lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cann…",
                 "path": []
               },
-              "message": "Alfa sia-r1"
+              "message": "The document has at least one `<title>` element The first `<title>` element has text content"
             }
           ],
           "error": null,
@@ -7911,8 +8410,22 @@
         {
           "actRuleId": "46ca7f",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r86",
+              "actRuleId": "46ca7f",
+              "outcome": "passed",
+              "target": {
+                "selector": "/html[1]/body[1]/main[1]/img[1]",
+                "snippet": "<img src=\"avatar.png\" alt=\"\">",
+                "path": []
+              },
+              "message": "The element is marked as decorative and is not exposed"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7943,8 +8456,22 @@
         {
           "actRuleId": "59796f",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r28",
+              "actRuleId": "59796f",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r28"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8012,7 +8539,7 @@
             {
               "engine": "alfa",
               "engineVersion": "0.119.0",
-              "engineRuleId": "sia-r21",
+              "engineRuleId": "sia-r110",
               "actRuleId": "674b10",
               "outcome": "inapplicable",
               "target": {
@@ -8020,7 +8547,7 @@
                 "snippet": "",
                 "path": []
               },
-              "message": "Alfa sia-r21"
+              "message": "Alfa sia-r110"
             }
           ],
           "error": null,
@@ -8076,8 +8603,22 @@
         {
           "actRuleId": "78fd32",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r93",
+              "actRuleId": "78fd32",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r93"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8108,8 +8649,22 @@
         {
           "actRuleId": "8fc3b6",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r63",
+              "actRuleId": "8fc3b6",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r63"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8126,11 +8681,11 @@
               "actRuleId": "97a4e1",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/button[1]",
+                "snippet": "<button type=\"submit\"> Save changes </button>",
                 "path": []
               },
-              "message": "Alfa sia-r12"
+              "message": "The button has an accessible name"
             }
           ],
           "error": null,
@@ -8140,8 +8695,22 @@
         {
           "actRuleId": "9e45ec",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r92",
+              "actRuleId": "9e45ec",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r92"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8149,8 +8718,22 @@
         {
           "actRuleId": "9eb3f6",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r39",
+              "actRuleId": "9eb3f6",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r39"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8167,11 +8750,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h1[1]/text()[1]",
+                "snippet": "Account settings",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
             },
             {
               "engine": "alfa",
@@ -8180,11 +8763,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "snippet": "Notifications",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
             },
             {
               "engine": "alfa",
@@ -8193,11 +8776,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "snippet": "Envoyer les notifications par courriel.",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -8206,11 +8789,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/label[1]/text()[1]",
+                "snippet": "Weekly digest",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -8219,11 +8802,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/button[1]/text()[1]",
+                "snippet": "Save changes",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 18.43:1 which is above the required contrast of 4.5:1"
             },
             {
               "engine": "alfa",
@@ -8232,11 +8815,11 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/a[1]/text()[1]",
+                "snippet": "Read the help pages",
                 "path": []
               },
-              "message": "Alfa sia-r69"
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 4.5:1"
             }
           ],
           "error": null,
@@ -8246,8 +8829,22 @@
         {
           "actRuleId": "b4f0c3",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r47",
+              "actRuleId": "b4f0c3",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r47"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8264,11 +8861,11 @@
               "actRuleId": "b5c3f8",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]",
+                "snippet": "<html lang=\"engRish\" xml:lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is rep…",
                 "path": []
               },
-              "message": "Alfa sia-r4"
+              "message": "The `lang` attribute exists and is neither empty nor only whitespace"
             }
           ],
           "error": null,
@@ -8278,8 +8875,22 @@
         {
           "actRuleId": "bc4a75",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r68",
+              "actRuleId": "bc4a75",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r68"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8287,8 +8898,22 @@
         {
           "actRuleId": "bc659a",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r9",
+              "actRuleId": "bc659a",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r9"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8305,11 +8930,11 @@
               "actRuleId": "bf051a",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/@lang",
+                "snippet": "lang=\"engRish\"",
                 "path": []
               },
-              "message": "Alfa sia-r5"
+              "message": "The `lang` attribute does not have a valid primary language tag"
             }
           ],
           "error": null,
@@ -8319,8 +8944,22 @@
         {
           "actRuleId": "bisz58",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r96",
+              "actRuleId": "bisz58",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r96"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8337,11 +8976,11 @@
               "actRuleId": "c487ae",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/a[1]",
+                "snippet": "<a href=\"/help\"> Read the help pages </a>",
                 "path": []
               },
-              "message": "Alfa sia-r11"
+              "message": "The link has an accessible name"
             }
           ],
           "error": null,
@@ -8383,11 +9022,11 @@
               "actRuleId": "de46e4",
               "outcome": "failed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/p[1]/@lang",
+                "snippet": "lang=\"xyzzy\"",
                 "path": []
               },
-              "message": "Alfa sia-r7"
+              "message": "The `lang` attribute does not have a valid primary language subtag"
             }
           ],
           "error": null,
@@ -8406,11 +9045,11 @@
               "actRuleId": "e086e5",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/input[1]",
+                "snippet": "<input type=\"checkbox\" id=\"digest\" name=\"digest\" checked>",
                 "path": []
               },
-              "message": "Alfa sia-r8"
+              "message": "The form field has an accessible name"
             }
           ],
           "error": null,
@@ -8438,8 +9077,22 @@
         {
           "actRuleId": "ff89c9",
           "engine": "alfa",
-          "status": "unsupported",
-          "verdicts": [],
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r42",
+              "actRuleId": "ff89c9",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r42"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8456,11 +9109,11 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h1[1]",
+                "snippet": "<h1> Account settings </h1>",
                 "path": []
               },
-              "message": "Alfa sia-r64"
+              "message": "The heading has an accessible name"
             },
             {
               "engine": "alfa",
@@ -8469,11 +9122,11 @@
               "actRuleId": "ffd0e9",
               "outcome": "passed",
               "target": {
-                "selector": ":root",
-                "snippet": "",
+                "selector": "/html[1]/body[1]/main[1]/h2[1]",
+                "snippet": "<h2> Notifications </h2>",
                 "path": []
               },
-              "message": "Alfa sia-r64"
+              "message": "The heading has an accessible name"
             }
           ],
           "error": null,
@@ -8977,11 +9630,11 @@
     ]
   },
   "totals": {
-    "findings": 37,
+    "findings": 38,
     "bySeverity": {
       "critical": 10,
       "serious": 14,
-      "moderate": 13,
+      "moderate": 14,
       "advisory": 0
     },
     "fixed": 0,
@@ -8995,14 +9648,14 @@
   },
   "invariantEnforced": [
     {
-      "actRuleId": "afw4f7",
+      "actRuleId": "09o5cg",
       "dissentingEngine": "alfa",
       "chosenEngine": "axe-core"
     },
     {
-      "actRuleId": "bc4a75",
-      "dissentingEngine": "axe-core",
-      "chosenEngine": "marlo"
+      "actRuleId": "afw4f7",
+      "dissentingEngine": "alfa",
+      "chosenEngine": "axe-core"
     }
   ]
 }

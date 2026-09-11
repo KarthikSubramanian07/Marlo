@@ -104,7 +104,7 @@ describe('the site has no theatre', () => {
     // golden file that tests/e2e/scan.e2e.test.ts regenerates from a real scan.
     //
     // So its numbers are permitted because they were recorded. If somebody edits the excerpt
-    // to read better, or nudges "37 findings" upward, this fails.
+    // to read better, or nudges the finding count upward, this fails.
     const excerpt = readFileSync(
       resolve(import.meta.dirname, '..', 'src', 'recorded-scan.txt'),
       'utf8',
@@ -124,10 +124,15 @@ describe('the site has no theatre', () => {
     }
 
     // And the excerpt actually reaches the page, escaped, rather than being dead weight.
+    // The finding count is read out of the excerpt rather than written here, because a
+    // second copy of it in this file is a second place to update and a second place to
+    // be wrong. The line it comes from is one of the lines proved verbatim above.
+    const summary = /^\s*(\d+ findings) .* (0 crashed)$/m.exec(excerpt);
+    expect(summary, 'the excerpt has no summary line').not.toBeNull();
     const index = pages.find((p) => p.path.endsWith(`dist${sep}index.html`));
     expect(index).toBeDefined();
-    expect(index?.html).toContain('37 findings');
-    expect(index?.html).toContain('0 crashed');
+    expect(index?.html).toContain(summary?.[1]);
+    expect(index?.html).toContain(summary?.[2]);
   });
 
   it('traces every number on the site to the calibration table', () => {

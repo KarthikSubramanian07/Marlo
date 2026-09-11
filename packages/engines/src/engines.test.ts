@@ -69,29 +69,18 @@ describe('every mapping entry is well formed', () => {
     });
   }
 
-  it('gives axe the largest table, since it is the only one built from a discovery run', () => {
-    // Alfa and htmlcs are measured now too (Issue #43), but axe's table was built by
-    // running discover-mappings.mjs over the whole corpus and reviewing every
-    // correlation, not just confirming a pre-existing guess against one rule at a time.
-    // If one of the other two overtakes it, somebody has been guessing at the same
-    // scale without the discovery run to back it up.
-    expect(AXE_MAPPING.entries.length).toBeGreaterThan(ALFA_MAPPING.entries.length);
-    expect(AXE_MAPPING.entries.length).toBeGreaterThan(HTMLCS_MAPPING.entries.length);
-  });
-
-  it('requires a measured citation before an Alfa or htmlcs entry may claim more than partial', () => {
-    // A documentation match is not a measurement. Claiming `exact` or `superset` on the
-    // strength of matching prose is exactly the overstatement this project argues
-    // against. Once a human has actually run the rule over the corpus, the note says so
-    // in the f/p/i vocabulary discover-mappings.mjs and the axe table use (Issue #43),
-    // and only then may the entry claim more than `partial`. Every Alfa and htmlcs note
-    // now carries that citation or reads `partial`, so this stops being one entry at a
-    // time and becomes something the harness confirms on every run.
-    const measured = /^f\d+\/\d+ p\d+ i\d+\.\s/;
+  it('requires every Alfa and htmlcs entry to cite the measurement behind it', () => {
+    // A documentation match is not a measurement. Both tables were once written from
+    // rule descriptions and every entry was marked partial for that reason; #43
+    // measured them and a discovery run over the whole corpus built the rest. The
+    // citation is the evidence in the vocabulary discover-mappings.mjs prints, `f<n>/<n>
+    // p<n> i<n>`, optionally with a cantTell count, and an entry without one is a claim
+    // nobody ran. The axe table predates the convention and states its evidence in
+    // prose; bringing it into the same shape is a good change and not this test's job.
+    const measured = /^f\d+\/\d+ p\d+ i\d+( ct\d+)?\.\s/;
     for (const mapping of [ALFA_MAPPING, HTMLCS_MAPPING]) {
       for (const entry of mapping.entries) {
-        if (entry.kind === 'partial') continue;
-        expect(entry.note, `${entry.engineRuleId} claims ${entry.kind} without a citation`).toMatch(
+        expect(entry.note, `${entry.engineRuleId} -> ${entry.actId} cites no measurement`).toMatch(
           measured,
         );
       }
@@ -237,6 +226,34 @@ describe('the adapters run against a real page', () => {
         expect(['passed', 'failed', 'cantTell', 'inapplicable']).toContain(verdict.outcome);
       }
     }
+    await page.close();
+  });
+
+  it('reports where an alfa finding is and what alfa said about it', async () => {
+    // The first version of this adapter reported `:root` and the rule id for every
+    // verdict, because Alfa hands back its own node objects rather than selectors. It
+    // does supply a path and a serialisation, so a reader gets the element rather than
+    // the document, and Alfa's own diagnostic rather than the name of the rule.
+    const page = await renderer.render({ html: BROKEN });
+    const report = await new AlfaEngine().evaluate(page, ['b5c3f8', '23a2a8', 'c487ae']);
+
+    const located = report.results
+      .filter((r) => r.status === 'ok')
+      .flatMap((r) => r.verdicts)
+      .filter((v) => v.outcome === 'failed');
+    expect(located.length).toBeGreaterThan(0);
+
+    for (const verdict of located) {
+      // An element target gets Alfa's path, `/html[1]/body[1]/img[1]`. A document-level
+      // target has none and stays `:root`, which is the one honest use of it.
+      expect(verdict.target.selector, verdict.engineRuleId).toMatch(/^(:root|\/html\[\d+\])/);
+      // And the message is Alfa's diagnostic, not a restatement of which rule ran.
+      expect(verdict.message, verdict.engineRuleId).not.toBe(`Alfa ${verdict.engineRuleId}`);
+    }
+
+    const withPath = located.find((v) => v.target.selector !== ':root');
+    expect(withPath, 'no alfa verdict carried a path').toBeDefined();
+    expect(withPath?.target.snippet).not.toBe('');
     await page.close();
   });
 
