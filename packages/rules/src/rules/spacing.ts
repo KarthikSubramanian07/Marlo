@@ -48,36 +48,69 @@ interface SpacingRule {
  * Not the same question as `isHiddenFromAssistiveTech`: off-screen text is still in the
  * accessibility tree, only not part of the visual presentation these rules are about.
  *
- * Deliberately narrow, matching this file's style attribute-only scope: a small offset
- * is ordinary positioning, so only a four-figure-or-larger magnitude counts, which is
- * the threshold the common `-999em` / `-9999px` idioms clear by a wide margin.
+ * Deliberately narrow, matching this file's style attribute-only scope. A small offset
+ * is ordinary positioning, so only a magnitude no viewport could contain counts: at
+ * least 100 font sizes in `em` or `rem`, or at least 1000 pixels. Percentages are not
+ * read, because a percentage offset is relative to a containing block whose size is a
+ * layout question. Every offset in the declaration is checked, not the first one found:
+ * `left: 0; top: -9999px` is the same idiom with the coordinates in the other order.
  */
 function isOffScreen(element: MarloElement): boolean {
   for (const node of [element, ...ancestors(element)]) {
     const style = attr(node, 'style');
     if (style === null) continue;
     if (!/position\s*:\s*(?:absolute|fixed)\b/i.test(style)) continue;
-    const offset = /(?:top|left|right|bottom)\s*:\s*(-?[\d.]+)/i.exec(style);
-    if (offset === null) continue;
-    if (Number.parseFloat(offset[1] ?? '0') <= -100) return true;
+    const offsets = style.matchAll(
+      /(?:^|;)\s*(?:top|left|right|bottom)\s*:\s*(-[\d.]+)(em|rem|px)?\s*(?:;|$)/gi,
+    );
+    for (const offset of offsets) {
+      const magnitude = -Number.parseFloat(offset[1] ?? '0');
+      const unit = (offset[2] ?? 'px').toLowerCase();
+      if (unit === 'px' ? magnitude >= 1000 : magnitude >= 100) return true;
+    }
   }
   return false;
 }
 
 /**
- * Whether the text is set up so it can never take a soft wrap break, per line-height's
- * own applicability. Deliberately narrow: `white-space: nowrap`/`pre` is unambiguous,
- * and an inline `overflow-x: scroll` is the idiom for a fixed-width box that scrolls its
- * contents horizontally rather than wrapping them. Neither requires layout to read off
- * the style attribute, but this is not a general no-wrap detector: a stylesheet rule
- * doing the same thing is invisible here, same as everywhere else in this file.
+ * Whether the text can never take a soft wrap break, per line-height's own
+ * applicability. Only `white-space: nowrap` and `white-space: pre`, on the element or
+ * an ancestor, are decidable from the style attribute: both forbid wrapping outright.
  */
 function cannotSoftWrap(element: MarloElement): boolean {
   for (const node of [element, ...ancestors(element)]) {
     const style = attr(node, 'style');
     if (style === null) continue;
     if (/white-space\s*:\s*(?:nowrap|pre)\b/i.test(style)) return true;
-    if (/overflow-x\s*:\s*scroll\b/i.test(style)) return true;
+  }
+  return false;
+}
+
+/**
+ * Whether the text may or may not wrap, and nothing in the DOM can say which.
+ *
+ * The rule applies only to text that includes a soft wrap break, and whether a
+ * sentence wraps is a layout fact: it depends on the box width, the font and the
+ * viewport. Under the static renderer these rules assume a block of text wraps, which
+ * is true of almost every paragraph on almost every page. The one idiom that makes the
+ * assumption unsafe is a horizontally scrolling container with an explicitly sized
+ * child, `overflow-x: scroll` around a `width: 1000px` paragraph, where the author's
+ * intent is a single long line.
+ *
+ * An earlier version read that idiom as `inapplicable`. That asserts the text does not
+ * wrap, which the DOM cannot know: the same markup with a longer sentence wraps inside
+ * the 1000 pixel box and the rule applies after all. So the idiom is reported as
+ * `cantTell` instead, which is the true answer, and costs nothing in the strict view
+ * because a cantTell on an inapplicable example is recorded as caution rather than as a
+ * false positive.
+ */
+function wrappingIsUncertain(element: MarloElement): boolean {
+  const own = attr(element, 'style') ?? '';
+  if (!/(?:^|;)\s*width\s*:\s*[\d.]+(?:px|em|rem|ch)\s*(?:;|$)/i.test(own)) return false;
+  for (const node of ancestors(element)) {
+    const style = attr(node, 'style');
+    if (style === null) continue;
+    if (/overflow(?:-x)?\s*:\s*(?:scroll|auto)\b/i.test(style)) return true;
   }
   return false;
 }
@@ -117,6 +150,17 @@ function spacingRule(spec: SpacingRule) {
         value = (match[1] ?? '').trim();
       }
       const lower = value.toLowerCase();
+
+      if (spec.property === 'line-height' && wrappingIsUncertain(element)) {
+        return {
+          outcome: 'cantTell',
+          message:
+            `${spec.property}: ${value} !important is declared on a fixed-width element inside a ` +
+            'horizontally scrolling container. The rule applies only to text that wraps, and ' +
+            'whether this text wraps depends on layout. Run with --renderer browser, or remove ' +
+            '!important, which is the whole fix either way.',
+        };
+      }
 
       const passes = (amount: number): boolean => amount >= spec.threshold;
       const passedResult = {

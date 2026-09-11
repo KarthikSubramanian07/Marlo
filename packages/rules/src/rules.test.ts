@@ -530,12 +530,58 @@ describe('78fd32 line height is not important below the threshold', () => {
   });
 
   it('does not apply where the text cannot take a soft wrap break', () => {
+    // white-space: nowrap forbids wrapping outright, on the element or an ancestor, and
+    // that much is decidable from the style attribute alone.
     expect(
       check(
         '78fd32',
-        '<html><body><div style="overflow-x: scroll;"><p style="line-height: 1em !important; width: 1000px;">x</p></div></body></html>',
+        '<html><body><p style="white-space: nowrap; line-height: 1em !important;">x</p></body></html>',
       ).outcome,
     ).toBe('inapplicable');
+    expect(
+      check(
+        '78fd32',
+        '<html><body><div style="white-space: pre"><p style="line-height: 1em !important;">x</p></div></body></html>',
+      ).outcome,
+    ).toBe('inapplicable');
+  });
+
+  it('declines rather than deciding when a scrolling container makes wrapping a layout question', () => {
+    // The corpus idiom: a fixed-width paragraph inside overflow-x: scroll. Whether the
+    // sentence wraps inside 1000 pixels depends on the font, so the honest answer under
+    // the static renderer is cantTell, not inapplicable.
+    const result = check(
+      '78fd32',
+      '<html><body><div style="overflow-x: scroll;"><p style="line-height: 1em !important; width: 1000px;">x</p></div></body></html>',
+    );
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('depends on layout');
+    // Without the explicit width the container alone proves nothing, and the paragraph
+    // is graded like any other.
+    expect(
+      check(
+        '78fd32',
+        '<html><body><div style="overflow-x: scroll;"><p style="line-height: 1em !important;">x</p></div></body></html>',
+      ).outcome,
+    ).toBe('failed');
+  });
+
+  it('reads every offset in an off-screen declaration, not the first one', () => {
+    // `left: 0; top: -9999px` is the same idiom with the coordinates in the other
+    // order, and a version that stopped at `left: 0` graded it as visible.
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="position: absolute; left: 0; top: -9999px; line-height: 1em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('inapplicable');
+    // A hundred pixels is a large offset and not an off-screen one.
+    expect(
+      check(
+        '78fd32',
+        '<html><body><p style="position: absolute; top: -100px; line-height: 1em !important;">x</p></body></html>',
+      ).outcome,
+    ).toBe('failed');
   });
 });
 
