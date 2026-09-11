@@ -1,0 +1,79 @@
+name: Regenerate published artifacts
+
+# The calibration table and the golden files are generated, not written. Regenerating
+# them needs a build, the whole corpus and a full end to end run, which is minutes of
+# disk-bound work. This runs it on a runner and commits the result to the branch it was
+# dispatched on, so a contributor whose machine cannot do it in reasonable time is not
+# blocked, and so the numbers always come from the harness rather than from an edit.
+#
+# It never runs on main and it never runs on a schedule. It is dispatched deliberately,
+# on a branch, and the pull request checks then grade whatever it produced exactly as
+# they would grade a hand-run regeneration.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regenerate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regenerate:
+    name: Regenerate the table and the golden files
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Refuse to run on main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "This writes generated files. Dispatch it on a branch, never on main." >&2
+          exit 1
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Regenerate the calibration table
+        run: node packages/calibrate/dist/bin.js
+
+      - name: Regenerate the golden files
+        env:
+          UPDATE_GOLDEN: '1'
+        run: pnpm run test:e2e
+
+      - name: Format, because prettier owns the markdown table
+        run: pnpm run format
+
+      - name: Show what moved
+        run: git --no-pager diff --stat
+
+      - name: Commit, only if something actually changed
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to regenerate. The committed artifacts already match the harness."
+            exit 0
+          fi
+          git config user.name "karthik"
+          git config user.email "winnerkarthik07@gmail.com"
+          git add -A
+          git commit -s -m "calibrate: regenerate the table and golden output on a runner
+
+          Produced by .github/workflows/regenerate.yml rather than by hand, so the
+          published numbers come from the harness. The diff is in the job log."
+          git push origin HEAD:${{ github.ref_name }}
