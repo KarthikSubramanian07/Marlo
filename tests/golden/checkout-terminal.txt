@@ -65,8 +65,8 @@ apps/demo/checkout.html
 
   ▲▲  serious  6a7281  ARIA state or property has valid value
       WCAG 1.3.1, 4.1.2  alfa precision 1.00 over 24 official test cases
-      :root (not located in source)
-        Alfa sia-r19
+      /html[1]/body[1]/main[1]/form[1]/input[6]/@aria-required (not located in source)
+        The attribute does not have a valid value
 
   ▲▲  serious  6cfa84  Element with aria-hidden has no content in sequential focus navigation
       WCAG 4.1.2  axe-core precision 1.00 over 14 official test cases
@@ -88,8 +88,8 @@ apps/demo/checkout.html
       INVARIANT alfa reported a failure the routed engine did not, so Marlo may not report clean.
       disagreement: alfa says failed
       disagreement: htmlcs says passed
-      :root (not located in source)
-        Alfa sia-r69
+      /html[1]/body[1]/main[1]/p[1]/text()[1] (not located in source)
+        The highest possible contrast of the text is 3.45:1 which is below the required contrast of 4.5:1
 
   ▲▲  serious  b5c3f8  HTML page has lang attribute
       WCAG 3.1.1  marlo precision 1.00 over 7 official test cases
@@ -97,15 +97,15 @@ apps/demo/checkout.html
         The html element has no lang attribute, so assistive technology has to guess the language and will often pick the wrong voice.
 
   ▲▲  serious  bc659a  Meta element has no refresh delay
-      WCAG 2.2.1, 2.2.4, 3.2.5  marlo precision 1.00 over 15 official test cases
+      WCAG 2.2.1, 2.2.4, 3.2.5  alfa precision 1.00 over 15 official test cases
       disagreement: htmlcs says passed
-      meta (not located in source)
-        The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it.
+      /html[1]/head[1]/meta[3] (not located in source)
+        The refresh or redirect is delayed
 
   ▲▲  serious  bisz58  Meta element has no refresh delay (no exception)
-      WCAG 2.2.1, 2.2.4, 3.2.5  marlo precision 1.00 over 14 official test cases
-      meta (not located in source)
-        The page refreshes after 30 seconds. This rule allows no exception for a long delay.
+      WCAG 2.2.1, 2.2.4, 3.2.5  alfa precision 1.00 over 14 official test cases
+      /html[1]/head[1]/meta[3] (not located in source)
+        The refresh or redirect is delayed
 
   ▲▲  serious  cae760  Iframe element has non-empty accessible name
       WCAG 4.1.2  axe-core precision 1.00 over 10 official test cases
@@ -116,6 +116,14 @@ apps/demo/checkout.html
       no mapped success criterion  axe-core precision 1.00 over 15 official test cases
       h1 (not located in source)
         Headings should not be empty
+
+  ▲   moderate 09o5cg  Text has enhanced contrast
+      WCAG 1.4.3, 1.4.6  alfa precision 0.88 over 29 official test cases
+      INVARIANT alfa reported a failure the routed engine did not, so Marlo may not report clean.
+      disagreement: alfa says failed
+      disagreement: htmlcs says passed
+      /html[1]/body[1]/main[1]/p[1]/text()[1] (not located in source)
+        The highest possible contrast of the text is 3.45:1 which is below the required contrast of 7:1
 
   ▲   moderate 24afc2  Important letter spacing in style attributes is wide enough
       WCAG 1.4.12  marlo precision 1.00 over 16 official test cases
@@ -139,8 +147,8 @@ apps/demo/checkout.html
   ▲   moderate 5c01ea  ARIA state or property is permitted
       WCAG 1.3.1, 4.1.2  alfa precision 1.00 over 15 official test cases
       disagreement: marlo says cantTell
-      :root (not located in source)
-        Alfa sia-r18
+      /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked (not located in source)
+        The attribute is not allowed for the element on which it is specified The attribute is not prohibited for the element on which it is specified
 
   ▲   moderate 5f99a7  ARIA attribute is defined in WAI-ARIA
       WCAG 1.3.1, 4.1.2  marlo precision 1.00 over 7 official test cases
@@ -158,17 +166,16 @@ apps/demo/checkout.html
         word-spacing: 0.05em !important cannot be overridden by a user stylesheet, and it is below 0.16 times the font size. Removing !important is usually the whole fix.
 
   ▲   moderate bc4a75  ARIA required owned elements
-      WCAG 1.3.1  axe-core precision 0.88 over 19 official test cases
-      INVARIANT axe-core reported a failure the routed engine did not, so Marlo may not report clean.
-      disagreement: axe-core says failed
-      div[role="list"] (not located in source)
-        Certain ARIA roles must contain particular children
+      WCAG 1.3.1  alfa precision 1.00 over 19 official test cases
+      disagreement: marlo says cantTell
+      /html[1]/body[1]/main[1]/div[3] (not located in source)
+        The element owns no elements as required by its semantic role
 
   ▲   moderate ff89c9  ARIA required context role
-      WCAG 1.3.1  axe-core precision 1.00 over 15 official test cases
+      WCAG 1.3.1  alfa precision 1.00 over 15 official test cases
       disagreement: marlo says cantTell
-      div[role="listitem"] (not located in source)
-        Certain ARIA roles must be contained by particular parents
+      /html[1]/body[1]/main[1]/div[2] (not located in source)
+        The element is not owned by an element of its required context role
 
 
 apps/demo/settings.html
@@ -196,7 +203,7 @@ apps/demo/settings.html
         lang attribute must have a valid value
 
   ------------------------------------------------------------------------
-  37 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
+  38 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
   coverage: 35 of 94 published ACT rules
   one-directional invariant enforced on 2 rule(s): a peer reported a failure the routed engine did not.
-  calibration 2026-08-10, corpus 2026-07-29
+  calibration 2026-09-11, corpus 2026-07-29

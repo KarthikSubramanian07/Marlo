@@ -9,13 +9,24 @@ import { buildMapping } from '../engine.js';
  * exported rules, 76 have non-criterion requirements and every one of those is a
  * technique or an EAA reference. So this table is hand-written like the others.
  *
- * SMALLER AND MORE CAUTIOUS THAN THE AXE TABLE, ON PURPOSE.
+ * BUILT FROM A DISCOVERY RUN OVER THE WHOLE CORPUS, THE SAME WAY THE AXE TABLE WAS.
  *
- * The axe mapping was derived by running axe over all 1134 test cases and reviewing
- * the correlations. Alfa cannot go through the same script, because its modules read
- * DOM globals at import time and have to be loaded inside `withDomGlobals`, so its
- * discovery runs through the calibration harness instead. That work is filed rather
- * than guessed at here.
+ * `node scripts/discover-mappings.mjs --engine alfa` runs every Alfa rule over all
+ * 1134 test cases through the same StaticRenderer the harness uses and reports, per
+ * ACT rule, which Alfa rules fired on its failing examples and which fired on its
+ * passing or inapplicable ones. The first version of this file predates that support
+ * and was written from Alfa's rule descriptions; #43 measured those entries one at a
+ * time, and the discovery run then found twenty more rules the descriptions had not
+ * suggested, including implementations of the four ACT rules that had been routed to
+ * no engine at all. Every entry below cites its counts as `f<caught>/<failing>
+ * p<passing flagged> i<inapplicable flagged>`, with `ct<n>` where Alfa answered
+ * cantTell, and names the specific case behind any miss or false positive.
+ *
+ * A correlation is a proposal, not a mapping. Each rule added from the run was read in
+ * `node_modules/.pnpm/@siteimprove+alfa-rules@0.119.0/node_modules/@siteimprove/alfa-rules/dist/sia-rNN/rule.js`
+ * to confirm its applicability and expectation are the ACT rule's condition, because
+ * four Alfa rules (R1, R4, R59, R87: title, lang, headings, focus) fire on nearly every
+ * corpus fragment and correlate with everything while meaning none of it.
  *
  * What is below started as the subset where Alfa's own published rule descriptions
  * state the same condition as the ACT rule in the same words, a documentation match
@@ -152,10 +163,10 @@ const ENTRIES: readonly MappingEntry[] = [
     note: 'f2/2 p0 i0. Alfa R20 checks aria- attributes are defined in WAI-ARIA, exactly the ACT rule.',
   },
   {
-    engineRuleId: 'sia-r21',
+    engineRuleId: 'sia-r110',
     actId: '674b10',
-    kind: 'superset',
-    note: 'f2/2 p1 i0. Alfa R21 flags a role attribute if any of its space-separated tokens is invalid, but ACT 674b10 accepts the attribute once one token resolves to a valid role, per the ARIA role-list fallback. False positive on corpus case 674b10/22ce45f ("Passed Example 3", `role="searchfield searchbox"`), where "searchbox" is valid and the ACT rule passes, but Alfa flags it over the unrecognised "searchfield" token.',
+    kind: 'exact',
+    note: 'f2/2 p0 i0. Alfa R110 checks that a role attribute resolves to a valid role, applying the ARIA fallback so `role="searchfield searchbox"` is valid because its second token is. It replaces R21 here: R21 flagged any invalid token and produced a false positive on 674b10/22ce45f8 ("Passed Example 3", that exact attribute), which the ACT rule passes. Alfa deprecated R21 in favour of R110 for the same reason, and mapping the deprecated rule was measuring Alfa at its worst rather than as shipped.',
   },
   {
     engineRuleId: 'sia-r43',
@@ -174,6 +185,138 @@ const ENTRIES: readonly MappingEntry[] = [
     actId: 'afw4f7',
     kind: 'partial',
     note: 'f5/8 p1 i0 ct4. Alfa R69 checks text has sufficient contrast. Needs layout, so expect cantTell on the static renderer, the same as axe, which accounts for most of the shortfall. Also one false positive: afw4f7/0b212e48 ("Passed Example 7") is a decorative divider string of symbols on a low-contrast background, which the ACT rule exempts as non-meaningful text and Alfa flags anyway, so the gap is not layout alone.',
+  },
+  {
+    engineRuleId: 'sia-r9',
+    actId: 'bc659a',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R9 checks a meta refresh either has no delay or a delay above twenty hours, which is the ACT rule with its exception. Passes the 72001-second example the no-exception rule fails.',
+  },
+  {
+    engineRuleId: 'sia-r96',
+    actId: 'bisz58',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R96 is the no-exception variant of R9: any delayed meta refresh fails, including one above twenty hours, which is exactly bisz58. R9 alone catches three of four here because it honours the exception bisz58 does not.',
+  },
+  {
+    engineRuleId: 'sia-r94',
+    actId: 'm6b1q3',
+    kind: 'exact',
+    note: 'f2/2 p0 i0. Alfa R94 checks an element with role menuitem has a non-empty accessible name. Before this entry no engine measured well enough to be routed this rule; axe maps it through button-name at 0.67 precision.',
+  },
+  {
+    engineRuleId: 'sia-r68',
+    actId: 'bc4a75',
+    kind: 'partial',
+    note: 'f6/7 p0 i0. Alfa R68 checks an element with a role that requires owned elements has them (hasRequiredChildren). Misses bc4a75/a7a314ce ("Failed Example 7"): a menu whose nested group owns treeitems rather than menuitems, two levels down, which the ACT rule fails and Alfa does not report.',
+  },
+  {
+    engineRuleId: 'sia-r42',
+    actId: 'ff89c9',
+    kind: 'partial',
+    note: 'f3/4 p0 i0. Alfa R42 checks an element whose role requires a context role is owned by one (hasRequiredParent). Misses ff89c9/289c7bc0 ("Failed Example 4"): listitems inside a shadow root, referenced by aria-owns from a list outside it, which the ACT rule fails and Alfa does not report.',
+  },
+  {
+    engineRuleId: 'sia-r46',
+    actId: 'd0f69e',
+    kind: 'partial',
+    note: 'f2/3 p0 i0. Alfa R46 checks each header cell in a table element has at least one cell assigned to it. Misses d0f69e/46645a39 ("Failed Example 3"), an ARIA grid built from divs with role="columnheader": R46 walks table elements only, and the ACT rule applies to the grid role as well.',
+  },
+  {
+    engineRuleId: 'sia-r45',
+    actId: 'a25f45',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R45 checks that every id in a headers attribute refers to a cell in the same table (HeadersRefersToCellInTable), exactly the ACT rule. Not R77, which asks the reverse question of whether a data cell has a header and only correlates by accident.',
+  },
+  {
+    engineRuleId: 'sia-r86',
+    actId: '46ca7f',
+    kind: 'partial',
+    note: 'f2/3 p0 i0. Alfa R86 checks an element marked decorative with role none or presentation is not included in the accessibility tree. Misses 46ca7f/baa8fcdc ("Failed Example 3"), an svg with role="none" and an aria-label: the ACT rule holds that the global aria-label keeps the element exposed, and Alfa does not flag it. R67, the same check restricted to img and svg, catches a subset of what R86 catches and adds nothing, so it is not mapped.',
+  },
+  {
+    engineRuleId: 'sia-r90',
+    actId: '307n5z',
+    kind: 'exact',
+    note: 'f3/3 p0 i0. Alfa R90 checks an element whose role has presentational children contains no tabbable descendant, exactly the ACT rule.',
+  },
+  {
+    engineRuleId: 'sia-r28',
+    actId: '59796f',
+    kind: 'exact',
+    note: 'f3/3 p0 i0. Alfa R28 checks an input of type image has a non-empty accessible name, exactly the ACT rule. This was the lead left when the same rule was removed from 8fc3b6, where it had been mapped by its description and could never fire; measured here rather than assumed.',
+  },
+  {
+    engineRuleId: 'sia-r10',
+    actId: '73f2c2',
+    kind: 'exact',
+    note: 'f5/5 p0 i0. Alfa R10 checks an autocomplete attribute on a form field has a valid token sequence, exactly the ACT rule, including the applicability exclusions for hidden and disabled fields and for the values on and off.',
+  },
+  {
+    engineRuleId: 'sia-r63',
+    actId: '8fc3b6',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R63 checks an object element that embeds media has a non-empty accessible name, exactly the ACT rule. This is the rule that should have been here instead of R28.',
+  },
+  {
+    engineRuleId: 'sia-r47',
+    actId: 'b4f0c3',
+    kind: 'exact',
+    note: 'f4/4 p0 i0. Alfa R47 checks a meta viewport does not prevent zoom through user-scalable=no or a maximum-scale below 2, exactly the ACT rule.',
+  },
+  {
+    engineRuleId: 'sia-r44',
+    actId: 'b33eff',
+    kind: 'exact',
+    note: 'f3/3 p0 i0. Alfa R44 resolves the cascade under both orientations and fails a transform that locks rotation, exactly the ACT rule. Works on the static renderer because Alfa evaluates style elements itself; no other engine here claims the rule.',
+  },
+  {
+    engineRuleId: 'sia-r91',
+    actId: '24afc2',
+    kind: 'superset',
+    note: 'f3/4 p0 i1. Alfa R91 is its implementation of the letter-spacing rule and shares its threshold. Fires on 24afc2/f57bef41 ("Inapplicable Example 3"), text positioned off-screen with top: -999em, which the ACT rule excludes as not visible and Alfa cannot see as off-screen without a viewport. Misses 24afc2/0d7c8aa0 ("Failed Example 3"), letter-spacing: normal !important.',
+  },
+  {
+    engineRuleId: 'sia-r92',
+    actId: '9e45ec',
+    kind: 'superset',
+    note: 'f3/4 p0 i1. Alfa R92 is its implementation of the word-spacing rule. Same shape as R91: fires on the off-screen inapplicable example 9e45ec/4b55d76e and misses 9e45ec/673f8527 ("Failed Example 3"), word-spacing: normal !important.',
+  },
+  {
+    engineRuleId: 'sia-r93',
+    actId: '78fd32',
+    kind: 'superset',
+    note: 'f6/6 p0 i1. Alfa R93 is its implementation of the line-height rule and catches every failing example. Fires on 78fd32/166eef55 ("Inapplicable Example 4"), the off-screen text, for the same reason as R91.',
+  },
+  {
+    engineRuleId: 'sia-r66',
+    actId: '09o5cg',
+    kind: 'partial',
+    note: 'f7/10 p1 i0 ct3. Alfa R66 checks text has enhanced contrast of 7:1, computed from declared colours where it can and cantTell where a background image or gradient makes the ratio unknowable. One false positive, 09o5cg/c83b77f0 ("Passed Example 6"), a decorative string of symbols the ACT rule exempts as non-meaningful text, the same shape as R69 on the minimum-contrast rule.',
+  },
+  {
+    engineRuleId: 'sia-r15',
+    actId: '4b1c6c',
+    kind: 'partial',
+    note: 'f0/4 p0 i0 ct10. Alfa R15 groups iframes by identical accessible name and asks a human whether they embed the same resource, so every applicable example is cantTell. The condition is the ACT rule exactly and the answer is never automatic, which the strict view records as zero recall and the official view as consistent; the flattered column exists for this row. No other engine claims the rule.',
+  },
+  {
+    engineRuleId: 'sia-r41',
+    actId: 'b20e66',
+    kind: 'partial',
+    note: 'f0/6 p0 i0 ct14. Alfa R41 groups links by identical accessible name and asks whether they serve the same purpose. cantTell on every applicable example, for the same reason as R15, and no other engine claims the rule.',
+  },
+  {
+    engineRuleId: 'sia-r81',
+    actId: 'fd3a94',
+    kind: 'partial',
+    note: 'f0/5 p0 i0 ct12. Alfa R81 is R41 restricted to links in the same context, which is the distinction between fd3a94 and b20e66. cantTell on every applicable example.',
+  },
+  {
+    engineRuleId: 'sia-r39',
+    actId: '9eb3f6',
+    kind: 'partial',
+    note: 'f0/5 p0 i0 ct8. Alfa R39 finds an image whose accessible name equals its filename and asks whether that is acceptable. cantTell on every applicable example, which is also what Marlo answers for this rule and for the same reason: whether a filename describes an image is a judgment.',
   },
 ];
 
