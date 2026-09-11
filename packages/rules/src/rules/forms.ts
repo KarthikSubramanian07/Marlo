@@ -339,10 +339,31 @@ function quote(element: MarloElement): string {
   return text.length <= 100 ? `"${text}"` : `"${text.slice(0, 99)}…"`;
 }
 
+/**
+ * Removed from the accessibility tree by an author's declaration, on the element or an
+ * ancestor.
+ *
+ * Deliberately narrower than the shared `isHiddenFromAssistiveTech`, which also treats
+ * `visibility: hidden` on any ancestor as hiding the subtree. Visibility inherits and is
+ * overridable, so a message that sets `visibility: visible` on itself inside a hidden
+ * wrapper is on screen and in the tree, and the shared helper says otherwise. The
+ * shared one is left alone: it is conservative in the direction that suppresses
+ * findings, several rules depend on it, and changing it would move numbers this rule has
+ * no business moving. The visibility question is answered here by `isVisuallyHidden`.
+ */
+function isRemovedFromTree(element: MarloElement): boolean {
+  for (const node of [element, ...ancestors(element)]) {
+    if (node.tag === 'template' || node.tag === 'head') return true;
+    if (hasAttr(node, 'hidden')) return true;
+    if (attr(node, 'aria-hidden') === 'true') return true;
+  }
+  return false;
+}
+
 /** Why a candidate cannot be perceived, or null when it can. */
 function unperceivable(element: MarloElement): string | null {
   if (isVisuallyHidden(element)) return 'not visible';
-  if (isHiddenFromAssistiveTech(element)) return 'not in the accessibility tree';
+  if (isRemovedFromTree(element)) return 'not in the accessibility tree';
   return null;
 }
 
