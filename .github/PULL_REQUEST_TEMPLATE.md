@@ -19,6 +19,12 @@
 
 Closes #
 
+### Credit
+
+- [ ] Commit Author is the person who did the work, with a GitHub-linked email (see [CONTRIBUTING.md](../CONTRIBUTING.md#credit-and-authorship))
+- [ ] If this replaces or heavily rewrites another pull request, that person remains Author of their commits and/or is listed as `Co-authored-by:` with their GitHub noreply email
+- [ ] No AI `Co-authored-by` trailers
+
 ---
 
 <!-- Delete the sections below that do not apply. Keep the ones that do. -->

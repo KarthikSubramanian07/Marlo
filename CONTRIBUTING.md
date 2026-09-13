@@ -143,6 +143,13 @@ Raising a threshold is a normal pull request. Lowering one needs a reason in the
 
 `main` requires ten green checks, a linear history, and one approving review. The first two have no exceptions and no bypass: a force push to `main` is refused for everybody, including the repository owner.
 
+Allowed merge methods are **rebase** and **squash**:
+
+- **Rebase and merge** is the default for contributor pull requests. It keeps each commit's Author.
+- **Squash** is for noisy branches only. The squash commit must stay authored as the pull request author, never as the person clicking merge.
+
+Do not rewrite a contributor's Author field to a maintainer identity when landing their work. See [Credit and authorship](#credit-and-authorship).
+
 ## Sign-off
 
 Marlo uses the [Developer Certificate of Origin](https://developercertificate.org/), not a contributor licence agreement. Commit with `-s`:
@@ -156,6 +163,43 @@ That appends `Signed-off-by: Your Name <you@example.com>`, which is you stating 
 It is a DCO rather than a CLA because the contribution this project most wants is a false positive report from someone who is annoyed that Marlo was wrong about their markup, and putting a legal document in front of that person is how you lose the message. Recorded as [D-001](DECISIONS.md#d-001).
 
 Forgot it? `git commit --amend -s --no-edit`, or for a branch, `git rebase --signoff origin/main`.
+
+---
+
+## Credit and authorship
+
+GitHub's contributor graph and commit pages follow the **Author** name and email on each commit, plus any `Co-authored-by:` trailers that use a GitHub-linked email. Pull request openers and issue assignees are not Authors unless their commits say so. The human-readable roll is [CREDITS.md](CREDITS.md). Recorded as [D-013](DECISIONS.md#d-013).
+
+### Your Git identity
+
+Use a name and email linked to your GitHub account. Prefer the noreply address from GitHub → Settings → Emails (Keep my email private):
+
+```
+git config user.name "Your GitHub name"
+git config user.email "12345678+username@users.noreply.github.com"
+```
+
+Or any verified email on that account. After your first commit, open it on GitHub: your avatar should appear, not a grey ghost.
+
+Do not commit with machine emails (`*.local`, `*MacBook*`, residential ISP hostnames). CI rejects those on pull requests because they never link to an account.
+
+### Who is Author
+
+1. The person who wrote the change stays **Author** on the commits they push.
+2. Maintainers do not amend Author to themselves when merging.
+3. Light maintainer edits before merge: contributor remains Author. A maintainer may add themselves as `Co-authored-by:` only when they wrote a material part of the commit.
+4. Substantial maintainer rewrite of someone else's pull request (different design, different files): either land their commits first (Author = them) and follow with maintainer commits (Author = maintainer), or land one replacement commit with Author = maintainer and a required `Co-authored-by: Name <github-noreply>` for the person whose work was replaced. Prefer the first when the history stays readable.
+5. Never squash a multi-person branch into a commit authored as the merger.
+6. No AI co-author trailers (`Co-authored-by: Claude…`, Anthropic noreply addresses, and similar). Humans only.
+7. Bot commits (Dependabot, the regenerate workflow) use a fixed bot or maintainer identity, never a contributor's.
+
+`Co-authored-by` format (empty line before trailers):
+
+```
+Co-authored-by: Sai Sanjay Devi <107503943+dudeperson123@users.noreply.github.com>
+```
+
+Use the person's GitHub noreply or another email linked to their account, or the trailer will not count on GitHub.
 
 ---
 

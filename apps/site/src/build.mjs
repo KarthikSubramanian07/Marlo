@@ -263,7 +263,7 @@ ${body}
             <h2>The argument</h2>
             <ul>
               <li><a href="${REPO}/blob/main/RESEARCH.md">What was measured first</a></li>
-              <li><a href="${REPO}/blob/main/DECISIONS.md">Twelve decisions</a></li>
+              <li><a href="${REPO}/blob/main/DECISIONS.md">Thirteen decisions</a></li>
               <li><a href="/honesty/">Where Marlo was wrong</a></li>
             </ul>
           </div>

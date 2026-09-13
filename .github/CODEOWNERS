@@ -1,6 +1,6 @@
 # Review ownership. Until there are more maintainers, everything routes to one
-# person; the structure is here so adding the four engineers is one line each
-# rather than a reorganisation.
+# person; the structure is here so adding collaborators (see CREDITS.md) is one
+# line each rather than a reorganisation.
 #
 # The reason this file is granular rather than a single catch-all: the two things
 # most damaging to get wrong are the accuracy claims and the safety boundary, and
