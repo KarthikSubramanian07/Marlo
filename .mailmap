@@ -1,0 +1,20 @@
+# Canonical identities for git shortlog and blame. GitHub's contribution graph
+# ignores this file: only the Author email on each commit matters there.
+#
+# Format: Proper Name <canonical@email> [Commit Name] <commit@email>
+
+KarthikSubramanian07 <winnerkarthik07@gmail.com> <karthik.subramanian@berkeley.edu>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> <karthik@tryclear.app>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> <88288818+KarthikSubramanian07@users.noreply.github.com>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> karthik <winnerkarthik07@gmail.com>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> karthik <karthik.subramanian@berkeley.edu>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> karthik <karthik@tryclear.app>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> Karthik Subramanian <88288818+KarthikSubramanian07@users.noreply.github.com>
+KarthikSubramanian07 <winnerkarthik07@gmail.com> KarthikSubramanian07 <karthik@tryclear.app>
+
+Sai Sanjay Devi <107503943+dudeperson123@users.noreply.github.com> <SaiSanjayD@MacBookAir.hsd1.ca.comcast.net>
+Sai Sanjay Devi <107503943+dudeperson123@users.noreply.github.com> <SaiSanjayD@Sais-Macbook-Air.local>
+Sai Sanjay Devi <107503943+dudeperson123@users.noreply.github.com> Sai Sanjay Devi <SaiSanjayD@MacBookAir.hsd1.ca.comcast.net>
+Sai Sanjay Devi <107503943+dudeperson123@users.noreply.github.com> Sai Sanjay Devi <SaiSanjayD@Sais-Macbook-Air.local>
+
+Krishna Durgavarjhula <138071408+kri-dur@users.noreply.github.com> krishna <kdurgavarjhula44@gmail.com>

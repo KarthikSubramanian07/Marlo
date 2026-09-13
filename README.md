@@ -243,7 +243,7 @@ A rule that measures badly still gets merged. It is published with its real numb
 
 **[Dispute a number.](https://github.com/KarthikSubramanian07/Marlo/issues/new?template=calibration-dispute.yml)** A published figure being wrong is a defect in the thing this project is for, so it outranks a feature request.
 
-[CONTRIBUTING.md](CONTRIBUTING.md) · sign off with `git commit -s` ([DCO, not a CLA](DECISIONS.md#d-001), because putting a legal document in front of an annoyed bug reporter is how you lose the report)
+[CONTRIBUTING.md](CONTRIBUTING.md) · [CREDITS.md](CREDITS.md) · sign off with `git commit -s` ([DCO, not a CLA](DECISIONS.md#d-001), because putting a legal document in front of an annoyed bug reporter is how you lose the report) · [credit stays with Git Author](DECISIONS.md#d-013)
 
 ---
 
@@ -252,7 +252,7 @@ A rule that measures badly still gets merged. It is published with its real numb
 |                                                |                                                                                  |
 | ---------------------------------------------- | -------------------------------------------------------------------------------- |
 | [RESEARCH.md](RESEARCH.md)                     | What was measured before any code was written, and the eight things it rules out |
-| [DECISIONS.md](DECISIONS.md)                   | Twelve decisions, each stating what would make it wrong                          |
+| [DECISIONS.md](DECISIONS.md)                   | Thirteen decisions, each stating what would make it wrong                        |
 | [HONESTY.md](HONESTY.md)                       | Eleven entries. Every defect found during the build, with what reported success  |
 | [calibration/README.md](calibration/README.md) | The generated table, per rule, per engine                                        |
 | [ARCHITECTURE.md](ARCHITECTURE.md)             | How a page moves through the pipeline                                            |

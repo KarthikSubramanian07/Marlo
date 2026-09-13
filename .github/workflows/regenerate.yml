@@ -73,7 +73,7 @@ jobs:
             echo "Nothing to regenerate. The committed artifacts already match the harness."
             exit 0
           fi
-          git config user.name "karthik"
+          git config user.name "KarthikSubramanian07"
           git config user.email "winnerkarthik07@gmail.com"
           git add -A
           # The pre-commit hook lints the staged files, and every file staged here is

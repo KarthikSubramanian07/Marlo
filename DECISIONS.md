@@ -193,6 +193,18 @@ Two reasons it is not a convenience. CI has to be green with no network, which t
 
 ---
 
+## D-013: Commit credit follows Git Author, with a written rewrite policy
+
+**Status:** accepted.
+
+GitHub's contributor graph and commit pages attribute work by the Author name and email on each commit, and by `Co-authored-by:` trailers that use a GitHub-linked address. Pull request openers, issue assignees, and CODEOWNERS lines are not Authors. Treating them as Authors without commits is how credit becomes theatre.
+
+The policy in CONTRIBUTING.md is the operational form: contributor commits keep the contributor as Author; maintainers prefer rebase merges; a substantial rewrite either lands the original commits first or carries a required `Co-authored-by:` for the person whose work was replaced; machine emails and AI co-author trailers are refused by `scripts/check-signoff.mjs`. CREDITS.md is the human-readable roll for people with write access who have not yet committed, so Aarush Chavali, Ishan Garg, and the other collaborators are visible without inventing history.
+
+**Wrong if:** a contributor's measured work routinely lands under a maintainer Author with no trailer and no prior commits of theirs on the branch, or if the check starts accepting `*.local` Author emails again.
+
+---
+
 ## Working agreements
 
 Outside the D-series numbering on purpose, because these are not architectural decisions. They are the things the code does not record: approaches already tried and refused, areas that are settled, and what finished means here. The file exists so the same proposal does not arrive twice.

@@ -361,8 +361,9 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Every commit is signed off
-        # Marlo uses the DCO rather than a CLA. DECISIONS.md D-001.
+      - name: Sign-off, linked Author email, no AI co-authors
+        # Marlo uses the DCO rather than a CLA. DECISIONS.md D-001 and D-013.
+        # Job name stays "DCO sign-off": that string is a required status check on main.
         run: |
           node scripts/check-signoff.mjs --range \
             "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
