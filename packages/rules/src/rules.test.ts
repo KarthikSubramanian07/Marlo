@@ -1198,6 +1198,108 @@ describe('cf77f2 bypass blocks, composed from the three rules Marlo implements',
   });
 });
 
+describe('2ee8b8 visible label is part of the accessible name', () => {
+  it('fails an aria-label that replaces the visible words', () => {
+    const result = check('2ee8b8', '<a href="/" aria-label="WCAG">ACT rules</a>');
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('"act rules"');
+  });
+
+  it('fails a label only partly in the name, and compares whole words rather than substrings', () => {
+    expect(check('2ee8b8', '<button aria-label="the full">The full label</button>').outcome).toBe(
+      'failed',
+    );
+    expect(check('2ee8b8', '<a href="#" aria-label="1a">1</a>').outcome).toBe('failed');
+    // "It" inside "Italy" is a substring and not a word. It is also a prefix, which is
+    // how an abbreviation looks, and abbreviations are outside the rule, so this asks.
+    expect(check('2ee8b8', '<a href="#" aria-label="Discover Italy">Discover It</a>').outcome).toBe(
+      'cantTell',
+    );
+  });
+
+  it('passes a label contained in the name, ignoring case, spacing and brackets', () => {
+    expect(
+      check('2ee8b8', '<button aria-label="Next Page in the list">Next Page</button>').outcome,
+    ).toBe('passed');
+    expect(check('2ee8b8', '<a href="#" aria-label="  act   RULES ">ACT rules</a>').outcome).toBe(
+      'passed',
+    );
+    expect(
+      check('2ee8b8', '<button aria-label="Search by date">Search by date (YYYY-MM-DD)</button>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('reads the words in document order', () => {
+    // Guards the fixture as much as the rule: text around a child element used to be
+    // rolled up out of order.
+    expect(
+      check('2ee8b8', '<a href="#" aria-label="Download the file">Download <b>the</b> file</a>')
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it('leaves out text hidden by an attribute or an inline style', () => {
+    const html =
+      '<a href="#" aria-label="Download specification">Download <span style="display: none">gizmo</span> specification</a>';
+    expect(check('2ee8b8', html).outcome).toBe('passed');
+  });
+
+  it('asks rather than fails when screen-reader-only text could be the difference', () => {
+    // The dialog close button every component library ships. A stylesheet hides the span,
+    // the visible label is the symbol, and the rule is satisfied. Marlo cannot see the
+    // stylesheet.
+    const html = '<button aria-label="Close">× <span class="sr-only">Close dialog</span></button>';
+    expect(check('2ee8b8', html).outcome).toBe('cantTell');
+  });
+
+  it('asks rather than fails on an icon font ligature', () => {
+    const html =
+      '<button aria-label="Open navigation"><span class="material-icons">menu</span></button>';
+    const result = check('2ee8b8', html);
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('icon font');
+  });
+
+  it('asks rather than fails on a single letter, which is often a symbol', () => {
+    expect(check('2ee8b8', '<button aria-label="close">X</button>').outcome).toBe('cantTell');
+  });
+
+  it('asks when the answer depends on whether adjacent elements render as blocks', () => {
+    const html = '<button aria-label="Hello world"><span>Hello</span><span>world</span></button>';
+    expect(check('2ee8b8', html).outcome).toBe('cantTell');
+  });
+
+  it('asks rather than fails on what may be an abbreviation or a hyphenation difference', () => {
+    expect(
+      check('2ee8b8', '<a href="#" aria-label="University Avenue">University Ave.</a>').outcome,
+    ).toBe('cantTell');
+    expect(check('2ee8b8', '<a href="#" aria-label="non-standard">nonstandard</a>').outcome).toBe(
+      'cantTell',
+    );
+  });
+
+  it('is inapplicable without an aria label, without visible text, or without a widget role', () => {
+    expect(check('2ee8b8', '<a href="/">ACT rules</a>').outcome).toBe('inapplicable');
+    expect(
+      check('2ee8b8', '<a href="/" aria-label="W3C"><img src="w3c.png" alt="w3c logo"></a>')
+        .outcome,
+    ).toBe('inapplicable');
+    expect(check('2ee8b8', '<nav aria-label="main nav">W3C navigation</nav>').outcome).toBe(
+      'inapplicable',
+    );
+    expect(check('2ee8b8', '<div role="tooltip" aria-label="OK">Next</div>').outcome).toBe(
+      'inapplicable',
+    );
+  });
+
+  it('declines when aria-labelledby points at nothing, rather than comparing an empty name', () => {
+    expect(check('2ee8b8', '<a href="#" aria-labelledby="missing">Home</a>').outcome).toBe(
+      'cantTell',
+    );
+  });
+});
+
 describe('the capability model reaches the rules', () => {
   it('reports contrast as unsupported without layout, never as a pass', () => {
     // The single most important test in this package. If this ever returns `passed`,

@@ -51,6 +51,7 @@ import {
   instrumentToNonRepeatedContent,
   landmarkWithNonRepeatedContent,
 } from './rules/bypass.js';
+import { labelInName } from './rules/label-in-name.js';
 
 /**
  * Every rule Marlo implements.
@@ -91,6 +92,7 @@ export const MARLO_RULES: readonly MarloRule[] = Object.freeze([
   imageButtonHasName,
   objectHasName,
   svgHasName,
+  labelInName,
 
   // Structure and metadata.
   uniqueId,
