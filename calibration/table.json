@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-09-11",
-  "commit": "e2ee062c91545561da8a90f64ac4e73c02d6c94a",
+  "generated": "2026-09-15",
+  "commit": "f9d68be361de2bb35c902059f3be62e2b8d79478",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -12,7 +12,7 @@
     {
       "id": "marlo",
       "version": "0.1.0",
-      "mappedRules": 36
+      "mappedRules": 41
     },
     {
       "id": "axe-core",
@@ -32,6 +32,200 @@
   ],
   "renderer": "static",
   "entries": [
+    {
+      "actRuleId": "047fe0",
+      "engine": "marlo",
+      "engineVersion": "0.1.0",
+      "engineRuleIds": [
+        "marlo/047fe0"
+      ],
+      "mappingKind": "exact",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 9,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 1,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 1
+      },
+      "act": {
+        "consistency": "partial",
+        "automation": "automated",
+        "disallowed": 1
+      },
+      "strict": {
+        "truePositives": 3,
+        "falsePositives": 0,
+        "falseNegatives": 1,
+        "trueNegatives": 9,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 1,
+        "recall": 0.75,
+        "f1": 0.8571428571428571,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "047fe0",
+      "engine": "axe-core",
+      "engineVersion": "4.13.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 14
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "047fe0",
+      "engine": "alfa",
+      "engineVersion": "0.119.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 14
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "047fe0",
+      "engine": "htmlcs",
+      "engineVersion": "2.5.1",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 14
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
     {
       "actRuleId": "09o5cg",
       "engine": "marlo",
@@ -827,6 +1021,200 @@
         "recall": 1,
         "f1": 0.7692307692307693,
         "falsePositiveRate": 0.6
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "2ee8b8",
+      "engine": "marlo",
+      "engineVersion": "0.1.0",
+      "engineRuleIds": [
+        "marlo/2ee8b8"
+      ],
+      "mappingKind": "exact",
+      "testCaseCount": 13,
+      "matrix": {
+        "passed": {
+          "passed": 4,
+          "failed": 0,
+          "cantTell": 2,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0
+      },
+      "act": {
+        "consistency": "consistent",
+        "automation": "semi-automated",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 3,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 10,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 2,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "2ee8b8",
+      "engine": "axe-core",
+      "engineVersion": "4.13.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 13,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 13
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "2ee8b8",
+      "engine": "alfa",
+      "engineVersion": "0.119.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 13,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 13
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "2ee8b8",
+      "engine": "htmlcs",
+      "engineVersion": "2.5.1",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 13,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 13
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
       },
       "flatteredByProtocol": false
     },
@@ -5564,19 +5952,21 @@
       "actRuleId": "b40fd1",
       "engine": "marlo",
       "engineVersion": "0.1.0",
-      "engineRuleIds": [],
-      "mappingKind": "none",
+      "engineRuleIds": [
+        "marlo/b40fd1"
+      ],
+      "mappingKind": "exact",
       "testCaseCount": 8,
       "matrix": {
         "passed": {
-          "passed": 0,
+          "passed": 4,
           "failed": 0,
           "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
           "passed": 0,
-          "failed": 0,
+          "failed": 3,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -5587,24 +5977,24 @@
           "inapplicable": 0
         },
         "errored": 0,
-        "unsupported": 8
+        "unsupported": 1
       },
       "act": {
-        "consistency": "unmapped",
-        "automation": "not-applicable",
+        "consistency": "consistent",
+        "automation": "automated",
         "disallowed": 0
       },
       "strict": {
-        "truePositives": 0,
+        "truePositives": 3,
         "falsePositives": 0,
         "falseNegatives": 0,
-        "trueNegatives": 0,
+        "trueNegatives": 4,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": null,
-        "recall": null,
-        "f1": null,
-        "falsePositiveRate": null
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
     },
@@ -7330,6 +7720,200 @@
         },
         "errored": 0,
         "unsupported": 10
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "cf77f2",
+      "engine": "marlo",
+      "engineVersion": "0.1.0",
+      "engineRuleIds": [
+        "marlo/cf77f2"
+      ],
+      "mappingKind": "exact",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 4,
+          "failed": 0,
+          "cantTell": 8,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 1
+      },
+      "act": {
+        "consistency": "consistent",
+        "automation": "semi-automated",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 1,
+        "trueNegatives": 12,
+        "cantTellOnFailed": 1,
+        "cantTellOnPassed": 8,
+        "precision": null,
+        "recall": 0,
+        "f1": null,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": true
+    },
+    {
+      "actRuleId": "cf77f2",
+      "engine": "axe-core",
+      "engineVersion": "4.13.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 14
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "cf77f2",
+      "engine": "alfa",
+      "engineVersion": "0.119.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 14
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "cf77f2",
+      "engine": "htmlcs",
+      "engineVersion": "2.5.1",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 14,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 14
       },
       "act": {
         "consistency": "unmapped",
@@ -9119,9 +9703,217 @@
         "falsePositiveRate": null
       },
       "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "ye5d6e",
+      "engine": "marlo",
+      "engineVersion": "0.1.0",
+      "engineRuleIds": [
+        "marlo/ye5d6e"
+      ],
+      "mappingKind": "exact",
+      "testCaseCount": 12,
+      "matrix": {
+        "passed": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 7,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 1,
+          "cantTell": 2,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 1
+      },
+      "act": {
+        "consistency": "consistent",
+        "automation": "semi-automated",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 1,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 8,
+        "cantTellOnFailed": 2,
+        "cantTellOnPassed": 7,
+        "precision": 1,
+        "recall": 0.3333333333333333,
+        "f1": 0.5,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": true
+    },
+    {
+      "actRuleId": "ye5d6e",
+      "engine": "axe-core",
+      "engineVersion": "4.13.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 12,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 12
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "ye5d6e",
+      "engine": "alfa",
+      "engineVersion": "0.119.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 12,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 12
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "ye5d6e",
+      "engine": "htmlcs",
+      "engineVersion": "2.5.1",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 12,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 12
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
     }
   ],
   "routing": [
+    {
+      "actRuleId": "047fe0",
+      "chosen": "marlo",
+      "reason": "sole-implementer",
+      "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 0.75,
+          "strictPrecision": 1,
+          "consistency": "partial"
+        }
+      ],
+      "autoFixPermitted": false
+    },
     {
       "actRuleId": "09o5cg",
       "chosen": "axe-core",
@@ -9234,6 +10026,20 @@
           "strictRecall": 1,
           "strictPrecision": 0.625,
           "consistency": "incorrect"
+        }
+      ],
+      "autoFixPermitted": false
+    },
+    {
+      "actRuleId": "2ee8b8",
+      "chosen": "marlo",
+      "reason": "sole-implementer",
+      "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
         }
       ],
       "autoFixPermitted": false
@@ -9792,9 +10598,15 @@
     },
     {
       "actRuleId": "b40fd1",
-      "chosen": null,
-      "reason": "uncalibrated",
+      "chosen": "marlo",
+      "reason": "sole-implementer",
       "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        },
         {
           "engine": "axe-core",
           "strictRecall": 1,
@@ -10043,6 +10855,20 @@
       "autoFixPermitted": false
     },
     {
+      "actRuleId": "cf77f2",
+      "chosen": "marlo",
+      "reason": "uncalibrated",
+      "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 0,
+          "strictPrecision": null,
+          "consistency": "consistent"
+        }
+      ],
+      "autoFixPermitted": false
+    },
+    {
       "actRuleId": "d0f69e",
       "chosen": "alfa",
       "reason": "best-measured",
@@ -10233,6 +11059,20 @@
         }
       ],
       "autoFixPermitted": false
+    },
+    {
+      "actRuleId": "ye5d6e",
+      "chosen": "marlo",
+      "reason": "sole-implementer",
+      "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 0.3333333333333333,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        }
+      ],
+      "autoFixPermitted": false
     }
   ],
   "autoFixThreshold": {
@@ -10241,15 +11081,15 @@
     "rationale": "Precision rather than recall, because the two failures cost differently: a missed violation is a gap the developer already had, and a wrong fix is a change to their code they did not ask for. The sample floor exists because a precision of 1.0 over two examples is not evidence."
   },
   "coverage": {
-    "implemented": 36,
+    "implemented": 41,
     "publishedActRules": 94,
-    "calibratable": 36,
+    "calibratable": 41,
     "implementedButUnmeasurable": []
   },
   "aggregate": {
-    "strictPrecision": 0.8403361344537815,
-    "strictRecall": 0.6329113924050633,
-    "falsePositiveRate": 0.06375838926174497,
-    "sampleSize": 456
+    "strictPrecision": 0.8527131782945736,
+    "strictRecall": 0.6395348837209303,
+    "falsePositiveRate": 0.05571847507331378,
+    "sampleSize": 513
   }
 }

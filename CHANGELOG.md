@@ -22,7 +22,30 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ### Accuracy
 
-Three movements since the first published measurement, all from work under Phase 1.
+Five rules added under [#38](https://github.com/KarthikSubramanian07/Marlo/issues/38) moved the pooled figures. No entry that was already in the table changed: every one measures exactly what it did before.
+
+| Figure                    | Was   | Now   |
+| ------------------------- | ----- | ----- |
+| Marlo strict precision    | 0.840 | 0.853 |
+| Marlo strict recall       | 0.633 | 0.640 |
+| Marlo false positive rate | 6.4%  | 5.6%  |
+| Official test cases       | 456   | 513   |
+
+**The false positive rate fell without any existing rule getting more accurate.** The five rules add 57 graded cases: 10 true positives, 4 misses, 43 true negatives and no false positives. More correct negatives in the denominator lower the rate while the 19 false positives already recorded stay where they were. It is more measurement, not a better engine.
+
+| Rule     | Strict precision | Strict recall | TP  | FP  | FN  | cantTell (fail/pass) | Routed to                |
+| -------- | ---------------- | ------------- | --- | --- | --- | -------------------- | ------------------------ |
+| `b40fd1` | 1.00             | 1.00          | 3   | 0   | 0   | 0/0                  | Marlo, previously nobody |
+| `047fe0` | 1.00             | 0.75          | 3   | 0   | 1   | 0/0                  | Marlo                    |
+| `ye5d6e` | 1.00             | 0.33          | 1   | 0   | 2   | 2/7                  | Marlo                    |
+| `2ee8b8` | 1.00             | 1.00          | 3   | 0   | 0   | 0/2                  | Marlo                    |
+| `cf77f2` | not measured     | 0.00          | 0   | 0   | 1   | 1/8                  | Marlo, uncalibrated      |
+
+`b40fd1` was the one claimed rule no engine reported. axe-core maps it and fails a passing example, which rules it out of routing, so a page that opened with navigation and put its content in no landmark came back clean. It now routes to Marlo.
+
+The misses are chosen. `047fe0` passes a heading moved off-screen by a stylesheet class, because the rule declares only `dom`. `ye5d6e` answers `cantTell` on a page opening with a single link and on a skip link that lands in an `aside`, because one page cannot show whether either repeats elsewhere. `cf77f2` fails only where nothing on the page could collapse a block, because Marlo does not implement `3e12e1`, and its one failing example has an `aside` it cannot place. `ye5d6e` and `cf77f2` both grade `consistent` with strict recall under 0.5, so the flattered column now has nine entries, five of them Marlo's.
+
+Three movements before that, since the first published measurement, all from work under Phase 1.
 
 | Figure                    | Was   | Now   |
 | ------------------------- | ----- | ----- |
@@ -87,7 +110,8 @@ Three entries are officially `consistent` under W3C's protocol while missing mor
 ### Coverage
 
 - Denominator established: **94 published ACT rules**, 91 of which carry official test cases.
-- Marlo implements **36 of 94**. Of those, 36 can be calibrated.
+- Marlo implements **41 of 94**, up from 36 of 94. All 41 can be calibrated.
+- Added `b40fd1`, `047fe0` and `ye5d6e`, the three atomic bypass blocks rules, and `cf77f2`, the composite over them and `3e12e1`. Added `2ee8b8`, visible label is part of accessible name.
 
 ### Fixed
 
