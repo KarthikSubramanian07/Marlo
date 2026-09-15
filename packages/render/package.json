@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@marlo/schema": "workspace:*",
-    "happy-dom": "20.11.1"
+    "happy-dom": "20.14.3"
   },
   "peerDependencies": {
     "playwright": ">=1.49.0"
