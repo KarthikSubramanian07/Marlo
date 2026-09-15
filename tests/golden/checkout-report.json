@@ -4,8 +4,8 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-09-11",
-    "commit": "e2ee062c91545561da8a90f64ac4e73c02d6c94a",
+    "generated": "2026-09-15",
+    "commit": "f9d68be361de2bb35c902059f3be62e2b8d79478",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -1608,6 +1608,29 @@
       ],
       "results": [
         {
+          "actRuleId": "047fe0",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/047fe0",
+              "actRuleId": "047fe0",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
+                "path": []
+              },
+              "message": "\"Your order\" is a heading after the navigation, so a reader moving by heading lands on the content."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "09o5cg",
           "engine": "marlo",
           "status": "unsupported",
@@ -1710,6 +1733,15 @@
               "message": "The page has no title element in its head. The title is the first thing a screen reader announces and the only label in a tab or a bookmark."
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -2442,6 +2474,29 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/b40fd1",
+              "actRuleId": "b40fd1",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
+                "path": []
+              },
+              "message": "<main> is a main landmark starting after the navigation, so a screen reader user can jump straight to \"Your order\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "marlo",
           "status": "ok",
@@ -2618,6 +2673,29 @@
                 "path": []
               },
               "message": "This iframe has no accessible name. A screen reader user moving between frames has nothing to distinguish this one by."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/cf77f2",
+              "actRuleId": "cf77f2",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
+                "path": []
+              },
+              "message": "<main> is a main landmark starting after the navigation, so a screen reader user can jump straight to \"Your order\". (b40fd1)"
             }
           ],
           "error": null,
@@ -3438,6 +3516,38 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "ye5d6e",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/ye5d6e",
+              "actRuleId": "ye5d6e",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "html",
+                "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
+                "path": []
+              },
+              "message": "No link skips the navigation, but <button> could move focus by script, which the DOM does not show. Activate it and see where focus lands."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "09o5cg",
           "engine": "axe-core",
           "status": "ok",
@@ -3577,6 +3687,15 @@
               "message": "Documents must have <title> element to aid in navigation"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -4228,6 +4347,29 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "landmark-one-main",
+              "actRuleId": "b40fd1",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html>",
+                "path": []
+              },
+              "message": "Document should have one main landmark"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "axe-core",
           "status": "ok",
@@ -4477,6 +4619,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "cf77f2",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "de46e4",
           "engine": "axe-core",
           "status": "ok",
@@ -4699,6 +4850,24 @@
               "message": "Headings should not be empty"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -4947,6 +5116,15 @@
               "message": "The document does not have a `<title>` element; The first `<title>` element has no text content"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -5740,6 +5918,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "alfa",
           "status": "ok",
@@ -5932,6 +6119,15 @@
               "message": "The `<iframe>` does not have an accessible name"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -6151,6 +6347,24 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "ye5d6e",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "09o5cg",
           "engine": "htmlcs",
           "status": "ok",
@@ -6224,6 +6438,15 @@
               "message": "A title should be provided for the document, using a non-empty title element in the head section."
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -6419,6 +6642,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -6561,6 +6793,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "cf77f2",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "de46e4",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -6647,6 +6888,15 @@
         },
         {
           "actRuleId": "ffd0e9",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
           "engine": "htmlcs",
           "status": "unsupported",
           "verdicts": [],
@@ -6804,6 +7054,29 @@
       ],
       "results": [
         {
+          "actRuleId": "047fe0",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/047fe0",
+              "actRuleId": "047fe0",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"engRish\" xml:lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is repo…",
+                "path": []
+              },
+              "message": "\"Account settings\" is a heading outside any navigation, header, footer or aside."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "09o5cg",
           "engine": "marlo",
           "status": "unsupported",
@@ -6852,6 +7125,15 @@
               "message": "The page is titled \"Account settings\"."
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7092,6 +7374,29 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/b40fd1",
+              "actRuleId": "b40fd1",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"engRish\" xml:lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is repo…",
+                "path": []
+              },
+              "message": "<main> is a main landmark, so a screen reader user can jump to the page's own content."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "marlo",
           "status": "ok",
@@ -7215,6 +7520,29 @@
           "engine": "marlo",
           "status": "ok",
           "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/cf77f2",
+              "actRuleId": "cf77f2",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"engRish\" xml:lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is repo…",
+                "path": []
+              },
+              "message": "<main> is a main landmark, so a screen reader user can jump to the page's own content. (b40fd1)"
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -7539,6 +7867,38 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "ye5d6e",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/ye5d6e",
+              "actRuleId": "ye5d6e",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"engRish\" xml:lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is repo…",
+                "path": []
+              },
+              "message": "The page does not open with a block of links Marlo recognises as site navigation, so it cannot tell where the repeated content ends. Check by hand whether a link near the top moves focus past the navigation."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "09o5cg",
           "engine": "axe-core",
           "status": "ok",
@@ -7639,6 +7999,15 @@
               "message": "Documents must have <title> element to aid in navigation"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8043,6 +8412,29 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "landmark-one-main",
+              "actRuleId": "b40fd1",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"engRish\" xml:lang=\"en\">",
+                "path": []
+              },
+              "message": "Document should have one main landmark"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "axe-core",
           "status": "ok",
@@ -8253,6 +8645,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "cf77f2",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "de46e4",
           "engine": "axe-core",
           "status": "ok",
@@ -8397,6 +8798,24 @@
               "message": "Headings should not be empty"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8554,6 +8973,15 @@
               "message": "The document has at least one `<title>` element; The first `<title>` element has text content"
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -8996,6 +9424,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "alfa",
           "status": "ok",
@@ -9180,6 +9617,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "cf77f2",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "de46e4",
           "engine": "alfa",
           "status": "ok",
@@ -9303,6 +9749,24 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "ye5d6e",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "09o5cg",
           "engine": "htmlcs",
           "status": "ok",
@@ -9376,6 +9840,15 @@
               "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
             }
           ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -9571,6 +10044,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "b40fd1",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "b4f0c3",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -9713,6 +10195,15 @@
           "durationMs": 0
         },
         {
+          "actRuleId": "cf77f2",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
           "actRuleId": "de46e4",
           "engine": "htmlcs",
           "status": "unsupported",
@@ -9779,6 +10270,15 @@
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
         }
       ],
       "durationMs": 0
@@ -9786,9 +10286,9 @@
   ],
   "repairs": [],
   "coverage": {
-    "implemented": 36,
+    "implemented": 41,
     "publishedActRules": 94,
-    "calibrated": 36,
+    "calibrated": 41,
     "unmeasurable": [],
     "notEvaluated": [
       {
