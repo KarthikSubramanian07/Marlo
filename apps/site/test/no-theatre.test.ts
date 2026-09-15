@@ -534,8 +534,18 @@ describe('SEO and delivery', () => {
         /<link rel="canonical" href="https:\/\/trymarlo\.pages\.dev/,
       );
       expect(page.html, page.path).toMatch(/<meta name="description" content="[^"]{60,}"/);
-      expect(page.html, page.path).toContain('property="og:image"');
+      // LinkedIn, Facebook and Slack render no preview for an SVG og:image, so it has to be raster.
+      expect(page.html, page.path).toContain(
+        '<meta property="og:image" content="https://trymarlo.pages.dev/og.png" />',
+      );
+      expect(page.html, page.path).toContain('<meta property="og:image:width" content="1200" />');
     }
+  });
+
+  it('ships the social image as a 1200 by 630 PNG', () => {
+    const png = readFileSync(join(DIST, 'og.png'));
+    expect(png.subarray(1, 4).toString('latin1'), 'og.png is not a PNG').toBe('PNG');
+    expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([1200, 630]);
   });
 
   it('ships a sitemap, robots and structured data', () => {

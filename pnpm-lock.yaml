@@ -81,7 +81,11 @@ importers:
         specifier: 4.131.0
         version: 4.131.0(@types/node@26.5.1)
 
-  apps/site: {}
+  apps/site:
+    devDependencies:
+      sharp:
+        specifier: '>=0.35.4'
+        version: 0.35.4(@types/node@26.5.1)
 
   packages/act:
     dependencies:

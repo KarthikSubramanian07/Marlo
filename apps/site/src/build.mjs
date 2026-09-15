@@ -30,6 +30,8 @@
 import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
+import sharp from 'sharp';
+
 const HERE = import.meta.dirname;
 const ROOT = resolve(HERE, '..', '..', '..');
 const OUT = resolve(HERE, '..', 'dist');
@@ -117,6 +119,7 @@ const best = [...engines]
   .filter((e) => e.precision !== null)
   .sort((a, b) => b.precision - a.precision)[0];
 const flattered = table.entries.filter((e) => e.flatteredByProtocol);
+const OG_ALT = `Marlo. False positive rate ${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}, measured and published.`;
 const routedTo = (id) => table.routing.filter((r) => r.chosen === id).length;
 const autoFixable = table.routing.filter((r) => r.autoFixPermitted).length;
 const routedTotal = table.routing.filter((r) => r.chosen !== null).length;
@@ -219,11 +222,16 @@ function layout({ slug, title, description, body, canonical }) {
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${ORIGIN}/og.svg" />
+    <meta property="og:image" content="${ORIGIN}/og.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${escapeHtml(OG_ALT)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
-    <meta name="twitter:image" content="${ORIGIN}/og.svg" />
+    <meta name="twitter:image" content="${ORIGIN}/og.png" />
+    <meta name="twitter:image:alt" content="${escapeHtml(OG_ALT)}" />
 
     <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 6)}
@@ -1356,15 +1364,15 @@ const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" rol
 </svg>
 `;
 
-const OG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Marlo. False positive rate ${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}, measured and published.">
+const OG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="${OG_ALT}">
   <rect width="1200" height="630" fill="${BG}"/>
   <rect x="72" y="66" width="38" height="38" fill="${ACCENT}"/>
   <rect x="84" y="78" width="14" height="14" fill="${BG}"/>
-  <text x="126" y="95" font-family="system-ui, sans-serif" font-size="30" font-weight="650" fill="${INK}">marlo</text>
-  <text x="72" y="250" font-family="system-ui, sans-serif" font-size="58" font-weight="600" fill="${INK}">Our false positive rate is</text>
-  <text x="72" y="394" font-family="ui-monospace, monospace" font-size="146" font-weight="600" fill="${ACCENT}">${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}</text>
-  <text x="72" y="456" font-family="system-ui, sans-serif" font-size="31" fill="${MUTED}">Measured over ${num(table.corpus.testCases, { field: 'corpus.testCases' })} official W3C test cases. Published anyway.</text>
-  <text x="72" y="548" font-family="ui-monospace, monospace" font-size="25" fill="${MUTED}">${num(table.coverage.implemented, { field: 'coverage.implemented' })} of ${num(table.coverage.publishedActRules, { field: 'coverage.publishedActRules' })} published ACT rules  .  trymarlo.pages.dev</text>
+  <text x="126" y="95" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="30" font-weight="650" fill="${INK}">marlo</text>
+  <text x="72" y="250" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="58" font-weight="600" fill="${INK}">Our false positive rate is</text>
+  <text x="72" y="394" font-family="JetBrains Mono, Menlo, DejaVu Sans Mono, monospace" font-size="146" font-weight="600" fill="${ACCENT}">${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}</text>
+  <text x="72" y="456" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="31" fill="${MUTED}">Measured over ${num(table.corpus.testCases, { field: 'corpus.testCases' })} official W3C test cases. Published anyway.</text>
+  <text x="72" y="548" font-family="JetBrains Mono, Menlo, DejaVu Sans Mono, monospace" font-size="25" fill="${MUTED}">${num(table.coverage.implemented, { field: 'coverage.implemented' })} of ${num(table.coverage.publishedActRules, { field: 'coverage.publishedActRules' })} published ACT rules  ·  trymarlo.pages.dev</text>
   <rect x="0" y="618" width="1200" height="12" fill="${ACCENT}"/>
 </svg>
 `;
@@ -1391,6 +1399,10 @@ for (const font of ['dm-sans-latin.woff2', 'jetbrains-mono-latin.woff2']) {
 }
 writeFileSync(resolve(OUT, 'favicon.svg'), FAVICON, 'utf8');
 writeFileSync(resolve(OUT, 'og.svg'), OG, 'utf8');
+// LinkedIn, Facebook and Slack do not render an SVG og:image: the card comes back blank and
+// LinkedIn reports that it cannot preview the link. The PNG is rasterised from the same SVG,
+// so the two cannot disagree about the number.
+await sharp(Buffer.from(OG)).png({ compressionLevel: 9 }).toFile(resolve(OUT, 'og.png'));
 
 writeFileSync(
   resolve(OUT, 'sitemap.xml'),
