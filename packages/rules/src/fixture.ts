@@ -88,10 +88,11 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
 
     if (text !== undefined) {
       const trimmed = text.replace(/\s+/g, ' ');
-      if (trimmed.trim() !== '') {
-        const current = stack[stack.length - 1];
-        if (current !== undefined) current.text += trimmed;
-      }
+      // Appended to every open element at once, so `element.text` is descendant text in
+      // document order, the way `textContent` is. Rolling it up afterwards put an
+      // element's own text before its children's whatever the source order, and a rule
+      // reading words in order read `<a>Download <b>the</b> file</a>` as "Download file the".
+      if (trimmed.trim() !== '') for (const open of stack) open.text += trimmed;
       continue;
     }
     if (tagName === undefined) continue;
@@ -139,16 +140,6 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
     parent.children.push(element);
     if (!VOID_ELEMENTS.has(tag) && !token[0].endsWith('/>')) stack.push(element);
   }
-
-  // Text propagates upward, because `element.text` is defined as concatenated
-  // descendant text.
-  const rollUp = (node: Building): string => {
-    let own = node.text;
-    for (const child of node.children) own += rollUp(child as Building);
-    node.text = own;
-    return own;
-  };
-  rollUp(root);
 
   // Resolved styles, where the fixture asked for them.
   if (options.computed !== undefined) {
