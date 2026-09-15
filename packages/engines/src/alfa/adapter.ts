@@ -82,7 +82,7 @@ interface AlfaOutcome {
 }
 
 /**
- * Reads the evidence off an Alfa target.
+ * Reads the evidence off a single Alfa target.
  *
  * Alfa targets are its own node objects, not selectors, and the first version of this
  * adapter reported `:root` for every finding rather than fabricate a selector. Alfa
@@ -91,7 +91,7 @@ interface AlfaOutcome {
  * text-node target has a path and its text; a document-level target has neither, and
  * `:root` remains the honest answer for that one.
  */
-function readTarget(target: unknown): { path: string | null; snippet: string } {
+function readOneTarget(target: unknown): { path: string | null; snippet: string } {
   if (typeof target !== 'object' || target === null) return { path: null, snippet: '' };
   let path: string | null = null;
   const pathFn: unknown = Reflect.get(target, 'path');
@@ -111,6 +111,58 @@ function readTarget(target: unknown): { path: string | null; snippet: string } {
     if (typeof value === 'string' && !/^\[object \w+\]$/.test(value)) snippet = value;
   }
   return { path, snippet };
+}
+
+/** At most this many members of a group are read, because a page sets the count. */
+const GROUP_MEMBER_LIMIT = 10;
+
+/**
+ * The evidence for one Alfa target.
+ *
+ * Most targets are Alfa DOM nodes, and the base `Node` declares both `path` and a real
+ * `toString`, so those give a genuine locator and genuine markup.
+ *
+ * A `Group` does not. It is what the multi-element rules report, R41 and R81 among
+ * them, and it declares neither: it is a plain wrapper over its members with a
+ * `Symbol.iterator`. Read as a single target it produced "[object Object]" at `:root`,
+ * which is the whole evidence for a finding about links that share an accessible name,
+ * on a page where those links are the entire point. Alfa handles the case itself, and
+ * `Group.toSARIF` flat-maps the members' locations, so this reads the members too: the
+ * first member that has one supplies the locator, and their serialisations are joined
+ * for the snippet. Bounded, because how many members a group has is a property of the
+ * page rather than of this adapter.
+ */
+function readTarget(target: unknown): { path: string | null; snippet: string } {
+  if (typeof target !== 'object' || target === null) return { path: null, snippet: '' };
+
+  // Alfa's DOM nodes are iterable too, over their children, so being iterable is not what
+  // makes a group. A node declares `path` and a group does not: reading an element's
+  // children here moved every element locator onto its first text node.
+  const ownPath: unknown = Reflect.get(target, 'path');
+  const iterate: unknown = Reflect.get(target, Symbol.iterator);
+  if (typeof ownPath !== 'function' && typeof iterate === 'function') {
+    const members: unknown[] = [];
+    try {
+      for (const member of target as Iterable<unknown>) {
+        members.push(member);
+        if (members.length === GROUP_MEMBER_LIMIT) break;
+      }
+    } catch {
+      // An iterable that throws part way through still yields what it produced.
+    }
+    if (members.length > 0) {
+      const read = members.map((member) => readOneTarget(member));
+      return {
+        path: read.find((r) => r.path !== null)?.path ?? null,
+        snippet: read
+          .map((r) => r.snippet)
+          .filter((s) => s !== '')
+          .join(' '),
+      };
+    }
+  }
+
+  return readOneTarget(target);
 }
 
 /**
