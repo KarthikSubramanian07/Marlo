@@ -988,6 +988,216 @@ describe('classifyLanguageTag', () => {
   });
 });
 
+/** A page that opens with site navigation, for the bypass blocks rules. */
+const NAV =
+  '<nav><ul><li><a href="/">Home</a></li><li><a href="/chapters/2">Chapter 2</a></li></ul></nav>';
+
+function bypassPage(body: string, head = ''): string {
+  return `<html lang="en"><head><title>t</title>${head}</head><body>${body}</body></html>`;
+}
+
+describe('b40fd1 landmark with non-repeated content', () => {
+  it('fails content after the navigation that sits in no landmark', () => {
+    const result = check('b40fd1', bypassPage(`${NAV}<p>Unity succeeds division.</p>`));
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('<main>');
+  });
+
+  it('fails a leading block of plain links, the shape with no nav element', () => {
+    const html = bypassPage(
+      '<div><a>Chapter 1</a> <a href="/chapters/2">Chapter 2</a></div><p>Unity succeeds division.</p>',
+    );
+    expect(check('b40fd1', html).outcome).toBe('failed');
+  });
+
+  it('fails a main element hidden from assistive technology, and says so', () => {
+    const result = check('b40fd1', bypassPage(`${NAV}<main aria-hidden="true"><p>Text</p></main>`));
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('hidden from assistive technology');
+  });
+
+  it('passes a main landmark after the navigation, by element or by role', () => {
+    expect(check('b40fd1', bypassPage(`${NAV}<main><p>Text</p></main>`)).outcome).toBe('passed');
+    expect(check('b40fd1', bypassPage(`${NAV}<div role="main"><p>Text</p></div>`)).outcome).toBe(
+      'passed',
+    );
+  });
+
+  it('passes a page that links nowhere, because nothing on it can repeat', () => {
+    expect(check('b40fd1', bypassPage('<p>Unity succeeds division.</p>')).outcome).toBe('passed');
+  });
+
+  it('does not fail a page opening with one "back" link, which need not repeat anywhere', () => {
+    // A 404 page or a search result detail page. One link is not a block of navigation,
+    // and failing it would be a finding about content that exists on no other page.
+    const html = bypassPage('<a href="/results">Back to results</a><p>Order 1234 shipped.</p>');
+    expect(check('b40fd1', html).outcome).toBe('cantTell');
+  });
+
+  it('does not fail an in-page table of contents, whose links go nowhere else', () => {
+    const html = bypassPage(
+      '<nav><a href="#intro">Intro</a> <a href="#usage">Usage</a></nav><p id="intro">Text</p>',
+    );
+    expect(check('b40fd1', html).outcome).not.toBe('failed');
+  });
+
+  it('does not fail an article header that opens with its title rather than navigation', () => {
+    const html = bypassPage(
+      '<header><h1>Release notes</h1><a href="/authors/ada">Ada</a></header><p>Text</p>',
+    );
+    expect(check('b40fd1', html).outcome).not.toBe('failed');
+  });
+
+  it('does not read a breadcrumb trail inside main as site navigation', () => {
+    const html = bypassPage(
+      '<main><nav><a href="/">Home</a> <a href="/docs">Docs</a></nav><p>Text</p></main>',
+    );
+    expect(check('b40fd1', html).outcome).toBe('passed');
+    expect(check('047fe0', html).outcome).not.toBe('failed');
+  });
+
+  it('asks rather than fails when the only landmark after the navigation is an aside', () => {
+    // A sidebar that repeats on every page does not pass the rule, and an aside about this
+    // article does. One page does not show which.
+    const html = bypassPage(`${NAV}<aside><p>About this book</p></aside><p>Text</p>`);
+    expect(check('b40fd1', html).outcome).toBe('cantTell');
+  });
+
+  it('asks rather than fails when a custom element could hold a landmark in its shadow root', () => {
+    const html = bypassPage(`${NAV}<p>Text</p><app-shell></app-shell>`);
+    expect(check('b40fd1', html).outcome).toBe('cantTell');
+  });
+});
+
+describe('047fe0 heading for non-repeated content', () => {
+  it('fails content after the navigation with no heading', () => {
+    const html = bypassPage(`${NAV}<div><strong>Three Heroes</strong><p>Text</p></div>`);
+    expect(check('047fe0', html).outcome).toBe('failed');
+  });
+
+  it('fails when the only heading is inside the navigation', () => {
+    const html = bypassPage(
+      '<nav><h2>Contents</h2><a href="/">Home</a> <a href="/2">Two</a></nav><p>Text</p>',
+    );
+    expect(check('047fe0', html).outcome).toBe('failed');
+  });
+
+  it('fails a heading hidden from assistive technology, and names it', () => {
+    const result = check('047fe0', bypassPage(`${NAV}<h1 aria-hidden="true">Heroes</h1><p>T</p>`));
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('"Heroes"');
+  });
+
+  it('passes a heading after the navigation, native or by role', () => {
+    expect(check('047fe0', bypassPage(`${NAV}<h1>Heroes</h1><p>Text</p>`)).outcome).toBe('passed');
+    const byRole = bypassPage(`${NAV}<div role="heading" aria-level="1">Heroes</div><p>T</p>`);
+    expect(check('047fe0', byRole).outcome).toBe('passed');
+  });
+
+  it('passes a heading whose only content is an image', () => {
+    const html = bypassPage(`${NAV}<h1><img src="a.png" alt="Heroes"></h1><p>Text</p>`);
+    expect(check('047fe0', html).outcome).toBe('passed');
+  });
+
+  it('asks rather than fails when the only heading after the navigation is in the footer', () => {
+    // A site footer's "Contact" heading repeats on every page. A footer unique to this
+    // page would count. Failing either way would be a guess.
+    const html = bypassPage(`${NAV}<p>Text</p><footer><h2>Contact</h2></footer>`);
+    expect(check('047fe0', html).outcome).toBe('cantTell');
+  });
+
+  it('reads a heading hidden only by a stylesheet class as visible, a miss rather than a finding', () => {
+    // The documented gap of a dom-only rule. It errs towards passing, never failing.
+    const html = bypassPage(`${NAV}<h1 class="visually-hidden">Heroes</h1><p>Text</p>`);
+    expect(check('047fe0', html).outcome).toBe('passed');
+  });
+});
+
+describe('ye5d6e instrument to move focus to non-repeated content', () => {
+  it('fails a page with navigation and no way past it', () => {
+    const result = check('ye5d6e', bypassPage(`${NAV}<div id="main"><p>Text</p></div>`));
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('skip to content');
+  });
+
+  it('fails a skip link whose target does not exist, and names the href', () => {
+    const html = bypassPage(`<a href="#nope">Skip</a>${NAV}<div id="main"><p>Text</p></div>`);
+    const result = check('ye5d6e', html);
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('#nope');
+  });
+
+  it('passes a skip link to the content', () => {
+    const html = bypassPage(`<a href="#main">Skip</a>${NAV}<div id="main"><p>Text</p></div>`);
+    expect(check('ye5d6e', html).outcome).toBe('passed');
+  });
+
+  it('passes a target that is empty and sits just before the content', () => {
+    const html = bypassPage(`<a href="#skip">Skip</a>${NAV}<span id="skip"></span><p>Text</p>`);
+    expect(check('ye5d6e', html).outcome).toBe('passed');
+  });
+
+  it('treats an absolute URL to this page, with a different query, as a same-page link', () => {
+    const html = bypassPage(
+      `<a href="https://marlo.invalid/?from=top#main">Skip</a>${NAV}<div id="main"><p>T</p></div>`,
+    );
+    expect(check('ye5d6e', html).outcome).toBe('passed');
+  });
+
+  it('does not treat a fragment on another page as a skip link', () => {
+    const html = bypassPage(`<a href="/other#main">Skip</a>${NAV}<div id="main"><p>T</p></div>`);
+    expect(check('ye5d6e', html).outcome).toBe('failed');
+  });
+
+  it('fails a skip link that lands back inside the navigation', () => {
+    const html = bypassPage(`<a href="#top">Skip</a><nav id="top">${NAV}</nav><p>Text</p>`);
+    expect(check('ye5d6e', html).outcome).toBe('failed');
+  });
+
+  it('asks rather than fails when a button could move focus by script', () => {
+    // The header of nearly every site has a menu button. A script may make any button a
+    // skip mechanism, and whether it does is not in the markup.
+    const html = bypassPage(`<button>Menu</button>${NAV}<p>Text</p>`);
+    expect(check('ye5d6e', html).outcome).toBe('cantTell');
+  });
+
+  it('asks rather than fails when the skip link lands in an aside', () => {
+    const html = bypassPage(
+      `<a href="#about">Skip</a>${NAV}<aside><p id="about">About</p></aside><p>Text</p>`,
+    );
+    expect(check('ye5d6e', html).outcome).toBe('cantTell');
+  });
+});
+
+describe('cf77f2 bypass blocks, composed from the three rules Marlo implements', () => {
+  it('passes when any one input passes', () => {
+    expect(check('cf77f2', bypassPage(`${NAV}<main><p>Text</p></main>`)).outcome).toBe('passed');
+    expect(check('cf77f2', bypassPage(`${NAV}<h1>Heroes</h1><p>Text</p>`)).outcome).toBe('passed');
+  });
+
+  it('fails when all three fail and nothing on the page could collapse the navigation', () => {
+    const result = check('cf77f2', bypassPage(`${NAV}<p>Text</p>`));
+    expect(result.outcome).toBe('failed');
+    expect(result.messages.join(' ')).toContain('<main>');
+  });
+
+  it('asks rather than fails when a script could make the navigation collapsible', () => {
+    // 3e12e1 is the fourth input and Marlo does not implement it. Where a collapse is
+    // possible, three failures do not make a fourth.
+    const html = bypassPage(`${NAV}<p>Text</p>`, '<script src="menu.js"></script>');
+    expect(check('cf77f2', html).outcome).toBe('cantTell');
+  });
+
+  it('asks once, not three times, when the page opens with no recognisable navigation', () => {
+    const result = check('cf77f2', bypassPage('<h1>Hi</h1><a href="/a">A</a><p>Text</p>'));
+    expect(result.outcome).toBe('passed');
+    const unclear = check('cf77f2', bypassPage('<p>Intro</p><a href="/a">A</a>'));
+    expect(unclear.outcome).toBe('cantTell');
+    expect(unclear.messages).toHaveLength(1);
+    expect(unclear.messages[0]?.match(/Check by hand/g)).toHaveLength(1);
+  });
+});
+
 describe('the capability model reaches the rules', () => {
   it('reports contrast as unsupported without layout, never as a pass', () => {
     // The single most important test in this package. If this ever returns `passed`,

@@ -133,6 +133,32 @@ export function isHiddenFromAssistiveTech(element: MarloElement): boolean {
   return false;
 }
 
+/**
+ * Hidden from sight, as far as the DOM can tell: the `hidden` attribute, or
+ * `display: none` or `visibility: hidden` in a style attribute, on the element or an
+ * ancestor. `aria-hidden` is deliberately not part of this. It hides from assistive
+ * technology and leaves the pixels alone, so a rule that cares about both asks about
+ * them separately.
+ *
+ * Like `isHiddenFromAssistiveTech`, it cannot see a stylesheet. A rule using it says
+ * so in its own comment, and the direction of the gap is a hidden element read as
+ * shown.
+ */
+export function isVisuallyHidden(element: MarloElement): boolean {
+  for (const node of [element, ...ancestors(element)]) {
+    if (hasAttr(node, 'hidden')) return true;
+    const style = attr(node, 'style');
+    if (style === null) continue;
+    // `display: none` removes the subtree and no descendant can undo it.
+    if (/(?:^|;)\s*display\s*:\s*none\s*(?:!\s*important)?\s*(?:;|$)/i.test(style)) return true;
+    // `visibility` inherits and a descendant may set it back to `visible`, so the
+    // nearest declaration wins rather than the first hidden one found on the way up.
+    const visibility = /(?:^|;)\s*visibility\s*:\s*([a-z]+)/i.exec(style);
+    if (visibility !== null) return visibility[1]?.toLowerCase() !== 'visible';
+  }
+  return false;
+}
+
 /** Focusable by default, or made focusable by a non-negative tabindex. */
 export function isFocusable(element: MarloElement): boolean {
   const tabindex = attr(element, 'tabindex');

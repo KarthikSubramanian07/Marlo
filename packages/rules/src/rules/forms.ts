@@ -1,6 +1,14 @@
 import { defineRule } from '../define.js';
 import type { MarloDocument, MarloElement } from '../dom.js';
-import { ancestors, attr, hasAttr, isHiddenFromAssistiveTech, normalise, walk } from '../dom.js';
+import {
+  ancestors,
+  attr,
+  hasAttr,
+  isHiddenFromAssistiveTech,
+  isVisuallyHidden,
+  normalise,
+  walk,
+} from '../dom.js';
 import { explicitRole } from './aria.js';
 
 /**
@@ -185,28 +193,6 @@ function referenced(ids: string, document: MarloDocument): MarloElement[] {
 function isInvalid(element: MarloElement): boolean {
   const value = (attr(element, 'aria-invalid') ?? '').trim().toLowerCase();
   return value === 'true' || value === 'grammar' || value === 'spelling';
-}
-
-/**
- * Hidden from sight, as far as the DOM can tell: the `hidden` attribute, or
- * `display: none` or `visibility: hidden` in a style attribute, on the element or an
- * ancestor. `aria-hidden` is deliberately not part of this. It hides from assistive
- * technology and leaves the pixels alone, and the rule's second and third expectations
- * ask about those separately.
- */
-function isVisuallyHidden(element: MarloElement): boolean {
-  for (const node of [element, ...ancestors(element)]) {
-    if (hasAttr(node, 'hidden')) return true;
-    const style = attr(node, 'style');
-    if (style === null) continue;
-    // `display: none` removes the subtree and no descendant can undo it.
-    if (/(?:^|;)\s*display\s*:\s*none\s*(?:!\s*important)?\s*(?:;|$)/i.test(style)) return true;
-    // `visibility` inherits and a descendant may set it back to `visible`, so the
-    // nearest declaration wins rather than the first hidden one found on the way up.
-    const visibility = /(?:^|;)\s*visibility\s*:\s*([a-z]+)/i.exec(style);
-    if (visibility !== null) return visibility[1]?.toLowerCase() !== 'visible';
-  }
-  return false;
 }
 
 /**
