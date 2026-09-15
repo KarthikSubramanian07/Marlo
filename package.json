@@ -61,18 +61,18 @@
     "@marlo/report": "workspace:*",
     "@marlo/rules": "workspace:*",
     "@marlo/schema": "workspace:*",
-    "@types/node": "26.5.0",
+    "@types/node": "26.5.1",
     "@vitest/coverage-v8": "4.1.11",
     "dependency-cruiser": "18.2.0",
     "eslint": "10.10.0",
     "eslint-plugin-import-x": "4.17.1",
     "fast-check": "4.9.0",
-    "lefthook": "2.1.10",
+    "lefthook": "2.1.12",
     "prettier": "3.9.6",
     "typescript": "6.0.3",
     "typescript-eslint": "8.70.0",
     "vitest": "4.1.11",
-    "wrangler": "4.116.0"
+    "wrangler": "4.131.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -87,6 +87,6 @@
     }
   },
   "dependencies": {
-    "zod": "4.4.3"
+    "zod": "4.6.2"
   }
 }
