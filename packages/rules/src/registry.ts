@@ -45,6 +45,12 @@ import {
 } from './rules/spacing.js';
 import { enhancedContrast, minimumContrast } from './rules/contrast.js';
 import { errorMessageDescribesValue } from './rules/forms.js';
+import {
+  bypassBlocks,
+  headingForNonRepeatedContent,
+  instrumentToNonRepeatedContent,
+  landmarkWithNonRepeatedContent,
+} from './rules/bypass.js';
 
 /**
  * Every rule Marlo implements.
@@ -98,6 +104,13 @@ export const MARLO_RULES: readonly MarloRule[] = Object.freeze([
 
   // Forms. Decides what the DOM can decide, and asks about the rest.
   errorMessageDescribesValue,
+
+  // Bypass blocks. One page cannot show which content repeats, so these fail only on a
+  // page that opens with navigation and offers no way past it, and ask about the rest.
+  landmarkWithNonRepeatedContent,
+  headingForNonRepeatedContent,
+  instrumentToNonRepeatedContent,
+  bypassBlocks,
 
   // Text spacing.
   lineHeightNotImportant,
