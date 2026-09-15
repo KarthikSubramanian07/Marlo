@@ -12,6 +12,10 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ## [Unreleased]
 
+### Fixed
+
+- Links to trymarlo.pages.dev now preview on LinkedIn, Facebook and Slack. The social image was an SVG, which those crawlers do not render, so LinkedIn reported that it could not preview the page. The build now rasterises the same SVG to a 1200 by 630 `og.png` and declares its type, size and alt text.
+
 ### Changed
 
 - Credit and authorship are written down: CONTRIBUTING.md, CREDITS.md, D-013, and the DCO check now also refuse machine Author emails and AI co-author trailers. Collaborators with write access who have no commits yet (including Aarush Chavali and Ishan Garg) are listed in CREDITS.md without inventing Git Authors.
