@@ -264,6 +264,31 @@ describe('the adapters run against a real page', () => {
     await page.close();
   });
 
+  it('reads the members of an alfa group target rather than the wrapper', async () => {
+    // R41 and R81 report a Group of links, which declares no path and no toString, so it
+    // used to surface as "[object Object]" at `:root`. Alfa's DOM nodes are iterable too,
+    // over their children, and must not be mistaken for a group.
+    const page = await renderer.render({
+      html: `<!doctype html><html lang="en"><head><title>Links</title></head><body><main>
+        <a href="/one">Read more</a><a href="/two">Read more</a></main></body></html>`,
+    });
+    const report = await new AlfaEngine().evaluate(page, ['b20e66', 'fd3a94']);
+    const verdicts = report.results
+      .filter((r) => r.status === 'ok')
+      .flatMap((r) => r.verdicts)
+      .filter((v) => v.outcome !== 'inapplicable' && v.outcome !== 'passed');
+    expect(verdicts.length, 'alfa reported nothing about two links named alike').toBeGreaterThan(0);
+
+    for (const verdict of verdicts) {
+      expect(verdict.target.selector, verdict.engineRuleId).toMatch(
+        /^xpath \/html\[1\]\/.*\/a\[1\]$/,
+      );
+      expect(verdict.target.snippet, verdict.engineRuleId).toContain('href="/one"');
+      expect(verdict.target.snippet, verdict.engineRuleId).toContain('href="/two"');
+    }
+    await page.close();
+  });
+
   it('html_codesniffer reports messages and names its version', async () => {
     const page = await renderer.render({ html: BROKEN });
     const engine = new HtmlcsEngine();
