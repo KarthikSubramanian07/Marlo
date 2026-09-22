@@ -21,7 +21,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "zod": "4.6.2"
+    "zod": "4.6.5"
   },
   "publishConfig": {
     "access": "public"

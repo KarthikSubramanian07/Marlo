@@ -29,7 +29,7 @@
     "@marlo/render": "workspace:*",
     "@marlo/rules": "workspace:*",
     "@marlo/schema": "workspace:*",
-    "zod": "4.6.2"
+    "zod": "4.6.5"
   },
   "publishConfig": {
     "access": "public"
