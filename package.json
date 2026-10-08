@@ -44,6 +44,7 @@
     "test:e2e": "vitest run --project e2e",
     "test:browser": "vitest run --project browser",
     "site:build": "node apps/site/src/build.mjs",
+    "site:verify": "node scripts/verify-site.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "deploy": "node scripts/deploy.mjs",
     "mcp": "node packages/mcp/dist/bin.js",
