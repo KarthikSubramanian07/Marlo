@@ -22,7 +22,18 @@ console.log('Rebuilding the site from calibration/table.json.');
 run('node', ['apps/site/src/build.mjs']);
 
 console.log('\nChecking the site does not lie about itself.');
-run('pnpm', ['exec', 'vitest', 'run', '--project', 'unit', 'apps/site']);
+run('pnpm', [
+  'exec',
+  'vitest',
+  'run',
+  '--project',
+  'unit',
+  'apps/site',
+  'scripts/site-worker.test.mjs',
+  'scripts/site-markdown.test.mjs',
+  'scripts/public-api.test.mjs',
+  'scripts/developer-content.test.mjs',
+]);
 
 if (dryRun) {
   console.log('\n--dry-run: built and checked, nothing deployed.');
@@ -44,3 +55,4 @@ run('pnpm', [
 ]);
 
 console.log('\nhttps://trymarlo.pages.dev');
+run('node', ['scripts/verify-site.mjs', 'https://trymarlo.pages.dev']);
