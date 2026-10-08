@@ -25,6 +25,35 @@ pnpm site:build         # generates apps/site/dist from calibration/table.json
 pnpm screenshots        # needs Playwright, see below
 ```
 
+## Public metadata and documentation
+
+The site publishes anonymous, read-only coverage, ACT rule metadata and calibration evidence
+under `/api/v1/`. `/openapi.json` describes the REST operations. `/mcp` exposes the same
+metadata over stateless Streamable HTTP. Hosted endpoints do not accept HTML or perform scans.
+Use the local CLI to evaluate trusted files.
+
+All published pages offer HTML and Markdown through the `Accept` header. Explicit Markdown
+files, `/llms.txt`, and `/llms-full.txt` provide additional discovery surfaces. Unknown pages
+return an actual HTTP 404; API failures return structured Problem Details.
+
+To exercise the generated worker locally, build the site and run Wrangler from `apps/site`:
+
+```bash
+pnpm site:build
+cd apps/site
+pnpm exec wrangler pages dev dist --port 8897
+```
+
+From another terminal at the repository root:
+
+```bash
+pnpm site:verify http://localhost:8897
+```
+
+The verifier checks every published page in both representations, every rule endpoint,
+discovery files, API errors, and MCP initialization and tool calls. `pnpm deploy` runs the
+site and protocol tests before publishing, then runs this verifier against production.
+
 ## Optional: the browser renderer and screenshots
 
 Only needed for layout-dependent rules and for capturing the site.

@@ -29,6 +29,9 @@
  */
 import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { developerPages } from './developer-content.mjs';
+import { markdownForPage } from './markdown.mjs';
+import { createPublicApi } from './public-api.mjs';
 
 const HERE = import.meta.dirname;
 const ROOT = resolve(HERE, '..', '..', '..');
@@ -37,6 +40,7 @@ const ORIGIN = 'https://trymarlo.pages.dev';
 const REPO = 'https://github.com/KarthikSubramanian07/Marlo';
 
 const table = JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8'));
+const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus/act/MANIFEST.json'), 'utf8'));
 const recorded = readFileSync(resolve(HERE, 'recorded-scan.txt'), 'utf8').trimEnd();
 
 /* ── Numbers ─────────────────────────────────────────────────────────────────── */
@@ -176,13 +180,25 @@ const NAV = [
   ['/rules/', 'rules', 'Rules'],
   ['/method/', 'method', 'Method'],
   ['/honesty/', 'honesty', 'Honesty'],
+  ['/developers/', 'developers', 'Developers'],
 ];
 
-function layout({ slug, title, description, body, canonical }) {
-  const nav = NAV.map(
-    ([href, id, label]) =>
-      `<a href="${href}"${id === slug ? ' aria-current="page"' : ''}>${label}</a>`,
-  ).join('\n          ');
+function layout({ slug, title, description, body, canonical, notFound = false }) {
+  const resourceLabels = {
+    docs: 'Documentation',
+    about: 'About',
+    contact: 'Contact',
+    privacy: 'Privacy',
+  };
+  const navigation = Object.hasOwn(resourceLabels, slug)
+    ? [...NAV, [`/${slug}/`, slug, resourceLabels[slug]]]
+    : NAV;
+  const nav = navigation
+    .map(
+      ([href, id, label]) =>
+        `<a href="${href}"${id === slug ? ' aria-current="page"' : ''}>${label}</a>`,
+    )
+    .join('\n          ');
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -198,6 +214,18 @@ function layout({ slug, title, description, body, canonical }) {
       `${num(table.coverage.implemented, { field: 'coverage.implemented' })} of ` +
       `${num(table.coverage.publishedActRules, { field: 'coverage.publishedActRules' })} published ACT rules.`,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: {
+      '@type': 'Organization',
+      '@id': `${ORIGIN}/#organization`,
+      name: 'Marlo',
+      url: ORIGIN,
+      logo: `${ORIGIN}/favicon.svg`,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'technical support',
+        url: `${REPO}/issues`,
+      },
+    },
   };
 
   return `<!doctype html>
@@ -208,6 +236,9 @@ function layout({ slug, title, description, body, canonical }) {
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${canonical}" />
+    ${notFound ? '<meta name="robots" content="noindex" />' : `<link rel="alternate" type="text/markdown" href="${canonical}index.md" />`}
+    <link rel="describedby" href="/llms.txt" />
+    <link rel="service-desc" type="application/vnd.oai.openapi+json" href="/openapi.json" />
     <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -257,6 +288,9 @@ ${body}
               <li><a href="${REPO}">Source on GitHub</a></li>
               <li><a href="/accuracy/">The numbers</a></li>
               <li><a href="/rules/">Rules covered</a></li>
+              <li><a href="/developers/">Developer portal</a></li>
+              <li><a href="/docs/">API and CLI documentation</a></li>
+              <li><a href="/openapi.json">OpenAPI specification</a></li>
             </ul>
           </div>
           <div>
@@ -281,6 +315,9 @@ ${body}
               <li><a href="${REPO}/issues/new?template=false-positive.yml">Report a false positive</a></li>
               <li><a href="${REPO}/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Anew-rule">Implement a rule</a></li>
               <li><a href="${REPO}/issues/new?template=calibration-dispute.yml">Dispute a number</a></li>
+              <li><a href="/about/">About Marlo</a></li>
+              <li><a href="/contact/">Contact</a></li>
+              <li><a href="/privacy/">Privacy</a></li>
             </ul>
           </div>
         </div>
@@ -405,7 +442,7 @@ pages.push({
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="wrap hero__inner">
           <span class="eyebrow eyebrow--accent">Measured over ${num(table.corpus.testCases, { field: 'corpus.testCases' })} official W3C test cases</span>
-          <h1>Every accessibility tool says it is accurate. Here is our receipt.</h1>
+          <h1>Marlo checks accessibility. Here is our receipt.</h1>
           <p class="lede">
             Marlo checks your pages against the official ACT rule corpus. Then it turns the
             same corpus on itself and commits the score, including the part where it loses.
@@ -1371,6 +1408,10 @@ const OG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
 
 /* ── Write ───────────────────────────────────────────────────────────────────── */
 
+pages.push(...developerPages({ ORIGIN, REPO }));
+const api = createPublicApi({ origin: ORIGIN, table, manifest });
+const markdownPages = {};
+
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 mkdirSync(resolve(OUT, 'fonts'), { recursive: true });
@@ -1383,7 +1424,48 @@ for (const page of pages) {
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, html, 'utf8');
   urls.push(canonical);
+  const markdown = markdownForPage({ body: page.body, origin: canonical });
+  markdownPages[new URL(canonical).pathname] = markdown;
+  writeFileSync(target.replace(/index\.html$/, 'index.md'), markdown, 'utf8');
 }
+
+const missingPage = layout({
+  slug: 'not-found',
+  title: 'Resource not found: Marlo accessibility checker',
+  description:
+    'This Marlo resource does not exist. Find developer documentation, measured accessibility coverage, and supported public API endpoints.',
+  canonical: `${ORIGIN}/404.html`,
+  notFound: true,
+  body: '<section class="hero"><div class="wrap hero__inner"><h1>Resource not found</h1><p class="lede">This Marlo resource does not exist. Check the URL or visit the <a href="/docs/">developer documentation</a>, <a href="/sitemap.xml">sitemap</a>, or <a href="/llms.txt">resource guide</a>.</p></div></section>',
+});
+writeFileSync(resolve(OUT, '404.html'), missingPage, 'utf8');
+writeFileSync(resolve(OUT, 'openapi.json'), `${JSON.stringify(api.openapi, null, 2)}\n`, 'utf8');
+mkdirSync(resolve(OUT, '.well-known'), { recursive: true });
+writeFileSync(
+  resolve(OUT, '.well-known/mcp'),
+  `${JSON.stringify(api.mcpManifest, null, 2)}\n`,
+  'utf8',
+);
+writeFileSync(
+  resolve(OUT, '_routes.json'),
+  `${JSON.stringify({ version: 1, include: ['/*'], exclude: [] }, null, 2)}\n`,
+  'utf8',
+);
+writeFileSync(
+  resolve(OUT, '_worker.js'),
+  `${readFileSync(resolve(HERE, 'worker.mjs'), 'utf8')}\nexport default createSiteWorker(${JSON.stringify({ origin: ORIGIN, pages: markdownPages, api })});\n`,
+  'utf8',
+);
+writeFileSync(
+  resolve(OUT, 'llms.txt'),
+  `# Marlo\n\n> Marlo is an open-source accessibility checker with published ACT corpus measurements, visible coverage limits, and evidence for each engine.\n\nWhen to use: inspect measured accessibility rule coverage, compare engine accuracy, understand a finding, or scan trusted local HTML with the CLI. Read coverage before interpreting results. A rule that was not evaluated is not a pass. The public REST API and HTTP MCP tools return published metadata only; they do not accept HTML or run scans. Use the local CLI for evaluation. No API key is required for metadata.\n\n## Documentation\n\n- [Developer portal](${ORIGIN}/developers/index.md): API, CLI, and MCP entry points.\n- [API and CLI documentation](${ORIGIN}/docs/index.md): Authentication, endpoints, error handling, and local scan commands.\n- [OpenAPI specification](${ORIGIN}/openapi.json): Typed REST operations and response schemas.\n- [MCP discovery](${ORIGIN}/.well-known/mcp): Streamable HTTP endpoint and read-only tools.\n\n## Evidence\n\n- [Coverage API](${ORIGIN}/api/v1/coverage): Current corpus coverage and engine accuracy.\n- [Rule catalog API](${ORIGIN}/api/v1/rules): ACT identifiers, metadata, measurements, and routing.\n- [Calibration API](${ORIGIN}/api/v1/calibration): Published calibration table.\n- [Measured accuracy](${ORIGIN}/accuracy/index.md): Strict accuracy results and limitations.\n- [Method](${ORIGIN}/method/index.md): How the corpus is graded.\n- [Known defects](${ORIGIN}/honesty/index.md): Where earlier results were wrong.\n\n## Project\n\n- [About Marlo](${ORIGIN}/about/index.md): Purpose and boundaries.\n- [Contact](${ORIGIN}/contact/index.md): Public reporting channel.\n- [Privacy](${ORIGIN}/privacy/index.md): Website requests and local scans.\n- [Sitemap](${ORIGIN}/sitemap.xml): Published pages.\n`,
+  'utf8',
+);
+writeFileSync(
+  resolve(OUT, 'llms-full.txt'),
+  `${pages.map((page) => markdownPages[`/${page.path.replace(/index\.html$/, '')}`]).join('\n\n---\n\n')}\n`,
+  'utf8',
+);
 
 copyFileSync(resolve(HERE, 'style.css'), resolve(OUT, 'style.css'));
 for (const font of ['dm-sans-latin.woff2', 'jetbrains-mono-latin.woff2']) {

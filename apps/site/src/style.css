@@ -599,6 +599,18 @@ h3 {
 
 .prose {
   max-width: 70ch;
+  min-width: 0;
+}
+
+.prose pre.scroller {
+  max-width: 100%;
+  padding: 16px;
+  font-size: 13px;
+}
+
+.prose pre.scroller code {
+  padding: 0;
+  background: none;
 }
 
 .prose > * + * {
@@ -628,6 +640,7 @@ h3 {
  */
 .longform {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
 }
 

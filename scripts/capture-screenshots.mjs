@@ -38,6 +38,12 @@ const PAGES = [
   { slug: 'rules', path: 'rules/index.html' },
   { slug: 'method', path: 'method/index.html' },
   { slug: 'honesty', path: 'honesty/index.html' },
+  { slug: 'developers', path: 'developers/index.html' },
+  { slug: 'docs', path: 'docs/index.html' },
+  { slug: 'about', path: 'about/index.html' },
+  { slug: 'contact', path: 'contact/index.html' },
+  { slug: 'privacy', path: 'privacy/index.html' },
+  { slug: 'not-found', path: '404.html' },
 ];
 
 /**
@@ -212,11 +218,15 @@ if (chromium !== undefined) {
           await tab.screenshot({
             path: resolve(SHOTS, `${page.slug}-${viewport.name}.png`),
             fullPage: true,
+            timeout: 120_000,
+            scale: 'css',
           });
         } else if (page.slug === 'home' || page.slug === 'accuracy') {
           await tab.screenshot({
             path: resolve(SHOTS, `${page.slug}-${viewport.name}-light.png`),
             fullPage: true,
+            timeout: 120_000,
+            scale: 'css',
           });
         }
 

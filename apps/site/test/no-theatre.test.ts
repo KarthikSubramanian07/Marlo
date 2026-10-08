@@ -63,7 +63,7 @@ beforeAll(() => {
     stdio: 'ignore',
   });
   pages = htmlFiles(DIST).map((path) => ({ path, html: readFileSync(path, 'utf8') }));
-});
+}, 30_000);
 
 describe('the site has no theatre', () => {
   it('builds every page', () => {
@@ -228,6 +228,9 @@ describe('the site has no theatre', () => {
       '630',
       '1200',
       '65526',
+      // HTTP status and the Problem Details specification identify protocols, not accuracy.
+      '404',
+      '9457',
       '80',
       // Facts about Marlo's own audit and its own test suite, from HONESTY.md: 48 tap
       // targets under 24 CSS pixels, 24 pixels, a 2.18:1 contrast failure, 26 site tests
@@ -363,6 +366,10 @@ describe('the site is accessible by construction', () => {
 
   it('marks the current page in the navigation', () => {
     for (const page of pages) {
+      if (page.path.endsWith(`${sep}404.html`)) {
+        expect(page.html).not.toContain('aria-current="page"');
+        continue;
+      }
       expect(page.html, page.path).toContain('aria-current="page"');
     }
   });
@@ -444,6 +451,12 @@ describe('severity and state are never colour alone', () => {
 describe('the site is responsive by construction', () => {
   const css = (): string =>
     readFileSync(resolve(import.meta.dirname, '..', 'src', 'style.css'), 'utf8');
+
+  it('contains wide documentation examples within a shrinking grid column', () => {
+    expect(css()).toMatch(/\.longform\s*\{[^}]*grid-template-columns: minmax\(0, 1fr\)/);
+    expect(css()).toMatch(/\.prose\s*\{[^}]*min-width: 0/);
+    expect(css()).toMatch(/\.prose pre\.scroller\s*\{[^}]*max-width: 100%/);
+  });
 
   it('declares a viewport that permits zoom', () => {
     // Marlo has a rule about this. Failing its own rule on its own site would be the
@@ -528,6 +541,31 @@ describe('the assets do not drift from the stylesheet', () => {
 });
 
 describe('SEO and delivery', () => {
+  it('publishes protocol discovery, page Markdown and an excluded error document', () => {
+    expect(readFileSync(join(DIST, '_worker.js'), 'utf8')).toContain(
+      'export default createSiteWorker(',
+    );
+    expect(JSON.parse(readFileSync(join(DIST, '_routes.json'), 'utf8'))).toEqual({
+      version: 1,
+      include: ['/*'],
+      exclude: [],
+    });
+    const llms = readFileSync(join(DIST, 'llms.txt'), 'utf8');
+    expect(llms).toMatch(/^# Marlo\n\n> /);
+    expect(llms).toContain('When to use:');
+    expect(llms).toContain('/openapi.json');
+    expect(llms).toContain('/.well-known/mcp');
+    for (const page of pages) {
+      if (page.path.endsWith(`${sep}404.html`)) {
+        expect(page.html).toContain('name="robots" content="noindex"');
+        continue;
+      }
+      const markdown = readFileSync(page.path.replace(/index\.html$/, 'index.md'), 'utf8');
+      expect(markdown.length).toBeGreaterThan(500);
+      expect(markdown).toContain('# ');
+      expect(page.html).toContain('rel="alternate" type="text/markdown"');
+    }
+  });
   it('has a canonical URL, a description and OG tags on every page', () => {
     for (const page of pages) {
       expect(page.html, page.path).toMatch(
@@ -542,7 +580,10 @@ describe('SEO and delivery', () => {
     expect(existsSync(join(DIST, 'sitemap.xml'))).toBe(true);
     expect(existsSync(join(DIST, 'robots.txt'))).toBe(true);
     const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8');
-    expect((sitemap.match(/<loc>/g) ?? []).length).toBe(pages.length);
+    expect((sitemap.match(/<loc>/g) ?? []).length).toBe(
+      pages.filter((page) => !page.path.endsWith(`${sep}404.html`)).length,
+    );
+    expect(sitemap).not.toContain('/404.html');
     for (const page of pages) {
       expect(page.html, page.path).toContain('application/ld+json');
     }
