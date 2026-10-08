@@ -82,16 +82,17 @@ importers:
         version: 4.135.0(@types/node@26.6.2)
 
   apps/site:
-    devDependencies:
-      sharp:
-        specifier: '>=0.35.4'
-        version: 0.35.4(@types/node@26.6.2)
+    dependencies:
       turndown:
         specifier: 7.2.4
         version: 7.2.4
       turndown-plugin-gfm:
         specifier: 1.0.2
         version: 1.0.2
+    devDependencies:
+      sharp:
+        specifier: '>=0.35.4'
+        version: 0.35.4(@types/node@26.6.2)
 
   packages/act:
     dependencies:

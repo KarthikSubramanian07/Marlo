@@ -9,7 +9,9 @@
     "build": "node src/build.mjs"
   },
   "devDependencies": {
-    "sharp": "0.35.4",
+    "sharp": "0.35.4"
+  },
+  "dependencies": {
     "turndown": "7.2.4",
     "turndown-plugin-gfm": "1.0.2"
   }
