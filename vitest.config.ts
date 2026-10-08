@@ -57,6 +57,9 @@ if (existsSync(packagesDir)) {
 export default defineConfig({
   test: {
     globals: false,
+    // DOM engines allocate a window per scan. Bound worker concurrency so independent
+    // engine suites do not exhaust memory while building the site or running integration tests.
+    maxWorkers: 2,
     // Packages arrive branch by branch. A project with no tests yet is not a
     // failure; a project whose tests were deleted is caught by the coverage gate.
     passWithNoTests: true,
@@ -74,7 +77,8 @@ export default defineConfig({
           ],
           exclude: ['**/*.browser.test.ts', '**/*.e2e.test.ts'],
           environment: 'node',
-          testTimeout: 20_000,
+          testTimeout: 60_000,
+          hookTimeout: 60_000,
         },
       },
       {
