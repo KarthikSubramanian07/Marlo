@@ -28,6 +28,9 @@ export default tseslint.config(
   {
     ignores: [
       '**/dist/**',
+      // Local preview bundles and scratch outputs are generated, not workspace source.
+      '**/.wrangler/**',
+      'tmp/**',
       '**/coverage/**',
       'corpus/**',
       'tests/golden/**',
