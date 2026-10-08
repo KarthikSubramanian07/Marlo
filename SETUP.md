@@ -51,7 +51,7 @@ pnpm site:verify http://localhost:8897
 ```
 
 The verifier checks every published page in both representations, every rule endpoint,
-discovery files, API errors, and MCP initialization and tool calls. `pnpm deploy` runs the
+discovery files, API errors, and MCP initialization and tool calls. `pnpm run deploy` runs the
 site and protocol tests before publishing, then runs this verifier against production.
 
 ## Optional: the browser renderer and screenshots
@@ -68,7 +68,7 @@ Without it, layout-dependent rules report as **not evaluated** rather than passi
 ## To deploy the site
 
 ```bash
-pnpm deploy
+pnpm run deploy
 ```
 
 Requires `wrangler` to be authenticated once:
