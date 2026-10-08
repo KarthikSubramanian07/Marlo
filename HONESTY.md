@@ -236,7 +236,7 @@ The part that took the second attempt: a check like this is one reworded sentenc
 
 **Why this one belongs here rather than in the changelog.** Nothing crashed and no artifact was malformed. A reader who came to this repository for the one thing it promises, an accuracy figure it will not flatter, was handed a stale one by the paragraph explaining why it could be trusted. That is the shape this file exists for.
 
-**Still open.** The deployed site at [trymarlo.pages.dev](https://trymarlo.pages.dev) is published by hand with `pnpm deploy` and no workflow, so it can lag main by any amount. At the time of writing it serves the old figures. The generated artifact is correct and the publishing step is manual, which is a gap this check cannot close.
+**Still open.** The deployed site at [trymarlo.pages.dev](https://trymarlo.pages.dev) is published by hand with `pnpm run deploy` and no workflow, so it can lag main by any amount. At the time of writing it serves the old figures. The generated artifact is correct and the publishing step is manual, which is a gap this check cannot close.
 
 ---
 

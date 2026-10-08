@@ -98,7 +98,7 @@ If any of that needs the network after `install`, it is a bug. The whole suite r
 | `pnpm calibrate:check` | The CI gate: fails on a regression **and** on an unrecorded improvement |
 | `pnpm corpus:verify`   | Prove the 1134 vendored test cases are unmodified                       |
 | `pnpm screenshots`     | Capture the site at iPhone, iPad and laptop widths, and audit it        |
-| `pnpm deploy`          | Build the site and ship it                                              |
+| `pnpm run deploy`      | Build the site and ship it                                              |
 
 ---
 
