@@ -10,6 +10,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
+import { verifyPublished } from './lib/verify-published.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const dryRun = process.argv.includes('--dry-run');
@@ -55,4 +56,4 @@ run('pnpm', [
 ]);
 
 console.log('\nhttps://trymarlo.pages.dev');
-run('node', ['scripts/verify-site.mjs', 'https://trymarlo.pages.dev']);
+await verifyPublished(() => run('node', ['scripts/verify-site.mjs', 'https://trymarlo.pages.dev']));
