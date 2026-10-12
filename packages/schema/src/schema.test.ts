@@ -102,6 +102,7 @@ describe('a fix cannot exist without its verification', () => {
     successCriteria: ['3.1.1'],
     edits: [edit],
     verification,
+    thresholdEvidence: { strictPrecision: 1, strictRecall: 0.9, threshold: 0.95, sampleSize: 6 },
     ranges: [{ file: 'index.html', start: 15, end: 31, line: 1, column: 16 }],
     summary: 'Added lang="en" to the html element.',
     howToReject: 'Delete this line from the diff and Marlo will not propose it again.',
@@ -110,6 +111,24 @@ describe('a fix cannot exist without its verification', () => {
   it('accepts a fix that carries one', () => {
     const parsed = Repair.safeParse(fixed);
     expect(parsed.success).toBe(true);
+  });
+
+  it('rejects a fix with the measurement that admitted it removed', () => {
+    // The pull request body prints the precision and sample size every fix rested on. A
+    // fix that cannot say what number admitted it is a fix that was asserted.
+    const { thresholdEvidence: _dropped, ...withoutEvidence } = fixed;
+    expect(Repair.safeParse(withoutEvidence).success).toBe(false);
+    expect(Repair.safeParse({ ...fixed, thresholdEvidence: null }).success).toBe(false);
+  });
+
+  it('rejects a fix whose measured precision is below the threshold it names', () => {
+    // The gate, restated as a shape. A verified fix for a rule measured under the
+    // threshold is not constructible, so loosening the gate in code alone is not enough
+    // to produce one.
+    const below = { ...fixed.thresholdEvidence, strictPrecision: 0.71 };
+    expect(Repair.safeParse({ ...fixed, thresholdEvidence: below }).success).toBe(false);
+    const unmeasured = { ...fixed.thresholdEvidence, strictPrecision: null };
+    expect(Repair.safeParse({ ...fixed, thresholdEvidence: unmeasured }).success).toBe(false);
   });
 
   it('rejects a fix with the verification removed', () => {

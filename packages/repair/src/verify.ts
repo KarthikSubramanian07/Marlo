@@ -174,7 +174,9 @@ export async function repairFinding(finding: Finding, context: RepairContext): P
 
   // 2. Does the engine that reported it measure well enough to be trusted with an edit?
   const threshold = checkThreshold(context.table, actRuleId, finding.reportedBy);
-  if (!threshold.permitted) {
+  // `permitted` already implies a measured precision; the second test is what lets the
+  // type system carry that fact into the fix rather than asserting it.
+  if (!threshold.permitted || threshold.strictPrecision === null) {
     return flag(
       finding,
       threshold.strictPrecision === null ? 'uncalibrated' : 'below-threshold',
@@ -307,6 +309,12 @@ export async function repairFinding(finding: Finding, context: RepairContext): P
     successCriteria: [...finding.successCriteria],
     edits: [...codemod.edits] as [Edit, ...Edit[]],
     verification,
+    thresholdEvidence: {
+      strictPrecision: threshold.strictPrecision,
+      strictRecall: threshold.strictRecall,
+      threshold: threshold.threshold,
+      sampleSize: threshold.sampleSize,
+    },
     ranges: ranges,
     summary: codemod.edits[0]?.rationale ?? 'A mechanical change, verified.',
     howToReject:
