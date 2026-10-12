@@ -25,7 +25,7 @@
  * that were never resolved.
  */
 
-export type { ComputedStyle, MarloAttribute, MarloDocument, MarloElement } from './dom.js';
+export type { Box, ComputedStyle, MarloAttribute, MarloDocument, MarloElement } from './dom.js';
 export {
   ancestors,
   attr,

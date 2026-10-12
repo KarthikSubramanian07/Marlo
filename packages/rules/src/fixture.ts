@@ -1,4 +1,4 @@
-import type { ComputedStyle, MarloDocument, MarloElement } from './dom.js';
+import type { Box, ComputedStyle, MarloDocument, MarloElement } from './dom.js';
 
 /**
  * Builds a `MarloDocument` from a tiny markup description, for tests.
@@ -37,9 +37,11 @@ interface Building {
   children: MarloElement[];
   parent: MarloElement | null;
   text: string;
+  ownText: string;
   range: null;
   outerHTML: string;
   computed: ComputedStyle | null;
+  box: Box | null;
 }
 
 function parseAttributes(raw: string): { name: string; value: string; range: null }[] {
@@ -55,13 +57,15 @@ function parseAttributes(raw: string): { name: string; value: string; range: nul
 }
 
 /**
- * `computed` supplies resolved styles per selector, for the rare fixture that needs to
- * exercise a layout-dependent path. Absent means no layout, which is the default and
- * the honest one.
+ * `computed` supplies resolved styles per selector, and `boxes` supplies geometry per
+ * selector, for the rare fixture that needs to exercise a layout-dependent path. Both
+ * are keyed by `#id` where the element has one and by tag name otherwise. Absent means
+ * no layout, which is the default and the honest one.
  */
 export interface FixtureOptions {
   readonly url?: string;
   readonly computed?: Readonly<Record<string, Readonly<Record<string, string>>>>;
+  readonly boxes?: Readonly<Record<string, Box>>;
 }
 
 export function fixture(html: string, options: FixtureOptions = {}): MarloDocument {
@@ -74,9 +78,11 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
     children: [],
     parent: null,
     text: '',
+    ownText: '',
     range: null,
     outerHTML: body,
     computed: null,
+    box: null,
   };
 
   const stack: Building[] = [root];
@@ -93,6 +99,9 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
       // element's own text before its children's whatever the source order, and a rule
       // reading words in order read `<a>Download <b>the</b> file</a>` as "Download file the".
       if (trimmed.trim() !== '') for (const open of stack) open.text += trimmed;
+      // Own text goes to the innermost open element only, which is the one it belongs to.
+      const innermost = stack[stack.length - 1];
+      if (innermost !== undefined) innermost.ownText += trimmed;
       continue;
     }
     if (tagName === undefined) continue;
@@ -133,17 +142,20 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
       children: [],
       parent,
       text: '',
+      ownText: '',
       range: null,
       outerHTML: token[0],
       computed: null,
+      box: null,
     };
     parent.children.push(element);
     if (!VOID_ELEMENTS.has(tag) && !token[0].endsWith('/>')) stack.push(element);
   }
 
-  // Resolved styles, where the fixture asked for them.
-  if (options.computed !== undefined) {
-    const styles = options.computed;
+  // Resolved styles and geometry, where the fixture asked for them.
+  if (options.computed !== undefined || options.boxes !== undefined) {
+    const styles = options.computed ?? {};
+    const boxes = options.boxes ?? {};
     const apply = (node: Building): void => {
       const id = node.attributes.find((a) => a.name === 'id')?.value;
       const key = id !== undefined && id !== '' ? `#${id}` : node.tag;
@@ -151,6 +163,8 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
       if (declared !== undefined) {
         node.computed = { get: (property) => declared[property] ?? null };
       }
+      const box = boxes[key];
+      if (box !== undefined) node.box = box;
       for (const child of node.children) apply(child as Building);
     };
     apply(root);

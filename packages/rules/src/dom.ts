@@ -21,6 +21,13 @@ export interface MarloElement {
   readonly parent: MarloElement | null;
   /** Concatenated descendant text, in document order. */
   readonly text: string;
+  /**
+   * The element's own text: its direct text node children, concatenated in order, with
+   * no descendant element text. `<p>Hello <b>there</b></p>` gives `Hello ` for the
+   * paragraph and `there` for the bold. A rule about rendered text needs this rather
+   * than `text`, because the colour and size of a child are the child's.
+   */
+  readonly ownText: string;
   /** Byte range in the original source, if the parser recorded one. */
   readonly range: { readonly start: number; readonly end: number } | null;
   /** Serialised form, for evidence in a report. */
@@ -32,6 +39,23 @@ export interface MarloElement {
    * and cannot accidentally treat "no layout" as "no styles set".
    */
   readonly computed: ComputedStyle | null;
+  /**
+   * The element's border box in CSS pixels, in document coordinates, or null when the
+   * renderer provided no `layout` capability.
+   *
+   * Null for the same reason `computed` is: a rule that needs to know whether two
+   * elements overlap has to handle not knowing, and cannot read a zero-sized box as an
+   * element that is not there.
+   */
+  readonly box: Box | null;
+}
+
+/** A rectangle in CSS pixels. Document coordinates, so scrolling does not move it. */
+export interface Box {
+  readonly x: number;
+  readonly y: number;
+  readonly width: number;
+  readonly height: number;
 }
 
 export interface MarloAttribute {
