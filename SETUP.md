@@ -79,6 +79,17 @@ pnpm exec wrangler login
 
 The Pages project is `trymarlo`, already created, serving [trymarlo.pages.dev](https://trymarlo.pages.dev).
 
+### Automatic deployment from main
+
+`.github/workflows/deploy.yml` runs the same script on every push to `main` that touches the site, the calibration table, or the documents the site is built from. It needs two repository secrets, and it fails with a message rather than skipping when they are absent:
+
+| Secret                  | Value                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | An API token created at dash.cloudflare.com under My Profile, API Tokens, with the `Cloudflare Pages: Edit` permission only |
+| `CLOUDFLARE_ACCOUNT_ID` | The account id shown on the Workers and Pages overview page, or by `pnpm exec wrangler whoami`                              |
+
+Add both under the repository's Settings, Secrets and variables, Actions. The workflow deploys through a `production` environment, so a reviewer can also require approval there if they want a person in the loop.
+
 ## Manual steps that remain
 
 Exactly four, and all of them are things a person has to decide rather than a script.
