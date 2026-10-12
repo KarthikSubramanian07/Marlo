@@ -104,7 +104,7 @@ export class MarloEngine implements Engine {
         evaluateRules(actRuleIds, {
           document: buildDocument(
             { nodeType: 1, nodeName: 'html', childNodes: [], textContent: '' },
-            { url: page.url, hasDoctype: false, computedStyleFor: null },
+            { url: page.url, hasDoctype: false, computedStyleFor: null, boxFor: null },
           ),
           renderer: page.renderer,
           capabilities: page.capabilities,
@@ -122,6 +122,7 @@ export class MarloEngine implements Engine {
       // does not describe what a user sees, which is the failure the whole capability
       // model exists to prevent.
       computedStyleFor: null,
+      boxFor: null,
     });
 
     return Promise.resolve(

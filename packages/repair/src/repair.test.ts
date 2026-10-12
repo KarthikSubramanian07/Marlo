@@ -547,6 +547,7 @@ describe('the verification loop', () => {
             url: page.url,
             hasDoctype: window.document.doctype !== null && window.document.doctype !== undefined,
             computedStyleFor: null,
+            boxFor: null,
           });
           const marlo = evaluateRules(rules, {
             document,
