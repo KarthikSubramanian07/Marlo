@@ -67,6 +67,16 @@ function renderFix(fix: VerifiedFix, index: number): string {
   lines.push(`**What changed.** ${fix.summary}`);
   lines.push('');
 
+  // The number the decision rested on, printed so a reader can disagree with the
+  // measurement rather than with the change.
+  const t = fix.thresholdEvidence;
+  lines.push(
+    `**The measurement this rested on.** ${fix.finding.reportedBy} reports \`${fix.actRuleId}\` ` +
+      `with strict precision ${t.strictPrecision.toFixed(2)} over ${String(t.sampleSize)} ` +
+      `decision-bearing official test cases, against a threshold of ${t.threshold.toFixed(2)}.`,
+  );
+  lines.push('');
+
   for (const edit of fix.edits) lines.push(renderEdit(edit), '');
 
   // Verification, answered as three questions rather than asserted as one word.
@@ -196,6 +206,15 @@ export function renderPullRequestBody(body: PullRequestBody): string {
     });
   }
 
+  if (body.omittedFlags > 0) {
+    out.push(
+      `**${String(body.omittedFlags)} more flag(s) were left out** to keep this body under the ` +
+        'size limit. Nothing was dropped from the fixes above. Run `marlo fix` on the same ' +
+        'files to see every flag with its evidence.',
+    );
+    out.push('');
+  }
+
   out.push('## The accuracy these claims rest on');
   out.push('');
   out.push(
@@ -237,6 +256,15 @@ export function renderPullRequestBody(body: PullRequestBody): string {
   out.push(
     'Marlo opened this pull request and cannot merge it. It does not push to your default ' +
       'branch, force push, rewrite history, or deploy.',
+  );
+  out.push('');
+  // The last line names the instrument and the table, so a reader of the pull request
+  // alone can reproduce every number above.
+  out.push(
+    `Marlo ${body.marloVersion}, calibration table generated ${body.calibration.generated}` +
+      (body.calibration.commit === null
+        ? ', from an uncommitted tree.'
+        : ` at commit \`${body.calibration.commit}\`.`),
   );
 
   return `${out.join('\n')}\n`;
