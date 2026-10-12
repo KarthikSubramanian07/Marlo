@@ -143,8 +143,30 @@ export const FlagReason = z.enum([
   'verification-failed',
   /** The active renderer could not evaluate the rule, so a fix cannot be verified. */
   'renderer-cannot-verify',
+  /**
+   * Two verified fixes in the same file touch the same bytes. Neither is wrong on its
+   * own, and applying one would move the bytes the other was computed against, so the
+   * whole file is handed back rather than picking a winner.
+   */
+  'conflicting-edits',
 ]);
 export type FlagReason = z.infer<typeof FlagReason>;
+
+/**
+ * The measurement an auto-fix decision rested on.
+ *
+ * Strict precision and the number of decision-bearing official test cases it was
+ * computed over, next to the threshold they were compared with. A flag carries it when
+ * the reason is a threshold; a fix always carries it, so a reader can disagree with the
+ * number rather than with the decision.
+ */
+export const ThresholdEvidence = z.object({
+  strictPrecision: z.number().min(0).max(1).nullable(),
+  strictRecall: z.number().min(0).max(1).nullable(),
+  threshold: z.number().min(0).max(1),
+  sampleSize: z.number().int().nonnegative(),
+});
+export type ThresholdEvidence = z.infer<typeof ThresholdEvidence>;
 
 /**
  * A detected problem Marlo did not fix, with everything a human needs to decide.
@@ -167,15 +189,7 @@ export const Flag = z.object({
    * The measured values that made this a flag rather than a fix, when the reason
    * is a threshold. Null when the reason is categorical, like a design decision.
    */
-  thresholdEvidence: z
-    .object({
-      strictPrecision: z.number().min(0).max(1).nullable(),
-      strictRecall: z.number().min(0).max(1).nullable(),
-      threshold: z.number().min(0).max(1),
-      sampleSize: z.number().int().nonnegative(),
-    })
-    .nullable()
-    .default(null),
+  thresholdEvidence: ThresholdEvidence.nullable().default(null),
   /**
    * A repair Marlo generated but could not verify, kept so the reader can judge
    * it. Present only when reason is `verification-failed`. Never applied.
@@ -198,6 +212,16 @@ export const VerifiedFix = z.object({
   successCriteria: z.array(SuccessCriterion),
   edits: z.array(Edit).min(1),
   verification: Verification,
+  /**
+   * The measurement that admitted this fix through the gate. Required, with a measured
+   * precision at or above the threshold, so a fix for a rule below the gate has no
+   * representation either.
+   */
+  thresholdEvidence: ThresholdEvidence.extend({
+    strictPrecision: z.number().min(0).max(1),
+  }).refine((e) => e.strictPrecision >= e.threshold, {
+    message: 'a verified fix cannot rest on a precision below the threshold',
+  }),
   /** Where the change landed, for the pull request body. */
   ranges: z.array(SourceRange).min(1),
   /** One sentence for a reviewer who will not read the diff. */

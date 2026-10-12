@@ -139,6 +139,48 @@ export const ScanReport = z.object({
 export type ScanReport = z.infer<typeof ScanReport>;
 
 /**
+ * One file `marlo fix` worked on.
+ *
+ * `source` is the text every edit in `repairs` was computed against, carried so that a
+ * consumer can apply the edits itself and have the application refuse if the bytes do
+ * not match, rather than trusting offsets against a file it has to read separately.
+ */
+export const FixedFile = z.object({
+  /** The path the caller gave, verbatim. */
+  target: z.string().min(1),
+  source: z.string(),
+  repairs: z.array(Repair),
+  /** Whether the verified fixes were written back to the file. */
+  written: z.boolean(),
+});
+export type FixedFile = z.infer<typeof FixedFile>;
+
+/**
+ * What `marlo fix --json` prints. Validated the way `ScanReport` is, because a consumer
+ * (the pull request planner, for one) parses it at a trust boundary.
+ */
+export const FixReport = z.object({
+  schemaVersion: z.literal(1),
+  runId: RunId,
+  marloVersion: z.string().min(1),
+  startedAt: z.iso.datetime(),
+  calibration: z.object({
+    generated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    commit: z.string().nullable(),
+    corpusRetrieved: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  }),
+  engines: z.array(z.object({ id: EngineId, version: z.string().min(1) })),
+  renderer: RendererId,
+  coverage: Coverage,
+  files: z.array(FixedFile),
+  totals: z.object({
+    fixed: z.number().int().nonnegative(),
+    flagged: z.number().int().nonnegative(),
+  }),
+});
+export type FixReport = z.infer<typeof FixReport>;
+
+/**
  * The generated pull request body, as data rather than a string.
  *
  * Kept structured up to the last moment for two reasons. The template can then be
@@ -182,6 +224,17 @@ export const PullRequestBody = z.object({
 
   /** Success criteria touched, for a reader auditing against a specific one. */
   successCriteria: z.array(SuccessCriterion),
+
+  /** The Marlo that produced this, named on the last line next to the table it used. */
+  marloVersion: z.string().min(1),
+
+  /**
+   * How many flags were left out to keep the body under the size cap. The fixes section
+   * is never truncated: a change without its evidence is the artifact this project
+   * argues against, so the planner drops fixes from the plan before it drops their
+   * evidence from the body.
+   */
+  omittedFlags: z.number().int().nonnegative().default(0),
 });
 export type PullRequestBody = z.infer<typeof PullRequestBody>;
 
