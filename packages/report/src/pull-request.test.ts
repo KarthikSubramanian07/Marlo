@@ -80,6 +80,7 @@ const fix = (over: Partial<VerifiedFix> = {}): VerifiedFix => ({
     regressions: [],
     durationMs: 42,
   },
+  thresholdEvidence: { strictPrecision: 1, strictRecall: 0.94, threshold: 0.95, sampleSize: 17 },
   ranges: [{ file: 'checkout.html', start: 100, end: 108, line: 12, column: 4 }],
   summary: 'Adds the label the placeholder was standing in for.',
   howToReject: 'Delete this commit, or reply "reject e086e5" on this pull request.',
@@ -136,6 +137,7 @@ const body = (over: Partial<PullRequestBody> = {}): PullRequestBody =>
       permanently: 'Add the rule to marlo.config.json under never.',
     },
     successCriteria: ['1.3.1', '1.4.3', '4.1.2'],
+    marloVersion: '0.1.0',
     ...over,
   });
 
@@ -253,6 +255,52 @@ describe('the pull request body', () => {
     const rendered = renderPullRequestBody(body({ flags: [belowThreshold] }));
     expect(rendered).toContain('0.71');
     expect(rendered).toContain('0.95');
+  });
+
+  it('prints the precision and sample size each fix rested on', () => {
+    // The issue's test of the body: a reader has to be able to disagree with the number
+    // rather than with the decision, so the number is on the fix and not in a footnote.
+    const rendered = renderPullRequestBody(body());
+    const fixSection = rendered.slice(
+      rendered.indexOf('## What was fixed'),
+      rendered.indexOf('## What Marlo did not fix'),
+    );
+    expect(fixSection).toContain(
+      'strict precision 1.00 over 17 decision-bearing official test cases',
+    );
+    expect(fixSection).toContain('threshold of 0.95');
+  });
+
+  it('ends with the Marlo version and the calibration table it used', () => {
+    const rendered = renderPullRequestBody(body()).trimEnd().split('\n');
+    const last = rendered[rendered.length - 1] ?? '';
+    expect(last).toContain('Marlo 0.1.0');
+    expect(last).toContain('2026-07-30');
+    expect(last).toContain('abc1234');
+  });
+
+  it('says when the table came from an uncommitted tree rather than inventing a commit', () => {
+    const rendered = renderPullRequestBody(
+      body({
+        calibration: {
+          generated: '2026-07-30',
+          commit: null,
+          url: 'https://github.com/KarthikSubramanian07/Marlo/blob/main/calibration/table.json',
+        },
+      }),
+    );
+    expect(rendered).toContain('from an uncommitted tree');
+  });
+
+  it('says how many flags were left out, and only when some were', () => {
+    expect(renderPullRequestBody(body())).not.toContain('were left out');
+    const truncated = renderPullRequestBody(body({ omittedFlags: 12 }));
+    expect(truncated).toContain('**12 more flag(s) were left out**');
+    // The note sits after the flags that were kept and before the accuracy section.
+    expect(truncated.indexOf('were left out')).toBeGreaterThan(truncated.indexOf('afw4f7'));
+    expect(truncated.indexOf('were left out')).toBeLessThan(
+      truncated.indexOf('## The accuracy these claims rest on'),
+    );
   });
 
   it('shows an unverified repair as evidence without ever presenting it as applied', () => {
