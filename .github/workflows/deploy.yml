@@ -1,0 +1,74 @@
+name: Deploy the site
+
+# The site is generated from calibration/table.json, and HONESTY.md entry 13 records the
+# cost of publishing it by hand: the deployed pages served figures the repository had
+# already corrected. This workflow publishes on every push to main that touches anything
+# the site is built from, through the same script a maintainer runs locally, so the
+# deployed site cannot lag the committed table by more than one CI run.
+#
+# It needs two repository secrets, CLOUDFLARE_API_TOKEN (a token with Cloudflare Pages
+# edit permission on the account) and CLOUDFLARE_ACCOUNT_ID. Without them the job fails
+# and says so, rather than reporting a deploy that did not happen. SETUP.md has the steps.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/site/**'
+      - 'calibration/**'
+      - 'scripts/deploy.mjs'
+      - 'scripts/verify-site.mjs'
+      - 'README.md'
+      - 'HONESTY.md'
+      - 'DECISIONS.md'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build, check and publish trymarlo.pages.dev
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://trymarlo.pages.dev
+    steps:
+      - name: Refuse to run without the deployment credentials
+        env:
+          HAS_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+          HAS_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        run: |
+          set -euo pipefail
+          if [ "$HAS_TOKEN" != "true" ] || [ "$HAS_ACCOUNT" != "true" ]; then
+            echo "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are not both set as repository" >&2
+            echo "secrets, so the site was not deployed. SETUP.md describes how to add them." >&2
+            exit 1
+          fi
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build, run the site tests, deploy, then verify production
+        # The same script as `pnpm run deploy`. It rebuilds the site from the committed
+        # table, refuses to publish if the no-theatre tests fail, deploys, and then runs
+        # the production verifier against the live origin.
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/deploy.mjs
