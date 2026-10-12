@@ -109,6 +109,34 @@ jobs:
         # exists is worse than no check.
         run: node scripts/verify-act-corpus.mjs
 
+  calibration:
+    name: Published numbers match the harness
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Regenerate the table in memory and compare it to the committed one
+        # The committed calibration table is the artifact every published number reads
+        # from, and `--check` fails on a regression and on an unrecorded improvement
+        # alike. README.md and SETUP.md have described this as the CI gate since the
+        # table existed, and until this job nothing in CI invoked it: the table could
+        # drift from the harness and ten green checks would say nothing about it.
+        run: node packages/calibrate/dist/bin.js --check
+
   test:
     name: Test (node ${{ matrix.node }})
     runs-on: ubuntu-latest
