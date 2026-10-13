@@ -612,7 +612,7 @@
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
-              "axe-core@4.13.0",
+              "axe-core@4.14.0",
               "alfa@0.119.0",
               "htmlcs@2.5.1"
             ]
@@ -2056,7 +2056,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "image-alt",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2101,7 +2101,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "avoid-inline-spacing",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2442,7 +2442,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "aria-allowed-attr",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "alfa"
@@ -2623,7 +2623,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "aria-hidden-focus",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "sole-implementer",
             "agreed-by": [
               "marlo",
@@ -2711,7 +2711,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "svg-img-alt",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2755,7 +2755,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "object-alt",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2799,7 +2799,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "button-name",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2844,7 +2844,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "avoid-inline-spacing",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2888,7 +2888,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "color-contrast",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2933,7 +2933,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "meta-viewport",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3223,7 +3223,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "image-alt",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "alfa"
@@ -3277,7 +3277,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "link-name",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "alfa"
@@ -3331,7 +3331,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "frame-title",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3375,7 +3375,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "aria-input-field-name",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3420,7 +3420,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "label",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3465,7 +3465,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "label",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3510,7 +3510,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "label",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3705,7 +3705,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "empty-heading",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3796,7 +3796,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "html-lang-valid",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3846,7 +3846,7 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "valid-lang",
-            "engine-version": "4.13.0",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",

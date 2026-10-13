@@ -40,6 +40,8 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 **The published static figures did not move.** Precision 0.853, recall 0.640 and a false positive rate of 5.6% over 513 graded cases, exactly as before. Contrast needs layout, so the static renderer still reports both contrast rules as not evaluated, and the `23a2a8` correction touches no official case.
 
+**axe-core 4.14.0 and happy-dom 20.14.6 moved no accuracy figure** on either renderer. On the real pages axe-core 4.14.0 finishes the React documentation page that 4.13.0 errored on, so it covers 25 pages rather than 24.
+
 **The browser table is published for the first time**, in `calibration/browser.json` and [calibration/BROWSER.md](calibration/BROWSER.md), beside the headline rather than replacing it. 590 cases are graded there against 513 on the static renderer, because the layout cases become measurable.
 
 **The real-page block carries no accuracy figure**, because nobody has rated the pages yet. What it does carry moved once in this round: the `23a2a8` correction took Marlo's agreement with Alfa on that rule from a kappa of 0.55 to 1.0 and with axe-core from 0.50 to 0.67.
