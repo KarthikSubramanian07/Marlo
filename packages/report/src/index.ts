@@ -15,6 +15,8 @@
 
 export type { RuleVerdict } from './invariant.js';
 export { decideRule, invariantViolations } from './invariant.js';
+export type { UncoveredFailure } from './elements.js';
+export { attributeKey, elementKey, uncoveredPeerFailures } from './elements.js';
 export type { TerminalOptions } from './terminal.js';
 export { coverageLine, renderTerminal, shouldUseColour } from './terminal.js';
 export { pullRequestTitle, renderPullRequestBody } from './pull-request.js';

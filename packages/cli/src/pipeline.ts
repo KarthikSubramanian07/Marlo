@@ -14,7 +14,7 @@ import type { Renderer } from '@marlo/render';
 import { peerEngines } from '@marlo/engines';
 import { IMPLEMENTED_RULES } from '@marlo/rules';
 import { MarloEngine } from '@marlo/calibrate';
-import { decideRule } from '@marlo/report';
+import { decideRule, uncoveredPeerFailures } from '@marlo/report';
 
 /**
  * The scan pipeline: render, run every engine, route, apply the invariant, report.
@@ -138,45 +138,97 @@ export async function scan(options: ScanOptions): Promise<ScanReport> {
         if (verdict.outcome !== 'failed') continue;
 
         const published = findRule(actRuleId);
-        const entry = options.table.entries.find(
-          (e) => e.actRuleId === actRuleId && e.engine === verdict.reportedBy,
-        );
         const routed = options.table.routing.find((r) => r.actRuleId === actRuleId);
+
+        const confidenceOf = (engine: Finding['reportedBy']): Finding['confidence'] => {
+          const measured = options.table.entries.find(
+            (e) => e.actRuleId === actRuleId && e.engine === engine,
+          );
+          return {
+            source:
+              measured === undefined || measured.testCaseCount === 0
+                ? 'uncalibrated'
+                : 'calibrated',
+            precision: measured?.strict.precision ?? null,
+            recall: measured?.strict.recall ?? null,
+            sampleSize: measured?.testCaseCount ?? 0,
+            meetsAutoFixThreshold: engine === routed?.chosen && routed.autoFixPermitted,
+          };
+        };
+
+        const findingFor = (
+          engineVerdict: Finding['verdict'],
+          fields: Pick<Finding, 'reportedBy' | 'routingReason' | 'agreedBy' | 'disagreements'>,
+        ): Finding => ({
+          id: `${actRuleId}-${String(findings.filter((f) => f.actRuleId === actRuleId).length)}`,
+          actRuleId,
+          actRuleName: published?.name ?? actRuleId,
+          successCriteria: [...(published?.successCriteria ?? [])],
+          severity: severityOf(actRuleId),
+          ...fields,
+          verdict: engineVerdict,
+          confidence: confidenceOf(fields.reportedBy),
+          // Source location arrives with the repair layer. Null with a stated reason is
+          // the honest placeholder; a fabricated byte offset would not be.
+          source: null,
+          locationNote:
+            'Source location arrives with the repair layer. The selector above is where ' +
+            'the problem is in the rendered page.',
+          renderer: page.renderer,
+          help: engineVerdict.message,
+          helpUrl: `https://act-rules.github.io/rules/${actRuleId}`,
+        });
 
         // One finding per failing element, so a fix has somewhere to land.
         const source = verdict.evidence.find((r) => r.engine === verdict.reportedBy);
         const failing = (source?.verdicts ?? []).filter((v) => v.outcome === 'failed');
+        for (const engineVerdict of failing) {
+          findings.push(
+            findingFor(engineVerdict, {
+              reportedBy: verdict.reportedBy,
+              routingReason: verdict.routingReason,
+              agreedBy: [...verdict.agreedBy],
+              disagreements: [...verdict.disagreements],
+            }),
+          );
+        }
 
-        for (const [index, engineVerdict] of failing.entries()) {
-          findings.push({
-            id: `${actRuleId}-${String(index)}`,
-            actRuleId,
-            actRuleName: published?.name ?? actRuleId,
-            successCriteria: [...(published?.successCriteria ?? [])],
-            severity: severityOf(actRuleId),
-            reportedBy: verdict.reportedBy,
-            routingReason: verdict.routingReason,
-            verdict: engineVerdict,
-            agreedBy: [...verdict.agreedBy],
-            disagreements: [...verdict.disagreements],
-            confidence: {
-              source:
-                entry === undefined || entry.testCaseCount === 0 ? 'uncalibrated' : 'calibrated',
-              precision: entry?.strict.precision ?? null,
-              recall: entry?.strict.recall ?? null,
-              sampleSize: entry?.testCaseCount ?? 0,
-              meetsAutoFixThreshold: routed?.autoFixPermitted ?? false,
-            },
-            // Source location arrives with the repair layer. Null with a stated reason is
-            // the honest placeholder; a fabricated byte offset would not be.
-            source: null,
-            locationNote:
-              'Source location arrives with the repair layer. The selector above is where ' +
-              'the problem is in the rendered page.',
-            renderer: page.renderer,
-            help: engineVerdict.message,
-            helpUrl: `https://act-rules.github.io/rules/${actRuleId}`,
-          });
+        // The invariant, per element. A peer that failed an element the findings above do
+        // not include gets that element reported, attributed to the peer and routed as
+        // `invariant`, with the engines that judged it otherwise recorded as dissent.
+        const routedRecall =
+          routed?.chosen === null || routed?.chosen === undefined
+            ? null
+            : (options.table.entries.find(
+                (e) => e.actRuleId === actRuleId && e.engine === routed.chosen,
+              )?.strict.recall ?? null);
+        for (const uncovered of uncoveredPeerFailures(verdict.evidence, verdict.reportedBy)) {
+          const dissenter = uncovered.verdict.engine;
+          if (
+            !invariantEnforced.some(
+              (e) => e.actRuleId === actRuleId && e.dissentingEngine === dissenter,
+            )
+          ) {
+            invariantEnforced.push({
+              actRuleId,
+              dissentingEngine: dissenter,
+              chosenEngine: routed?.chosen ?? 'marlo',
+            });
+          }
+          findings.push(
+            findingFor(uncovered.verdict, {
+              reportedBy: dissenter,
+              routingReason: 'invariant',
+              agreedBy: [...uncovered.agreedBy],
+              disagreements: uncovered.dissent.map((d) => ({
+                engine: d.engine,
+                engineRuleId: d.engineRuleId,
+                outcome: d.outcome,
+                message: d.message,
+                chosenEngineStrictRecall: routedRecall,
+              })),
+            }),
+          );
         }
       }
 
