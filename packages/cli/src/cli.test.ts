@@ -8,6 +8,7 @@ import { StaticRenderer } from '@marlo/render';
 import { renderSarif, renderTerminal } from '@marlo/report';
 
 import { exitCodeFor, newRunId, scan } from './pipeline.js';
+import { TABLE_BY_RENDERER, calibrationTableFor, describeTableChoice } from './table.js';
 
 const ROOT = resolve(import.meta.dirname, '..', '..', '..');
 const table = CalibrationTable.parse(
@@ -413,13 +414,62 @@ describe('the marlo command', () => {
     expect(result.out).toContain('you decide:');
   }, 90_000);
 
-  it('rejects the browser renderer rather than silently using the static one', () => {
+  it('rejects a renderer it does not have rather than silently using the static one', () => {
     if (!built) return;
     // Silently downgrading would report layout rules as not evaluated while the caller
     // believed they had been checked.
-    const { code, err } = run(['scan', 'x.html', '--renderer', 'browser']);
+    const { code, err } = run(['scan', 'x.html', '--renderer', 'headless']);
     expect(code).toBe(EXIT_CODES.usage);
-    expect(err).toContain('not the same as passing');
+    expect(err).toContain('unknown renderer "headless"');
+  });
+
+  it('leaves the static terminal output without a table footer', () => {
+    if (!built) return;
+    // The footer belongs to the browser path, which has a choice of table. The static
+    // path has one, and its output is held byte for byte by the e2e golden files.
+    const file = resolve(ROOT, 'apps/demo/clean.html');
+    const { out } = run(['scan', file]);
+    expect(out).not.toContain('calibration table:');
+  }, 90_000);
+});
+
+describe('which calibration table a scan reads', () => {
+  it('reads the static table for the static renderer, whatever else exists', () => {
+    expect(calibrationTableFor('static', () => true)).toEqual({
+      relative: 'calibration/table.json',
+      fellBack: false,
+    });
+  });
+
+  it('reads the browser table for the browser renderer when it has been generated', () => {
+    const asked: string[] = [];
+    const choice = calibrationTableFor('browser', (relative) => {
+      asked.push(relative);
+      return true;
+    });
+    expect(choice).toEqual({ relative: 'calibration/browser.json', fellBack: false });
+    expect(asked).toEqual(['calibration/browser.json']);
+  });
+
+  it('falls back to the static table and says so when the browser table is absent', () => {
+    const choice = calibrationTableFor('browser', () => false);
+    expect(choice).toEqual({ relative: 'calibration/table.json', fellBack: true });
+    const line = describeTableChoice(choice);
+    expect(line).toContain('calibration/table.json');
+    expect(line).toContain('measured with the static renderer');
+    expect(line).toContain('no calibration/browser.json was found');
+  });
+
+  it('does not apologise when nothing fell back', () => {
+    const line = describeTableChoice({ relative: 'calibration/browser.json', fellBack: false });
+    expect(line).toBe('  calibration table: calibration/browser.json');
+  });
+
+  it('keeps the two file names where the harness writes them', () => {
+    expect(TABLE_BY_RENDERER).toEqual({
+      static: 'calibration/table.json',
+      browser: 'calibration/browser.json',
+    });
   });
 });
 

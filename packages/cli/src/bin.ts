@@ -1,14 +1,21 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { ActRuleId, EngineReport, FixedFile, Repair, ScanReport } from '@marlo/schema';
 import { CalibrationTable, EXIT_CODES, FixReport } from '@marlo/schema';
-import { StaticRenderer } from '@marlo/render';
+import type { Renderer } from '@marlo/render';
+import { BrowserRenderer, PlaywrightMissingError, StaticRenderer } from '@marlo/render';
 import { peerEngines } from '@marlo/engines';
 import { MarloEngine } from '@marlo/calibrate';
 import { renderSarif, renderTerminal, shouldUseColour } from '@marlo/report';
 import { repairFinding, repairedText } from '@marlo/repair';
 import { exitCodeFor, newRunId, scan } from './pipeline.js';
+import {
+  calibrationTableFor,
+  describeTableChoice,
+  type ScanRenderer,
+  type TableChoice,
+} from './table.js';
 
 /**
  * The `marlo` command.
@@ -65,8 +72,13 @@ OPTIONS
   --json              Machine-readable report on stdout, nothing else. For fix, the
                       FixReport: per file, the repairs and whether the file was written.
   --sarif             SARIF 2.1.0 on stdout, with per-engine provenance on every result.
-  --renderer <which>  static (default) or browser. The browser renderer adds layout and
-                      paint, which the contrast and focus rules need. It costs a Chromium.
+  --renderer <which>  static (default) or browser. The browser renderer runs every engine
+                      inside a real Chromium page, which adds layout and paint, so the
+                      contrast rules are evaluated rather than reported as not evaluated.
+                      It needs Playwright, which is optional:
+                        pnpm add -D playwright && pnpm exec playwright install chromium
+                      Confidence figures then come from calibration/browser.json, the
+                      table measured with that renderer, when it is present.
   --rule <act-id>     Evaluate one rule. Repeatable.
   --fail-on-skipped   Exit 3 when a rule could not be evaluated. Off by default, because
                       most callers want to know about findings first.
@@ -139,22 +151,44 @@ if (argv.length === 0 || argv.includes('-h') || argv.includes('--help')) {
   }
 }
 
-function loadTable(): CalibrationTable {
+/**
+ * Loads the calibration table matching the renderer, so the confidence figures printed
+ * were measured the way the scan was run. `table.ts` explains the choice.
+ */
+function loadTable(renderer: ScanRenderer = 'static'): {
+  table: CalibrationTable;
+  choice: TableChoice;
+} {
+  const choice = calibrationTableFor(renderer, (relative) => existsSync(resolve(ROOT, relative)));
   try {
-    return CalibrationTable.parse(
-      JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8')),
+    const table = CalibrationTable.parse(
+      JSON.parse(readFileSync(resolve(ROOT, choice.relative), 'utf8')),
     );
+    return { table, choice };
   } catch (error) {
     // Refusing to run is right. Every confidence figure Marlo prints comes from this
     // file, and a scan with no calibration data would be a scan with no accuracy claim
     // while looking exactly like one that had.
     fail(
-      'could not read calibration/table.json, so there is no accuracy data to report ' +
+      `could not read ${choice.relative}, so there is no accuracy data to report ` +
         `against.\n  Run \`pnpm calibrate\` to generate it.\n  ${
           error instanceof Error ? error.message : String(error)
         }`,
     );
   }
+}
+
+/** The renderer named on the command line, or the default. Refuses anything else. */
+function rendererFromArgs(): ScanRenderer {
+  const index = argv.indexOf('--renderer');
+  if (index === -1) return 'static';
+  const which = argv[index + 1];
+  if (which === 'browser' || which === 'static') return which;
+  fail(`unknown renderer "${which ?? ''}". Use static or browser.`);
+}
+
+function makeRenderer(id: ScanRenderer): Renderer {
+  return id === 'browser' ? new BrowserRenderer() : new StaticRenderer();
 }
 
 async function main(): Promise<void> {
@@ -188,7 +222,7 @@ async function main(): Promise<void> {
 
   switch (verb) {
     case 'coverage': {
-      const table = loadTable();
+      const { table } = loadTable();
       console.log(
         `${String(table.coverage.implemented)} of ${String(table.coverage.publishedActRules)} published ACT rules`,
       );
@@ -217,7 +251,7 @@ async function main(): Promise<void> {
     case 'explain': {
       const actRuleId = files[0] ?? rules[0];
       if (actRuleId === undefined) fail('explain needs an ACT rule id, for example b5c3f8');
-      const table = loadTable();
+      const { table } = loadTable();
       const entries = table.entries.filter(
         (e) => e.actRuleId === actRuleId && e.mappingKind !== 'none',
       );
@@ -253,29 +287,28 @@ async function main(): Promise<void> {
 
     case 'scan': {
       if (files.length === 0) fail('scan needs at least one file');
-      const table = loadTable();
+      const rendererId = rendererFromArgs();
+      const { table, choice } = loadTable(rendererId);
 
-      if (flags.has('--renderer') || argv.includes('--renderer')) {
-        const which = argv[argv.indexOf('--renderer') + 1];
-        if (which === 'browser') {
-          fail(
-            'the browser renderer needs Playwright and is wired up in the CLI in a later ' +
-              'branch. The static renderer reports layout-dependent rules as not evaluated, ' +
-              'which is not the same as passing them.',
-          );
-        }
-        if (which !== 'static') fail(`unknown renderer "${which ?? ''}". Use static.`);
+      const renderer = makeRenderer(rendererId);
+      let report;
+      try {
+        report = await scan({
+          targets: files.map((f) => ({ label: f, path: resolve(process.cwd(), f) })),
+          renderer,
+          table,
+          marloVersion: version(),
+          ...(rules.length === 0 ? {} : { rules }),
+        });
+      } catch (error) {
+        // The one failure a caller can fix from the message alone. It is a usage error:
+        // the browser renderer was asked for on a machine with no browser, and the error
+        // itself says how to install one or how to run without it.
+        if (error instanceof PlaywrightMissingError) fail(error.message);
+        throw error;
+      } finally {
+        await renderer.dispose();
       }
-
-      const renderer = new StaticRenderer();
-      const report = await scan({
-        targets: files.map((f) => ({ label: f, path: resolve(process.cwd(), f) })),
-        renderer,
-        table,
-        marloVersion: version(),
-        ...(rules.length === 0 ? {} : { rules }),
-      });
-      await renderer.dispose();
 
       if (flags.has('--json')) {
         console.log(JSON.stringify(report, null, 2));
@@ -286,6 +319,12 @@ async function main(): Promise<void> {
           ? false
           : shouldUseColour(process.env, process.stdout.isTTY);
         console.log(renderTerminal(report, { colour }));
+        // Which table the confidence figures above came from, on the browser path only.
+        // Printed here rather than inside renderTerminal, because the report itself does
+        // not record the file and adding a field to it would change every committed
+        // golden. The static path has one table and its output stays byte for byte as it
+        // was.
+        if (rendererId === 'browser') console.log(describeTableChoice(choice));
       }
 
       finish(exitCodeFor(report, flags.has('--fail-on-skipped')));
@@ -294,7 +333,7 @@ async function main(): Promise<void> {
 
     case 'fix': {
       if (files.length === 0) fail('fix needs at least one file');
-      const table = loadTable();
+      const { table } = loadTable();
       const renderer = new StaticRenderer();
       const write = flags.has('--write');
       const json = flags.has('--json');

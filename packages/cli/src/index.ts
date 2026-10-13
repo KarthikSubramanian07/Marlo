@@ -6,3 +6,5 @@
  */
 export type { ScanOptions, ScanTarget } from './pipeline.js';
 export { exitCodeFor, newRunId, scan } from './pipeline.js';
+export type { ScanRenderer, TableChoice } from './table.js';
+export { TABLE_BY_RENDERER, calibrationTableFor, describeTableChoice } from './table.js';
