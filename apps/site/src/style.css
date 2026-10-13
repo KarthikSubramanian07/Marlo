@@ -744,6 +744,7 @@ h3 {
 }
 
 .scroller + p,
+.scroller + .prose,
 .rowset + p,
 .grid + p,
 .terminal + p,
