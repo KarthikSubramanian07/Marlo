@@ -24,6 +24,7 @@ Nothing is published to a registry yet. There is no installable release, so ther
 ### Fixed
 
 - The invariant held for every rule and not for every element, so a field a peer failed could vanish when the routed engine failed other fields of the same rule. On the checkout demo that was the placeholder-only email input the README's sample output described. HONESTY.md entry 15.
+- On a page with shadow roots, Marlo's element rules answered as though the shadow content were absent, because its document view does not enter shadow trees. A failing contrast example whose only text is in a shadow root came back `inapplicable`, which the ACT protocol does not allow. Those rules now add a `cantTell` naming how many shadow roots went unexamined, and rules about the document itself are unaffected. In the browser table, `afw4f7` and `09o5cg` move from `partial` to `consistent` as a result, with no precision or recall changing.
 - `23a2a8` no longer reports inline `svg` images, which belong to `7d6734`. The official cases contain no `svg` with `role="img"`, so the published precision could not show it.
 - README.md and SETUP.md described `pnpm calibrate:check` as a CI gate that no job ran. HONESTY.md entry 14.
 - SECURITY.md described a branch protection warning and a test file that did not exist. HONESTY.md entry 16.
