@@ -50,6 +50,17 @@ export interface RealHarnessOptions {
 
 export interface RealHarnessResult {
   readonly block: RealCorpus;
+  /**
+   * Every page by every rule Marlo implements, with each claiming engine's outcome and the
+   * resolved answer where there is one. The block above keeps only totals; the analysis
+   * scores routing on these cells once people have rated them.
+   */
+  readonly cells: readonly {
+    readonly page: string;
+    readonly actRuleId: ActRuleId;
+    readonly truth: Outcome | undefined;
+    readonly actual: Readonly<Partial<Record<EngineId, Outcome | null>>>;
+  }[];
   /** Every evaluation that did not finish, so the caller can say which. */
   readonly errors: readonly {
     readonly page: string;
@@ -328,7 +339,21 @@ export async function runRealHarness(options: RealHarnessOptions): Promise<RealH
       ? { strictPrecision: null, strictRecall: null, falsePositiveRate: null, sampleSize: 0 }
       : aggregateStrictAccuracy(marloStrict);
 
+  const cells = corpus.pages.flatMap((page) =>
+    options.implementedRules.map((rule) => {
+      const actual: Partial<Record<EngineId, Outcome | null>> = {};
+      for (const engine of claimers(rule)) actual[engine] = outcomeOf(page, engine, rule);
+      return {
+        page: page.id,
+        actRuleId: rule,
+        truth: options.adjudication.resolved.get(cellKey(page.id, rule)),
+        actual,
+      };
+    }),
+  );
+
   return {
+    cells,
     errors,
     block: {
       retrieved: corpus.retrieved,

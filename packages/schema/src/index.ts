@@ -27,5 +27,6 @@ export * from './primitives.js';
 export * from './finding.js';
 export * from './repair.js';
 export * from './calibration.js';
+export * from './analysis.js';
 export * from './report.js';
 export * from './config.js';

@@ -262,6 +262,14 @@ describe('the invariant holds exhaustively', () => {
             }
             if (verdict.invariantEnforced) invariantFired += 1;
 
+            // And the converse, which calibration/analysis.json relies on when it measures
+            // what marlo scan reports as the union of the engines' failures: a rule is
+            // reported failed exactly when some engine failed it, and never otherwise.
+            expect(
+              verdict.outcome === 'failed',
+              `outcomes [${outcomes.join(', ')}] produced ${verdict.outcome}`,
+            ).toBe(anyFailed);
+
             expect(invariantViolations([verdict])).toEqual([]);
           }
         }

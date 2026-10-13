@@ -5,16 +5,22 @@ import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { Worker } from 'node:worker_threads';
 import type { RendererId } from '@marlo/schema';
-import { CalibrationTable } from '@marlo/schema';
+import { AnalysisReport, CalibrationTable } from '@marlo/schema';
 import type { Renderer } from '@marlo/render';
 import { BrowserRenderer, PlaywrightMissingError, StaticRenderer } from '@marlo/render';
 import type { Engine } from '@marlo/engines';
 import { peerEngines } from '@marlo/engines';
 import { IMPLEMENTED_RULES } from '@marlo/rules';
+import { analyse, collectCases, type RealPageCell } from './analysis.js';
 import { loadCorpus } from './corpus.js';
 import { MarloEngine } from './marlo-engine.js';
 import { runHarness } from './harness.js';
-import { findRealCorpusChanges, findRegressions, renderCalibrationMarkdown } from './publish.js';
+import {
+  findRealCorpusChanges,
+  findRegressions,
+  renderAnalysisMarkdown,
+  renderCalibrationMarkdown,
+} from './publish.js';
 import { loadAdjudication, loadRealCorpus } from './real-corpus.js';
 import { runRealHarness } from './real-harness.js';
 import { runWorker, type WorkerJob } from './real-pool.js';
@@ -56,9 +62,24 @@ const ROOT = resolve(import.meta.dirname, '..', '..', '..');
 type HarnessRenderer = Extract<RendererId, 'static' | 'browser'>;
 
 /** The files each renderer owns. */
-const OUTPUTS: Readonly<Record<HarnessRenderer, { table: string; markdown: string }>> = {
-  static: { table: 'calibration/table.json', markdown: 'calibration/README.md' },
-  browser: { table: 'calibration/browser.json', markdown: 'calibration/BROWSER.md' },
+const OUTPUTS: Readonly<
+  Record<
+    HarnessRenderer,
+    { table: string; markdown: string; analysis: string; analysisMarkdown: string }
+  >
+> = {
+  static: {
+    table: 'calibration/table.json',
+    markdown: 'calibration/README.md',
+    analysis: 'calibration/analysis.json',
+    analysisMarkdown: 'calibration/ANALYSIS.md',
+  },
+  browser: {
+    table: 'calibration/browser.json',
+    markdown: 'calibration/BROWSER.md',
+    analysis: 'calibration/analysis-browser.json',
+    analysisMarkdown: 'calibration/ANALYSIS-BROWSER.md',
+  },
 };
 
 function currentCommit(): string | null {
@@ -109,7 +130,7 @@ const REAL_PAGE_HEAP_MB = 4_096;
 async function measureRealPages(
   actOnly: CalibrationTable,
   engines: readonly Engine[],
-): Promise<CalibrationTable> {
+): Promise<{ table: CalibrationTable; cells: readonly RealPageCell[] }> {
   const real = loadRealCorpus(ROOT);
   const concurrency = Math.max(1, Math.min(4, availableParallelism() - 1));
   console.log(
@@ -117,7 +138,7 @@ async function measureRealPages(
       `${String(concurrency)} at a time, each capped at ${String(REAL_PAGE_TIMEOUT_MS / 1000)} s.`,
   );
   let logged = 0;
-  const { block, errors } = await runRealHarness({
+  const { block, errors, cells } = await runRealHarness({
     corpus: real,
     adjudication: loadAdjudication(ROOT),
     engines: engines.map((e) => ({ id: e.id, claimedRules: e.mapping.claimedRules })),
@@ -151,7 +172,7 @@ async function measureRealPages(
     `Real pages: ${String(adjudication.ratedCells)} of ${String(adjudication.totalCells)} cells rated, ` +
       `${String(adjudication.resolvedCells)} resolved (${adjudication.status}).`,
   );
-  return CalibrationTable.parse({ ...actOnly, realCorpus: block });
+  return { table: CalibrationTable.parse({ ...actOnly, realCorpus: block }), cells };
 }
 
 async function main(): Promise<number> {
@@ -183,6 +204,9 @@ async function main(): Promise<number> {
   );
 
   let lastLogged = 0;
+  // Every engine's graded outcome on every case, observed during the one harness pass, for
+  // the analysis. Single-rule runs skip it: an analysis of one rule is not the analysis.
+  const observations: Parameters<typeof collectCases>[0][number][] = [];
   let table: CalibrationTable;
   try {
     table = await runHarness({
@@ -193,6 +217,19 @@ async function main(): Promise<number> {
       autoFix: { minStrictPrecision: 0.95, minSampleSize: 6 },
       commit: currentCommit(),
       generated: generatedDate(checkOnly, committed),
+      ...(onlyRule === undefined
+        ? {
+            onCase: ({ actRuleId, engine, testCase, graded }) => {
+              observations.push({
+                actRuleId,
+                engine,
+                path: testCase.path,
+                expected: testCase.expected,
+                actual: graded.actual,
+              });
+            },
+          }
+        : {}),
       onProgress: (done, total) => {
         const percent = Math.floor((done / total) * 100);
         if (percent >= lastLogged + 10) {
@@ -214,10 +251,20 @@ async function main(): Promise<number> {
   // Validated before it is written or compared. An unvalidated table is how a published
   // error rate quietly becomes a different number.
   const actOnly = CalibrationTable.parse(table);
-  const validated =
+  const measured =
     onlyRule === undefined && rendererName === 'static'
       ? await measureRealPages(actOnly, engines)
-      : actOnly;
+      : { table: actOnly, cells: [] };
+  const validated = measured.table;
+  const analysis =
+    onlyRule === undefined
+      ? analyse({
+          table: validated,
+          cases: collectCases(observations),
+          implementedRules: IMPLEMENTED_RULES,
+          realCells: measured.cells,
+        })
+      : null;
 
   console.log('');
   console.log(
@@ -300,6 +347,28 @@ async function main(): Promise<number> {
 
     if (realChanges.length > 0) return 1;
 
+    // The analysis has no better or worse either: any figure in it that moved is a result
+    // to explain, so a regenerated analysis has to equal the committed one exactly, apart
+    // from the date and commit it records.
+    if (analysis !== null) {
+      const analysisPath = resolve(ROOT, outputs.analysis);
+      let committedAnalysis: AnalysisReport | null = null;
+      try {
+        committedAnalysis = AnalysisReport.parse(JSON.parse(readFileSync(analysisPath, 'utf8')));
+      } catch {
+        committedAnalysis = null;
+      }
+      const comparable = (a: AnalysisReport): string =>
+        JSON.stringify({ ...a, generated: null, commit: null });
+      if (committedAnalysis === null || comparable(committedAnalysis) !== comparable(analysis)) {
+        console.error(
+          `\n${outputs.analysis} ${committedAnalysis === null ? 'is missing or invalid' : 'does not match the harness'}. ` +
+            'Regenerate it with `pnpm calibrate` and say in the pull request which figure moved and why.\n',
+        );
+        return 1;
+      }
+    }
+
     console.log(
       rendererName === 'static'
         ? '\ncalibrate --check: no regression, and the real-page block did not move.'
@@ -311,6 +380,19 @@ async function main(): Promise<number> {
   writeFileSync(tablePath, `${JSON.stringify(validated, null, 2)}\n`, 'utf8');
   writeFileSync(markdownPath, renderCalibrationMarkdown(validated), 'utf8');
   console.log(`\nWrote ${outputs.table} and ${outputs.markdown}`);
+  if (analysis !== null) {
+    writeFileSync(
+      resolve(ROOT, outputs.analysis),
+      `${JSON.stringify(analysis, null, 2)}\n`,
+      'utf8',
+    );
+    writeFileSync(
+      resolve(ROOT, outputs.analysisMarkdown),
+      renderAnalysisMarkdown(analysis),
+      'utf8',
+    );
+    console.log(`Wrote ${outputs.analysis} and ${outputs.analysisMarkdown}`);
+  }
   return 0;
 }
 

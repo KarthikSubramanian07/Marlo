@@ -50,6 +50,18 @@ export interface HarnessOptions {
   /** ISO date. Passed in rather than read from the clock, so a run is reproducible. */
   readonly generated: string;
   readonly onProgress?: (done: number, total: number, label: string) => void;
+  /**
+   * Called once per engine per test case with the graded outcome, in corpus order. The
+   * table keeps only per-rule totals; an analysis that has to hold cases out, or compare
+   * engines case by case, needs the cases themselves. Observing them here means nothing is
+   * measured twice and the analysis cannot drift from what the table was built from.
+   */
+  readonly onCase?: (record: {
+    readonly actRuleId: ActRuleId;
+    readonly engine: EngineId;
+    readonly testCase: CorpusCase;
+    readonly graded: GradedCase;
+  }) => void;
 }
 
 /** One engine's graded results for one rule. */
@@ -319,6 +331,15 @@ export async function runHarness(options: HarnessOptions): Promise<CalibrationTa
       // `incorrect` and must stay so.
       const measurement = await measureRule(engine, actRuleId, cases, options);
       entries.push(entryFor(engine, actRuleId, measurement, cases.length));
+      // measureRule records exactly one graded entry per case, in case order.
+      if (options.onCase !== undefined) {
+        for (const [index, testCase] of cases.entries()) {
+          const graded = measurement.graded[index];
+          if (graded !== undefined) {
+            options.onCase({ actRuleId, engine: engine.id, testCase, graded });
+          }
+        }
+      }
       done += 1;
       options.onProgress?.(done, total, `${actRuleId} / ${engine.id}`);
     }
