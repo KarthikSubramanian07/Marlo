@@ -1,0 +1,73 @@
+name: Dogfood repair
+
+# Runs the Action's pull request mode against this repository's own demo pages, so the
+# whole loop (marlo fix --json, the planner, the GitHub client) is exercised against the
+# real API at least once by somebody other than a unit test.
+#
+# Dispatched by hand only. A scheduled run would open a pull request nobody asked for, which
+# is the behaviour D-011 exists to prevent. A second dispatch over the same content opens
+# nothing, because the branch name is a hash of the edits.
+#
+# Expected to fail one check, by design. This repository's DCO check refuses machine Author
+# emails and commits without a human sign-off, and the commit this opens is authored by
+# marlo[bot] with no sign-off. The pull request is evidence that the loop works, not a change
+# to merge: read it, then close it.
+
+on:
+  workflow_dispatch:
+
+# Exactly what the pull request mode requires and nothing more. check-scopes.mjs refuses the
+# run if either is missing or if anything broader is granted.
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: dogfood-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    name: Open a pull request of verified fixes to the demo pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The client commits through the API, so the job never pushes with git, and
+          # leaving the token out of the local git config keeps it that way.
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Fix the demo pages and open the pull request
+        id: marlo
+        uses: ./.github/actions/marlo
+        with:
+          files: 'apps/demo/checkout.html apps/demo/settings.html'
+          open-pull-request: 'true'
+          # The demo pages are built to fail. The scan still reports every finding; this
+          # keeps the job about whether the pull request was opened.
+          fail-on: 'never'
+
+      - name: Report
+        env:
+          PULL_REQUEST_URL: ${{ steps.marlo.outputs.pull-request-url }}
+          FIXES_APPLIED: ${{ steps.marlo.outputs.fixes-applied }}
+          FIXES_REFUSED: ${{ steps.marlo.outputs.fixes-refused }}
+        run: |
+          set -euo pipefail
+          echo "pull request: ${PULL_REQUEST_URL:-none}"
+          echo "fixes applied: ${FIXES_APPLIED}"
+          echo "fixes refused: ${FIXES_REFUSED}"
