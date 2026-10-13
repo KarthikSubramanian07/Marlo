@@ -86,4 +86,4 @@ Not a merge conflict to resolve. A result to investigate.
 
 ## What needs a person, not a script
 
-See [SETUP.md](SETUP.md#manual-steps-that-remain): the shorter domain if you want it, npm publication, and a language provider key if you ever want generated descriptions. Two more since then: the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets, without which the deploy workflow fails on purpose and the site is published by hand, and two people to rate the real pages.
+See [SETUP.md](SETUP.md#manual-steps-that-remain): the shorter domain if you want it, npm publication, and a language provider key if you ever want generated descriptions. One more since then: two people to rate the real pages. The site is published by hand with `pnpm run deploy`; there is no deploy workflow, because that would need Cloudflare credentials held as repository secrets.

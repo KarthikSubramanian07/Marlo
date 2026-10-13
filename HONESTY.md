@@ -240,7 +240,7 @@ The part that took the second attempt: a check like this is one reworded sentenc
 
 **Why this one belongs here rather than in the changelog.** Nothing crashed and no artifact was malformed. A reader who came to this repository for the one thing it promises, an accuracy figure it will not flatter, was handed a stale one by the paragraph explaining why it could be trusted. That is the shape this file exists for.
 
-**What is still open.** `.github/workflows/deploy.yml` now publishes the site on every push to main that touches it, through the same script, which refuses to deploy when the site tests fail and verifies production afterwards. It needs two Cloudflare secrets in the repository, and until they are added it fails on its first step with a message saying so, rather than reporting a deploy that did not happen. Until then the site is still published by hand, and can still lag main.
+**What is still open.** The site is still published by hand with `pnpm run deploy`, so it can lag main. The script refuses to deploy when the site tests fail and verifies production afterwards, so what is published is checked; when it is published is a person's decision. Publishing from CI would need Cloudflare credentials held as repository secrets, which the project has chosen not to hold.
 
 ---
 
