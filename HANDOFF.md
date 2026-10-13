@@ -15,6 +15,7 @@ Everything in this list runs with no API key and no network after `pnpm install`
 | Three peer engine adapters                                 | axe-core, Alfa, HTML CodeSniffer: in-process on the static renderer, inside the page on the browser renderer                              |
 | 41 of Marlo's own ACT rules                                | `packages/rules/src/registry.ts`                                                                                                          |
 | Contrast with a paint-order walk                           | `packages/rules/src/colour.ts` and `paint.ts`; declines with a named element wherever one ratio would be a guess                          |
+| The held-out analysis                                      | `calibration/analysis.json`: what the scan reports as a whole, routing left out one case at a time, Wilson intervals, checked in CI       |
 | The calibration tables                                     | `calibration/table.json` (static, the published headline) and `calibration/browser.json`; the static one is checked on every pull request |
 | A second corpus of real pages                              | 25 pages in `corpus/real`, digest-verified, measured separately, with a two-rater adjudication protocol and empty worksheets              |
 | Routing and the one-directional invariant                  | `packages/report/src/invariant.ts` per rule, 256-case exhaustive test; `elements.ts` per element, with property tests                     |

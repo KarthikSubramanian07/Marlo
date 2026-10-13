@@ -20,6 +20,8 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - Repair that opens a pull request ([#63](https://github.com/KarthikSubramanian07/Marlo/issues/63)). `marlo fix --json`, a pure planner whose branch name is derived from the edits so a second run opens nothing, a GitHub client that refuses to write to the default branch or force-update a ref, and an opt-in `open-pull-request` mode in the Action that requires exactly `contents: write` and `pull-requests: write`. The body carries the measurement and the three verification answers per fix, and the disqualifying number per refusal.
 - The one-directional invariant per element. A peer's failure on an element the routed engine passed is reported, attributed to the peer and marked as an invariant, and the terminal lists those elements first in their rule.
 - A required CI job runs `pnpm calibrate --check`.
+- `calibration/analysis.json` and `ANALYSIS.md`: what `marlo scan` reports measured as a whole, every engine alone, the routed engine in sample and leave one out, a majority of engines, Wilson intervals on every proportion, pairwise agreement between engines, the flattered column's sensitivity to its threshold, and the routing scored on rated real pages once any exist.
+- `node scripts/rate.mjs --rater A` (or `B`), a local interface for rating the real pages.
 
 ### Fixed
 
@@ -37,6 +39,10 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - Credit and authorship are written down: CONTRIBUTING.md, CREDITS.md, D-013, and the DCO check now also refuse machine Author emails and AI co-author trailers. Collaborators with write access who have no commits yet (including Aarush Chavali and Ishan Garg) are listed in CREDITS.md without inventing Git Authors.
 
 ### Accuracy
+
+**The headline now states what `marlo scan` reports: a false positive rate of 8.7%, not 5.6%.** Nothing got worse; the old figure measured a different thing. 5.6% is Marlo's own rule engine, one of four engines in the product. The product reports a failure whenever any engine does, and measured as a whole over the 41 rules it evaluates, its output has precision 0.831, recall 0.853 and a false positive rate of 8.7% (95% interval 6.3 to 12.0). HONESTY.md entry 17.
+
+**The routed engine's precision of 1.000 was in sample.** Recomputed leave one out, it is 0.933 with recall 0.737, below Alfa alone on both, with overlapping intervals, and holding one case out changes the router's choice on 16 of 709 cases. `calibration/analysis.json` publishes these and the other case-by-case figures with Wilson intervals, and `--check` compares them exactly.
 
 **The published static figures did not move.** Precision 0.853, recall 0.640 and a false positive rate of 5.6% over 513 graded cases, exactly as before. Contrast needs layout, so the static renderer still reports both contrast rules as not evaluated, and the `23a2a8` correction touches no official case.
 

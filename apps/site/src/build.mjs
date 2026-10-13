@@ -44,6 +44,12 @@ const REPO = 'https://github.com/KarthikSubramanian07/Marlo';
 const table = JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8'));
 // The same measurement inside Chromium. Published beside the headline, never in place of it.
 const browserTable = JSON.parse(readFileSync(resolve(ROOT, 'calibration/browser.json'), 'utf8'));
+// What marlo scan reports, measured as a whole, and the held-out routing figures. The
+// headline is this, not the rate of Marlo's own rule engine. HONESTY.md entry 17.
+const analysis = JSON.parse(readFileSync(resolve(ROOT, 'calibration/analysis.json'), 'utf8'));
+const scanScope = analysis.scopes.find((s) => s.id === 'scan');
+const strategyOf = (id) => scanScope.strategies.find((s) => s.id === id);
+const product = strategyOf('scan-output');
 const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus/act/MANIFEST.json'), 'utf8'));
 const recorded = readFileSync(resolve(HERE, 'recorded-scan.txt'), 'utf8').trimEnd();
 
@@ -132,12 +138,9 @@ const browserContrast = browserTable.entries.find(
   (e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo',
 );
 const real = table.realCorpus ?? null;
-const best = [...engines]
-  .filter((e) => e.precision !== null)
-  .sort((a, b) => b.precision - a.precision)[0];
 const flattered = table.entries.filter((e) => e.flatteredByProtocol);
 const flatteredMarlo = flattered.filter((e) => e.engine === 'marlo').length;
-const OG_ALT = `Marlo. False positive rate ${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}, measured and published.`;
+const OG_ALT = `Marlo. False positive rate ${num(product.falsePositiveRate.value, { as: 'percent', field: 'analysis.scan.scan-output.falsePositiveRate' })}, measured and published.`;
 const routedTo = (id) => table.routing.filter((r) => r.chosen === id).length;
 const autoFixable = table.routing.filter((r) => r.autoFixPermitted).length;
 const routedTotal = table.routing.filter((r) => r.chosen !== null).length;
@@ -456,9 +459,10 @@ pages.push({
   path: 'index.html',
   title: 'Marlo: an accessibility checker that publishes its own error rate',
   description:
-    `Marlo checks pages against the official ACT corpus, sends each rule to whichever engine ` +
-    `measures best at it, and publishes what it gets wrong. Its own false positive rate is ` +
-    `${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}. ` +
+    `Marlo checks pages against the official ACT corpus with four engines, reports every ` +
+    `failure any of them finds once with its provenance, and publishes what it gets wrong. ` +
+    `What it reports has a false positive rate of ` +
+    `${num(product.falsePositiveRate.value, { as: 'percent', field: 'analysis.scan.scan-output.falsePositiveRate' })}. ` +
     `${num(table.coverage.implemented, { field: 'coverage.implemented' })} of ` +
     `${num(table.coverage.publishedActRules, { field: 'coverage.publishedActRules' })} published ACT rules.`,
   body: `      <section class="hero hero--centred">
@@ -487,11 +491,14 @@ pages.push({
           <div class="split split--wide">
             <div class="headline-stat">
               <span class="eyebrow">Our false positive rate</span>
-              <span class="headline-stat__value">${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}</span>
+              <span class="headline-stat__value">${num(product.falsePositiveRate.value, { as: 'percent', field: 'analysis.scan.scan-output.falsePositiveRate' })}</span>
               <span class="headline-stat__label">
-                ${num(Math.round((marlo.falsePositiveRate / best.falsePositiveRate) * 10) / 10, { field: 'derived.marloVsBest' })}
-                times worse than ${escapeHtml(best.label)}. No vendor prints this, which is
-                exactly why it goes near the top.
+                What <code>marlo scan</code> reports, measured as a whole over
+                ${num(scanScope.rules, { field: 'analysis.scan.rules' })} rules. It reports a
+                failure whenever any of its four engines does, and that costs precision.
+                Marlo's own rule engine alone measures
+                ${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}.
+                No vendor prints either number, which is exactly why they go near the top.
               </span>
               <a class="textlink" href="/accuracy/" style="margin-top: 14px">
                 The whole table, per rule${ICON.arrow}
@@ -594,9 +601,10 @@ pages.push({
             <span class="eyebrow">How it works</span>
             <h2>Six stages, and stage five can override the other five</h2>
             <p>
-              Marlo routes. It does not pile four engines' output into one list and call the
-              pile thorough. Each rule is reported by whichever engine measured best at that
-              rule, and one stage is allowed to overrule the routing.
+              Marlo does not pile four engines' output into one list and call the pile
+              thorough. Every failure any engine finds is reported once, by the engine the
+              table routes the rule to, with that engine's evidence and measured accuracy,
+              and one stage forbids the routing from silencing anyone.
             </p>
           </div>
           <ol class="pipeline">
@@ -644,7 +652,9 @@ pages.push({
               <div>
                 <span class="stage__name">Route from the table</span>
                 <p class="stage__detail">
-                  Whichever engine measured best on a rule reports that rule.
+                  Whichever engine measured best on a rule reports that rule's findings, with
+                  its locator and confidence. Routing chooses provenance, not what is detected:
+                  held out, it is no more accurate than the best single engine.
                   ${num(routedTo('axe-core'), { field: 'routing.axe-core' })} go to axe-core,
                   ${num(routedTo('marlo'), { field: 'routing.marlo' })} to Marlo,
                   ${num(routedTo('alfa'), { field: 'routing.alfa' })} to Alfa, and
@@ -812,8 +822,9 @@ pages.push({
   description:
     `Precision, recall and false positive rate per engine over ` +
     `${num(table.corpus.testCases, { field: 'corpus.testCases' })} official ACT test cases. ` +
-    `Marlo's own false positive rate is ` +
-    `${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}, third of four.`,
+    `What marlo scan reports has a false positive rate of ` +
+    `${num(product.falsePositiveRate.value, { as: 'percent', field: 'analysis.scan.scan-output.falsePositiveRate' })}; ` +
+    `Marlo's own rule engine places third of four.`,
   body: `      <section class="hero">
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="wrap hero__inner">
@@ -850,6 +861,71 @@ pages.push({
               read as "cannot tell", and the adapter reads silence on a rule it claims as a
               pass. That inference is the weakest step in the whole engines package, and the
               table is where its cost shows.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">What the product reports</span>
+            <h2>Measured as a whole, and with the router held out</h2>
+            <p>
+              The router picks each rule's engine from the same grades the table publishes, so
+              scoring the routed engine on those cases grades it on its own answers. Here every
+              case is decided by the routing chosen without it, over the
+              ${num(scanScope.rules, { field: 'analysis.scan.rules' })} rules
+              <code>marlo scan</code> evaluates and
+              ${num(scanScope.cases, { field: 'analysis.scan.cases' })} official cases. The
+              ranges are 95% intervals.
+            </p>
+          </div>
+          <div class="scroller" role="region" aria-label="What marlo scan reports and routing held out, scrollable" tabindex="0">
+            <table>
+              <caption>Strict view: cantTell counts as no detection.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Strategy</th>
+                  <th scope="col">Precision</th>
+                  <th scope="col">Recall</th>
+                  <th scope="col">False positives</th>
+                </tr>
+              </thead>
+              <tbody>
+${[
+  'scan-output',
+  'routed-held-out',
+  'routed-in-sample',
+  'majority',
+  'single-alfa',
+  'single-axe-core',
+  'single-marlo',
+]
+  .map((id) => {
+    const st = strategyOf(id);
+    const range = (p, field, as) =>
+      `${num(p.value, { as, field: `${field}.value` })} <span class="dim">(${num(p.low, { as, field: `${field}.low` })} to ${num(p.high, { as, field: `${field}.high` })})</span>`;
+    return `                <tr${id === 'scan-output' ? ' class="is-marlo"' : ''}>
+                  <th scope="row">${escapeHtml(st.label)}</th>
+                  <td class="num">${range(st.precision, `analysis.scan.${id}.precision`, 'rate')}</td>
+                  <td class="num">${range(st.recall, `analysis.scan.${id}.recall`, 'rate')}</td>
+                  <td class="num">${range(st.falsePositiveRate, `analysis.scan.${id}.falsePositiveRate`, 'percent')}</td>
+                </tr>`;
+  })
+  .join('\n')}
+              </tbody>
+            </table>
+          </div>
+          <div class="prose stack">
+            <p>
+              The routed engine's perfect in-sample precision does not survive being held out,
+              and holding one case out changes the router's choice on
+              ${num(analysis.routingStability.casesWhereChoiceChanges, { field: 'analysis.routingStability.casesWhereChoiceChanges' })}
+              of ${num(analysis.routingStability.cases, { field: 'analysis.routingStability.cases' })}
+              cases. What the product reports is the union of its engines, because none may be
+              silenced: the highest recall here, at the cost printed in the first row. Routing
+              decides which engine's evidence a finding carries, not what is found.
             </p>
           </div>
         </div>
@@ -1565,7 +1641,7 @@ const OG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
   <rect x="84" y="78" width="14" height="14" fill="${BG}"/>
   <text x="126" y="95" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="30" font-weight="650" fill="${INK}">marlo</text>
   <text x="72" y="250" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="58" font-weight="600" fill="${INK}">Our false positive rate is</text>
-  <text x="72" y="394" font-family="JetBrains Mono, Menlo, DejaVu Sans Mono, monospace" font-size="146" font-weight="600" fill="${ACCENT}">${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}</text>
+  <text x="72" y="394" font-family="JetBrains Mono, Menlo, DejaVu Sans Mono, monospace" font-size="146" font-weight="600" fill="${ACCENT}">${num(product.falsePositiveRate.value, { as: 'percent', field: 'analysis.scan.scan-output.falsePositiveRate' })}</text>
   <text x="72" y="456" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="31" fill="${MUTED}">Measured over ${num(table.corpus.testCases, { field: 'corpus.testCases' })} official W3C test cases. Published anyway.</text>
   <text x="72" y="548" font-family="JetBrains Mono, Menlo, DejaVu Sans Mono, monospace" font-size="25" fill="${MUTED}">${num(table.coverage.implemented, { field: 'coverage.implemented' })} of ${num(table.coverage.publishedActRules, { field: 'coverage.publishedActRules' })} published ACT rules  ·  trymarlo.pages.dev</text>
   <rect x="0" y="618" width="1200" height="12" fill="${ACCENT}"/>
@@ -1686,5 +1762,5 @@ console.log(
   `  coverage ${String(table.coverage.implemented)} of ${String(table.coverage.publishedActRules)}`,
 );
 console.log(
-  `  marlo false positive rate ${marlo.falsePositiveRate === null ? 'not measured' : `${(marlo.falsePositiveRate * 100).toFixed(1)}%`}`,
+  `  marlo scan false positive rate ${(product.falsePositiveRate.value * 100).toFixed(1)}%, Marlo's own engine ${marlo.falsePositiveRate === null ? 'not measured' : `${(marlo.falsePositiveRate * 100).toFixed(1)}%`}`,
 );
