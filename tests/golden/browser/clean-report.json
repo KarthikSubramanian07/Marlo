@@ -1,0 +1,5290 @@
+{
+  "schemaVersion": 1,
+  "runId": "<run>",
+  "marloVersion": "0.1.0",
+  "startedAt": "<time>",
+  "calibration": {
+    "generated": "2026-10-13",
+    "commit": null,
+    "corpusRetrieved": "2026-07-29"
+  },
+  "engines": [
+    {
+      "id": "marlo",
+      "version": "0.1.0"
+    },
+    {
+      "id": "axe-core",
+      "version": "4.13.0"
+    },
+    {
+      "id": "alfa",
+      "version": "0.119.0"
+    },
+    {
+      "id": "htmlcs",
+      "version": "2.5.1"
+    }
+  ],
+  "pages": [
+    {
+      "target": "apps/demo/clean.html",
+      "renderer": "browser",
+      "capabilities": [
+        "dom",
+        "layout",
+        "paint",
+        "script"
+      ],
+      "findings": [],
+      "results": [
+        {
+          "actRuleId": "047fe0",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/047fe0",
+              "actRuleId": "047fe0",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "\"Order confirmed\" is a heading after the navigation, so a reader moving by heading lands on the content."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "09o5cg",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 238) on rgb(255, 255, 255), a contrast ratio of 9.40:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 238) on rgb(255, 255, 255), a contrast ratio of 9.40:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for large text at 32px, weight 700."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for large text at 24px, weight 700."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p>Your order will arrive on Tuesday. We will send an email when it ships.</p>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for large text at 24px, weight 700."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "li",
+                "snippet": "<li>14 Example Street</li>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "li",
+                "snippet": "<li>London</li>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"reference\">Order reference</label>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"notes\">Delivery notes</label>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"contact\">Contact by</label>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(239, 239, 239), a contrast ratio of 18.26:1, which meets the 7:1 required for regular text at 13.3333px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/09o5cg",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p>Marlo Example Shop</p>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 7:1 required for regular text at 16px, weight 400."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "23a2a8",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/23a2a8",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"logo.svg\" alt=\"Marlo\">",
+                "path": []
+              },
+              "message": "The image is named \"Marlo\"."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/23a2a8",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\">",
+                "path": []
+              },
+              "message": "The image is named \"A blue enamel kettle\"."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/23a2a8",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "The image is named \"Delivered\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "24afc2",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2779a5",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/2779a5",
+              "actRuleId": "2779a5",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "The page is titled \"Order confirmed\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "textarea#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/36b590",
+              "actRuleId": "36b590",
+              "outcome": "passed",
+              "target": {
+                "selector": "select#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "3ea0c8",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/3ea0c8",
+              "actRuleId": "3ea0c8",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "id=\"reference\" is unique."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/3ea0c8",
+              "actRuleId": "3ea0c8",
+              "outcome": "passed",
+              "target": {
+                "selector": "textarea#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "id=\"notes\" is unique."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/3ea0c8",
+              "actRuleId": "3ea0c8",
+              "outcome": "passed",
+              "target": {
+                "selector": "select#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "id=\"contact\" is unique."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "46ca7f",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/46ca7f",
+              "actRuleId": "46ca7f",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "The element is genuinely removed from the tree."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "4e8ab6",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "59796f",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5b7ae0",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5c01ea",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/5c01ea",
+              "actRuleId": "5c01ea",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/5c01ea",
+              "actRuleId": "5c01ea",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "Properties are permitted on role=\"img\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5f99a7",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/5f99a7",
+              "actRuleId": "5f99a7",
+              "outcome": "passed",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "Every aria- attribute is defined in ARIA 1.2."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/5f99a7",
+              "actRuleId": "5f99a7",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "Every aria- attribute is defined in ARIA 1.2."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "674b10",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/674b10",
+              "actRuleId": "674b10",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "role=\"img\" is a valid ARIA role."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6a7281",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/6a7281",
+              "actRuleId": "6a7281",
+              "outcome": "passed",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "Every ARIA value is valid for its attribute type."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/6a7281",
+              "actRuleId": "6a7281",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "Every ARIA value is valid for its attribute type."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6cfa84",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "78fd32",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "7d6734",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/7d6734",
+              "actRuleId": "7d6734",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "The svg is named \"Delivered\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "8fc3b6",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "97a4e1",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/97a4e1",
+              "actRuleId": "97a4e1",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "The button is named \"Save changes\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9e45ec",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9eb3f6",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/9eb3f6",
+              "actRuleId": "9eb3f6",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"logo.svg\" alt=\"Marlo\">",
+                "path": []
+              },
+              "message": "The alt text is not the filename."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/9eb3f6",
+              "actRuleId": "9eb3f6",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\">",
+                "path": []
+              },
+              "message": "The alt text is not the filename."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "afw4f7",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 238) on rgb(255, 255, 255), a contrast ratio of 9.40:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 238) on rgb(255, 255, 255), a contrast ratio of 9.40:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 3:1 required for large text at 32px, weight 700."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 3:1 required for large text at 24px, weight 700."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p>Your order will arrive on Tuesday. We will send an email when it ships.</p>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 3:1 required for large text at 24px, weight 700."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "li",
+                "snippet": "<li>14 Example Street</li>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "li",
+                "snippet": "<li>London</li>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"reference\">Order reference</label>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"notes\">Delivery notes</label>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"contact\">Contact by</label>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(239, 239, 239), a contrast ratio of 18.26:1, which meets the 4.5:1 required for regular text at 13.3333px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/afw4f7",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p>Marlo Example Shop</p>",
+                "path": []
+              },
+              "message": "This text is rgb(0, 0, 0) on rgb(255, 255, 255), a contrast ratio of 21.00:1, which meets the 4.5:1 required for regular text at 16px, weight 400."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b40fd1",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/b40fd1",
+              "actRuleId": "b40fd1",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "<main> is a main landmark starting after the navigation, so a screen reader user can jump straight to \"Order confirmed\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b4f0c3",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/b4f0c3",
+              "actRuleId": "b4f0c3",
+              "outcome": "passed",
+              "target": {
+                "selector": "meta",
+                "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+                "path": []
+              },
+              "message": "The viewport permits zooming to at least 200 percent."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b5c3f8",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/b5c3f8",
+              "actRuleId": "b5c3f8",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "The page declares lang=\"en\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc4a75",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc659a",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bf051a",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/bf051a",
+              "actRuleId": "bf051a",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "lang=\"en\" is a valid language tag."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bisz58",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "c487ae",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/c487ae",
+              "actRuleId": "c487ae",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"Marlo\"></a>",
+                "path": []
+              },
+              "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/c487ae",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "This link is named \"Orders\" via content."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/c487ae",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "This link is named \"Help\" via content."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cae760",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/cae760",
+              "actRuleId": "cae760",
+              "outcome": "passed",
+              "target": {
+                "selector": "iframe",
+                "snippet": "<iframe src=\"./receipt.html\" title=\"Your receipt\" width=\"300\" height=\"120\"></iframe>",
+                "path": []
+              },
+              "message": "This iframe is named \"Your receipt\" via title."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/cf77f2",
+              "actRuleId": "cf77f2",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "<main> is a main landmark starting after the navigation, so a screen reader user can jump straight to \"Order confirmed\". (b40fd1)"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "de46e4",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/de46e4",
+              "actRuleId": "de46e4",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "lang=\"fr\" is a valid language tag."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e086e5",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e086e5",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "The field is named \"Order reference\" via content."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e086e5",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "textarea#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "The field is named \"Delivery notes\" via content."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e086e5",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "select#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "The field is named \"Contact by\" via content."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e6952f",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "head",
+                "snippet": "<head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object.defineProperty;…",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "meta",
+                "snippet": "<meta charset=\"utf-8\">",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "meta",
+                "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "title",
+                "snippet": "<title>Order confirmed</title>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "script",
+                "snippet": "<script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object.defineProperty; var __getOwnPropDesc = Object.getOwnPropertyDescriptor; var __getOwnPropNames = Object.getOwnPropertyNames; var __hasOwnProp = Ob…",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "body",
+                "snippet": "<body> <header> <a href=\"/\"><img src=\"logo.svg\" alt=\"Marlo\"></a> <nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav> </header> <main> <h1>Order confirmed</h1> <h2>What happens next</h2> <p>Your order wil…",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "header",
+                "snippet": "<header> <a href=\"/\"><img src=\"logo.svg\" alt=\"Marlo\"></a> <nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav> </header>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"Marlo\"></a>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"logo.svg\" alt=\"Marlo\">",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "a",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "main",
+                "snippet": "<main> <h1>Order confirmed</h1> <h2>What happens next</h2> <p>Your order will arrive on Tuesday. We will send an email when it ships.</p> <img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\"> <!-- Decorative, and…",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p>Your order will arrive on Tuesday. We will send an email when it ships.</p>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\">",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "ul",
+                "snippet": "<ul> <li>14 Example Street</li> <li>London</li> </ul>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "li",
+                "snippet": "<li>14 Example Street</li>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "li",
+                "snippet": "<li>London</li>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "form",
+                "snippet": "<form action=\"/orders\" method=\"post\"> <label for=\"reference\">Order reference</label> <input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\"> <label for=\"notes\">Delivery notes</label> <textarea id=\"notes\" name=\"notes\" rows=\"3\">…",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"reference\">Order reference</label>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "input#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"notes\">Delivery notes</label>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "textarea#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "label",
+                "snippet": "<label for=\"contact\">Contact by</label>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "select#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "option",
+                "snippet": "<option value=\"email\">Email</option>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "option",
+                "snippet": "<option value=\"sms\">Text message</option>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "title",
+                "snippet": "<title>Delivered</title>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "path",
+                "snippet": "<path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "iframe",
+                "snippet": "<iframe src=\"./receipt.html\" title=\"Your receipt\" width=\"300\" height=\"120\"></iframe>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "footer",
+                "snippet": "<footer> <p>Marlo Example Shop</p> </footer>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "p",
+                "snippet": "<p>Marlo Example Shop</p>",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e88epe",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e88epe",
+              "actRuleId": "e88epe",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "img",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "This image is hidden from assistive technology (divider.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ff89c9",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ffd0e9",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/ffd0e9",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "The heading is named \"Order confirmed\"."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/ffd0e9",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "The heading is named \"What happens next\"."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/ffd0e9",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "The heading is named \"Delivery address\"."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "marlo",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/ye5d6e",
+              "actRuleId": "ye5d6e",
+              "outcome": "cantTell",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title>Order confirmed</title> <script type=\"text/javascript\">\"use strict\"; var MarloRules = (() => { var __defProp = Object…",
+                "path": []
+              },
+              "message": "No link skips the navigation, but <button> could move focus by script, which the DOM does not show. Activate it and see where focus lands."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "09o5cg",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href$=\"orders\"]",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href$=\"help\"]",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2:nth-child(2)",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "p:nth-child(3)",
+                "snippet": "<p>Your order will arrive on Tuesday. We will send an email when it ships.</p>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2:nth-child(6)",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "li:nth-child(1)",
+                "snippet": "<li>14 Example Street</li>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "li:nth-child(2)",
+                "snippet": "<li>London</li>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "label[for=\"reference\"]",
+                "snippet": "<label for=\"reference\">Order reference</label>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "label[for=\"notes\"]",
+                "snippet": "<label for=\"notes\">Delivery notes</label>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "label[for=\"contact\"]",
+                "snippet": "<label for=\"contact\">Contact by</label>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "p[lang=\"fr\"]",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast-enhanced",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "footer > p",
+                "snippet": "<p>Marlo Example Shop</p>",
+                "path": []
+              },
+              "message": "Elements must meet enhanced color contrast ratio thresholds"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "23a2a8",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "image-alt",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"logo.svg\"]",
+                "snippet": "<img src=\"logo.svg\" alt=\"Marlo\">",
+                "path": []
+              },
+              "message": "Images must have alternative text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "image-alt",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"product-8842.jpg\"]",
+                "snippet": "<img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\">",
+                "path": []
+              },
+              "message": "Images must have alternative text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "image-alt",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"divider.svg\"]",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "Images must have alternative text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "role-img-alt",
+              "actRuleId": "23a2a8",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "[role=\"img\"] and [role=\"image\"] elements must have alternative text"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "24afc2",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "avoid-inline-spacing",
+              "actRuleId": "24afc2",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Inline text spacing must be adjustable with custom stylesheets"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2779a5",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "document-title",
+              "actRuleId": "2779a5",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\">",
+                "path": []
+              },
+              "message": "Documents must have <title> element to aid in navigation"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "3ea0c8",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "duplicate-id-aria",
+              "actRuleId": "3ea0c8",
+              "outcome": "passed",
+              "target": {
+                "selector": "#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "IDs used in ARIA and labels must be unique"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "duplicate-id-aria",
+              "actRuleId": "3ea0c8",
+              "outcome": "passed",
+              "target": {
+                "selector": "#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "IDs used in ARIA and labels must be unique"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "duplicate-id-aria",
+              "actRuleId": "3ea0c8",
+              "outcome": "passed",
+              "target": {
+                "selector": "#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "IDs used in ARIA and labels must be unique"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "46ca7f",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "presentation-role-conflict",
+              "actRuleId": "46ca7f",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"divider.svg\"]",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "Elements marked as presentational should be consistently ignored"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "4e8ab6",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-required-attr",
+              "actRuleId": "4e8ab6",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "Required ARIA attributes must be provided"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "59796f",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "input-image-alt",
+              "actRuleId": "59796f",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Image buttons must have alternative text"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5b7ae0",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "html-xml-lang-mismatch",
+              "actRuleId": "5b7ae0",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML elements with lang and xml:lang must have the same base language"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5c01ea",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-allowed-attr",
+              "actRuleId": "5c01ea",
+              "outcome": "passed",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "Elements must only use supported ARIA attributes"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-allowed-attr",
+              "actRuleId": "5c01ea",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "Elements must only use supported ARIA attributes"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5f99a7",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-valid-attr",
+              "actRuleId": "5f99a7",
+              "outcome": "passed",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "ARIA attributes must conform to valid names"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-valid-attr",
+              "actRuleId": "5f99a7",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "ARIA attributes must conform to valid names"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "674b10",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-roles",
+              "actRuleId": "674b10",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "ARIA roles used must conform to valid values"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6a7281",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-valid-attr-value",
+              "actRuleId": "6a7281",
+              "outcome": "passed",
+              "target": {
+                "selector": "nav",
+                "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
+                "path": []
+              },
+              "message": "ARIA attributes must conform to valid values"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-valid-attr-value",
+              "actRuleId": "6a7281",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "ARIA attributes must conform to valid values"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6cfa84",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-hidden-focus",
+              "actRuleId": "6cfa84",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "ARIA hidden element must not be focusable or contain focusable elements"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "78fd32",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "avoid-inline-spacing",
+              "actRuleId": "78fd32",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Inline text spacing must be adjustable with custom stylesheets"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "7d6734",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "svg-img-alt",
+              "actRuleId": "7d6734",
+              "outcome": "passed",
+              "target": {
+                "selector": "svg",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "<svg> elements with an img or image role must have alternative text"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "8fc3b6",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "object-alt",
+              "actRuleId": "8fc3b6",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "<object> elements must have alternative text"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "97a4e1",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "button-name",
+              "actRuleId": "97a4e1",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "Buttons must have discernible text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-command-name",
+              "actRuleId": "97a4e1",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "ARIA commands must have an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9e45ec",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "avoid-inline-spacing",
+              "actRuleId": "9e45ec",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Inline text spacing must be adjustable with custom stylesheets"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9eb3f6",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "afw4f7",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href$=\"orders\"]",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href$=\"help\"]",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2:nth-child(2)",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "p:nth-child(3)",
+                "snippet": "<p>Your order will arrive on Tuesday. We will send an email when it ships.</p>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2:nth-child(6)",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "li:nth-child(1)",
+                "snippet": "<li>14 Example Street</li>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "li:nth-child(2)",
+                "snippet": "<li>London</li>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "label[for=\"reference\"]",
+                "snippet": "<label for=\"reference\">Order reference</label>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "label[for=\"notes\"]",
+                "snippet": "<label for=\"notes\">Delivery notes</label>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "label[for=\"contact\"]",
+                "snippet": "<label for=\"contact\">Contact by</label>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "button",
+                "snippet": "<button type=\"submit\">Save changes</button>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "p[lang=\"fr\"]",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "color-contrast",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "footer > p",
+                "snippet": "<p>Marlo Example Shop</p>",
+                "path": []
+              },
+              "message": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b40fd1",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "landmark-one-main",
+              "actRuleId": "b40fd1",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\">",
+                "path": []
+              },
+              "message": "Document should have one main landmark"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b4f0c3",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "meta-viewport",
+              "actRuleId": "b4f0c3",
+              "outcome": "passed",
+              "target": {
+                "selector": "meta[name=\"viewport\"]",
+                "snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+                "path": []
+              },
+              "message": "Zooming and scaling must not be disabled"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b5c3f8",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "html-has-lang",
+              "actRuleId": "b5c3f8",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\">",
+                "path": []
+              },
+              "message": "<html> element must have a lang attribute"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc4a75",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-required-children",
+              "actRuleId": "bc4a75",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Certain ARIA roles must contain particular children"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc659a",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "meta-refresh",
+              "actRuleId": "bc659a",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Delayed refresh under 20 hours must not be used"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bf051a",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "html-lang-valid",
+              "actRuleId": "bf051a",
+              "outcome": "passed",
+              "target": {
+                "selector": "html",
+                "snippet": "<html lang=\"en\">",
+                "path": []
+              },
+              "message": "<html> element must have a valid value for the lang attribute"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bisz58",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "meta-refresh",
+              "actRuleId": "bisz58",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Delayed refresh under 20 hours must not be used"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "c487ae",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "image-alt",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"logo.svg\"]",
+                "snippet": "<img src=\"logo.svg\" alt=\"Marlo\">",
+                "path": []
+              },
+              "message": "Images must have alternative text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "image-alt",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"product-8842.jpg\"]",
+                "snippet": "<img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\">",
+                "path": []
+              },
+              "message": "Images must have alternative text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "image-alt",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "img[src$=\"divider.svg\"]",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "Images must have alternative text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "link-name",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href=\"/\"]",
+                "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"Marlo\"></a>",
+                "path": []
+              },
+              "message": "Links must have discernible text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "link-name",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href$=\"orders\"]",
+                "snippet": "<a href=\"/orders\">Orders</a>",
+                "path": []
+              },
+              "message": "Links must have discernible text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "link-name",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "a[href$=\"help\"]",
+                "snippet": "<a href=\"/help\">Help</a>",
+                "path": []
+              },
+              "message": "Links must have discernible text"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "area-alt",
+              "actRuleId": "c487ae",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Active <area> elements must have alternative text"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cae760",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "frame-title",
+              "actRuleId": "cae760",
+              "outcome": "passed",
+              "target": {
+                "selector": "iframe",
+                "snippet": "<iframe src=\"./receipt.html\" title=\"Your receipt\" width=\"300\" height=\"120\"></iframe>",
+                "path": []
+              },
+              "message": "Frames must have an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "de46e4",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "valid-lang",
+              "actRuleId": "de46e4",
+              "outcome": "passed",
+              "target": {
+                "selector": "p[lang=\"fr\"]",
+                "snippet": "<p lang=\"fr\">Merci pour votre commande.</p>",
+                "path": []
+              },
+              "message": "lang attribute must have a valid value"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e086e5",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "label",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "#reference",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "Form elements must have labels"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "label",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "#notes",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "Form elements must have labels"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "select-name",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "#contact",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\">Email</option> <option value=\"sms\">Text message</option> </select>",
+                "path": []
+              },
+              "message": "Select element must have an accessible name"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-input-field-name",
+              "actRuleId": "e086e5",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "ARIA input fields must have an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e6952f",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e88epe",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ff89c9",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "aria-required-parent",
+              "actRuleId": "ff89c9",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Certain ARIA roles must be contained by particular parents"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ffd0e9",
+          "engine": "axe-core",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "empty-heading",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "h1",
+                "snippet": "<h1>Order confirmed</h1>",
+                "path": []
+              },
+              "message": "Headings should not be empty"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "empty-heading",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2:nth-child(2)",
+                "snippet": "<h2>What happens next</h2>",
+                "path": []
+              },
+              "message": "Headings should not be empty"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.13.0",
+              "engineRuleId": "empty-heading",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "h2:nth-child(6)",
+                "snippet": "<h2>Delivery address</h2>",
+                "path": []
+              },
+              "message": "Headings should not be empty"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "axe-core",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "09o5cg",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
+                "snippet": "Orders",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[2]/text()[1]",
+                "snippet": "Help",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]/text()[1]",
+                "snippet": "Order confirmed",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "snippet": "What happens next",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "snippet": "Your order will arrive on Tuesday. We will send an email when it ships.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[2]/text()[1]",
+                "snippet": "Delivery address",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]/li[1]/text()[1]",
+                "snippet": "14 Example Street",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]/li[2]/text()[1]",
+                "snippet": "London",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
+                "snippet": "Order reference",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[2]/text()[1]",
+                "snippet": "Delivery notes",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[3]/text()[1]",
+                "snippet": "Contact by",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]/option[1]/text()[1]",
+                "snippet": "Email",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]/option[2]/text()[1]",
+                "snippet": "Text message",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/button[1]/text()[1]",
+                "snippet": "Save changes",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 18.43:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/p[2]/text()[1]",
+                "snippet": "Merci pour votre commande.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/footer[1]/p[1]/text()[1]",
+                "snippet": "Marlo Example Shop",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "23a2a8",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r2",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/a[1]/img[1]",
+                "snippet": "<img src=\"logo.svg\" alt=\"Marlo\">",
+                "path": []
+              },
+              "message": "The image has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r2",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/img[1]",
+                "snippet": "<img src=\"product-8842.jpg\" alt=\"A blue enamel kettle\" width=\"120\" height=\"120\">",
+                "path": []
+              },
+              "message": "The image has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "24afc2",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r91",
+              "actRuleId": "24afc2",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r91"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2779a5",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r1",
+              "actRuleId": "2779a5",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /",
+                "snippet": "#document <!doctype html> <!-- The other half of the demo, and the reason it exists: an action or a scanner that only ever gets shown broken markup has never been tested for a false positive. Every rule Marlo implements either passes here …",
+                "path": []
+              },
+              "message": "The document has at least one `<title>` element; The first `<title>` element has text content"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "3ea0c8",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "46ca7f",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r86",
+              "actRuleId": "46ca7f",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/img[2]",
+                "snippet": "<img src=\"divider.svg\" alt=\"\">",
+                "path": []
+              },
+              "message": "The element is marked as decorative and is not exposed"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "4e8ab6",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r16",
+              "actRuleId": "4e8ab6",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title> Delivered </title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "The element has all required states and properties"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "59796f",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r28",
+              "actRuleId": "59796f",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r28"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5b7ae0",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5c01ea",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r18",
+              "actRuleId": "5c01ea",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/@aria-label",
+                "snippet": "aria-label=\"Primary\"",
+                "path": []
+              },
+              "message": "The attribute is allowed for the element on which it is specified; The attribute is not prohibited for the element on which it is specified"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r18",
+              "actRuleId": "5c01ea",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]/@aria-label",
+                "snippet": "aria-label=\"Delivered\"",
+                "path": []
+              },
+              "message": "The attribute is allowed for the element on which it is specified; The attribute is not prohibited for the element on which it is specified"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5f99a7",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r20",
+              "actRuleId": "5f99a7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/@aria-label",
+                "snippet": "aria-label=\"Primary\"",
+                "path": []
+              },
+              "message": "The attribute is defined"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r20",
+              "actRuleId": "5f99a7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]/@aria-label",
+                "snippet": "aria-label=\"Delivered\"",
+                "path": []
+              },
+              "message": "The attribute is defined"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "674b10",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r110",
+              "actRuleId": "674b10",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]/@role",
+                "snippet": "role=\"img\"",
+                "path": []
+              },
+              "message": "The element has a at least one valid role"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6a7281",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r19",
+              "actRuleId": "6a7281",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/@aria-label",
+                "snippet": "aria-label=\"Primary\"",
+                "path": []
+              },
+              "message": "The attribute has a valid value"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r19",
+              "actRuleId": "6a7281",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]/@aria-label",
+                "snippet": "aria-label=\"Delivered\"",
+                "path": []
+              },
+              "message": "The attribute has a valid value"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6cfa84",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r17",
+              "actRuleId": "6cfa84",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r17"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "78fd32",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r93",
+              "actRuleId": "78fd32",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r93"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "7d6734",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r43",
+              "actRuleId": "7d6734",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/svg[1]",
+                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title> Delivered </title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
+                "path": []
+              },
+              "message": "The `<svg>` element has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "8fc3b6",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r63",
+              "actRuleId": "8fc3b6",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r63"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "97a4e1",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r12",
+              "actRuleId": "97a4e1",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/button[1]",
+                "snippet": "<button type=\"submit\"> Save changes </button>",
+                "path": []
+              },
+              "message": "The button has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9e45ec",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r92",
+              "actRuleId": "9e45ec",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r92"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9eb3f6",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r39",
+              "actRuleId": "9eb3f6",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r39"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "afw4f7",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/text()[1]",
+                "snippet": "Orders",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[2]/text()[1]",
+                "snippet": "Help",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 9.4:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]/text()[1]",
+                "snippet": "Order confirmed",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]/text()[1]",
+                "snippet": "What happens next",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/p[1]/text()[1]",
+                "snippet": "Your order will arrive on Tuesday. We will send an email when it ships.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[2]/text()[1]",
+                "snippet": "Delivery address",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 3:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]/li[1]/text()[1]",
+                "snippet": "14 Example Street",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]/li[2]/text()[1]",
+                "snippet": "London",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
+                "snippet": "Order reference",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[2]/text()[1]",
+                "snippet": "Delivery notes",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[3]/text()[1]",
+                "snippet": "Contact by",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]/option[1]/text()[1]",
+                "snippet": "Email",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]/option[2]/text()[1]",
+                "snippet": "Text message",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/button[1]/text()[1]",
+                "snippet": "Save changes",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 18.43:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/p[2]/text()[1]",
+                "snippet": "Merci pour votre commande.",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/footer[1]/p[1]/text()[1]",
+                "snippet": "Marlo Example Shop",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b40fd1",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b4f0c3",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r47",
+              "actRuleId": "b4f0c3",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r47"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b5c3f8",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r4",
+              "actRuleId": "b5c3f8",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]",
+                "snippet": "<html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <title> Order confirmed </title> <script type=\"text/javascript\"> \"use strict\"; var MarloRules = (() => { var __defProp = Ob…",
+                "path": []
+              },
+              "message": "The `lang` attribute exists and is neither empty nor only whitespace"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc4a75",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r68",
+              "actRuleId": "bc4a75",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]",
+                "snippet": "<ul> <li> 14 Example Street </li> <li> London </li> </ul>",
+                "path": []
+              },
+              "message": "The element owns elements as required by its semantic role"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r68",
+              "actRuleId": "bc4a75",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\"> Email </option> <option value=\"sms\"> Text message </option> </select>",
+                "path": []
+              },
+              "message": "The element owns elements as required by its semantic role"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc659a",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r9",
+              "actRuleId": "bc659a",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r9"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bf051a",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r5",
+              "actRuleId": "bf051a",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/@lang",
+                "snippet": "lang=\"en\"",
+                "path": []
+              },
+              "message": "The `lang` attribute has a valid primary language tag"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bisz58",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r96",
+              "actRuleId": "bisz58",
+              "outcome": "inapplicable",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "Alfa sia-r96"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "c487ae",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r11",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/a[1]",
+                "snippet": "<a href=\"/\"> <img src=\"logo.svg\" alt=\"Marlo\"> </a>",
+                "path": []
+              },
+              "message": "The link has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r11",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]",
+                "snippet": "<a href=\"/orders\"> Orders </a>",
+                "path": []
+              },
+              "message": "The link has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r11",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[2]",
+                "snippet": "<a href=\"/help\"> Help </a>",
+                "path": []
+              },
+              "message": "The link has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cae760",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r13",
+              "actRuleId": "cae760",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/iframe[1]",
+                "snippet": "<iframe src=\"./receipt.html\" title=\"Your receipt\" width=\"300\" height=\"120\"> #document <html> <head></head> <body></body> </html> </iframe>",
+                "path": []
+              },
+              "message": "The `<iframe>` has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "de46e4",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r7",
+              "actRuleId": "de46e4",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/p[2]/@lang",
+                "snippet": "lang=\"fr\"",
+                "path": []
+              },
+              "message": "The `lang` attribute has a valid primary language subtag"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e086e5",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r8",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[1]",
+                "snippet": "<input type=\"text\" id=\"reference\" name=\"reference\" value=\"MRL-8842\">",
+                "path": []
+              },
+              "message": "The form field has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r8",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/textarea[1]",
+                "snippet": "<textarea id=\"notes\" name=\"notes\" rows=\"3\"></textarea>",
+                "path": []
+              },
+              "message": "The form field has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r8",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]",
+                "snippet": "<select id=\"contact\" name=\"contact\"> <option value=\"email\"> Email </option> <option value=\"sms\"> Text message </option> </select>",
+                "path": []
+              },
+              "message": "The form field has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e6952f",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e88epe",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ff89c9",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r42",
+              "actRuleId": "ff89c9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]/li[1]",
+                "snippet": "<li> 14 Example Street </li>",
+                "path": []
+              },
+              "message": "The element is owned by an element of its required context role"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r42",
+              "actRuleId": "ff89c9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/ul[1]/li[2]",
+                "snippet": "<li> London </li>",
+                "path": []
+              },
+              "message": "The element is owned by an element of its required context role"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r42",
+              "actRuleId": "ff89c9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]/option[1]",
+                "snippet": "<option value=\"email\"> Email </option>",
+                "path": []
+              },
+              "message": "The element is owned by an element of its required context role"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r42",
+              "actRuleId": "ff89c9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/select[1]/option[2]",
+                "snippet": "<option value=\"sms\"> Text message </option>",
+                "path": []
+              },
+              "message": "The element is owned by an element of its required context role"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ffd0e9",
+          "engine": "alfa",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r64",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h1[1]",
+                "snippet": "<h1> Order confirmed </h1>",
+                "path": []
+              },
+              "message": "The heading has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r64",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[1]",
+                "snippet": "<h2> What happens next </h2>",
+                "path": []
+              },
+              "message": "The heading has an accessible name"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r64",
+              "actRuleId": "ffd0e9",
+              "outcome": "passed",
+              "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/h2[2]",
+                "snippet": "<h2> Delivery address </h2>",
+                "path": []
+              },
+              "message": "The heading has an accessible name"
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "alfa",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "047fe0",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "09o5cg",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "1_4_6.G17.Fail",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "23a2a8",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "1_1_1.H37",
+              "actRuleId": "23a2a8",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "24afc2",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2779a5",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "2_4_2.H25.1.NoTitleEl",
+              "actRuleId": "2779a5",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "2ee8b8",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "36b590",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "3ea0c8",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "46ca7f",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "4e8ab6",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "59796f",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5b7ae0",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5c01ea",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "5f99a7",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "674b10",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6a7281",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "6cfa84",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "78fd32",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "7d6734",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "8fc3b6",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "97a4e1",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "4_1_2.H91.Button.Name",
+              "actRuleId": "97a4e1",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9e45ec",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "9eb3f6",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "afw4f7",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "1_4_3.G18.Fail",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b40fd1",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b4f0c3",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "b5c3f8",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "3_1_1.H57.2",
+              "actRuleId": "b5c3f8",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc4a75",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bc659a",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "2_2_1.F40.2",
+              "actRuleId": "bc659a",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bf051a",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "3_1_1.H57.3.Lang",
+              "actRuleId": "bf051a",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "bisz58",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "2_2_1.F41.2",
+              "actRuleId": "bisz58",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "c487ae",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "4_1_2.H91.A.NoContent",
+              "actRuleId": "c487ae",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cae760",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "cf77f2",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "de46e4",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e086e5",
+          "engine": "htmlcs",
+          "status": "ok",
+          "verdicts": [
+            {
+              "engine": "htmlcs",
+              "engineVersion": "2.5.1",
+              "engineRuleId": "4_1_2.H91.InputText.Name",
+              "actRuleId": "e086e5",
+              "outcome": "passed",
+              "target": {
+                "selector": ":root",
+                "snippet": "",
+                "path": []
+              },
+              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass."
+            }
+          ],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e6952f",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "e88epe",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ff89c9",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ffd0e9",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        },
+        {
+          "actRuleId": "ye5d6e",
+          "engine": "htmlcs",
+          "status": "unsupported",
+          "verdicts": [],
+          "error": null,
+          "missingCapabilities": [],
+          "durationMs": 0
+        }
+      ],
+      "durationMs": 0
+    }
+  ],
+  "repairs": [],
+  "coverage": {
+    "implemented": 41,
+    "publishedActRules": 94,
+    "calibrated": 41,
+    "unmeasurable": [],
+    "notEvaluated": []
+  },
+  "totals": {
+    "findings": 0,
+    "bySeverity": {
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "advisory": 0
+    },
+    "fixed": 0,
+    "flagged": 0,
+    "errored": 0,
+    "notEvaluated": 0,
+    "withheld": {
+      "count": 0,
+      "reason": null
+    }
+  },
+  "invariantEnforced": []
+}

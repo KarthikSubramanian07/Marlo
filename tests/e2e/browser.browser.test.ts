@@ -1,68 +1,87 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it } from 'vitest';
 import { CalibrationTable } from '@marlo/schema';
-import { BrowserRenderer, StaticRenderer } from '@marlo/render';
-import { peerEngines } from '@marlo/engines';
-import { MarloEngine } from '@marlo/calibrate';
-import { scan } from '@marlo/cli';
+import { BrowserRenderer } from '@marlo/render';
+import { renderSarif, renderTerminal } from '@marlo/report';
+import { calibrationTableFor, scan } from '@marlo/cli';
 
 /**
- * The browser renderer, and the gap this file was written to close and instead exposed.
+ * The whole pipeline through a real browser, compared to committed output.
  *
- * WHAT WAS EXPECTED
+ * The static path has `scan.e2e.test.ts` and `tests/golden`. This is the same test with
+ * the other renderer: the same demo pages go through Chromium, every engine is evaluated
+ * inside the page rather than beside it, and the output is committed under
+ * `tests/golden/browser`. A divergence between the two paths shows up as a diff between
+ * the two golden sets rather than as a mystery.
  *
- * The static path has committed golden output and a CI job; the browser path had neither, so the
- * claim that the same rule set produces genuine results under a real browser rested on manual
- * runs. This was meant to be a golden file for it.
+ * They are meant to diverge, and in one direction in particular. The two contrast rules
+ * are `unsupported` on the static renderer because contrast needs layout. Here they are
+ * evaluated, and the assertions below say so in both directions: nothing is reported as
+ * not evaluated, and every rule the demo page is built to break still fires.
  *
- * WHAT IS ACTUALLY TRUE
+ * An earlier version of this file asserted the opposite. No engine could evaluate a
+ * Playwright page, and the test wrote that limitation down so it was not folklore, with
+ * the comment that it would fail the day somebody made the browser path work. That is
+ * HONESTY.md entry 9, and this file is what replaced it when the day came.
  *
- * No engine can evaluate a Playwright page. Every adapter needs an in-process DOM window with an
- * `eval`, because that is how axe-core, Alfa and HTML CodeSniffer are run: their script is
- * evaluated inside the same JavaScript realm as the document. A Playwright page is a handle to a
- * document in a different process, and passing one to an adapter throws.
- *
- * So `BrowserRenderer` renders, and declares `layout` and `paint` truthfully about itself, and
- * nothing downstream can consume it. It is a rendering seam with no adapter behind it.
- *
- * HOW THE ARCHITECTURE HANDLES IT, WHICH IS THE GOOD NEWS
- *
- * `asWindow` in `@marlo/engines` was written for precisely this, and the two engine families deal
- * with it differently. Both are correct.
- *
- * The peer adapters catch it and report `status: 'error'` per rule, carrying the explanation
- * verbatim. `error` is never a pass anywhere in this codebase, so the pipeline reports "13 rules
- * threw" rather than a clean page, which is the same mechanism that made the HTML CodeSniffer
- * crash loud rather than silent.
- *
- * `MarloEngine` validates the handle before it returns a promise, so it throws synchronously.
- *
- * WHY IT WENT UNNOTICED ANYWAY
- *
- * That guard had never once been reached. `marlo scan --renderer browser` refuses before it gets
- * there, and no test had ever asked for it. A guard nothing reaches protects nothing, and a
- * limitation nobody wrote down is indistinguishable from a limitation that is not there.
- *
- * This file writes it down, and it fails the moment somebody makes the browser path work, which
- * is the point.
- *
- * The remaining work is in issue #37: run each engine inside the page rather than beside it. That
- * is what `pnpm screenshots` already does for axe-core, and doing it for four engines needs a
- * bundle step for each.
+ * The golden files are committed. Run with UPDATE_GOLDEN=1 to rewrite them, then read the
+ * diff before you commit it. This project needs Playwright and a built tree: the Alfa and
+ * Marlo bundles come from `pnpm build`, and without them those two adapters report every
+ * rule as errored, which the first assertion catches.
  */
 
 const ROOT = resolve(import.meta.dirname, '..', '..');
+const GOLDEN = resolve(ROOT, 'tests/golden/browser');
+const UPDATE = process.env['UPDATE_GOLDEN'] === '1';
+
+const choice = calibrationTableFor('browser', (relative) => existsSync(resolve(ROOT, relative)));
 const table = CalibrationTable.parse(
-  JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8')),
+  JSON.parse(readFileSync(resolve(ROOT, choice.relative), 'utf8')),
 );
-const CHECKOUT = resolve(ROOT, 'apps/demo/checkout.html');
 
-let renderer: BrowserRenderer;
+/** The same four fields `scan.e2e.test.ts` replaces, for the same reason. */
+function stabilise(text: string): string {
+  return text
+    .replace(/"runId": "[0-9a-f]+"/g, '"runId": "<run>"')
+    .replace(/"startedAt": "[^"]+"/g, '"startedAt": "<time>"')
+    .replace(/"startTimeUtc": "[^"]+"/g, '"startTimeUtc": "<time>"')
+    .replace(/"durationMs": \d+/g, '"durationMs": 0');
+}
 
-beforeAll(() => {
-  renderer = new BrowserRenderer();
-});
+function golden(name: string, actual: string): void {
+  mkdirSync(GOLDEN, { recursive: true });
+  const path = resolve(GOLDEN, name);
+  if (UPDATE || !existsSync(path)) {
+    writeFileSync(path, actual, 'utf8');
+    return;
+  }
+  expect(
+    actual,
+    `browser/${name} differs. Run UPDATE_GOLDEN=1 pnpm test:browser and read the diff.`,
+  ).toBe(readFileSync(path, 'utf8'));
+}
+
+const renderer = new BrowserRenderer();
+
+async function scanWith(targets: readonly string[]): ReturnType<typeof scan> {
+  try {
+    return await scan({
+      targets: targets.map((t) => ({ label: t, path: resolve(ROOT, t) })),
+      renderer,
+      table,
+      marloVersion: '0.1.0',
+    });
+  } catch (error) {
+    // A failure here is a failed file, and the browser has to go down with it or the
+    // worker hangs on an open Chromium.
+    await renderer.dispose();
+    throw error;
+  }
+}
+
+const report = await scanWith(['apps/demo/checkout.html', 'apps/demo/settings.html']);
+const clean = await scanWith(['apps/demo/clean.html']);
 
 afterAll(async () => {
   await renderer.dispose();
@@ -70,129 +89,137 @@ afterAll(async () => {
   await renderer.dispose();
 });
 
-describe('what the browser renderer can do', () => {
-  it('renders a real file and declares the two capabilities the static path lacks', async () => {
-    const page = await renderer.render({ path: CHECKOUT });
-    try {
-      expect(page.renderer).toBe('browser');
-      expect(page.capabilities).toContain('dom');
-      expect(page.capabilities).toContain('script');
-      // The two the contrast and focus rules need, and the reason this renderer exists.
-      expect(page.capabilities).toContain('layout');
-      expect(page.capabilities).toContain('paint');
-    } finally {
-      await page.close();
-    }
-  }, 180_000);
+const expected = JSON.parse(readFileSync(resolve(ROOT, 'apps/demo/expected.json'), 'utf8')) as {
+  mustFail: Record<string, string>;
+  mustNotEvaluate: Record<string, string>;
+};
 
-  it('resolves a style the static renderer cannot compute at all', async () => {
-    // Proof the `layout` capability is about something real rather than a label. The demo page
-    // sets letter-spacing in em, which a Node DOM returns as the string it was given and a real
-    // browser resolves to pixels.
-    //
-    // The handle is a Playwright Page. The seam deliberately types it as `unknown`, because the
-    // whole point of the capability model is that a consumer asks what a renderer can do rather
-    // than what it is, and a test reaching through it has to say so.
-    const page = await renderer.render({ path: CHECKOUT });
-    try {
-      const handle = page.handle as { evaluate: (fn: string) => Promise<unknown> };
-      const resolved = String(
-        await handle.evaluate(`getComputedStyle(document.querySelector('p[style]')).letterSpacing`),
-      );
-      expect(resolved).not.toBe('');
-      expect(
-        resolved,
-        'a resolved letter-spacing is in pixels, not the em it was written in',
-      ).toMatch(/px$/);
-    } finally {
-      await page.close();
-    }
-  }, 180_000);
-});
-
-describe('what the browser renderer cannot do yet, stated so it is not folklore', () => {
-  it('cannot be evaluated by any engine, and no engine reports a pass', async () => {
-    const page = await renderer.render({ path: CHECKOUT });
-    try {
-      for (const engine of [new MarloEngine(), ...peerEngines()]) {
-        // Two honest shapes, and the assertion is the same for both: nothing comes back as a
-        // verdict. MarloEngine throws before it returns a promise. The peer adapters catch the
-        // guard and report status 'error' per rule, which is never a pass anywhere, so the
-        // pipeline says the rules threw rather than that the page is clean.
-        //
-        // What must never happen is a report full of inapplicable or passed, which is what
-        // `asWindow` exists to prevent and what this asserts it prevents.
-        let thrown: string | null = null;
-        let report: Awaited<ReturnType<typeof engine.evaluate>> | null = null;
-        try {
-          report = await engine.evaluate(page, ['b5c3f8', 'e086e5', '97a4e1']);
-        } catch (error) {
-          thrown = error instanceof Error ? error.message : String(error);
-        }
-
-        if (thrown !== null) {
-          expect(thrown, `${engine.id} failed without saying why`).toMatch(/DOM window/i);
-          continue;
-        }
-
-        expect(report, `${engine.id} returned nothing at all`).not.toBeNull();
-        for (const result of report?.results ?? []) {
-          expect(
-            result.status,
-            `${engine.id} reported ${result.actRuleId} as ${result.status} against a page it ` +
-              'cannot read',
-          ).toBe('error');
-          expect(
-            result.verdicts,
-            `${engine.id} produced a verdict it could not have earned`,
-          ).toEqual([]);
-          expect(result.error ?? '', `${engine.id} errored without saying why`).toMatch(
-            /DOM window/i,
-          );
-        }
-      }
-    } finally {
-      await page.close();
-    }
-  }, 180_000);
-
-  it('makes the whole pipeline fail rather than report a clean page', async () => {
-    // The assertion that matters most. If this ever starts passing without the engines being
-    // reworked, something has begun swallowing the error above, and a swallowed error here means
-    // Marlo reports a page with 34 findings as having none.
-    await expect(
-      scan({
-        targets: [{ label: 'apps/demo/checkout.html', path: CHECKOUT }],
-        renderer,
-        table,
-        marloVersion: '0.1.0',
-      }),
-    ).rejects.toThrow();
-  }, 180_000);
-
-  it('is not reachable from the command line, so nobody meets this by accident', () => {
-    // `marlo scan --renderer browser` refuses with an explanation. That refusal is why the guard
-    // above had never been reached in the first place.
-    const bin = readFileSync(resolve(ROOT, 'packages/cli/src/bin.ts'), 'utf8');
-    expect(bin).toContain('the browser renderer needs Playwright');
+describe('the pipeline through a real browser', () => {
+  it('reads the table measured with the same renderer', () => {
+    // A browser scan with the static table's confidence figures would attach a
+    // measurement to findings that measurement never covered. The browser table is
+    // committed, so the fallback is a defect here rather than a convenience.
+    expect(choice.fellBack, 'calibration/browser.json is missing').toBe(false);
+    expect(table.renderer).toBe('browser');
   });
 
-  it('leaves the static renderer as the only one that produces a report', async () => {
-    // The honest fallback, and the reason none of the above is a live defect for a user: the
-    // default path works, and the rules that need layout are reported as not evaluated rather
-    // than as passing.
-    const staticRenderer = new StaticRenderer();
-    try {
-      const report = await scan({
-        targets: [{ label: 'apps/demo/checkout.html', path: CHECKOUT }],
-        renderer: staticRenderer,
-        table,
-        marloVersion: '0.1.0',
-      });
-      expect(report.pages[0]?.findings.length).toBeGreaterThan(0);
-      expect(report.coverage.notEvaluated.length).toBeGreaterThan(0);
-    } finally {
-      await staticRenderer.dispose();
+  it('declares every capability on every page', () => {
+    for (const page of report.pages) {
+      expect(page.renderer).toBe('browser');
+      expect(page.capabilities).toEqual(['dom', 'layout', 'paint', 'script']);
     }
-  }, 180_000);
+  });
+
+  it('crashes nowhere, in any of the four engines', () => {
+    // The assertion that would have caught every adapter handed a handle it could not
+    // read, which is what every adapter was until this path existed. It also catches a
+    // missing bundle: the Alfa and Marlo adapters report an error naming `pnpm build`.
+    const errored = report.pages
+      .flatMap((p) => p.results)
+      .filter((r) => r.status === 'error')
+      .map((r) => `${r.actRuleId} (${r.engine}): ${r.error ?? ''}`);
+    expect(errored).toEqual([]);
+  });
+
+  it('finds a violation for every rule the demo page is built to break', () => {
+    const fired = new Set(report.pages.flatMap((p) => p.findings.map((f) => f.actRuleId)));
+    const missing = Object.keys(expected.mustFail).filter((id) => !fired.has(id));
+    expect(
+      missing,
+      `apps/demo has defects for these rules and nothing reported them: ${missing.join(' ')}`,
+    ).toEqual([]);
+  });
+
+  it('evaluates the layout rules instead of declining them', () => {
+    // The point of the renderer. On the static path these two are the `mustNotEvaluate`
+    // set; here nothing is not evaluated, and Marlo's own engine returns a verdict for
+    // each rather than `unsupported`. What verdict it returns is measured, not asserted:
+    // the calibration table under calibration/browser.json records it.
+    expect(report.coverage.notEvaluated).toEqual([]);
+    expect(report.totals.notEvaluated).toBe(0);
+    for (const id of Object.keys(expected.mustNotEvaluate)) {
+      const marlo = report.pages
+        .flatMap((p) => p.results)
+        .filter((r) => r.engine === 'marlo' && r.actRuleId === id);
+      expect(marlo.length, `${id} has no Marlo result`).toBeGreaterThan(0);
+      for (const result of marlo) {
+        expect(result.status, `${id} on the browser renderer`).toBe('ok');
+        expect(result.missingCapabilities).toEqual([]);
+      }
+    }
+  });
+
+  it('never reports clean where a peer engine reported a failure', () => {
+    // The one-directional invariant, on real markup, with every engine evaluated.
+    for (const page of report.pages) {
+      const failedByAnyone = new Set(
+        page.results
+          .filter((r) => r.status === 'ok' && r.verdicts.some((v) => v.outcome === 'failed'))
+          .map((r) => r.actRuleId),
+      );
+      const reported = new Set(page.findings.map((f) => f.actRuleId));
+      const swallowed = [...failedByAnyone].filter((id) => !reported.has(id));
+      expect(swallowed, `${page.target}: a peer failure went unreported`).toEqual([]);
+    }
+  });
+
+  it('keeps a selector and a snippet on every verdict that crossed out of the page', () => {
+    // The serialisation boundary is part of the contract. A finding that lost its
+    // selector on the way out of the page is a finding a developer cannot act on.
+    for (const result of report.pages.flatMap((p) => p.results)) {
+      for (const verdict of result.verdicts) {
+        expect(verdict.target.selector, `${result.engine} ${result.actRuleId}`).not.toBe('');
+        if (verdict.outcome === 'failed') {
+          expect(
+            verdict.target.selector,
+            `${result.engine} ${result.actRuleId} failed with no location`,
+          ).not.toBe(':root');
+        }
+      }
+    }
+  });
+});
+
+describe('the page with nothing wrong with it, through a real browser', () => {
+  it('reports nothing, and this time has nothing left unchecked', () => {
+    const findings = clean.pages.flatMap((p) => p.findings);
+    expect(
+      findings.map((f) => `${f.actRuleId} ${f.reportedBy} ${f.verdict.target.selector}`),
+      'a false positive on the clean page',
+    ).toEqual([]);
+
+    // On the static path zero findings is only honest alongside the two rules that could
+    // not be evaluated. Here every rule was evaluated, so the not-evaluated list is empty
+    // and the terminal output does not have to warn about it.
+    expect(clean.coverage.notEvaluated).toEqual([]);
+    expect(renderTerminal(clean, { colour: false })).toContain('no findings');
+
+    const errored = clean.pages.flatMap((p) => p.results).filter((r) => r.status === 'error');
+    expect(errored).toEqual([]);
+  });
+});
+
+describe('the committed browser output', () => {
+  it('matches the terminal golden file', () => {
+    golden('checkout-terminal.txt', `${stabilise(renderTerminal(report, { colour: false }))}\n`);
+  });
+
+  it('matches the SARIF golden file', () => {
+    const sarif = stabilise(renderSarif(report));
+    golden('checkout-sarif.json', sarif);
+    const parsed = JSON.parse(sarif) as { version: string; runs: { results: unknown[] }[] };
+    expect(parsed.version).toBe('2.1.0');
+    expect(parsed.runs[0]?.results.length).toBeGreaterThan(0);
+  });
+
+  it('matches the JSON report golden file', () => {
+    golden('checkout-report.json', `${stabilise(JSON.stringify(report, null, 2))}\n`);
+  });
+
+  it('matches the clean page golden file', () => {
+    // The static path has no golden for the clean page. This one is worth having,
+    // because the clean page is where a false positive from a newly evaluated layout
+    // rule would show up first.
+    golden('clean-report.json', `${stabilise(JSON.stringify(clean, null, 2))}\n`);
+  });
 });
