@@ -22,7 +22,9 @@
  *
  * `requires` is honest. The contrast rules declare `layout` and `paint`, so under the
  * default renderer they report `unsupported` instead of a verdict computed from styles
- * that were never resolved.
+ * that were never resolved. With layout present they compute a ratio through the
+ * paint-order walk in `paint.ts`, and answer `cantTell` with a named element wherever
+ * the walk cannot conclude.
  */
 
 export type { Box, ComputedStyle, MarloAttribute, MarloDocument, MarloElement } from './dom.js';
@@ -42,6 +44,19 @@ export {
 
 export type { AccessibleName, NameConfidence } from './accname.js';
 export { accessibleName, hasEmptyAccessibleName } from './accname.js';
+
+export type { ParsedColour, Rgba } from './colour.js';
+export {
+  contrastRatio,
+  formatColour,
+  isLargeText,
+  over,
+  parseColour,
+  relativeLuminance,
+} from './colour.js';
+
+export type { ContrastApplicability, ContrastMeasurement } from './paint.js';
+export { contrastApplicability, describeElement, measureContrast } from './paint.js';
 
 export type { MarloRule, RuleTarget, RuleVerdict } from './define.js';
 export { defineRule } from './define.js';
