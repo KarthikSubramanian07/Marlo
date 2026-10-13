@@ -1,15 +1,17 @@
 # Marlo
 
-**Our false positive rate is 5.6%. Here is how we measured it, and why we are printing it.**
+**Our false positive rate is 8.7%. Here is how we measured it, and why we are printing it.**
 
 [![CI](https://github.com/KarthikSubramanian07/Marlo/actions/workflows/ci.yml/badge.svg)](https://github.com/KarthikSubramanian07/Marlo/actions/workflows/ci.yml)
 [![coverage: 41 of 94 ACT rules](https://img.shields.io/badge/ACT_rules-41_of_94-c9f227?labelColor=0a0c09)](calibration/README.md)
-[![false positive rate: 5.6%](https://img.shields.io/badge/false_positives-5.6%25-ff6b5e?labelColor=0a0c09)](calibration/README.md)
+[![false positive rate: 8.7%](https://img.shields.io/badge/false_positives-8.7%25-ff6b5e?labelColor=0a0c09)](calibration/ANALYSIS.md)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-9aa38f?labelColor=0a0c09)](LICENSE)
 
 Every accessibility tool claims to be accurate. Not one of them will tell you how often it is wrong.
 
-Marlo will. It checks pages against the [official W3C ACT rule corpus](https://act-rules.github.io), then measures itself against that same corpus and commits the result to this repository. The numbers are regenerated in CI on every push. When one gets worse, the build fails.
+Marlo will. It checks pages against the [official W3C ACT rule corpus](https://act-rules.github.io), then measures itself against that same corpus and commits the result to this repository. The numbers are regenerated in CI on every push. When one moves and nobody said why, the build fails.
+
+That figure is what `marlo scan` reports, measured as a whole over the 41 rules it evaluates. Until recently this line printed 5.6%, which is the rate of Marlo's own rule engine, one component of the product. The product reports a failure whenever any of its four engines does, and that costs precision. [HONESTY.md entry 17](HONESTY.md#17-the-front-page-measured-a-component-and-the-routing-was-graded-on-its-own-answers).
 
 **[trymarlo.pages.dev](https://trymarlo.pages.dev)** · [the numbers](calibration/README.md) · [where Marlo was wrong](HONESTY.md)
 
@@ -29,6 +31,28 @@ Four engines, 513 official test case outcomes, one code path, no exemptions.
 Marlo is third of four. Alfa and axe-core are both more precise and more sensitive, and the router sends 18 rules to axe-core against 20 to Marlo's own engine.
 
 Nobody edited that. Marlo's engine goes through the same harness, on the same corpus, with no special case, because a table where the author's own engine happened to win would be worth exactly nothing. That is [D-008](DECISIONS.md#d-008), and it is the reason to believe any other number here.
+
+### What the product reports, and what routing does on cases it has not seen
+
+The table grades each engine on each rule. The router picks an engine per rule from those same grades, so scoring "the engine the router picked" on those cases is grading it on its own answers. [calibration/ANALYSIS.md](calibration/ANALYSIS.md) scores everything case by case instead, over the 41 rules `marlo scan` evaluates and 568 official cases, with each routing decision recomputed without the case being scored. Every figure carries a 95% Wilson interval.
+
+| Over what marlo scan evaluates | Precision              | Recall                 | False positives    |
+| ------------------------------ | ---------------------- | ---------------------- | ------------------ |
+| What marlo scan reports        | 0.831 (0.772 to 0.877) | 0.853 (0.795 to 0.896) | 8.7% (6.3 to 12.0) |
+| Routed engine, leave one out   | 0.933 (0.882 to 0.963) | 0.737 (0.670 to 0.794) | 2.6% (1.4 to 4.8)  |
+| Routed engine, in sample       | 1.000 (0.974 to 1.000) | 0.763 (0.698 to 0.818) | 0.0% (0.0 to 1.0)  |
+| Majority of engines            | 0.931 (0.877 to 0.962) | 0.705 (0.637 to 0.765) | 2.6% (1.4 to 4.8)  |
+| Alfa alone                     | 0.960 (0.915 to 0.981) | 0.753 (0.687 to 0.809) | 1.6% (0.7 to 3.4)  |
+| axe-core alone                 | 0.954 (0.904 to 0.979) | 0.658 (0.588 to 0.722) | 1.6% (0.7 to 3.4)  |
+| Marlo alone                    | 0.853 (0.781 to 0.904) | 0.579 (0.508 to 0.647) | 5.0% (3.2 to 7.7)  |
+
+Three things this says, and none of them flatters the design.
+
+**The routed engine's perfect precision was an artifact.** Held out, it falls to 0.933, and holding a single case out changes the router's choice on 16 of 709 cases. Routed this way, it scores below running Alfa everywhere on both precision and recall, though the intervals overlap.
+
+**The product detects the union.** Because no engine may be silenced, a rule fails whenever any engine fails it, which gives the highest recall here and the highest false positive rate apart from HTML CodeSniffer alone. That trade is deliberate: a violation one engine can see is a violation, and the cost of reporting it is printed above rather than hidden.
+
+**What routing buys is not accuracy.** It decides which engine's evidence, locator and measured confidence a finding carries, so each failure is reported once with provenance, and it decides what a clean result rests on. Whether routing could also raise accuracy is an open question this table cannot answer; scoring it on the real pages, once they are rated, is the test.
 
 ### The same corpus, inside a real browser
 
@@ -162,11 +186,11 @@ flowchart LR
 
 The two accented boxes are the seams, and the thick one is the rule that can override everything upstream of it.
 
-**Marlo routes. It does not pile findings up and call the pile thorough.**
+**Marlo reports every engine's failures once, with provenance. It does not pile them up and call the pile thorough.**
 
-There was a project that integrated ten engines and around a thousand rules. Published at SIGACCESS, adopted inside a Fortune 50 company, reached almost nobody. The research it cites explains why: accessibility engines find largely _disjoint_ issue sets with poor agreement, so unioning them raises recall and buries the signal. Hand somebody ten engines' output and you have given them a triage problem, which is worse than the detection problem they started with.
+There was a project that integrated ten engines and around a thousand rules. Published at SIGACCESS, adopted inside a Fortune 50 company, reached almost nobody. The research it cites explains why: accessibility engines find largely _disjoint_ issue sets with poor agreement, and handing somebody ten engines' raw output gives them a triage problem, which is worse than the detection problem they started with.
 
-So the calibration table decides which engine reports each rule, and you get one finding with provenance attached. [D-003](DECISIONS.md#d-003).
+Marlo's detection is still the union of its engines, because the rule below forbids silencing any of them, and the measured cost of that is the 8.7% at the top of this page. What it does instead of piling is deduplicate: the calibration table decides which engine reports each rule, a failure is listed once against the element it names, and every finding carries the engine that reported it, the engines that agreed or dissented, and that engine's measured accuracy on the rule. [D-003](DECISIONS.md#d-003).
 
 **Routing decides who speaks. It does not let anyone silence a peer.** If any engine reports a failure, Marlo may not report clean. It can dissent, on the record, with the disagreeing engine named.
 
@@ -283,14 +307,14 @@ A rule that measures badly still gets merged. It is published with its real numb
 
 ## Reading order, if you have twenty minutes
 
-|                                                |                                                                                  |
-| ---------------------------------------------- | -------------------------------------------------------------------------------- |
-| [RESEARCH.md](RESEARCH.md)                     | What was measured before any code was written, and the eight things it rules out |
-| [DECISIONS.md](DECISIONS.md)                   | Thirteen decisions, each stating what would make it wrong                        |
-| [HONESTY.md](HONESTY.md)                       | Sixteen entries. Every defect found during the build, with what reported success |
-| [calibration/README.md](calibration/README.md) | The generated table, per rule, per engine                                        |
-| [ARCHITECTURE.md](ARCHITECTURE.md)             | How a page moves through the pipeline                                            |
-| [HANDOFF.md](HANDOFF.md)                       | What is real, what is stubbed, what is deferred, and the traps                   |
+|                                                |                                                                                    |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [RESEARCH.md](RESEARCH.md)                     | What was measured before any code was written, and the eight things it rules out   |
+| [DECISIONS.md](DECISIONS.md)                   | Thirteen decisions, each stating what would make it wrong                          |
+| [HONESTY.md](HONESTY.md)                       | Seventeen entries. Every defect found during the build, with what reported success |
+| [calibration/README.md](calibration/README.md) | The generated table, per rule, per engine                                          |
+| [ARCHITECTURE.md](ARCHITECTURE.md)             | How a page moves through the pipeline                                              |
+| [HANDOFF.md](HANDOFF.md)                       | What is real, what is stubbed, what is deferred, and the traps                     |
 
 `HONESTY.md` existed before the product did. It is not a postmortem, it is a design constraint: a project whose claim is "we tell you when we are wrong" needs somewhere to write that down before it has anything to be wrong about.
 

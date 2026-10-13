@@ -56,6 +56,9 @@ const ROOT = resolve(import.meta.dirname, '..');
 const readme = readFileSync(resolve(ROOT, 'README.md'), 'utf8');
 const table = JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8'));
 const browser = JSON.parse(readFileSync(resolve(ROOT, 'calibration/browser.json'), 'utf8'));
+const analysis = JSON.parse(readFileSync(resolve(ROOT, 'calibration/analysis.json'), 'utf8'));
+const scanScope = analysis.scopes.find((scope) => scope.id === 'scan');
+const scanOutput = scanScope?.strategies.find((strategy) => strategy.id === 'scan-output');
 const golden = readFileSync(resolve(ROOT, 'tests/golden/checkout-terminal.txt'), 'utf8');
 const codemodSource = readFileSync(resolve(ROOT, 'packages/repair/src/codemod.ts'), 'utf8');
 
@@ -74,6 +77,10 @@ function section(from, to) {
 
 const STATIC_SECTION = section(
   '## The table nobody else publishes',
+  '### The same corpus, inside a real browser',
+);
+const HELD_OUT_SECTION = section(
+  '### What the product reports, and what routing does on cases it has not seen',
   '### The same corpus, inside a real browser',
 );
 const BROWSER_SECTION = section(
@@ -155,19 +162,47 @@ const NUMBER_WORDS = [
 
 const marlo = pooled('marlo');
 
-// The first line of the repository, and the badge that repeats it.
+// The first line of the repository, and the badge that repeats it. They state what
+// marlo scan reports, measured as a whole in calibration/analysis.json, not the rate of
+// Marlo's own rule engine, which is one component of it. HONESTY.md entry 17.
+const headline = scanOutput?.falsePositiveRate?.value ?? null;
 expect(
   'headline false positive rate',
   claim('headline false positive rate', /Our false positive rate is ([\d.]+%)\./g)?.map(
     (m) => m[1],
   ),
-  percent(marlo.falsePositiveRate),
+  percent(headline),
 );
 expect(
   'false positive badge',
   claim('false positive badge', /false_positives-([\d.]+)%25-/g)?.map((m) => `${m[1]}%`),
+  percent(headline),
+);
+expect(
+  'headline scope',
+  claim('headline scope', /measured as a whole over the (\d+) rules it evaluates/g)?.map(
+    (m) => m[1],
+  ),
+  String(scanScope?.rules ?? 'missing'),
+);
+expect(
+  'engine rate beside the headline',
+  claim('engine rate beside the headline', /which is the rate of Marlo's own rule engine/g)?.map(
+    () => percent(marlo.falsePositiveRate),
+  ),
   percent(marlo.falsePositiveRate),
 );
+{
+  const said = claim('previous headline', /Until recently this line printed ([\d.]+%)/g);
+  if (said !== null) {
+    expect(
+      'previous headline',
+      said.map((m) => m[1]),
+      percent(marlo.falsePositiveRate),
+    );
+  }
+}
+
 expect(
   'coverage badge',
   claim('coverage badge', /ACT_rules-(\d+)_of_(\d+)-/g)?.map((m) => `${m[1]} of ${m[2]}`),
@@ -235,6 +270,105 @@ function checkEngineTable(name, text, source, labelSuffix) {
     `${name}: Marlo's rank`,
     claim(`${name}: Marlo's rank`, /(first|second|third|fourth) of four/g, text)?.map((m) => m[1]),
     ORDINALS[order.indexOf('marlo')],
+  );
+}
+
+// The held-out table, every cell against calibration/analysis.json.
+{
+  const interval = (p, asPercent) =>
+    p === null || p === undefined
+      ? 'not measured'
+      : asPercent
+        ? `${(p.value * 100).toFixed(1)}% (${(p.low * 100).toFixed(1)} to ${(p.high * 100).toFixed(1)})`
+        : `${p.value.toFixed(3)} (${p.low.toFixed(3)} to ${p.high.toFixed(3)})`;
+  const ROWS = {
+    'What marlo scan reports': 'scan-output',
+    'Routed engine, leave one out': 'routed-held-out',
+    'Routed engine, in sample': 'routed-in-sample',
+    'Majority of engines': 'majority',
+    'Alfa alone': 'single-alfa',
+    'axe-core alone': 'single-axe-core',
+    'Marlo alone': 'single-marlo',
+  };
+  const cell = '([\\d.]+%? \\([\\d.]+ to [\\d.]+\\)|not measured)';
+  for (const [label, id] of Object.entries(ROWS)) {
+    const row = claim(
+      `held-out table: ${label}`,
+      new RegExp(
+        `\\|\\s*${label}\\s*\\|\\s*${cell}\\s*\\|\\s*${cell}\\s*\\|\\s*${cell}\\s*\\|`,
+        'g',
+      ),
+      HELD_OUT_SECTION,
+    );
+    const strategy = scanScope?.strategies.find((x) => x.id === id);
+    if (row === null) continue;
+    if (strategy === undefined) {
+      problems.push(`held-out table: ${label} has no strategy ${id} in calibration/analysis.json`);
+      continue;
+    }
+    expect(
+      `held-out ${label} precision`,
+      row.map((m) => m[1]),
+      interval(strategy.precision, false),
+    );
+    expect(
+      `held-out ${label} recall`,
+      row.map((m) => m[2]),
+      interval(strategy.recall, false),
+    );
+    expect(
+      `held-out ${label} false positives`,
+      row.map((m) => m[3]),
+      interval(strategy.falsePositiveRate, true),
+    );
+  }
+  expect(
+    'held-out scope',
+    claim(
+      'held-out scope',
+      /over the (\d+) rules `marlo scan` evaluates and (\d+) official cases/g,
+      HELD_OUT_SECTION,
+    )?.map((m) => `${m[1]}/${m[2]}`),
+    `${String(scanScope?.rules)}/${String(scanScope?.cases)}`,
+  );
+  expect(
+    'routing stability',
+    claim(
+      'routing stability',
+      /changes the router's choice on (\d+) of (\d+) cases/g,
+      HELD_OUT_SECTION,
+    )?.map((m) => `${m[1]}/${m[2]}`),
+    `${String(analysis.routingStability.casesWhereChoiceChanges)}/${String(analysis.routingStability.cases)}`,
+  );
+  const alfa = scanScope?.strategies.find((x) => x.id === 'single-alfa');
+  const heldOut = scanScope?.strategies.find((x) => x.id === 'routed-held-out');
+  if (
+    claim(
+      'routing against Alfa',
+      /scores below running Alfa everywhere on both precision and recall, though the intervals overlap/g,
+      HELD_OUT_SECTION,
+    ) !== null &&
+    alfa !== undefined &&
+    heldOut !== undefined
+  ) {
+    compared += 1;
+    const below =
+      heldOut.precision.value < alfa.precision.value && heldOut.recall.value < alfa.recall.value;
+    const overlap =
+      heldOut.precision.high >= alfa.precision.low && heldOut.recall.high >= alfa.recall.low;
+    if (!below || !overlap) {
+      problems.push(
+        'routing against Alfa: the README says held-out routing is below Alfa with overlapping intervals, and the analysis no longer shows that',
+      );
+    }
+  }
+  expect(
+    'union cost at the top',
+    claim(
+      'union cost at the top',
+      /the measured cost of that is the ([\d.]+%) at the top of this page/g,
+    )?.map((m) => m[1]),
+    percent(headline),
   );
 }
 
