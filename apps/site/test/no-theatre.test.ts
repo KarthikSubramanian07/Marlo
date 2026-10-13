@@ -244,6 +244,50 @@ describe('the site has no theatre', () => {
     const contrast = browser.entries.find((e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo');
     if (contrast !== undefined) for (const value of Object.values(contrast.strict)) add(value);
 
+    // The analysis: what marlo scan reports and the held-out routing, with every interval
+    // bound, read from calibration/analysis.json.
+    interface Proportion {
+      readonly value: number;
+      readonly low: number;
+      readonly high: number;
+    }
+    const analysis = JSON.parse(
+      readFileSync(resolve(ROOT, 'calibration/analysis.json'), 'utf8'),
+    ) as {
+      readonly scopes: readonly {
+        readonly rules: number;
+        readonly cases: number;
+        readonly strategies: readonly {
+          readonly precision: Proportion | null;
+          readonly recall: Proportion | null;
+          readonly falsePositiveRate: Proportion | null;
+        }[];
+      }[];
+      readonly routingStability: {
+        readonly cases: number;
+        readonly casesWhereChoiceChanges: number;
+      };
+      readonly interval: string;
+    };
+    // The confidence level the intervals are stated at, read from the method the analysis
+    // declares rather than allow-listed.
+    const level = /^wilson-(\d+)$/.exec(analysis.interval)?.[1];
+    if (level !== undefined) permitted.add(`${level}%`);
+    for (const scope of analysis.scopes) {
+      add(scope.rules);
+      add(scope.cases);
+      for (const strategy of scope.strategies) {
+        for (const p of [strategy.precision, strategy.recall, strategy.falsePositiveRate]) {
+          if (p === null) continue;
+          add(p.value);
+          add(p.low);
+          add(p.high);
+        }
+      }
+    }
+    add(analysis.routingStability.cases);
+    add(analysis.routingStability.casesWhereChoiceChanges);
+
     // The real-page block: counts only, since it holds no accuracy figure until rated.
     const real = table.realCorpus;
     if (real !== undefined) {
