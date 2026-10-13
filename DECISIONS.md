@@ -48,6 +48,8 @@ So: where several engines implement the same ACT rule, the calibration table say
 
 **Wrong if:** the calibration data shows that for some rule no engine is reliably better and their errors are uncorrelated, which is the one situation where a union genuinely beats a choice. That would be a per-rule exception with the data attached, not a change of default.
 
+**What the measurement later showed, and what this decision now means.** Measured case by case in `calibration/analysis.json`, the invariant makes the reported outcome of a rule exactly the union of the engines' failures: a rule is reported failed when, and only when, some engine failed it, which the invariant test asserts over all 256 combinations. So routing does not choose what is detected. It chooses which engine's finding is reported for each failure, with that engine's locator, evidence and measured confidence, so a failure several engines see is listed once rather than four times, and it decides what a clean result for a rule rests on. The analysis also found that routing chosen without the case being scored is not more accurate than the best single engine on the official corpus. The decision stands as a decision about presentation and provenance, and the claim that routing is an accuracy mechanism is withdrawn until the rated real pages can test it. HONESTY.md entry 17.
+
 ---
 
 ## D-004: The calibration table publishes two accuracy views, not one
