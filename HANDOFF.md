@@ -6,22 +6,26 @@ Read [ARCHITECTURE.md](ARCHITECTURE.md) first for the shape. This file is the st
 
 ## Real, measured, and merged
 
-Everything in this list runs with no API key, no network after `pnpm install` and no browser.
+Everything in this list runs with no API key and no network after `pnpm install`. Only the rows marked as browser need Playwright, and `pnpm check` needs none of them.
 
-|                                                            | Evidence                                                                                |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| The ACT corpus, vendored                                   | 1134 test cases across 91 rules, SHA-256 per file, `pnpm corpus:verify`                 |
-| The grading protocol and both accuracy views               | `packages/act`, every line and branch covered                                           |
-| Three peer engine adapters                                 | axe-core, Alfa, HTML CodeSniffer, in-process                                            |
-| 36 of Marlo's own ACT rules                                | `packages/rules/src/registry.ts`                                                        |
-| The calibration table                                      | 164 engine-rule measurements, `calibration/table.json`, regenerated in CI               |
-| Routing and the one-directional invariant                  | `packages/report/src/invariant.ts`, 256-case exhaustive test                            |
-| Terminal, JSON, SARIF 2.1.0 and pull request body surfaces | `packages/report`                                                                       |
-| A working CLI                                              | `marlo scan`, `explain`, `coverage`                                                     |
-| The website                                                | [trymarlo.pages.dev](https://trymarlo.pages.dev), every number generated from the table |
-| The dogfood gate                                           | `pnpm screenshots`, three widths, both colour schemes, axe-core, tap targets, overflow  |
+|                                                            | Evidence                                                                                                                                  |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| The ACT corpus, vendored                                   | 1134 test cases across 91 rules, SHA-256 per file, `pnpm corpus:verify`                                                                   |
+| The grading protocol and both accuracy views               | `packages/act`, every line and branch covered                                                                                             |
+| Three peer engine adapters                                 | axe-core, Alfa, HTML CodeSniffer: in-process on the static renderer, inside the page on the browser renderer                              |
+| 41 of Marlo's own ACT rules                                | `packages/rules/src/registry.ts`                                                                                                          |
+| Contrast with a paint-order walk                           | `packages/rules/src/colour.ts` and `paint.ts`; declines with a named element wherever one ratio would be a guess                          |
+| The calibration tables                                     | `calibration/table.json` (static, the published headline) and `calibration/browser.json`; the static one is checked on every pull request |
+| A second corpus of real pages                              | 25 pages in `corpus/real`, digest-verified, measured separately, with a two-rater adjudication protocol and empty worksheets              |
+| Routing and the one-directional invariant                  | `packages/report/src/invariant.ts` per rule, 256-case exhaustive test; `elements.ts` per element, with property tests                     |
+| Terminal, JSON, SARIF 2.1.0 and pull request body surfaces | `packages/report`                                                                                                                         |
+| A working CLI                                              | `marlo scan` on either renderer, `fix`, `explain`, `coverage`                                                                             |
+| Repair that opens a pull request                           | `packages/repair/src/pull-request.ts` and `github.ts`, opt-in in the Action, idempotent by branch name                                    |
+| The browser renderer, evaluated                            | Every engine runs in the page; golden output under `tests/golden/browser/`, its own CI job                                                |
+| The website                                                | [trymarlo.pages.dev](https://trymarlo.pages.dev), every number generated from the table                                                   |
+| The dogfood gate                                           | `pnpm screenshots`, three widths, both colour schemes, axe-core, tap targets, overflow                                                    |
 
-404 tests. `pnpm check` is what CI runs and there is nothing CI runs that it does not.
+`pnpm check` is what CI runs, apart from the jobs that need a browser or a build, and every one of those is a required check too.
 
 ## Stubbed, on purpose, and honest about it
 
@@ -31,21 +35,21 @@ Everything in this list runs with no API key, no network after `pnpm install` an
 
 **`RemoteRenderer`.** Constructs, declares its capabilities, and throws when you render. It exists to hold the shape of the seam and to name the first dollar of variable cost in one place. See [D-007](DECISIONS.md#d-007).
 
-**The browser renderer is real but optional.** Playwright is not a dependency. Absent it, layout-dependent and paint-dependent rules report `unsupported`, which is visible in the output above the findings, not a pass.
+**The browser renderer is real but optional.** Playwright is not a dependency. Absent it, layout-dependent and paint-dependent rules report `unsupported`, which is visible in the output above the findings, not a pass. With it, every engine runs inside the page and `--renderer browser` reads its own calibration table.
+
+**Shadow trees are not entered.** Marlo's document view leaves shadow content out, because IDs and ID references are scoped per tree and folding the trees together would invent duplicates. On a page with shadow roots, every element rule adds a `cantTell` naming how many it did not examine, so the page cannot read as clean. The static renderer does not build the shadow roots that page script attaches at all, so there the content is simply absent.
 
 ## Deferred, with the honest reason
 
 None of these are hidden behind a flag that does nothing.
 
-|                                       | Issue                                                          | Why it is not here                                                                                                                                                                                                                                                                                      |
-| ------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Golden files for the browser renderer | [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37) | The static path has committed golden output and a CI job. The browser path rests on manual runs, so a divergence between the two would show up as a mystery rather than as a diff.                                                                                                                      |
-| The other 53 ACT rules                | [#38](https://github.com/KarthikSubramanian07/Marlo/issues/38) | A backlog rather than a task, and it stays open on purpose: a public project needs a start-here issue. No claimed rule is routed to nobody any more: `b40fd1` went to Marlo with the bypass blocks rules. `3e12e1` is the one that would let `cf77f2` fail on pages with script, which is most of them. |
-| A performance budget in CI            |                                                                | Accuracy and coverage are gated. Nothing gates time, so a rule that gets ten times slower passes.                                                                                                                                                                                                       |
-| A parse-only renderer                 |                                                                | The default renderer executes inline page script. [HONESTY.md](HONESTY.md#1-a-security-option-that-did-nothing) explains that and does not excuse it.                                                                                                                                                   |
-| Repair over a pull request            |                                                                | `marlo fix` writes to files. The pull request surface is opt-in per [D-011](DECISIONS.md#d-011) and the body renderer is written and tested; nothing wires it to an API yet.                                                                                                                            |
-
-**Repair is no longer on this list.** `@marlo/repair` locates source, generates minimal diffs for seven rules, and verifies each one before applying it. What it will not do is the interesting part, and it is in the next section.
+|                            | Issue                                                          | Why it is not here                                                                                                                                                                                                                                                                                      |
+| -------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rating the real pages      |                                                                | The protocol, tooling and empty worksheets are committed. It needs two people, rating independently, and their disagreements written down. Until then the table carries no real-page accuracy figure and refuses one.                                                                                   |
+| The other 53 ACT rules     | [#38](https://github.com/KarthikSubramanian07/Marlo/issues/38) | A backlog rather than a task, and it stays open on purpose: a public project needs a start-here issue. No claimed rule is routed to nobody any more: `b40fd1` went to Marlo with the bypass blocks rules. `3e12e1` is the one that would let `cf77f2` fail on pages with script, which is most of them. |
+| Entering shadow trees      |                                                                | Needs per-tree id scoping in the document view and in every rule that resolves an id reference. Until then element rules decline on pages with shadow content.                                                                                                                                          |
+| A performance budget in CI |                                                                | Accuracy and coverage are gated. Nothing gates time, so a rule that gets ten times slower passes.                                                                                                                                                                                                       |
+| A parse-only renderer      |                                                                | The default renderer executes inline page script. [HONESTY.md](HONESTY.md#1-a-security-option-that-did-nothing) explains that and does not excuse it.                                                                                                                                                   |
 
 ## Traps
 
@@ -75,10 +79,11 @@ Not a merge conflict to resolve. A result to investigate.
 
 ## What I would do first
 
-1. **Raise the precision of the rules that already have a codemod.** Five of the seven are refused by the gate rather than by a missing implementation, and `24afc2`, `78fd32` and `9e45ec` are all Marlo's own rules measuring between 0.29 and 0.33. Every point of precision there converts a flag into a fix, which is a much better return than a new rule.
-2. **Make `e6952f` detectable.** The codemod for it exists and works, and no engine reports the rule, so nothing ever calls it. Source location is what makes the rule visible at all, and that now exists. This is the shortest path from written code to a working fix.
-3. **Browser renderer golden files** ([#37](https://github.com/KarthikSubramanian07/Marlo/issues/37)). The claim that the same rule set reports genuine results under a real browser deserves a committed file rather than a manual run.
+1. **Rate the real pages.** Two people, the protocol in `corpus/real/adjudication/PROTOCOL.md`, and `node scripts/adjudicate.mjs`. It is the only way the project gets a number that describes the pages people actually scan, and the agreement between the two raters is a ceiling on what any tool can score, which belongs on the website either way.
+2. **Raise the precision of the rules that already have a codemod.** Five of the seven are refused by the gate rather than by a missing implementation, and `24afc2`, `78fd32` and `9e45ec` are Marlo's own rules. Every point of precision there converts a flag into a fix.
+3. **Make `e6952f` detectable.** The codemod for it exists and works, and no engine reports the rule, so nothing ever calls it.
+4. **Enter shadow trees** with per-tree id scoping, so element rules stop declining on component-heavy pages.
 
 ## What needs a person, not a script
 
-See [SETUP.md](SETUP.md#manual-steps-that-remain). Four items: branch protection, the shorter domain if you want it, npm publication, and a language provider key if you ever want generated descriptions.
+See [SETUP.md](SETUP.md#manual-steps-that-remain): the shorter domain if you want it, npm publication, and a language provider key if you ever want generated descriptions. Two more since then: the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets, without which the deploy workflow fails on purpose and the site is published by hand, and two people to rate the real pages.

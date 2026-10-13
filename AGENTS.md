@@ -8,13 +8,14 @@ The product claim is a published error rate. A number nothing measured, and a ch
 
 Grep the whole repository before changing a default. These have already drifted.
 
-| Value                           | Every place it lives                                                                                                                                                                                            |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Coverage thresholds 87/73/90/88 | `vitest.config.ts` owns them. CONTRIBUTING.md restates them. HONESTY.md section 8 and the coverage comment in `.github/workflows/ci.yml` are both stale and disagree with each other                            |
-| Auto-fix threshold 0.95         | `packages/schema/src/config.ts` twice, hardcoded again in `packages/calibrate/src/bin.ts`, prose in SETUP.md and calibration/README.md                                                                          |
-| Node floor 22.13.0              | `.nvmrc`, `engines.node` in package.json, the test matrix in `.github/workflows/ci.yml`. Not arbitrary: vite 8 needs 22.12 and watskeburt 6 needs ^22.13                                                        |
-| The published site origin       | `ORIGIN` in `apps/site/src/build.mjs`, plus eighteen other tracked files. SETUP.md lists four of them                                                                                                           |
-| The site palette                | sRGB hex in `apps/site/src/style.css`. `build.mjs` reads the same list, and a test fails if `favicon.svg` uses a colour the stylesheet does not record. The tab icon and the page were once two different cyans |
+| Value                           | Every place it lives                                                                                                                                                                                                             |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Coverage thresholds 87/73/90/88 | `vitest.config.ts` owns them. CONTRIBUTING.md restates them. HONESTY.md section 8 and the coverage comment in `.github/workflows/ci.yml` are both stale and disagree with each other                                             |
+| Auto-fix threshold 0.95         | `packages/schema/src/config.ts` twice, hardcoded again in `packages/calibrate/src/bin.ts`, prose in SETUP.md and calibration/README.md                                                                                           |
+| Node floor 22.13.0              | `.nvmrc`, `engines.node` in package.json, the test matrix in `.github/workflows/ci.yml`. Not arbitrary: vite 8 needs 22.12 and watskeburt 6 needs ^22.13                                                                         |
+| The published site origin       | `ORIGIN` in `apps/site/src/build.mjs`, plus eighteen other tracked files. SETUP.md lists four of them                                                                                                                            |
+| Required checks on main: 12     | The `main: history and checks, no exceptions` ruleset owns the list. AGENTS.md, CONTRIBUTING.md and SETUP.md each state the count. Adding a CI job that should block a merge means adding it to the ruleset and moving all three |
+| The site palette                | sRGB hex in `apps/site/src/style.css`. `build.mjs` reads the same list, and a test fails if `favicon.svg` uses a colour the stylesheet does not record. The tab icon and the page were once two different cyans                  |
 
 ## Editing
 
@@ -88,7 +89,7 @@ Add a test that fails against the old code and guards the category, not the one 
 
 ## Committing
 
-- Work on a branch. `main` refuses a force push from everybody, including the repository owner, and requires ten green checks and a linear history.
+- Work on a branch. `main` refuses a force push from everybody, including the repository owner, and requires twelve green checks and a linear history.
 - `<scope>: <what changed>`, imperative, lower case, no trailing full stop. The scope is the package or area. The body explains why, because the diff already says what.
 - Sign off every commit with `git commit -s`. A `commit-msg` hook and a required check both verify it.
 - Small and single-purpose. One rule per change is the target.

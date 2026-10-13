@@ -12,7 +12,22 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ## [Unreleased]
 
+### Added
+
+- Every engine now runs inside a real browser page ([#60](https://github.com/KarthikSubramanian07/Marlo/issues/60), [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37)). axe-core and HTML CodeSniffer are injected as their own scripts, Alfa and Marlo's rules are bundled for the browser at build time, and every verdict crosses back through one serialisation boundary that keeps its selector and snippet. `marlo scan --renderer browser` works and reads its own table, `calibration/browser.json`. The browser path has committed golden output.
+- Contrast is computed ([#61](https://github.com/KarthikSubramanian07/Marlo/issues/61)). `afw4f7` and `09o5cg` walk the paint order behind each piece of text, compositing alpha and ancestor opacity in sRGB, and answer `cantTell` naming the responsible element wherever a single ratio would be a guess: background images and gradients, blend modes and filters, text shadows, positioned elements painting over the text, colour syntaxes they cannot convert exactly, and canvases a page allows to be dark.
+- A second corpus of 25 real pages ([#62](https://github.com/KarthikSubramanian07/Marlo/issues/62)), vendored and digest-verified like the first, with a two-rater adjudication protocol, tooling that computes Cohen's kappa and logs every disagreement, and empty worksheets. The harness measures every engine on it in a separate pass and writes an optional `realCorpus` block that is never pooled with the ACT figures and refuses an accuracy figure before any cell is rated.
+- Repair that opens a pull request ([#63](https://github.com/KarthikSubramanian07/Marlo/issues/63)). `marlo fix --json`, a pure planner whose branch name is derived from the edits so a second run opens nothing, a GitHub client that refuses to write to the default branch or force-update a ref, and an opt-in `open-pull-request` mode in the Action that requires exactly `contents: write` and `pull-requests: write`. The body carries the measurement and the three verification answers per fix, and the disqualifying number per refusal.
+- The one-directional invariant per element. A peer's failure on an element the routed engine passed is reported, attributed to the peer and marked as an invariant, and the terminal lists those elements first in their rule.
+- A required CI job runs `pnpm calibrate --check`, and a deploy workflow publishes the site from main once the Cloudflare secrets are configured.
+
 ### Fixed
+
+- The invariant held for every rule and not for every element, so a field a peer failed could vanish when the routed engine failed other fields of the same rule. On the checkout demo that was the placeholder-only email input the README's sample output described. HONESTY.md entry 15.
+- `23a2a8` no longer reports inline `svg` images, which belong to `7d6734`. The official cases contain no `svg` with `role="img"`, so the published precision could not show it.
+- README.md and SETUP.md described `pnpm calibrate:check` as a CI gate that no job ran. HONESTY.md entry 14.
+- SECURITY.md described a branch protection warning and a test file that did not exist. HONESTY.md entry 16.
+- The required-check count had drifted across AGENTS.md, CONTRIBUTING.md and SETUP.md. It is now in the AGENTS.md table of constants that live in more than one place.
 
 - Links to trymarlo.pages.dev now preview on LinkedIn, Facebook and Slack. The social image was an SVG, which those crawlers do not render, so LinkedIn reported that it could not preview the page. The build now rasterises the same SVG to a 1200 by 630 `og.png` and declares its type, size and alt text.
 
@@ -21,6 +36,12 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - Credit and authorship are written down: CONTRIBUTING.md, CREDITS.md, D-013, and the DCO check now also refuse machine Author emails and AI co-author trailers. Collaborators with write access who have no commits yet (including Aarush Chavali and Ishan Garg) are listed in CREDITS.md without inventing Git Authors.
 
 ### Accuracy
+
+**The published static figures did not move.** Precision 0.853, recall 0.640 and a false positive rate of 5.6% over 513 graded cases, exactly as before. Contrast needs layout, so the static renderer still reports both contrast rules as not evaluated, and the `23a2a8` correction touches no official case.
+
+**The browser table is published for the first time**, in `calibration/browser.json` and [calibration/BROWSER.md](calibration/BROWSER.md), beside the headline rather than replacing it. 590 cases are graded there against 513 on the static renderer, because the layout cases become measurable.
+
+**The real-page block carries no accuracy figure**, because nobody has rated the pages yet. What it does carry moved once in this round: the `23a2a8` correction took Marlo's agreement with Alfa on that rule from a kappa of 0.55 to 1.0 and with axe-core from 0.50 to 0.67.
 
 Five rules added under [#38](https://github.com/KarthikSubramanian07/Marlo/issues/38) moved the pooled figures. No entry that was already in the table changed: every one measures exactly what it did before.
 
