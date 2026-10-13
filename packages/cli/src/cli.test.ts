@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { CalibrationTable, EXIT_CODES } from '@marlo/schema';
+import { CalibrationTable, EXIT_CODES, FixReport } from '@marlo/schema';
 import { StaticRenderer } from '@marlo/render';
 import { renderSarif, renderTerminal } from '@marlo/report';
 
@@ -347,6 +347,41 @@ describe('the marlo command', () => {
     expect(after).not.toBe(original);
     expect(after).not.toContain('!important');
     expect(after).toContain('user-scalable');
+  }, 90_000);
+
+  it('emits a FixReport on stdout for `fix --json`, and nothing else there', () => {
+    if (!built) return;
+    const dir = mkdtempSync(join(tmpdir(), 'marlo-fix-json-'));
+    const file = join(dir, 'broken.html');
+    // The same pairing as above: 78fd32 clears the gate and is fixed, b4f0c3 does not and
+    // is flagged, so the report carries one repair of each kind.
+    const original =
+      '<!doctype html><html lang="en"><head><title>t</title>' +
+      '<meta name="viewport" content="width=device-width, user-scalable=no"></head>' +
+      '<body><p style="line-height: 1em !important; max-width: 200px;">' +
+      'The toy brought back fond memories of being lost in the rain forest.</p></body></html>';
+    writeFileSync(file, original, 'utf8');
+
+    // Through a real pipe, the way `scan --json` is tested: a truncated write is the
+    // failure this guards against (HONESTY.md entry 2), and it only happens on a pipe.
+    const dry = run(['fix', file, '--json']);
+    expect(dry.code).toBe(EXIT_CODES.findings);
+    const report = FixReport.parse(JSON.parse(dry.out));
+    expect(dry.out).not.toContain('nothing was written');
+    expect(report.files).toHaveLength(1);
+    const entry = report.files[0]!;
+    expect(entry.target).toBe(file);
+    expect(entry.source).toBe(original);
+    expect(entry.written).toBe(false);
+    expect(entry.repairs.some((r) => r.kind === 'fixed' && r.actRuleId === '78fd32')).toBe(true);
+    expect(entry.repairs.some((r) => r.kind === 'flagged')).toBe(true);
+    expect(report.totals.fixed).toBe(entry.repairs.filter((r) => r.kind === 'fixed').length);
+    expect(readFileSync(file, 'utf8')).toBe(original);
+
+    const applied = run(['fix', file, '--json', '--write']);
+    const written = FixReport.parse(JSON.parse(applied.out));
+    expect(written.files[0]?.written).toBe(true);
+    expect(readFileSync(file, 'utf8')).not.toContain('!important');
   }, 90_000);
 
   it('refuses to apply a mechanical fix for a rule measured below the threshold', () => {
