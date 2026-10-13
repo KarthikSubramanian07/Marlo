@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-09-15",
-  "commit": "f9d68be361de2bb35c902059f3be62e2b8d79478",
+  "generated": "2026-10-13",
+  "commit": "f8d43e9e87b3b8a6d34f4e924ecee43b8a3de3fc",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -11091,5 +11091,4418 @@
     "strictRecall": 0.6395348837209303,
     "falsePositiveRate": 0.05571847507331378,
     "sampleSize": 513
+  },
+  "realCorpus": {
+    "retrieved": "2026-10-12",
+    "pages": 25,
+    "categories": [
+      {
+        "category": "application",
+        "pages": 3
+      },
+      {
+        "category": "documentation",
+        "pages": 4
+      },
+      {
+        "category": "error",
+        "pages": 1
+      },
+      {
+        "category": "form",
+        "pages": 2
+      },
+      {
+        "category": "government",
+        "pages": 3
+      },
+      {
+        "category": "landing",
+        "pages": 1
+      },
+      {
+        "category": "login",
+        "pages": 1
+      },
+      {
+        "category": "news",
+        "pages": 3
+      },
+      {
+        "category": "search",
+        "pages": 1
+      },
+      {
+        "category": "settings",
+        "pages": 1
+      },
+      {
+        "category": "shop",
+        "pages": 4
+      },
+      {
+        "category": "table",
+        "pages": 1
+      }
+    ],
+    "adjudication": {
+      "status": "awaiting-adjudication",
+      "ratedCells": 0,
+      "resolvedCells": 0,
+      "totalCells": 1025,
+      "kappa": null,
+      "percentAgreement": null
+    },
+    "entries": [
+      {
+        "actRuleId": "047fe0",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 24,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 25,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 23,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 1,
+          "failed": 17,
+          "cantTell": 1,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2277,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 15,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 15,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 9,
+          "failed": 2,
+          "cantTell": 3,
+          "inapplicable": 10
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 8,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 10,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 13,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "24afc2",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "24afc2",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 11,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 10
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "24afc2",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 21,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "2ee8b8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 3,
+          "failed": 6,
+          "cantTell": 4,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 19,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "307n5z",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 17,
+          "failed": 3,
+          "cantTell": 3,
+          "inapplicable": 1
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 6,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "307n5z",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 22,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "36b590",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 16,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 8
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "3ea0c8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 21,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 8,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "3ea0c8",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 21,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 15,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 10
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 8,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 13
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 15,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 10
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "4b1c6c",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 24
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 2,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 14,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 7
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 18,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 7
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "59796f",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "59796f",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "59796f",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5b7ae0",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5b7ae0",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 23,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 18,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 3
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 19,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 22,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 17,
+          "failed": 1,
+          "cantTell": 3,
+          "inapplicable": 3
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 19,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 5,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "674b10",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 20,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 6,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "674b10",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 14,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 7
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "674b10",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 18,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 7
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "6a7281",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 15,
+          "failed": 8,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 9,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "6a7281",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 17,
+          "failed": 1,
+          "cantTell": 3,
+          "inapplicable": 3
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "6a7281",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 16,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 7
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 8,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 14,
+          "failed": 1,
+          "cantTell": 3,
+          "inapplicable": 6
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 18,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "73f2c2",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 5,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 16
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "73f2c2",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 2,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 23
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "78fd32",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "78fd32",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 11,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 10
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "78fd32",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "7d6734",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 8,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 17
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "7d6734",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 8,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 16
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "7d6734",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 8,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 17
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 22,
+          "failed": 2,
+          "cantTell": 1,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 3,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 18,
+          "failed": 1,
+          "cantTell": 3,
+          "inapplicable": 2
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 3,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 11,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 10
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "9eb3f6",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 10,
+          "failed": 0,
+          "cantTell": 2,
+          "inapplicable": 13
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "9eb3f6",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "a25f45",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 2,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 19
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "a25f45",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "a25f45",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 25,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 23,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 7,
+          "failed": 9,
+          "cantTell": 3,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 119,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b20e66",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 12,
+          "failed": 0,
+          "cantTell": 5,
+          "inapplicable": 8
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b33eff",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b40fd1",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 20,
+          "failed": 1,
+          "cantTell": 4,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b40fd1",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 17,
+          "failed": 4,
+          "cantTell": 3,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 24,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 23,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 2,
+          "cantTell": 3,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 18,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 3,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 3,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 20
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 13,
+          "failed": 8,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 47,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 2
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 11,
+          "failed": 3,
+          "cantTell": 11,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 3,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 16,
+          "failed": 5,
+          "cantTell": 3,
+          "inapplicable": 0
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 22,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 17,
+          "failed": 8,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 34,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 17,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 9,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "cae760",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 1,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 23
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "cae760",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "cae760",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "cf77f2",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 24,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "d0f69e",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 2,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 19
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "d0f69e",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 1,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "de46e4",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 6,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 18
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "de46e4",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 4,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 17
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "de46e4",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 7,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 18
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 11,
+          "failed": 5,
+          "cantTell": 0,
+          "inapplicable": 9
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 5,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 11,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 10
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 15,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 10
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 5,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "e6952f",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "e88epe",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 9,
+          "inapplicable": 16
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "fd3a94",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 9,
+          "failed": 0,
+          "cantTell": 2,
+          "inapplicable": 14
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 4,
+          "failed": 1,
+          "cantTell": 1,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 20
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 20,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 1
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 24,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "m6b1q3",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 18,
+          "failed": 1,
+          "cantTell": 3,
+          "inapplicable": 2
+        },
+        "errored": 1,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "m6b1q3",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ye5d6e",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 6,
+          "failed": 0,
+          "cantTell": 19,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      }
+    ],
+    "agreement": [
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.0417,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.05,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.05,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.6667,
+        "kappa": 0.4974
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.72,
+        "kappa": 0.5524
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.55,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7917,
+        "kappa": 0.6748
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.4,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.3,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "24afc2",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4167,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "24afc2",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "24afc2",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4167,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "307n5z",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.5472
+      },
+      {
+        "actRuleId": "3ea0c8",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.52
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7083,
+        "kappa": 0.5044
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7083,
+        "kappa": 0.5044
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.375,
+        "kappa": 0.0863
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.36,
+        "kappa": 0.0805
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.7509
+      },
+      {
+        "actRuleId": "59796f",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "59796f",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "59796f",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "5b7ae0",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.2083,
+        "kappa": 0.0952
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.08,
+        "kappa": 0.0711
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.7037
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.5472
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0.6231
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.6308
+      },
+      {
+        "actRuleId": "674b10",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7083,
+        "kappa": 0.4043
+      },
+      {
+        "actRuleId": "674b10",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.84,
+        "kappa": 0.5781
+      },
+      {
+        "actRuleId": "674b10",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.7509
+      },
+      {
+        "actRuleId": "6a7281",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.6667,
+        "kappa": 0.4074
+      },
+      {
+        "actRuleId": "6a7281",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.68,
+        "kappa": 0.2754
+      },
+      {
+        "actRuleId": "6a7281",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7917,
+        "kappa": 0.3878
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.6893
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.8294
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.7608
+      },
+      {
+        "actRuleId": "73f2c2",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.75,
+        "kappa": 0.3271
+      },
+      {
+        "actRuleId": "78fd32",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4167,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "78fd32",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "78fd32",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4167,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "7d6734",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "7d6734",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "7d6734",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7083,
+        "kappa": 0.1295
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0.359
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.95,
+        "kappa": 0.6491
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.4576
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.85,
+        "kappa": -0.0345
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.9,
+        "kappa": -0.0256
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4167,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4167,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "9eb3f6",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.52,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "a25f45",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7917,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "a25f45",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.1,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "a25f45",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.125,
+        "kappa": -0.008
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.05,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.3,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "b40fd1",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.75,
+        "kappa": 0.3543
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.5325
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.5325
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.75,
+        "kappa": 0.2577
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.28,
+        "kappa": 0.0741
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.2083,
+        "kappa": 0.0579
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.5325
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.9,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.5325
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.9,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.9,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.4583,
+        "kappa": 0.1211
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.56,
+        "kappa": 0.3357
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.55,
+        "kappa": 0.1549
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.7429
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.85,
+        "kappa": 0.4828
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.85,
+        "kappa": 0.4828
+      },
+      {
+        "actRuleId": "cae760",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.9583,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "cae760",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0.6528
+      },
+      {
+        "actRuleId": "cae760",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "d0f69e",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.4514
+      },
+      {
+        "actRuleId": "de46e4",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.9167,
+        "kappa": 0.8154
+      },
+      {
+        "actRuleId": "de46e4",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0.9035
+      },
+      {
+        "actRuleId": "de46e4",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.722
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.75,
+        "kappa": 0.616
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.72,
+        "kappa": 0.527
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.6,
+        "kappa": 0.1534
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.7764
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.5,
+        "kappa": -0.0471
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 20,
+        "percentAgreement": 0.5,
+        "kappa": -0.0471
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.7917,
+        "kappa": 0.3684
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.24,
+        "kappa": -0.015
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.2083,
+        "kappa": 0.044
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.8333,
+        "kappa": 0.2727
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0.6528
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.875,
+        "kappa": 0.3739
+      },
+      {
+        "actRuleId": "m6b1q3",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 24,
+        "percentAgreement": 0.0833,
+        "kappa": 0
+      }
+    ],
+    "aggregate": {
+      "findingsPerPage": [
+        {
+          "engine": "marlo",
+          "pages": 25,
+          "findings": 88,
+          "mean": 3.52
+        },
+        {
+          "engine": "axe-core",
+          "pages": 24,
+          "findings": 50,
+          "mean": 2.0833
+        },
+        {
+          "engine": "alfa",
+          "pages": 25,
+          "findings": 2511,
+          "mean": 100.44
+        },
+        {
+          "engine": "htmlcs",
+          "pages": 20,
+          "findings": 15,
+          "mean": 0.75
+        }
+      ],
+      "perPage": [
+        {
+          "page": "application (140e297c3fb9)",
+          "findings": {
+            "marlo": 5,
+            "axe-core": 14,
+            "alfa": 105,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "application (339528b65ae8)",
+          "findings": {
+            "marlo": 5,
+            "axe-core": 14,
+            "alfa": 58,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "application (29d051888ee8)",
+          "findings": {
+            "marlo": 5,
+            "axe-core": 1,
+            "alfa": 1,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "documentation (7487de8b9f8f)",
+          "findings": {
+            "marlo": 11,
+            "axe-core": 0,
+            "alfa": 39,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "documentation (39f95cc80c20)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 4,
+            "alfa": 1,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "documentation (9364dcbac87f)",
+          "findings": {
+            "marlo": 6,
+            "axe-core": 2,
+            "alfa": 2,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "documentation (ada6b8fb59cd)",
+          "findings": {
+            "marlo": 8,
+            "axe-core": null,
+            "alfa": 66,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "error (8776911cf683)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 40,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "form (85435b63bf0a)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "form (312802aff8cc)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "government (85fa82766479)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "government (ab2ca3d5ac91)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 3,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "government (2b6bea051603)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 3
+          }
+        },
+        {
+          "page": "landing (6f9ab4a5a615)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 1,
+            "alfa": 37,
+            "htmlcs": 6
+          }
+        },
+        {
+          "page": "login (3b077de399e3)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 1,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "news (1266362a16c3)",
+          "findings": {
+            "marlo": 7,
+            "axe-core": 0,
+            "alfa": 597,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "news (68833e124745)",
+          "findings": {
+            "marlo": 14,
+            "axe-core": 0,
+            "alfa": 121,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "news (2181a194c04c)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "search (e15f0aeca205)",
+          "findings": {
+            "marlo": 4,
+            "axe-core": 0,
+            "alfa": 9,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "settings (45fd35c19415)",
+          "findings": {
+            "marlo": 4,
+            "axe-core": 0,
+            "alfa": 4,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "shop (b640eddff8aa)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 3,
+            "alfa": 18,
+            "htmlcs": 2
+          }
+        },
+        {
+          "page": "shop (b049aafa903b)",
+          "findings": {
+            "marlo": 2,
+            "axe-core": 7,
+            "alfa": 13,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "shop (db52c72978e7)",
+          "findings": {
+            "marlo": 3,
+            "axe-core": 1,
+            "alfa": 8,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "shop (e59fc248b2aa)",
+          "findings": {
+            "marlo": 2,
+            "axe-core": 3,
+            "alfa": 2,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "table (fb91db770f63)",
+          "findings": {
+            "marlo": 7,
+            "axe-core": 0,
+            "alfa": 1386,
+            "htmlcs": null
+          }
+        }
+      ],
+      "invariant": {
+        "pages": 25,
+        "pagesWhereItWouldFire": 19,
+        "fraction": 0.76,
+        "perRule": [
+          {
+            "actRuleId": "047fe0",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "09o5cg",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 17
+          },
+          {
+            "actRuleId": "23a2a8",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 2
+          },
+          {
+            "actRuleId": "24afc2",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "2779a5",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "2ee8b8",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "307n5z",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "36b590",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "3ea0c8",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "46ca7f",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "4b1c6c",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "4e8ab6",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "59796f",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "5b7ae0",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "5c01ea",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "5f99a7",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 3
+          },
+          {
+            "actRuleId": "674b10",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "6a7281",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 8
+          },
+          {
+            "actRuleId": "6cfa84",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "73f2c2",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "78fd32",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "7d6734",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "8fc3b6",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "97a4e1",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "9e45ec",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "9eb3f6",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "a25f45",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "afw4f7",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 9
+          },
+          {
+            "actRuleId": "b20e66",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "b33eff",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "b40fd1",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 3
+          },
+          {
+            "actRuleId": "b4f0c3",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "b5c3f8",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "bc4a75",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "bc659a",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "bf051a",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "bisz58",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "c487ae",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 4
+          },
+          {
+            "actRuleId": "cae760",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "cf77f2",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "d0f69e",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "de46e4",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "e086e5",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 5
+          },
+          {
+            "actRuleId": "e6952f",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "e88epe",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "fd3a94",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "ff89c9",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "ffd0e9",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "m6b1q3",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "ye5d6e",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          }
+        ]
+      },
+      "accuracy": {
+        "strictPrecision": null,
+        "strictRecall": null,
+        "falsePositiveRate": null,
+        "sampleSize": 0
+      }
+    }
   }
 }
