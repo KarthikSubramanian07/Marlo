@@ -1,4 +1,4 @@
-import type { Coverage, ScanReport, Severity } from '@marlo/schema';
+import type { Coverage, Finding, ScanReport, Severity } from '@marlo/schema';
 import { SEVERITY_PRESENTATION, formatCoverage } from '@marlo/schema';
 
 /**
@@ -162,12 +162,28 @@ export function renderTerminal(report: ScanReport, options: TerminalOptions): st
         out.push(dim(`      disagreement: ${disagreement.engine} says ${disagreement.outcome}`));
       }
 
-      for (const finding of findings.slice(0, maxPerRule)) {
+      // An element a peer failed and the routed engine did not is listed before the routed
+      // engine's own elements, so the per-rule cap can never be the thing that hides it.
+      const overridden = (finding: Finding): boolean =>
+        first.routingReason !== 'invariant' && finding.routingReason === 'invariant';
+      const ordered = [
+        ...findings.filter((f) => overridden(f)),
+        ...findings.filter((f) => !overridden(f)),
+      ];
+      for (const finding of ordered.slice(0, maxPerRule)) {
         const where =
           finding.source === null
             ? `${finding.verdict.target.selector} ${dim('(not located in source)')}`
             : `${finding.source.file}:${String(finding.source.line)}:${String(finding.source.column)}`;
         out.push(`      ${where}`);
+        if (overridden(finding)) {
+          const dissent = finding.disagreements
+            .map((d) => `${d.engine} says ${d.outcome}`)
+            .join(', ');
+          out.push(
+            `        ${paint('INVARIANT', ANSI.yellow)} ${finding.reportedBy} failed this element and the routed engine did not report it${dissent === '' ? '.' : `: ${dissent}.`}`,
+          );
+        }
         out.push(dim(`        ${finding.verdict.message}`));
       }
 
