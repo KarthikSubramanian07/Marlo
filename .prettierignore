@@ -18,4 +18,6 @@ packages/act/src/rules.generated.ts
 
 calibration/table.json
 calibration/README.md
+calibration/browser.json
+calibration/BROWSER.md
 calibration/history/
