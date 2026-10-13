@@ -22,7 +22,7 @@ pre-commit:
       run: node scripts/check-claims.mjs {staged_files}
     corpus-is-immutable:
       glob: 'corpus/**'
-      run: node scripts/verify-act-corpus.mjs
+      run: node scripts/verify-act-corpus.mjs && node scripts/verify-real-corpus.mjs
 
 pre-push:
   parallel: false

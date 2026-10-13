@@ -1,0 +1,406 @@
+{
+  "source": {
+    "name": "Real pages, snapshotted from the public web",
+    "sourcesFile": "SOURCES.json",
+    "notice": "NOTICE.md",
+    "identification": "Published tables name a page by category and the first twelve hex digits of its SHA-256. The source URL for each is in this file."
+  },
+  "retrieved": "2026-10-12",
+  "totals": {
+    "pages": 25,
+    "bytes": 13257475,
+    "scriptsRemoved": 313,
+    "categories": {
+      "application": 3,
+      "documentation": 4,
+      "error": 1,
+      "form": 2,
+      "government": 3,
+      "landing": 1,
+      "login": 1,
+      "news": 3,
+      "search": 1,
+      "settings": 1,
+      "shop": 4,
+      "table": 1
+    }
+  },
+  "pages": [
+    {
+      "id": "application-01",
+      "category": "application",
+      "url": "https://demo.realworld.show/",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/gothinkster/angular-realworld-example-app/blob/main/LICENSE"
+      },
+      "title": "Conduit",
+      "path": "pages/application-01/index.html",
+      "sha256": "140e297c3fb973ec51fdfb5e9757f7296370eb95cb4f9301abb8b981739c703d",
+      "bytes": 117967,
+      "scriptsRemoved": 1
+    },
+    {
+      "id": "application-02",
+      "category": "application",
+      "url": "https://demo.realworld.show/article/how-to-learn-javascript-efficiently",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/gothinkster/angular-realworld-example-app/blob/main/LICENSE"
+      },
+      "title": "Conduit",
+      "path": "pages/application-02/index.html",
+      "sha256": "339528b65ae846c94a00b8e85ae0f830b57c650ecf477042da4ae26d89989f8b",
+      "bytes": 114062,
+      "scriptsRemoved": 1
+    },
+    {
+      "id": "application-03",
+      "category": "application",
+      "url": "https://preview.tabler.io/",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tabler/tabler/blob/dev/LICENSE"
+      },
+      "title": "Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.",
+      "path": "pages/application-03/index.html",
+      "sha256": "29d051888ee812396d96b941cc10d0e1bdcfbcbd05ce3eb353fc1d5dba45ddd8",
+      "bytes": 1741928,
+      "scriptsRemoved": 25
+    },
+    {
+      "id": "documentation-01",
+      "category": "documentation",
+      "url": "https://docs.python.org/3/tutorial/introduction.html",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "Python Software Foundation License Version 2",
+        "url": "https://docs.python.org/3/license.html"
+      },
+      "title": "3. An Informal Introduction to Python — Python 3.15.0 documentation",
+      "path": "pages/documentation-01/index.html",
+      "sha256": "7487de8b9f8ff3fbddfe8c487e0fa8dac608e38975160fa820fb1c0f3a9d1f7d",
+      "bytes": 132734,
+      "scriptsRemoved": 13
+    },
+    {
+      "id": "documentation-02",
+      "category": "documentation",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "CC BY-SA 2.5",
+        "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+      },
+      "title": "&lt;img&gt; HTML image embed element - HTML | MDN",
+      "path": "pages/documentation-02/index.html",
+      "sha256": "39f95cc80c20da26ec25b71e083bb2a1aa092a9bc8459babbf1f543d56d50a35",
+      "bytes": 233973,
+      "scriptsRemoved": 7
+    },
+    {
+      "id": "documentation-03",
+      "category": "documentation",
+      "url": "https://doc.rust-lang.org/book/ch01-01-installation.html",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/rust-lang/book/blob/main/LICENSE-MIT"
+      },
+      "title": "Installation - The Rust Programming Language",
+      "path": "pages/documentation-03/index.html",
+      "sha256": "9364dcbac87fda9c31b2af8c9fd139bbdd1ac78d379e4246b947abca25d59573",
+      "bytes": 107372,
+      "scriptsRemoved": 14
+    },
+    {
+      "id": "documentation-04",
+      "category": "documentation",
+      "url": "https://react.dev/learn",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/reactjs/react.dev/blob/main/LICENSE-DOCS.md"
+      },
+      "title": "Quick Start – React",
+      "path": "pages/documentation-04/index.html",
+      "sha256": "ada6b8fb59cdeafaf37abd8621efe02596976bf6d1eb8f91f39cfcb5be0f7b26",
+      "bytes": 356645,
+      "scriptsRemoved": 15
+    },
+    {
+      "id": "error-01",
+      "category": "error",
+      "url": "https://www.gov.uk/404",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      },
+      "title": "Page not found - GOV.UK",
+      "path": "pages/error-01/index.html",
+      "sha256": "8776911cf683c885dc313c99a06d574f1043105a1af9e7ce466d57ba7c0a4518",
+      "bytes": 542643,
+      "scriptsRemoved": 9
+    },
+    {
+      "id": "form-01",
+      "category": "form",
+      "url": "https://design-system.service.gov.uk/patterns/question-pages/default/index.html",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/alphagov/govuk-design-system/blob/main/LICENSE.txt"
+      },
+      "title": "Question pages – Example – GOV.UK Design System",
+      "path": "pages/form-01/index.html",
+      "sha256": "85435b63bf0ac7a8be5e18029fd7a1458a72304a2dcdb7252936ea531b90a63e",
+      "bytes": 154181,
+      "scriptsRemoved": 2
+    },
+    {
+      "id": "form-02",
+      "category": "form",
+      "url": "https://design-system.service.gov.uk/patterns/check-answers/default/index.html",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/alphagov/govuk-design-system/blob/main/LICENSE.txt"
+      },
+      "title": "Check answers – Example – GOV.UK Design System",
+      "path": "pages/form-02/index.html",
+      "sha256": "312802aff8cc39b00186170c1f0f272ef3e79d4188ccf8d536098bec1da7ee16",
+      "bytes": 156722,
+      "scriptsRemoved": 2
+    },
+    {
+      "id": "government-01",
+      "category": "government",
+      "url": "https://www.usa.gov/",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.usa.gov/government-copyright"
+      },
+      "title": "Making government services easier to find | USAGov",
+      "path": "pages/government-01/index.html",
+      "sha256": "85fa827664796fc311cf7b3fddd133b42f0c977dc0c8b1e114958d7b4e81dfac",
+      "bytes": 923463,
+      "scriptsRemoved": 25
+    },
+    {
+      "id": "government-02",
+      "category": "government",
+      "url": "https://www.gov.uk/",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      },
+      "title": "Welcome to GOV.UK",
+      "path": "pages/government-02/index.html",
+      "sha256": "ab2ca3d5ac91b0dbb8b156a36b3de5706f63dfc8918bc1ef29a04dedee073d0c",
+      "bytes": 508547,
+      "scriptsRemoved": 7
+    },
+    {
+      "id": "government-04",
+      "category": "government",
+      "url": "https://www.nasa.gov/",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "United States government work (NASA media usage guidelines)",
+        "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      },
+      "title": "NASA",
+      "path": "pages/government-04/index.html",
+      "sha256": "2b6bea051603ae20ce9deb00c50076568968182493cf4d8811398fe332795fe6",
+      "bytes": 559199,
+      "scriptsRemoved": 38
+    },
+    {
+      "id": "landing-01",
+      "category": "landing",
+      "url": "https://nodejs.org/en",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/nodejs/nodejs.org/blob/main/LICENSE"
+      },
+      "title": "Node.js — Run JavaScript Everywhere",
+      "path": "pages/landing-01/index.html",
+      "sha256": "6f9ab4a5a6150ca82ef3abe279f6e4c6b89cc377679695babb4b21a2c4f45749",
+      "bytes": 355397,
+      "scriptsRemoved": 33
+    },
+    {
+      "id": "login-01",
+      "category": "login",
+      "url": "https://preview.tabler.io/sign-in.html",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tabler/tabler/blob/dev/LICENSE"
+      },
+      "title": "Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.",
+      "path": "pages/login-01/index.html",
+      "sha256": "3b077de399e365ba15bc8edf074493d0a2b1b030dc8a97e93c3b351ae162e4ad",
+      "bytes": 884240,
+      "scriptsRemoved": 12
+    },
+    {
+      "id": "news-01",
+      "category": "news",
+      "url": "https://en.wikipedia.org/wiki/Web_accessibility",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://en.wikipedia.org/wiki/Wikipedia:Copyrights"
+      },
+      "title": "Web accessibility - Wikipedia",
+      "path": "pages/news-01/index.html",
+      "sha256": "1266362a16c3e0282c8bd1aff0a28adab9b26a8eb77108153f6fb016237bdcad",
+      "bytes": 888763,
+      "scriptsRemoved": 6
+    },
+    {
+      "id": "news-02",
+      "category": "news",
+      "url": "https://en.wikinews.org/wiki/Wikimedia_Foundation_closes_Wikinews_after_21_years",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://en.wikinews.org/wiki/Wikinews:Copyright"
+      },
+      "title": "Wikimedia Foundation closes Wikinews after 21 years - Wikinews, the free news source",
+      "path": "pages/news-02/index.html",
+      "sha256": "68833e124745607fa1def70fb976e109716fde48cf6b536db5bbadd631c0ff05",
+      "bytes": 808391,
+      "scriptsRemoved": 7
+    },
+    {
+      "id": "news-04",
+      "category": "news",
+      "url": "https://www.gov.uk/government/news/new-taskforce-to-boost-britains-resilience-to-flooding-and-drought",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      },
+      "title": "New taskforce to boost Britain’s resilience to flooding and drought - GOV.UK",
+      "path": "pages/news-04/index.html",
+      "sha256": "2181a194c04c68d7e889b27ecbb804492ac2c250fcef31a7f0fc75f51f80b6c6",
+      "bytes": 477840,
+      "scriptsRemoved": 9
+    },
+    {
+      "id": "search-01",
+      "category": "search",
+      "url": "https://www.gov.uk/search/all?keywords=passport",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      },
+      "title": "passport - Search - GOV.UK",
+      "path": "pages/search-01/index.html",
+      "sha256": "e15f0aeca205aa0d464223a15651b8becc850cca5becf1a0d141e2a2a22d52df",
+      "bytes": 371339,
+      "scriptsRemoved": 10
+    },
+    {
+      "id": "settings-01",
+      "category": "settings",
+      "url": "https://preview.tabler.io/settings.html",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tabler/tabler/blob/dev/LICENSE"
+      },
+      "title": "Settings - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.",
+      "path": "pages/settings-01/index.html",
+      "sha256": "45fd35c19415f24c61d7f7e9a1b3310b97b4652e586b4abddc85bf5e5f1f5cda",
+      "bytes": 1021489,
+      "scriptsRemoved": 12
+    },
+    {
+      "id": "shop-01",
+      "category": "shop",
+      "url": "https://next.medusajs.com/us/store",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/medusajs/nextjs-starter-medusa/blob/main/LICENSE"
+      },
+      "title": "Store",
+      "path": "pages/shop-01/index.html",
+      "sha256": "b640eddff8aa41eef880c21e7b7541b9a630b15179d234b7f4a84cdf38257cd5",
+      "bytes": 68636,
+      "scriptsRemoved": 28
+    },
+    {
+      "id": "shop-02",
+      "category": "shop",
+      "url": "https://next.medusajs.com/us/products/espresso-cup",
+      "landedUrl": "https://next.medusajs.com/us/products/espresso-cup?v_id=variant_01KA906CNZ2951NNN2GDFV1QF8",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/medusajs/nextjs-starter-medusa/blob/main/LICENSE"
+      },
+      "title": "Espresso Cup | Medusa Store",
+      "path": "pages/shop-02/index.html",
+      "sha256": "b049aafa903bf8be69d07d179eeeb981fe0aee80727c2c01f5819fecd2ea13d4",
+      "bytes": 66636,
+      "scriptsRemoved": 23
+    },
+    {
+      "id": "shop-03",
+      "category": "shop",
+      "url": "https://v2.demo.sylius.com/en_US/taxons/t-shirts/men",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/Sylius/Sylius/blob/2.0/LICENSE"
+      },
+      "title": "Fashion Web Store",
+      "path": "pages/shop-03/index.html",
+      "sha256": "db52c72978e759c2d851facd4893db135fddbe033938bbe455ff9bdefba81c42",
+      "bytes": 336420,
+      "scriptsRemoved": 4
+    },
+    {
+      "id": "shop-04",
+      "category": "shop",
+      "url": "https://v2.demo.sylius.com/en_US/checkout/address",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/Sylius/Sylius/blob/2.0/LICENSE"
+      },
+      "title": "Address | Fashion Web Store",
+      "path": "pages/shop-04/index.html",
+      "sha256": "e59fc248b2aa45a7e1957b7469b259f3ea0dba88f36b3f5d50fca67c7e5ecfc3",
+      "bytes": 317694,
+      "scriptsRemoved": 4
+    },
+    {
+      "id": "table-01",
+      "category": "table",
+      "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population",
+      "retrieved": "2026-10-12",
+      "licence": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://en.wikipedia.org/wiki/Wikipedia:Copyrights"
+      },
+      "title": "List of countries and dependencies by population - Wikipedia",
+      "path": "pages/table-01/index.html",
+      "sha256": "fb91db770f636277735e764e665165f48a9e181c1a1866f7354d7d66535df7f3",
+      "bytes": 2011194,
+      "scriptsRemoved": 6
+    }
+  ]
+}

@@ -109,6 +109,12 @@ jobs:
         # exists is worse than no check.
         run: node scripts/verify-act-corpus.mjs
 
+      - name: Verify the real-page corpus
+        # The second ground truth, corpus/real, under the same rule: every page
+        # digest-verified, nothing unlisted on disk, no script survived the
+        # snapshot. Bare node for the same reason as the step above.
+        run: node scripts/verify-real-corpus.mjs
+
   calibration:
     name: Published numbers match the harness
     runs-on: ubuntu-latest

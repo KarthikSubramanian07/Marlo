@@ -32,7 +32,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "corpus:fetch": "node scripts/fetch-act-corpus.mjs",
-    "corpus:verify": "node scripts/verify-act-corpus.mjs",
+    "corpus:verify": "node scripts/verify-act-corpus.mjs && node scripts/verify-real-corpus.mjs",
     "act:index": "node scripts/generate-act-index.mjs",
     "act:index:check": "node scripts/generate-act-index.mjs --check",
     "mappings:discover": "node scripts/discover-mappings.mjs",
