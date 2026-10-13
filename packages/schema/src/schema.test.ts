@@ -590,7 +590,10 @@ describe('the real-page block cannot publish a number nothing measured', () => {
   const awaiting = {
     retrieved: '2026-10-12',
     pages: 2,
-    categories: { government: 1, shop: 1 },
+    categories: [
+      { category: 'government', pages: 1 },
+      { category: 'shop', pages: 1 },
+    ],
     adjudication: {
       status: 'awaiting-adjudication',
       ratedCells: 0,

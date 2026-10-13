@@ -19,6 +19,26 @@ const object = (properties) => ({
 function schemas() {
   const row = object({ passed: count, failed: count, cantTell: count, inapplicable: count });
   const engineMetadata = object({ id: engine, version: string, mappedRules: count });
+  const calibration = object({
+    schemaVersion: { const: 1, type: 'integer' },
+    generated: date,
+    commit: { type: ['string', 'null'] },
+    corpus: ref('Corpus'),
+    engines: list(engineMetadata),
+    renderer: { type: 'string', enum: ['static', 'browser'] },
+    entries: list(ref('Measurement')),
+    routing: list(ref('Routing')),
+    autoFixThreshold: object({
+      minStrictPrecision: { type: 'number', minimum: 0, maximum: 1 },
+      minSampleSize: positiveCount,
+      rationale: { type: 'string', minLength: 1 },
+    }),
+    coverage: ref('CoverageCounts'),
+    aggregate: ref('Aggregate'),
+    // Null on a table measured before the real-page corpus existed, so the property is
+    // always present and typed, as every property in these schemas is.
+    realCorpus: { anyOf: [ref('RealCorpus'), { type: 'null' }] },
+  });
   return {
     Corpus: object({
       retrieved: date,
@@ -106,22 +126,80 @@ function schemas() {
         authentication: { const: 'none', type: 'string' },
       }),
     }),
-    Calibration: object({
-      schemaVersion: { const: 1, type: 'integer' },
-      generated: date,
-      commit: { type: ['string', 'null'] },
-      corpus: ref('Corpus'),
-      engines: list(engineMetadata),
-      renderer: { type: 'string', enum: ['static', 'browser'] },
-      entries: list(ref('Measurement')),
-      routing: list(ref('Routing')),
-      autoFixThreshold: object({
-        minStrictPrecision: { type: 'number', minimum: 0, maximum: 1 },
-        minSampleSize: positiveCount,
-        rationale: { type: 'string', minLength: 1 },
+    Calibration: calibration,
+    // The real-page corpus is graded separately from the ACT test cases and is never pooled
+    // with them. Optional on the table, so a table measured before the corpus existed still
+    // validates, and typed in full like every other hosted schema.
+    RealCorpus: object({
+      retrieved: date,
+      pages: positiveCount,
+      categories: list(object({ category: string, pages: positiveCount })),
+      adjudication: object({
+        status: { type: 'string', enum: ['awaiting-adjudication', 'partial', 'adjudicated'] },
+        ratedCells: count,
+        resolvedCells: count,
+        totalCells: positiveCount,
+        kappa: { type: ['number', 'null'], minimum: -1, maximum: 1 },
+        percentAgreement: rate,
       }),
-      coverage: ref('CoverageCounts'),
-      aggregate: ref('Aggregate'),
+      entries: list(
+        object({
+          actRuleId: ruleId,
+          engine,
+          outcomes: row,
+          errored: count,
+          unsupported: count,
+          findings: count,
+          graded: object({
+            resolvedCells: count,
+            unresolvedCells: count,
+            cantTellTruth: count,
+            strict: { anyOf: [ref('StrictAccuracy'), { type: 'null' }] },
+          }),
+        }),
+      ),
+      agreement: list(
+        object({
+          actRuleId: ruleId,
+          engines: { type: 'array', items: engine, minItems: 2, maxItems: 2 },
+          pages: count,
+          percentAgreement: rate,
+          kappa: { type: ['number', 'null'], minimum: -1, maximum: 1 },
+        }),
+      ),
+      aggregate: object({
+        findingsPerPage: list(
+          object({
+            engine,
+            pages: count,
+            findings: count,
+            mean: { type: ['number', 'null'], minimum: 0 },
+          }),
+        ),
+        perPage: list(
+          object({
+            page: { type: 'string', pattern: '^[a-z]+ \\([0-9a-f]{12}\\)$' },
+            findings: object(
+              Object.fromEntries(
+                engine.enum.map((id) => [id, { type: ['integer', 'null'], minimum: 0 }]),
+              ),
+            ),
+          }),
+        ),
+        invariant: object({
+          pages: count,
+          pagesWhereItWouldFire: count,
+          fraction: rate,
+          perRule: list(
+            object({
+              actRuleId: ruleId,
+              routedTo: { ...engine, type: ['string', 'null'], enum: [...engine.enum, null] },
+              pagesWhereItWouldFire: count,
+            }),
+          ),
+        }),
+        accuracy: ref('Aggregate'),
+      }),
     }),
     Problem: object({
       type: { type: 'string', format: 'uri-reference' },
@@ -268,5 +346,6 @@ export function createPublicApi({ origin, table, manifest }) {
     openapi: `${origin}/openapi.json`,
     tools: ['marlo_coverage', 'marlo_list_rules', 'marlo_explain_rule'],
   };
-  return { coverage, rules, calibration: table, openapi, mcpManifest };
+  const calibration = { ...table, realCorpus: table.realCorpus ?? null };
+  return { coverage, rules, calibration, openapi, mcpManifest };
 }

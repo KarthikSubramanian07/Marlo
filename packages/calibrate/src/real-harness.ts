@@ -333,7 +333,9 @@ export async function runRealHarness(options: RealHarnessOptions): Promise<RealH
     block: {
       retrieved: corpus.retrieved,
       pages: corpus.pages.length,
-      categories: { ...corpus.categories },
+      categories: Object.entries(corpus.categories)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([category, pages]) => ({ category, pages })),
       adjudication,
       entries,
       agreement,
