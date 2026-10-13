@@ -226,6 +226,9 @@ importers:
       '@marlo/render':
         specifier: workspace:*
         version: link:../render
+      '@marlo/report':
+        specifier: workspace:*
+        version: link:../report
       '@marlo/rules':
         specifier: workspace:*
         version: link:../rules
