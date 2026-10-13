@@ -239,14 +239,14 @@
         "passed": {
           "passed": 4,
           "failed": 0,
-          "cantTell": 2,
-          "inapplicable": 2
+          "cantTell": 3,
+          "inapplicable": 1
         },
         "failed": {
           "passed": 0,
           "failed": 6,
-          "cantTell": 3,
-          "inapplicable": 1
+          "cantTell": 4,
+          "inapplicable": 0
         },
         "inapplicable": {
           "passed": 2,
@@ -258,17 +258,17 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "partial",
+        "consistency": "consistent",
         "automation": "semi-automated",
-        "disallowed": 1
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 6,
         "falsePositives": 0,
         "falseNegatives": 4,
         "trueNegatives": 19,
-        "cantTellOnFailed": 3,
-        "cantTellOnPassed": 2,
+        "cantTellOnFailed": 4,
+        "cantTellOnPassed": 3,
         "precision": 1,
         "recall": 0.6,
         "f1": 0.7499999999999999,
@@ -1621,9 +1621,9 @@
       "testCaseCount": 10,
       "matrix": {
         "passed": {
-          "passed": 4,
+          "passed": 3,
           "failed": 0,
-          "cantTell": 0,
+          "cantTell": 1,
           "inapplicable": 0
         },
         "failed": {
@@ -1643,7 +1643,7 @@
       },
       "act": {
         "consistency": "consistent",
-        "automation": "automated",
+        "automation": "semi-automated",
         "disallowed": 0
       },
       "strict": {
@@ -1652,7 +1652,7 @@
         "falseNegatives": 0,
         "trueNegatives": 7,
         "cantTellOnFailed": 0,
-        "cantTellOnPassed": 0,
+        "cantTellOnPassed": 1,
         "precision": 1,
         "recall": 1,
         "f1": 1,
@@ -5377,14 +5377,14 @@
         "passed": {
           "passed": 4,
           "failed": 0,
-          "cantTell": 3,
-          "inapplicable": 2
+          "cantTell": 4,
+          "inapplicable": 1
         },
         "failed": {
           "passed": 0,
           "failed": 4,
-          "cantTell": 3,
-          "inapplicable": 1
+          "cantTell": 4,
+          "inapplicable": 0
         },
         "inapplicable": {
           "passed": 2,
@@ -5396,17 +5396,17 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "partial",
+        "consistency": "consistent",
         "automation": "semi-automated",
-        "disallowed": 1
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 4,
         "falsePositives": 0,
         "falseNegatives": 4,
         "trueNegatives": 20,
-        "cantTellOnFailed": 3,
-        "cantTellOnPassed": 3,
+        "cantTellOnFailed": 4,
+        "cantTellOnPassed": 4,
         "precision": 1,
         "recall": 0.5,
         "f1": 0.6666666666666666,
@@ -9129,14 +9129,14 @@
         "passed": {
           "passed": 2,
           "failed": 1,
-          "cantTell": 2,
-          "inapplicable": 1
+          "cantTell": 3,
+          "inapplicable": 0
         },
         "failed": {
           "passed": 1,
           "failed": 1,
-          "cantTell": 1,
-          "inapplicable": 1
+          "cantTell": 2,
+          "inapplicable": 0
         },
         "inapplicable": {
           "passed": 0,
@@ -9150,15 +9150,15 @@
       "act": {
         "consistency": "incorrect",
         "automation": "semi-automated",
-        "disallowed": 3
+        "disallowed": 2
       },
       "strict": {
         "truePositives": 1,
         "falsePositives": 1,
         "falseNegatives": 3,
         "trueNegatives": 10,
-        "cantTellOnFailed": 1,
-        "cantTellOnPassed": 3,
+        "cantTellOnFailed": 2,
+        "cantTellOnPassed": 4,
         "precision": 0.5,
         "recall": 0.25,
         "f1": 0.3333333333333333,
@@ -9939,7 +9939,7 @@
           "engine": "marlo",
           "strictRecall": 0.6,
           "strictPrecision": 1,
-          "consistency": "partial"
+          "consistency": "consistent"
         },
         {
           "engine": "htmlcs",
@@ -10573,7 +10573,7 @@
           "engine": "marlo",
           "strictRecall": 0.5,
           "strictPrecision": 1,
-          "consistency": "partial"
+          "consistency": "consistent"
         },
         {
           "engine": "htmlcs",

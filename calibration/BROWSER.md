@@ -50,7 +50,7 @@ Rules are listed in ACT identifier order. An engine with no mapping for a rule i
 | [`09o5cg`](https://act-rules.github.io/rules/09o5cg) | Alfa | partial | incorrect | semi-automated | 0.89 | 0.80 | 1/1 | no |
 | [`09o5cg`](https://act-rules.github.io/rules/09o5cg) | axe-core | partial | partial | automated | 1.00 | 0.70 | 0/0 | no |
 | [`09o5cg`](https://act-rules.github.io/rules/09o5cg) | HTML CodeSniffer | partial | partial | automated | not measured | 0.00 | 0/0 | no |
-| [`09o5cg`](https://act-rules.github.io/rules/09o5cg) | Marlo | exact | partial | semi-automated | 1.00 | 0.60 | 3/2 | no |
+| [`09o5cg`](https://act-rules.github.io/rules/09o5cg) | Marlo | exact | consistent | semi-automated | 1.00 | 0.60 | 4/3 | no |
 | | | | | | | | | Text has enhanced contrast |
 | [`23a2a8`](https://act-rules.github.io/rules/23a2a8) | Alfa | exact | consistent | automated | 1.00 | 1.00 | 0/0 | no |
 | [`23a2a8`](https://act-rules.github.io/rules/23a2a8) | axe-core | partial | consistent | automated | 1.00 | 1.00 | 0/0 | no |
@@ -74,7 +74,7 @@ Rules are listed in ACT identifier order. An engine with no mapping for a rule i
 | [`36b590`](https://act-rules.github.io/rules/36b590) | Marlo | exact | consistent | semi-automated | not measured | 0.00 | 5/2 | **yes** |
 | | | | | | | | | Error message describes invalid form field value |
 | [`3ea0c8`](https://act-rules.github.io/rules/3ea0c8) | axe-core | partial | consistent | semi-automated | not measured | 0.00 | 3/0 | **yes** |
-| [`3ea0c8`](https://act-rules.github.io/rules/3ea0c8) | Marlo | exact | consistent | automated | 1.00 | 1.00 | 0/0 | no |
+| [`3ea0c8`](https://act-rules.github.io/rules/3ea0c8) | Marlo | exact | consistent | semi-automated | 1.00 | 1.00 | 0/1 | no |
 | | | | | | | | | Id attribute value is unique |
 | [`46ca7f`](https://act-rules.github.io/rules/46ca7f) | Alfa | partial | consistent | automated | 1.00 | 1.00 | 0/0 | no |
 | [`46ca7f`](https://act-rules.github.io/rules/46ca7f) | axe-core | exact | consistent | automated | 1.00 | 1.00 | 0/0 | no |
@@ -147,7 +147,7 @@ Rules are listed in ACT identifier order. An engine with no mapping for a rule i
 | [`afw4f7`](https://act-rules.github.io/rules/afw4f7) | Alfa | partial | incorrect | semi-automated | 0.86 | 0.75 | 1/2 | no |
 | [`afw4f7`](https://act-rules.github.io/rules/afw4f7) | axe-core | partial | consistent | semi-automated | 1.00 | 0.63 | 3/4 | no |
 | [`afw4f7`](https://act-rules.github.io/rules/afw4f7) | HTML CodeSniffer | partial | incorrect | automated | 0.29 | 0.25 | 0/0 | no |
-| [`afw4f7`](https://act-rules.github.io/rules/afw4f7) | Marlo | exact | partial | semi-automated | 1.00 | 0.50 | 3/3 | no |
+| [`afw4f7`](https://act-rules.github.io/rules/afw4f7) | Marlo | exact | consistent | semi-automated | 1.00 | 0.50 | 4/4 | no |
 | | | | | | | | | Text has minimum contrast |
 | [`b20e66`](https://act-rules.github.io/rules/b20e66) | Alfa | partial | consistent | semi-automated | not measured | 0.00 | 6/7 | **yes** |
 | | | | | | | | | Links with identical accessible names have equivalent purpose |
@@ -215,7 +215,7 @@ Rules are listed in ACT identifier order. An engine with no mapping for a rule i
 | | | | | | | | | Links with identical accessible names and same context serve equivalent purpose |
 | [`ff89c9`](https://act-rules.github.io/rules/ff89c9) | Alfa | partial | consistent | automated | 1.00 | 1.00 | 0/0 | no |
 | [`ff89c9`](https://act-rules.github.io/rules/ff89c9) | axe-core | partial | partial | automated | 1.00 | 0.75 | 0/0 | no |
-| [`ff89c9`](https://act-rules.github.io/rules/ff89c9) | Marlo | exact | incorrect | semi-automated | 0.50 | 0.25 | 1/3 | no |
+| [`ff89c9`](https://act-rules.github.io/rules/ff89c9) | Marlo | exact | incorrect | semi-automated | 0.50 | 0.25 | 2/4 | no |
 | | | | | | | | | ARIA required context role |
 | [`ffd0e9`](https://act-rules.github.io/rules/ffd0e9) | Alfa | exact | consistent | automated | 1.00 | 1.00 | 0/0 | no |
 | [`ffd0e9`](https://act-rules.github.io/rules/ffd0e9) | axe-core | exact | consistent | automated | 1.00 | 1.00 | 0/0 | no |
