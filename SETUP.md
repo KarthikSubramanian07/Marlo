@@ -98,11 +98,11 @@ Add both under the repository's Settings, Secrets and variables, Actions. The wo
 
 ## Manual steps that remain
 
-Exactly four, and all of them are things a person has to decide rather than a script.
+Six, and all of them are things a person has to decide or hold rather than a script.
 
 1. **Nothing, for branch protection.** It is on, as two rulesets, and it is worth knowing which is which because they are enforced differently.
 
-   `main: history and checks, no exceptions` has **no bypass actors at all**. Nobody can force push, delete the branch, merge a non-linear history, or land anything without all ten required checks green. That includes the repository owner, and it has been tested by attempting a force push and being refused.
+   `main: history and checks, no exceptions` has **no bypass actors at all**. Nobody can force push, delete the branch, merge a non-linear history, or land anything without all twelve required checks green. That includes the repository owner, and it has been tested by attempting a force push and being refused.
 
    `main: one review, repository admin exempt` requires one approving review. The bypass is the part GitHub cannot express on a personal repository: `bypass_actors` accepts `RepositoryRole: admin`, which does not cover the owner, and `OrganizationAdmin`, which needs an organization. So the review requirement applies to everyone, and the owner overrides it per merge:
 
@@ -117,6 +117,8 @@ Exactly four, and all of them are things a person has to decide rather than a sc
 2. **`marlo.pages.dev` was taken.** Cloudflare assigned a suffixed subdomain, so the documented fallback `trymarlo.pages.dev` is used consistently everywhere. If you acquire the shorter name, it appears in `apps/site/src/build.mjs` (`ORIGIN`), `README.md`, `package.json` and `SECURITY.md`.
 3. **Publishing to npm.** Nothing is published. `pnpm -r publish` when you want it, and note the brief's instruction that a public release should not be tagged without asking.
 4. **A language provider, if you ever want generated alt text.** `ANTHROPIC_API_KEY` plus `MARLO_LANGUAGE_PROVIDER=anthropic`. The default is a deterministic stub and there is no fallback that quietly upgrades to a network call.
+5. **The deployment secrets.** `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, as described under [Automatic deployment from main](#automatic-deployment-from-main). Until they exist the deploy workflow fails on its first step and says why, and the site is published by hand with `pnpm run deploy`.
+6. **Two people to rate the real pages.** `corpus/real/adjudication/PROTOCOL.md` explains the protocol, and `node scripts/adjudicate.mjs sheet --rater A` regenerates a worksheet. The raters work independently and never see engine output. No real-page accuracy figure can be published until they have, and the schema refuses one.
 
 ## Environment variables
 

@@ -140,7 +140,7 @@ jobs:
         # from, and `--check` fails on a regression and on an unrecorded improvement
         # alike. README.md and SETUP.md have described this as the CI gate since the
         # table existed, and until this job nothing in CI invoked it: the table could
-        # drift from the harness and ten green checks would say nothing about it.
+        # drift from the harness and every other required check would say nothing about it.
         run: node packages/calibrate/dist/bin.js --check
 
   test:

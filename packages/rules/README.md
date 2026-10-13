@@ -28,8 +28,8 @@ That is asserted structurally rather than by reading source. `rules.test.ts` run
 
 A complete computation handles CSS generated content, `::before` and `::after`, and text alternatives resolved through the box tree. Those need `layout`. So a link containing an image gets `uncertain`, not a guess, and the calibration table shows what that caution costs in recall.
 
-## Contrast: located, never fixed
+## Contrast: computed, never fixed
 
 Both contrast rules are `fixability: 'never'`, with a test asserting it. Recolouring is a design decision, and a repair layer permitted to pick a colour is exactly the "fix drifting into UI redesign" failure the LLM accessibility literature catalogues.
 
-Even with `layout` available, they return `cantTell` and name the declared colours rather than asserting a ratio: computing it correctly needs the effective background behind any transparency, which is a paint-order walk this version does not implement. Locating the text is real value. Asserting a ratio Marlo has not correctly computed would not be.
+With `layout` available they compute the ratio. `colour.ts` parses the colours a browser resolves and composites alpha in sRGB, and `paint.ts` walks the paint order behind each piece of text: background layers up the ancestors to the first opaque one, ancestor `opacity` multiplied through, and the canvas. Wherever one ratio would be a guess, a background image or gradient, a blend mode or filter, a text shadow, a positioned element painting over the text, a colour syntax that cannot be converted exactly, or a canvas the page allows to be dark, the rule answers `cantTell` and names the element responsible. A confident wrong ratio is worse than none. Without `layout`, both rules report as not evaluated.
