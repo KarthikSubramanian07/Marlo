@@ -902,10 +902,15 @@ ${
           <div class="prose stack">
             <p>
               Ground truth comes from two people rating every page against every rule
-              independently, with every disagreement written down. Of
-              ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })}
-              cells, ${num(real.adjudication.ratedCells, { field: 'realCorpus.adjudication.ratedCells' })}
-              are rated, so the table holds no accuracy figure for these pages and refuses one.
+              independently, with every disagreement written down. ${
+                real.adjudication.ratedCells === 0
+                  ? `None of the ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })} cells has been rated yet`
+                  : `${num(real.adjudication.ratedCells, { field: 'realCorpus.adjudication.ratedCells' })} of the ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })} cells are rated`
+              }${
+                real.aggregate.accuracy.sampleSize === 0
+                  ? ', so the table holds no accuracy figure for these pages and refuses one'
+                  : ''
+              }.
             </p>
             <p>
               What can be measured without ground truth already shows the official corpus is
