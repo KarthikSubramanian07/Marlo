@@ -21,7 +21,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build && esbuild src/marlo-browser-entry.ts --bundle --format=iife --global-name=MarloRules --platform=browser --target=es2022 --outfile=dist/marlo.browser.js --log-level=warning"
   },
   "dependencies": {
     "@marlo/act": "workspace:*",
@@ -33,5 +33,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
   }
 }

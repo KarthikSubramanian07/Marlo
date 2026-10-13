@@ -1,9 +1,18 @@
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
-import type { ActRuleId, Capability, EngineId, EngineReport } from '@marlo/schema';
+import type { ActRuleId, Capability, EngineId } from '@marlo/schema';
+import { EngineReport } from '@marlo/schema';
 import type { RenderedPage } from '@marlo/render';
 import type { Engine } from '@marlo/engines';
-import { buildMapping } from '@marlo/engines';
+import {
+  assembleReport,
+  buildMapping,
+  bundlePath,
+  ensureScript,
+  evaluateInPage,
+  narrowHandle,
+  readBundle,
+} from '@marlo/engines';
 import {
   IMPLEMENTED_RULES,
   buildDocument,
@@ -25,11 +34,18 @@ import {
  * There is a test asserting this file contains no verdict logic, because a "wrapper"
  * that started adjusting outcomes would be exactly the self-audit the boundary exists
  * to prevent.
+ *
+ * Two paths, chosen by narrowing the handle. A happy-dom window is converted in this
+ * process with no resolved styles, so the layout rules report `unsupported`. A Playwright
+ * page gets the rules injected as a bundle, `dist/marlo.browser.js`, and evaluated inside
+ * it with the real computed styles and boxes; the finished report crosses back as JSON and
+ * is validated against the schema before anything reads it.
  */
 
 const require = createRequire(import.meta.url);
 
 let cachedVersion: string | null = null;
+let cachedBundle: string | null = null;
 
 function marloVersion(): string {
   cachedVersion ??= ((): string => {
@@ -43,6 +59,16 @@ function marloVersion(): string {
     throw new Error('cannot read the @marlo/rules version');
   })();
   return cachedVersion;
+}
+
+/** Where the build puts the rules browser bundle. Works from `src` and from `dist`. */
+export function marloBundlePath(): string {
+  return bundlePath(require.resolve('@marlo/calibrate/package.json'), 'marlo.browser.js');
+}
+
+function marloBundleSource(): string {
+  cachedBundle ??= readBundle(marloBundlePath(), 'Marlo rules');
+  return cachedBundle;
 }
 
 /** Narrows a renderer handle to the DOM shape @marlo/rules can convert. */
@@ -97,23 +123,61 @@ export class MarloEngine implements Engine {
    */
   readonly requires: readonly Capability[] = ['dom'];
 
-  evaluate(page: RenderedPage, actRuleIds: readonly ActRuleId[]): Promise<EngineReport> {
+  async evaluate(page: RenderedPage, actRuleIds: readonly ActRuleId[]): Promise<EngineReport> {
     const implemented = actRuleIds.filter((id) => findMarloRule(id) !== undefined);
     if (implemented.length === 0) {
-      return Promise.resolve(
-        evaluateRules(actRuleIds, {
-          document: buildDocument(
-            { nodeType: 1, nodeName: 'html', childNodes: [], textContent: '' },
-            { url: page.url, hasDoctype: false, computedStyleFor: null, boxFor: null },
-          ),
-          renderer: page.renderer,
-          capabilities: page.capabilities,
-          version: this.version,
-        }),
-      );
+      return evaluateRules(actRuleIds, {
+        document: buildDocument(
+          { nodeType: 1, nodeName: 'html', childNodes: [], textContent: '' },
+          { url: page.url, hasDoctype: false, computedStyleFor: null, boxFor: null },
+        ),
+        renderer: page.renderer,
+        capabilities: page.capabilities,
+        version: this.version,
+      });
     }
 
-    const { root, hasDoctype } = documentOf(page.handle);
+    const handle = narrowHandle(page.handle, 'marlo');
+
+    if (handle.kind === 'page') {
+      const started = Date.now();
+      try {
+        await ensureScript(handle.page, 'MarloRules', marloBundleSource);
+        const options = JSON.stringify({
+          url: page.url,
+          renderer: page.renderer,
+          capabilities: [...page.capabilities],
+          version: this.version,
+        });
+        const raw = await evaluateInPage(
+          handle.page,
+          `return MarloRules.evaluate(${JSON.stringify(actRuleIds)}, ${options});`,
+        );
+        // Validated rather than cast. The report was produced in another process by a
+        // bundle built from some revision of @marlo/rules, and the schema is the contract.
+        return EngineReport.parse(raw);
+      } catch (error) {
+        // A real page can fail in ways a happy-dom window cannot: a meta refresh or a
+        // script navigates it away and destroys the context mid-evaluation, or the bundle
+        // is missing. That is one page that could not be measured, reported per rule as
+        // `error` exactly as the peer adapters report it, and `error` is never a pass.
+        // Throwing instead would take the whole scan or calibration run down with it.
+        const message = error instanceof Error ? error.message : String(error);
+        return assembleReport({
+          engine: this.id,
+          engineVersion: this.version,
+          page,
+          requested: actRuleIds,
+          requires: this.requires,
+          mapping: this.mapping,
+          verdicts: new Map(),
+          errors: new Map(implemented.map((id) => [id, message])),
+          durationMs: Date.now() - started,
+        });
+      }
+    }
+
+    const { root, hasDoctype } = documentOf(handle.window);
     const document = buildDocument(root, {
       url: page.url,
       hasDoctype,
@@ -125,13 +189,11 @@ export class MarloEngine implements Engine {
       boxFor: null,
     });
 
-    return Promise.resolve(
-      evaluateRules(actRuleIds, {
-        document,
-        renderer: page.renderer,
-        capabilities: page.capabilities,
-        version: this.version,
-      }),
-    );
+    return evaluateRules(actRuleIds, {
+      document,
+      renderer: page.renderer,
+      capabilities: page.capabilities,
+      version: this.version,
+    });
   }
 }
