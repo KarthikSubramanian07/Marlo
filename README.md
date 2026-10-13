@@ -43,7 +43,7 @@ Under Chromium, 590 test case outcomes are graded, because the layout cases beco
 | **Marlo**           | **41** | **0.858** | **0.630** | **5.0%**        |
 | HTML CodeSniffer    | 12     | 0.622     | 0.394     | 13.0%           |
 
-Still third of four. On minimum contrast, which every scan before this reported as not evaluated, Marlo computes the ratio from a paint-order walk and has not flagged a passing case, and it misses every failing case whose text sits on an image, a gradient or a shadow, because there it says it cannot tell rather than guess.
+Still third of four. On minimum contrast, which every scan before this reported as not evaluated, Marlo computes the ratio from a paint-order walk and has not flagged a passing case, and every failing case it misses is one where it says it cannot tell rather than guess: text on an image or a gradient, or inside a shadow root it does not enter.
 
 ### A second corpus, from real pages
 

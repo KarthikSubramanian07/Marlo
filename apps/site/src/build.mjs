@@ -877,8 +877,8 @@ pages.push({
               ${num(browserContrast?.strict.precision ?? null, { as: 'rate', field: 'browser.strict.precision.afw4f7' })},
               recall
               ${num(browserContrast?.strict.recall ?? null, { as: 'rate', field: 'browser.strict.recall.afw4f7' })}.
-              Its misses are pages where the text sits on an image, a gradient or a shadow,
-              where it says it cannot tell rather than guess a ratio.
+              Every failing case it misses is one where it says it cannot tell rather than
+              guess: text on an image or a gradient, or inside a shadow root it does not enter.
             </p>
           </div>
         </div>
