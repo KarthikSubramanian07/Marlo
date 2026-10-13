@@ -221,11 +221,19 @@ jobs:
           pnpm add -D -w playwright@1.62.0
           pnpm exec playwright install --with-deps chromium
 
-      - name: What the browser renderer can and cannot do
-        # The job that writes down a limitation rather than assuming it. No engine can
-        # evaluate a Playwright page, and this asserts that none of them returns a verdict
-        # it could not have earned. It fails the day somebody makes the browser path work,
-        # which is issue #37 and the point of the test.
+      - name: Build
+        # Two of the four engines are injected into the page as bundles that esbuild
+        # writes during the build: Alfa into packages/engines/dist and Marlo's own rules
+        # into packages/calibrate/dist. Without this step the adapters report every rule
+        # as errored with a message naming `pnpm build`, which is loud but not a result.
+        run: pnpm run build
+
+      - name: Every engine, inside a real browser page
+        # The browser golden files. The same demo pages the end to end job scans with the
+        # static renderer go through Chromium here, with all four engines evaluated inside
+        # the page, and the output is compared to tests/golden/browser. The two renderers
+        # disagree on purpose: the contrast rules are evaluated here and not evaluated
+        # there, and the diff between the two golden sets is the record of that.
         run: pnpm run test:browser
 
   coverage:

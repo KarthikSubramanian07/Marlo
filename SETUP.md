@@ -61,9 +61,15 @@ Only needed for layout-dependent rules and for capturing the site.
 ```bash
 pnpm add -D playwright
 pnpm exec playwright install chromium
+pnpm build                                    # the browser path injects bundles from dist
+marlo scan page.html --renderer browser       # every engine runs inside a Chromium page
+pnpm calibrate --renderer browser             # writes calibration/browser.json and BROWSER.md
+pnpm test:browser                             # the browser golden files, tests/golden/browser
 ```
 
-Without it, layout-dependent rules report as **not evaluated** rather than passing, which is the honest degradation.
+With it, all four engines run inside the page: axe-core and HTML CodeSniffer are injected as they ship, and Alfa and Marlo's own rules are injected as the bundles `pnpm build` writes to `packages/engines/dist/alfa.browser.js` and `packages/calibrate/dist/marlo.browser.js`. The contrast rules are then evaluated, and a browser scan reads its confidence figures from `calibration/browser.json`, the table measured with that renderer, when it exists.
+
+Without it, layout-dependent rules report as **not evaluated** rather than passing, which is the honest degradation, and `marlo scan --renderer browser` exits 2 with the install command above.
 
 ## To deploy the site
 
