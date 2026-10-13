@@ -32,6 +32,9 @@ apps/demo/checkout.html
 
   ▲▲▲ critical e086e5  Form field has non-empty accessible name
       WCAG 1.3.1, 2.5.3, 4.1.2  axe-core precision 1.00 over 17 official test cases
+      input (not located in source)
+        INVARIANT marlo failed this element and the routed engine did not report it: axe-core says passed, alfa says passed.
+        The field has no accessible name, so it is announced only by its type. A placeholder ("Email") is not a label: it disappears on focus and is not reliably announced.
       div[role="slider"] (not located in source)
         ARIA input fields must have an accessible name
       input[name="postcode"] (not located in source)
@@ -39,8 +42,6 @@ apps/demo/checkout.html
       input[name="postcode-confirm"] (not located in source)
         Form elements must have labels
       input[name="city"] (not located in source)
-        Form elements must have labels
-      input[type="tel"] (not located in source)
         Form elements must have labels
       and 1 more for this rule, not shown
 
