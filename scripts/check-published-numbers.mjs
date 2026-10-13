@@ -28,6 +28,17 @@
  *   the corpus sample size
  *   the routing counts
  *   the number of rows in the flattered-by-protocol table
+ *   Marlo's rank among the four engines, in words
+ *   the same table, sample size and rank for the browser measurement, against
+ *     calibration/browser.json
+ *   the real-page counts against the table's realCorpus block, and that no rated cell
+ *     exists while the README says none does
+ *   how many codemod rules clear the auto-fix gate
+ *   the recorded scan, line by line, against the committed golden terminal output
+ *
+ * The static and browser tables share a row format, so each claim is looked up only in
+ * the README section it belongs to. A pattern searched across the whole file matched
+ * both tables and compared one engine's browser figures with its static ones.
  *
  * A PATTERN THAT STOPS MATCHING IS A FAILURE, NOT A PASS
  *
@@ -44,16 +55,41 @@ import { resolve } from 'node:path';
 const ROOT = resolve(import.meta.dirname, '..');
 const readme = readFileSync(resolve(ROOT, 'README.md'), 'utf8');
 const table = JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8'));
+const browser = JSON.parse(readFileSync(resolve(ROOT, 'calibration/browser.json'), 'utf8'));
+const golden = readFileSync(resolve(ROOT, 'tests/golden/checkout-terminal.txt'), 'utf8');
+const codemodSource = readFileSync(resolve(ROOT, 'packages/repair/src/codemod.ts'), 'utf8');
 
 const problems = [];
 
+/**
+ * The text between two headings, or the empty string when either is missing, which every
+ * claim inside it then reports as no longer present.
+ */
+function section(from, to) {
+  const start = readme.indexOf(from);
+  if (start === -1) return '';
+  const end = to === null ? -1 : readme.indexOf(to, start + from.length);
+  return readme.slice(start, end === -1 ? undefined : end);
+}
+
+const STATIC_SECTION = section(
+  '## The table nobody else publishes',
+  '### The same corpus, inside a real browser',
+);
+const BROWSER_SECTION = section(
+  '### The same corpus, inside a real browser',
+  '### A second corpus, from real pages',
+);
+const REAL_SECTION = section('### A second corpus, from real pages', '\n---');
+const SCAN_SECTION = section('## What using it looks like', 'Three things there that');
+
 /** Pools the confusion counts the way `aggregateStrictAccuracy` does. */
-function pooled(engineId) {
+function pooled(engineId, source = table) {
   let tp = 0;
   let fp = 0;
   let fn = 0;
   let tn = 0;
-  for (const entry of table.entries) {
+  for (const entry of source.entries) {
     if (entry.engine !== engineId) continue;
     if (entry.mappingKind === 'none' || entry.testCaseCount === 0) continue;
     tp += entry.strict.truePositives;
@@ -64,7 +100,7 @@ function pooled(engineId) {
   const ratio = (a, b) => (b === 0 ? null : a / b);
   return {
     rules: new Set(
-      table.entries
+      source.entries
         .filter((e) => e.engine === engineId && e.mappingKind !== 'none')
         .map((e) => e.actRuleId),
     ).size,
@@ -82,8 +118,8 @@ const percent = (value) => (value === null ? 'not measured' : `${(value * 100).t
  * Finds exactly one match, or records a problem. Zero matches means the claim was
  * reworded and this check went blind, which is reported rather than ignored.
  */
-function claim(what, pattern) {
-  const matches = [...readme.matchAll(pattern)];
+function claim(what, pattern, text = readme) {
+  const matches = [...text.matchAll(pattern)];
   if (matches.length === 0) {
     problems.push(`${what}: no longer present in README.md. Reword the check, not just the prose.`);
     return null;
@@ -102,6 +138,20 @@ function expect(what, actual, wanted) {
     if (found !== wanted) problems.push(`${what}: README says ${found}, the table says ${wanted}`);
   }
 }
+
+const NUMBER_WORDS = [
+  'Zero',
+  'One',
+  'Two',
+  'Three',
+  'Four',
+  'Five',
+  'Six',
+  'Seven',
+  'Eight',
+  'Nine',
+  'Ten',
+];
 
 const marlo = pooled('marlo');
 
@@ -131,45 +181,182 @@ expect(
   String(table.aggregate.sampleSize),
 );
 
-// The per-engine table. Every cell, not only Marlo's row.
+// The per-engine tables. Every cell, not only Marlo's row, each against its own table.
 const LABELS = {
   Alfa: 'alfa',
   'axe-core': 'axe-core',
   Marlo: 'marlo',
   'HTML CodeSniffer': 'htmlcs',
 };
-for (const [label, id] of Object.entries(LABELS)) {
-  const row = claim(
-    `${label} row`,
-    new RegExp(
-      `\\|\\s*\\*{0,2}${label.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\*{0,2}\\s*\\|` +
-        `\\s*\\*{0,2}(\\d+)\\*{0,2}\\s*\\|\\s*\\*{0,2}([\\d.]+|not measured)\\*{0,2}\\s*\\|` +
-        `\\s*\\*{0,2}([\\d.]+|not measured)\\*{0,2}\\s*\\|\\s*\\*{0,2}([\\d.]+%|not measured)\\*{0,2}\\s*\\|`,
-      'g',
-    ),
-  );
-  if (row === null) continue;
-  const want = pooled(id);
+const ORDINALS = ['first', 'second', 'third', 'fourth'];
+
+function checkEngineTable(name, text, source, labelSuffix) {
+  for (const [label, id] of Object.entries(LABELS)) {
+    const cell = `${label}${labelSuffix}`.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const row = claim(
+      `${name}: ${label} row`,
+      new RegExp(
+        `\\|\\s*\\*{0,2}${cell}\\*{0,2}\\s*\\|` +
+          `\\s*\\*{0,2}(\\d+)\\*{0,2}\\s*\\|\\s*\\*{0,2}([\\d.]+|not measured)\\*{0,2}\\s*\\|` +
+          `\\s*\\*{0,2}([\\d.]+|not measured)\\*{0,2}\\s*\\|\\s*\\*{0,2}([\\d.]+%|not measured)\\*{0,2}\\s*\\|`,
+        'g',
+      ),
+      text,
+    );
+    if (row === null) continue;
+    const want = pooled(id, source);
+    expect(
+      `${name}: ${label} rules`,
+      row.map((m) => m[1]),
+      String(want.rules),
+    );
+    expect(
+      `${name}: ${label} precision`,
+      row.map((m) => m[2]),
+      rate(want.precision),
+    );
+    expect(
+      `${name}: ${label} recall`,
+      row.map((m) => m[3]),
+      rate(want.recall),
+    );
+    expect(
+      `${name}: ${label} false positives`,
+      row.map((m) => m[4]),
+      percent(want.falsePositiveRate),
+    );
+  }
+  // The rank, by false positive rate, which is the published claim.
+  const order = Object.values(LABELS)
+    .map((id) => ({ id, fpr: pooled(id, source).falsePositiveRate ?? Infinity }))
+    .sort((a, b) => a.fpr - b.fpr)
+    .map((e) => e.id);
   expect(
-    `${label} rules`,
-    row.map((m) => m[1]),
-    String(want.rules),
+    `${name}: Marlo's rank`,
+    claim(`${name}: Marlo's rank`, /(first|second|third|fourth) of four/g, text)?.map((m) => m[1]),
+    ORDINALS[order.indexOf('marlo')],
   );
-  expect(
-    `${label} precision`,
-    row.map((m) => m[2]),
-    rate(want.precision),
+}
+
+checkEngineTable('static table', STATIC_SECTION, table, '');
+checkEngineTable('browser table', BROWSER_SECTION, browser, '');
+expect(
+  'browser sample size',
+  claim(
+    'browser sample size',
+    /Under Chromium, ([\d,]+) test case outcomes are graded/g,
+    BROWSER_SECTION,
+  )?.map((m) => m[1]),
+  String(browser.aggregate.sampleSize),
+);
+
+// The contrast claim under the browser renderer: no passing case flagged, and every
+// missed failing case a decline rather than a wrong answer.
+{
+  const entry = browser.entries.find((e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo');
+  const said = claim(
+    'contrast claim',
+    /Marlo computes the ratio from a paint-order walk and has not flagged a passing case/g,
+    BROWSER_SECTION,
   );
-  expect(
-    `${label} recall`,
-    row.map((m) => m[3]),
-    rate(want.recall),
+  if (said !== null && entry !== undefined) {
+    compared += 1;
+    if (entry.strict.falsePositives !== 0) {
+      problems.push(
+        `contrast claim: README says no passing case was flagged, the browser table records ${String(entry.strict.falsePositives)}`,
+      );
+    }
+    if (entry.strict.falseNegatives !== entry.strict.cantTellOnFailed) {
+      problems.push(
+        'contrast claim: README says every miss is a decline, and the browser table has a failing case answered other than cantTell',
+      );
+    }
+  }
+}
+
+// The real-page corpus, against its own block.
+{
+  const real = table.realCorpus;
+  const NUMBER_RE = /vendors (\d+) pages from (\d+) kinds of site/g;
+  if (real === undefined) {
+    problems.push('real pages: README describes a real-page corpus and the table has none');
+  } else {
+    expect(
+      'real pages and categories',
+      claim('real pages and categories', NUMBER_RE, REAL_SECTION)?.map((m) => `${m[1]}/${m[2]}`),
+      `${String(real.pages)}/${String(real.categories.length)}`,
+    );
+    const cells = claim(
+      'real adjudication cells',
+      /none of the (\d+) cells has been rated/g,
+      REAL_SECTION,
+    );
+    expect(
+      'real adjudication cells',
+      cells?.map((m) => m[1]),
+      String(real.adjudication.totalCells),
+    );
+    if (cells !== null && real.adjudication.ratedCells !== 0) {
+      problems.push(
+        `real adjudication: README says no cell is rated, the table records ${String(real.adjudication.ratedCells)}`,
+      );
+    }
+    expect(
+      'real invariant pages',
+      claim(
+        'real invariant pages',
+        /on (\d+) of the (\d+) pages some engine reports a failure/g,
+        REAL_SECTION,
+      )?.map((m) => `${m[1]}/${m[2]}`),
+      `${String(real.aggregate.invariant.pagesWhereItWouldFire)}/${String(real.aggregate.invariant.pages)}`,
+    );
+    const means = real.aggregate.findingsPerPage
+      .map((f) => f.mean)
+      .filter((m) => m !== null && m > 0);
+    const words = [
+      'zero',
+      'one order of magnitude',
+      'two orders of magnitude',
+      'three orders of magnitude',
+    ];
+    expect(
+      'real findings spread',
+      claim('real findings spread', /(\w+ orders? of magnitude) apart/g, REAL_SECTION)?.map(
+        (m) => m[1],
+      ),
+      words[Math.floor(Math.log10(Math.max(...means) / Math.min(...means)))] ?? 'more',
+    );
+  }
+}
+
+// The repair gate, stated in prose.
+{
+  const block = /export const CODEMODS[^{]*\{([\s\S]*?)\n\}/.exec(codemodSource)?.[1] ?? '';
+  const ids = [...new Set([...block.matchAll(/'?([0-9a-z]{6})'?\s*:/g)].map((m) => m[1]))];
+  const clearing = ids.filter(
+    (id) => table.routing.find((r) => r.actRuleId === id)?.autoFixPermitted === true,
   );
-  expect(
-    `${label} false positives`,
-    row.map((m) => m[4]),
-    percent(want.falsePositiveRate),
+  const said = claim('repair gate', /Repair covers (\w+) rules, and applies (\w+) of them/g)?.map(
+    (m) => `${m[1].toLowerCase()}/${m[2].toLowerCase()}`,
   );
+  const word = (n) => (NUMBER_WORDS[n] ?? String(n)).toLowerCase();
+  expect('repair gate', said, `${word(ids.length)}/${word(clearing.length)}`);
+}
+
+// The recorded scan, which must be output the scanner produced rather than prose.
+{
+  const block = /```\n([\s\S]*?)\n```/.exec(SCAN_SECTION)?.[1];
+  if (block === undefined) {
+    problems.push('recorded scan: no code block found under "What using it looks like"');
+  } else {
+    for (const line of block.split('\n')) {
+      if (line.trim() === '' || line.startsWith('$ marlo')) continue;
+      compared += 1;
+      if (!golden.includes(line)) {
+        problems.push(`recorded scan: not in tests/golden/checkout-terminal.txt: ${line.trim()}`);
+      }
+    }
+  }
 }
 
 // Routing, stated in prose next to the table.
@@ -183,25 +370,14 @@ expect(
   claim(
     'routing counts',
     /router sends (\d+) rules to axe-core against (\d+) to Marlo's own engine/g,
+    STATIC_SECTION,
   )?.map((m) => `${m[1]}/${m[2]}`),
   `${String(routed['axe-core'] ?? 0)}/${String(routed['marlo'] ?? 0)}`,
 );
 
 // The flattered-by-protocol table, which is the point of publishing two views.
 const flattered = table.entries.filter((e) => e.flatteredByProtocol);
-const NUMBER_WORDS = [
-  'Zero',
-  'One',
-  'Two',
-  'Three',
-  'Four',
-  'Five',
-  'Six',
-  'Seven',
-  'Eight',
-  'Nine',
-  'Ten',
-];
+
 expect(
   'flattered entry count',
   claim('flattered entry count', /(\w+) entries currently grade as officially/g)?.map((m) => m[1]),
