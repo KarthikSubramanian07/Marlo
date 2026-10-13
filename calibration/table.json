@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generated": "2026-10-13",
-  "commit": "f8d43e9e87b3b8a6d34f4e924ecee43b8a3de3fc",
+  "commit": "91bb96dd1acc348dfe38201751b4f2603ff0ecbd",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -11253,14 +11253,14 @@
         "actRuleId": "23a2a8",
         "engine": "marlo",
         "outcomes": {
-          "passed": 15,
-          "failed": 4,
+          "passed": 10,
+          "failed": 3,
           "cantTell": 0,
-          "inapplicable": 6
+          "inapplicable": 12
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 15,
+        "findings": 14,
         "graded": {
           "resolvedCells": 0,
           "unresolvedCells": 25,
@@ -13712,8 +13712,8 @@
           "axe-core"
         ],
         "pages": 24,
-        "percentAgreement": 0.6667,
-        "kappa": 0.4974
+        "percentAgreement": 0.7917,
+        "kappa": 0.6748
       },
       {
         "actRuleId": "23a2a8",
@@ -13722,8 +13722,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.5524
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "23a2a8",
@@ -13732,7 +13732,7 @@
           "htmlcs"
         ],
         "pages": 20,
-        "percentAgreement": 0.55,
+        "percentAgreement": 0.3,
         "kappa": 0
       },
       {
@@ -14991,8 +14991,8 @@
         {
           "engine": "marlo",
           "pages": 25,
-          "findings": 88,
-          "mean": 3.52
+          "findings": 87,
+          "mean": 3.48
         },
         {
           "engine": "axe-core",
@@ -15053,7 +15053,7 @@
         {
           "page": "documentation (39f95cc80c20)",
           "findings": {
-            "marlo": 1,
+            "marlo": 0,
             "axe-core": 4,
             "alfa": 1,
             "htmlcs": 0
@@ -15258,7 +15258,7 @@
           {
             "actRuleId": "23a2a8",
             "routedTo": "axe-core",
-            "pagesWhereItWouldFire": 2
+            "pagesWhereItWouldFire": 1
           },
           {
             "actRuleId": "24afc2",
