@@ -49,3 +49,7 @@ docs/screenshots/*.png
 !docs/screenshots/home-desktop.png
 !docs/screenshots/accuracy-desktop.png
 !docs/screenshots/home-skip-link-focused.png
+
+# A temporary file the rating tool writes beside a worksheet before renaming it into place.
+# One survives only if the process died mid-write, and the worksheet itself is then intact.
+corpus/real/adjudication/.*.tmp

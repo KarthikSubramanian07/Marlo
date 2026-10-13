@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Marlo rating</title>
+    <link rel="stylesheet" href="/app.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#cell">Skip to the current cell</a>
+    <header class="bar">
+      <p class="brand">
+        <span class="wordmark">marlo</span>
+        <span class="brand-sep" aria-hidden="true">/</span>
+        <span id="rater-label">rating</span>
+      </p>
+      <div class="progress">
+        <p id="progress-text">Loading the worksheet.</p>
+        <progress id="progress-bar" max="1" value="0" aria-labelledby="progress-text"></progress>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="pane page-pane" aria-labelledby="page-heading">
+        <div class="pane-head">
+          <h2 id="page-heading">Page <span id="page-id" class="mono"></span></h2>
+          <div class="toggle" role="group" aria-label="How to show the page">
+            <button type="button" id="view-rendered" aria-pressed="true">Rendered</button>
+            <button type="button" id="view-source" aria-pressed="false">Source</button>
+          </div>
+        </div>
+        <p class="pane-note">
+          The vendored snapshot, offline: no scripts run and nothing loads from the network, so
+          remote images and fonts are missing by design.
+        </p>
+        <iframe
+          id="snapshot"
+          sandbox=""
+          title="Page snapshot"
+          referrerpolicy="no-referrer"
+        ></iframe>
+        <div id="source-view" class="source-view" hidden>
+          <div class="search" role="search">
+            <label for="search">Search the source</label>
+            <input id="search" type="search" autocomplete="off" spellcheck="false" />
+            <button type="button" id="search-prev">Previous</button>
+            <button type="button" id="search-next">Next</button>
+            <span id="search-count" class="search-count" aria-live="polite"></span>
+          </div>
+          <pre id="source" class="source" tabindex="0" aria-label="Page source"></pre>
+        </div>
+      </section>
+
+      <section class="pane cell-pane" id="cell" tabindex="-1" aria-labelledby="cell-heading">
+        <p class="kicker">Cell <span id="position"></span></p>
+        <h1 id="cell-heading">Loading</h1>
+
+        <dl class="facts">
+          <div>
+            <dt>Page</dt>
+            <dd><span id="fact-page" class="mono"></span>, <span id="fact-category"></span></dd>
+          </div>
+          <div>
+            <dt>Rule</dt>
+            <dd>
+              <a
+                id="rule-link"
+                class="mono"
+                href="https://act-rules.github.io/rules/"
+                rel="noreferrer"
+                target="_blank"
+              ></a
+              ><span id="fact-type"></span>
+            </dd>
+          </div>
+          <div>
+            <dt>Requirements</dt>
+            <dd id="fact-requirements" class="mono small"></dd>
+          </div>
+          <div>
+            <dt>Input aspects</dt>
+            <dd id="fact-aspects"></dd>
+          </div>
+        </dl>
+
+        <p class="notice">
+          The rule's applicability and expectations are not vendored in this repository, so this
+          tool does not show them and fetches nothing. The rule page linked above is the authority:
+          read it before answering.
+        </p>
+
+        <p id="prescreen" class="notice notice-prescreen" hidden></p>
+
+        <fieldset class="answers">
+          <legend>Answer</legend>
+          <button type="button" class="answer" data-answer="passed" aria-pressed="false">
+            <kbd>1</kbd> passed
+          </button>
+          <button type="button" class="answer" data-answer="failed" aria-pressed="false">
+            <kbd>2</kbd> failed
+          </button>
+          <button type="button" class="answer" data-answer="cantTell" aria-pressed="false">
+            <kbd>3</kbd> cantTell
+          </button>
+          <button type="button" class="answer" data-answer="inapplicable" aria-pressed="false">
+            <kbd>4</kbd> inapplicable
+          </button>
+        </fieldset>
+
+        <div class="note">
+          <label for="note">Note</label>
+          <p id="note-hint" class="hint">
+            Required with failed and cantTell: name the element and the reason. Optional otherwise.
+          </p>
+          <textarea
+            id="note"
+            rows="4"
+            maxlength="4000"
+            aria-describedby="note-hint note-error"
+          ></textarea>
+          <p id="note-error" class="error" hidden></p>
+          <div class="note-actions">
+            <button type="button" id="save-note">Save note</button>
+            <button type="button" id="clear-answer">Clear answer</button>
+          </div>
+        </div>
+
+        <nav class="moves" aria-label="Cells">
+          <button type="button" id="prev">Previous</button>
+          <button type="button" id="next">Next</button>
+          <button type="button" id="next-unanswered">Next unanswered</button>
+        </nav>
+        <div class="options">
+          <label
+            ><input type="checkbox" id="only-unanswered" /> Step through unanswered cells
+            only</label
+          >
+          <label><input type="checkbox" id="auto-advance" checked /> Move on after answering</label>
+        </div>
+
+        <p id="status" class="status" role="status"></p>
+
+        <div id="problems" class="problems" hidden>
+          <h2>Worksheet problems</h2>
+          <p id="problems-count"></p>
+          <ul id="problems-list"></ul>
+        </div>
+
+        <details class="keys">
+          <summary>Keyboard shortcuts</summary>
+          <dl>
+            <div>
+              <dt><kbd>1</kbd> to <kbd>4</kbd></dt>
+              <dd>passed, failed, cantTell, inapplicable</dd>
+            </div>
+            <div>
+              <dt><kbd>J</kbd> and <kbd>K</kbd></dt>
+              <dd>next and previous cell</dd>
+            </div>
+            <div>
+              <dt><kbd>U</kbd></dt>
+              <dd>next unanswered cell</dd>
+            </div>
+            <div>
+              <dt><kbd>N</kbd></dt>
+              <dd>write a note</dd>
+            </div>
+            <div>
+              <dt><kbd>V</kbd></dt>
+              <dd>switch between the rendered page and its source</dd>
+            </div>
+            <div>
+              <dt><kbd>/</kbd></dt>
+              <dd>search the source</dd>
+            </div>
+            <div>
+              <dt><kbd>Ctrl</kbd> <kbd>Enter</kbd> in the note</dt>
+              <dd>save the note and move on</dd>
+            </div>
+            <div>
+              <dt><kbd>Esc</kbd> in the note or search</dt>
+              <dd>leave the field</dd>
+            </div>
+          </dl>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>
