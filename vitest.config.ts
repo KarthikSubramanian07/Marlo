@@ -74,6 +74,7 @@ export default defineConfig({
             'packages/*/src/**/*.test.ts',
             'apps/*/test/**/*.test.ts',
             'scripts/**/*.test.mjs',
+            '.github/actions/**/*.test.mjs',
           ],
           exclude: ['**/*.browser.test.ts', '**/*.e2e.test.ts'],
           environment: 'node',
