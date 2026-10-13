@@ -1,0 +1,269 @@
+{
+  "about": "The page list scripts/snapshot-real-pages.mjs reads. Every entry names the licence that permits vendoring a modified copy (inlining CSS is a modification) and the URL of the licence page that was read when the page was chosen. Ids are category and a counter rather than a name, because published tables identify a page by category and digest; see NOTICE.md.",
+  "pages": [
+    {
+      "id": "government-01",
+      "category": "government",
+      "url": "https://www.usa.gov/",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.usa.gov/government-copyright",
+        "attribution": "USA.gov, U.S. General Services Administration. A work of the United States government, not subject to copyright in the United States."
+      }
+    },
+    {
+      "id": "government-02",
+      "category": "government",
+      "url": "https://www.gov.uk/",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "attribution": "Contains public sector information licensed under the Open Government Licence v3.0."
+      }
+    },
+    {
+      "id": "government-04",
+      "category": "government",
+      "url": "https://www.nasa.gov/",
+      "licence": {
+        "name": "United States government work (NASA media usage guidelines)",
+        "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "attribution": "NASA. NASA content is generally not subject to copyright in the United States. The NASA insignia and logotype are not in the public domain and are not used here beyond their appearance in the page."
+      }
+    },
+    {
+      "id": "documentation-01",
+      "category": "documentation",
+      "url": "https://docs.python.org/3/tutorial/introduction.html",
+      "licence": {
+        "name": "Python Software Foundation License Version 2",
+        "url": "https://docs.python.org/3/license.html",
+        "attribution": "Copyright 2001 Python Software Foundation; All Rights Reserved. Derived from the Python documentation under the PSF License Version 2. Changes: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "documentation-02",
+      "category": "documentation",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img",
+      "licence": {
+        "name": "CC BY-SA 2.5",
+        "url": "https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+        "attribution": "\"<img>: The Image Embed element\" by Mozilla Contributors, licensed under CC BY-SA 2.5. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "documentation-03",
+      "category": "documentation",
+      "url": "https://doc.rust-lang.org/book/ch01-01-installation.html",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/rust-lang/book/blob/main/LICENSE-MIT",
+        "attribution": "Copyright (c) 2010 The Rust Project Developers. The Rust Programming Language, dual licensed MIT or Apache 2.0; vendored here under MIT."
+      }
+    },
+    {
+      "id": "documentation-04",
+      "category": "documentation",
+      "url": "https://react.dev/learn",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/reactjs/react.dev/blob/main/LICENSE-DOCS.md",
+        "attribution": "React documentation, Meta Platforms, Inc. and affiliates, licensed under CC BY 4.0. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "news-01",
+      "category": "news",
+      "url": "https://en.wikipedia.org/wiki/Web_accessibility",
+      "licence": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "attribution": "\"Web accessibility\", Wikipedia contributors, licensed under CC BY-SA 4.0. Modified: stylesheets inlined, scripts removed. Images are not vendored and carry their own licences."
+      }
+    },
+    {
+      "id": "news-02",
+      "category": "news",
+      "url": "https://en.wikinews.org/wiki/Wikimedia_Foundation_closes_Wikinews_after_21_years",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://en.wikinews.org/wiki/Wikinews:Copyright",
+        "attribution": "Wikinews, licensed under CC BY 4.0 (text published after 16 December 2024). Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "news-04",
+      "category": "news",
+      "url": "https://www.gov.uk/government/news/new-taskforce-to-boost-britains-resilience-to-flooding-and-drought",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "attribution": "Contains public sector information licensed under the Open Government Licence v3.0."
+      }
+    },
+    {
+      "id": "shop-01",
+      "category": "shop",
+      "url": "https://next.medusajs.com/us/store",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/medusajs/nextjs-starter-medusa/blob/main/LICENSE",
+        "attribution": "Copyright (c) 2022 Medusa. The Medusa Next.js starter storefront demo, MIT licensed."
+      }
+    },
+    {
+      "id": "shop-02",
+      "category": "shop",
+      "url": "https://next.medusajs.com/us/products/espresso-cup",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/medusajs/nextjs-starter-medusa/blob/main/LICENSE",
+        "attribution": "Copyright (c) 2022 Medusa. The Medusa Next.js starter storefront demo, MIT licensed."
+      }
+    },
+    {
+      "id": "shop-03",
+      "category": "shop",
+      "url": "https://v2.demo.sylius.com/en_US/taxons/t-shirts/men",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/Sylius/Sylius/blob/2.0/LICENSE",
+        "attribution": "Copyright (c) 2011-present Sylius Sp. z o.o. The Sylius Community Edition demo storefront, MIT licensed."
+      }
+    },
+    {
+      "id": "shop-04",
+      "category": "shop",
+      "url": "https://v2.demo.sylius.com/en_US/checkout/address",
+      "actions": [
+        {
+          "goto": "https://v2.demo.sylius.com/en_US/products/nebula-surge-t-shirt"
+        },
+        {
+          "click": "#add-to-cart-button"
+        },
+        {
+          "waitForUrl": "**/cart/"
+        },
+        {
+          "goto": "https://v2.demo.sylius.com/en_US/checkout/address"
+        }
+      ],
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/Sylius/Sylius/blob/2.0/LICENSE",
+        "attribution": "Copyright (c) 2011-present Sylius Sp. z o.o. The Sylius Community Edition demo storefront, MIT licensed. The checkout was reached by adding one product to an empty cart."
+      }
+    },
+    {
+      "id": "application-01",
+      "category": "application",
+      "url": "https://demo.realworld.show/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/gothinkster/angular-realworld-example-app/blob/main/LICENSE",
+        "attribution": "RealWorld example app (Conduit), Angular implementation, Copyright (c) Thinkster, MIT licensed. Demo seed content belongs to the RealWorld project."
+      }
+    },
+    {
+      "id": "application-02",
+      "category": "application",
+      "url": "https://demo.realworld.show/article/how-to-learn-javascript-efficiently",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/gothinkster/angular-realworld-example-app/blob/main/LICENSE",
+        "attribution": "RealWorld example app (Conduit), Angular implementation, Copyright (c) Thinkster, MIT licensed. Article content is RealWorld demo seed data."
+      }
+    },
+    {
+      "id": "application-03",
+      "category": "application",
+      "url": "https://preview.tabler.io/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tabler/tabler/blob/dev/LICENSE",
+        "attribution": "Copyright (c) 2018-2026 The Tabler Authors. Tabler demo, MIT licensed."
+      }
+    },
+    {
+      "id": "form-01",
+      "category": "form",
+      "url": "https://design-system.service.gov.uk/patterns/question-pages/default/index.html",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/alphagov/govuk-design-system/blob/main/LICENSE.txt",
+        "attribution": "Crown copyright, GOV.UK Design System, MIT licensed code; content under the Open Government Licence v3.0."
+      }
+    },
+    {
+      "id": "form-02",
+      "category": "form",
+      "url": "https://design-system.service.gov.uk/patterns/check-answers/default/index.html",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/alphagov/govuk-design-system/blob/main/LICENSE.txt",
+        "attribution": "Crown copyright, GOV.UK Design System, MIT licensed code; content under the Open Government Licence v3.0."
+      }
+    },
+    {
+      "id": "search-01",
+      "category": "search",
+      "url": "https://www.gov.uk/search/all?keywords=passport",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "attribution": "Contains public sector information licensed under the Open Government Licence v3.0."
+      }
+    },
+    {
+      "id": "login-01",
+      "category": "login",
+      "url": "https://preview.tabler.io/sign-in.html",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tabler/tabler/blob/dev/LICENSE",
+        "attribution": "Copyright (c) 2018-2026 The Tabler Authors. Tabler demo, MIT licensed."
+      }
+    },
+    {
+      "id": "settings-01",
+      "category": "settings",
+      "url": "https://preview.tabler.io/settings.html",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tabler/tabler/blob/dev/LICENSE",
+        "attribution": "Copyright (c) 2018-2026 The Tabler Authors. Tabler demo, MIT licensed."
+      }
+    },
+    {
+      "id": "landing-01",
+      "category": "landing",
+      "url": "https://nodejs.org/en",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/nodejs/nodejs.org/blob/main/LICENSE",
+        "attribution": "Copyright Node.js Website WG contributors. nodejs.org, MIT licensed. Node.js is a trademark of the OpenJS Foundation."
+      }
+    },
+    {
+      "id": "table-01",
+      "category": "table",
+      "url": "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population",
+      "licence": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "attribution": "\"List of countries and dependencies by population\", Wikipedia contributors, licensed under CC BY-SA 4.0. Modified: stylesheets inlined, scripts removed. Images are not vendored and carry their own licences."
+      }
+    },
+    {
+      "id": "error-01",
+      "category": "error",
+      "url": "https://www.gov.uk/404",
+      "licence": {
+        "name": "Open Government Licence v3.0",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+        "attribution": "Contains public sector information licensed under the Open Government Licence v3.0."
+      }
+    }
+  ]
+}
