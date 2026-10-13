@@ -78,6 +78,8 @@ module.exports = {
           '\\.test\\.ts$',
           '/bin\\.ts$',
           '/index\\.ts$',
+          // The two browser bundle entries. esbuild reads them and nothing imports them.
+          '[/-]browser-entry\\.ts$',
         ],
       },
       to: {},

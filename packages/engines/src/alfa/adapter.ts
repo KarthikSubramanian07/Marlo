@@ -3,10 +3,12 @@ import { readFileSync } from 'node:fs';
 import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@marlo/schema';
 import type { RenderedPage } from '@marlo/render';
 import { withDomGlobals } from '@marlo/render';
-import { asWindow } from '../dom.js';
+import { ensureScript, evaluateInPage, narrowHandle } from '../dom.js';
+import { bundlePath, readBundle } from '../bundle.js';
 import type { Engine, RawVerdict } from '../engine.js';
-import { assembleReport, truncateSnippet } from '../engine.js';
+import { assembleReport, narrowCarriedTarget, truncateSnippet } from '../engine.js';
 import { ALFA_MAPPING } from './mapping.js';
+import { recordOutcome, type AlfaOutcomeRecord } from './outcome.js';
 
 /**
  * Alfa, Siteimprove's engine. MIT.
@@ -26,13 +28,18 @@ import { ALFA_MAPPING } from './mapping.js';
  * right function and returns a Trampoline, which produces
  * "node.children is not a function" several frames later.
  *
- * Alfa is imported dynamically for one reason: its own modules read DOM globals at
- * import time, so importing it before the window exists binds it to nothing.
+ * Alfa is imported dynamically on the window path for one reason: its own modules read
+ * DOM globals at import time, so importing it before the window exists binds it to
+ * nothing. On the browser path none of that applies. The same modules are bundled by
+ * esbuild into `dist/alfa.browser.js`, injected into the page, and run against the real
+ * document, where `globalThis.document` is simply the document. `browser-entry.ts` is
+ * that bundle's entry and `outcome.ts` is the translation both paths share.
  */
 
 const require = createRequire(import.meta.url);
 
 let cachedVersion: string | null = null;
+let cachedBundle: string | null = null;
 
 function alfaVersion(): string {
   cachedVersion ??= ((): string => {
@@ -46,6 +53,16 @@ function alfaVersion(): string {
     throw new Error('cannot read the @siteimprove/alfa-rules version');
   })();
   return cachedVersion;
+}
+
+/** Where the build puts the Alfa browser bundle. Works from `src` and from `dist`. */
+export function alfaBundlePath(): string {
+  return bundlePath(require.resolve('@marlo/engines/package.json'), 'alfa.browser.js');
+}
+
+function alfaBundleSource(): string {
+  cachedBundle ??= readBundle(alfaBundlePath(), 'Alfa');
+  return cachedBundle;
 }
 
 /**
@@ -69,140 +86,120 @@ function narrowOutcome(value: unknown, ruleUri: string): Outcome {
   );
 }
 
-/** The parts of an Alfa outcome this adapter reads. */
-interface AlfaOutcome {
-  readonly outcome: unknown;
-  readonly rule: { readonly uri: string };
-  /** Alfa's path to the target, `/html[1]/body[1]/p[2]`, or null for a document-level one. */
-  readonly path: string | null;
-  /** The target serialised by Alfa, which for an element is its markup. */
-  readonly snippet: string;
-  /** What Alfa's expectation said, or null when it said nothing a reader could use. */
-  readonly message: string | null;
+/** Audits a happy-dom window in this process. The original path. */
+async function auditWindow(handle: unknown, pageUrl: string): Promise<AlfaOutcomeRecord[]> {
+  return withDomGlobals(handle, async () => {
+    // Every one of these has to be imported after the globals are installed.
+    const { Native } = await import('@siteimprove/alfa-dom/native');
+    const { Node } = await import('@siteimprove/alfa-dom');
+    const { Page } = await import('@siteimprove/alfa-web');
+    const { Request, Response } = await import('@siteimprove/alfa-http');
+    const { Device } = await import('@siteimprove/alfa-device');
+    const { Audit } = await import('@siteimprove/alfa-act');
+    const { URL } = await import('@siteimprove/alfa-url');
+    const rules = (await import('@siteimprove/alfa-rules')).default;
+
+    const device = Device.standard();
+    const serialised = await Native.fromNode(Reflect.get(globalThis, 'document') as never);
+    // Node.from, not Document.fromDocument. The latter returns a Trampoline and
+    // fails later with "node.children is not a function".
+    //
+    // Node.from is typed as returning the union of every Alfa node type, and
+    // Page.of wants a Document. The cast is narrowing a runtime fact the types
+    // cannot express: the input to Native.fromNode was a document, so the output
+    // is a document. Asserted by the adapter test, which would throw on the Page
+    // construction if it were not.
+    const document = Node.from(serialised, device) as never;
+
+    const url = URL.parse(pageUrl).getUnsafe();
+    const alfaPage = Page.of(Request.of('GET', url), Response.of(url, 200), document, device);
+
+    const result = await Audit.of(alfaPage, rules).evaluate();
+    // Collected inside the globals scope, because reading a lazy Alfa value after
+    // the globals are gone throws. That includes the path and the serialisation.
+    return [...result].map((outcome) => recordOutcome(outcome));
+  });
 }
 
 /**
- * Reads the evidence off a single Alfa target.
+ * Narrows what came back across a serialisation boundary to the record shape.
  *
- * Alfa targets are its own node objects, not selectors, and the first version of this
- * adapter reported `:root` for every finding rather than fabricate a selector. Alfa
- * does give a path, `/html[1]/head[1]/meta[3]`, and a serialisation, and both are read
- * through `Reflect` because they arrive typed as the union of every Alfa node kind. A
- * text-node target has a path and its text; a document-level target has neither, and
- * `:root` remains the honest answer for that one.
+ * Here rather than in `outcome.ts`, because `outcome.ts` is bundled for the browser and
+ * must import nothing at run time, and this half only ever runs in Node.
+ *
+ * A browser page hands back structured-cloned data, which is whatever the bundle put in
+ * it. Checking the shape here means a bundle built from a different revision of this
+ * module fails loudly rather than producing records with missing fields that read as
+ * findings at `:root` with no evidence.
  */
-function readOneTarget(target: unknown): { path: string | null; snippet: string } {
-  if (typeof target !== 'object' || target === null) return { path: null, snippet: '' };
-  let path: string | null = null;
-  const pathFn: unknown = Reflect.get(target, 'path');
-  if (typeof pathFn === 'function') {
-    const value: unknown = Reflect.apply(pathFn, target, []);
-    if (typeof value === 'string' && value !== '') path = value;
-  }
-  // Every object inherits `Object.prototype.toString`, so a `typeof` check on it and a
-  // `typeof` check on its result are both vacuous: they pass for anything and hand back
-  // "[object Object]". That string was reaching the snippet field, which is the evidence
-  // a reader is shown for the finding. Only an override counts, and a result still
-  // shaped like the default is refused.
-  let snippet = '';
-  const serialise: unknown = Reflect.get(target, 'toString');
-  if (typeof serialise === 'function' && serialise !== Object.prototype.toString) {
-    const value: unknown = Reflect.apply(serialise, target, []);
-    if (typeof value === 'string' && !/^\[object \w+\]$/.test(value)) snippet = value;
-  }
-  return { path, snippet };
+export function narrowOutcomeRecords(value: unknown): readonly AlfaOutcomeRecord[] {
+  if (!Array.isArray(value)) throw new TypeError('the Alfa audit did not return a list');
+  return value.map((item: unknown, index): AlfaOutcomeRecord => {
+    if (typeof item !== 'object' || item === null) {
+      throw new TypeError(`Alfa outcome ${String(index)} is not an object`);
+    }
+    const ruleUri: unknown = Reflect.get(item, 'ruleUri');
+    const message: unknown = Reflect.get(item, 'message');
+    if (typeof ruleUri !== 'string') {
+      throw new TypeError(`Alfa outcome ${String(index)} has no rule URI`);
+    }
+    return {
+      outcome: Reflect.get(item, 'outcome'),
+      ruleUri,
+      ...narrowCarriedTarget(item),
+      message: typeof message === 'string' ? message : null,
+    };
+  });
 }
 
-/** At most this many members of a group are read, because a page sets the count. */
-const GROUP_MEMBER_LIMIT = 10;
-
 /**
- * The evidence for one Alfa target.
+ * Translates outcome records into verdicts, grouped by ACT rule.
  *
- * Most targets are Alfa DOM nodes, and the base `Node` declares both `path` and a real
- * `toString`, so those give a genuine locator and genuine markup.
- *
- * A `Group` does not. It is what the multi-element rules report, R41 and R81 among
- * them, and it declares neither: it is a plain wrapper over its members with a
- * `Symbol.iterator`. Read as a single target it produced "[object Object]" at `:root`,
- * which is the whole evidence for a finding about links that share an accessible name,
- * on a page where those links are the entire point. Alfa handles the case itself, and
- * `Group.toSARIF` flat-maps the members' locations, so this reads the members too: the
- * first member that has one supplies the locator, and their serialisations are joined
- * for the snippet. Bounded, because how many members a group has is a property of the
- * page rather than of this adapter.
+ * Shared by both paths. An outcome word this adapter does not know costs the rules that
+ * outcome speaks for rather than the whole page: `narrowOutcome` throws by design, and
+ * letting that reach the adapter's outer catch would mark every claimed rule errored
+ * and discard verdicts already collected for rules that were fine.
  */
-function readTarget(target: unknown): { path: string | null; snippet: string } {
-  if (typeof target !== 'object' || target === null) return { path: null, snippet: '' };
+export function verdictsFromRecords(
+  records: readonly AlfaOutcomeRecord[],
+  mapping: typeof ALFA_MAPPING,
+  actRuleIds: readonly ActRuleId[],
+): { verdicts: Map<ActRuleId, RawVerdict[]>; errors: Map<ActRuleId, string> } {
+  const verdicts = new Map<ActRuleId, RawVerdict[]>();
+  const errors = new Map<ActRuleId, string>();
 
-  // Alfa's DOM nodes are iterable too, over their children, so being iterable is not what
-  // makes a group. A node declares `path` and a group does not: reading an element's
-  // children here moved every element locator onto its first text node.
-  const ownPath: unknown = Reflect.get(target, 'path');
-  const iterate: unknown = Reflect.get(target, Symbol.iterator);
-  if (typeof ownPath !== 'function' && typeof iterate === 'function') {
-    const members: unknown[] = [];
+  for (const item of records) {
+    // Alfa rule URIs look like https://alfa.siteimprove.com/rules/sia-r2.
+    const engineRuleId = item.ruleUri.split('/').pop() ?? item.ruleUri;
+    const mapped = mapping
+      .engineToAct(engineRuleId)
+      .filter((entry) => actRuleIds.includes(entry.actId));
+    if (mapped.length === 0) continue;
+
+    let outcome: Outcome;
     try {
-      for (const member of target as Iterable<unknown>) {
-        members.push(member);
-        if (members.length === GROUP_MEMBER_LIMIT) break;
-      }
-    } catch {
-      // An iterable that throws part way through still yields what it produced.
+      outcome = narrowOutcome(item.outcome, item.ruleUri);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      for (const entry of mapped) errors.set(entry.actId, message);
+      continue;
     }
-    if (members.length > 0) {
-      const read = members.map((member) => readOneTarget(member));
-      return {
-        path: read.find((r) => r.path !== null)?.path ?? null,
-        snippet: read
-          .map((r) => r.snippet)
-          .filter((s) => s !== '')
-          .join(' '),
-      };
-    }
-  }
 
-  return readOneTarget(target);
-}
-
-/**
- * What Alfa's expectations said, in its words.
- *
- * `toJSON()` on an outcome carries an `expectations` list of `[id, result]` pairs, and
- * a result holds its diagnostic under `error` when it failed and under `value` when it
- * passed. Both are read, so a passed verdict explains itself too. Anything that is not
- * shaped like that yields null, and the caller falls back to naming the rule.
- */
-function readMessage(outcome: object): string | null {
-  const toJSON: unknown = Reflect.get(outcome, 'toJSON');
-  if (typeof toJSON !== 'function') return null;
-  const json: unknown = Reflect.apply(toJSON, outcome, []);
-  if (typeof json !== 'object' || json === null) return null;
-  const expectations: unknown = Reflect.get(json, 'expectations');
-  if (!Array.isArray(expectations)) return null;
-
-  // A failed outcome carries the expectations it satisfied alongside the one it did
-  // not. Reading all of them put the satisfied ones first, so the evidence for a
-  // failure opened by saying the element passed something. Alfa's own `Failed.toSARIF`
-  // filters to the erring results and this mirrors it, which also means the two
-  // renderings of one outcome cannot disagree about which clause failed.
-  const failed = Reflect.get(json, 'outcome') === 'failed';
-  const messages: string[] = [];
-  for (const entry of expectations as unknown[]) {
-    if (!Array.isArray(entry)) continue;
-    const result: unknown = entry[1];
-    if (typeof result !== 'object' || result === null) continue;
-    if (failed && Reflect.get(result, 'type') !== 'err') continue;
-    const inner: unknown = Reflect.get(result, 'error') ?? Reflect.get(result, 'value');
-    const holder = typeof inner === 'object' && inner !== null ? inner : result;
-    const message: unknown = Reflect.get(holder, 'message');
-    if (typeof message === 'string' && message.trim() !== '') {
-      messages.push(message.replace(/\s+/g, ' ').trim());
+    for (const entry of mapped) {
+      const list = verdicts.get(entry.actId) ?? [];
+      list.push({
+        engineRuleId,
+        outcome,
+        // Already `xpath ...` or `:root`; `outcome.ts` explains the notation.
+        selector: item.selector,
+        snippet: truncateSnippet(item.snippet),
+        message: item.message ?? `Alfa ${engineRuleId}`,
+      });
+      verdicts.set(entry.actId, list);
     }
   }
-  // Several clauses of one rule, kept apart, because a bare space ran them together
-  // into a sentence Alfa never wrote.
-  return messages.length === 0 ? null : messages.join('; ');
+
+  return { verdicts, errors };
 }
 
 export class AlfaEngine implements Engine {
@@ -216,8 +213,8 @@ export class AlfaEngine implements Engine {
 
   async evaluate(page: RenderedPage, actRuleIds: readonly ActRuleId[]): Promise<EngineReport> {
     const started = Date.now();
-    const verdicts = new Map<ActRuleId, RawVerdict[]>();
-    const errors = new Map<ActRuleId, string>();
+    let verdicts = new Map<ActRuleId, RawVerdict[]>();
+    let errors = new Map<ActRuleId, string>();
 
     const claimed = actRuleIds.filter((id) => this.mapping.claimedRules.has(id));
     if (claimed.length === 0) {
@@ -234,104 +231,24 @@ export class AlfaEngine implements Engine {
     }
 
     try {
-      // The same guard the axe-core and HTML CodeSniffer adapters use, and this one did not.
-      //
-      // Alfa reaches `globalThis.document` through withDomGlobals rather than taking a window
-      // directly, so a handle it cannot read did not fail here: it failed several frames deeper
-      // with "Cannot read properties of undefined (reading 'createRange')", which tells a reader
-      // nothing about what went wrong or what to do.
-      //
-      // Found by the first test that ever handed any adapter a Playwright page. Two of the three
-      // peers explained themselves and this one did not.
-      asWindow(page.handle, 'alfa');
+      // Narrowed before anything else, and loudly. Alfa reaches `globalThis.document`
+      // through withDomGlobals rather than taking a window directly, so a handle it could
+      // not read used to fail several frames deeper with "Cannot read properties of
+      // undefined (reading 'createRange')", which tells a reader nothing. Found by the
+      // first test that ever handed any adapter a Playwright page.
+      const handle = narrowHandle(page.handle, 'alfa');
+      let records: readonly AlfaOutcomeRecord[];
 
-      const outcomes = await withDomGlobals(page.handle, async () => {
-        // Every one of these has to be imported after the globals are installed.
-        const { Native } = await import('@siteimprove/alfa-dom/native');
-        const { Node } = await import('@siteimprove/alfa-dom');
-        const { Page } = await import('@siteimprove/alfa-web');
-        const { Request, Response } = await import('@siteimprove/alfa-http');
-        const { Device } = await import('@siteimprove/alfa-device');
-        const { Audit } = await import('@siteimprove/alfa-act');
-        const { URL } = await import('@siteimprove/alfa-url');
-        const rules = (await import('@siteimprove/alfa-rules')).default;
-
-        const device = Device.standard();
-        const serialised = await Native.fromNode(Reflect.get(globalThis, 'document') as never);
-        // Node.from, not Document.fromDocument. The latter returns a Trampoline and
-        // fails later with "node.children is not a function".
-        //
-        // Node.from is typed as returning the union of every Alfa node type, and
-        // Page.of wants a Document. The cast is narrowing a runtime fact the types
-        // cannot express: the input to Native.fromNode was a document, so the output
-        // is a document. Asserted by the adapter test, which would throw on the Page
-        // construction if it were not.
-        const document = Node.from(serialised, device) as never;
-
-        const url = URL.parse(page.url).getUnsafe();
-        const alfaPage = Page.of(Request.of('GET', url), Response.of(url, 200), document, device);
-
-        const result = await Audit.of(alfaPage, rules).evaluate();
-        // Collected inside the globals scope, because reading a lazy Alfa value after
-        // the globals are gone throws. That includes the path and the serialisation.
-        return [...result].map((o): AlfaOutcome => {
-          const outcome = o as unknown as {
-            outcome: unknown;
-            rule: { uri: string };
-            target: unknown;
-          };
-          const { path, snippet } = readTarget(outcome.target);
-          return {
-            outcome: outcome.outcome,
-            rule: { uri: outcome.rule.uri },
-            path,
-            snippet,
-            message: readMessage(o),
-          };
-        });
-      });
-
-      for (const item of outcomes) {
-        // Alfa rule URIs look like https://alfa.siteimprove.com/rules/sia-r2.
-        const engineRuleId = item.rule.uri.split('/').pop() ?? item.rule.uri;
-        const mapped = this.mapping
-          .engineToAct(engineRuleId)
-          .filter((entry) => actRuleIds.includes(entry.actId));
-        if (mapped.length === 0) continue;
-
-        // Narrowed once per outcome, and inside its own catch, so an outcome word this
-        // adapter does not know costs the rules that outcome speaks for rather than the
-        // whole page. `narrowOutcome` throws by design, and the outer catch marks every
-        // rule the engine claims as errored, which would discard verdicts already
-        // collected for rules that were fine.
-        let outcome;
-        try {
-          outcome = narrowOutcome(item.outcome, item.rule.uri);
-        } catch (error) {
-          const message = error instanceof Error ? error.message : String(error);
-          for (const entry of mapped) errors.set(entry.actId, message);
-          continue;
-        }
-
-        for (const entry of mapped) {
-          const list = verdicts.get(entry.actId) ?? [];
-          list.push({
-            engineRuleId,
-            outcome,
-            // Alfa locates by an XPath-shaped path rather than a CSS selector, and
-            // this field carries a CSS selector for every other engine. Reported
-            // with its notation named, because `/html[1]/body[1]/p[2]` on its own
-            // reads as a selector to a person and as an absolute file path to
-            // anything consuming the report: `sarif.ts` uses this field as the
-            // artifact URI when a finding has no source mapping. `:root` stays for
-            // a document-level target, which is the one case it is true of.
-            selector: item.path === null ? ':root' : `xpath ${item.path}`,
-            snippet: truncateSnippet(item.snippet),
-            message: item.message ?? `Alfa ${engineRuleId}`,
-          });
-          verdicts.set(entry.actId, list);
-        }
+      if (handle.kind === 'window') {
+        records = await auditWindow(handle.window, page.url);
+      } else {
+        await ensureScript(handle.page, 'MarloAlfa', alfaBundleSource);
+        records = narrowOutcomeRecords(
+          await evaluateInPage(handle.page, `return MarloAlfa.audit(${JSON.stringify(page.url)});`),
+        );
       }
+
+      ({ verdicts, errors } = verdictsFromRecords(records, this.mapping, actRuleIds));
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       for (const actId of claimed) errors.set(actId, message);
