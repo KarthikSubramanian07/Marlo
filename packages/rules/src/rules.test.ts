@@ -922,6 +922,17 @@ describe('the accessible name rules', () => {
     );
   });
 
+  it('leaves an svg with role img to 7d6734, because 23a2a8 applies to HTML elements only', () => {
+    // An inline svg is an SVG element even inside an HTML page. Reporting it here as well
+    // duplicated 7d6734, and the official cases have no svg with role="img" to show it.
+    const svg = '<html><body><svg role="img" width="24" height="24"></svg></body></html>';
+    expect(check('23a2a8', svg).outcome).toBe('inapplicable');
+    expect(check('7d6734', svg).outcome).toBe('failed');
+    expect(check('23a2a8', '<html><body><span role="img"></span></body></html>').outcome).toBe(
+      'failed',
+    );
+  });
+
   it('fails an empty heading and says why it is worse than no heading', () => {
     const result = check('ffd0e9', '<html><body><h2></h2></body></html>');
     expect(result.outcome).toBe('failed');
