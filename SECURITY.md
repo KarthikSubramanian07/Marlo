@@ -38,44 +38,42 @@ This is the safety boundary from [D-011](DECISIONS.md#d-011). It is asserted in 
 | Forbidden                           | Why it matters                                                   | How it is prevented                                                                                       |
 | ----------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Merge a pull request                | A tool that merges its own diffs has no reviewer                 | No merge API call exists in the codebase, and a test fails if one appears                                 |
-| Push to a default branch            | The reason branch protection exists                              | Every write goes through a generated branch named `marlo/<rule>-<short-sha>`                              |
-| Force push                          | Destroys history someone may be relying on                       | `--force` is not constructible in the git surface exposed to the fix path                                 |
+| Push to a default branch            | The reason branch protection exists                              | Every write goes through a generated branch named `marlo/fix-<12 hex>`, and the default branch is refused |
+| Force push                          | Destroys history someone may be relying on                       | The one ref update is sent with `force: false`, and the client runs no git command                        |
 | Rewrite history                     | Same                                                             | No rebase, amend, or filter operation is reachable                                                        |
 | Deploy                              | Marlo is not in the release path                                 | No deployment credential is ever requested                                                                |
-| Modify workflow files               | A tool that can edit CI can disable the check that constrains it | `.github/` is on the edit deny-list, checked before any edit is applied                                   |
+| Modify workflow files               | A tool that can edit CI can disable the check that constrains it | The planner refuses any path under `.github/`, and the token never holds `workflows`                      |
 | Edit files outside the target paths | Scope creep with write access                                    | Every edit is a byte range in a file the caller passed in, validated against the caller's path allow-list |
 
-The test asserting all of this is `packages/action/src/boundary.test.ts`, and it is written as an inventory of forbidden operations rather than a list of permitted ones, so a new capability has to be added to the list deliberately.
+The tests asserting this are `packages/repair/src/github.test.ts`, which reads the repair package for any merge, force, delete or shell call and checks the client exposes no method that could make one, and `packages/repair/src/pull-request.test.ts`, which checks the planner refuses `.github/` and paths outside the repository.
 
 ### Token scopes, one at a time with the reason
 
 The GitHub Action requests the minimum for each mode. Nothing is requested "just in case".
 
-**Report only, the default:**
+The Action's first step, `check-scopes.mjs`, reads the token's permissions and refuses to run if they do not match the mode, and prints which mode it checked. Where the runner does not expose the permissions, it says they were not checked rather than reporting a pass.
 
-```yaml
-permissions:
-  contents: read # read the files being scanned
-  pull-requests: write # post one comment with the findings
-```
+| Scope             | Report only, the default                       | `open-pull-request: true`                             |
+| ----------------- | ---------------------------------------------- | ----------------------------------------------------- |
+| `contents`        | `read`. `write` is refused                     | `write`, required: create the branch and commit to it |
+| `pull-requests`   | `write` only if `comment: true`, else optional | `write`, required: open the pull request              |
+| `security-events` | `write` only if you upload the SARIF           | Same                                                  |
+| `workflows`       | Refused                                        | Refused                                               |
+| `administration`  | Refused                                        | Refused                                               |
+| `packages`        | Refused                                        | Refused                                               |
+| `pages`           | Refused                                        | Refused                                               |
+| `deployments`     | Refused                                        | Refused                                               |
+| `id-token`        | Refused                                        | Refused                                               |
 
-`pull-requests: write` is the only write scope and it exists solely to comment. It does not permit merging: merge requires `contents: write` on the base branch, which is not granted.
+In the default mode `pull-requests: write` is the only write scope and it exists solely to comment. It does not permit merging: merge requires `contents: write` on the base branch, which is not granted.
 
-**Remediation, opt-in and off by default:**
+In the pull request mode `contents: write` is what makes people uncomfortable and they are right to look closely. It is the scope that allows creating a branch and writing a commit to it. It also technically allows pushing to `main`, which is why:
 
-```yaml
-permissions:
-  contents: write # create a branch and commit the diff to it
-  pull-requests: write # open the pull request describing it
-```
+1. The client in `packages/repair/src/github.ts` refuses any ref that is not under `refs/heads/marlo/`, reads the default branch from the API and refuses to write to it, refuses a head equal to the base, and sends its one ref update with `force: false`. Each is asserted in tests against an in-memory fake and a recorded `fetch`.
+2. Enable branch protection on the default branch before turning the mode on. The Action does not check for it, so this one is on you.
+3. The mode is off unless `open-pull-request: true` is set explicitly. There is no way to arrive at it by default or by upgrade, and `check-scopes.test.mjs` proves the Action refuses it under `contents: read`.
 
-`contents: write` is what makes people uncomfortable and they are right to look closely. It is the scope that allows creating a branch and writing a commit to it. It also technically allows pushing to `main`, which is why:
-
-1. Marlo never constructs a ref that is not `refs/heads/marlo/*`, asserted in tests.
-2. `SETUP.md` instructs enabling branch protection on the default branch before enabling remediation, and the Action emits a warning if it can detect that protection is absent.
-3. Remediation is off unless `mode: remediate` is set explicitly. There is no way to arrive at it by default or by upgrade.
-
-**Never requested, in any mode:** `actions:write`, `packages:write`, `deployments:write`, `admin:*`, `workflow`, `security_events:write`, or any organisation scope.
+**Never requested, in any mode:** `actions: write`, `workflows`, `administration`, `packages`, `pages`, `deployments`, `id-token`, or any organisation scope.
 
 ### Fork pull requests
 
