@@ -17,7 +17,14 @@ export { MarloEngine } from './marlo-engine.js';
 export type { HarnessOptions } from './harness.js';
 export { outcomeSpread, routeRule, runHarness } from './harness.js';
 export type { Regression } from './publish.js';
-export { findRealCorpusChanges, findRegressions, renderCalibrationMarkdown } from './publish.js';
+export {
+  findRealCorpusChanges,
+  findRegressions,
+  renderAnalysisMarkdown,
+  renderCalibrationMarkdown,
+} from './publish.js';
+export type { CaseRecord, RealPageCell } from './analysis.js';
+export { analyse, collectCases, routeFrom, wilson } from './analysis.js';
 export type { Adjudication, RealCorpusSource, RealPage } from './real-corpus.js';
 export { loadAdjudication, loadRealCorpus, pageLabel } from './real-corpus.js';
 export type { RealHarnessOptions, RealHarnessResult } from './real-harness.js';
