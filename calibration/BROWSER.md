@@ -35,7 +35,7 @@ The false positive rate is the number this project would most like to be small a
 | Engine | Version | ACT rules claimed |
 |---|---|---|
 | Marlo | `0.1.0` | 41 |
-| axe-core | `4.13.0` | 38 |
+| axe-core | `4.14.0` | 38 |
 | Alfa | `0.119.0` | 40 |
 | HTML CodeSniffer | `2.5.1` | 12 |
 
