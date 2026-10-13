@@ -104,18 +104,131 @@ export function buildMapping(entries: readonly MappingEntry[]): EngineMapping {
 }
 
 /**
+ * Where a verdict points, as plain strings.
+ *
+ * The half of a verdict that cannot be recovered once a page has been left behind. On
+ * the window path an adapter could read it off a live node at any time; on the browser
+ * path the node never leaves the page, so the selector and the snippet are read off it
+ * inside the page and only these two strings cross. Every in-page record carries exactly
+ * this, under these names, and `narrowCarriedTarget` is the one place that reads it back.
+ */
+export interface CarriedTarget {
+  /** A CSS selector, `xpath ` followed by a path for Alfa, or `:root` for the document. */
+  readonly selector: string;
+  /** The element's markup, or text for a text target. Trimmed by `truncateSnippet` later. */
+  readonly snippet: string;
+}
+
+/**
  * What an adapter reports for one rule before the report is assembled.
  *
  * Deliberately not `RuleResult`: an adapter produces verdicts and a status, and the
  * timing and the ACT identifier are added by the harness so an adapter cannot
  * accidentally report a rule it was not asked about.
+ *
+ * This is also the shape every in-page payload reduces to. An engine run inside a
+ * browser page hands back plain data, and whatever it hands back has to carry enough to
+ * fill these five fields without a second trip, which is why the target half is its own
+ * type. A verdict that arrives without it is a finding a developer cannot act on.
  */
-export interface RawVerdict {
+export interface RawVerdict extends CarriedTarget {
   readonly engineRuleId: string;
   readonly outcome: Outcome;
-  readonly selector: string;
-  readonly snippet: string;
   readonly message: string;
+}
+
+/**
+ * Reads the target half of a record that came back across the page boundary.
+ *
+ * A missing or empty selector becomes `:root` rather than an empty string, because an
+ * empty selector renders as a finding with no location at all, and `:root` is at least
+ * what a document-level verdict truly points at. A missing snippet is an empty one.
+ */
+export function narrowCarriedTarget(item: object): CarriedTarget {
+  const selector: unknown = Reflect.get(item, 'selector');
+  const snippet: unknown = Reflect.get(item, 'snippet');
+  return {
+    selector: typeof selector === 'string' && selector !== '' ? selector : ':root',
+    snippet: typeof snippet === 'string' ? snippet : '',
+  };
+}
+
+/**
+ * THE SERIALISATION BOUNDARY, DECIDED ONCE.
+ *
+ * Everything that crosses `page.evaluate` out of a browser page is structured-cloned,
+ * so it has to be plain data: strings, numbers, booleans, arrays and objects of those.
+ * No node, no function, no engine object. Each adapter's in-page code therefore returns
+ * one of these envelopes, and exactly one function, `unwrapInPageResult`, opens it.
+ *
+ * The envelope exists so a failure inside the page arrives as data rather than as a
+ * Playwright exception with the page's stack flattened into one line. The adapter's own
+ * catch then records the message per rule, exactly as it does for a failure on the
+ * window path, and `error` is never a pass anywhere downstream.
+ *
+ * The payload under `value` is plain, and every record in it that points at an element
+ * carries a `CarriedTarget`: axe's result nodes (whose `target` and `html` axe itself
+ * computes in the page, joined into a selector in Node), HTML CodeSniffer messages and
+ * Alfa outcomes as records extending `CarriedTarget`, and Marlo's finished report, whose
+ * verdict targets already have this shape. Translating a payload into `RawVerdict`s
+ * happens in Node, in the same function the window path uses, so the two renderers
+ * cannot disagree about what an engine said.
+ */
+export interface InPageSuccess {
+  readonly ok: true;
+  readonly value: unknown;
+}
+
+export interface InPageFailure {
+  readonly ok: false;
+  readonly error: string;
+}
+
+export type InPageResult = InPageSuccess | InPageFailure;
+
+/**
+ * Wraps a function body for `page.evaluate` so it always yields an `InPageResult`.
+ *
+ * `body` is the body of an async function and may `return` a value or `await` a
+ * promise. The wrapper is an expression rather than a function, because Playwright
+ * evaluates a string as an expression and awaits the promise it produces.
+ */
+export function inPageExpression(body: string): string {
+  return (
+    '(async () => {\n' +
+    '  try {\n' +
+    `    const value = await (async () => {\n${body}\n    })();\n` +
+    '    return { ok: true, value };\n' +
+    '  } catch (error) {\n' +
+    '    const message = error !== null && typeof error === "object" && "message" in error\n' +
+    '      ? String(error.message)\n' +
+    '      : String(error);\n' +
+    '    return { ok: false, error: message };\n' +
+    '  }\n' +
+    '})()'
+  );
+}
+
+/**
+ * Opens an envelope that came back across the boundary.
+ *
+ * Returns the payload, throws what the page threw, and refuses anything that is not an
+ * envelope at all. The last case matters: a bundle built from an older revision, or a
+ * page script that returned its payload bare, would otherwise be read as a payload with
+ * every field missing, which an adapter would faithfully turn into findings at `:root`.
+ */
+export function unwrapInPageResult(raw: unknown): unknown {
+  if (typeof raw !== 'object' || raw === null || typeof Reflect.get(raw, 'ok') !== 'boolean') {
+    throw new TypeError(
+      'the page returned something other than an in-page result envelope, so nothing it ' +
+        'said can be trusted',
+    );
+  }
+  if (Reflect.get(raw, 'ok') === true) return Reflect.get(raw, 'value');
+  const error: unknown = Reflect.get(raw, 'error');
+  throw new Error(
+    `inside the page: ${typeof error === 'string' && error !== '' ? error : 'a failure with no message'}`,
+  );
 }
 
 export interface Engine {
