@@ -2,7 +2,8 @@
 /**
  * Runs the scan and writes the outputs, the job summary and the optional SARIF.
  *
- * Nothing here writes to the repository. The only files it creates are inside the runner's
+ * Nothing here writes to the repository; the opt-in pull request is open-pull-request.mjs, a
+ * separate step. The only files this one creates are inside the runner's
  * temporary directory and the SARIF path the caller asked for, and there is no git command in
  * this file at all. See check-scopes.mjs for why that boundary is enforced by a permission
  * rather than by this comment.
@@ -177,8 +178,11 @@ lines.push(
 );
 lines.push('');
 lines.push(
-  'Marlo does not commit, push, merge or deploy. This job refuses a token with ' +
-    '`contents: write`.',
+  process.env['MARLO_OPEN_PULL_REQUEST'] === 'true'
+    ? 'open-pull-request is on: Marlo may commit verified fixes to a `marlo/` branch and open ' +
+        'one pull request from it. It does not merge, push to a default branch or deploy.'
+    : 'Marlo does not commit, push, merge or deploy. This job refuses a token with ' +
+        '`contents: write`.',
 );
 
 const markdown = lines.join('\n');

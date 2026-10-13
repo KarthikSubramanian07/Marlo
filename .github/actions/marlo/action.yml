@@ -1,7 +1,8 @@
 name: 'Marlo accessibility scan'
 description: >-
   Check changed HTML against the official ACT rules, with the measured accuracy of every
-  finding attached. Read-only: this action never commits, pushes, merges or deploys.
+  finding attached. Read-only unless open-pull-request is on, when it opens one pull request
+  of verified fixes from a marlo/ branch. It never merges, pushes to a default branch or deploys.
 author: 'Marlo contributors'
 
 branding:
@@ -41,9 +42,33 @@ inputs:
   comment:
     description: >-
       Post the report as a pull request comment. Needs `pull-requests: write`, which is the
-      only write permission this action can use, and it is off by default.
+      only write permission the report-only mode can use, and it is off by default.
     required: false
     default: 'false'
+  open-pull-request:
+    description: >-
+      Open one pull request containing the fixes Marlo verified, from a `marlo/fix-` branch
+      named by a hash of its content, with the evidence for each fix in the body. Needs
+      exactly `contents: write` and `pull-requests: write`, and is off by default. A second
+      run over the same content opens nothing.
+    required: false
+    default: 'false'
+  pull-request-base:
+    description: >-
+      The branch the pull request targets. Empty means the repository's default branch, read
+      from the API. Marlo refuses a base equal to its own head branch.
+    required: false
+    default: ''
+  git-author-name:
+    description: >-
+      Author name on the commit. Empty means `marlo[bot]`. Set together with git-author-email.
+    required: false
+    default: ''
+  git-author-email:
+    description: >-
+      Author email on the commit. Empty means `marlo-bot@users.noreply.github.com`.
+    required: false
+    default: ''
 
 outputs:
   findings:
@@ -58,6 +83,17 @@ outputs:
   sarif:
     description: 'Path to the SARIF file, when one was requested.'
     value: ${{ steps.scan.outputs.sarif }}
+  pull-request-url:
+    description: >-
+      The pull request opened, or the one already open for the same content. Empty when
+      open-pull-request is off or there was nothing to open.
+    value: ${{ steps.pull-request.outputs.pull-request-url }}
+  fixes-applied:
+    description: 'Verified fixes in the pull request. 0 when open-pull-request is off.'
+    value: ${{ steps.pull-request.outputs.fixes-applied }}
+  fixes-refused:
+    description: 'Findings left for a person, each with its measurement or reason in the body.'
+    value: ${{ steps.pull-request.outputs.fixes-refused }}
 
 runs:
   using: 'composite'
@@ -69,15 +105,17 @@ runs:
     # never force pushes, never rewrites history and never deploys. Inside a GitHub Action
     # that promise is not a matter of what the code does: it is a matter of what the token
     # can do. So this step reads the permissions it was handed and stops if they exceed what
-    # the work needs.
+    # the mode needs: `contents: write` is refused unless open-pull-request is on, and then
+    # exactly `contents: write` and `pull-requests: write` are required.
     #
     # It is first on purpose. A check that runs after the scan is a check that has already
     # let a job with `contents: write` do whatever it wanted for thirty seconds.
     # ────────────────────────────────────────────────────────────────────────────────────
-    - name: Refuse a token that can write to the repository
+    - name: Refuse a token that can do more than this mode needs
       shell: bash
       env:
         MARLO_COMMENT: ${{ inputs.comment }}
+        MARLO_OPEN_PULL_REQUEST: ${{ inputs.open-pull-request }}
       run: |
         set -euo pipefail
         node "${GITHUB_ACTION_PATH}/check-scopes.mjs"
@@ -91,6 +129,23 @@ runs:
         set -euo pipefail
         node "${GITHUB_ACTION_PATH}/resolve-files.mjs" >> "$GITHUB_OUTPUT"
 
+    # Before the scan, so a scan that fails the job on its findings still leaves the pull
+    # request that fixes some of them. Every write goes through the client in @marlo/repair,
+    # which refuses any branch outside marlo/, the default branch and a forced ref update.
+    - name: Open a pull request with the verified fixes
+      id: pull-request
+      if: ${{ inputs.open-pull-request == 'true' }}
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        MARLO_TARGETS: ${{ steps.files.outputs.targets }}
+        MARLO_PULL_REQUEST_BASE: ${{ inputs.pull-request-base }}
+        MARLO_GIT_AUTHOR_NAME: ${{ inputs.git-author-name }}
+        MARLO_GIT_AUTHOR_EMAIL: ${{ inputs.git-author-email }}
+      run: |
+        set -euo pipefail
+        node "${GITHUB_ACTION_PATH}/open-pull-request.mjs"
+
     - name: Scan
       id: scan
       shell: bash
@@ -100,13 +155,13 @@ runs:
         MARLO_FAIL_ON: ${{ inputs.fail-on }}
         MARLO_FAIL_ON_NOT_EVALUATED: ${{ inputs.fail-on-not-evaluated }}
         MARLO_SARIF_FILE: ${{ inputs.sarif-file }}
+        MARLO_OPEN_PULL_REQUEST: ${{ inputs.open-pull-request }}
       run: |
         set -euo pipefail
         node "${GITHUB_ACTION_PATH}/run.mjs"
 
-    # Only ever a comment, and only when asked. There is no step here that pushes a commit,
-    # opens a pull request, or approves one. Adding one would need `contents: write`, which
-    # the first step refuses.
+    # Only ever a comment, and only when asked. Nothing here approves or merges a pull
+    # request, and the only step that commits is the opt-in one above, on a marlo/ branch.
     - name: Comment on the pull request
       if: ${{ inputs.comment == 'true' && github.event_name == 'pull_request' && always() }}
       shell: bash
