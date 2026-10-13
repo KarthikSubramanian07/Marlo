@@ -4,7 +4,7 @@ import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@ma
 import type { RenderedPage } from '@marlo/render';
 import type { Engine, RawVerdict } from '../engine.js';
 import { assembleReport, truncateSnippet } from '../engine.js';
-import { asWindow } from '../dom.js';
+import { ensureScript, evaluateInPage, narrowHandle } from '../dom.js';
 import { AXE_MAPPING } from './mapping.js';
 
 /**
@@ -15,6 +15,11 @@ import { AXE_MAPPING } from './mapping.js';
  * it to whatever global existed at import time, which is not the page. Evaluating the
  * bundle in the window is how every browser integration does it and it is what the
  * spike in RESEARCH.md §2 verified works against happy-dom.
+ *
+ * The browser path is the same idea one process over: the bundle goes in through
+ * `addScriptTag`, `axe.run` runs through `evaluate`, and the result comes back as the
+ * JSON axe already produces. The translation from that result to verdicts is one
+ * function, used by both paths.
  *
  * Reading the bundle from disk once and caching it costs about 4 MB of memory and
  * saves re-reading it per page.
@@ -68,12 +73,14 @@ interface AxeResult {
   readonly nodes: readonly AxeNode[];
 }
 
-interface AxeRun {
+export interface AxeRun {
   readonly violations: readonly AxeResult[];
   readonly passes: readonly AxeResult[];
   readonly incomplete: readonly AxeResult[];
   readonly inapplicable: readonly AxeResult[];
 }
+
+const BUCKETS = ['violations', 'passes', 'incomplete', 'inapplicable'] as const;
 
 const OUTCOME_BY_BUCKET: Readonly<Record<keyof AxeRun, Outcome>> = Object.freeze({
   violations: 'failed',
@@ -82,17 +89,79 @@ const OUTCOME_BY_BUCKET: Readonly<Record<keyof AxeRun, Outcome>> = Object.freeze
   inapplicable: 'inapplicable',
 });
 
-function narrowRun(value: unknown): AxeRun {
-  const buckets: (keyof AxeRun)[] = ['violations', 'passes', 'incomplete', 'inapplicable'];
+export function narrowRun(value: unknown): AxeRun {
   if (typeof value !== 'object' || value === null) {
     throw new TypeError('axe.run returned a non-object');
   }
-  for (const bucket of buckets) {
+  for (const bucket of BUCKETS) {
     if (!Array.isArray(Reflect.get(value, bucket))) {
       throw new TypeError(`axe.run result has no ${bucket} array`);
     }
   }
   return value as unknown as AxeRun;
+}
+
+/** The options axe is run with, serialised once so both paths pass the same ones. */
+function runOptions(wanted: ReadonlySet<string>): string {
+  return JSON.stringify({
+    runOnly: { type: 'rule', values: [...wanted].sort() },
+    // Every bucket, because `passes` and `inapplicable` are the evidence that
+    // the rule ran, and `incomplete` is cantTell.
+    resultTypes: [...BUCKETS],
+    reporter: 'v2',
+    // axe's own iframe traversal would need the frames to have loaded, and the
+    // renderers deliberately do not load them.
+    iframes: false,
+    elementRef: false,
+  });
+}
+
+/**
+ * Translates one axe run into verdicts, grouped by the ACT rules that were asked for.
+ *
+ * Shared by the window path and the page path, so the calibration table cannot carry
+ * a difference between the two renderers that is really a difference in translation.
+ */
+export function verdictsFromRun(
+  run: AxeRun,
+  mapping: typeof AXE_MAPPING,
+  actRuleIds: readonly ActRuleId[],
+): Map<ActRuleId, RawVerdict[]> {
+  const verdicts = new Map<ActRuleId, RawVerdict[]>();
+  for (const bucket of BUCKETS) {
+    const outcome = OUTCOME_BY_BUCKET[bucket];
+    for (const result of run[bucket]) {
+      for (const entry of mapping.engineToAct(result.id)) {
+        if (!actRuleIds.includes(entry.actId)) continue;
+        const list = verdicts.get(entry.actId) ?? [];
+
+        if (result.nodes.length === 0) {
+          // `inapplicable` results carry no nodes. The absence is the finding.
+          list.push({
+            engineRuleId: result.id,
+            outcome,
+            selector: ':root',
+            snippet: '',
+            message: result.help,
+          });
+        } else {
+          for (const node of result.nodes) {
+            list.push({
+              engineRuleId: result.id,
+              outcome,
+              // axe's own target: a CSS selector it computed against the live tree, so
+              // it is already something a developer can paste into devtools.
+              selector: node.target.join(' '),
+              snippet: truncateSnippet(node.html),
+              message: node.failureSummary ?? result.help,
+            });
+          }
+        }
+        verdicts.set(entry.actId, list);
+      }
+    }
+  }
+  return verdicts;
 }
 
 export class AxeEngine implements Engine {
@@ -106,7 +175,7 @@ export class AxeEngine implements Engine {
 
   async evaluate(page: RenderedPage, actRuleIds: readonly ActRuleId[]): Promise<EngineReport> {
     const started = Date.now();
-    const verdicts = new Map<ActRuleId, RawVerdict[]>();
+    let verdicts = new Map<ActRuleId, RawVerdict[]>();
     const errors = new Map<ActRuleId, string>();
 
     // The requested ACT rules translated into axe rule ids. Running only what is
@@ -118,57 +187,21 @@ export class AxeEngine implements Engine {
 
     if (wanted.size > 0) {
       try {
-        const window = asWindow(page.handle, 'axe-core');
-        window.eval(axeSource());
+        const handle = narrowHandle(page.handle, 'axe-core');
+        const options = runOptions(wanted);
+        let raw: unknown;
 
-        const options = JSON.stringify({
-          runOnly: { type: 'rule', values: [...wanted].sort() },
-          // Every bucket, because `passes` and `inapplicable` are the evidence that
-          // the rule ran, and `incomplete` is cantTell.
-          resultTypes: ['violations', 'passes', 'incomplete', 'inapplicable'],
-          reporter: 'v2',
-          // axe's own iframe traversal would need the frames to have loaded, and the
-          // renderers deliberately do not load them.
-          iframes: false,
-          elementRef: false,
-        });
-
-        const raw: unknown = await Promise.resolve(
-          window.eval(`axe.run(document, ${options})`) as Promise<unknown>,
-        );
-        const run = narrowRun(raw);
-
-        for (const bucket of ['violations', 'passes', 'incomplete', 'inapplicable'] as const) {
-          const outcome = OUTCOME_BY_BUCKET[bucket];
-          for (const result of run[bucket]) {
-            for (const entry of this.mapping.engineToAct(result.id)) {
-              if (!actRuleIds.includes(entry.actId)) continue;
-              const list = verdicts.get(entry.actId) ?? [];
-
-              if (result.nodes.length === 0) {
-                // `inapplicable` results carry no nodes. The absence is the finding.
-                list.push({
-                  engineRuleId: result.id,
-                  outcome,
-                  selector: ':root',
-                  snippet: '',
-                  message: result.help,
-                });
-              } else {
-                for (const node of result.nodes) {
-                  list.push({
-                    engineRuleId: result.id,
-                    outcome,
-                    selector: node.target.join(' '),
-                    snippet: truncateSnippet(node.html),
-                    message: node.failureSummary ?? result.help,
-                  });
-                }
-              }
-              verdicts.set(entry.actId, list);
-            }
-          }
+        if (handle.kind === 'window') {
+          handle.window.eval(axeSource());
+          raw = await Promise.resolve(
+            handle.window.eval(`axe.run(document, ${options})`) as Promise<unknown>,
+          );
+        } else {
+          await ensureScript(handle.page, 'axe', axeSource);
+          raw = await evaluateInPage(handle.page, `return axe.run(document, ${options});`);
         }
+
+        verdicts = verdictsFromRun(narrowRun(raw), this.mapping, actRuleIds);
       } catch (error) {
         // One failure marks every requested rule as errored rather than as clean.
         // axe runs the whole set in one call, so a throw means nothing was measured,
