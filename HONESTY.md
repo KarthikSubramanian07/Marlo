@@ -180,6 +180,10 @@ Then the global thresholds were set to the measured figures rounded down: 86, 87
 
 **The lesson, and it is the one this file keeps relearning:** a check that has never run is not a check, and this is the third instance in this document. The others were a coverage gate no job invoked and a corpus job that called a binary it did not have.
 
+**What is true now.** Every engine runs inside the Playwright page ([#60](https://github.com/KarthikSubramanian07/Marlo/issues/60)). axe-core and HTML CodeSniffer are injected as their own browser scripts, Alfa and Marlo's rules are bundled for the browser at build time, and every verdict crosses back through one serialisation boundary that keeps its selector and snippet. `marlo scan --renderer browser` works, reads its own calibration table, `calibration/browser.json`, so the confidence it prints was measured on the renderer in use, and the browser test is now the golden-file comparison it was always meant to be. The test that asserted no engine could evaluate a browser page failed the day this landed, as it was written to, and was rewritten rather than deleted.
+
+The first run under the browser found something the static path had hidden. That is entry 15.
+
 ---
 
 ## 10. Three checks that could not fail
@@ -236,21 +240,67 @@ The part that took the second attempt: a check like this is one reworded sentenc
 
 **Why this one belongs here rather than in the changelog.** Nothing crashed and no artifact was malformed. A reader who came to this repository for the one thing it promises, an accuracy figure it will not flatter, was handed a stale one by the paragraph explaining why it could be trusted. That is the shape this file exists for.
 
-**Still open.** The deployed site at [trymarlo.pages.dev](https://trymarlo.pages.dev) is published by hand with `pnpm run deploy` and no workflow, so it can lag main by any amount. At the time of writing it serves the old figures. The generated artifact is correct and the publishing step is manual, which is a gap this check cannot close.
+**What is still open.** `.github/workflows/deploy.yml` now publishes the site on every push to main that touches it, through the same script, which refuses to deploy when the site tests fail and verifies production afterwards. It needs two Cloudflare secrets in the repository, and until they are added it fails on its first step with a message saying so, rather than reporting a deploy that did not happen. Until then the site is still published by hand, and can still lag main.
 
 ---
 
-## 14. Standing limitations
+## 14. The calibration gate was described as a CI job, and no CI job ran it
+
+**What it claimed.** README.md listed `pnpm calibrate:check` as "The CI gate: fails on a regression **and** on an unrecorded improvement". SETUP.md called it "what CI runs". Entry 4 and the changelog both lean on it.
+
+**What was true.** No workflow job invoked it. The eleven required checks covered typecheck, lint, format, the corpus digests, unit and end to end tests, coverage, the browser renderer, the site audit, the Action and the sign-off. The one check that compares the published table to what the harness actually computes was run by hand, when somebody remembered.
+
+**What reported success.** Every required check, on every merge, including the merges that regenerated the table.
+
+**What changed.** A twelfth job, "Published numbers match the harness", builds the workspace and runs the check, and it is a required status on main. It now covers both corpora, and the real-page block fails on movement in either direction, because those figures have no better or worse until people have rated the pages.
+
+**The fourth instance** of the lesson in entry 9, and the most uncomfortable one, because this is the gate the whole project's claim rests on.
+
+---
+
+## 15. The invariant held for every rule and not for every element
+
+**What it claimed.** "If any engine reports a failure, Marlo may not report clean." Tested over all 256 combinations of four engines and four outcomes, held at 100 percent coverage, and illustrated in the README by a sample scan in which Marlo's own rule fails a placeholder-only email field, axe-core does not, and the invariant forces the field through with axe-core named as the dissenter.
+
+**What was true.** The invariant was enforced per rule. When the routed engine failed some elements of a rule, the rule was reported, and its findings were taken from the routed engine alone, so an element that a peer failed and the routed engine passed was dropped. On `apps/demo/checkout.html` that was the placeholder-only email field, which is the example the README printed: axe-core is routed for `e086e5`, fails four other fields, passes that one, and the field never appeared in the output. The README's sample described behaviour the scanner did not have.
+
+**What reported success.** The 256-case test, which asserts the property it was written for, about rules. The end to end test "never reports clean where a peer engine reported a failure", which compares rule ids. And the README, which nothing executes.
+
+**How it was found.** The first browser run. In Chromium, axe-core also passes the `input type="tel"` whose `aria-labeledby` is misspelled, and the finding count went from 38 to 37 between the static and browser goldens with every rule still present. A count that falls while every rule-level assertion passes is the shape this file exists for.
+
+**What changed.** `packages/report/src/elements.ts`. Engines locate elements in different notations, so they are matched by the normalised opening tag each carries as evidence. Identical elements are counted rather than collapsed, a failure Alfa locates at an attribute covers the element that carries it, a page-level target is one defect per page, and evidence that identifies no element is never guessed at, so the change can only add findings. Each uncovered element is reported under the peer that failed it, routed as `invariant`, with the engines that disagreed named. The terminal lists those elements first in their rule, because its five-per-rule cap had hidden the recovered email field behind "and 1 more for this rule, not shown". A property test asserts every peer failure is either covered or reported.
+
+**What it found on the way.** Comparing failures element by element surfaced a false positive in Marlo's own `23a2a8`, which applies to HTML `img` elements and HTML elements whose role is `img`. Marlo's rule also took inline `svg` elements, which are SVG elements even inside an HTML page and belong to `7d6734`. The official test cases contain no `svg` with `role="img"`, so the published precision could not show it. The rule was corrected; the ACT figures did not move, and on the real pages Marlo's agreement with Alfa on that rule rose from a kappa of 0.55 to 1.0.
+
+---
+
+## 16. SECURITY.md described two safeguards that did not exist
+
+**What it claimed.** That the Action warns when the target branch has no protection, and that `packages/action/src/boundary.test.ts` asserts the forbidden operations are unreachable.
+
+**What was true.** The Action has never checked branch protection, and there is no `packages/action` directory, so the test it named could not exist. Both sentences were written before the code and survived after it.
+
+**What reported success.** Nothing, because nothing checks a security document against the repository it describes.
+
+**What changed.** Found while adding the opt-in pull request mode to the Action. SECURITY.md now says the Action does not check branch protection, and names the tests that do exist: the scope check is a tested function with its own unit tests, and the pull request planner refuses paths under `.github/`, absolute paths and dot segments, also tested. A security claim nothing can fail is the same defect as an accuracy claim nothing can fail, in a document people read when they are deciding whether to trust the tool.
+
+---
+
+## 17. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 
 **The accessible name computation is incomplete**, and returns a confidence rather than pretending otherwise. Where a name would depend on CSS generated content or the box tree, Marlo answers `cantTell`. That is why its recall on the naming rules sits below its peers', and the calibration table shows exactly what the caution costs.
 
-**Contrast never gets a ratio**, even with a real browser. Computing it correctly needs the effective background behind any transparency, which is a paint-order walk this version does not implement. Marlo locates the text and names the declared colours. Asserting a ratio it has not correctly computed would be a future entry on this page.
+**Contrast is computed, and declines where a single ratio would be a guess.** With a renderer that provides layout, `afw4f7` and `09o5cg` walk the paint order behind each piece of text: background layers up to the first opaque one, `opacity` multiplied through every ancestor, and the canvas. They answer `cantTell`, naming the element responsible, for a background image or gradient, a blend mode or filter, a text shadow or stroke, a colour syntax they cannot convert exactly, a positioned element painting over the text, or a canvas the page allows to be dark. Every one of their misses on the official cases is one of those declines rather than a wrong ratio. On the static renderer both rules still report as not evaluated, because there is no layout to read.
 
 **Source locations are not implemented.** Findings carry a DOM selector and state plainly that the source location arrives with the repair layer, rather than reporting a byte offset nobody computed.
 
-**The browser renderer cannot be evaluated by any engine.** It renders and declares `layout` and `paint`, and every adapter needs an in-process DOM window, so nothing can consume it. The static renderer is the only one that produces a report, and the rules needing layout come back as not evaluated rather than as passing. Entry 9 above, and [#37](https://github.com/KarthikSubramanian07/Marlo/issues/37).
+**The published headline is measured on the static renderer.** It needs no browser, so anybody can reproduce it from a clean clone, and the browser table sits beside it as `calibration/browser.json` rather than replacing it. The browser table records "a dirty tree" in place of a commit, because Playwright has to be added to the workspace manifest for the run and is deliberately not a dependency. Two rules, the meta refresh pair, navigate the page away during evaluation in a real browser, and those cases are recorded as errors rather than graded.
+
+**No real-page accuracy figure exists yet.** `corpus/real` holds twenty-five pages and a protocol for two independent raters, and the table carries what can be measured without ground truth: findings per page per engine, agreement between engines, and where the invariant would fire. What it already shows is that the official corpus is not what users scan. Engines that agree closely on the hand-written test cases report findings at rates two orders of magnitude apart on real pages, the invariant would fire on most of them, and HTML CodeSniffer crashes on several. None of that is accuracy, and the table refuses to hold an accuracy figure until people have rated the pages and their disagreements are written down.
+
+**Element identity rests on the evidence engines supply.** Matching failures across engines uses the opening tag in each verdict's markup. Two engines that locate one defect at two different elements, other than the document itself, can still produce two findings, and a verdict whose evidence is not an element is never added, only reported at rule level.
 
 **HTML CodeSniffer cannot compute a contrast ratio on the static renderer**, and unlike Alfa and axe on the identical limitation, it does not consistently report `cantTell` when it cannot: on most failing examples it stays completely silent, and this project's silence-means-passed inference turns that into a reported pass. A narrow advisory code catches a handful of the alpha-transparency shape of the failure honestly, not enough to change the overall picture. See entry 12.
 
