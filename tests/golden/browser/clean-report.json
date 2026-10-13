@@ -283,19 +283,6 @@
                 "path": []
               },
               "message": "The image is named \"A blue enamel kettle\"."
-            },
-            {
-              "engine": "marlo",
-              "engineVersion": "0.1.0",
-              "engineRuleId": "marlo/23a2a8",
-              "actRuleId": "23a2a8",
-              "outcome": "passed",
-              "target": {
-                "selector": "svg",
-                "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
-                "path": []
-              },
-              "message": "The image is named \"Delivered\"."
             }
           ],
           "error": null,

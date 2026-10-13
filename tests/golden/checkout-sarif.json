@@ -3569,6 +3569,58 @@
           }
         },
         {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:input"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/e086e5",
+            "engine-version": "0.1.0",
+            "routing-reason": "invariant",
+            "agreed-by": [],
+            "disagreements": [
+              {
+                "engine": "axe-core",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              },
+              {
+                "engine": "alfa",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 0.75,
+            "measured-recall": 0.42857142857142855,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": false,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
           "ruleId": "ff89c9",
           "level": "warning",
           "message": {

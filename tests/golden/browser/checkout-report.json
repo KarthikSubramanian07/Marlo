@@ -48,19 +48,6 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "invariant",
-          "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/09o5cg",
-            "actRuleId": "09o5cg",
-            "outcome": "failed",
-            "target": {
-              "selector": "p",
-              "snippet": "<p style=\"color: #8a8a8a; background-color: #ffffff\">Free returns within 30 days.</p>",
-              "path": []
-            },
-            "message": "This text is rgb(138, 138, 138) on rgb(255, 255, 255), a contrast ratio of 3.45:1. It is regular text at 16px, weight 400, which needs at least 7:1."
-          },
           "agreedBy": [
             "alfa"
           ],
@@ -80,12 +67,25 @@
               "chosenEngineStrictRecall": 0.7
             }
           ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/09o5cg",
+            "actRuleId": "09o5cg",
+            "outcome": "failed",
+            "target": {
+              "selector": "p",
+              "snippet": "<p style=\"color: #8a8a8a; background-color: #ffffff\">Free returns within 30 days.</p>",
+              "path": []
+            },
+            "message": "This text is rgb(138, 138, 138) on rgb(255, 255, 255), a contrast ratio of 3.45:1. It is regular text at 16px, weight 400, which needs at least 7:1."
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 1,
             "recall": 0.6,
             "sampleSize": 29,
-            "meetsAutoFixThreshold": true
+            "meetsAutoFixThreshold": false
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
@@ -103,6 +103,12 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -116,12 +122,6 @@
             },
             "message": "Images must have alternative text"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -145,6 +145,11 @@
           "severity": "moderate",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -158,11 +163,6 @@
             },
             "message": "Inline text spacing must be adjustable with custom stylesheets"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -186,19 +186,6 @@
           "severity": "serious",
           "reportedBy": "marlo",
           "routingReason": "invariant",
-          "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/2779a5",
-            "actRuleId": "2779a5",
-            "outcome": "failed",
-            "target": {
-              "selector": "html",
-              "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
-              "path": []
-            },
-            "message": "The page has no title element in its head. The title is the first thing a screen reader announces and the only label in a tab or a bookmark."
-          },
           "agreedBy": [
             "axe-core",
             "alfa",
@@ -234,6 +221,19 @@
               "chosenEngineStrictRecall": null
             }
           ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/2779a5",
+            "actRuleId": "2779a5",
+            "outcome": "failed",
+            "target": {
+              "selector": "html",
+              "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
+              "path": []
+            },
+            "message": "The page has no title element in its head. The title is the first thing a screen reader announces and the only label in a tab or a bookmark."
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 0.7142857142857143,
@@ -257,6 +257,16 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [],
+          "disagreements": [
+            {
+              "engine": "axe-core",
+              "engineRuleId": "duplicate-id-aria",
+              "outcome": "inapplicable",
+              "message": "IDs used in ARIA and labels must be unique",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -270,16 +280,6 @@
             },
             "message": "id=\"postcode\" appears 2 times. Every reference to it, including a label's for and any aria-labelledby, resolves to the first one only."
           },
-          "agreedBy": [],
-          "disagreements": [
-            {
-              "engine": "axe-core",
-              "engineRuleId": "duplicate-id-aria",
-              "outcome": "inapplicable",
-              "message": "IDs used in ARIA and labels must be unique",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -303,6 +303,16 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [],
+          "disagreements": [
+            {
+              "engine": "axe-core",
+              "engineRuleId": "duplicate-id-aria",
+              "outcome": "inapplicable",
+              "message": "IDs used in ARIA and labels must be unique",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -316,16 +326,6 @@
             },
             "message": "id=\"postcode\" appears 2 times. Every reference to it, including a label's for and any aria-labelledby, resolves to the first one only."
           },
-          "agreedBy": [],
-          "disagreements": [
-            {
-              "engine": "axe-core",
-              "engineRuleId": "duplicate-id-aria",
-              "outcome": "inapplicable",
-              "message": "IDs used in ARIA and labels must be unique",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -349,6 +349,18 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "alfa"
+          ],
+          "disagreements": [
+            {
+              "engine": "axe-core",
+              "engineRuleId": "presentation-role-conflict",
+              "outcome": "passed",
+              "message": "Elements marked as presentational should be consistently ignored",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -362,18 +374,6 @@
             },
             "message": "This element is marked decorative but tabindex=\"0\" puts it in the focus order, which puts it back in the accessibility tree with its role stripped. It ends up announced as a generic element."
           },
-          "agreedBy": [
-            "alfa"
-          ],
-          "disagreements": [
-            {
-              "engine": "axe-core",
-              "engineRuleId": "presentation-role-conflict",
-              "outcome": "passed",
-              "message": "Elements marked as presentational should be consistently ignored",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -398,6 +398,11 @@
           "severity": "serious",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "axe-core",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -411,11 +416,6 @@
             },
             "message": "role=\"slider\" requires aria-valuenow. Without it the widget announces its role but not its state."
           },
-          "agreedBy": [
-            "axe-core",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -440,6 +440,11 @@
           "severity": "critical",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "axe-core",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -453,11 +458,6 @@
             },
             "message": "An image button with no alt text is announced as \"button\" or as its filename. It is the submit control, so this usually blocks the form entirely."
           },
-          "agreedBy": [
-            "axe-core",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -482,6 +482,18 @@
           "severity": "moderate",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "alfa"
+          ],
+          "disagreements": [
+            {
+              "engine": "marlo",
+              "engineRuleId": "marlo/5c01ea",
+              "outcome": "cantTell",
+              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element.",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -495,18 +507,6 @@
             },
             "message": "Elements must only use supported ARIA attributes"
           },
-          "agreedBy": [
-            "alfa"
-          ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/5c01ea",
-              "outcome": "cantTell",
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element.",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -531,6 +531,11 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "axe-core",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -544,11 +549,6 @@
             },
             "message": "aria-labeledby is not defined in ARIA 1.2, so assistive technology ignores it. Usually a typo."
           },
-          "agreedBy": [
-            "axe-core",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -573,6 +573,11 @@
           "severity": "serious",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "axe-core",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -586,11 +591,6 @@
             },
             "message": "role=\"buton\" contains no valid ARIA role, so the element keeps its native semantics and the author's intent is lost silently."
           },
-          "agreedBy": [
-            "axe-core",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -615,6 +615,11 @@
           "severity": "serious",
           "reportedBy": "alfa",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "axe-core"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "alfa",
             "engineVersion": "0.119.0",
@@ -628,11 +633,6 @@
             },
             "message": "The attribute does not have a valid value"
           },
-          "agreedBy": [
-            "marlo",
-            "axe-core"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -656,6 +656,11 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "sole-implementer",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -669,11 +674,6 @@
             },
             "message": "ARIA hidden element must not be focusable or contain focusable elements"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -697,6 +697,11 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "axe-core",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -710,11 +715,6 @@
             },
             "message": "line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix."
           },
-          "agreedBy": [
-            "axe-core",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -738,6 +738,11 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -751,11 +756,6 @@
             },
             "message": "<svg> elements with an img or image role must have alternative text"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -779,6 +779,11 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -792,11 +797,6 @@
             },
             "message": "<object> elements must have alternative text"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -820,6 +820,12 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -833,12 +839,6 @@
             },
             "message": "Buttons must have discernible text"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -862,6 +862,11 @@
           "severity": "moderate",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -875,11 +880,6 @@
             },
             "message": "Inline text spacing must be adjustable with custom stylesheets"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -904,6 +904,12 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -917,12 +923,6 @@
             },
             "message": "Elements must meet minimum color contrast ratio thresholds"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -947,6 +947,11 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -960,11 +965,6 @@
             },
             "message": "Zooming and scaling must not be disabled"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -988,19 +988,6 @@
           "severity": "serious",
           "reportedBy": "marlo",
           "routingReason": "invariant",
-          "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/b5c3f8",
-            "actRuleId": "b5c3f8",
-            "outcome": "failed",
-            "target": {
-              "selector": "html",
-              "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
-              "path": []
-            },
-            "message": "The html element has no lang attribute, so assistive technology has to guess the language and will often pick the wrong voice."
-          },
           "agreedBy": [
             "axe-core",
             "alfa",
@@ -1036,6 +1023,19 @@
               "chosenEngineStrictRecall": null
             }
           ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/b5c3f8",
+            "actRuleId": "b5c3f8",
+            "outcome": "failed",
+            "target": {
+              "selector": "html",
+              "snippet": "<html><head> <meta charset=\"utf-8\"> <!-- b4f0c3: user-scalable=no and a maximum-scale under 2 both forbid zoom. --> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\"> <!-- bc659a and bis…",
+              "path": []
+            },
+            "message": "The html element has no lang attribute, so assistive technology has to guess the language and will often pick the wrong voice."
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 0.6666666666666666,
@@ -1059,6 +1059,18 @@
           "severity": "moderate",
           "reportedBy": "alfa",
           "routingReason": "sole-implementer",
+          "agreedBy": [
+            "axe-core"
+          ],
+          "disagreements": [
+            {
+              "engine": "marlo",
+              "engineRuleId": "marlo/bc4a75",
+              "outcome": "cantTell",
+              "message": "role=\"list\" requires listitem. None of its children declare an explicit role, so the answer depends on implicit roles Marlo does not compute here.",
+              "chosenEngineStrictRecall": 0.8571428571428571
+            }
+          ],
           "verdict": {
             "engine": "alfa",
             "engineVersion": "0.119.0",
@@ -1072,18 +1084,6 @@
             },
             "message": "The element owns no elements as required by its semantic role"
           },
-          "agreedBy": [
-            "axe-core"
-          ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/bc4a75",
-              "outcome": "cantTell",
-              "message": "role=\"list\" requires listitem. None of its children declare an explicit role, so the answer depends on implicit roles Marlo does not compute here.",
-              "chosenEngineStrictRecall": 0.8571428571428571
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1109,19 +1109,6 @@
           "severity": "serious",
           "reportedBy": "marlo",
           "routingReason": "invariant",
-          "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/bc659a",
-            "actRuleId": "bc659a",
-            "outcome": "failed",
-            "target": {
-              "selector": "meta",
-              "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
-              "path": []
-            },
-            "message": "The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it."
-          },
           "agreedBy": [
             "axe-core",
             "alfa"
@@ -1156,6 +1143,19 @@
               "chosenEngineStrictRecall": null
             }
           ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/bc659a",
+            "actRuleId": "bc659a",
+            "outcome": "failed",
+            "target": {
+              "selector": "meta",
+              "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
+              "path": []
+            },
+            "message": "The page refreshes after 30 seconds. Anyone reading slowly, or using a screen reader, loses their place with no way to stop it."
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1181,19 +1181,6 @@
           "severity": "serious",
           "reportedBy": "marlo",
           "routingReason": "invariant",
-          "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/bisz58",
-            "actRuleId": "bisz58",
-            "outcome": "failed",
-            "target": {
-              "selector": "meta",
-              "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
-              "path": []
-            },
-            "message": "The page refreshes after 30 seconds. This rule allows no exception for a long delay."
-          },
           "agreedBy": [
             "axe-core",
             "alfa",
@@ -1229,6 +1216,19 @@
               "chosenEngineStrictRecall": null
             }
           ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/bisz58",
+            "actRuleId": "bisz58",
+            "outcome": "failed",
+            "target": {
+              "selector": "meta",
+              "snippet": "<meta http-equiv=\"refresh\" content=\"30\">",
+              "path": []
+            },
+            "message": "The page refreshes after 30 seconds. This rule allows no exception for a long delay."
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1255,19 +1255,6 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
-          "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.13.0",
-            "engineRuleId": "image-alt",
-            "actRuleId": "c487ae",
-            "outcome": "failed",
-            "target": {
-              "selector": "img[src$=\"product-8842.jpg\"]",
-              "snippet": "<img src=\"product-8842.jpg\" width=\"120\" height=\"120\">",
-              "path": []
-            },
-            "message": "Images must have alternative text"
-          },
           "agreedBy": [
             "alfa"
           ],
@@ -1287,6 +1274,19 @@
               "chosenEngineStrictRecall": 1
             }
           ],
+          "verdict": {
+            "engine": "axe-core",
+            "engineVersion": "4.13.0",
+            "engineRuleId": "image-alt",
+            "actRuleId": "c487ae",
+            "outcome": "failed",
+            "target": {
+              "selector": "img[src$=\"product-8842.jpg\"]",
+              "snippet": "<img src=\"product-8842.jpg\" width=\"120\" height=\"120\">",
+              "path": []
+            },
+            "message": "Images must have alternative text"
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1313,19 +1313,6 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
-          "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.13.0",
-            "engineRuleId": "link-name",
-            "actRuleId": "c487ae",
-            "outcome": "failed",
-            "target": {
-              "selector": "a[href=\"/\"]",
-              "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"\"></a>",
-              "path": []
-            },
-            "message": "Links must have discernible text"
-          },
           "agreedBy": [
             "alfa"
           ],
@@ -1345,6 +1332,19 @@
               "chosenEngineStrictRecall": 1
             }
           ],
+          "verdict": {
+            "engine": "axe-core",
+            "engineVersion": "4.13.0",
+            "engineRuleId": "link-name",
+            "actRuleId": "c487ae",
+            "outcome": "failed",
+            "target": {
+              "selector": "a[href=\"/\"]",
+              "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"\"></a>",
+              "path": []
+            },
+            "message": "Links must have discernible text"
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1368,6 +1368,11 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -1381,11 +1386,6 @@
             },
             "message": "Frames must have an accessible name"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1411,6 +1411,12 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -1424,12 +1430,6 @@
             },
             "message": "ARIA input fields must have an accessible name"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1455,6 +1455,12 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -1468,12 +1474,6 @@
             },
             "message": "Form elements must have labels"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1499,6 +1499,12 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -1512,12 +1518,6 @@
             },
             "message": "Form elements must have labels"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1543,6 +1543,12 @@
           "severity": "critical",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -1556,12 +1562,6 @@
             },
             "message": "Form elements must have labels"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa",
-            "htmlcs"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1576,6 +1576,111 @@
           "helpUrl": "https://act-rules.github.io/rules/e086e5"
         },
         {
+          "id": "e086e5-4",
+          "actRuleId": "e086e5",
+          "actRuleName": "Form field has non-empty accessible name",
+          "successCriteria": [
+            "1.3.1",
+            "2.5.3",
+            "4.1.2"
+          ],
+          "severity": "critical",
+          "reportedBy": "marlo",
+          "routingReason": "invariant",
+          "agreedBy": [],
+          "disagreements": [
+            {
+              "engine": "axe-core",
+              "engineRuleId": "label",
+              "outcome": "passed",
+              "message": "Form elements must have labels",
+              "chosenEngineStrictRecall": 1
+            },
+            {
+              "engine": "alfa",
+              "engineRuleId": "sia-r8",
+              "outcome": "passed",
+              "message": "The form field has an accessible name",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/e086e5",
+            "actRuleId": "e086e5",
+            "outcome": "failed",
+            "target": {
+              "selector": "input",
+              "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
+              "path": []
+            },
+            "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced."
+          },
+          "confidence": {
+            "source": "calibrated",
+            "precision": 0.75,
+            "recall": 0.42857142857142855,
+            "sampleSize": 17,
+            "meetsAutoFixThreshold": false
+          },
+          "source": null,
+          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
+          "renderer": "browser",
+          "help": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced.",
+          "helpUrl": "https://act-rules.github.io/rules/e086e5"
+        },
+        {
+          "id": "e086e5-5",
+          "actRuleId": "e086e5",
+          "actRuleName": "Form field has non-empty accessible name",
+          "successCriteria": [
+            "1.3.1",
+            "2.5.3",
+            "4.1.2"
+          ],
+          "severity": "critical",
+          "reportedBy": "marlo",
+          "routingReason": "invariant",
+          "agreedBy": [
+            "alfa"
+          ],
+          "disagreements": [
+            {
+              "engine": "axe-core",
+              "engineRuleId": "label",
+              "outcome": "passed",
+              "message": "Form elements must have labels",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/e086e5",
+            "actRuleId": "e086e5",
+            "outcome": "failed",
+            "target": {
+              "selector": "input",
+              "snippet": "<input type=\"tel\" aria-labeledby=\"phone-hint\">",
+              "path": []
+            },
+            "message": "The field has no accessible name, so it is announced only by its type."
+          },
+          "confidence": {
+            "source": "calibrated",
+            "precision": 0.75,
+            "recall": 0.42857142857142855,
+            "sampleSize": 17,
+            "meetsAutoFixThreshold": false
+          },
+          "source": null,
+          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
+          "renderer": "browser",
+          "help": "The field has no accessible name, so it is announced only by its type.",
+          "helpUrl": "https://act-rules.github.io/rules/e086e5"
+        },
+        {
           "id": "ff89c9-0",
           "actRuleId": "ff89c9",
           "actRuleName": "ARIA required context role",
@@ -1585,6 +1690,18 @@
           "severity": "moderate",
           "reportedBy": "alfa",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "axe-core"
+          ],
+          "disagreements": [
+            {
+              "engine": "marlo",
+              "engineRuleId": "marlo/ff89c9",
+              "outcome": "cantTell",
+              "message": "role=\"listitem\" requires a context of list. No ancestor declares an explicit role, so the context would come from implicit roles, which Marlo does not compute for every element.",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
           "verdict": {
             "engine": "alfa",
             "engineVersion": "0.119.0",
@@ -1598,18 +1715,6 @@
             },
             "message": "The element is not owned by an element of its required context role"
           },
-          "agreedBy": [
-            "axe-core"
-          ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/ff89c9",
-              "outcome": "cantTell",
-              "message": "role=\"listitem\" requires a context of list. No ancestor declares an explicit role, so the context would come from implicit roles, which Marlo does not compute for every element.",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1631,6 +1736,11 @@
           "severity": "serious",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -1644,11 +1754,6 @@
             },
             "message": "Headings should not be empty"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -1867,19 +1972,6 @@
               "target": {
                 "selector": "img",
                 "snippet": "<img src=\"product-8842.jpg\" width=\"120\" height=\"120\">",
-                "path": []
-              },
-              "message": "The image has no accessible name, so a screen reader announces the filename or nothing at all. If the image is decorative, alt=\"\" says so deliberately."
-            },
-            {
-              "engine": "marlo",
-              "engineVersion": "0.1.0",
-              "engineRuleId": "marlo/23a2a8",
-              "actRuleId": "23a2a8",
-              "outcome": "failed",
-              "target": {
-                "selector": "svg",
-                "snippet": "<svg role=\"img\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <path d=\"M4 12h16\" stroke=\"currentColor\"></path> </svg>",
                 "path": []
               },
               "message": "The image has no accessible name, so a screen reader announces the filename or nothing at all. If the image is decorative, alt=\"\" says so deliberately."
@@ -7721,6 +7813,16 @@
           "severity": "moderate",
           "reportedBy": "marlo",
           "routingReason": "best-measured",
+          "agreedBy": [],
+          "disagreements": [
+            {
+              "engine": "axe-core",
+              "engineRuleId": "html-xml-lang-mismatch",
+              "outcome": "inapplicable",
+              "message": "HTML elements with lang and xml:lang must have the same base language",
+              "chosenEngineStrictRecall": 1
+            }
+          ],
           "verdict": {
             "engine": "marlo",
             "engineVersion": "0.1.0",
@@ -7734,16 +7836,6 @@
             },
             "message": "lang=\"engRish\" and xml:lang=\"en\" declare different languages. Which one wins depends on how the document is served, so the two have to agree."
           },
-          "agreedBy": [],
-          "disagreements": [
-            {
-              "engine": "axe-core",
-              "engineRuleId": "html-xml-lang-mismatch",
-              "outcome": "inapplicable",
-              "message": "HTML elements with lang and xml:lang must have the same base language",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -7767,19 +7859,6 @@
           "severity": "moderate",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
-          "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.13.0",
-            "engineRuleId": "html-lang-valid",
-            "actRuleId": "bf051a",
-            "outcome": "failed",
-            "target": {
-              "selector": "html",
-              "snippet": "<html lang=\"engRish\" xml:lang=\"en\">",
-              "path": []
-            },
-            "message": "<html> element must have a valid value for the lang attribute"
-          },
           "agreedBy": [
             "marlo",
             "alfa"
@@ -7793,6 +7872,19 @@
               "chosenEngineStrictRecall": 1
             }
           ],
+          "verdict": {
+            "engine": "axe-core",
+            "engineVersion": "4.13.0",
+            "engineRuleId": "html-lang-valid",
+            "actRuleId": "bf051a",
+            "outcome": "failed",
+            "target": {
+              "selector": "html",
+              "snippet": "<html lang=\"engRish\" xml:lang=\"en\">",
+              "path": []
+            },
+            "message": "<html> element must have a valid value for the lang attribute"
+          },
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -7816,6 +7908,11 @@
           "severity": "moderate",
           "reportedBy": "axe-core",
           "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa"
+          ],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.13.0",
@@ -7829,11 +7926,6 @@
             },
             "message": "lang attribute must have a valid value"
           },
-          "agreedBy": [
-            "marlo",
-            "alfa"
-          ],
-          "disagreements": [],
           "confidence": {
             "source": "calibrated",
             "precision": 1,
@@ -11384,9 +11476,9 @@
     "notEvaluated": []
   },
   "totals": {
-    "findings": 37,
+    "findings": 39,
     "bySeverity": {
-      "critical": 9,
+      "critical": 11,
       "serious": 14,
       "moderate": 14,
       "advisory": 0
@@ -11425,6 +11517,11 @@
       "actRuleId": "bisz58",
       "dissentingEngine": "marlo",
       "chosenEngine": "marlo"
+    },
+    {
+      "actRuleId": "e086e5",
+      "dissentingEngine": "marlo",
+      "chosenEngine": "axe-core"
     }
   ]
 }

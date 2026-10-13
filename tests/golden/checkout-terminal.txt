@@ -42,6 +42,7 @@ apps/demo/checkout.html
         Form elements must have labels
       input[type="tel"] (not located in source)
         Form elements must have labels
+      and 1 more for this rule, not shown
 
   ▲▲  serious  23a2a8  Image has non-empty accessible name
       WCAG 1.1.1  axe-core precision 1.00 over 18 official test cases
@@ -203,7 +204,7 @@ apps/demo/settings.html
         lang attribute must have a valid value
 
   ------------------------------------------------------------------------
-  38 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
+  39 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
   coverage: 41 of 94 published ACT rules
-  one-directional invariant enforced on 2 rule(s): a peer reported a failure the routed engine did not.
+  one-directional invariant enforced on 3 rule(s): a peer reported a failure the routed engine did not.
   calibration 2026-10-13, corpus 2026-07-29

@@ -36,6 +36,9 @@ apps/demo/checkout.html
         Form elements must have labels
       input[name="city"] (not located in source)
         Form elements must have labels
+      input (not located in source)
+        The field has no accessible name, so it is announced only by its type. A placeholder ("Email") is not a label: it disappears on focus and is not reliably announced.
+      and 1 more for this rule, not shown
 
   ▲▲  serious  23a2a8  Image has non-empty accessible name
       WCAG 1.1.1  axe-core precision 1.00 over 18 official test cases
@@ -201,7 +204,7 @@ apps/demo/settings.html
         lang attribute must have a valid value
 
   ------------------------------------------------------------------------
-  37 findings   0 fixed   0 flagged   0 not evaluated   0 crashed
+  39 findings   0 fixed   0 flagged   0 not evaluated   0 crashed
   coverage: 41 of 94 published ACT rules
-  one-directional invariant enforced on 5 rule(s): a peer reported a failure the routed engine did not.
+  one-directional invariant enforced on 6 rule(s): a peer reported a failure the routed engine did not.
   calibration 2026-10-13, corpus 2026-07-29
