@@ -21,10 +21,39 @@
  *   "found nothing".
  */
 
-export type { Engine, EngineMapping, MappingEntry, MappingKind, RawVerdict } from './engine.js';
-export { assembleReport, buildMapping, collapseOutcome, truncateSnippet } from './engine.js';
-export type { DocumentLike, ElementLike, WindowLike } from './dom.js';
-export { asWindow, describeSelector } from './dom.js';
+export type {
+  CarriedTarget,
+  Engine,
+  EngineMapping,
+  InPageFailure,
+  InPageResult,
+  InPageSuccess,
+  MappingEntry,
+  MappingKind,
+  RawVerdict,
+} from './engine.js';
+export {
+  assembleReport,
+  buildMapping,
+  collapseOutcome,
+  inPageExpression,
+  narrowCarriedTarget,
+  truncateSnippet,
+  unwrapInPageResult,
+} from './engine.js';
+export type { BrowserPageLike, DocumentLike, ElementLike, PageHandle, WindowLike } from './dom.js';
+export {
+  asBrowserPage,
+  asWindow,
+  describeSelector,
+  describeSelectorSource,
+  ensureScript,
+  evaluateInPage,
+  isBrowserPage,
+  isWindow,
+  narrowHandle,
+} from './dom.js';
+export { bundlePath, readBundle } from './bundle.js';
 
 export { AxeEngine } from './axe/adapter.js';
 export { AXE_MAPPING } from './axe/mapping.js';
