@@ -39,3 +39,22 @@ export {
   planPullRequest,
   refusedPath,
 } from './pull-request.js';
+export type {
+  CommitAuthor,
+  FakeRepository,
+  FetchLike,
+  GitHubClient,
+  GitHubClientOptions,
+  OpenOptions,
+  OpenResult,
+  PullRequestRef,
+} from './github.js';
+export {
+  BRANCH_PREFIX,
+  DEFAULT_COMMIT_AUTHOR,
+  GitHubApiError,
+  InMemoryGitHub,
+  RefusedError,
+  createGitHubClient,
+  openPlannedPullRequest,
+} from './github.js';
