@@ -1,4 +1,4 @@
-import type { CalibrationEntry, CalibrationTable, EngineId } from '@marlo/schema';
+import type { CalibrationEntry, CalibrationTable, EngineId, RealCorpus } from '@marlo/schema';
 import { findRule } from '@marlo/act';
 
 /**
@@ -197,7 +197,164 @@ export function renderCalibrationMarkdown(table: CalibrationTable): string {
   }
   lines.push('');
 
+  if (table.realCorpus !== undefined) lines.push(...renderRealCorpus(table.realCorpus));
+
   return `${lines.join('\n')}\n`;
+}
+
+/** Kappa and agreement to two decimals, and undefined said in words rather than as 0. */
+function ratio(value: number | null): string {
+  return value === null ? 'undefined' : value.toFixed(2);
+}
+
+/**
+ * The `## Real pages` section. Separate from everything above it on purpose: these
+ * numbers come from a different corpus and are never pooled with the ACT figures.
+ */
+function renderRealCorpus(real: RealCorpus): string[] {
+  const lines: string[] = [];
+  const { adjudication } = real;
+  const categories = Object.keys(real.categories).length;
+
+  lines.push('## Real pages');
+  lines.push('');
+  lines.push(
+    `A second corpus: ${String(real.pages)} pages in ${String(categories)} categories, ` +
+      `snapshotted from the public web on ${real.retrieved} and vendored in \`corpus/real\`. ` +
+      'Everything in this section is measured on those pages alone and is never pooled with ' +
+      'the ACT figures above, because a precision on hand-written minimal examples and a ' +
+      'precision on real pages are different claims. Pages are named by category and the ' +
+      'first twelve hex digits of their SHA-256; ' +
+      '[corpus/real/NOTICE.md](../corpus/real/NOTICE.md) says why, and the manifest has the URLs.',
+  );
+  lines.push('');
+
+  lines.push('### Ground truth');
+  lines.push('');
+  lines.push(
+    `${String(adjudication.ratedCells)} of ${String(adjudication.totalCells)} cells (pages ` +
+      'times the rules Marlo implements) have been rated by both raters, and ' +
+      `${String(adjudication.resolvedCells)} have a resolved ground truth. Status: ` +
+      `\`${adjudication.status}\`.`,
+  );
+  lines.push('');
+  if (adjudication.resolvedCells === 0) {
+    lines.push(
+      '**No real-page accuracy figure exists yet**, and none will until two people have rated ' +
+        'the pages independently under ' +
+        '[the adjudication protocol](../corpus/real/adjudication/PROTOCOL.md). ' +
+        'The figures below need no ground truth.',
+    );
+  } else {
+    lines.push(
+      `Inter-rater agreement over the rated cells: ${pct(adjudication.percentAgreement)}, ` +
+        `Cohen's kappa ${ratio(adjudication.kappa)}. Marlo against the resolved cells only:`,
+    );
+    lines.push('');
+    lines.push('| | |');
+    lines.push('|---|---|');
+    lines.push(`| Strict precision | ${rate(real.aggregate.accuracy.strictPrecision)} |`);
+    lines.push(`| Strict recall | ${rate(real.aggregate.accuracy.strictRecall)} |`);
+    lines.push(`| False positive rate | ${pct(real.aggregate.accuracy.falsePositiveRate)} |`);
+    lines.push(`| Resolved cells behind these | ${String(real.aggregate.accuracy.sampleSize)} |`);
+  }
+  lines.push('');
+
+  lines.push('### Findings per page');
+  lines.push('');
+  lines.push(
+    'A finding is one element one engine flagged as failing one rule, over the rules that ' +
+      'engine claims. Engines claim different numbers of rules, so this compares volume, not ' +
+      'accuracy. A page where an engine reported an error on any rule, crashed, or ran out of ' +
+      'time is excluded from its mean and counted in the last column, never read as clean.',
+  );
+  lines.push('');
+  lines.push('| Engine | Pages finished | Findings | Mean per page | Pages errored |');
+  lines.push('|---|---|---|---|---|');
+  for (const row of real.aggregate.findingsPerPage) {
+    lines.push(
+      `| ${ENGINE_LABELS[row.engine]} | ${String(row.pages)} | ${String(row.findings)} | ` +
+        `${row.mean === null ? 'not measured' : row.mean.toFixed(2)} | ${String(real.pages - row.pages)} |`,
+    );
+  }
+  lines.push('');
+
+  const { invariant } = real.aggregate;
+  lines.push('### The one-directional invariant');
+  lines.push('');
+  lines.push(
+    `On ${String(invariant.pagesWhereItWouldFire)} of ${String(invariant.pages)} pages ` +
+      `(${pct(invariant.fraction)}), at least one rule has a peer engine reporting a failure ` +
+      'where the engine routing chose for that rule does not, so the invariant would override ' +
+      'the routed verdict. Routing is the one the ACT table above produced.',
+  );
+  lines.push('');
+  const firing = invariant.perRule.filter((r) => r.pagesWhereItWouldFire > 0);
+  if (firing.length > 0) {
+    lines.push('| ACT rule | Routed to | Pages where it would fire |');
+    lines.push('|---|---|---|');
+    for (const row of firing) {
+      lines.push(
+        `| \`${row.actRuleId}\` | ${row.routedTo === null ? 'nobody' : ENGINE_LABELS[row.routedTo]} | ` +
+          `${String(row.pagesWhereItWouldFire)} |`,
+      );
+    }
+    lines.push('');
+  }
+
+  lines.push('### Agreement between engines');
+  lines.push('');
+  lines.push(
+    'Per rule, for each pair of engines that both claim it, over the pages where both returned ' +
+      "an outcome: how often they gave the same one, and Cohen's kappa, which discounts the " +
+      'agreement two engines would reach by chance. Two engines that disagree cannot both be ' +
+      'right, so a low figure marks a rule worth a human look, though not which engine is wrong. ' +
+      'Kappa is undefined when both engines gave one identical answer on every page.',
+  );
+  lines.push('');
+  lines.push('| ACT rule | Engines | Pages | Agreement | Kappa |');
+  lines.push('|---|---|---|---|---|');
+  for (const row of real.agreement) {
+    lines.push(
+      `| \`${row.actRuleId}\` | ${ENGINE_LABELS[row.engines[0]]} and ${ENGINE_LABELS[row.engines[1]]} | ` +
+        `${String(row.pages)} | ${pct(row.percentAgreement)} | ${ratio(row.kappa)} |`,
+    );
+  }
+  lines.push('');
+  return lines;
+}
+
+/**
+ * Every leaf of the real-page block that differs between two tables, for `--check`.
+ *
+ * These figures carry no direction to call better or worse until ground truth exists, so
+ * any movement fails the check, in either direction. A number that moved for no recorded
+ * reason is the thing to investigate, whichever way it went.
+ */
+export function findRealCorpusChanges(
+  before: CalibrationTable,
+  after: CalibrationTable,
+  limit = 40,
+): readonly string[] {
+  const flatten = (value: unknown, path: string, out: Map<string, string>): void => {
+    if (value !== null && typeof value === 'object') {
+      for (const [key, child] of Object.entries(value)) flatten(child, `${path}.${key}`, out);
+    } else {
+      out.set(path, JSON.stringify(value));
+    }
+  };
+  const left = new Map<string, string>();
+  const right = new Map<string, string>();
+  flatten(before.realCorpus ?? null, 'realCorpus', left);
+  flatten(after.realCorpus ?? null, 'realCorpus', right);
+  const changes: string[] = [];
+  for (const key of [...new Set([...left.keys(), ...right.keys()])].sort()) {
+    if (left.get(key) === right.get(key)) continue;
+    changes.push(`${key}: ${left.get(key) ?? 'absent'} -> ${right.get(key) ?? 'absent'}`);
+  }
+  return changes.length > limit
+    ? [...changes.slice(0, limit), `...and ${String(changes.length - limit)} more`]
+    : changes;
 }
 
 /** A regression in any published number, for the CI gate. */

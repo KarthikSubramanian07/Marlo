@@ -1,8 +1,8 @@
 /**
  * @marlo/calibrate
  *
- * Measures every engine against the official ACT test cases and produces the calibration
- * table, which is the artifact every downstream claim rests on.
+ * Measures every engine against the official ACT test cases, and separately against the
+ * real pages in corpus/real, and produces the calibration table, which is the artifact every downstream claim rests on.
  *
  * The design constraint that makes the table worth anything: every engine goes through
  * the same code path. No engine gets a longer timeout, a retry, a different renderer, or
@@ -17,4 +17,8 @@ export { MarloEngine } from './marlo-engine.js';
 export type { HarnessOptions } from './harness.js';
 export { outcomeSpread, routeRule, runHarness } from './harness.js';
 export type { Regression } from './publish.js';
-export { findRegressions, renderCalibrationMarkdown } from './publish.js';
+export { findRealCorpusChanges, findRegressions, renderCalibrationMarkdown } from './publish.js';
+export type { Adjudication, RealCorpusSource, RealPage } from './real-corpus.js';
+export { loadAdjudication, loadRealCorpus, pageLabel } from './real-corpus.js';
+export type { RealHarnessOptions, RealHarnessResult } from './real-harness.js';
+export { cohensKappa, runRealHarness, summariseAdjudication } from './real-harness.js';
