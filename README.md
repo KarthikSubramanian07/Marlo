@@ -48,7 +48,7 @@ The table grades each engine on each rule. The router picks an engine per rule f
 
 Three things this says, and none of them flatters the design.
 
-**The routed engine's perfect precision was an artifact.** Held out, it falls to 0.933, and holding a single case out changes the router's choice on 16 of 709 cases. Routed this way, it scores below running Alfa everywhere on both precision and recall, though the intervals overlap.
+**The routed engine's perfect precision was an artifact.** Held out, it falls to 0.933, and holding a single case out changes the router's choice on 16 of 709 cases across every routed rule. Routed this way, it scores below running Alfa everywhere on both precision and recall, though the intervals overlap.
 
 **The product detects the union.** Because no engine may be silenced, a rule fails whenever any engine fails it, which gives the highest recall here and the highest false positive rate apart from HTML CodeSniffer alone. That trade is deliberate: a violation one engine can see is a violation, and the cost of reporting it is printed above rather than hidden.
 

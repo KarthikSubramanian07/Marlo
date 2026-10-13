@@ -923,7 +923,7 @@ ${[
               and holding one case out changes the router's choice on
               ${num(analysis.routingStability.casesWhereChoiceChanges, { field: 'analysis.routingStability.casesWhereChoiceChanges' })}
               of ${num(analysis.routingStability.cases, { field: 'analysis.routingStability.cases' })}
-              cases. What the product reports is the union of its engines, because none may be
+              cases across every routed rule. What the product reports is the union of its engines, because none may be
               silenced: the highest recall here, at the cost printed in the first row. Routing
               decides which engine's evidence a finding carries, not what is found.
             </p>
