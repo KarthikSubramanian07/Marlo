@@ -42,6 +42,8 @@ const ORIGIN = 'https://trymarlo.pages.dev';
 const REPO = 'https://github.com/KarthikSubramanian07/Marlo';
 
 const table = JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8'));
+// The same measurement inside Chromium. Published beside the headline, never in place of it.
+const browserTable = JSON.parse(readFileSync(resolve(ROOT, 'calibration/browser.json'), 'utf8'));
 const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus/act/MANIFEST.json'), 'utf8'));
 const recorded = readFileSync(resolve(HERE, 'recorded-scan.txt'), 'utf8').trimEnd();
 
@@ -68,7 +70,7 @@ const escapeHtml = (s) =>
   );
 
 /** Pooled confusion counts for one engine, across every rule it maps. */
-function engineTotals(engineId) {
+function engineTotals(engineId, source = table) {
   let tp = 0;
   let fp = 0;
   let fn = 0;
@@ -76,7 +78,7 @@ function engineTotals(engineId) {
   let ctF = 0;
   let ctP = 0;
   let rules = 0;
-  for (const entry of table.entries) {
+  for (const entry of source.entries) {
     if (entry.engine !== engineId || entry.mappingKind === 'none') continue;
     rules += 1;
     tp += entry.strict.truePositives;
@@ -118,11 +120,23 @@ const engines = ['alfa', 'axe-core', 'marlo', 'htmlcs'].map((id) => ({
   ...engineTotals(id),
 }));
 
+const browserEngines = ['axe-core', 'alfa', 'marlo', 'htmlcs'].map((id) => ({
+  id,
+  label: ENGINE_LABEL[id],
+  ...engineTotals(id, browserTable),
+}));
+
 const marlo = engines.find((e) => e.id === 'marlo');
+const browserMarlo = browserEngines.find((e) => e.id === 'marlo');
+const browserContrast = browserTable.entries.find(
+  (e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo',
+);
+const real = table.realCorpus ?? null;
 const best = [...engines]
   .filter((e) => e.precision !== null)
   .sort((a, b) => b.precision - a.precision)[0];
 const flattered = table.entries.filter((e) => e.flatteredByProtocol);
+const flatteredMarlo = flattered.filter((e) => e.engine === 'marlo').length;
 const OG_ALT = `Marlo. False positive rate ${num(marlo.falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.marlo' })}, measured and published.`;
 const routedTo = (id) => table.routing.filter((r) => r.chosen === id).length;
 const autoFixable = table.routing.filter((r) => r.autoFixPermitted).length;
@@ -364,11 +378,12 @@ ${engines
             </div>`;
 }
 
-function engineTable() {
-  return `<div class="scroller" role="region" aria-label="Accuracy per engine, scrollable" tabindex="0">
+function engineTable(rows = engines, { label = 'Accuracy per engine', prefix = '' } = {}) {
+  const sample = rows.find((e) => e.id === 'marlo')?.sampleSize ?? null;
+  return `<div class="scroller" role="region" aria-label="${escapeHtml(label)}, scrollable" tabindex="0">
             <table>
               <caption>
-                ${num(marlo.sampleSize, { field: 'aggregate.sampleSize' })} official test case
+                ${num(sample, { field: `${prefix}aggregate.sampleSize` })} official test case
                 outcomes, strict view, where cantTell counts as no detection.
               </caption>
               <thead>
@@ -382,15 +397,15 @@ function engineTable() {
                 </tr>
               </thead>
               <tbody>
-${engines
+${rows
   .map(
     (e) => `                <tr${e.id === 'marlo' ? ' class="is-marlo"' : ''}>
                   <th scope="row">${escapeHtml(e.label)}</th>
-                  <td class="num">${num(e.rules, { field: `entries.count.${e.id}` })}</td>
-                  <td class="num">${num(e.precision, { as: 'rate', field: `strict.precision.${e.id}` })}</td>
-                  <td class="num">${num(e.recall, { as: 'rate', field: `strict.recall.${e.id}` })}</td>
-                  <td class="num">${num(e.falsePositiveRate, { as: 'percent', field: `strict.falsePositiveRate.${e.id}` })}</td>
-                  <td class="num">${num(e.cantTellOnFailed, { field: `strict.cantTellOnFailed.${e.id}` })} / ${num(e.cantTellOnPassed, { field: `strict.cantTellOnPassed.${e.id}` })}</td>
+                  <td class="num">${num(e.rules, { field: `${prefix}entries.count.${e.id}` })}</td>
+                  <td class="num">${num(e.precision, { as: 'rate', field: `${prefix}strict.precision.${e.id}` })}</td>
+                  <td class="num">${num(e.recall, { as: 'rate', field: `${prefix}strict.recall.${e.id}` })}</td>
+                  <td class="num">${num(e.falsePositiveRate, { as: 'percent', field: `${prefix}strict.falsePositiveRate.${e.id}` })}</td>
+                  <td class="num">${num(e.cantTellOnFailed, { field: `${prefix}strict.cantTellOnFailed.${e.id}` })} / ${num(e.cantTellOnPassed, { field: `${prefix}strict.cantTellOnPassed.${e.id}` })}</td>
                 </tr>`,
   )
   .join('\n')}
@@ -829,17 +844,105 @@ pages.push({
           <div class="callout callout--warn">
             <span class="callout__mark" aria-hidden="true">!</span>
             <p>
-              <strong>HTML CodeSniffer's recall is
-              ${num(engines.find((e) => e.id === 'htmlcs').recall, { as: 'rate', field: 'strict.recall.htmlcs' })}.</strong>
-              It never returns a definite failure for any rule it claims. Its warnings and
-              notices are advisory, which honestly means "cannot tell", and the adapter reads
-              silence as a pass. That inference is the weakest step in the whole engines
-              package. It stays in the table because it puts a number on exactly the gap the
-              table exists to show.
+              <strong>HTML CodeSniffer has the worst false positive rate of the four,
+              ${num(engines.find((e) => e.id === 'htmlcs').falsePositiveRate, { as: 'percent', field: 'strict.falsePositiveRate.htmlcs' })}.</strong>
+              Its results are severities rather than outcomes, so its warnings and notices are
+              read as "cannot tell", and the adapter reads silence on a rule it claims as a
+              pass. That inference is the weakest step in the whole engines package, and the
+              table is where its cost shows.
             </p>
           </div>
         </div>
       </section>
+
+      <section class="reveal">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">The same corpus, inside Chromium</span>
+            <h2>Every engine, run inside a real browser page</h2>
+            <p>
+              The table above needs no browser, so anybody can reproduce it from a clean clone.
+              The same harness also runs all four engines inside Chromium, which is the only
+              way to evaluate the rules that need layout. These figures sit beside the headline
+              rather than replacing it.
+            </p>
+          </div>
+          ${engineTable(browserEngines, { label: 'Accuracy per engine inside Chromium', prefix: 'browser.' })}
+          <div class="prose stack">
+            <p>
+              Marlo's false positive rate in the browser is
+              ${num(browserMarlo.falsePositiveRate, { as: 'percent', field: 'browser.strict.falsePositiveRate.marlo' })},
+              still third of four. On minimum contrast, which every static scan reports as not
+              evaluated, Marlo computes the ratio from a paint-order walk: precision
+              ${num(browserContrast?.strict.precision ?? null, { as: 'rate', field: 'browser.strict.precision.afw4f7' })},
+              recall
+              ${num(browserContrast?.strict.recall ?? null, { as: 'rate', field: 'browser.strict.recall.afw4f7' })}.
+              Its misses are pages where the text sits on an image, a gradient or a shadow,
+              where it says it cannot tell rather than guess a ratio.
+            </p>
+          </div>
+        </div>
+      </section>
+${
+  real === null
+    ? ''
+    : `
+      <section class="reveal">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">A second corpus</span>
+            <h2>Real pages, with no accuracy figure yet, on purpose</h2>
+            <p>
+              Every number above comes from hand-written test cases built to isolate one
+              condition. ${num(real.pages, { field: 'realCorpus.pages' })} real pages from
+              ${num(real.categories.length, { field: 'realCorpus.categories.length' })} kinds
+              of site are vendored beside them and measured separately, never pooled.
+            </p>
+          </div>
+          <div class="prose stack">
+            <p>
+              Ground truth comes from two people rating every page against every rule
+              independently, with every disagreement written down. Of
+              ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })}
+              cells, ${num(real.adjudication.ratedCells, { field: 'realCorpus.adjudication.ratedCells' })}
+              are rated, so the table holds no accuracy figure for these pages and refuses one.
+            </p>
+            <p>
+              What can be measured without ground truth already shows the official corpus is
+              not what people scan. On
+              ${num(real.aggregate.invariant.pagesWhereItWouldFire, { field: 'realCorpus.aggregate.invariant.pagesWhereItWouldFire' })}
+              of the ${num(real.aggregate.invariant.pages, { field: 'realCorpus.aggregate.invariant.pages' })}
+              pages, some engine fails a rule the routed engine passes.
+            </p>
+          </div>
+          <div class="scroller" role="region" aria-label="Findings per real page by engine, scrollable" tabindex="0">
+            <table>
+              <caption>Findings per page on the real pages. Not accuracy: nothing is rated yet.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Engine</th>
+                  <th scope="col">Pages finished</th>
+                  <th scope="col">Findings</th>
+                  <th scope="col">Per page</th>
+                </tr>
+              </thead>
+              <tbody>
+${real.aggregate.findingsPerPage
+  .map(
+    (f) => `                <tr${f.engine === 'marlo' ? ' class="is-marlo"' : ''}>
+                  <th scope="row">${escapeHtml(ENGINE_LABEL[f.engine])}</th>
+                  <td class="num">${num(f.pages, { field: `realCorpus.findingsPerPage.${f.engine}.pages` })}</td>
+                  <td class="num">${num(f.findings, { field: `realCorpus.findingsPerPage.${f.engine}.findings` })}</td>
+                  <td class="num">${num(f.mean === null ? null : Math.round(f.mean * 10) / 10, { field: `realCorpus.findingsPerPage.${f.engine}.mean` })}</td>
+                </tr>`,
+  )
+  .join('\n')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>`
+}
 
       <section class="reveal">
         <div class="wrap">
@@ -870,7 +973,7 @@ pages.push({
               notice it. ${num(flattered.length, { field: 'entries.flattered.length' })} entries
               currently grade as officially consistent while missing more than half the
               violations a real user would hit.
-              <strong>Two of the three are ours.</strong>
+              <strong>${num(flatteredMarlo, { field: 'entries.flattered.marlo.length' })} of them are ours.</strong>
             </p>
           </div>
           <div class="scroller" role="region" aria-label="Rules where the official protocol flatters an engine, scrollable" tabindex="0">
@@ -1219,6 +1322,39 @@ pages.push({
         <div class="wrap">
           <div class="rowset">
             <div class="row">
+              <span class="row__tag">Reported success: an exhaustive test of the wrong property</span>
+              <span class="row__title">The invariant held for every rule and not for every element</span>
+              <p class="row__body">
+                "If any engine reports a failure, Marlo may not report clean" was tested over
+                every combination of engines and outcomes, about rules. Within a rule, the
+                findings came from the routed engine alone, so a field a peer failed and the
+                routed engine passed was dropped. On the demo checkout page that was the email
+                input labelled only by a placeholder, which is the exact example the README's
+                sample output used to show the invariant working.
+              </p>
+              <p class="row__body">
+                It surfaced when the browser path first ran and the finding count fell while
+                every rule-level assertion passed. Failures are now matched across engines by
+                the element each one names, identical elements are counted rather than merged,
+                and an element a peer failed is reported under that peer and listed first. The
+                same comparison exposed a false positive in Marlo's own image rule, which the
+                official test cases never exercise.
+              </p>
+            </div>
+            <div class="row">
+              <span class="row__tag">Reported success: every required check</span>
+              <span class="row__title">The calibration gate was described as CI, and nothing ran it</span>
+              <p class="row__body">
+                The README called <code>pnpm calibrate:check</code> the CI gate that fails when
+                a published number moves. No workflow job invoked it. The check the whole claim
+                rests on was run by hand, when somebody remembered.
+              </p>
+              <p class="row__body">
+                It is a required job now, on both corpora, and the real-page figures fail on any
+                movement in either direction until people have rated those pages.
+              </p>
+            </div>
+            <div class="row">
               <span class="row__tag">Reported success: nothing did</span>
               <span class="row__title">A security option that did nothing</span>
               <p class="row__body">
@@ -1322,12 +1458,29 @@ pages.push({
               </p>
             </div>
             <div class="row">
-              <span class="row__title">Contrast never gets a ratio</span>
+              <span class="row__title">Contrast is computed, and declines where one ratio would be a guess</span>
               <p class="row__body">
-                Not even with a real browser. Doing it correctly needs the effective background
-                behind any transparency, which is a paint-order walk this version does not
-                implement. Marlo locates the text and names the declared colours. Asserting a
-                ratio it had not computed would be a future entry on this page.
+                With layout, Marlo walks the paint order behind each piece of text, compositing
+                transparency and ancestor opacity. Over an image, a gradient, a shadow, or an
+                element painted on top, it answers "cannot tell" and names the element
+                responsible. Without layout, both contrast rules report as not evaluated.
+              </p>
+            </div>
+            <div class="row">
+              <span class="row__title">No accuracy figure for real pages yet</span>
+              <p class="row__body">
+                The real-page corpus is vendored and measured, and the table refuses an accuracy
+                figure for it until two people have rated every page independently and written
+                down where they disagreed. What it already shows is that engines agreeing on the
+                official cases disagree widely on real ones.
+              </p>
+            </div>
+            <div class="row">
+              <span class="row__title">Shadow trees are not entered</span>
+              <p class="row__body">
+                IDs are scoped to the tree they are written in, so folding shadow content into
+                the page would invent duplicates. Marlo leaves it out, and on a page with shadow
+                roots every element rule says "cannot tell" rather than calling the page clean.
               </p>
             </div>
             <div class="row">

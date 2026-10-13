@@ -37,9 +37,23 @@ interface Table {
     readonly engine: string;
     readonly mappingKind: string;
     readonly testCaseCount: number;
+    readonly flatteredByProtocol: boolean;
     readonly strict: Record<string, number | null>;
   }[];
   readonly routing: readonly { readonly actRuleId: string; readonly chosen: string | null }[];
+  readonly realCorpus?: {
+    readonly pages: number;
+    readonly categories: readonly unknown[];
+    readonly adjudication: { readonly totalCells: number; readonly ratedCells: number };
+    readonly aggregate: {
+      readonly invariant: { readonly pages: number; readonly pagesWhereItWouldFire: number };
+      readonly findingsPerPage: readonly {
+        readonly pages: number;
+        readonly findings: number;
+        readonly mean: number | null;
+      }[];
+    };
+  };
 }
 
 const table: Table = JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8'));
@@ -194,6 +208,56 @@ describe('the site has no theatre', () => {
     }
     for (const engine of ['marlo', 'axe-core', 'alfa', 'htmlcs', null]) {
       add(table.routing.filter((r) => r.chosen === engine).length);
+    }
+    add(table.entries.filter((e) => e.flatteredByProtocol && e.engine === 'marlo').length);
+
+    // The browser table, pooled the same way, and the one contrast entry the site quotes.
+    const browser: Table = JSON.parse(
+      readFileSync(resolve(ROOT, 'calibration/browser.json'), 'utf8'),
+    );
+    for (const engine of ['marlo', 'axe-core', 'alfa', 'htmlcs']) {
+      let tp = 0;
+      let fp = 0;
+      let fn = 0;
+      let tn = 0;
+      let ctF = 0;
+      let ctP = 0;
+      let rules = 0;
+      for (const entry of browser.entries) {
+        if (entry.engine !== engine || entry.mappingKind === 'none') continue;
+        rules += 1;
+        tp += entry.strict['truePositives'] ?? 0;
+        fp += entry.strict['falsePositives'] ?? 0;
+        fn += entry.strict['falseNegatives'] ?? 0;
+        tn += entry.strict['trueNegatives'] ?? 0;
+        ctF += entry.strict['cantTellOnFailed'] ?? 0;
+        ctP += entry.strict['cantTellOnPassed'] ?? 0;
+      }
+      add(rules);
+      add(ctF);
+      add(ctP);
+      add(tp + fp + fn + tn);
+      if (tp + fp > 0) add(tp / (tp + fp));
+      if (tp + fn > 0) add(tp / (tp + fn));
+      if (fp + tn > 0) add(fp / (fp + tn));
+    }
+    const contrast = browser.entries.find((e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo');
+    if (contrast !== undefined) for (const value of Object.values(contrast.strict)) add(value);
+
+    // The real-page block: counts only, since it holds no accuracy figure until rated.
+    const real = table.realCorpus;
+    if (real !== undefined) {
+      add(real.pages);
+      add(real.categories.length);
+      add(real.adjudication.totalCells);
+      add(real.adjudication.ratedCells);
+      add(real.aggregate.invariant.pages);
+      add(real.aggregate.invariant.pagesWhereItWouldFire);
+      for (const f of real.aggregate.findingsPerPage) {
+        add(f.pages);
+        add(f.findings);
+        if (f.mean !== null) add(Math.round(f.mean * 10) / 10);
+      }
     }
 
     // Numerals from the recorded scan. Permitted because the test above proves every line of
