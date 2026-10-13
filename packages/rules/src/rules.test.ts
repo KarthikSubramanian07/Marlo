@@ -1311,6 +1311,60 @@ describe('2ee8b8 visible label is part of the accessible name', () => {
   });
 });
 
+describe('shadow content the document view does not enter', () => {
+  function withShadow(actId: string, html: string) {
+    const report = evaluateRules([actId], {
+      document: fixture(html, { shadowRoots: 1 }),
+      renderer: 'static',
+      capabilities: CAPS,
+      version: '0.1.0-test',
+    });
+    const outcomes = report.results[0]?.verdicts.map((v) => v.outcome) ?? [];
+    return {
+      outcomes,
+      messages: report.results[0]?.verdicts.map((v) => v.message) ?? [],
+    };
+  }
+
+  it('declines instead of reporting a rule inapplicable when shadow content went unseen', () => {
+    const { outcomes, messages } = withShadow(
+      'e086e5',
+      '<html><body><p id="host"></p></body></html>',
+    );
+    expect(outcomes).toEqual(['cantTell']);
+    expect(messages.join(' ')).toContain('shadow root');
+  });
+
+  it('declines instead of passing, because the passes were only over the light tree', () => {
+    const { outcomes } = withShadow(
+      'e086e5',
+      '<html><body><label>Name <input type="text"></label></body></html>',
+    );
+    expect(outcomes).toContain('passed');
+    expect(outcomes).toContain('cantTell');
+  });
+
+  it('keeps a failure it found, since the worst verdict is what a rule reports', () => {
+    const { outcomes } = withShadow('e086e5', '<html><body><input type="text"></body></html>');
+    expect(outcomes).toContain('failed');
+  });
+
+  it('leaves rules about the document itself alone, since no shadow tree can hold their subject', () => {
+    for (const actId of ['b5c3f8', 'bf051a', '5b7ae0', '2779a5', 'b4f0c3', 'bc659a', 'bisz58']) {
+      expect(findMarloRule(actId)?.subject, actId).toBe('document');
+    }
+    const { outcomes } = withShadow('b5c3f8', '<html lang="en"><body><p>x</p></body></html>');
+    expect(outcomes).toEqual(['passed']);
+  });
+
+  it('marks no element rule as a document rule', () => {
+    const documentRules = MARLO_RULES.filter((r) => r.subject === 'document').map((r) => r.actId);
+    expect(documentRules.sort()).toEqual(
+      ['2779a5', '5b7ae0', 'b4f0c3', 'b5c3f8', 'bc659a', 'bf051a', 'bisz58'].sort(),
+    );
+  });
+});
+
 describe('the capability model reaches the rules', () => {
   it('reports contrast as unsupported without layout, never as a pass', () => {
     // The single most important test in this package. If this ever returns `passed`,

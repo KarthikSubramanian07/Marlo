@@ -252,6 +252,7 @@ export const pageHasLang = defineRule({
   successCriteria: ['3.1.1'],
   requires: ['dom'],
   fixability: 'auto',
+  subject: 'document',
   applicability: (document) => {
     // Scoped to HTML documents. An SVG document has a root that is not `html`, and the
     // ACT rule's inapplicable examples are exactly those, which is where axe reports a
@@ -286,6 +287,7 @@ export const pageLangValid = defineRule({
   successCriteria: ['3.1.1'],
   requires: ['dom'],
   fixability: 'context-dependent',
+  subject: 'document',
   applicability: (document) => {
     const html = findFirst(document, 'html');
     if (html === null) return [];
@@ -412,6 +414,7 @@ export const langAndXmlLangMatch = defineRule({
   successCriteria: ['3.1.1'],
   requires: ['dom'],
   fixability: 'auto',
+  subject: 'document',
   applicability: (document) => {
     const html = findFirst(document, 'html');
     if (html === null) return [];

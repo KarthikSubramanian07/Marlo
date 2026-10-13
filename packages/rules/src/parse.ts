@@ -22,6 +22,8 @@ export interface SourceElement {
   readonly attributes?: ArrayLike<{ readonly name: string; readonly value: string }>;
   readonly textContent: string | null;
   readonly outerHTML?: string;
+  /** An open shadow root, when the element hosts one. Closed roots read as null. */
+  readonly shadowRoot?: unknown;
 }
 
 const ELEMENT_NODE = 1;
@@ -64,7 +66,9 @@ function convert(
   source: SourceElement,
   parent: MarloElement | null,
   options: ParseOptions,
+  counts: { shadowRoots: number },
 ): MarloElement {
+  if (typeof source.shadowRoot === 'object' && source.shadowRoot !== null) counts.shadowRoots += 1;
   const node: Mutable = {
     tag: source.nodeName.toLowerCase(),
     attributes: [],
@@ -94,7 +98,7 @@ function convert(
       continue;
     }
     if (child.nodeType !== ELEMENT_NODE) continue;
-    node.children.push(convert(child, node, options));
+    node.children.push(convert(child, node, options, counts));
   }
 
   node.text = source.textContent ?? '';
@@ -102,9 +106,12 @@ function convert(
 }
 
 export function buildDocument(root: SourceElement, options: ParseOptions): MarloDocument {
+  const counts = { shadowRoots: 0 };
+  const converted = convert(root, null, options, counts);
   return {
-    root: convert(root, null, options),
+    root: converted,
     url: options.url,
     hasDoctype: options.hasDoctype,
+    shadowRoots: counts.shadowRoots,
   };
 }

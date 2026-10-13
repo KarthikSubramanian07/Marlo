@@ -76,6 +76,16 @@ export interface MarloDocument {
   readonly url: string;
   /** Whether the source declared a doctype. Some rules scope to HTML documents. */
   readonly hasDoctype: boolean;
+  /**
+   * How many shadow roots the renderer's document holds, none of which this view enters.
+   *
+   * IDs and ID references are scoped to the tree they are written in, so folding a shadow
+   * tree into the light one would invent duplicate ids and resolve references across a
+   * boundary the browser does not. The view leaves shadow content out instead, and says
+   * how much it left out, so a rule can decline rather than call a page it could not see
+   * clean. See `evaluateRules`.
+   */
+  readonly shadowRoots: number;
 }
 
 export function attr(element: MarloElement, name: string): string | null {
