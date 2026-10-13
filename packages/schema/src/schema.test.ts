@@ -10,6 +10,7 @@ import {
   EXIT_CODES,
   MarloConfig,
   Outcome,
+  RealCorpus,
   Repair,
   RENDERER_CAPABILITIES,
   RuleResult,
@@ -582,5 +583,96 @@ describe('the calibration table is validated on load', () => {
     // the moment it happened to run.
     const minimal = { schemaVersion: 1, generated: '2026-07-29T12:00:00Z' };
     expect(CalibrationTable.safeParse(minimal).success).toBe(false);
+  });
+});
+
+describe('the real-page block cannot publish a number nothing measured', () => {
+  const awaiting = {
+    retrieved: '2026-10-12',
+    pages: 2,
+    categories: { government: 1, shop: 1 },
+    adjudication: {
+      status: 'awaiting-adjudication',
+      ratedCells: 0,
+      resolvedCells: 0,
+      totalCells: 82,
+      kappa: null,
+      percentAgreement: null,
+    },
+    entries: [],
+    agreement: [],
+    aggregate: {
+      findingsPerPage: [{ engine: 'marlo', pages: 2, findings: 5, mean: 2.5 }],
+      perPage: [{ page: 'government (85fa82766479)', findings: { marlo: 3, alfa: null } }],
+      invariant: { pages: 2, pagesWhereItWouldFire: 1, fraction: 0.5, perRule: [] },
+      accuracy: {
+        strictPrecision: null,
+        strictRecall: null,
+        falsePositiveRate: null,
+        sampleSize: 0,
+      },
+    },
+  };
+
+  it('accepts a corpus nobody has rated yet', () => {
+    expect(RealCorpus.safeParse(awaiting).success).toBe(true);
+  });
+
+  it('is optional on the table, so schemaVersion stays 1', () => {
+    expect(CalibrationTable.shape.realCorpus.safeParse(undefined).success).toBe(true);
+    expect(CalibrationTable.shape.schemaVersion.safeParse(1).success).toBe(true);
+  });
+
+  it('refuses an accuracy figure before any cell is resolved', () => {
+    // The whole point of the block: no real-page precision until two people have rated.
+    const flattering = {
+      ...awaiting,
+      aggregate: {
+        ...awaiting.aggregate,
+        accuracy: { strictPrecision: 1, strictRecall: 1, falsePositiveRate: 0, sampleSize: 0 },
+      },
+    };
+    expect(RealCorpus.safeParse(flattering).success).toBe(false);
+  });
+
+  it('refuses an inter-rater figure with no rated cells under it', () => {
+    const invented = { ...awaiting, adjudication: { ...awaiting.adjudication, kappa: 0.9 } };
+    expect(RealCorpus.safeParse(invented).success).toBe(false);
+  });
+
+  it('refuses a status that disagrees with the counts', () => {
+    const claimed = {
+      ...awaiting,
+      adjudication: { ...awaiting.adjudication, status: 'adjudicated' },
+    };
+    expect(RealCorpus.safeParse(claimed).success).toBe(false);
+    const partial = {
+      ...awaiting,
+      adjudication: { ...awaiting.adjudication, status: 'partial', resolvedCells: 82 },
+    };
+    expect(RealCorpus.safeParse(partial).success).toBe(false);
+    const done = {
+      ...awaiting,
+      adjudication: {
+        ...awaiting.adjudication,
+        status: 'adjudicated',
+        ratedCells: 60,
+        resolvedCells: 82,
+        kappa: 0.7,
+        percentAgreement: 0.8,
+      },
+    };
+    expect(RealCorpus.safeParse(done).success).toBe(true);
+  });
+
+  it('names a page by category and digest, never by URL', () => {
+    const named = {
+      ...awaiting,
+      aggregate: {
+        ...awaiting.aggregate,
+        perPage: [{ page: 'https://www.gov.uk/', findings: { marlo: 1 } }],
+      },
+    };
+    expect(RealCorpus.safeParse(named).success).toBe(false);
   });
 });

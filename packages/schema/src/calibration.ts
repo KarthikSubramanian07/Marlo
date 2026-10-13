@@ -182,6 +182,164 @@ export const RoutingDecision = z
 export type RoutingDecision = z.infer<typeof RoutingDecision>;
 
 /**
+ * Outcome counts for one engine on one rule across the real-page corpus. One page
+ * contributes one outcome, collapsed the same way the ACT pass collapses a test case.
+ */
+export const RealOutcomeCounts = z.object({
+  passed: z.number().int().nonnegative(),
+  failed: z.number().int().nonnegative(),
+  cantTell: z.number().int().nonnegative(),
+  inapplicable: z.number().int().nonnegative(),
+});
+export type RealOutcomeCounts = z.infer<typeof RealOutcomeCounts>;
+
+/**
+ * One engine on one rule over the real pages.
+ *
+ * `graded` rests only on cells two raters have resolved. A cell nobody has resolved is
+ * counted in `unresolvedCells` and never guessed at, and a resolved `cantTell` is counted
+ * in `cantTellTruth` rather than scored, because no detection can be right or wrong
+ * against an answer that says it cannot be known from the page.
+ */
+export const RealCorpusEntry = z.object({
+  actRuleId: ActRuleId,
+  engine: EngineId,
+  outcomes: RealOutcomeCounts,
+  /** Pages where the engine threw or ran out of time. Never a pass. */
+  errored: z.number().int().nonnegative(),
+  /** Pages where the renderer could not provide what the rule needs. */
+  unsupported: z.number().int().nonnegative(),
+  /** Failed verdicts, summed over pages. One element flagged once is one finding. */
+  findings: z.number().int().nonnegative(),
+  graded: z.object({
+    resolvedCells: z.number().int().nonnegative(),
+    unresolvedCells: z.number().int().nonnegative(),
+    cantTellTruth: z.number().int().nonnegative(),
+    strict: StrictAccuracy.nullable(),
+  }),
+});
+export type RealCorpusEntry = z.infer<typeof RealCorpusEntry>;
+
+/**
+ * How often two engines gave the same outcome for one rule, over the pages where both
+ * gave one. Needs no ground truth, which is why it can be published before anybody has
+ * rated a page: two engines that disagree cannot both be right.
+ */
+export const RealEngineAgreement = z.object({
+  actRuleId: ActRuleId,
+  engines: z.tuple([EngineId, EngineId]),
+  /** Pages where both engines returned an outcome. */
+  pages: z.number().int().nonnegative(),
+  percentAgreement: z.number().min(0).max(1).nullable(),
+  /** Cohen's kappa over the four outcomes. Null when undefined, never zero. */
+  kappa: z.number().min(-1).max(1).nullable(),
+});
+export type RealEngineAgreement = z.infer<typeof RealEngineAgreement>;
+
+/**
+ * The real-page corpus, measured separately from the ACT test cases and never pooled
+ * with them. A precision on hand-written minimal examples and a precision on real pages
+ * are different claims, and a table that averaged them would be making neither.
+ *
+ * Pages are named by category and the first twelve hex digits of their SHA-256, never by
+ * URL. corpus/real/NOTICE.md says why.
+ */
+export const RealCorpus = z
+  .object({
+    retrieved: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    pages: z.number().int().positive(),
+    categories: z.record(z.string().min(1), z.number().int().positive()),
+    adjudication: z.object({
+      status: z.enum(['awaiting-adjudication', 'partial', 'adjudicated']),
+      /** Cells both raters have answered by hand. Pre-screened cells are not counted. */
+      ratedCells: z.number().int().nonnegative(),
+      /** Cells with a resolved ground truth, which is all grading may use. */
+      resolvedCells: z.number().int().nonnegative(),
+      /** Pages times implemented rules. */
+      totalCells: z.number().int().positive(),
+      /** Inter-rater Cohen's kappa over the rated cells, or null when nothing is rated. */
+      kappa: z.number().min(-1).max(1).nullable(),
+      percentAgreement: z.number().min(0).max(1).nullable(),
+    }),
+    entries: z.array(RealCorpusEntry),
+    agreement: z.array(RealEngineAgreement),
+    aggregate: z.object({
+      /** Findings per page per engine, over the rules each engine claims. */
+      findingsPerPage: z.array(
+        z.object({
+          engine: EngineId,
+          /** Pages the engine finished without an error or a timeout. */
+          pages: z.number().int().nonnegative(),
+          findings: z.number().int().nonnegative(),
+          mean: z.number().nonnegative().nullable(),
+        }),
+      ),
+      perPage: z.array(
+        z.object({
+          /** Category and digest prefix, for example `government (85fa82766479)`. */
+          page: z.string().regex(/^[a-z]+ \([0-9a-f]{12}\)$/),
+          /** Findings per engine, or null where that engine errored on the page. */
+          findings: z.partialRecord(EngineId, z.number().int().nonnegative().nullable()),
+        }),
+      ),
+      /**
+       * Where the one-directional invariant would fire: a peer reported a failure for a
+       * rule and the engine routing chose for it did not. Routing comes from the ACT
+       * table, because that is the routing Marlo ships.
+       */
+      invariant: z.object({
+        pages: z.number().int().nonnegative(),
+        pagesWhereItWouldFire: z.number().int().nonnegative(),
+        fraction: z.number().min(0).max(1).nullable(),
+        perRule: z.array(
+          z.object({
+            actRuleId: ActRuleId,
+            routedTo: EngineId.nullable(),
+            pagesWhereItWouldFire: z.number().int().nonnegative(),
+          }),
+        ),
+      }),
+      /** Marlo against resolved cells only. Null until two people have rated. */
+      accuracy: z.object({
+        strictPrecision: z.number().min(0).max(1).nullable(),
+        strictRecall: z.number().min(0).max(1).nullable(),
+        falsePositiveRate: z.number().min(0).max(1).nullable(),
+        sampleSize: z.number().int().nonnegative(),
+      }),
+    }),
+  })
+  /*
+   * The states below cannot be published, so the schema refuses them rather than
+   * trusting every writer to remember. An accuracy figure with nothing resolved under it
+   * is the exact number this block exists not to print.
+   */
+  .refine(
+    (r) =>
+      r.adjudication.resolvedCells > 0 ||
+      (r.aggregate.accuracy.sampleSize === 0 &&
+        r.aggregate.accuracy.strictPrecision === null &&
+        r.aggregate.accuracy.strictRecall === null &&
+        r.aggregate.accuracy.falsePositiveRate === null),
+    { message: 'no real-page accuracy figure may exist before any cell is resolved' },
+  )
+  .refine(
+    (r) =>
+      r.adjudication.ratedCells > 0 ||
+      (r.adjudication.kappa === null && r.adjudication.percentAgreement === null),
+    { message: 'an inter-rater figure needs rated cells under it' },
+  )
+  .refine(
+    (r) =>
+      r.adjudication.resolvedCells <= r.adjudication.totalCells &&
+      (r.adjudication.status === 'adjudicated') ===
+        (r.adjudication.resolvedCells === r.adjudication.totalCells) &&
+      (r.adjudication.status === 'awaiting-adjudication') ===
+        (r.adjudication.resolvedCells === 0 && r.adjudication.ratedCells === 0),
+    { message: 'the adjudication status must agree with the cell counts' },
+  );
+export type RealCorpus = z.infer<typeof RealCorpus>;
+
+/**
  * The whole table, as committed to `calibration/table.json`.
  *
  * Validated on load, every time. An unvalidated calibration table is how a
@@ -249,6 +407,12 @@ export const CalibrationTable = z.object({
     /** Total official test cases the aggregate rests on. */
     sampleSize: z.number().int().nonnegative(),
   }),
+
+  /**
+   * The second corpus, real pages, graded on its own. Optional so a table measured
+   * before corpus/real existed still parses, and so `schemaVersion` stays 1.
+   */
+  realCorpus: RealCorpus.optional(),
 });
 export type CalibrationTable = z.infer<typeof CalibrationTable>;
 
