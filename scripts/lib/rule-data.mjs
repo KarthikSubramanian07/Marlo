@@ -170,10 +170,11 @@ export const PROSE_RULES = [
 ];
 
 /**
- * Files whose bytes are somebody else's. The corpus is vendored under the W3C
- * Software and Document Licence and is digest-verified, so it cannot be used as
- * a hiding place. The lockfile has no prose. LICENSE and CODE_OF_CONDUCT are
- * boilerplate nobody may edit.
+ * Files whose bytes are somebody else's. Both corpora sit under the one corpus
+ * prefix: corpus/act is vendored under the W3C Software and Document Licence and
+ * corpus/real is snapshotted web pages under the licences in its NOTICE.md. Every
+ * page in either is digest-verified, so neither can be used as a hiding place. The
+ * lockfile has no prose. LICENSE and CODE_OF_CONDUCT are boilerplate nobody may edit.
  */
 export const NOT_OUR_PROSE = [
   /^corpus\//,
