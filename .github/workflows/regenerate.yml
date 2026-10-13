@@ -9,9 +9,24 @@ name: Regenerate published artifacts
 # It never runs on main and it never runs on a schedule. It is dispatched deliberately,
 # on a branch, and the pull request checks then grade whatever it produced exactly as
 # they would grade a hand-run regeneration.
+#
+# The `renderer` input chooses which table is regenerated. `static` rewrites
+# calibration/table.json, README.md and tests/golden. `browser` installs Playwright the
+# same way the CI browser job does, rewrites calibration/browser.json and BROWSER.md, and
+# regenerates tests/golden/browser. The two are separate files because the two renderers
+# measure different things, and a run with one never touches the other's output.
 
 on:
   workflow_dispatch:
+    inputs:
+      renderer:
+        description: 'Which renderer to measure with'
+        required: true
+        default: static
+        type: choice
+        options:
+          - static
+          - browser
 
 permissions:
   contents: write
@@ -24,7 +39,12 @@ jobs:
   regenerate:
     name: Regenerate the table and the golden files
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
+    env:
+      # Read through the environment rather than substituted into a shell line, for the
+      # same reason the branch name is below: an input is text that bash would otherwise
+      # see as code. This one is a choice with two values, and it stays data anyway.
+      RENDERER: ${{ inputs.renderer }}
     steps:
       - name: Refuse to run anywhere but a branch that is not main
         # Not only `refs/heads/main`. A dispatch on a tag gives `refs/tags/v1`, which the
@@ -50,16 +70,41 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Add Playwright, for the browser renderer only
+        # Exactly what the CI browser job does, and for the same reason it is not a
+        # devDependency: `pnpm check` must stay green with no browser installed. The
+        # package.json and lockfile edits this makes are reverted before the commit below,
+        # so a regeneration never turns Playwright into a dependency of the repository.
+        if: inputs.renderer == 'browser'
+        run: |
+          pnpm add -D -w playwright@1.62.0
+          pnpm exec playwright install --with-deps chromium
+
       - name: Build
+        # The harness and the CLI run from dist, and the browser path injects two bundles
+        # the build writes there.
         run: pnpm run build
 
       - name: Regenerate the calibration table
-        run: node packages/calibrate/dist/bin.js
+        run: node packages/calibrate/dist/bin.js --renderer "$RENDERER"
 
-      - name: Regenerate the golden files
+      - name: Regenerate the static golden files
+        if: inputs.renderer == 'static'
         env:
           UPDATE_GOLDEN: '1'
         run: pnpm run test:e2e
+
+      - name: Regenerate the browser golden files
+        if: inputs.renderer == 'browser'
+        env:
+          UPDATE_GOLDEN: '1'
+        run: pnpm run test:browser
+
+      - name: Put Playwright back where it was
+        # The browser job above added it to package.json and the lockfile. Those two files
+        # must not be committed with it, so they are restored before anything is staged.
+        if: inputs.renderer == 'browser'
+        run: git checkout -- package.json pnpm-lock.yaml
 
       - name: Format, because prettier owns the markdown table
         run: pnpm run format
@@ -69,7 +114,7 @@ jobs:
 
       - name: Commit, only if something actually changed
         run: |
-          if git diff --quiet; then
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
             echo "Nothing to regenerate. The committed artifacts already match the harness."
             exit 0
           fi
@@ -80,7 +125,7 @@ jobs:
           # generated output that CI is about to lint anyway. Leaving the hook in place
           # means an unrelated lint error in the source blocks a regeneration that
           # succeeded, which is what happened the first time this ran.
-          git commit -sn -m "calibrate: regenerate the table and golden output on a runner
+          git commit -sn -m "calibrate: regenerate the $RENDERER table and golden output on a runner
 
           Produced by .github/workflows/regenerate.yml rather than by hand, so the
           published numbers come from the harness. The diff is in the job log."
