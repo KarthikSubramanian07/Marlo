@@ -1308,17 +1308,44 @@ describe('the capability model reaches the rules', () => {
     expect(result.outcome).toBe('unsupported');
   });
 
-  it('evaluates contrast once layout is available, and still declines to assert a ratio', () => {
+  it('evaluates contrast once layout is available, and computes the ratio from the stack', () => {
+    const styles = { 'font-size': '16px', 'background-color': 'rgba(0, 0, 0, 0)' };
     const result = check('afw4f7', '<html><body><p id="t">text</p></body></html>', {
       capabilities: ALL_CAPS,
       computed: {
-        computed: { '#t': { color: 'rgb(119,119,119)', 'background-color': 'rgb(255,255,255)' } },
+        computed: {
+          html: { color: 'rgb(0, 0, 0)', ...styles },
+          body: { color: 'rgb(0, 0, 0)', ...styles },
+          '#t': {
+            color: 'rgb(119, 119, 119)',
+            ...styles,
+            'background-color': 'rgb(255, 255, 255)',
+          },
+        },
+        boxes: { '#t': { x: 8, y: 16, width: 100, height: 18 } },
       },
     });
-    // Marlo locates the text and names the colours, and does not claim a ratio it has
-    // not computed correctly. That is a published limitation rather than a silent one.
+    // Marlo names both colours and the ratio, and the verdict follows from the number.
+    expect(result.outcome).toBe('failed');
+    expect(result.messages[0]).toContain('rgb(119, 119, 119) on rgb(255, 255, 255)');
+    expect(result.messages[0]).toContain('4.48:1');
+  });
+
+  it('declines rather than guessing when layout is present but geometry is not', () => {
+    const result = check('afw4f7', '<html><body><p id="t">text</p></body></html>', {
+      capabilities: ALL_CAPS,
+      computed: {
+        computed: {
+          '#t': {
+            color: 'rgb(119,119,119)',
+            'background-color': 'rgb(255,255,255)',
+            'font-size': '16px',
+          },
+        },
+      },
+    });
     expect(result.outcome).toBe('cantTell');
-    expect(result.messages.join(' ')).toContain('paint');
+    expect(result.messages.join(' ')).toContain('No geometry');
   });
 
   it('reports a rule Marlo does not implement as unsupported with nothing missing', () => {
