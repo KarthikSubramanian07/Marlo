@@ -101,7 +101,14 @@ own block of `calibration/table.json` and are never pooled with the ACT figures.
 
 1. `pnpm build`, then `node scripts/adjudicate.mjs sheet --rater A` and `--rater B`.
    Both sheets are committed empty.
-2. Each rater fills in their own sheet and runs `node scripts/adjudicate.mjs validate`.
+2. Each rater fills in their own sheet with `node scripts/rate.mjs --rater A` (or
+   `--rater B`), which prints a local address to open in a browser. It shows the page
+   snapshot offline beside one cell at a time, in the sheet's own order, saves every
+   answer to the sheet as it is given, and runs the same validation as `validate` after
+   each save. It serves that rater's sheet and nothing from the other rater, the
+   disagreement log, the resolutions or any engine. Editing the JSON by hand is still
+   allowed and gives the same result. When the sheet is finished, the rater runs
+   `node scripts/adjudicate.mjs validate`.
 3. `node scripts/adjudicate.mjs agreement`, then resolve every entry in
    `DISAGREEMENTS.md` in `resolutions.json`.
 4. `node scripts/adjudicate.mjs resolve`, then `pnpm calibrate`.

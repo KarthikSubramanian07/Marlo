@@ -110,6 +110,14 @@ Five, and all of them are things a person has to decide rather than a script.
 4. **A language provider, if you ever want generated alt text.** `ANTHROPIC_API_KEY` plus `MARLO_LANGUAGE_PROVIDER=anthropic`. The default is a deterministic stub and there is no fallback that quietly upgrades to a network call.
 5. **Two people to rate the real pages.** `corpus/real/adjudication/PROTOCOL.md` explains the protocol, and `node scripts/adjudicate.mjs sheet --rater A` regenerates a worksheet. The raters work independently and never see engine output. No real-page accuracy figure can be published until they have, and the schema refuses one.
 
+   **Rating the real pages.** After `pnpm build`, each rater runs the rating tool on their own machine:
+
+   ```bash
+   node scripts/rate.mjs --rater A   # the other rater uses --rater B
+   ```
+
+   It prints an address on 127.0.0.1. Open it in a browser. The left side shows the page snapshot with scripts off and every network load blocked, with a switch to the page source and a search box. The right side shows one cell: the page, the ACT rule with a link to its definition, four answer buttons with keyboard shortcuts (1 to 4), and a note field that is required for `failed` and `cantTell`. The rule's applicability text is not vendored, so the rater reads it on act-rules.github.io from the link. Every answer is written to `corpus/real/adjudication/sheet-A.json` (or `sheet-B.json`) as soon as it is given, so the tool can be stopped with Ctrl+C and restarted at any point. The server refuses to serve the other rater's sheet, `DISAGREEMENTS.md`, `resolutions.json` and `resolved.json`. When a sheet is complete, run `node scripts/adjudicate.mjs validate`, then commit the sheet.
+
 ## Environment variables
 
 All optional. Defaults are in `packages/schema/src/config.ts`, and `process.env` is a lint error outside that file so a required key cannot be introduced without appearing here.
