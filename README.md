@@ -30,6 +30,27 @@ Marlo is third of four. Alfa and axe-core are both more precise and more sensiti
 
 Nobody edited that. Marlo's engine goes through the same harness, on the same corpus, with no special case, because a table where the author's own engine happened to win would be worth exactly nothing. That is [D-008](DECISIONS.md#d-008), and it is the reason to believe any other number here.
 
+### The same corpus, inside a real browser
+
+The table above is measured with no browser, so anyone can reproduce it from a clean clone. The same harness also runs every engine inside Chromium, which is the only way to evaluate the rules that need layout, contrast among them. Those numbers are published beside the headline, never in place of it, in [calibration/BROWSER.md](calibration/BROWSER.md).
+
+Under Chromium, 590 test case outcomes are graded, because the layout cases become measurable.
+
+| Engine, in Chromium | Rules  | Precision | Recall    | False positives |
+| ------------------- | ------ | --------- | --------- | --------------- |
+| axe-core            | 38     | 0.964     | 0.906     | 1.6%            |
+| Alfa                | 40     | 0.960     | 0.862     | 1.7%            |
+| **Marlo**           | **41** | **0.858** | **0.630** | **5.0%**        |
+| HTML CodeSniffer    | 12     | 0.622     | 0.394     | 13.0%           |
+
+Still third of four. On minimum contrast, which every scan before this reported as not evaluated, Marlo computes the ratio from a paint-order walk and has not flagged a passing case, and it misses every failing case whose text sits on an image, a gradient or a shadow, because there it says it cannot tell rather than guess.
+
+### A second corpus, from real pages
+
+Every number above comes from hand-written test cases, each built to isolate one condition. Real pages are not like that, so `corpus/real` vendors 25 pages from 12 kinds of site (government, documentation, shops, checkouts, forms, application shells and more), all under licences that allow it, and the harness measures every engine on them separately and never pools the result with the table above.
+
+There is no accuracy figure for them yet, and the table refuses to hold one. Ground truth comes from two people rating every page against every rule independently, with their disagreements written down, and none of the 1025 cells has been rated. What can be measured without ground truth already says the official corpus is not what users scan: on 19 of the 25 pages some engine reports a failure for a rule the routed engine passes, and engines that agree closely on the official cases report findings at rates two orders of magnitude apart.
+
 ---
 
 ## Why this is the product
@@ -44,10 +65,12 @@ So Marlo's differentiator is not better fixes. It is that its error rate is a nu
 
 ## What using it looks like
 
-```
-$ marlo scan checkout.html
+This is recorded output, not a mock-up: every line below appears verbatim in `tests/golden/checkout-terminal.txt`, which the end to end suite regenerates from a real scan of the deliberately broken demo page, and a test fails if the excerpt drifts from it.
 
-checkout.html
+```
+$ marlo scan apps/demo/checkout.html apps/demo/settings.html
+
+apps/demo/checkout.html
   static renderer  dom, script
 
   NOT EXAMINED  2 rules need layout and paint, which this renderer does not provide.
@@ -55,25 +78,34 @@ checkout.html
                 This is not a pass. Use --renderer browser to evaluate them.
 
   ▲▲▲ critical e086e5  Form field has non-empty accessible name
-      WCAG 1.3.1, 2.5.3, 4.1.2  marlo precision 0.75 over 17 official test cases
-      INVARIANT marlo reported a failure the routed engine did not, so Marlo may not report clean.
-      disagreement: axe-core says passed
-        A placeholder ("Email") is not a label: it disappears on focus and is not
-        reliably announced.
+      WCAG 1.3.1, 2.5.3, 4.1.2  axe-core precision 1.00 over 17 official test cases
+      input (not located in source)
+        INVARIANT marlo failed this element and the routed engine did not report it: axe-core says passed, alfa says passed.
+        The field has no accessible name, so it is announced only by its type. A placeholder ("Email") is not a label: it disappears on focus and is not reliably announced.
+      div[role="slider"] (not located in source)
+        ARIA input fields must have an accessible name
 
-  ------------------------------------------------------------
-  12 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
+  ▲▲  serious  afw4f7  Text has minimum contrast
+      WCAG 1.4.3, 1.4.6  alfa precision 0.83 over 28 official test cases
+      INVARIANT alfa reported a failure the routed engine did not, so Marlo may not report clean.
+      disagreement: alfa says failed
+      disagreement: htmlcs says passed
+      xpath /html[1]/body[1]/main[1]/p[1]/text()[1] (not located in source)
+        The highest possible contrast of the text is 3.45:1 which is below the required contrast of 4.5:1
+
+  ------------------------------------------------------------------------
+  39 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
   coverage: 41 of 94 published ACT rules
-  calibration 2026-07-30, corpus 2026-07-29
+  one-directional invariant enforced on 3 rule(s): a peer reported a failure the routed engine did not.
 ```
 
 Three things there that most scanners will not show you.
 
-**What it could not check, before what it found.** Two rules need CSS layout, the default renderer has none, and it says so above the findings rather than in a footnote. "No contrast problems were found" and "contrast was not examined" are different sentences.
+**What it could not check, before what it found.** Two rules need CSS layout, the default renderer has none, and it says so above the findings rather than in a footnote. "No contrast problems were found" and "contrast was not examined" are different sentences. Run it with `--renderer browser` and both rules are evaluated.
 
-**Where the confidence came from.** `marlo precision 0.75 over 17 official test cases`. Go and disagree with it.
+**Where the confidence came from.** `axe-core precision 1.00 over 17 official test cases`. Go and disagree with it.
 
-**A disagreement between engines, on the record.** The calibration table routes that rule to axe-core, which did not flag a placeholder-only input. Marlo's own rule did. The invariant forced the failure through and named the dissenter.
+**A disagreement between engines, on the record, down to the element.** The calibration table routes `e086e5` to axe-core, which fails five other form controls on this page and passes the email input whose only label is a placeholder. Marlo's own rule fails it. The routed engine decides who speaks for the rule, and it still may not silence a peer about a single element, so that field is listed first, marked, with the engines that disagreed named. On contrast the routed engine reported nothing at all, so the whole rule was forced through on Alfa's word.
 
 Severity is a text mark, never colour on its own, so the output survives a pipe, a CI log, and a reader who cannot tell red from amber.
 
@@ -85,7 +117,7 @@ Severity is a text mark, never colour on its own, so the output survives a pipe,
 git clone https://github.com/KarthikSubramanian07/Marlo.git
 cd Marlo
 pnpm install
-pnpm check                          # 404 tests. No network, no API key, no browser.
+pnpm check                          # Everything CI runs. No network, no API key, no browser.
 pnpm build && node packages/cli/dist/bin.js scan your-page.html
 ```
 
@@ -110,7 +142,7 @@ flowchart LR
   R --> AXE[axe-core]:::eng
   R --> ALF[Alfa]:::eng
   R --> HCS[HTML CodeSniffer]:::eng
-  R --> MAR[Marlo, 35 rules]:::eng
+  R --> MAR[Marlo's own rules]:::eng
   AXE --> N[normalise to<br/>ACT rule ids]:::pure
   ALF --> N
   HCS --> N
@@ -210,10 +242,10 @@ Five of the nine are ours. Under the protocol W3C publishes implementation repor
 | **CLI**           | `marlo scan`, `explain`, `coverage`              | Exits 1 on findings, 3 on a rule it could not evaluate           |
 | **Library**       | `@marlo/cli`, `@marlo/report`                    | The pipeline and the surfaces, importable                        |
 | **SARIF 2.1.0**   | `--sarif`                                        | Per-engine provenance on every result, for the code scanning tab |
-| **GitHub Action** | [`.github/actions/marlo`](.github/actions/marlo) | Refuses a token with `contents: write` before it does any work   |
+| **GitHub Action** | [`.github/actions/marlo`](.github/actions/marlo) | Read-only by default; an opt-in mode opens a pull request        |
 | **MCP**           | [`@marlo/mcp`](packages/mcp)                     | Three read-only tools. No `fix` tool, and there will not be one  |
 
-The last two are where the safety promise stops being prose. In an Action, "Marlo never pushes" is a statement about a permission, so the Action reads the permissions it was handed and stops if they exceed the job. Over MCP, a model calls tools with no human in between, so the server has no tool that writes and a test asserts the package does not import `writeFileSync` at all.
+The last two are where the safety promise stops being prose. In an Action, what Marlo may write is a statement about a permission, so the Action reads the permissions it was handed before it does anything. By default it refuses any token that can write to the repository. With `open-pull-request: true` it requires exactly `contents: write` and `pull-requests: write`, refuses every other write scope, applies only fixes that cleared the measured gate and verified, and opens one pull request whose branch name is derived from the edits, so a second run over the same state opens nothing. It refuses to write to the default branch, never force-updates a ref, and never merges. The body carries, per fix, the measurement the decision rested on and the three verification answers, and per refusal the number that disqualified it. Over MCP, a model calls tools with no human in between, so the server has no tool that writes and a test asserts the package does not import `writeFileSync` at all.
 
 ---
 
@@ -255,7 +287,7 @@ A rule that measures badly still gets merged. It is published with its real numb
 | ---------------------------------------------- | -------------------------------------------------------------------------------- |
 | [RESEARCH.md](RESEARCH.md)                     | What was measured before any code was written, and the eight things it rules out |
 | [DECISIONS.md](DECISIONS.md)                   | Thirteen decisions, each stating what would make it wrong                        |
-| [HONESTY.md](HONESTY.md)                       | Eleven entries. Every defect found during the build, with what reported success  |
+| [HONESTY.md](HONESTY.md)                       | Sixteen entries. Every defect found during the build, with what reported success |
 | [calibration/README.md](calibration/README.md) | The generated table, per rule, per engine                                        |
 | [ARCHITECTURE.md](ARCHITECTURE.md)             | How a page moves through the pipeline                                            |
 | [HANDOFF.md](HANDOFF.md)                       | What is real, what is stubbed, what is deferred, and the traps                   |
