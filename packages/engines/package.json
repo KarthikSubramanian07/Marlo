@@ -18,7 +18,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build && esbuild src/alfa/browser-entry.ts --bundle --format=iife --global-name=MarloAlfa --platform=browser --target=es2022 --outfile=dist/alfa.browser.js --log-level=warning"
   },
   "dependencies": {
     "@marlo/act": "workspace:*",
@@ -37,5 +37,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  }
 }
