@@ -1,16 +1,23 @@
 #!/usr/bin/env node
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
+import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
+import { Worker } from 'node:worker_threads';
 import type { RendererId } from '@marlo/schema';
 import { CalibrationTable } from '@marlo/schema';
 import type { Renderer } from '@marlo/render';
 import { BrowserRenderer, PlaywrightMissingError, StaticRenderer } from '@marlo/render';
+import type { Engine } from '@marlo/engines';
 import { peerEngines } from '@marlo/engines';
+import { IMPLEMENTED_RULES } from '@marlo/rules';
 import { loadCorpus } from './corpus.js';
 import { MarloEngine } from './marlo-engine.js';
 import { runHarness } from './harness.js';
-import { findRegressions, renderCalibrationMarkdown } from './publish.js';
+import { findRealCorpusChanges, findRegressions, renderCalibrationMarkdown } from './publish.js';
+import { loadAdjudication, loadRealCorpus } from './real-corpus.js';
+import { runRealHarness } from './real-harness.js';
+import { runWorker, type WorkerJob } from './real-pool.js';
 
 /**
  * Regenerates the calibration table.
@@ -23,6 +30,10 @@ import { findRegressions, renderCalibrationMarkdown } from './publish.js';
  *
  * `--check` is the CI gate. It is a required status, because a false positive rate that
  * can drift without failing a build is a marketing number.
+ *
+ * The static run measures both corpora: the ACT test cases first, then the real pages in
+ * corpus/real, graded separately and written to their own block of the table. The real
+ * pages are measured on the static renderer only, and `--rule` skips them.
  *
  * The two renderers write two tables, never one. A layout rule is `unsupported` under the
  * static renderer and a measured number under the browser one, so a single file would
@@ -87,6 +98,62 @@ function rendererFor(name: HarnessRenderer): Renderer {
     : new StaticRenderer();
 }
 
+/**
+ * The cap on one engine evaluating one real page, the same for every engine (D-008). An
+ * evaluation past it is terminated and recorded as errored, never as a pass.
+ */
+const REAL_PAGE_TIMEOUT_MS = 600_000;
+/** Heap for one evaluation. A worker that runs out is recorded as errored too. */
+const REAL_PAGE_HEAP_MB = 4_096;
+
+async function measureRealPages(
+  actOnly: CalibrationTable,
+  engines: readonly Engine[],
+): Promise<CalibrationTable> {
+  const real = loadRealCorpus(ROOT);
+  const concurrency = Math.max(1, Math.min(4, availableParallelism() - 1));
+  console.log(
+    `\nMeasuring ${String(engines.length)} engines over ${String(real.pages.length)} real pages, ` +
+      `${String(concurrency)} at a time, each capped at ${String(REAL_PAGE_TIMEOUT_MS / 1000)} s.`,
+  );
+  let logged = 0;
+  const { block, errors } = await runRealHarness({
+    corpus: real,
+    adjudication: loadAdjudication(ROOT),
+    engines: engines.map((e) => ({ id: e.id, claimedRules: e.mapping.claimedRules })),
+    implementedRules: IMPLEMENTED_RULES,
+    routing: actOnly.routing,
+    concurrency,
+    evaluate: (page, engine, rules) => {
+      const job: WorkerJob = { html: real.read(page), url: page.url, engine, rules };
+      return runWorker(
+        () =>
+          new Worker(new URL('./real-worker.js', import.meta.url), {
+            workerData: job,
+            resourceLimits: { maxOldGenerationSizeMb: REAL_PAGE_HEAP_MB },
+          }),
+        REAL_PAGE_TIMEOUT_MS,
+      );
+    },
+    onProgress: (done, total) => {
+      const percent = Math.floor((done / total) * 100);
+      if (percent >= logged + 10) {
+        logged = percent;
+        console.log(`  ${String(percent)}%  (${String(done)}/${String(total)})`);
+      }
+    },
+  });
+  for (const error of errors) {
+    console.log(`  errored: ${error.page} / ${error.engine}: ${error.reason}`);
+  }
+  const { adjudication } = block;
+  console.log(
+    `Real pages: ${String(adjudication.ratedCells)} of ${String(adjudication.totalCells)} cells rated, ` +
+      `${String(adjudication.resolvedCells)} resolved (${adjudication.status}).`,
+  );
+  return CalibrationTable.parse({ ...actOnly, realCorpus: block });
+}
+
 async function main(): Promise<number> {
   if (rendererName !== 'static' && rendererName !== 'browser') {
     console.error(`Unknown renderer "${rendererName ?? ''}". Use static or browser.`);
@@ -146,7 +213,11 @@ async function main(): Promise<number> {
 
   // Validated before it is written or compared. An unvalidated table is how a published
   // error rate quietly becomes a different number.
-  const validated = CalibrationTable.parse(table);
+  const actOnly = CalibrationTable.parse(table);
+  const validated =
+    onlyRule === undefined && rendererName === 'static'
+      ? await measureRealPages(actOnly, engines)
+      : actOnly;
 
   console.log('');
   console.log(
@@ -196,6 +267,16 @@ async function main(): Promise<number> {
       console.log(`  improved: ${improvement.what} ${improvement.before} -> ${improvement.after}`);
     }
 
+    const realChanges = findRealCorpusChanges(committed, validated);
+    if (realChanges.length > 0) {
+      console.error(`\nThe real-page block moved (${String(realChanges.length)} change(s)):\n`);
+      for (const change of realChanges) console.error(`  ${change}`);
+      console.error(
+        '\nThese figures have no better or worse until ground truth exists, so any movement fails.\n' +
+          'Find out why it moved, then regenerate with `pnpm calibrate` and say why in the pull request.\n',
+      );
+    }
+
     if (regressions.length > 0) {
       console.error(`\n${String(regressions.length)} regression(s):\n`);
       for (const regression of regressions) {
@@ -217,7 +298,13 @@ async function main(): Promise<number> {
       return 1;
     }
 
-    console.log('\ncalibrate --check: no regression.');
+    if (realChanges.length > 0) return 1;
+
+    console.log(
+      rendererName === 'static'
+        ? '\ncalibrate --check: no regression, and the real-page block did not move.'
+        : '\ncalibrate --check: no regression.',
+    );
     return 0;
   }
 
