@@ -45,6 +45,13 @@ export interface MarloRule {
    * they still have the rule's semantics in mind.
    */
   readonly fixability: 'auto' | 'context-dependent' | 'never';
+  /**
+   * `document` for a rule whose subject is the document itself, its language, title,
+   * viewport or refresh, which no shadow tree can hold. Every other rule may have
+   * subjects inside a shadow tree, and declines on a page with shadow content it cannot
+   * see. Absent means an element rule.
+   */
+  readonly subject?: 'document';
   /** Elements this rule applies to. An empty list means the rule is inapplicable. */
   applicability(document: MarloDocument): readonly RuleTarget[];
   /** The verdict for one target. */

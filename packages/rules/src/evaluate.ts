@@ -125,6 +125,31 @@ export function evaluateRules(
         };
       });
 
+      // Shadow content this view did not enter. An element rule that found nothing wrong,
+      // or nothing in scope, in the part of the page it could see has not looked at the
+      // rest, so it adds a cantTell rather than letting the page read as clean. A failure
+      // it did find still stands, because the outcome a rule reports is its worst verdict.
+      // Found on afw4f7's failing example 6, whose only text sits in a shadow root: it read
+      // as inapplicable, which the ACT protocol does not allow for a failing example.
+      if (options.document.shadowRoots > 0 && rule.subject !== 'document') {
+        verdicts.push({
+          engine: 'marlo' as const,
+          engineVersion: options.version,
+          engineRuleId: `marlo/${rule.actId}`,
+          actRuleId,
+          outcome: 'cantTell',
+          target: {
+            selector: describeSelector(options.document.root),
+            snippet: snippet(options.document.root),
+            path: [],
+          },
+          message:
+            `This page has ${String(options.document.shadowRoots)} shadow root(s), and Marlo's ` +
+            'rules do not look inside shadow trees. Anything this rule applies to inside one ' +
+            'was not examined, which is not the same as passing.',
+        });
+      }
+
       results.push({
         actRuleId,
         engine: 'marlo',

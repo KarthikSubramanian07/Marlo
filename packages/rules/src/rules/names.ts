@@ -371,6 +371,7 @@ export const pageHasTitle = defineRule({
   successCriteria: ['2.4.2'],
   requires: ['dom'],
   fixability: 'never',
+  subject: 'document',
   applicability: (document) => {
     // Applies to the document, once. Scoped to HTML documents.
     const html = findAll(document, ['html'])[0];

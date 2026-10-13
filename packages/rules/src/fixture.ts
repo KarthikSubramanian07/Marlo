@@ -66,6 +66,8 @@ export interface FixtureOptions {
   readonly url?: string;
   readonly computed?: Readonly<Record<string, Readonly<Record<string, string>>>>;
   readonly boxes?: Readonly<Record<string, Box>>;
+  /** Shadow roots the renderer would have reported. The fixture parser never builds one. */
+  readonly shadowRoots?: number;
 }
 
 export function fixture(html: string, options: FixtureOptions = {}): MarloDocument {
@@ -170,5 +172,10 @@ export function fixture(html: string, options: FixtureOptions = {}): MarloDocume
     apply(root);
   }
 
-  return { root, url: options.url ?? 'https://marlo.invalid/', hasDoctype };
+  return {
+    root,
+    url: options.url ?? 'https://marlo.invalid/',
+    hasDoctype,
+    shadowRoots: options.shadowRoots ?? 0,
+  };
 }

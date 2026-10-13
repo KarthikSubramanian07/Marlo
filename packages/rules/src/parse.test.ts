@@ -72,6 +72,36 @@ describe('buildDocument', () => {
   });
 });
 
+describe('shadow roots', () => {
+  it('counts the shadow roots it does not enter, and enters none of them', () => {
+    const host = {
+      ...element('DIV', [text('light')]),
+      shadowRoot: { childNodes: [element('BUTTON', [text('in the shadow tree')])] },
+    };
+    const document = buildDocument(element('HTML', [element('BODY', [host, element('P')])]), {
+      url: 'https://marlo.invalid/',
+      hasDoctype: true,
+      computedStyleFor: null,
+      boxFor: null,
+    });
+    expect(document.shadowRoots).toBe(1);
+    const div = document.root.children[0]?.children[0];
+    expect(div?.children).toEqual([]);
+    expect(div?.ownText).toBe('light');
+  });
+
+  it('reports none for a page without them, and treats a closed root as invisible', () => {
+    const closed = { ...element('DIV'), shadowRoot: null };
+    const document = buildDocument(element('HTML', [closed]), {
+      url: 'https://marlo.invalid/',
+      hasDoctype: true,
+      computedStyleFor: null,
+      boxFor: null,
+    });
+    expect(document.shadowRoots).toBe(0);
+  });
+});
+
 describe('fixture', () => {
   it('assigns own text to the innermost open element only', () => {
     const document = fixture('<html><body><p id="p">Hello <b>there</b> again</p></body></html>');

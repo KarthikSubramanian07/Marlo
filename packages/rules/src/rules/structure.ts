@@ -77,6 +77,7 @@ export const metaRefreshNoDelay = defineRule({
   successCriteria: ['2.2.1', '2.2.4', '3.2.5'],
   requires: ['dom'],
   fixability: 'auto',
+  subject: 'document',
   applicability: (document) => {
     const targets = [];
     for (const element of findAll(document, ['meta'])) {
@@ -120,6 +121,7 @@ export const metaRefreshStrict = defineRule({
   successCriteria: ['2.2.1', '2.2.4', '3.2.5'],
   requires: ['dom'],
   fixability: 'auto',
+  subject: 'document',
   applicability: (document) => {
     const targets = [];
     for (const element of findAll(document, ['meta'])) {
@@ -151,6 +153,7 @@ export const viewportAllowsZoom = defineRule({
   successCriteria: ['1.4.4', '1.4.10'],
   requires: ['dom'],
   fixability: 'auto',
+  subject: 'document',
   applicability: (document) => {
     const targets = [];
     for (const element of findAll(document, ['meta'])) {
