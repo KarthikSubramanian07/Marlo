@@ -1,5 +1,6 @@
-# Vendored under the W3C Software and Document Licence. Reformatting it would be
-# an unmarked modification, which the licence forbids, and would change digests.
+# Vendored. corpus/act is under the W3C Software and Document Licence, where reformatting
+# would be an unmarked modification the licence forbids, and corpus/real is snapshotted
+# pages under the licences in its NOTICE.md. Reformatting either would change digests.
 corpus/
 
 pnpm-lock.yaml

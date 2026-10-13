@@ -21,6 +21,7 @@ indent_size = 2
 indent_style = tab
 
 [corpus/**]
-# Vendored under the W3C Software and Document Licence. Do not reformat.
+# corpus/act is vendored under the W3C Software and Document Licence and corpus/real under
+# the licences in its NOTICE.md. Both are digest-verified. Do not reformat.
 insert_final_newline = false
 trim_trailing_whitespace = false

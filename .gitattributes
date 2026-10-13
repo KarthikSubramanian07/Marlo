@@ -1,7 +1,11 @@
 * text=auto eol=lf
 
-# Vendored corpus: byte-exact, digest-verified. Never normalise.
+# Vendored corpora, corpus/act and corpus/real: byte-exact, digest-verified. Never normalise.
 corpus/** -text -diff linguist-vendored
+
+# Except the real-page adjudication record, which people write by hand. A disagreement log
+# nobody can read in review is not a log, so these files are ordinary diffable text.
+corpus/real/adjudication/** text eol=lf diff -linguist-vendored
 
 # Golden files. A diff here is the point, so keep them readable in review.
 tests/golden/** text eol=lf
