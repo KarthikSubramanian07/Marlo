@@ -5,7 +5,7 @@
   "startedAt": "<time>",
   "calibration": {
     "generated": "2026-10-13",
-    "commit": "18b8d0ed76db25c2045a8fe218d699126d590e57",
+    "commit": "10a6c7961b013b7e5cb8079c77798c8bd39ba129",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
