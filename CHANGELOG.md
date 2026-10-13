@@ -19,7 +19,7 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - A second corpus of 25 real pages ([#62](https://github.com/KarthikSubramanian07/Marlo/issues/62)), vendored and digest-verified like the first, with a two-rater adjudication protocol, tooling that computes Cohen's kappa and logs every disagreement, and empty worksheets. The harness measures every engine on it in a separate pass and writes an optional `realCorpus` block that is never pooled with the ACT figures and refuses an accuracy figure before any cell is rated.
 - Repair that opens a pull request ([#63](https://github.com/KarthikSubramanian07/Marlo/issues/63)). `marlo fix --json`, a pure planner whose branch name is derived from the edits so a second run opens nothing, a GitHub client that refuses to write to the default branch or force-update a ref, and an opt-in `open-pull-request` mode in the Action that requires exactly `contents: write` and `pull-requests: write`. The body carries the measurement and the three verification answers per fix, and the disqualifying number per refusal.
 - The one-directional invariant per element. A peer's failure on an element the routed engine passed is reported, attributed to the peer and marked as an invariant, and the terminal lists those elements first in their rule.
-- A required CI job runs `pnpm calibrate --check`, and a deploy workflow publishes the site from main once the Cloudflare secrets are configured.
+- A required CI job runs `pnpm calibrate --check`.
 
 ### Fixed
 
