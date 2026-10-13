@@ -429,7 +429,11 @@ function readJson(file) {
   return JSON.parse(readFileSync(file, 'utf8'));
 }
 
-async function corpusContext() {
+/**
+ * The pages, the implemented rules and the cell keys a complete worksheet covers. Exported
+ * so scripts/rate.mjs validates against exactly the cell set `validate` uses.
+ */
+export async function corpusContext() {
   const manifest = readJson(join(REAL, 'MANIFEST.json'));
   let rules;
   try {
