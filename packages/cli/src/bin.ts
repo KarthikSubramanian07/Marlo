@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { ActRuleId, EngineReport, Repair } from '@marlo/schema';
-import { CalibrationTable, EXIT_CODES } from '@marlo/schema';
+import type { ActRuleId, EngineReport, FixedFile, Repair, ScanReport } from '@marlo/schema';
+import { CalibrationTable, EXIT_CODES, FixReport } from '@marlo/schema';
 import { StaticRenderer } from '@marlo/render';
 import { peerEngines } from '@marlo/engines';
 import { MarloEngine } from '@marlo/calibrate';
 import { renderSarif, renderTerminal, shouldUseColour } from '@marlo/report';
 import { repairFinding, repairedText } from '@marlo/repair';
-import { exitCodeFor, scan } from './pipeline.js';
+import { exitCodeFor, newRunId, scan } from './pipeline.js';
 
 /**
  * The `marlo` command.
@@ -57,12 +57,13 @@ const HELP = `marlo ${version()}
 
 USAGE
   marlo scan <file...> [options]
-  marlo fix <file...> [--write]
+  marlo fix <file...> [--write] [--json]
   marlo explain <act-rule-id>
   marlo coverage
 
 OPTIONS
-  --json              Machine-readable report on stdout, nothing else.
+  --json              Machine-readable report on stdout, nothing else. For fix, the
+                      FixReport: per file, the repairs and whether the file was written.
   --sarif             SARIF 2.1.0 on stdout, with per-engine provenance on every result.
   --renderer <which>  static (default) or browser. The browser renderer adds layout and
                       paint, which the contrast and focus rules need. It costs a Chromium.
@@ -92,8 +93,8 @@ FIX
   marlo explain <rule> says which, and why.
 
 NOT YET
-  Repair does not open pull requests. That surface is opt-in, off by default, and lands
-  with the GitHub Action rather than here.
+  This command does not open pull requests. The GitHub Action does, from the output of
+  marlo fix --json, and only when its open-pull-request input is set. It is off by default.
 
   Coverage, accuracy per rule, and which engine reports what: calibration/README.md.
 `;
@@ -296,6 +297,16 @@ async function main(): Promise<void> {
       const table = loadTable();
       const renderer = new StaticRenderer();
       const write = flags.has('--write');
+      const json = flags.has('--json');
+      // In JSON mode stdout is the payload and nothing else may reach it.
+      const say = json
+        ? (): void => undefined
+        : (line: string): void => {
+            console.log(line);
+          };
+      const startedAt = new Date().toISOString();
+      const fixedFiles: FixedFile[] = [];
+      let firstScan: ScanReport | undefined;
       let fixed = 0;
       let flagged = 0;
 
@@ -310,6 +321,7 @@ async function main(): Promise<void> {
             marloVersion: version(),
             ...(rules.length === 0 ? {} : { rules }),
           });
+          firstScan ??= report;
 
           const evaluate = async (
             source: string,
@@ -338,46 +350,64 @@ async function main(): Promise<void> {
           fixed += fixes.length;
           flagged += flagged2.length;
 
-          console.log(`\n${file}`);
-          console.log(
-            `  ${String(fixes.length)} verified, ${String(flagged2.length)} flagged for a human`,
-          );
+          say(`\n${file}`);
+          say(`  ${String(fixes.length)} verified, ${String(flagged2.length)} flagged for a human`);
           for (const repair of fixes) {
-            console.log(`\n  FIXED  ${repair.actRuleId}  ${repair.finding.actRuleName}`);
-            console.log(`      ${repair.summary}`);
+            say(`\n  FIXED  ${repair.actRuleId}  ${repair.finding.actRuleName}`);
+            say(`      ${repair.summary}`);
             for (const edit of repair.edits) {
-              console.log(`      - ${edit.before.trim()}`);
-              console.log(`      + ${edit.after.trim()}`);
+              say(`      - ${edit.before.trim()}`);
+              say(`      + ${edit.after.trim()}`);
             }
-            console.log(
+            say(
               '      verified: target closed, nothing else broke, applying twice is the same ' +
                 'as once',
             );
           }
           for (const repair of flagged2) {
-            console.log(`\n  FLAG   ${repair.finding.actRuleId}  ${repair.finding.actRuleName}`);
-            console.log(`      not fixed: ${repair.reason}`);
-            console.log(`      ${repair.explanation}`);
-            console.log(`      you decide: ${repair.humanDecision}`);
+            say(`\n  FLAG   ${repair.finding.actRuleId}  ${repair.finding.actRuleName}`);
+            say(`      not fixed: ${repair.reason}`);
+            say(`      ${repair.explanation}`);
+            say(`      you decide: ${repair.humanDecision}`);
           }
 
           const repaired = repairedText(html, repairs);
+          const written = repaired !== null && write;
+          fixedFiles.push({ target: file, source: html, repairs, written });
           if (repaired === null) continue;
-          if (write) {
+          if (written) {
             writeFileSync(path, repaired, 'utf8');
-            console.log(`\n  written: ${file}`);
+            say(`\n  written: ${file}`);
           } else {
-            console.log('\n  nothing was written. Pass --write to apply the verified fixes.');
+            say('\n  nothing was written. Pass --write to apply the verified fixes.');
           }
         }
       } finally {
         await renderer.dispose();
       }
 
-      console.log(
+      say(
         `\n${String(fixed)} verified fix(es), ${String(flagged)} flagged. ` +
           'Only changes Marlo verified are ever applied.',
       );
+      if (json && firstScan !== undefined) {
+        // Parsed before it is printed: the pull request planner reads this at a trust
+        // boundary, and a report that does not match its own schema should fail here, where
+        // the cause is, rather than there.
+        const fixReport = FixReport.parse({
+          schemaVersion: 1,
+          runId: newRunId(),
+          marloVersion: version(),
+          startedAt,
+          calibration: firstScan.calibration,
+          engines: firstScan.engines,
+          renderer: renderer.id,
+          coverage: firstScan.coverage,
+          files: fixedFiles,
+          totals: { fixed, flagged },
+        });
+        console.log(JSON.stringify(fixReport, null, 2));
+      }
       finish(fixed > 0 || flagged > 0 ? EXIT_CODES.findings : EXIT_CODES.clean);
       return;
     }
