@@ -24,6 +24,7 @@
     "@marlo/act": "workspace:*",
     "@marlo/engines": "workspace:*",
     "@marlo/render": "workspace:*",
+    "@marlo/report": "workspace:*",
     "@marlo/rules": "workspace:*",
     "@marlo/schema": "workspace:*",
     "parse5": "8.0.1"

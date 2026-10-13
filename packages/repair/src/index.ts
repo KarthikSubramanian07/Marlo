@@ -21,3 +21,21 @@ export type { CodemodInput, CodemodResult } from './codemod.js';
 export { CODEMODS, runCodemod, rulesWithCodemods } from './codemod.js';
 export type { RepairContext, ThresholdCheck } from './verify.js';
 export { checkThreshold, repairFinding, repairedText } from './verify.js';
+export type {
+  PlanInput,
+  PlanSummary,
+  PlannedFile,
+  PullRequestCaps,
+  PullRequestPlan,
+} from './pull-request.js';
+export {
+  CALIBRATION_TABLE_URL,
+  DEFAULT_CAPS,
+  MAX_BODY_CHARACTERS,
+  MAX_FILES_SCANNED,
+  MAX_FIXES_PER_PULL_REQUEST,
+  MAX_FLAGS_IN_BODY,
+  branchNameFor,
+  planPullRequest,
+  refusedPath,
+} from './pull-request.js';
