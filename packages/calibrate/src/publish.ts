@@ -214,7 +214,7 @@ function ratio(value: number | null): string {
 function renderRealCorpus(real: RealCorpus): string[] {
   const lines: string[] = [];
   const { adjudication } = real;
-  const categories = Object.keys(real.categories).length;
+  const categories = real.categories.length;
 
   lines.push('## Real pages');
   lines.push('');

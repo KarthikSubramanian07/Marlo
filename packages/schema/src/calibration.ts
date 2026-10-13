@@ -248,7 +248,13 @@ export const RealCorpus = z
   .object({
     retrieved: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     pages: z.number().int().positive(),
-    categories: z.record(z.string().min(1), z.number().int().positive()),
+    /**
+     * Pages per category, sorted by category. A list rather than a record so the published
+     * API can type every field of it, which is the convention every hosted schema follows.
+     */
+    categories: z.array(
+      z.object({ category: z.string().min(1), pages: z.number().int().positive() }),
+    ),
     adjudication: z.object({
       status: z.enum(['awaiting-adjudication', 'partial', 'adjudicated']),
       /** Cells both raters have answered by hand. Pre-screened cells are not counted. */
