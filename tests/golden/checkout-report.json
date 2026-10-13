@@ -1672,19 +1672,6 @@
                 "path": []
               },
               "message": "The image has no accessible name, so a screen reader announces the filename or nothing at all. If the image is decorative, alt=\"\" says so deliberately."
-            },
-            {
-              "engine": "marlo",
-              "engineVersion": "0.1.0",
-              "engineRuleId": "marlo/23a2a8",
-              "actRuleId": "23a2a8",
-              "outcome": "failed",
-              "target": {
-                "selector": "svg",
-                "snippet": "<svg role=\"img\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <path d=\"M4 12h16\" stroke=\"currentColor\"></path> </svg>",
-                "path": []
-              },
-              "message": "The image has no accessible name, so a screen reader announces the filename or nothing at all. If the image is decorative, alt=\"\" says so deliberately."
             }
           ],
           "error": null,

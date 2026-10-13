@@ -80,7 +80,12 @@ export const imageHasName = defineRule({
   fixability: 'context-dependent',
   applicability: (document) => {
     const targets = [];
-    for (const element of findAll(document, ['img', 'svg', 'div', 'span'])) {
+    // HTML elements only. The rule applies to HTML img elements and HTML elements whose
+    // semantic role is img, and an inline svg is an SVG element even inside an HTML page:
+    // an svg with role="img" is 7d6734's subject. Including it here reported the same
+    // unnamed svg under two rules, and the official cases never exercised it, so the
+    // measured precision could not show it.
+    for (const element of findAll(document, ['img', 'div', 'span'])) {
       if (isHiddenFromAssistiveTech(element)) continue;
       const role = explicitRole(element);
       const isImage =
