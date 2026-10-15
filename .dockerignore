@@ -1,0 +1,10 @@
+# Everything the build stage does not need. dist/ is rebuilt inside the image, and the
+# vendored corpora are measured by the harness, which the image does not ship.
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+.git
+corpus/real
+docs/screenshots
+apps/site/dist
+coverage
