@@ -489,6 +489,47 @@ expect(
         );
       }
     }
+    const errors = JSON.parse(
+      readFileSync(resolve(ROOT, 'calibration/error-analysis.json'), 'utf8'),
+    );
+    const causeCells = (id) => errors.byCause.find((c) => c.id === id)?.cells ?? 0;
+    const familyCells = (family, kind) =>
+      errors.byCause
+        .filter((c) => c.family === family && c.kind === kind)
+        .reduce((sum, c) => sum + c.cells, 0);
+    expect(
+      'error analysis',
+      claim(
+        'error analysis',
+        /It makes (\d+) false positives and (\d+) false negatives on rules it evaluates, and each has a named root cause\. (\d+) of the false positives are rule logic that contradicts the ACT rule text, (\d+) of them from one defect: failing an ID reference whose target is missing, which the rule explicitly allows\. (\d+) of the false negatives are abstentions/g,
+        REAL_SECTION,
+      )?.map((m) => m.slice(1, 6).join('/')),
+      [
+        errors.falsePositives,
+        errors.falseNegatives,
+        familyCells('rule logic', 'FP'),
+        causeCells('idref-exception'),
+        familyCells('abstention', 'FN'),
+      ].join('/'),
+    );
+    expect(
+      'error analysis suite-blind rules',
+      claim(
+        'error analysis suite-blind rules',
+        /(\w+) rules with real-page errors score perfectly/g,
+        REAL_SECTION,
+      )?.map((m) => m[1]),
+      NUMBER_WORDS[new Set(errors.byCause.flatMap((c) => c.rulesPerfectOnAct)).size] ?? 'many',
+    );
+    expect(
+      'error analysis browser rerun',
+      claim(
+        'error analysis browser rerun',
+        /Rerun in headless Chromium, the engine's precision is ([\d.]+) and its recall ([\d.]+)\./g,
+        REAL_SECTION,
+      )?.map((m) => `${m[1]}/${m[2]}`),
+      `${rate(errors.graded.browser.precision.value)}/${rate(errors.graded.browser.recall.value)}`,
+    );
     expect(
       'real invariant pages',
       claim(

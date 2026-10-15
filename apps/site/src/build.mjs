@@ -1011,6 +1011,8 @@ ${
               ${num(product.recall.value, { field: 'analysis.scan.recall', as: 'rate' })}
               on the official cases. The routing chosen on the official corpus finds far fewer
               violations there and is no more precise, so routing is not an accuracy mechanism.
+              Every cell Marlo's own engine gets wrong there has a named root cause in
+              <a href="https://github.com/KarthikSubramanian07/Marlo/blob/main/calibration/ERROR-ANALYSIS.md">ERROR-ANALYSIS.md</a>.
             </p>`
             }
             <p>

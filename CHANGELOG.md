@@ -23,6 +23,7 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - `calibration/analysis.json` and `ANALYSIS.md`: what `marlo scan` reports measured as a whole, every engine alone, the routed engine in sample and leave one out, a majority of engines, Wilson intervals on every proportion, pairwise agreement between engines, the flattered column's sensitivity to its threshold, and the routing scored on rated real pages once any exist.
 - `node scripts/rate.mjs --rater A` (or `B`), a local interface for rating the real pages.
 - Ground truth for all 1025 real-page cells, rated independently by two language models blind to every engine, with the 40 disagreements settled by a third (D-014). Every sheet, resolution and published figure names the kind of rater and the model, and the schema refuses a rated cell without them. `scripts/rater-validity.mjs` grades the same raters on the 594 official test cases of the same rules with their names hidden, and writes `corpus/real/adjudication/RATER-VALIDITY.md`.
+- `calibration/ERROR-ANALYSIS.md`, which names a root cause for each of the 70 real-page cells Marlo's own engine gets wrong, with what it said and what both raters said, and reruns the engine in headless Chromium to separate renderer errors from rule errors. `scripts/error-analysis.mjs --check` runs in CI and fails if the stored verdicts stop reproducing the calibration table or a wrong cell has no cause.
 
 ### Accuracy
 
