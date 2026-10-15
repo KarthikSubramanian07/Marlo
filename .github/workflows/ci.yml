@@ -148,6 +148,12 @@ jobs:
         # official cases. It is generated, so it must match the answers it is built from.
         run: node scripts/rater-validity.mjs --check
 
+      - name: Check the real-page error analysis against the table
+        # ERROR-ANALYSIS.md names a root cause for every cell Marlo's engine gets wrong on the
+        # real pages. --check fails if the stored verdicts stop reproducing the table's
+        # figures, or if a wrong cell has no cause.
+        run: node scripts/error-analysis.mjs --check
+
   test:
     name: Test (node ${{ matrix.node }})
     runs-on: ubuntu-latest
