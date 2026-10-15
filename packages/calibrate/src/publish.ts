@@ -219,6 +219,31 @@ function ratio(value: number | null): string {
  * The `## Real pages` section. Separate from everything above it on purpose: these
  * numbers come from a different corpus and are never pooled with the ACT figures.
  */
+/**
+ * Who the ground truth rests on, in one sentence. A figure graded against language-model
+ * ratings must say so wherever it is printed.
+ */
+function ratersSentence(adjudication: RealCorpus['adjudication']): string {
+  const who = (r: RealCorpus['adjudication']['raters'][number]): string =>
+    r.kind === 'model' ? `\`${String(r.model)}\`` : 'a person';
+  const raters = adjudication.raters.map((r) => `rater ${r.rater} ${who(r)}`).join(', ');
+  const models = adjudication.raters.some((r) => r.kind === 'model');
+  const { person, model } = adjudication.resolutions;
+  const resolved =
+    person + model === 0
+      ? ''
+      : ` Disagreements were resolved by ${model > 0 ? 'a third model' : 'a person'}` +
+        `${person > 0 && model > 0 ? ' and by a person' : ''}.`;
+  return (
+    `The cells were rated independently by ${raters}.${resolved}` +
+    (models
+      ? ' This is **model-adjudicated ground truth, not human judgment**; how accurate the ' +
+        'raters are on cases with a known answer is measured in ' +
+        '[RATER-VALIDITY.md](../corpus/real/adjudication/RATER-VALIDITY.md).'
+      : '')
+  );
+}
+
 function renderRealCorpus(real: RealCorpus): string[] {
   const lines: string[] = [];
   const { adjudication } = real;
@@ -248,15 +273,16 @@ function renderRealCorpus(real: RealCorpus): string[] {
   lines.push('');
   if (adjudication.resolvedCells === 0) {
     lines.push(
-      '**No real-page accuracy figure exists yet**, and none will until two people have rated ' +
+      '**No real-page accuracy figure exists yet**, and none will until two raters have rated ' +
         'the pages independently under ' +
         '[the adjudication protocol](../corpus/real/adjudication/PROTOCOL.md). ' +
         'The figures below need no ground truth.',
     );
   } else {
     lines.push(
-      `Inter-rater agreement over the rated cells: ${pct(adjudication.percentAgreement)}, ` +
-        `Cohen's kappa ${ratio(adjudication.kappa)}. Marlo against the resolved cells only:`,
+      `${ratersSentence(adjudication)} Inter-rater agreement over the rated cells: ` +
+        `${pct(adjudication.percentAgreement)}, Cohen's kappa ${ratio(adjudication.kappa)}. ` +
+        'Marlo against the resolved cells only:',
     );
     lines.push('');
     lines.push('| | |');
@@ -545,7 +571,7 @@ export function renderAnalysisMarkdown(analysis: AnalysisReport): string {
   if (analysis.realPages === null) {
     lines.push(
       'Not yet. This is the other held-out design: the routing chosen on the official corpus, ' +
-        'scored on real pages it never saw. It needs pages two people have rated, and none are, ' +
+        'scored on real pages it never saw. It needs rated pages, and none are, ' +
         'so there is nothing to score against.',
     );
   } else {

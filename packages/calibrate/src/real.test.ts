@@ -61,17 +61,16 @@ describe('the real corpus on disk', () => {
     expect(first === undefined ? '' : corpus.read(first)).toMatch(/^<!DOCTYPE/i);
   });
 
-  it('has worksheets that cover every page and every implemented rule, empty of answers', () => {
+  it('has worksheets that cover every page and every implemented rule, with every rater named', () => {
     const corpus = loadRealCorpus(ROOT);
     const adjudication = loadAdjudication(ROOT);
     for (const sheet of [adjudication.sheetA, adjudication.sheetB]) {
       expect(sheet).toHaveLength(corpus.pages.length * IMPLEMENTED_RULES.length);
-      const humanAnswers = sheet.filter((c) => c.answer !== null && !c.prescreened);
-      expect(humanAnswers).toEqual([]);
     }
     const summary = summariseAdjudication(adjudication, corpus.pages, IMPLEMENTED_RULES);
-    expect(summary.status).toBe('awaiting-adjudication');
-    expect(summary.ratedCells).toBe(0);
+    // Whatever stage the adjudication is at, a rated cell has a named rater behind it.
+    expect(summary.ratedCells === 0 || summary.raters.length === 2).toBe(true);
+    expect(summary.resolvedCells).toBeLessThanOrEqual(summary.totalCells);
   });
 
   it('refuses a malformed manifest or worksheet', () => {
@@ -98,7 +97,13 @@ describe('the real corpus on disk', () => {
       }),
     );
     expect(() => loadRealCorpus(dir)).toThrow(/claims 2 pages and lists 1/);
-    expect(loadAdjudication(dir)).toEqual({ sheetA: [], sheetB: [], resolved: new Map() });
+    expect(loadAdjudication(dir)).toEqual({
+      sheetA: [],
+      sheetB: [],
+      resolved: new Map(),
+      raters: [],
+      resolutions: { person: 0, model: 0 },
+    });
     writeFileSync(
       join(dir, 'corpus/real/adjudication/sheet-A.json'),
       JSON.stringify({ rater: 'Q' }),
@@ -268,7 +273,15 @@ describe('the real-page pass', () => {
       autoFixPermitted: false,
     },
   ];
-  const empty: Adjudication = { sheetA: [], sheetB: [], resolved: new Map() };
+  const unrated = { raters: [], resolutions: { person: 0, model: 0 } };
+  const models = {
+    raters: [
+      { rater: 'A' as const, kind: 'model' as const, model: 'claude-opus-5-5' },
+      { rater: 'B' as const, kind: 'model' as const, model: 'claude-sonnet-5-5' },
+    ],
+    resolutions: { person: 0, model: 0 },
+  };
+  const empty: Adjudication = { sheetA: [], sheetB: [], resolved: new Map(), ...unrated };
 
   it('publishes ground-truth-free figures, and no accuracy, before anyone has rated', async () => {
     const { block, errors } = await runRealHarness({
@@ -350,7 +363,7 @@ describe('the real-page pass', () => {
     }));
     const { block } = await runRealHarness({
       corpus,
-      adjudication: { sheetA: sheet, sheetB: sheet, resolved },
+      adjudication: { sheetA: sheet, sheetB: sheet, resolved, ...models },
       engines,
       implementedRules: [rule],
       routing,
@@ -370,6 +383,8 @@ describe('the real-page pass', () => {
       totalCells: 3,
       kappa: null,
       percentAgreement: 1,
+      raters: models.raters,
+      resolutions: { person: 0, model: 0 },
     });
     expect(block.aggregate.accuracy.strictPrecision).toBe(1);
     expect(block.aggregate.accuracy.sampleSize).toBe(1);
@@ -385,7 +400,7 @@ describe('the real-page pass', () => {
       { page: 'news-01', rule, answer: 'failed', prescreened: false },
     ];
     const summary = summariseAdjudication(
-      { sheetA: left, sheetB: right, resolved: new Map() },
+      { sheetA: left, sheetB: right, resolved: new Map(), ...models },
       pages,
       [rule],
     );
@@ -455,6 +470,7 @@ describe('the real-page pass', () => {
           prescreened: false,
         })),
         resolved: new Map<string, Outcome>([[cellKey('shop-01', rule), 'failed']]),
+        ...models,
       },
       engines,
       implementedRules: [rule],

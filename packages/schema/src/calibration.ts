@@ -266,6 +266,24 @@ export const RealCorpus = z
       /** Inter-rater Cohen's kappa over the rated cells, or null when nothing is rated. */
       kappa: z.number().min(-1).max(1).nullable(),
       percentAgreement: z.number().min(0).max(1).nullable(),
+      /**
+       * Who rated: each rater who has answered a cell, whether a person or a language
+       * model, and which model. Ground truth from models is a different claim from ground
+       * truth from people, so every consumer can tell which one a figure rests on.
+       */
+      raters: z.array(
+        z.object({
+          rater: z.enum(['A', 'B']),
+          kind: z.enum(['person', 'model']),
+          /** The model identifier for a model rater, and null for a person. */
+          model: z.string().min(1).nullable(),
+        }),
+      ),
+      /** Disagreements resolved, by who resolved them. */
+      resolutions: z.object({
+        person: z.number().int().nonnegative(),
+        model: z.number().int().nonnegative(),
+      }),
     }),
     entries: z.array(RealCorpusEntry),
     agreement: z.array(RealEngineAgreement),
@@ -305,7 +323,7 @@ export const RealCorpus = z
           }),
         ),
       }),
-      /** Marlo against resolved cells only. Null until two people have rated. */
+      /** Marlo against resolved cells only. Null until two raters have rated. */
       accuracy: z.object({
         strictPrecision: z.number().min(0).max(1).nullable(),
         strictRecall: z.number().min(0).max(1).nullable(),
@@ -342,6 +360,12 @@ export const RealCorpus = z
       (r.adjudication.status === 'awaiting-adjudication') ===
         (r.adjudication.resolvedCells === 0 && r.adjudication.ratedCells === 0),
     { message: 'the adjudication status must agree with the cell counts' },
+  )
+  .refine(
+    (r) =>
+      (r.adjudication.ratedCells === 0 || r.adjudication.raters.length === 2) &&
+      r.adjudication.raters.every((x) => (x.kind === 'model') === (x.model !== null)),
+    { message: 'rated cells need both raters named, and a model rater needs its model' },
   );
 export type RealCorpus = z.infer<typeof RealCorpus>;
 

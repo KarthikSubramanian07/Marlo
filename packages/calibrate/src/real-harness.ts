@@ -17,8 +17,8 @@ import { mapLimit } from './real-pool.js';
  * The real-page measurement pass.
  *
  * Separate from `runHarness` and never pooled with it. The ACT pass grades against
- * expected outcomes the corpus ships with; this pass has no expected outcome until two
- * people have rated a cell, so most of what it publishes today needs no ground truth at
+ * expected outcomes the corpus ships with; this pass has no expected outcome until
+ * two raters have rated a cell, so much of what it publishes needs no ground truth at
  * all: how often engines agree with each other, how often the one-directional invariant
  * would fire, and how many findings each engine reports per page.
  *
@@ -53,7 +53,7 @@ export interface RealHarnessResult {
   /**
    * Every page by every rule Marlo implements, with each claiming engine's outcome and the
    * resolved answer where there is one. The block above keeps only totals; the analysis
-   * scores routing on these cells once people have rated them.
+   * scores routing on these cells once they are rated.
    */
   readonly cells: readonly {
     readonly page: string;
@@ -103,7 +103,7 @@ export function cohensKappa(pairs: readonly (readonly [string, string])[]): {
   return { percentAgreement: po, kappa: (po - pe) / (1 - pe) };
 }
 
-/** A pre-screened cell both raters left alone is a mechanical answer, not a human one. */
+/** A pre-screened cell both raters left alone is a mechanical answer, not a rater's. */
 const untouchedPrescreen = (cell: SheetCell): boolean =>
   cell.prescreened && cell.answer === 'inapplicable';
 
@@ -148,6 +148,11 @@ export function summariseAdjudication(
     totalCells,
     kappa: kappa === null ? null : round(kappa),
     percentAgreement: percentAgreement === null ? null : round(percentAgreement),
+    // A sheet nobody has started names no rater, and is left out rather than guessed at.
+    raters: adjudication.raters.flatMap((r) =>
+      r.kind === null ? [] : [{ rater: r.rater, kind: r.kind, model: r.model }],
+    ),
+    resolutions: { ...adjudication.resolutions },
   };
 }
 
