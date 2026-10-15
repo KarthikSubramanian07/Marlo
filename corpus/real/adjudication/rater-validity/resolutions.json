@@ -1,0 +1,132 @@
+{
+  "resolverKind": "model",
+  "resolver": "claude-fable-5-1",
+  "resolutions": [
+    {
+      "ruleId": "09o5cg",
+      "testcaseId": "26db50757b442f0c257840671a8e7c7297711e9d",
+      "answer": "failed",
+      "reasoning": "Text \"Hello world\" at 16px (not large scale) is rgba(90,90,90,0.9). Over the white part it composites to rgb(106.5,106.5,106.5), 5.37:1 against white; over the black part to rgb(81,81,81), 2.65:1. Both are below the 7:1 enhanced threshold."
+    },
+    {
+      "ruleId": "09o5cg",
+      "testcaseId": "c83b77f091ebb1e77cedecc20a1bc826702114e2",
+      "answer": "passed",
+      "reasoning": "The p text node is only punctuation/symbol characters (----=====++++ ...), so it does not express anything in human language; the expectation's exception applies even though #000 on #666 is only 3.66:1."
+    },
+    {
+      "ruleId": "36b590",
+      "testcaseId": "44dba9cf9b4dc698bbdfe549e6bb83c571586609",
+      "answer": "failed",
+      "reasoning": "input#age (spinbutton) has an error indicator: span#error \"Invalid value for age. Age must be at least 1.\" is exposed via aria-describedby on the Submit button. It is display:none, so no indicator describes the cause or fix in visible text; Expectation 2 fails."
+    },
+    {
+      "ruleId": "5c01ea",
+      "testcaseId": "46a07f5e7ad1db02e255f3d6c7d7b0e1ecf3b1fd",
+      "answer": "failed",
+      "reasoning": "aria-orientation is set on an audio element in the accessibility tree. It is not a global property; audio has no implicit role, and ARIA in HTML allows on audio only global attributes plus those of its allowed role application, which does not support aria-orientation. No expectation condition holds."
+    },
+    {
+      "ruleId": "5c01ea",
+      "testcaseId": "da191373f044d7c309cafdf03485c61d2f91e1ee",
+      "answer": "passed",
+      "reasoning": "button is focusable (and carries a non-global ARIA attribute), so role=none is ignored by presentational roles conflict resolution and the semantic role is button. aria-pressed is a supported property of button, so the attribute is permitted."
+    },
+    {
+      "ruleId": "9eb3f6",
+      "testcaseId": "28d908a951edb6fe7768d69b10460c7cfff251b1",
+      "answer": "failed",
+      "reasoning": "img alt \"Nyhavn\" equals (case-insensitively) the filename \"nyhavn\" of the first source, so the rule applies. The source set also includes \"paris\"; \"Nyhavn\" does not accurately describe that image, so the name fails to describe all image sources."
+    },
+    {
+      "ruleId": "9eb3f6",
+      "testcaseId": "499be2117059dba5f38526df06b711d0125eccd7",
+      "answer": "passed",
+      "reasoning": "img alt \"nyhavn.jpeg\" equals its src filename, so the rule applies. The img sits inside <a download href=...nyhavn.jpeg>, where the image's purpose is to identify the file being downloaded; the filename therefore serves an equivalent purpose to the non-text content."
+    },
+    {
+      "ruleId": "9eb3f6",
+      "testcaseId": "f636f815cba63087a142086b3b9791fe464300cc",
+      "answer": "failed",
+      "reasoning": "img alt \"Nyhavn\" equals (case-insensitively) the filename \"nyhavn\" of the first source, so the rule applies. The source set also includes \"pain\" (bread); \"Nyhavn\" does not accurately describe that image, so the name fails to describe all image sources."
+    },
+    {
+      "ruleId": "afw4f7",
+      "testcaseId": "e1094dcd0697b11e6228556c7c4da9703786e3d2",
+      "answer": "failed",
+      "reasoning": "Text \"Hello world\" at 16px (not large scale) is rgba(90,90,90,0.8). Over the transparent/white part it composites to rgb(123,123,123), 4.23:1 against white; over the black part to rgb(72,72,72), 2.30:1. No character reaches 4.5:1."
+    },
+    {
+      "ruleId": "b5c3f8",
+      "testcaseId": "190e6aec2df43e234c468b187d427c32d5d942c1",
+      "answer": "inapplicable",
+      "reasoning": "The case is a bare <svg xmlns=...></svg> document, authored as an SVG (image/svg+xml) document. Its document element is svg, not an html element with content type text/html, so the rule does not apply."
+    },
+    {
+      "ruleId": "b5c3f8",
+      "testcaseId": "580a61d57084cdbbe6b27c3dc35d4cc51d078c41",
+      "answer": "inapplicable",
+      "reasoning": "The case is a bare <math></math> document, authored as a MathML (application/mathml+xml) document. Its document element is a math element, not an html element with content type text/html, so the rule does not apply."
+    },
+    {
+      "ruleId": "bc4a75",
+      "testcaseId": "21c5ee18656453fbe61e1bde4b87f2a8688f9caf",
+      "answer": "failed",
+      "reasoning": "div[role=menu] owns a group whose children are a menuitem and another div[role=group]. menu's required owned elements allow group only when the group itself owns only menuitem/menuitemradio/menuitemcheckbox; the nested group breaks that, so the menu fails."
+    },
+    {
+      "ruleId": "bc4a75",
+      "testcaseId": "d226543d65b0d49a03e7ea45f2de82bf0cbc1726",
+      "answer": "failed",
+      "reasoning": "div[role=list] owns, in the accessibility tree, a span[role=listitem] and a div[role=group]. The ARIA 1.2 required owned elements of list are listitem only; group is not permitted, so the list fails."
+    },
+    {
+      "ruleId": "bc659a",
+      "testcaseId": "84b7a46e7e9cb736cc9327bce10240e943801ba6",
+      "answer": "inapplicable",
+      "reasoning": "The only meta has content \"0: https://w3.org\"; ':' after the time digits is not ';', ',' or whitespace, so the shared declarative refresh steps abort and the content value is invalid. No meta meets the applicability, so inapplicable."
+    },
+    {
+      "ruleId": "bc659a",
+      "testcaseId": "f2a48cafddd30c8b9a918fe0fe664c44db253b0d",
+      "answer": "failed",
+      "reasoning": "First meta content \"0: https://w3.org\" is invalid: after the digits the shared declarative refresh steps require ';', ',' or whitespace, and ':' aborts. The first valid refresh meta is content=\"5; https://w3.org\", time 5, which is neither 0 nor over 72000."
+    },
+    {
+      "ruleId": "bisz58",
+      "testcaseId": "1812017f58925ef5061af2f60c68afa671281c91",
+      "answer": "inapplicable",
+      "reasoning": "The only meta has content \"0: http://example.com\"; the ':' following the time digits aborts the shared declarative refresh steps, so the content value is invalid and the meta does not meet applicability."
+    },
+    {
+      "ruleId": "bisz58",
+      "testcaseId": "459353149c69b2ee77944c5641cbff66396829e0",
+      "answer": "failed",
+      "reasoning": "First meta content \"0: https://w3.org\" is invalid (':' after the digits aborts the shared declarative refresh steps). The first valid refresh meta is content=\"5; https://w3.org\" with time 5, which is not 0, so the no-exception rule fails."
+    },
+    {
+      "ruleId": "c487ae",
+      "testcaseId": "8130b961773da8671837e6a633ca879d1edd28d0",
+      "answer": "failed",
+      "reasoning": "a[href] is focusable, so presentational roles conflict resolution ignores role=none and the element keeps the link role, included in the accessibility tree. Its only content is whitespace, so the accessible name is empty."
+    },
+    {
+      "ruleId": "e88epe",
+      "testcaseId": "357d6afecdc6360f342bd3307e4ee71bb9d03397",
+      "answer": "inapplicable",
+      "reasoning": "The canvas has nothing drawn (scripts off, no content), so it renders fully transparent; making it transparent changes no pixels, so it is not visible. Applicability requires a visible img, canvas or svg; none exists."
+    },
+    {
+      "ruleId": "ff89c9",
+      "testcaseId": "7ec9a70548f600f1f74b0fc3a6bbf89d3ab2f4f5",
+      "answer": "passed",
+      "reasoning": "Both div[role=listitem] (explicit role, implicit role differs) are referenced by aria-owns on div[role=list]. aria-owns reparents them in the accessibility tree, so their parent there is the list, a required context role, despite the intervening navigation in the DOM."
+    },
+    {
+      "ruleId": "ffd0e9",
+      "testcaseId": "0af782abf9e6314ec4bd46d60b140e6f94b818b2",
+      "answer": "failed",
+      "reasoning": "h1 has role=none but also the global ARIA attribute aria-label, so presentational roles conflict resolution ignores none and the element remains a semantic heading in the accessibility tree. aria-label is empty and the only content is aria-hidden, so the accessible name is empty."
+    }
+  ]
+}

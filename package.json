@@ -29,6 +29,7 @@
     "lint:claims": "node scripts/check-claims.mjs",
     "lint:numbers": "node scripts/check-published-numbers.mjs",
     "lint:duplicates": "node scripts/check-no-duplicates.mjs",
+    "raters:check": "node scripts/rater-validity.mjs --check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "corpus:fetch": "node scripts/fetch-act-corpus.mjs",
@@ -48,7 +49,7 @@
     "screenshots": "node scripts/capture-screenshots.mjs",
     "deploy": "node scripts/deploy.mjs",
     "mcp": "node packages/mcp/dist/bin.js",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run act:index:check && pnpm run test && pnpm run test:e2e",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run act:index:check && pnpm run test && pnpm run raters:check && pnpm run test:e2e",
     "hooks": "lefthook install",
     "prepare": "lefthook install || true"
   },

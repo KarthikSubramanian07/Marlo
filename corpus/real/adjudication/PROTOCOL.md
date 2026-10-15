@@ -1,7 +1,12 @@
 # Adjudication protocol
 
 How the ground truth for `corpus/real` is produced. Until it has been followed by two
-people, no real-page accuracy figure exists, and `calibration/table.json` says so.
+raters, no real-page accuracy figure exists, and `calibration/table.json` says so.
+
+A rater is a person or a language model, and every sheet says which. The ground truth
+committed today was produced by two language models, as described under
+[Model raters](#model-raters) below, and every figure that rests on it says so. A person
+who rates later does so on fresh sheets, and the two kinds are never mixed on one sheet.
 
 ## The unit
 
@@ -32,7 +37,7 @@ on act-rules.github.io is the authority, linked from every cell.
 
 ## Two independent raters
 
-Two people, rater A and rater B, each fill in their own worksheet, `sheet-A.json` and
+Two raters, rater A and rater B, each fill in their own worksheet, `sheet-A.json` and
 `sheet-B.json`. Neither opens the other's sheet, `DISAGREEMENTS.md` or `resolved.json`
 before finishing. Neither looks at what any engine reported, and the worksheets contain
 no engine output: they are generated from the page list and the rule list alone, by a
@@ -51,14 +56,14 @@ the table does not cover exactly the implemented rules. Rules that apply to ever
 or whose applicability needs judgment, have no pattern and are never pre-screened.
 
 A pre-filled cell is overridable. A rater who disagrees changes the answer, and the cell
-then counts as human-judged like any other. A pre-screened cell both raters left alone is
+then counts as rated like any other. A pre-screened cell both raters left alone is
 resolved `inapplicable`, but only once both raters have finished that page, and it is
 never part of the inter-rater agreement figure.
 
 ## Agreement
 
 `node scripts/adjudicate.mjs agreement` computes Cohen's kappa and percent agreement
-over the human-judged cells: every cell both raters answered, except pre-screened cells
+over the rated cells: every cell both raters answered, except pre-screened cells
 both left alone. It writes `DISAGREEMENTS.md`, listing every cell where the two answers
 differ, what each rater said with their note, and the resolution once there is one.
 That log is committed and is meant to be read.
@@ -112,3 +117,48 @@ own block of `calibration/table.json` and are never pooled with the ACT figures.
 3. `node scripts/adjudicate.mjs agreement`, then resolve every entry in
    `DISAGREEMENTS.md` in `resolutions.json`.
 4. `node scripts/adjudicate.mjs resolve`, then `pnpm calibrate`.
+
+## Model raters
+
+A sheet may be answered by a language model instead of a person. The sheet then records
+`"raterKind": "model"` and the model identifier in `raterModel`, a resolution records
+`"resolverKind": "model"`, and `calibration/table.json` lists every rater with its kind
+and model, so a figure resting on model ground truth can never be read as resting on
+human judgment. `adjudicate.mjs validate` refuses a sheet with answers and no
+`raterKind`, and a model rater without its model. The rating tool records its own
+answers as a person's and refuses to continue a sheet a model answered.
+
+The ground truth committed in this directory was produced this way:
+
+- **Rater A** was `claude-opus-5-5`, **rater B** `claude-sonnet-5-5`: two different
+  models, each run once per page in its own context, so neither saw the other's answers.
+- **The resolver** was `claude-fable-5-1`, a third model. It saw only the cells the two
+  raters disagreed on, with both answers and both notes, and re-examined the page before
+  answering. It never saw a cell the raters agreed on, and `resolve` refuses a
+  resolution that overrules an agreement, as it does for a person.
+- **Blind to every engine.** Each rater received the page snapshot, the cell list, the
+  normative text of each ACT rule (Applicability, Expectations, Assumptions and
+  Accessibility Support, from the act-rules repository at commit
+  `40fd79067532ef9ee2af50e36384a725c3157ee8`) and the ACT glossary, and nothing from this
+  repository. They were instructed not to run or consult any accessibility checker,
+  Marlo included, and to write any check they needed from the rule text. They could read
+  the source, parse it with a plain DOM library, and evaluate scripts in headless
+  Chromium with the page's own scripts off and every network request blocked, the same
+  conditions as the rating tool people use.
+- **The same answers and notes as a person gives.** Four answers, a note naming the
+  element and the reason for every `failed` and `cantTell`, and the pre-screen treated as
+  a suggestion that may be overridden.
+
+**How accurate the raters are is measured, not assumed.** The same two raters, under
+the same instructions and restrictions, rated every ACT test case for the rules Marlo
+implements, with the files renamed so that nothing in a path or a name reveals the
+expected outcome. The W3C's expected outcomes were written by people, so agreement with
+them is an accuracy figure for the raters themselves. `RATER-VALIDITY.md` publishes it,
+per rater and per rule.
+
+**What this ground truth is not.** It is not human judgment, and the figures that rest on
+it are labelled as model-adjudicated wherever they appear. The pages and the ACT test
+cases are public, so a model may have seen them in training; the ACT measurement is the
+check on how much that matters for the cases, and it cannot be one for the pages. A
+person who rates these pages later uses fresh sheets with `raterKind` `person`, and the
+two sets of figures are published side by side rather than merged.
