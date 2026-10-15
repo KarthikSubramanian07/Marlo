@@ -106,22 +106,23 @@ describe('the site has no theatre', () => {
     }
   });
 
-  it('serves scripts that cannot fake progress or make a request', () => {
-    // The playground and the bookmarklet are the only scripts served. Neither has a timer
-    // to animate with, and neither has a way to send what it reads anywhere.
-    for (const file of ['playground.js', 'marlo-page.js']) {
+  it('serves scripts that cannot fake progress, and a bookmarklet that sends nothing', () => {
+    // Neither served script has a timer to animate a fake result with. The bookmarklet
+    // runs on other people's pages and has no way to send what it reads anywhere. The
+    // playground fetches the page or repository it was asked to check, and the CSP test
+    // below pins exactly where it may connect.
+    const common = [
+      'setTimeout',
+      'setInterval',
+      'XMLHttpRequest',
+      'sendBeacon',
+      'WebSocket',
+      'EventSource',
+    ];
+    const banned = { 'playground.js': common, 'marlo-page.js': [...common, 'fetch('] };
+    for (const [file, words] of Object.entries(banned)) {
       const source = readFileSync(join(DIST, 'try', file), 'utf8');
-      for (const banned of [
-        'setTimeout',
-        'setInterval',
-        'fetch(',
-        'XMLHttpRequest',
-        'sendBeacon',
-        'WebSocket',
-        'EventSource',
-      ]) {
-        expect(source, `${file} contains ${banned}`).not.toContain(banned);
-      }
+      for (const word of words) expect(source, `${file} contains ${word}`).not.toContain(word);
     }
   });
 
@@ -740,7 +741,9 @@ describe('SEO and delivery', () => {
     const tryPolicy = rest.join('');
     expect(tryPolicy).toContain('! Content-Security-Policy');
     expect(tryPolicy).toContain("script-src 'self'");
-    expect(tryPolicy).toContain("connect-src 'none'");
+    expect(tryPolicy).toContain(
+      "connect-src 'self' https://api.github.com https://raw.githubusercontent.com;",
+    );
     expect(tryPolicy).not.toContain('unsafe-eval');
   });
 

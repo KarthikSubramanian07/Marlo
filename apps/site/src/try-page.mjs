@@ -15,13 +15,25 @@ import { build } from 'esbuild';
 
 /**
  * The policy for /try/ and the two scripts it serves. build.mjs hands it to the worker and
- * writes it into _headers, so both say the same thing. The one base URL allowed is the one
- * the playground gives pasted markup, on a domain that never resolves.
+ * writes it into _headers, so both say the same thing.
+ *
+ * Script from this origin only. The playground may connect to exactly three places: this
+ * site's page fetch, GitHub's API and GitHub's raw file host. The preview may load a checked
+ * page's own stylesheets, images and fonts over https, so the layout rules see it styled,
+ * and its base URL may be any https address for the same reason. The checked page's scripts
+ * never run: the frame has no allow-scripts.
  */
 export const TRY_CSP =
-  "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; " +
-  "font-src 'self'; frame-src 'self'; connect-src 'none'; base-uri https://example.invalid; form-action 'none'; " +
-  "frame-ancestors 'none'";
+  "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https:; " +
+  "img-src 'self' data: https:; font-src 'self' data: https:; frame-src 'self'; " +
+  "connect-src 'self' https://api.github.com https://raw.githubusercontent.com; " +
+  "base-uri https:; form-action 'none'; frame-ancestors 'none'";
+
+/** Addresses to try, shown as buttons under the address box. */
+const ADDRESSES = [
+  ['https://www.w3.org/WAI/demos/bad/before/home.html', "W3C's deliberately inaccessible demo"],
+  ['github.com/KarthikSubramanian07/Marlo/tree/main/apps/demo', "Marlo's demo pages on GitHub"],
+];
 
 const SAMPLES = [
   ['checkout', 'Broken checkout', 'apps/demo/checkout.html'],
@@ -122,7 +134,11 @@ export function bookmarklet(origin) {
   );
 }
 
-export function tryPage({ origin, repo, samples, escapeHtml }) {
+export function tryPage({ origin, repo, samples, escapeHtml, scribble }) {
+  const addressButtons = ADDRESSES.map(
+    ([value, label]) =>
+      `<button type="button" class="btn btn-ghost try__sample" data-address="${escapeHtml(value)}">${escapeHtml(label)}</button>`,
+  ).join('\n              ');
   const sampleButtons = samples
     .map(
       (s) =>
@@ -134,56 +150,79 @@ export function tryPage({ origin, repo, samples, escapeHtml }) {
   return {
     slug: 'try',
     path: 'try/index.html',
-    title: 'Try Marlo in your browser: paste HTML, see what fails and how sure it is',
+    title: 'Try Marlo: check a website, a GitHub repository or some HTML for accessibility',
     description:
-      "Paste HTML and run Marlo's own accessibility rules on it in your browser, with the " +
-      'measured precision of every rule beside each finding. Nothing you paste leaves the page. ' +
-      'Or check any live page with the bookmarklet.',
+      "Enter a web address or a GitHub repository, or paste HTML, and Marlo's own accessibility " +
+      'rules check it in your browser, with the measured precision of every rule beside each ' +
+      'finding. Or check any page you open with the bookmarklet.',
     scripts: ['/try/playground.js'],
     body: `      <section class="hero">
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="wrap hero__inner">
           <span class="eyebrow eyebrow--accent">Try it</span>
-          <h1>Paste a page. See what fails, and how sure Marlo is.</h1>
+          <h1>Point it at a site. See what fails, and how sure Marlo is.</h1>
           <p class="lede">
-            Marlo's own rules run here, in your browser, on markup you paste or on any page you
-            open with the bookmarklet. Every finding carries the rule's measured precision.
-            Nothing you paste is sent anywhere: this page is not allowed to make a request.
+            A web address, a GitHub repository, or a paste of HTML. Marlo's own rules run here,
+            in your browser, and every finding carries the rule's measured precision.
           </p>
         </div>
       </section>
 
       <section class="try">
+        <div class="wrap">
+          <form id="mt-url-form" class="try__address tile tile--pad" novalidate>
+            ${scribble('any public site works. go on.', { arrow: 'down-left', place: 'address' })}
+            <label class="try__label" for="mt-url">Web address or GitHub repository</label>
+            <div class="try__address-row">
+              <input id="mt-url" class="try__url" type="text" inputmode="url" autocomplete="url"
+                spellcheck="false" placeholder="example.com or github.com/owner/repo"
+                aria-describedby="mt-url-hint" />
+              <button type="submit" id="mt-go" class="btn btn-primary" disabled>Check it</button>
+            </div>
+            <p id="mt-url-hint" class="try__hint dim">
+              A web address is fetched once by this site, which hands back that page's HTML and
+              keeps nothing. A repository is read straight from GitHub, up to twenty-five of its
+              HTML files. Either way the page's scripts do not run.
+            </p>
+            <div class="try__samples" role="group" aria-label="Addresses to try">
+              <span class="dim">Try:</span>
+              ${addressButtons}
+            </div>
+          </form>
+
+          <p id="mt-status" class="try__status" role="status" aria-live="polite">Loading Marlo's rules.</p>
+          <noscript><p class="try__status">The playground runs Marlo in your browser, which needs JavaScript. Everything else on this site works without it.</p></noscript>
+        </div>
+
         <div class="wrap try__grid">
-          <div class="try__input tile tile--pad">
-            <label class="try__label" for="mt-source">HTML to check</label>
+          <details id="mt-paste" class="try__input tile tile--pad">
+            <summary class="try__label">Or paste HTML</summary>
+            <label class="visually-hidden" for="mt-source">HTML to check</label>
             <textarea id="mt-source" class="try__source" spellcheck="false" autocomplete="off"
               placeholder="&lt;!doctype html&gt; ..." aria-describedby="mt-hint"></textarea>
             <p id="mt-hint" class="try__hint dim">
-              Scripts in the markup do not run, and nothing is fetched from the network, so the
-              check sees the page as its HTML and inline CSS describe it.
+              Pasted HTML never leaves this page. Relative links in it go nowhere.
             </p>
             <div class="try__actions">
-              <button type="button" id="mt-run" class="btn btn-primary" disabled>Check it</button>
-              <button type="button" id="mt-download" class="btn btn-ghost" hidden>Download JSON</button>
+              <button type="button" id="mt-run" class="btn btn-primary" disabled>Check the paste</button>
             </div>
             <div class="try__samples" role="group" aria-label="Examples">
-              <span class="dim">Or try an example:</span>
+              <span class="dim">Examples:</span>
                 ${sampleButtons}
             </div>
-            <p id="mt-status" class="try__status" role="status" aria-live="polite">
-              Loading Marlo's rules.
-            </p>
-            <noscript><p class="try__status">The playground runs Marlo in your browser, which needs JavaScript. Everything else on this site works without it.</p></noscript>
-          </div>
+          </details>
           <div class="try__preview tile">
-            <p class="try__label try__label--pad">Preview</p>
-            <iframe id="mt-frame" class="try__frame" title="Preview of the markup being checked"
+            <p class="try__label try__label--pad">Preview, with the page's scripts off</p>
+            <iframe id="mt-frame" class="try__frame" title="Preview of the page being checked"
               sandbox="allow-same-origin" srcdoc="&lt;!doctype html&gt;&lt;title&gt;Nothing yet&lt;/title&gt;"></iframe>
           </div>
         </div>
         <div class="wrap">
+          <div id="mt-files"></div>
           <div id="mt-results" class="try__results" aria-label="Findings"></div>
+          <div class="try__actions try__actions--end">
+            <button type="button" id="mt-download" class="btn btn-ghost" hidden>Download the report as JSON</button>
+          </div>
         </div>
       </section>
 
@@ -219,6 +258,7 @@ export function tryPage({ origin, repo, samples, escapeHtml }) {
           </div>
           <div class="prose stack">
             <p>
+              ${scribble('works on pages built with JavaScript, too', { arrow: 'down', place: 'bookmarklet' })}
               Drag this to your bookmarks bar, open any page, and click it:
               <a class="btn btn-ghost try__bookmarklet" href="${escapeHtml(bookmarklet(origin))}">Check with Marlo</a>
             </p>
