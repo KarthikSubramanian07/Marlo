@@ -84,6 +84,9 @@ importers:
 
   apps/site:
     dependencies:
+      esbuild:
+        specifier: 0.28.1
+        version: 0.28.1
       turndown:
         specifier: 7.2.4
         version: 7.2.4

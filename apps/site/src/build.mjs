@@ -24,14 +24,16 @@
  * test asserts every line of it appears verbatim in tests/golden/checkout-terminal.txt. Its
  * numbers are permitted because they were recorded, not because they looked plausible.
  *
- * No framework and no client script. Five pages and a build script. The interactive parts,
- * meaning the rule filter and the scroll reveals, are CSS.
+ * No framework, and no client script on any page but one. The interactive parts, meaning
+ * the rule filter and the scroll reveals, are CSS. The exception is /try/, built in
+ * try-page.mjs, whose script is Marlo's own rules running in the visitor's browser.
  */
 import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { developerPages } from './developer-content.mjs';
 import { markdownForPage } from './markdown.mjs';
 import { createPublicApi } from './public-api.mjs';
+import { TRY_CSP, buildTryBundles, tryPage } from './try-page.mjs';
 
 import sharp from 'sharp';
 
@@ -203,9 +205,10 @@ const NAV = [
   ['/method/', 'method', 'Method'],
   ['/honesty/', 'honesty', 'Honesty'],
   ['/developers/', 'developers', 'Developers'],
+  ['/try/', 'try', 'Try it'],
 ];
 
-function layout({ slug, title, description, body, canonical, notFound = false }) {
+function layout({ slug, title, description, body, canonical, notFound = false, scripts = [] }) {
   const resourceLabels = {
     docs: 'Documentation',
     about: 'About',
@@ -263,7 +266,7 @@ function layout({ slug, title, description, body, canonical, notFound = false })
     <link rel="service-desc" type="application/vnd.oai.openapi+json" href="/openapi.json" />
     <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />${scripts.map((src) => `\n    <script type="module" src="${src}"></script>`).join('')}
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#09090b" />
 
@@ -1676,13 +1679,15 @@ const OG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
 
 /* ── Write ───────────────────────────────────────────────────────────────────── */
 
-pages.push(...developerPages({ ORIGIN, REPO }));
-const api = createPublicApi({ origin: ORIGIN, table, manifest });
-const markdownPages = {};
-
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 mkdirSync(resolve(OUT, 'fonts'), { recursive: true });
+
+pages.push(...developerPages({ ORIGIN, REPO }));
+const tryBundles = await buildTryBundles({ root: ROOT, out: OUT, browserTable });
+pages.push(tryPage({ origin: ORIGIN, repo: REPO, samples: tryBundles.samples, escapeHtml }));
+const api = createPublicApi({ origin: ORIGIN, table, manifest });
+const markdownPages = {};
 
 const urls = [];
 for (const page of pages) {
@@ -1721,12 +1726,12 @@ writeFileSync(
 );
 writeFileSync(
   resolve(OUT, '_worker.js'),
-  `${readFileSync(resolve(HERE, 'worker.mjs'), 'utf8')}\nexport default createSiteWorker(${JSON.stringify({ origin: ORIGIN, pages: markdownPages, api })});\n`,
+  `${readFileSync(resolve(HERE, 'worker.mjs'), 'utf8')}\nexport default createSiteWorker(${JSON.stringify({ origin: ORIGIN, pages: markdownPages, api, tryCsp: TRY_CSP })});\n`,
   'utf8',
 );
 writeFileSync(
   resolve(OUT, 'llms.txt'),
-  `# Marlo\n\n> Marlo is an open-source accessibility checker with published ACT corpus measurements, visible coverage limits, and evidence for each engine.\n\nWhen to use: inspect measured accessibility rule coverage, compare engine accuracy, understand a finding, or scan trusted local HTML with the CLI. Read coverage before interpreting results. A rule that was not evaluated is not a pass. The public REST API and HTTP MCP tools return published metadata only; they do not accept HTML or run scans. Use the local CLI for evaluation. No API key is required for metadata.\n\n## Documentation\n\n- [Developer portal](${ORIGIN}/developers/index.md): API, CLI, and MCP entry points.\n- [API and CLI documentation](${ORIGIN}/docs/index.md): Authentication, endpoints, error handling, and local scan commands.\n- [OpenAPI specification](${ORIGIN}/openapi.json): Typed REST operations and response schemas.\n- [MCP discovery](${ORIGIN}/.well-known/mcp): Streamable HTTP endpoint and read-only tools.\n\n## Evidence\n\n- [Coverage API](${ORIGIN}/api/v1/coverage): Current corpus coverage and engine accuracy.\n- [Rule catalog API](${ORIGIN}/api/v1/rules): ACT identifiers, metadata, measurements, and routing.\n- [Calibration API](${ORIGIN}/api/v1/calibration): Published calibration table.\n- [Measured accuracy](${ORIGIN}/accuracy/index.md): Strict accuracy results and limitations.\n- [Method](${ORIGIN}/method/index.md): How the corpus is graded.\n- [Known defects](${ORIGIN}/honesty/index.md): Where earlier results were wrong.\n\n## Project\n\n- [About Marlo](${ORIGIN}/about/index.md): Purpose and boundaries.\n- [Contact](${ORIGIN}/contact/index.md): Public reporting channel.\n- [Privacy](${ORIGIN}/privacy/index.md): Website requests and local scans.\n- [Sitemap](${ORIGIN}/sitemap.xml): Published pages.\n`,
+  `# Marlo\n\n> Marlo is an open-source accessibility checker with published ACT corpus measurements, visible coverage limits, and evidence for each engine.\n\nWhen to use: inspect measured accessibility rule coverage, compare engine accuracy, understand a finding, or scan trusted local HTML with the CLI. Read coverage before interpreting results. A rule that was not evaluated is not a pass. The public REST API and HTTP MCP tools return published metadata only; they do not accept HTML or run scans. Use the local CLI for evaluation. No API key is required for metadata.\n\n## Documentation\n\n- [Playground](${ORIGIN}/try/): Run Marlo's own rules on pasted HTML in the browser, or on any page with the bookmarklet. Nothing is uploaded.\n- [Developer portal](${ORIGIN}/developers/index.md): API, CLI, and MCP entry points.\n- [API and CLI documentation](${ORIGIN}/docs/index.md): Authentication, endpoints, error handling, and local scan commands.\n- [OpenAPI specification](${ORIGIN}/openapi.json): Typed REST operations and response schemas.\n- [MCP discovery](${ORIGIN}/.well-known/mcp): Streamable HTTP endpoint and read-only tools.\n\n## Evidence\n\n- [Coverage API](${ORIGIN}/api/v1/coverage): Current corpus coverage and engine accuracy.\n- [Rule catalog API](${ORIGIN}/api/v1/rules): ACT identifiers, metadata, measurements, and routing.\n- [Calibration API](${ORIGIN}/api/v1/calibration): Published calibration table.\n- [Measured accuracy](${ORIGIN}/accuracy/index.md): Strict accuracy results and limitations.\n- [Method](${ORIGIN}/method/index.md): How the corpus is graded.\n- [Known defects](${ORIGIN}/honesty/index.md): Where earlier results were wrong.\n\n## Project\n\n- [About Marlo](${ORIGIN}/about/index.md): Purpose and boundaries.\n- [Contact](${ORIGIN}/contact/index.md): Public reporting channel.\n- [Privacy](${ORIGIN}/privacy/index.md): Website requests and local scans.\n- [Sitemap](${ORIGIN}/sitemap.xml): Published pages.\n`,
   'utf8',
 );
 writeFileSync(
@@ -1762,8 +1767,9 @@ writeFileSync(
   'utf8',
 );
 
-// Headers. No script is served, so the policy can forbid script entirely, which is the
-// strongest thing a static site can say about itself.
+// Headers. Every page but /try/ serves no script, so the policy there forbids script
+// entirely, which is the strongest thing a static site can say about itself. /try/ runs
+// Marlo itself, and its policy allows script from this origin and no request at all.
 writeFileSync(
   resolve(OUT, '_headers'),
   `/*
@@ -1779,6 +1785,10 @@ writeFileSync(
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+/try/*
+  ! Content-Security-Policy
+  Content-Security-Policy: ${TRY_CSP}
 `,
   'utf8',
 );

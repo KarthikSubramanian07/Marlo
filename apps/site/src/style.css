@@ -6,9 +6,10 @@
  *
  * THE THREE CONSTRAINTS THIS FILE WORKS INSIDE
  *
- * No JavaScript is served, so every interaction here is CSS. Hover and focus states are
- * transitions, the scroll reveals use animation-timeline, and the filter on the rules page
- * is radio inputs plus :has(). If a thing cannot be done without a script it is not done.
+ * No JavaScript drives the site, so every interaction here is CSS. Hover and focus states
+ * are transitions, the scroll reveals use animation-timeline, and the filter on the rules
+ * page is radio inputs plus :has(). If a thing cannot be done without a script it is not
+ * done. The one script served, on /try/, is the product itself, and it styles nothing.
  *
  * Mobile first, without exception. Every media query is min-width, so the phone layout is
  * the one that needs no query to be correct. no-theatre.test.ts asserts this, because a
@@ -326,7 +327,7 @@ em {
 
 /*
  * The navigation. A row that scrolls sideways when it does not fit, rather than a disclosure
- * button, because a button needs script and this site serves none. On a phone a scrolling row
+ * button, because a button needs script and the site's chrome has none. On a phone a scrolling row
  * beats no route at all to the other four pages.
  */
 .nav {
@@ -1654,6 +1655,281 @@ table a {
   }
 }
 
+/* ── Try it ──────────────────────────────────────────────────────────────────── */
+
+/*
+ * The one page with a script. The results are built by try/render.mjs with the same class
+ * names the bookmarklet panel uses, so the two read alike. Severity is the terminal's text
+ * mark first and a colour second, as everywhere else.
+ */
+
+.try {
+  padding-block: 8px var(--section-y);
+}
+
+.try__grid {
+  display: grid;
+  gap: 14px;
+}
+
+.try__input {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.try__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.try__label--pad {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.try__source {
+  width: 100%;
+  min-height: 16rem;
+  resize: vertical;
+  padding: 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--fg);
+  font: 13px/1.55 var(--font-mono);
+  font-variant-ligatures: none;
+  tab-size: 2;
+}
+
+.try__source:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.try__hint,
+.try__status {
+  font-size: 14px;
+}
+
+.try__status {
+  color: var(--fg-muted);
+}
+
+.try__actions,
+.try__samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.try__samples {
+  font-size: 14px;
+}
+
+.try__sample {
+  min-height: 2.25rem;
+  padding: 6px 14px;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+  transform: none;
+}
+
+.try__preview {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 22rem;
+}
+
+.try__frame {
+  width: 100%;
+  height: 100%;
+  min-height: 20rem;
+  border: 0;
+  background: #fff;
+}
+
+.try__results {
+  margin-top: 28px;
+}
+
+.try__results:empty {
+  display: none;
+}
+
+.try__bookmarklet {
+  margin-inline-start: 6px;
+  cursor: grab;
+}
+
+.mt-totals {
+  font-size: 16px;
+  color: var(--fg-muted);
+}
+
+.mt-totals strong {
+  color: var(--fg);
+}
+
+.mt-section {
+  margin: 26px 0 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.mt-empty {
+  color: var(--fg-muted);
+  font-size: 15px;
+}
+
+.mt-rules,
+.mt-verdicts {
+  list-style: none;
+}
+
+.mt-rule {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(#ffffff04, transparent);
+}
+
+.mt-rule + .mt-rule {
+  margin-top: 8px;
+}
+
+.mt-rule summary {
+  display: block;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius);
+}
+
+.mt-rule summary::-webkit-details-marker {
+  display: none;
+}
+
+.mt-rule summary:hover {
+  background: #ffffff07;
+}
+
+.mt-rule summary:focus-visible,
+.mt-verdict__target:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mt-rule__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.mt-sev {
+  font: 600 12px/1 var(--font-mono);
+  white-space: nowrap;
+}
+
+.mt-sev--critical,
+.mt-sev--serious {
+  color: var(--bad);
+}
+
+.mt-sev--moderate {
+  color: var(--warn);
+}
+
+.mt-sev--advisory {
+  color: var(--fg-muted);
+}
+
+.mt-rule__id {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.mt-rule__name {
+  flex: 1 1 14rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+}
+
+.mt-rule__count {
+  font-size: 13.5px;
+  color: var(--fg-muted);
+}
+
+.mt-rule__meta {
+  padding: 0 18px 10px;
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+
+.mt-rule__meta a {
+  color: var(--accent-strong);
+}
+
+.mt-verdicts {
+  padding: 0 18px 16px;
+}
+
+.mt-verdict {
+  display: grid;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.mt-verdict__target {
+  justify-self: start;
+  max-width: 100%;
+  min-height: 2rem;
+  padding: 4px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--accent-strong);
+  font: 12.5px/1.4 var(--font-mono);
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.mt-verdict__target code {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+.mt-verdict__message {
+  font-size: 15px;
+}
+
+.mt-verdict__snippet {
+  padding: 10px 12px;
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--fg-muted);
+  font: 12.5px/1.5 var(--font-mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1810,6 +2086,10 @@ table a {
 }
 
 @media (min-width: 64em) {
+  .try__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
   :root {
     --section-y: 96px;
   }
