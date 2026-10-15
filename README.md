@@ -87,6 +87,8 @@ On real pages the picture is much worse than on the official cases:
 
 Precision falls from 0.831 to 0.582 and recall from 0.853 to 0.570. The routing chosen on the official corpus, scored on pages it never saw, finds a third as many violations as the union and is no more precise, which settles the open question above: routing is not an accuracy mechanism. And Marlo's own engine, third of four on the official cases, is the least precise engine on real ones. Intervals and the full table are in [calibration/ANALYSIS.md](calibration/ANALYSIS.md). Beyond accuracy, on 19 of the 25 pages some engine reports a failure for a rule the routed engine passes, and engines that agree closely on the official cases report findings at rates two orders of magnitude apart.
 
+Why Marlo's own engine does so badly is written down cell by cell in [calibration/ERROR-ANALYSIS.md](calibration/ERROR-ANALYSIS.md). It makes 27 false positives and 43 false negatives on rules it evaluates, and each has a named root cause. 17 of the false positives are rule logic that contradicts the ACT rule text, 8 of them from one defect: failing an ID reference whose target is missing, which the rule explicitly allows. 24 of the false negatives are abstentions, mostly on bypass rules that turn on what repeats across a site. Five rules with real-page errors score perfectly on their official test cases, because no case exercises what fails. Rerun in headless Chromium, the engine's precision is 0.733 and its recall 0.473. None of this is fixed yet, because fixing rules on these pages would make them training data rather than a held-out measurement.
+
 ---
 
 ## Why this is the product
