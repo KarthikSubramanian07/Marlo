@@ -420,20 +420,74 @@ expect(
       claim('real pages and categories', NUMBER_RE, REAL_SECTION)?.map((m) => `${m[1]}/${m[2]}`),
       `${String(real.pages)}/${String(real.categories.length)}`,
     );
-    const cells = claim(
-      'real adjudication cells',
-      /none of the (\d+) cells has been rated/g,
-      REAL_SECTION,
-    );
+    const adj = real.adjudication;
     expect(
       'real adjudication cells',
-      cells?.map((m) => m[1]),
-      String(real.adjudication.totalCells),
+      claim('real adjudication cells', /Every one of the (\d+) cells/g, REAL_SECTION)?.map(
+        (m) => m[1],
+      ),
+      adj.resolvedCells === adj.totalCells ? String(adj.totalCells) : 'not every cell resolved',
     );
-    if (cells !== null && real.adjudication.ratedCells !== 0) {
+    if (
+      !adj.raters.some((r) => r.kind === 'model') !==
+      !/model-adjudicated, not human judgment/.test(REAL_SECTION)
+    ) {
       problems.push(
-        `real adjudication: README says no cell is rated, the table records ${String(real.adjudication.ratedCells)}`,
+        'real adjudication: README and table disagree on whether the raters are models',
       );
+    }
+    expect(
+      'real adjudication agreement',
+      claim(
+        'real adjudication agreement',
+        /settled the (\d+) cells where they disagreed\. They agreed on ([\d.]+%) of the (\d+) cells that needed a judgment \(Cohen's kappa ([\d.]+)\)/g,
+        REAL_SECTION,
+      )?.map((m) => `${m[1]}/${m[2]}/${m[3]}/${m[4]}`),
+      `${String(adj.resolutions.model + adj.resolutions.person)}/${percent(adj.percentAgreement)}/${String(adj.ratedCells)}/${rate(adj.kappa)}`,
+    );
+    const validity = JSON.parse(
+      readFileSync(resolve(ROOT, 'corpus/real/adjudication/rater-validity.json'), 'utf8'),
+    );
+    expect(
+      'rater validity',
+      claim(
+        'rater validity',
+        /rated the (\d+) official test cases of the same rules with their names hidden, and the adjudicated labels match the W3C's human-written answers on ([\d.]+%)/g,
+        REAL_SECTION,
+      )?.map((m) => `${m[1]}/${m[2]}`),
+      `${String(validity.cases)}/${percent(validity.graded.adjudicated.agreement.value)}`,
+    );
+    const pages = analysis.realPages;
+    if (pages === null) {
+      problems.push('real pages: README publishes real-page accuracy and the analysis has none');
+    } else {
+      expect(
+        'real resolved cells',
+        claim('real resolved cells', /\| Real pages, (\d+) resolved cells/g, REAL_SECTION)?.map(
+          (m) => m[1],
+        ),
+        String(pages.resolvedCells),
+      );
+      const rows = [
+        [
+          'scan-output',
+          /\| \*\*What `marlo scan` reports\*\* +\| \*\*([\d.]+)\*\* +\| \*\*([\d.]+)\*\* +\| \*\*([\d.]+%)\*\*/g,
+        ],
+        ['single-alfa', /\| Alfa alone +\| ([\d.]+) +\| ([\d.]+) +\| ([\d.]+%)/g],
+        ['single-axe-core', /\| axe-core alone +\| ([\d.]+) +\| ([\d.]+) +\| ([\d.]+%)/g],
+        ['routed-in-sample', /\| Routed engine +\| ([\d.]+) +\| ([\d.]+) +\| ([\d.]+%)/g],
+        ['single-marlo', /\| Marlo's own engine alone +\| ([\d.]+) +\| ([\d.]+) +\| ([\d.]+%)/g],
+      ];
+      for (const [id, pattern] of rows) {
+        const strategy = pages.strategies.find((x) => x.id === id);
+        expect(
+          `real pages ${id}`,
+          claim(`real pages ${id}`, pattern, REAL_SECTION)?.map((m) => `${m[1]}/${m[2]}/${m[3]}`),
+          strategy === undefined
+            ? 'absent'
+            : `${rate(strategy.precision?.value ?? null)}/${rate(strategy.recall?.value ?? null)}/${percent(strategy.falsePositiveRate?.value ?? null)}`,
+        );
+      }
     }
     expect(
       'real invariant pages',

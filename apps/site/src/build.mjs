@@ -138,6 +138,8 @@ const browserContrast = browserTable.entries.find(
   (e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo',
 );
 const real = table.realCorpus ?? null;
+/** What the scan reports on the rated real pages, or null before any are rated. */
+const realScan = analysis.realPages?.strategies.find((x) => x.id === 'scan-output') ?? null;
 const flattered = table.entries.filter((e) => e.flatteredByProtocol);
 const flatteredMarlo = flattered.filter((e) => e.engine === 'marlo').length;
 const OG_ALT = `Marlo. False positive rate ${num(product.falsePositiveRate.value, { as: 'percent', field: 'analysis.scan.scan-output.falsePositiveRate' })}, measured and published.`;
@@ -967,7 +969,7 @@ ${
         <div class="wrap">
           <div class="section-head">
             <span class="eyebrow">A second corpus</span>
-            <h2>Real pages, with no accuracy figure yet, on purpose</h2>
+            <h2>${real.aggregate.accuracy.sampleSize === 0 ? 'Real pages, with no accuracy figure yet, on purpose' : 'Real pages, where the accuracy falls'}</h2>
             <p>
               Every number above comes from hand-written test cases built to isolate one
               condition. ${num(real.pages, { field: 'realCorpus.pages' })} real pages from
@@ -977,20 +979,42 @@ ${
           </div>
           <div class="prose stack">
             <p>
-              Ground truth comes from two people rating every page against every rule
+              ${
+                real.adjudication.raters.some((r) => r.kind === 'model')
+                  ? `Ground truth is <strong>model-adjudicated, not human judgment</strong>: two
+              different language models rated each of the
+              ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })}
+              cells independently, blind to every engine, and a third settled the cells where
+              they disagreed. Their agreement is a Cohen's kappa of
+              ${num(real.adjudication.kappa, { field: 'realCorpus.adjudication.kappa', as: 'rate' })},
+              and how accurate they are is measured on the official cases, whose answers people
+              wrote, in <a href="https://github.com/KarthikSubramanian07/Marlo/blob/main/corpus/real/adjudication/RATER-VALIDITY.md">RATER-VALIDITY.md</a>.`
+                  : `Ground truth comes from two raters rating every page against every rule
               independently, with every disagreement written down. ${
                 real.adjudication.ratedCells === 0
-                  ? `None of the ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })} cells has been rated yet`
+                  ? `None of the ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })} cells has been rated yet, so the table holds no accuracy figure for these pages and refuses one`
                   : `${num(real.adjudication.ratedCells, { field: 'realCorpus.adjudication.ratedCells' })} of the ${num(real.adjudication.totalCells, { field: 'realCorpus.adjudication.totalCells' })} cells are rated`
-              }${
-                real.aggregate.accuracy.sampleSize === 0
-                  ? ', so the table holds no accuracy figure for these pages and refuses one'
-                  : ''
-              }.
+              }.`
+              }
             </p>
+            ${
+              realScan === null
+                ? ''
+                : `<p>
+              On those pages, what <code>marlo scan</code> reports has a precision of
+              ${num(realScan.precision.value, { field: 'analysis.realPages.scan.precision', as: 'rate' })}
+              and a recall of
+              ${num(realScan.recall.value, { field: 'analysis.realPages.scan.recall', as: 'rate' })},
+              against
+              ${num(product.precision.value, { field: 'analysis.scan.precision', as: 'rate' })}
+              and
+              ${num(product.recall.value, { field: 'analysis.scan.recall', as: 'rate' })}
+              on the official cases. The routing chosen on the official corpus finds far fewer
+              violations there and is no more precise, so routing is not an accuracy mechanism.
+            </p>`
+            }
             <p>
-              What can be measured without ground truth already shows the official corpus is
-              not what people scan. On
+              Even without ground truth the official corpus is plainly not what people scan. On
               ${num(real.aggregate.invariant.pagesWhereItWouldFire, { field: 'realCorpus.aggregate.invariant.pagesWhereItWouldFire' })}
               of the ${num(real.aggregate.invariant.pages, { field: 'realCorpus.aggregate.invariant.pages' })}
               pages, some engine fails a rule the routed engine passes.
@@ -998,7 +1022,7 @@ ${
           </div>
           <div class="scroller" role="region" aria-label="Findings per real page by engine, scrollable" tabindex="0">
             <table>
-              <caption>Findings per page on the real pages. Not accuracy: nothing is rated yet.</caption>
+              <caption>Findings per page on the real pages. A count, not accuracy.</caption>
               <thead>
                 <tr>
                   <th scope="col">Engine</th>
@@ -1432,7 +1456,7 @@ pages.push({
               </p>
               <p class="row__body">
                 It is a required job now, on both corpora, and the real-page figures fail on any
-                movement in either direction until people have rated those pages.
+                movement in either direction.
               </p>
             </div>
             <div class="row">
@@ -1548,12 +1572,12 @@ pages.push({
               </p>
             </div>
             <div class="row">
-              <span class="row__title">No accuracy figure for real pages yet</span>
+              <span class="row__title">Real-page ground truth comes from models, not people</span>
               <p class="row__body">
-                The real-page corpus is vendored and measured, and the table refuses an accuracy
-                figure for it until two people have rated every page independently and written
-                down where they disagreed. What it already shows is that engines agreeing on the
-                official cases disagree widely on real ones.
+                Two language models rated every real page against every rule, and a third
+                settled their disagreements. Every figure resting on that says so, and the
+                raters' own accuracy is measured on the official cases. A human rating of a
+                sample would test it, and the protocol for one is ready.
               </p>
             </div>
             <div class="row">
