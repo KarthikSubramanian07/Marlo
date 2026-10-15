@@ -48,6 +48,12 @@ export function developerPages({ ORIGIN, REPO }) {
           <p><a href="/docs/">Read the API and CLI documentation</a>, download <a href="/openapi.json">the OpenAPI specification</a>, or read <a href="/llms.txt">the machine-readable usage guide</a>. Published measurements remain visible on <a href="/accuracy/">The numbers</a> and their method is described on <a href="/method/">Method</a>.</p>`,
         ],
         [
+          'Run Marlo without installing it',
+          `<p><a href="/try/">The playground</a> runs Marlo's own rules on HTML you paste, in your browser, and offers a bookmarklet that does the same on any page you open. Neither sends the markup anywhere. They run one engine of the four, so the CLI finds more.</p>
+          <p>For the full scan without Node.js, use the container image:</p>
+          <pre class="scroller" tabindex="0" role="region" aria-label="Container example"><code>docker run --rm -v "$PWD:/work" ghcr.io/karthiksubramanian07/marlo scan page.html</code></pre>`,
+        ],
+        [
           'Try the live metadata sandbox',
           `<p>No account, API key, or authorization header is required for these read-only requests. The sandbox is the same public metadata surface used by integrations.</p>
           <pre class="scroller" tabindex="0" role="region" aria-label="Command examples"><code>curl -sS '${origin}/api/v1/coverage'
@@ -57,7 +63,7 @@ curl -sS '${origin}/api/v1/rules'</code></pre>
         [
           'MCP and source access',
           `<p>The <a href="/mcp">MCP endpoint</a> supports stateless Streamable HTTP for reading coverage, listing rules, and explaining a rule. Its tools are <code>marlo_coverage</code>, <code>marlo_list_rules</code>, and <code>marlo_explain_rule</code>. Discover the endpoint through <a href="/.well-known/mcp">the MCP manifest</a>.</p>
-          <p>The <a href="${repo}">source repository</a> contains the CLI, rule implementations, calibration harness, and test corpus. CLI installation currently uses a source checkout. A registry release is not required for the public metadata API.</p>`,
+          <p>The <a href="${repo}">source repository</a> contains the CLI, rule implementations, calibration harness, and test corpus. The CLI runs from a source checkout or the container image. A registry release is not required for the public metadata API.</p>`,
         ],
       ],
     ),
@@ -153,6 +159,7 @@ node packages/cli/dist/bin.js explain ACT_RULE_ID</code></pre>
         [
           'Website and public metadata',
           `<p>This website publishes documentation and accessibility calibration evidence. It has no account registration, payment form, source upload, or hosted page-scanning service. Its pages use locally served fonts and styles. The site does not include application analytics scripts, advertising scripts, or application cookies.</p>
+          <p>The one script it serves is on <a href="/try/">the playground</a>, and it is Marlo's rules. HTML pasted there is checked inside your browser and never sent: the page's security policy forbids it from making any request. The bookmarklet runs the same rules on the page you open and sends nothing back.</p>
           <p>Loading a page or calling a public endpoint sends an ordinary network request to the hosting service. That request includes connection information such as an IP address and headers supplied by your client. The hosting service may process request information for delivery, operations, and abuse prevention under its own policies. This page does not promise a retention period or the absence of infrastructure logs.</p>
           <p>The public API and MCP endpoint return existing rule metadata and published calibration results. They do not accept HTML uploads or scan URLs. Avoid placing credentials or private information in request URLs, query strings, or headers. Use the <a href="/docs/">documentation</a> to identify the supported endpoints.</p>`,
         ],

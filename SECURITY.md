@@ -120,11 +120,13 @@ Static pages plus one Worker that serves calibration data.
 
 |                      |                                                                                               |
 | -------------------- | --------------------------------------------------------------------------------------------- |
-| Accepts user content | **No.** There is no upload, no scan-a-URL form, and no field that accepts a page to test      |
+| Accepts user content | **Never on the server.** No upload and no scan-a-URL form. See the playground, below          |
 | Cookies              | None                                                                                          |
 | Analytics            | Cloudflare Web Analytics if enabled, which is cookieless and stores no per-visitor identifier |
 | Personal data stored | None                                                                                          |
 | Database contents    | Calibration history only, which is a projection of committed files in `calibration/`          |
+
+**The playground and the bookmarklet.** `/try/` is the one page that serves a script, and the script is Marlo's own rules. Markup pasted there is written into an iframe with `sandbox="allow-same-origin"` and no `allow-scripts`, so its scripts never run and its forms cannot submit, and it is evaluated in the visitor's browser. The page's policy is `connect-src 'none'` and allows script from the site's own origin only, so neither the playground nor anything pasted into it can send a request; its one permitted base URL is on `.invalid`, which never resolves, so relative URLs in pasted markup go nowhere. The bookmarklet loads the same rules into whatever page the visitor opens, evaluates it there, and makes no request of its own. Its panel is built with DOM calls and `textContent` inside a closed shadow root, so text from the page cannot inject markup into it. A site test fails if either script contains a timer or any request API.
 
 The absence of a hosted scanner is a deliberate architectural choice rather than a missing feature. A hosted scanner means accepting arbitrary URLs, rendering them in a browser we operate, and becoming a request-forgery surface and an abuse vector. It is also the component that would cost money, per [D-007](DECISIONS.md#d-007). Both reasons point the same way.
 

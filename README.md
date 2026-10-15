@@ -13,7 +13,9 @@ Marlo will. It checks pages against the [official W3C ACT rule corpus](https://a
 
 That figure is what `marlo scan` reports, measured as a whole over the 41 rules it evaluates. Until recently this line printed 5.6%, which is the rate of Marlo's own rule engine, one component of the product. The product reports a failure whenever any of its four engines does, and that costs precision. [HONESTY.md entry 17](HONESTY.md#17-the-front-page-measured-a-component-and-the-routing-was-graded-on-its-own-answers).
 
-**[trymarlo.pages.dev](https://trymarlo.pages.dev)** · [the numbers](calibration/README.md) · [where Marlo was wrong](HONESTY.md)
+**[trymarlo.pages.dev](https://trymarlo.pages.dev)** · [try it in your browser](https://trymarlo.pages.dev/try/) · [the numbers](calibration/README.md) · [where Marlo was wrong](HONESTY.md)
+
+**Try it without installing anything.** Paste HTML into the [playground](https://trymarlo.pages.dev/try/) and Marlo's own rules check it in your browser, with each rule's measured precision beside every finding; nothing you paste leaves the page. The same page has a bookmarklet that checks any page you open. For the full four-engine scan, `docker run --rm -v "$PWD:/work" ghcr.io/karthiksubramanian07/marlo scan page.html`.
 
 ---
 
@@ -273,17 +275,20 @@ Five of the nine are ours. Under the protocol W3C publishes implementation repor
 
 ---
 
-## Five ways in, one set of numbers
+## Eight ways in, one set of numbers
 
-|                   |                                                  |                                                                  |
-| ----------------- | ------------------------------------------------ | ---------------------------------------------------------------- |
-| **CLI**           | `marlo scan`, `explain`, `coverage`              | Exits 1 on findings, 3 on a rule it could not evaluate           |
-| **Library**       | `@marlo/cli`, `@marlo/report`                    | The pipeline and the surfaces, importable                        |
-| **SARIF 2.1.0**   | `--sarif`                                        | Per-engine provenance on every result, for the code scanning tab |
-| **GitHub Action** | [`.github/actions/marlo`](.github/actions/marlo) | Read-only by default; an opt-in mode opens a pull request        |
-| **MCP**           | [`@marlo/mcp`](packages/mcp)                     | Three read-only tools. No `fix` tool, and there will not be one  |
+|                   |                                                           |                                                                    |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------ |
+| **Playground**    | [trymarlo.pages.dev/try](https://trymarlo.pages.dev/try/) | Marlo's own rules on pasted HTML, in your browser, sending nothing |
+| **Bookmarklet**   | On the same page                                          | The same rules on any page you open, in a panel beside it          |
+| **Docker**        | `ghcr.io/karthiksubramanian07/marlo`                      | The CLI with nothing else installed; amd64 and arm64               |
+| **CLI**           | `marlo scan`, `explain`, `coverage`                       | Exits 1 on findings, 3 on a rule it could not evaluate             |
+| **Library**       | `@marlo/cli`, `@marlo/report`                             | The pipeline and the surfaces, importable                          |
+| **SARIF 2.1.0**   | `--sarif`                                                 | Per-engine provenance on every result, for the code scanning tab   |
+| **GitHub Action** | [`.github/actions/marlo`](.github/actions/marlo)          | Read-only by default; an opt-in mode opens a pull request          |
+| **MCP**           | [`@marlo/mcp`](packages/mcp), or `trymarlo.pages.dev/mcp` | Three read-only tools. No `fix` tool, and there will not be one    |
 
-The last two are where the safety promise stops being prose. In an Action, what Marlo may write is a statement about a permission, so the Action reads the permissions it was handed before it does anything. By default it refuses any token that can write to the repository. With `open-pull-request: true` it requires exactly `contents: write` and `pull-requests: write`, refuses every other write scope, applies only fixes that cleared the measured gate and verified, and opens one pull request whose branch name is derived from the edits, so a second run over the same state opens nothing. It refuses to write to the default branch, never force-updates a ref, and never merges. The body carries, per fix, the measurement the decision rested on and the three verification answers, and per refusal the number that disqualified it. Over MCP, a model calls tools with no human in between, so the server has no tool that writes and a test asserts the package does not import `writeFileSync` at all.
+The playground and the bookmarklet run only Marlo's own engine, so they find less than the CLI: no axe-core, Alfa or HTML CodeSniffer, no routing, and no invariant. They say so on the page. The Action and MCP are where the safety promise stops being prose. In an Action, what Marlo may write is a statement about a permission, so the Action reads the permissions it was handed before it does anything. By default it refuses any token that can write to the repository. With `open-pull-request: true` it requires exactly `contents: write` and `pull-requests: write`, refuses every other write scope, applies only fixes that cleared the measured gate and verified, and opens one pull request whose branch name is derived from the edits, so a second run over the same state opens nothing. It refuses to write to the default branch, never force-updates a ref, and never merges. The body carries, per fix, the measurement the decision rested on and the three verification answers, and per refusal the number that disqualified it. Over MCP, a model calls tools with no human in between, so the server has no tool that writes and a test asserts the package does not import `writeFileSync` at all.
 
 ---
 
