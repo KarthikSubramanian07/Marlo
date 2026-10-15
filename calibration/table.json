@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-13",
-  "commit": "10a6c7961b013b7e5cb8079c77798c8bd39ba129",
+  "generated": "2026-10-15",
+  "commit": "4a6b005f583d2daf4881abd2aefa6f67e4548ef4",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -11146,12 +11146,28 @@
       }
     ],
     "adjudication": {
-      "status": "awaiting-adjudication",
-      "ratedCells": 0,
-      "resolvedCells": 0,
+      "status": "adjudicated",
+      "ratedCells": 736,
+      "resolvedCells": 1025,
       "totalCells": 1025,
-      "kappa": null,
-      "percentAgreement": null
+      "kappa": 0.8849,
+      "percentAgreement": 0.9457,
+      "raters": [
+        {
+          "rater": "A",
+          "kind": "model",
+          "model": "claude-opus-5-5"
+        },
+        {
+          "rater": "B",
+          "kind": "model",
+          "model": "claude-sonnet-5-5"
+        }
+      ],
+      "resolutions": {
+        "person": 0,
+        "model": 40
+      }
     },
     "entries": [
       {
@@ -11167,10 +11183,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11186,10 +11213,21 @@
         "unsupported": 25,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 0,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": null
+          }
         }
       },
       {
@@ -11205,10 +11243,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 24,
+            "trueNegatives": 1,
+            "cantTellOnFailed": 23,
+            "cantTellOnPassed": 1,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11224,10 +11273,21 @@
         "unsupported": 0,
         "findings": 2277,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 17,
+            "falsePositives": 0,
+            "falseNegatives": 7,
+            "trueNegatives": 1,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": 1,
+            "recall": 0.7083333333333334,
+            "f1": 0.8292682926829268,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11243,10 +11303,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 19,
+            "trueNegatives": 1,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11262,10 +11333,21 @@
         "unsupported": 0,
         "findings": 14,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 22,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11281,10 +11363,21 @@
         "unsupported": 0,
         "findings": 8,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 22,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 2,
+            "precision": 1,
+            "recall": 0.6666666666666666,
+            "f1": 0.8,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11300,10 +11393,21 @@
         "unsupported": 0,
         "findings": 13,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 22,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11319,10 +11423,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 18,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11338,10 +11453,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11357,10 +11483,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11376,10 +11513,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11395,10 +11543,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11414,10 +11573,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11433,10 +11603,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11452,10 +11633,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11471,10 +11663,21 @@
         "unsupported": 0,
         "findings": 19,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 4,
+            "falseNegatives": 0,
+            "trueNegatives": 19,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 4,
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "f1": 0.5,
+            "falsePositiveRate": 0.17391304347826086
+          }
         }
       },
       {
@@ -11528,10 +11731,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11547,10 +11761,21 @@
         "unsupported": 0,
         "findings": 8,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11566,10 +11791,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11585,10 +11821,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11604,10 +11851,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11623,10 +11881,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11661,10 +11930,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.04
+          }
         }
       },
       {
@@ -11680,10 +11960,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11699,10 +11990,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11718,10 +12020,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11737,10 +12050,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11756,10 +12080,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11775,10 +12110,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11794,10 +12140,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11813,10 +12170,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 2,
+            "cantTellOnPassed": 21,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11832,10 +12200,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 2,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11851,10 +12230,21 @@
         "unsupported": 0,
         "findings": 4,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 2,
+            "falseNegatives": 1,
+            "trueNegatives": 21,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.3333333333333333,
+            "recall": 0.5,
+            "f1": 0.4,
+            "falsePositiveRate": 0.08695652173913043
+          }
         }
       },
       {
@@ -11870,10 +12260,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 3,
+            "trueNegatives": 21,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.25,
+            "f1": 0.4,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11889,10 +12290,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 3,
+            "trueNegatives": 21,
+            "cantTellOnFailed": 3,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.25,
+            "f1": 0.4,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11908,10 +12320,21 @@
         "unsupported": 0,
         "findings": 5,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 4,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 21,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11927,10 +12350,21 @@
         "unsupported": 0,
         "findings": 6,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.04
+          }
         }
       },
       {
@@ -11946,10 +12380,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11965,10 +12410,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -11984,10 +12440,21 @@
         "unsupported": 0,
         "findings": 9,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 8,
+            "falseNegatives": 0,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.32
+          }
         }
       },
       {
@@ -12003,10 +12470,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.04
+          }
         }
       },
       {
@@ -12022,10 +12500,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12041,10 +12530,21 @@
         "unsupported": 0,
         "findings": 8,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 2,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.08
+          }
         }
       },
       {
@@ -12060,10 +12560,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.04
+          }
         }
       },
       {
@@ -12079,10 +12590,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.04
+          }
         }
       },
       {
@@ -12136,10 +12658,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12155,10 +12688,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12174,10 +12718,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12193,10 +12748,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12212,10 +12778,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12231,10 +12808,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12250,10 +12838,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12269,10 +12868,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12288,10 +12898,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12307,10 +12928,21 @@
         "unsupported": 0,
         "findings": 3,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": 0.5,
+            "recall": 1,
+            "f1": 0.6666666666666666,
+            "falsePositiveRate": 0.041666666666666664
+          }
         }
       },
       {
@@ -12326,10 +12958,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12345,10 +12988,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12364,10 +13018,21 @@
         "unsupported": 0,
         "findings": 3,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 19,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.05
+          }
         }
       },
       {
@@ -12383,10 +13048,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12402,10 +13078,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12421,10 +13108,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12440,10 +13138,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 2,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12459,10 +13168,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12535,10 +13255,21 @@
         "unsupported": 25,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 0,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": null
+          }
         }
       },
       {
@@ -12554,10 +13285,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 10,
+            "trueNegatives": 15,
+            "cantTellOnFailed": 9,
+            "cantTellOnPassed": 15,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12573,10 +13315,21 @@
         "unsupported": 0,
         "findings": 119,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 2,
+            "falseNegatives": 3,
+            "trueNegatives": 13,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": 0.7777777777777778,
+            "recall": 0.7,
+            "f1": 0.7368421052631577,
+            "falsePositiveRate": 0.13333333333333333
+          }
         }
       },
       {
@@ -12592,10 +13345,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 7,
+            "trueNegatives": 13,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12649,10 +13413,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
-          "cantTellTruth": 0,
-          "strict": null
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 1,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 6,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 3,
+            "cantTellOnPassed": 1,
+            "precision": 1,
+            "recall": 0.14285714285714285,
+            "f1": 0.25,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12668,10 +13443,21 @@
         "unsupported": 0,
         "findings": 4,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
-          "cantTellTruth": 0,
-          "strict": null
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 1,
+          "strict": {
+            "truePositives": 4,
+            "falsePositives": 0,
+            "falseNegatives": 3,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": 1,
+            "recall": 0.5714285714285714,
+            "f1": 0.7272727272727273,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12687,10 +13473,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12706,10 +13503,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12725,10 +13533,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12744,10 +13563,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12763,10 +13593,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12782,10 +13623,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12801,10 +13653,21 @@
         "unsupported": 0,
         "findings": 2,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 18,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12820,10 +13683,21 @@
         "unsupported": 0,
         "findings": 3,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 3,
+            "falseNegatives": 2,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "falsePositiveRate": 0.13043478260869565
+          }
         }
       },
       {
@@ -12839,10 +13713,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 2,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12858,10 +13743,21 @@
         "unsupported": 0,
         "findings": 47,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 7,
+            "falseNegatives": 1,
+            "trueNegatives": 16,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.125,
+            "recall": 0.5,
+            "f1": 0.2,
+            "falsePositiveRate": 0.30434782608695654
+          }
         }
       },
       {
@@ -12877,10 +13773,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12896,10 +13803,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12915,10 +13833,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12934,10 +13863,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12953,10 +13893,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12972,10 +13923,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -12991,10 +13953,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13010,10 +13983,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13029,10 +14013,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13048,10 +14043,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13067,10 +14073,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13086,10 +14103,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13105,10 +14133,21 @@
         "unsupported": 0,
         "findings": 3,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 2,
+            "falseNegatives": 5,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 5,
+            "cantTellOnPassed": 6,
+            "precision": 0.3333333333333333,
+            "recall": 0.16666666666666666,
+            "f1": 0.2222222222222222,
+            "falsePositiveRate": 0.10526315789473684
+          }
         }
       },
       {
@@ -13124,10 +14163,21 @@
         "unsupported": 0,
         "findings": 22,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 5,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 19,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 2,
+            "precision": 1,
+            "recall": 0.8333333333333334,
+            "f1": 0.9090909090909091,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13143,10 +14193,21 @@
         "unsupported": 0,
         "findings": 34,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 6,
+            "falsePositives": 2,
+            "falseNegatives": 0,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.75,
+            "recall": 1,
+            "f1": 0.8571428571428571,
+            "falsePositiveRate": 0.10526315789473684
+          }
         }
       },
       {
@@ -13162,10 +14223,21 @@
         "unsupported": 0,
         "findings": 9,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 1,
+            "falseNegatives": 2,
+            "trueNegatives": 15,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.6666666666666666,
+            "recall": 0.5,
+            "f1": 0.5714285714285715,
+            "falsePositiveRate": 0.0625
+          }
         }
       },
       {
@@ -13181,10 +14253,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13200,10 +14283,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13219,10 +14313,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13238,10 +14343,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13295,10 +14411,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13314,10 +14441,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13333,10 +14471,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13352,10 +14501,21 @@
         "unsupported": 0,
         "findings": 5,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 5,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.2
+          }
         }
       },
       {
@@ -13371,10 +14531,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13390,10 +14561,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13409,10 +14591,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 19,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.05
+          }
         }
       },
       {
@@ -13428,10 +14621,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13447,10 +14651,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 16,
+            "trueNegatives": 9,
+            "cantTellOnFailed": 5,
+            "cantTellOnPassed": 4,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13485,10 +14700,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13504,10 +14730,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13523,10 +14760,21 @@
         "unsupported": 0,
         "findings": 1,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 1,
+            "falseNegatives": 1,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "falsePositiveRate": 0.041666666666666664
+          }
         }
       },
       {
@@ -13542,10 +14790,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13561,10 +14820,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13580,10 +14850,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
           "cantTellTruth": 0,
-          "strict": null
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       },
       {
@@ -13637,10 +14918,21 @@
         "unsupported": 0,
         "findings": 0,
         "graded": {
-          "resolvedCells": 0,
-          "unresolvedCells": 25,
-          "cantTellTruth": 0,
-          "strict": null
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 1,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 8,
+            "trueNegatives": 16,
+            "cantTellOnFailed": 8,
+            "cantTellOnPassed": 10,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
         }
       }
     ],
@@ -15498,10 +16790,10 @@
         ]
       },
       "accuracy": {
-        "strictPrecision": null,
-        "strictRecall": null,
-        "falsePositiveRate": null,
-        "sampleSize": 0
+        "strictPrecision": 0.37209302325581395,
+        "strictRecall": 0.2711864406779661,
+        "falsePositiveRate": 0.02954048140043764,
+        "sampleSize": 973
       }
     }
   }

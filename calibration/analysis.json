@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-13",
-  "commit": "10a6c7961b013b7e5cb8079c77798c8bd39ba129",
+  "generated": "2026-10-15",
+  "commit": "4a6b005f583d2daf4881abd2aefa6f67e4548ef4",
   "renderer": "static",
   "interval": "wilson-95",
   "scopes": [
@@ -567,7 +567,221 @@
       "kappaFailed": 0.3326
     }
   ],
-  "realPages": null,
+  "realPages": {
+    "resolvedCells": 1023,
+    "strategies": [
+      {
+        "id": "scan-output",
+        "label": "What marlo scan reports",
+        "description": "A rule fails on a page when any engine claiming it fails it, because the one-directional invariant forbids reporting clean once a peer has failed. At the level of a test case's outcome this is the union of the engines' failures.",
+        "truePositives": 53,
+        "falsePositives": 38,
+        "falseNegatives": 40,
+        "trueNegatives": 892,
+        "precision": {
+          "value": 0.5824,
+          "low": 0.4798,
+          "high": 0.6784,
+          "successes": 53,
+          "trials": 91
+        },
+        "recall": {
+          "value": 0.5699,
+          "low": 0.4685,
+          "high": 0.6658,
+          "successes": 53,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0409,
+          "low": 0.0299,
+          "high": 0.0556,
+          "successes": 38,
+          "trials": 930
+        }
+      },
+      {
+        "id": "routed-in-sample",
+        "label": "Routed engine, in sample",
+        "description": "The published routing, chosen from every case including the one being scored. Optimistic by construction, and kept only for comparison.",
+        "truePositives": 19,
+        "falsePositives": 17,
+        "falseNegatives": 74,
+        "trueNegatives": 913,
+        "precision": {
+          "value": 0.5278,
+          "low": 0.3701,
+          "high": 0.6801,
+          "successes": 19,
+          "trials": 36
+        },
+        "recall": {
+          "value": 0.2043,
+          "low": 0.1349,
+          "high": 0.2972,
+          "successes": 19,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0183,
+          "low": 0.0114,
+          "high": 0.0291,
+          "successes": 17,
+          "trials": 930
+        }
+      },
+      {
+        "id": "majority",
+        "label": "Majority of engines",
+        "description": "A rule fails when at least two of the engines claiming it fail it.",
+        "truePositives": 14,
+        "falsePositives": 8,
+        "falseNegatives": 79,
+        "trueNegatives": 922,
+        "precision": {
+          "value": 0.6364,
+          "low": 0.4295,
+          "high": 0.8027,
+          "successes": 14,
+          "trials": 22
+        },
+        "recall": {
+          "value": 0.1505,
+          "low": 0.0918,
+          "high": 0.237,
+          "successes": 14,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0086,
+          "low": 0.0044,
+          "high": 0.0169,
+          "successes": 8,
+          "trials": 930
+        }
+      },
+      {
+        "id": "single-marlo",
+        "label": "Marlo alone",
+        "description": "Marlo on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
+        "truePositives": 16,
+        "falsePositives": 27,
+        "falseNegatives": 77,
+        "trueNegatives": 903,
+        "precision": {
+          "value": 0.3721,
+          "low": 0.2438,
+          "high": 0.5214,
+          "successes": 16,
+          "trials": 43
+        },
+        "recall": {
+          "value": 0.172,
+          "low": 0.1088,
+          "high": 0.2613,
+          "successes": 16,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.029,
+          "low": 0.02,
+          "high": 0.0419,
+          "successes": 27,
+          "trials": 930
+        }
+      },
+      {
+        "id": "single-axe-core",
+        "label": "axe-core alone",
+        "description": "axe-core on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
+        "truePositives": 15,
+        "falsePositives": 2,
+        "falseNegatives": 78,
+        "trueNegatives": 928,
+        "precision": {
+          "value": 0.8824,
+          "low": 0.6566,
+          "high": 0.9671,
+          "successes": 15,
+          "trials": 17
+        },
+        "recall": {
+          "value": 0.1613,
+          "low": 0.1003,
+          "high": 0.2492,
+          "successes": 15,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0022,
+          "low": 0.0006,
+          "high": 0.0078,
+          "successes": 2,
+          "trials": 930
+        }
+      },
+      {
+        "id": "single-alfa",
+        "label": "Alfa alone",
+        "description": "Alfa on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
+        "truePositives": 42,
+        "falsePositives": 15,
+        "falseNegatives": 51,
+        "trueNegatives": 915,
+        "precision": {
+          "value": 0.7368,
+          "low": 0.6102,
+          "high": 0.8335,
+          "successes": 42,
+          "trials": 57
+        },
+        "recall": {
+          "value": 0.4516,
+          "low": 0.3544,
+          "high": 0.5527,
+          "successes": 42,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0161,
+          "low": 0.0098,
+          "high": 0.0264,
+          "successes": 15,
+          "trials": 930
+        }
+      },
+      {
+        "id": "single-htmlcs",
+        "label": "HTML CodeSniffer alone",
+        "description": "HTML CodeSniffer on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
+        "truePositives": 4,
+        "falsePositives": 3,
+        "falseNegatives": 89,
+        "trueNegatives": 927,
+        "precision": {
+          "value": 0.5714,
+          "low": 0.2505,
+          "high": 0.8418,
+          "successes": 4,
+          "trials": 7
+        },
+        "recall": {
+          "value": 0.043,
+          "low": 0.0169,
+          "high": 0.1054,
+          "successes": 4,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0032,
+          "low": 0.0011,
+          "high": 0.0094,
+          "successes": 3,
+          "trials": 930
+        }
+      }
+    ]
+  },
   "flatterySensitivity": [
     {
       "recallBelow": 0.25,
