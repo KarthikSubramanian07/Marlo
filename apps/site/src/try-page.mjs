@@ -31,7 +31,10 @@ export const TRY_CSP =
 
 /** Addresses to try, shown as buttons under the address box. */
 const ADDRESSES = [
-  ['https://www.w3.org/WAI/demos/bad/before/home.html', "W3C's deliberately inaccessible demo"],
+  // Each one is fetched from the site's Worker in production. The W3C's inaccessible demo
+  // refuses requests from Cloudflare's network, so it is not offered here.
+  ['https://dequeuniversity.com/demo/mars/', "Deque's deliberately inaccessible demo"],
+  ['https://www.gov.uk/', 'GOV.UK, a well-built real site'],
   ['github.com/KarthikSubramanian07/Marlo/tree/main/apps/demo', "Marlo's demo pages on GitHub"],
 ];
 
