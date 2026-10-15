@@ -207,6 +207,18 @@ The policy in CONTRIBUTING.md is the operational form: contributor commits keep 
 
 ---
 
+## D-014: The real pages are rated by two language models, a third resolves, and the raters are graded
+
+**Status:** accepted.
+
+The real-page corpus needs ground truth, and two independent people were never available to give it. Waiting for them left the one test this project most needed, accuracy on pages people actually scan, permanently open. So the cells are rated by two different language models, each in its own context, with the protocol written for people unchanged: four answers, a note for every failure and every `cantTell`, the pre-screen treated as a suggestion, and every disagreement written down and settled by a third model that saw only the disagreements. The raters received the page, the normative rule text and the ACT glossary, and nothing from this repository, and were instructed to write any check from the rule text rather than run an engine.
+
+Three things keep this from being the circularity it sounds like. Every sheet, resolution and published figure names the kind of rater and the model, and the schema refuses a rated cell without them, so model ground truth cannot be read as human judgment. The raters are graded: the same raters, under the same instructions, rated every ACT test case of every implemented rule, renamed so nothing revealed the answer, and their agreement with the W3C's human-written expected outcomes is published in `corpus/real/adjudication/RATER-VALIDITY.md`. And the protocol for people still stands: a person who rates later uses fresh sheets, and the two sets of figures are published side by side.
+
+**Wrong if:** the raters' agreement with the W3C outcomes is low enough that the error in the ground truth is comparable to the error being measured, or a person rating a sample of the pages disagrees with the adjudicated labels much more often than the ACT measurement predicts. Either would mean the real-page figures measure the raters as much as the engines, and they would be withdrawn, not adjusted.
+
+---
+
 ## Working agreements
 
 Outside the D-series numbering on purpose, because these are not architectural decisions. They are the things the code does not record: approaches already tried and refused, areas that are settled, and what finished means here. The file exists so the same proposal does not arrive twice.

@@ -22,6 +22,11 @@ Nothing is published to a registry yet. There is no installable release, so ther
 - A required CI job runs `pnpm calibrate --check`.
 - `calibration/analysis.json` and `ANALYSIS.md`: what `marlo scan` reports measured as a whole, every engine alone, the routed engine in sample and leave one out, a majority of engines, Wilson intervals on every proportion, pairwise agreement between engines, the flattered column's sensitivity to its threshold, and the routing scored on rated real pages once any exist.
 - `node scripts/rate.mjs --rater A` (or `B`), a local interface for rating the real pages.
+- Ground truth for all 1025 real-page cells, rated independently by two language models blind to every engine, with the 40 disagreements settled by a third (D-014). Every sheet, resolution and published figure names the kind of rater and the model, and the schema refuses a rated cell without them. `scripts/rater-validity.mjs` grades the same raters on the 594 official test cases of the same rules with their names hidden, and writes `corpus/real/adjudication/RATER-VALIDITY.md`.
+
+### Accuracy
+
+- First accuracy figures on real pages, model-adjudicated. What `marlo scan` reports: precision 0.582, recall 0.570, false positive rate 4.1%, against 0.831, 0.853 and 8.7% on the official cases. Marlo's own engine: precision 0.372, recall 0.172. The routing chosen on the official corpus, scored on these pages: precision 0.528, recall 0.204, below Alfa alone at 0.737 and 0.452.
 
 ### Fixed
 

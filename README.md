@@ -52,7 +52,7 @@ Three things this says, and none of them flatters the design.
 
 **The product detects the union.** Because no engine may be silenced, a rule fails whenever any engine fails it, which gives the highest recall here and the highest false positive rate apart from HTML CodeSniffer alone. That trade is deliberate: a violation one engine can see is a violation, and the cost of reporting it is printed above rather than hidden.
 
-**What routing buys is not accuracy.** It decides which engine's evidence, locator and measured confidence a finding carries, so each failure is reported once with provenance, and it decides what a clean result rests on. Whether routing could also raise accuracy is an open question this table cannot answer; scoring it on the real pages, once they are rated, is the test.
+**What routing buys is not accuracy.** It decides which engine's evidence, locator and measured confidence a finding carries, so each failure is reported once with provenance, and it decides what a clean result rests on. Whether routing could also raise accuracy is a question this table cannot answer. Scored on the rated real pages below, it does not.
 
 ### The same corpus, inside a real browser
 
@@ -73,7 +73,19 @@ Still third of four. On minimum contrast, which every scan before this reported 
 
 Every number above comes from hand-written test cases, each built to isolate one condition. Real pages are not like that, so `corpus/real` vendors 25 pages from 12 kinds of site (government, documentation, shops, checkouts, forms, application shells and more), all under licences that allow it, and the harness measures every engine on them separately and never pools the result with the table above.
 
-There is no accuracy figure for them yet, and the table refuses to hold one. Ground truth comes from two people rating every page against every rule independently, with their disagreements written down, and none of the 1025 cells has been rated. What can be measured without ground truth already says the official corpus is not what users scan: on 19 of the 25 pages some engine reports a failure for a rule the routed engine passes, and engines that agree closely on the official cases report findings at rates two orders of magnitude apart.
+Every one of the 1025 cells, each page against each rule Marlo implements, now has a resolved ground truth. **It is model-adjudicated, not human judgment**: two different language models rated every cell independently, blind to every engine, and a third settled the 40 cells where they disagreed. They agreed on 94.6% of the 736 cells that needed a judgment (Cohen's kappa 0.885). How far to trust that is measured rather than assumed: the same raters, under the same instructions, rated the 594 official test cases of the same rules with their names hidden, and the adjudicated labels match the W3C's human-written answers on 95.8% of them ([RATER-VALIDITY.md](corpus/real/adjudication/RATER-VALIDITY.md)). D-014 in [DECISIONS.md](DECISIONS.md) records why, and what would make the figures below wrong.
+
+On real pages the picture is much worse than on the official cases:
+
+| Real pages, 1023 resolved cells | Precision | Recall    | False positives |
+| ------------------------------- | --------- | --------- | --------------- |
+| **What `marlo scan` reports**   | **0.582** | **0.570** | **4.1%**        |
+| Alfa alone                      | 0.737     | 0.452     | 1.6%            |
+| axe-core alone                  | 0.882     | 0.161     | 0.2%            |
+| Routed engine                   | 0.528     | 0.204     | 1.8%            |
+| Marlo's own engine alone        | 0.372     | 0.172     | 2.9%            |
+
+Precision falls from 0.831 to 0.582 and recall from 0.853 to 0.570. The routing chosen on the official corpus, scored on pages it never saw, finds a third as many violations as the union and is no more precise, which settles the open question above: routing is not an accuracy mechanism. And Marlo's own engine, third of four on the official cases, is the least precise engine on real ones. Intervals and the full table are in [calibration/ANALYSIS.md](calibration/ANALYSIS.md). Beyond accuracy, on 19 of the 25 pages some engine reports a failure for a rule the routed engine passes, and engines that agree closely on the official cases report findings at rates two orders of magnitude apart.
 
 ---
 
