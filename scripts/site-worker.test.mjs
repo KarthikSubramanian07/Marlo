@@ -341,7 +341,7 @@ describe('the try page policy', () => {
     const tryPolicy = (await get('/try/playground.js')).headers.get('content-security-policy');
     expect(tryPolicy).toBe(TRY_CSP);
     expect(tryPolicy).toContain("script-src 'self'");
-    expect(tryPolicy).toContain("connect-src 'none'");
+    expect(tryPolicy).toContain("connect-src 'self' https://api.github.com");
     const home = (await get('/')).headers.get('content-security-policy');
     expect(home).not.toContain('script-src');
   });
@@ -349,5 +349,136 @@ describe('the try page policy', () => {
   it('leaves every policy alone when no try policy is configured', async () => {
     const response = await fetch('/try/');
     expect(response.headers.get('content-security-policy')).not.toContain('script-src');
+  });
+});
+
+describe('the playground page fetch', () => {
+  const page = '<!doctype html><title>Hi</title><p>Hello</p>';
+  const html = (body = page, headers = {}) =>
+    new Response(body, {
+      status: 200,
+      headers: { 'Content-Type': 'text/html; charset=utf-8', ...headers },
+    });
+  const make = (outbound) => createSiteWorker({ origin, pages, api, outbound });
+  const call = (w, target, site = 'same-origin') =>
+    w.fetch(
+      new Request(`${origin}/try/fetch?url=${encodeURIComponent(target)}`, {
+        headers: site === null ? {} : { 'Sec-Fetch-Site': site },
+      }),
+      env,
+    );
+
+  it('returns the page as bytes with the final address and declared type', async () => {
+    const seen = [];
+    const w = make(async (url, init) => {
+      seen.push([url, init.redirect, init.headers['User-Agent']]);
+      return html();
+    });
+    const response = await call(w, 'https://example.com/a#frag');
+    expect(response.status).toBe(200);
+    expect(response.headers.get('content-type')).toBe('application/octet-stream');
+    expect(response.headers.get('x-marlo-final-url')).toBe('https://example.com/a');
+    expect(response.headers.get('x-marlo-content-type')).toMatch(/text\/html/);
+    expect(response.headers.get('cache-control')).toBe('no-store');
+    expect(await response.text()).toBe(page);
+    expect(seen).toEqual([
+      ['https://example.com/a', 'manual', expect.stringMatching(/^MarloPlayground/)],
+    ]);
+  });
+
+  it('serves only same-origin callers', async () => {
+    const w = make(async () => html());
+    expect((await call(w, 'https://example.com/', 'cross-site')).status).toBe(403);
+    expect((await call(w, 'https://example.com/', null)).status).toBe(403);
+  });
+
+  it.each([
+    'http://10.0.0.1/',
+    'https://localhost/',
+    'https://printer.local/',
+    'https://example.com:8443/',
+    'https://user:pass@example.com/',
+    'file:///etc/passwd',
+    'https://trymarlo.pages.dev/',
+    'https://intranet/',
+  ])('refuses %s without fetching it', async (target) => {
+    let fetched = false;
+    const w = make(async () => {
+      fetched = true;
+      return html();
+    });
+    const response = await call(w, target);
+    expect(response.status).toBe(400);
+    expect(fetched).toBe(false);
+  });
+
+  it('re-checks every redirect, and refuses one into a private address', async () => {
+    const w = make(async (url) =>
+      url === 'https://example.com/'
+        ? new Response(null, { status: 302, headers: { Location: 'http://127.0.0.1/admin' } })
+        : html(),
+    );
+    const response = await call(w, 'https://example.com/');
+    expect(response.status).toBe(502);
+    expect((await response.json()).code).toBe('REDIRECT_REFUSED');
+  });
+
+  it('follows a public redirect and reports where it landed', async () => {
+    const w = make(async (url) =>
+      url === 'http://example.com/'
+        ? new Response(null, { status: 301, headers: { Location: 'https://www.example.com/' } })
+        : html(),
+    );
+    const response = await call(w, 'http://example.com/');
+    expect(response.headers.get('x-marlo-final-url')).toBe('https://www.example.com/');
+  });
+
+  it('gives up after five redirects', async () => {
+    let n = 0;
+    const w = make(async () => {
+      n += 1;
+      return new Response(null, {
+        status: 302,
+        headers: { Location: `https://example.com/${String(n)}` },
+      });
+    });
+    expect((await (await call(w, 'https://example.com/')).json()).code).toBe('TOO_MANY_REDIRECTS');
+  });
+
+  it('refuses what is not HTML, and what declares itself too large', async () => {
+    const pdf = make(
+      async () => new Response('%PDF', { headers: { 'Content-Type': 'application/pdf' } }),
+    );
+    expect((await call(pdf, 'https://example.com/a.pdf')).status).toBe(422);
+    const big = make(async () => html('x', { 'Content-Length': String(4 * 1024 * 1024) }));
+    expect((await call(big, 'https://example.com/')).status).toBe(413);
+  });
+
+  it('cuts off a body that grows past the cap without declaring it', async () => {
+    const chunk = new Uint8Array(1024 * 1024);
+    const w = make(
+      async () =>
+        new Response(
+          new ReadableStream({
+            pull(controller) {
+              controller.enqueue(chunk);
+            },
+          }),
+          { headers: { 'Content-Type': 'text/html' } },
+        ),
+    );
+    const response = await call(w, 'https://example.com/');
+    await expect(response.arrayBuffer()).rejects.toThrow(/three megabytes/);
+  });
+
+  it('says so when the site errors or cannot be reached', async () => {
+    const down = make(async () => new Response('no', { status: 503 }));
+    expect((await (await call(down, 'https://example.com/')).json()).code).toBe('UPSTREAM_STATUS');
+    const gone = make(async () => {
+      throw new TypeError('fetch failed');
+    });
+    expect((await (await call(gone, 'https://example.com/')).json()).code).toBe(
+      'UPSTREAM_UNREACHABLE',
+    );
   });
 });

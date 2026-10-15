@@ -78,7 +78,50 @@ async function readJson(request) {
   }
 }
 
-export function createSiteWorker({ origin, pages, api, tryCsp }) {
+/**
+ * The page fetch behind the playground's address box: /try/fetch?url=...
+ *
+ * Not a scanner. It returns one page's HTML, and the visitor's browser runs the rules. It
+ * exists because a browser cannot read another site's HTML itself, and the limits are what
+ * keep it from being useful as anything else: same-origin callers only, GET only, public
+ * hostnames on default ports only, every redirect re-checked, HTML only, a size cap and a
+ * time limit, nothing stored. DECISIONS.md D-015.
+ */
+const FETCH_LIMIT_BYTES = 3 * 1024 * 1024;
+const FETCH_TIMEOUT_MS = 10000;
+const FETCH_MAX_REDIRECTS = 5;
+const FETCH_USER_AGENT = 'MarloPlayground/0.1 (+https://trymarlo.pages.dev/try/)';
+
+/** A public http(s) URL on a default port, or a sentence saying why not. */
+export function fetchableUrl(raw, ownHost) {
+  if (typeof raw !== 'string' || raw.length === 0 || raw.length > 2048) {
+    return { error: 'Give a web address under 2048 characters.' };
+  }
+  let url;
+  try {
+    url = new URL(raw);
+  } catch {
+    return { error: 'That is not a web address.' };
+  }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') {
+    return { error: 'Only http and https addresses can be fetched.' };
+  }
+  if (url.username || url.password) return { error: 'Addresses with credentials are refused.' };
+  if (url.port !== '') return { error: 'Only the default ports are fetched.' };
+  const host = url.hostname.toLowerCase();
+  const local =
+    host === 'localhost' ||
+    ['.localhost', '.local', '.internal', '.home.arpa', '.lan'].some((s) => host.endsWith(s));
+  const literal = /^\d+\.\d+\.\d+\.\d+$/.test(host) || host.startsWith('[') || host.includes(':');
+  if (local || literal || !host.includes('.')) {
+    return { error: 'Only public sites are fetched, by name, not by IP address.' };
+  }
+  if (host === ownHost) return { error: 'This site checks other sites, not itself.' };
+  url.hash = '';
+  return { url };
+}
+
+export function createSiteWorker({ origin, pages, api, tryCsp, outbound = (...a) => fetch(...a) }) {
   const object = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
   const json = (value, status = 200, headers = {}) =>
     new Response(JSON.stringify(value), {
@@ -97,6 +140,9 @@ export function createSiteWorker({ origin, pages, api, tryCsp }) {
           406: 'Not Acceptable',
           413: 'Content Too Large',
           415: 'Unsupported Media Type',
+          422: 'Unprocessable Content',
+          502: 'Bad Gateway',
+          504: 'Gateway Timeout',
         }[status],
         status,
         detail,
@@ -312,6 +358,121 @@ export function createSiteWorker({ origin, pages, api, tryCsp }) {
     );
   }
 
+  async function fetchPage(request) {
+    // Browsers send Sec-Fetch-Site on every request. Requiring same-origin keeps other
+    // websites' scripts from using this as a proxy; a client that forges it gains a capped,
+    // HTML-only fetch it could make itself.
+    if (request.headers.get('sec-fetch-site') !== 'same-origin')
+      return problem(
+        request,
+        403,
+        'SAME_ORIGIN_ONLY',
+        'This fetch serves the playground on this site only.',
+        'Use the playground at /try/, or fetch the page yourself and paste its HTML.',
+      );
+    const ownHost = new URL(origin).hostname;
+    const first = fetchableUrl(new URL(request.url).searchParams.get('url'), ownHost);
+    if (first.error)
+      return problem(request, 400, 'URL_REFUSED', first.error, 'Enter a public https address.');
+    let current = first.url;
+    const deadline = AbortSignal.timeout(FETCH_TIMEOUT_MS);
+    for (let hop = 0; hop <= FETCH_MAX_REDIRECTS; hop += 1) {
+      let upstream;
+      try {
+        upstream = await outbound(current.href, {
+          method: 'GET',
+          redirect: 'manual',
+          signal: deadline,
+          headers: { 'User-Agent': FETCH_USER_AGENT, Accept: 'text/html,application/xhtml+xml' },
+        });
+      } catch (error) {
+        const timedOut =
+          error instanceof Error && /timeout|abort/i.test(error.name + error.message);
+        return problem(
+          request,
+          timedOut ? 504 : 502,
+          timedOut ? 'UPSTREAM_TIMEOUT' : 'UPSTREAM_UNREACHABLE',
+          timedOut
+            ? 'The site took longer than ten seconds to answer.'
+            : 'The site could not be reached.',
+          'Check the address, or open the page and use the bookmarklet.',
+        );
+      }
+      if ([301, 302, 303, 307, 308].includes(upstream.status)) {
+        const location = upstream.headers.get('location');
+        const next =
+          location === null
+            ? { error: 'A redirect without a destination.' }
+            : fetchableUrl(new URL(location, current).href, ownHost);
+        if (next.error)
+          return problem(
+            request,
+            502,
+            'REDIRECT_REFUSED',
+            `The site redirected somewhere this fetch will not follow. ${next.error}`,
+            'Enter the final address directly.',
+          );
+        current = next.url;
+        continue;
+      }
+      if (!upstream.ok)
+        return problem(
+          request,
+          502,
+          'UPSTREAM_STATUS',
+          `The site answered with status ${String(upstream.status)}.`,
+          'Some sites refuse automated requests. Open the page and use the bookmarklet instead.',
+        );
+      const type = upstream.headers.get('content-type') ?? '';
+      if (!/^\s*(text\/html|application\/xhtml\+xml)/i.test(type))
+        return problem(
+          request,
+          422,
+          'NOT_HTML',
+          `The address returned ${type || 'an unlabelled response'}, not an HTML page.`,
+          'Enter the address of a web page.',
+        );
+      const declared = Number(upstream.headers.get('content-length'));
+      if (declared > FETCH_LIMIT_BYTES)
+        return problem(
+          request,
+          413,
+          'PAGE_TOO_LARGE',
+          'The page is larger than three megabytes.',
+          'Save the page and paste the part you want checked.',
+        );
+      let seen = 0;
+      const capped = (upstream.body ?? new Response('').body).pipeThrough(
+        new TransformStream({
+          transform(chunk, controller) {
+            seen += chunk.byteLength;
+            if (seen > FETCH_LIMIT_BYTES)
+              controller.error(new Error('The page is larger than three megabytes.'));
+            else controller.enqueue(chunk);
+          },
+        }),
+      );
+      // Bytes, labelled so a browser will never render them as a page of this origin. The
+      // playground decodes them with the charset the site declared.
+      return new Response(capped, {
+        headers: {
+          'Content-Type': 'application/octet-stream',
+          'X-Marlo-Final-Url': current.href,
+          'X-Marlo-Content-Type': type,
+          'Cache-Control': 'no-store',
+          'Cross-Origin-Resource-Policy': 'same-origin',
+        },
+      });
+    }
+    return problem(
+      request,
+      502,
+      'TOO_MANY_REDIRECTS',
+      'The site redirected more than five times.',
+      'Enter the final address directly.',
+    );
+  }
+
   async function handle(request, env) {
     const url = new URL(request.url);
     const path = url.pathname;
@@ -335,6 +496,7 @@ export function createSiteWorker({ origin, pages, api, tryCsp }) {
         'Use GET or HEAD to read this resource.',
         { Allow: 'GET, HEAD, OPTIONS' },
       );
+    if (path === '/try/fetch') return fetchPage(request);
     if (machine) {
       if (quality(request.headers.get('accept'), 'application/json') === 0)
         return problem(
