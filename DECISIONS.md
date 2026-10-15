@@ -217,6 +217,18 @@ Three things keep this from being the circularity it sounds like. Every sheet, r
 
 **Wrong if:** the raters' agreement with the W3C outcomes is low enough that the error in the ground truth is comparable to the error being measured, or a person rating a sample of the pages disagrees with the adjudicated labels much more often than the ACT measurement predicts. Either would mean the real-page figures measure the raters as much as the engines, and they would be withdrawn, not adjusted.
 
+## D-015: The playground fetches a page's HTML, and the rules still run in the visitor's browser
+
+**Status:** accepted.
+
+Pasting a page's source is a step almost nobody can take, so the playground on `/try/` accepts a web address. A browser may not read another site's HTML, so something has to fetch it, and `/try/fetch` on the site's own Worker does: it returns that one page's bytes, and the rules run in the visitor's browser as they do for a paste. That keeps D-007 intact. There is still no browser Marlo operates and no rendering it pays for. The fetch is one request through Workers, inside the free allowance at any volume this site sees, and when that allowance runs out requests fail rather than bill.
+
+The limits are what stop it being an open proxy. It serves callers whose browser reports a same-origin request, so another website's script cannot use it. It fetches only http and https URLs on default ports, by public hostname, never an IP literal, `localhost` or a local suffix, and it re-checks every redirect against the same rules, stopping after five. It returns HTML only, under three megabytes, within ten seconds, labelled as bytes so no browser renders the response as a page of this origin, and it stores nothing. The page's own scripts never run: the preview frame has no `allow-scripts`. A GitHub repository needs no fetch at all, because GitHub's API and raw file host allow browsers to read them directly, and the page's content security policy names exactly those destinations.
+
+What this gives up, and the page says so: a page that builds itself with JavaScript has little in its HTML to check, and some sites refuse automated requests. The bookmarklet covers both, because it runs on the page as the visitor's browser drew it.
+
+**Wrong if:** the endpoint is used for something other than the playground at a volume that matters, or a request can be made to reach an address the rules refuse. Either would mean it is a proxy with a playground attached, and it would be removed rather than patched around.
+
 ---
 
 ## Working agreements

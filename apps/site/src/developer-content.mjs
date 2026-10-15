@@ -49,7 +49,7 @@ export function developerPages({ ORIGIN, REPO }) {
         ],
         [
           'Run Marlo without installing it',
-          `<p><a href="/try/">The playground</a> runs Marlo's own rules on HTML you paste, in your browser, and offers a bookmarklet that does the same on any page you open. Neither sends the markup anywhere. They run one engine of the four, so the CLI finds more.</p>
+          `<p><a href="/try/">The playground</a> runs Marlo's own rules in your browser on a web address, a public GitHub repository, or HTML you paste, and offers a bookmarklet that does the same on any page you open. A web address is fetched once by this site, which returns that page's HTML and stores nothing; a repository is read straight from GitHub. They run one engine of the four, so the CLI finds more.</p>
           <p>For the full scan without Node.js, use the container image:</p>
           <pre class="scroller" tabindex="0" role="region" aria-label="Container example"><code>docker run --rm -v "$PWD:/work" ghcr.io/karthiksubramanian07/marlo scan page.html</code></pre>`,
         ],
@@ -159,7 +159,7 @@ node packages/cli/dist/bin.js explain ACT_RULE_ID</code></pre>
         [
           'Website and public metadata',
           `<p>This website publishes documentation and accessibility calibration evidence. It has no account registration, payment form, source upload, or hosted page-scanning service. Its pages use locally served fonts and styles. The site does not include application analytics scripts, advertising scripts, or application cookies.</p>
-          <p>The one script it serves is on <a href="/try/">the playground</a>, and it is Marlo's rules. HTML pasted there is checked inside your browser and never sent: the page's security policy forbids it from making any request. The bookmarklet runs the same rules on the page you open and sends nothing back.</p>
+          <p>The one script it serves is on <a href="/try/">the playground</a>, and it is Marlo's rules, which run inside your browser. HTML pasted there is never sent. A web address you enter is sent to this site, which fetches that page once and returns its HTML without storing either. A GitHub repository is read by your browser directly from GitHub, under GitHub's own privacy terms. The bookmarklet runs the same rules on the page you open and sends nothing back.</p>
           <p>Loading a page or calling a public endpoint sends an ordinary network request to the hosting service. That request includes connection information such as an IP address and headers supplied by your client. The hosting service may process request information for delivery, operations, and abuse prevention under its own policies. This page does not promise a retention period or the absence of infrastructure logs.</p>
           <p>The public API and MCP endpoint return existing rule metadata and published calibration results. They do not accept HTML uploads or scan URLs. Avoid placing credentials or private information in request URLs, query strings, or headers. Use the <a href="/docs/">documentation</a> to identify the supported endpoints.</p>`,
         ],
