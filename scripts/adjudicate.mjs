@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * The tooling for human ground truth on the real-page corpus. The protocol it implements
+ * The tooling for rated ground truth on the real-page corpus. The protocol it implements
  * is corpus/real/adjudication/PROTOCOL.md; read that first.
  *
  * The unit is one page by one ACT rule, for every rule Marlo implements. Two raters each
@@ -31,6 +31,13 @@ const ADJUDICATION = join(REAL, 'adjudication');
 export const RATERS = Object.freeze(['A', 'B']);
 export const ANSWERS = Object.freeze(['passed', 'failed', 'cantTell', 'inapplicable']);
 
+/**
+ * Who may give an answer. A model rater is allowed and is always named: ground truth from
+ * language models and ground truth from people are different claims, and everything
+ * downstream publishes which one a figure rests on.
+ */
+export const RATER_KINDS = Object.freeze(['person', 'model']);
+
 /** Answers whose reasoning a resolver will need, so a note is required with them. */
 const NOTE_REQUIRED = new Set(['failed', 'cantTell']);
 
@@ -50,7 +57,7 @@ const any = (...patterns) => patterns;
  * or its applicability needs judgment, so it is never pre-screened.
  *
  * A pre-filled cell is a suggestion, not a verdict. A rater who disagrees changes the
- * answer, and the cell then counts as human-judged like any other.
+ * answer, and the cell then counts as rated like any other.
  */
 export const PRESCREEN = Object.freeze({
   '047fe0': null,
@@ -191,6 +198,8 @@ export function buildSheet(rater, pages, rules, readPage) {
   }
   return {
     rater,
+    raterKind: null,
+    raterModel: null,
     protocol: 'PROTOCOL.md',
     instructions:
       'Answer every cell with passed, failed, cantTell or inapplicable, judged from the page ' +
@@ -201,7 +210,7 @@ export function buildSheet(rater, pages, rules, readPage) {
   };
 }
 
-/** A pre-screened cell left alone is a mechanical answer, not a human judgment. */
+/** A pre-screened cell left alone is a mechanical answer, not a rater's judgment. */
 const untouchedPrescreen = (cell) => cell.prescreened === true && cell.answer === 'inapplicable';
 
 /**
@@ -216,6 +225,19 @@ export function validateSheet(sheet, expected) {
     return ['not a worksheet: no cells array'];
   }
   if (!RATERS.includes(sheet.rater)) problems.push(`rater "${String(sheet.rater)}" is not A or B`);
+  const started = sheet.cells.some((c) => c.answer !== null && !untouchedPrescreen(c));
+  const kind = sheet.raterKind ?? null;
+  if (kind !== null && !RATER_KINDS.includes(kind)) {
+    problems.push(`raterKind "${String(kind)}" is not one of ${RATER_KINDS.join(', ')}`);
+  } else if (kind === null && started) {
+    problems.push('raterKind is not set: say whether a person or a model gave these answers');
+  }
+  const model = sheet.raterModel ?? null;
+  if (kind === 'model' && (typeof model !== 'string' || model.trim() === '')) {
+    problems.push('raterModel is not set: a model rater must name the model');
+  }
+  if (kind !== 'model' && model !== null)
+    problems.push('raterModel is set for a rater who is not a model');
   const seen = new Set();
   for (const cell of sheet.cells) {
     const key = cellKey(cell.page, cell.rule);
@@ -264,15 +286,15 @@ export function cohensKappa(pairs) {
 /**
  * Pairs the two sheets cell by cell and sorts every cell into one bucket.
  *
- *   human        both answered, and not both an untouched pre-screen. Kappa runs on these.
+ *   rated        both answered, and not both an untouched pre-screen. Kappa runs on these.
  *   prescreen    both left the pre-screen as it was.
  *   pending      at least one rater has not answered.
  *
- * `disagreements` is the human cells whose answers differ.
+ * `disagreements` is the rated cells whose answers differ.
  */
 export function pairSheets(a, b) {
   const right = new Map(b.cells.map((c) => [cellKey(c.page, c.rule), c]));
-  const human = [];
+  const rated = [];
   const prescreen = [];
   const pending = [];
   for (const left of a.cells) {
@@ -283,11 +305,11 @@ export function pairSheets(a, b) {
     } else if (untouchedPrescreen(left) && untouchedPrescreen(other)) {
       prescreen.push({ key, a: left, b: other });
     } else {
-      human.push({ key, a: left, b: other });
+      rated.push({ key, a: left, b: other });
     }
   }
-  const disagreements = human.filter((cell) => cell.a.answer !== cell.b.answer);
-  return { human, prescreen, pending, disagreements };
+  const disagreements = rated.filter((cell) => cell.a.answer !== cell.b.answer);
+  return { rated, prescreen, pending, disagreements };
 }
 
 /** Validates resolutions.json entries. Returns problems. */
@@ -302,6 +324,9 @@ export function validateResolutions(resolutions, disagreementKeys) {
       problems.push(`resolution ${key}: answer is not an outcome`);
     if (typeof entry.resolver !== 'string' || entry.resolver.trim() === '') {
       problems.push(`resolution ${key}: names no resolver`);
+    }
+    if (!RATER_KINDS.includes(entry.resolverKind)) {
+      problems.push(`resolution ${key}: resolverKind is not one of ${RATER_KINDS.join(', ')}`);
     }
     if (typeof entry.reasoning !== 'string' || entry.reasoning.trim() === '') {
       problems.push(`resolution ${key}: gives no reasoning`);
@@ -341,7 +366,7 @@ export function resolveCells(a, b, resolutions) {
   }
 
   const cells = [];
-  for (const cell of paired.human) {
+  for (const cell of paired.rated) {
     if (cell.a.answer === cell.b.answer) {
       cells.push({
         page: cell.a.page,
@@ -365,6 +390,7 @@ export function resolveCells(a, b, resolutions) {
       answer: resolution.answer,
       source: 'resolution',
       resolver: resolution.resolver,
+      resolverKind: resolution.resolverKind,
       reasoning: resolution.reasoning,
     });
   }
@@ -385,7 +411,7 @@ export function resolveCells(a, b, resolutions) {
 export function renderDisagreements(paired, resolutions, labels) {
   const byKey = new Map(resolutions.map((r) => [cellKey(r.page, r.rule), r]));
   const { percentAgreement, kappa } = cohensKappa(
-    paired.human.map((c) => [c.a.answer, c.b.answer]),
+    paired.rated.map((c) => [c.a.answer, c.b.answer]),
   );
   const fmt = (value) => (value === null ? 'not defined' : value.toFixed(4));
   const lines = [
@@ -394,7 +420,7 @@ export function renderDisagreements(paired, resolutions, labels) {
     'Generated by `node scripts/adjudicate.mjs agreement`. Do not edit: record a resolution in',
     '`resolutions.json` and regenerate.',
     '',
-    `Human-judged cells: ${String(paired.human.length)}. Pre-screened cells both raters left alone: ` +
+    `Rated cells: ${String(paired.rated.length)}. Pre-screened cells both raters left alone: ` +
       `${String(paired.prescreen.length)}. Cells not yet answered by both: ${String(paired.pending.length)}.`,
     '',
     `Percent agreement: ${fmt(percentAgreement)}. Cohen's kappa: ${fmt(kappa)}.`,
@@ -556,10 +582,10 @@ async function main(argv) {
         'utf8',
       );
       const { percentAgreement, kappa } = cohensKappa(
-        paired.human.map((c) => [c.a.answer, c.b.answer]),
+        paired.rated.map((c) => [c.a.answer, c.b.answer]),
       );
       console.log(
-        `agreement: ${String(paired.human.length)} human-judged cells, ` +
+        `agreement: ${String(paired.rated.length)} rated cells, ` +
           `percent agreement ${percentAgreement === null ? 'not defined' : percentAgreement.toFixed(4)}, ` +
           `kappa ${kappa === null ? 'not defined' : kappa.toFixed(4)}, ` +
           `${String(paired.disagreements.length)} disagreement(s). Wrote DISAGREEMENTS.md.`,
@@ -573,7 +599,19 @@ async function main(argv) {
     }
     writeFileSync(
       join(ADJUDICATION, 'resolved.json'),
-      `${JSON.stringify({ protocol: 'PROTOCOL.md', cells: resolved.cells }, null, 2)}\n`,
+      `${JSON.stringify(
+        {
+          protocol: 'PROTOCOL.md',
+          raters: [a, b].map((s) => ({
+            rater: s.rater,
+            kind: s.raterKind ?? null,
+            model: s.raterModel ?? null,
+          })),
+          cells: resolved.cells,
+        },
+        null,
+        2,
+      )}\n`,
       'utf8',
     );
     console.log(

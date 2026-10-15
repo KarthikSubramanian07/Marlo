@@ -141,6 +141,14 @@ function schemas() {
         totalCells: positiveCount,
         kappa: { type: ['number', 'null'], minimum: -1, maximum: 1 },
         percentAgreement: rate,
+        raters: list(
+          object({
+            rater: { type: 'string', enum: ['A', 'B'] },
+            kind: { type: 'string', enum: ['person', 'model'] },
+            model: { type: ['string', 'null'], minLength: 1 },
+          }),
+        ),
+        resolutions: object({ person: count, model: count }),
       }),
       entries: list(
         object({

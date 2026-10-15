@@ -306,8 +306,18 @@ export async function createRatingServer(options) {
       const current = await readSheet();
       const index = current.cells.findIndex((c) => c.page === page && c.rule === rule);
       if (index < 0) throw new HttpError(404, `${cellKey(page, rule)} is not a cell of this sheet`);
+      // Answers given here are a person's. A sheet a model filled in is not continued by
+      // hand, because one sheet must have one kind of rater for its agreement to mean anything.
+      if ((current.raterKind ?? null) === 'model') {
+        throw new HttpError(409, `${basename(sheetFile)} was answered by a model, not a person`);
+      }
       const cell = { ...current.cells[index], answer, note };
-      const next = { ...current, cells: current.cells.with(index, cell) };
+      const next = {
+        ...current,
+        raterKind: 'person',
+        raterModel: null,
+        cells: current.cells.with(index, cell),
+      };
       const key = cellKey(page, rule);
       // The same validation `adjudicate.mjs validate` runs. A change that would give this
       // cell a problem, such as a failed answer with no note, is refused before it is written.

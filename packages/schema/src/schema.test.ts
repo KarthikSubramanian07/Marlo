@@ -601,6 +601,8 @@ describe('the real-page block cannot publish a number nothing measured', () => {
       totalCells: 82,
       kappa: null,
       percentAgreement: null,
+      raters: [],
+      resolutions: { person: 0, model: 0 },
     },
     entries: [],
     agreement: [],
@@ -663,9 +665,38 @@ describe('the real-page block cannot publish a number nothing measured', () => {
         resolvedCells: 82,
         kappa: 0.7,
         percentAgreement: 0.8,
+        raters: [
+          { rater: 'A', kind: 'model', model: 'claude-opus-5-5' },
+          { rater: 'B', kind: 'person', model: null },
+        ],
       },
     };
     expect(RealCorpus.safeParse(done).success).toBe(true);
+  });
+
+  it('refuses rated cells without both raters named, or a model rater without its model', () => {
+    const rated = {
+      ...awaiting,
+      adjudication: {
+        ...awaiting.adjudication,
+        status: 'partial',
+        ratedCells: 10,
+        kappa: 0.5,
+        percentAgreement: 0.7,
+      },
+    };
+    expect(RealCorpus.safeParse(rated).success).toBe(false);
+    const unnamedModel = {
+      ...rated,
+      adjudication: {
+        ...rated.adjudication,
+        raters: [
+          { rater: 'A', kind: 'model', model: null },
+          { rater: 'B', kind: 'model', model: 'claude-sonnet-5-5' },
+        ],
+      },
+    };
+    expect(RealCorpus.safeParse(unnamedModel).success).toBe(false);
   });
 
   it('names a page by category and digest, never by URL', () => {

@@ -88,6 +88,9 @@ const SheetCell = z.object({
 
 const Sheet = z.object({
   rater: z.enum(['A', 'B']),
+  /** A person or a language model. Null on a sheet nobody has started. */
+  raterKind: z.enum(['person', 'model']).nullable().default(null),
+  raterModel: z.string().min(1).nullable().default(null),
   cells: z.array(SheetCell),
 });
 
@@ -96,6 +99,7 @@ const ResolvedCell = z.object({
   rule: ActRuleId,
   answer: Outcome,
   source: z.enum(['agreement', 'prescreen', 'resolution']),
+  resolverKind: z.enum(['person', 'model']).optional(),
 });
 
 const Resolved = z.object({ cells: z.array(ResolvedCell) });
@@ -108,6 +112,14 @@ export interface Adjudication {
   readonly sheetB: readonly SheetCell[];
   /** Resolved ground truth, keyed `page/rule`. Empty until `adjudicate.mjs resolve` runs. */
   readonly resolved: ReadonlyMap<string, Outcome>;
+  /** Each sheet's rater, for the sheets that exist. */
+  readonly raters: readonly {
+    readonly rater: 'A' | 'B';
+    readonly kind: 'person' | 'model' | null;
+    readonly model: string | null;
+  }[];
+  /** Resolved disagreements, by who resolved them. */
+  readonly resolutions: { readonly person: number; readonly model: number };
 }
 
 export const cellKey = (page: string, rule: string): string => `${page}/${rule}`;
@@ -130,9 +142,16 @@ export function loadAdjudication(repositoryRoot: string): Adjudication {
   const a = readOptional(resolve(dir, 'sheet-A.json'), Sheet, 'sheet-A.json');
   const b = readOptional(resolve(dir, 'sheet-B.json'), Sheet, 'sheet-B.json');
   const resolved = readOptional(resolve(dir, 'resolved.json'), Resolved, 'resolved.json');
+  const resolvedCells = resolved?.cells ?? [];
+  const resolvedBy = (kind: 'person' | 'model'): number =>
+    resolvedCells.filter((c) => c.source === 'resolution' && c.resolverKind === kind).length;
   return {
     sheetA: a?.cells ?? [],
     sheetB: b?.cells ?? [],
-    resolved: new Map((resolved?.cells ?? []).map((c) => [cellKey(c.page, c.rule), c.answer])),
+    resolved: new Map(resolvedCells.map((c) => [cellKey(c.page, c.rule), c.answer])),
+    raters: [a, b]
+      .filter((sheet) => sheet !== null)
+      .map((sheet) => ({ rater: sheet.rater, kind: sheet.raterKind, model: sheet.raterModel })),
+    resolutions: { person: resolvedBy('person'), model: resolvedBy('model') },
   };
 }

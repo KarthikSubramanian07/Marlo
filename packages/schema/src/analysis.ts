@@ -86,7 +86,7 @@ export const AnalysisReport = z.object({
     }),
   ),
   /**
-   * The routing chosen on the official corpus, scored on the real pages people have rated:
+   * The routing chosen on the official corpus, scored on the rated real pages:
    * the other held-out design, on a corpus the router never saw. Null until a cell is
    * resolved, because without ground truth there is nothing to score against.
    */

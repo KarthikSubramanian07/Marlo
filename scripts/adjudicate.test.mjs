@@ -160,8 +160,27 @@ describe('worksheets', () => {
     expect(() => buildSheet('C', pages, rules, read)).toThrow(/rater/);
   });
 
+  it('names who answered once anything is answered, and the model for a model rater', () => {
+    const sheet = buildSheet('A', pages, rules, read);
+    expect(sheet.raterKind).toBeNull();
+    const cell = sheet.cells.find((c) => !c.prescreened);
+    cell.answer = 'passed';
+    expect(validateSheet(sheet, expected).join('\n')).toMatch(/raterKind is not set/);
+    sheet.raterKind = 'model';
+    expect(validateSheet(sheet, expected).join('\n')).toMatch(/must name the model/);
+    sheet.raterModel = 'claude-opus-5-5';
+    expect(validateSheet(sheet, expected)).toEqual([]);
+    sheet.raterKind = 'person';
+    expect(validateSheet(sheet, expected).join('\n')).toMatch(/not a model/);
+    sheet.raterModel = null;
+    expect(validateSheet(sheet, expected)).toEqual([]);
+    sheet.raterKind = 'robot';
+    expect(validateSheet(sheet, expected).join('\n')).toMatch(/raterKind "robot"/);
+  });
+
   it('requires a note with failed and cantTell', () => {
     const sheet = buildSheet('A', pages, rules, read);
+    sheet.raterKind = 'person';
     sheet.cells[0].answer = 'cantTell';
     expect(validateSheet(sheet, expected).join('\n')).toMatch(/needs a note/);
     sheet.cells[0].note = 'The label is an icon whose meaning depends on context.';
@@ -217,15 +236,15 @@ describe('agreement and resolution', () => {
     ],
   };
 
-  it('computes agreement over human-judged cells only', () => {
+  it('computes agreement over rated cells only', () => {
     const paired = pairSheets(a, b);
-    expect(paired.human.map((c) => c.key)).toEqual(['p1/r1', 'p1/r2']);
+    expect(paired.rated.map((c) => c.key)).toEqual(['p1/r1', 'p1/r2']);
     expect(paired.prescreen.map((c) => c.key)).toEqual(['p1/r3', 'p2/r3']);
     expect(paired.pending).toEqual(['p2/r1']);
     expect(paired.disagreements.map((c) => c.key)).toEqual(['p1/r2']);
   });
 
-  it('counts a pre-screen one rater overrode as human-judged', () => {
+  it('counts a pre-screen one rater overrode as rated', () => {
     const overridden = {
       ...b,
       cells: b.cells.map((c) =>
@@ -246,6 +265,7 @@ describe('agreement and resolution', () => {
       { page: 'p1', rule: 'r2', answer: 'failed', resolver: '', reasoning: '' },
     ]);
     expect(problems.join('\n')).toMatch(/names no resolver/);
+    expect(problems.join('\n')).toMatch(/resolverKind is not one of/);
     expect(problems.join('\n')).toMatch(/gives no reasoning/);
   });
 
@@ -256,9 +276,17 @@ describe('agreement and resolution', () => {
         rule: 'r2',
         answer: 'failed',
         resolver: 'C',
+        resolverKind: 'person',
         reasoning: 'The control has no name.',
       },
-      { page: 'p1', rule: 'r1', answer: 'failed', resolver: 'C', reasoning: 'Changed my mind.' },
+      {
+        page: 'p1',
+        rule: 'r1',
+        answer: 'failed',
+        resolver: 'C',
+        resolverKind: 'person',
+        reasoning: 'Changed my mind.',
+      },
     ]);
     expect(problems.join('\n')).toMatch(/p1\/r1: the raters did not disagree/);
   });
@@ -270,6 +298,7 @@ describe('agreement and resolution', () => {
         rule: 'r2',
         answer: 'failed',
         resolver: 'C',
+        resolverKind: 'person',
         reasoning: 'The control has no name.',
       },
     ]);
@@ -283,6 +312,7 @@ describe('agreement and resolution', () => {
         answer: 'failed',
         source: 'resolution',
         resolver: 'C',
+        resolverKind: 'person',
         reasoning: 'The control has no name.',
       },
       { page: 'p1', rule: 'r3', answer: 'inapplicable', source: 'prescreen' },

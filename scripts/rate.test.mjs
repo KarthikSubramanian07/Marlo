@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 import {
-  copyFileSync,
   existsSync,
   mkdtempSync,
   readFileSync,
@@ -13,7 +12,7 @@ import { request as httpRequest } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { corpusContext, validateSheet } from './adjudicate.mjs';
+import { buildSheet, corpusContext, validateSheet } from './adjudicate.mjs';
 import {
   MAX_BODY_BYTES,
   SNAPSHOT_CSP,
@@ -23,7 +22,7 @@ import {
 } from './rate.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const ADJUDICATION = join(ROOT, 'corpus', 'real', 'adjudication');
+const REAL = join(ROOT, 'corpus', 'real');
 const MANIFEST = JSON.parse(readFileSync(join(ROOT, 'corpus', 'real', 'MANIFEST.json'), 'utf8'));
 
 /** A raw HTTP request, so a path reaches the server exactly as written, dots and all. */
@@ -57,14 +56,22 @@ const postAnswer = (port, answer) =>
     body: JSON.stringify(answer),
   });
 
-/** A private copy of one rater's committed sheet, so no test writes into the corpus. */
+/**
+ * A fresh, unanswered sheet for one rater in a private directory, built exactly as
+ * `adjudicate.mjs sheet` builds one, so no test writes into the corpus and the tests do
+ * not depend on whether the committed sheets have been answered.
+ */
 function copySheet(rater) {
   const dir = mkdtempSync(join(tmpdir(), `marlo-rate-${rater}-`));
   const file = join(dir, `sheet-${rater}.json`);
-  copyFileSync(join(ADJUDICATION, `sheet-${rater}.json`), file);
+  const sheet = buildSheet(rater, context.pages, context.rules, (p) =>
+    readFileSync(join(REAL, p.path), 'utf8'),
+  );
+  writeFileSync(file, `${JSON.stringify(sheet, null, 2)}\n`, 'utf8');
   return { dir, file };
 }
 
+let context;
 let expected;
 const servers = [];
 const dirs = [];
@@ -79,7 +86,8 @@ async function start(rater) {
 }
 
 beforeAll(async () => {
-  expected = (await corpusContext()).expected;
+  context = await corpusContext();
+  expected = context.expected;
 });
 
 afterAll(async () => {
@@ -141,6 +149,32 @@ describe('saving through the HTTP API', () => {
       (c, i) => JSON.stringify(c) !== JSON.stringify(before.cells[i]),
     );
     expect(changed).toHaveLength(answers.length);
+  });
+
+  it("records the answers as a person's, and will not continue a sheet a model answered", async () => {
+    const { file, port } = await start('B');
+    const cell = JSON.parse(readFileSync(file, 'utf8')).cells.find((c) => c.answer === null);
+    const saved = await postAnswer(port, { page: cell.page, rule: cell.rule, answer: 'passed' });
+    expect(saved.status, saved.body.toString()).toBe(200);
+    expect(JSON.parse(readFileSync(file, 'utf8'))).toMatchObject({
+      raterKind: 'person',
+      raterModel: null,
+    });
+
+    const modelSheet = JSON.parse(readFileSync(file, 'utf8'));
+    writeFileSync(
+      file,
+      `${JSON.stringify({ ...modelSheet, raterKind: 'model', raterModel: 'claude-sonnet-5-5' }, null, 2)}\n`,
+    );
+    const before = readFileSync(file, 'utf8');
+    const refused = await postAnswer(port, {
+      page: cell.page,
+      rule: cell.rule,
+      answer: 'failed',
+      note: 'x',
+    });
+    expect(refused.status).toBe(409);
+    expect(readFileSync(file, 'utf8')).toBe(before);
   });
 
   it('refuses a failed or cantTell answer with no note, and leaves the sheet alone', async () => {
