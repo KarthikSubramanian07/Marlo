@@ -1,0 +1,6287 @@
+{
+  "protocol": "PROTOCOL.md",
+  "raters": [
+    {
+      "rater": "A",
+      "kind": "model",
+      "model": "claude-opus-5-5"
+    },
+    {
+      "rater": "B",
+      "kind": "model",
+      "model": "claude-sonnet-5-5"
+    }
+  ],
+  "cells": [
+    {
+      "page": "application-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "23a2a8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "3ea0c8",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "5c01ea",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "5f99a7",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "6a7281",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "6cfa84",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "b5c3f8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "bc4a75",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "bf051a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "c487ae",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-01",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "23a2a8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "3ea0c8",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "5c01ea",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "5f99a7",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "6a7281",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "6cfa84",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "b5c3f8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "bc4a75",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "bf051a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "c487ae",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-02",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-02",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "2ee8b8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Applicability is role-based only: HTML checkbox inputs (aria-label 'Select task'/'Select invoice') and text inputs ('Invoices count', 'Search invoice') are test targets. None has aria-invalid, :invalid, error text, role=alert or error classes in the snapshot, so each target has no form field error indicator and all three expectations hold."
+    },
+    {
+      "page": "application-03",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "application-03",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "application-03",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "3ea0c8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "6cfa84",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only visible text below threshold is the single glyph « in span inside div#sidebarbutton (title \"Collapse sidebar\"), #fff on #ccc = 1.61:1. Like the rule's Passed Example 7 (button \"X\"), an arrow glyph expresses nothing in human language, so it is excepted. The other ~1300 visible text nodes meet 4.5:1 (or 3:1 when large)."
+    },
+    {
+      "page": "documentation-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The three meta[name=viewport] content values are \"width=device-width, initial-scale=1.0\" / \"initial-scale=1\"; none has a maximum-scale or user-scalable key, so no content attribute meets the applicability."
+    },
+    {
+      "page": "documentation-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "6cfa84",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only visible svg with an empty name (the 162x162 illustration in div.article-footer__svg-container) is inside section[aria-labelledby=feedback], named 'Help improve MDN'; an ancestor named from author triggers the exception. svg.logo__image has role=img and <title>MDN; the footer logo svgs have <title> names inside aria-labelled links. No img or canvas is visible."
+    },
+    {
+      "page": "documentation-02",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-02",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Only fields with listed roles: input#mdbook-sidebar-toggle-anchor (checkbox, display:none) and input#mdbook-searchbar (search, under a display:none ancestor). Neither has any form field error indicator (no aria-invalid, error text or error styling on the page), so nothing can be tested; per the corpus convention a field with no error indicator does not make this rule applicable."
+    },
+    {
+      "page": "documentation-03",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "5c01ea",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "5f99a7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The role list has required owned elements (listitem). The visible sidebar ol.chapter (280px wide, in the accessibility tree) and its nested ol.section lists own only li children (no aria-owns on the page). The only menu, ul#mdbook-theme-list, is display:none so it is not a target. Every applicable list owns only listitems."
+    },
+    {
+      "page": "documentation-03",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "cae760",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-03",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "bc4a75",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "cae760",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The header home link a[href='/'] in div.uwu-hidden holds a visible 40x40 React atom svg with no role, no title, empty accessible name, and no ancestor named from author (the link has no aria-label/title). The svg is the brand logo, informative rather than purely decorative; adjacent 'React' text does not change that under this rule. The unnamed search and Copy-page icon svgs are similar."
+    },
+    {
+      "page": "documentation-04",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only explicit roles with a required context are the five button[role=tab] (.sp-tab-button). Each is inside div.w-[fit-content].invisible, whose computed visibility is hidden (.invisible{visibility:hidden}), so the tabs are not included in the accessibility tree. No other element has an explicit role (listitem, option, row, cell, menuitem, treeitem...) needing a context."
+    },
+    {
+      "page": "documentation-04",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "documentation-04",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "error-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.govuk-footer__licence-logo is visible (41x17 at 160,1595), aria-hidden=true so not in the accessibility tree, and has no named-from-author ancestor. Its path draws the Open Government Licence 'OGL' mark, which identifies the licence; that is information, not pure decoration. Adjacent licence text makes it redundant, which the rule note says still fails."
+    },
+    {
+      "page": "error-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "error-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The page has no HTML img element and no HTML-namespace element with semantic role img. The only role=img element is svg.govuk-header__logotype, whose namespaceURI is http://www.w3.org/2000/svg, so it is an SVG element, not an HTML element as the applicability requires. Footer svgs are role=presentation or aria-hidden."
+    },
+    {
+      "page": "form-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Four HTML radio inputs (#whereDoYouLive to #whereDoYouLive-4) have semantic role radio, so the rule applies regardless of error state. The snapshot has no aria-invalid, :invalid, govuk-error-message/summary or error styling, so each target has no form field error indicator and every expectation is satisfied."
+    },
+    {
+      "page": "form-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The single meta[name=viewport] has content 'width=device-width, initial-scale=1, viewport-fit=cover', which contains neither a maximum-scale nor a user-scalable key, so no content attribute meets the applicability."
+    },
+    {
+      "page": "form-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "bc4a75",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only element with a lang attribute is html (lang=en). The rule requires the element to be an inclusive descendant of body in the flat tree; html is body's ancestor, and no element inside body carries lang, so there is no test target."
+    },
+    {
+      "page": "form-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.govuk-footer__licence-logo is visible (41x17 at 160,725), aria-hidden=true so excluded from the accessibility tree, with no named-from-author ancestor. Its path draws the Open Government Licence 'OGL' mark identifying the licence, so it conveys information and is not purely decorative; the adjacent licence text only makes it redundant, which per the rule note still fails."
+    },
+    {
+      "page": "form-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The page has no img element. The only element with role=img is svg.govuk-header__logotype, which is in the SVG namespace, not an HTML element (glossary: namespaced element), so it is outside this rule and is covered by the SVG rule instead. The footer svgs are role=presentation and aria-hidden respectively."
+    },
+    {
+      "page": "form-02",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only meta name=viewport has content=\"width=device-width, initial-scale=1, viewport-fit=cover\", which contains neither a maximum-scale nor a user-scalable key, so no content attribute meets the applicability."
+    },
+    {
+      "page": "form-02",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "bc4a75",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "form-02",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.govuk-footer__licence-logo is visible and aria-hidden=true, so it is excluded from the accessibility tree and applicable. It draws the Open Government Licence (OGL) logo; adjacent text makes it redundant, but per the rule note an informative icon with adjacent text is not purely decorative, so it fails. svg.govuk-footer__crown (role=presentation) is also applicable."
+    },
+    {
+      "page": "form-02",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "form-02",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "09o5cg",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "e88epe",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-02",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.gem-c-search__icon (aria-hidden, 20x20, visible) in the homepage button.gem-c-search__submit: the button's text \"Search GOV.UK\" is hidden by text-indent:-5000px, so the magnifier is the only visual label, not purely decorative; no named-from-author ancestor. svg.govuk-footer__licence-logo (OGL logo, aria-hidden, 41x17) is likewise informative (cf. Inapplicable Ex. 8)."
+    },
+    {
+      "page": "government-02",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-02",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Measured all 121 visible text nodes offline. With images/video unloaded, text over media sits on the opaque bg-carbon-black wrapper (#000) under the skrim gradient: white text is 21:1. Lowest: 'Learn More' white on rgb(216,57,51) 4.61:1 (22px bold, large, needs 3:1); '422 Images' rgb(113,113,115) on white 4.87:1 (needs 4.5:1). None below threshold."
+    },
+    {
+      "page": "government-04",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "government-04",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "All img elements are broken offline (naturalWidth 0) so excepted. Applicable: visible unnamed inline svg icons (graphics-document, empty name, links named from content). The svg.square-2 icons in Featured News cards use a distinct glyph per type (News Release / Article / Blog bubble) beside the matching label: informative icon marked decorative with adjacent text, which the rule's note says fails."
+    },
+    {
+      "page": "government-04",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "government-04",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "landing-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.index-module__EJ526G__icon (aria-hidden, 12x12, visible) inside the nav links \"Beta Docs\" and \"Contribute\" (target=_blank, no aria-label on any ancestor) is an external-link arrow conveying that the link opens an external site in a new tab; that information is nowhere in the text, so the image is not purely decorative."
+    },
+    {
+      "page": "landing-01",
+      "rule": "ff89c9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "landing-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "input#signin-email (type=email, role textbox) and the Remember-me input[type=checkbox] (role checkbox) are applicable targets. With scripts off the form is novalidate and the page has no error text, aria-invalid, .is-invalid or role=alert, so each target has no form field error indicator and all three expectations hold vacuously."
+    },
+    {
+      "page": "login-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only landmark is main#content (the form is unnamed, the banner div has no role). Its first perceivable content is a.navbar-brand[aria-label=Tabler] with the visible 110x32 logo svg, a block repeated on the linked pages (., ./sign-up.html, ./forgot-password.html) that share the same logo header. Non-repeated content (h1 'Login to your account') comes only after it."
+    },
+    {
+      "page": "login-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The single meta[name=viewport] has content 'width=device-width, initial-scale=1, viewport-fit=cover', which contains neither a maximum-scale nor a user-scalable key, so no content attribute meets the applicability."
+    },
+    {
+      "page": "login-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "bc4a75",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "login-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "login-01",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only instrument is a.skip-link href='#content', which moves focus to main#content. The first perceivable content after main is a.navbar-brand (Tabler logo link, repeated on the linked sign-up/forgot-password/index pages), so main is just before repeated content, not just before a node of non-repeated content (the h1). No other skip link or focus-moving control exists."
+    },
+    {
+      "page": "news-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Applicable targets exist: input.mw-searchInput[type=search] (searchbox, visible 404x32) and the Appearance radio inputs (role radio). No element on the page has aria-invalid, an error message, or error presentation, so each target has no form field error indicator and all three expectations hold."
+    },
+    {
+      "page": "news-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "5f99a7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The six backlinks such as a#mwAss (href #cite_ref-sec1095_1-1) hide their span but carry ::before { content: counter(mw-ref-linkback, lower-alpha) } rendered as a visible letter (7px box). Accname step 2F.ii includes CSS generated textual content in name from content, so the name is non-empty. All other in-tree links have text, alt or aria-label names."
+    },
+    {
+      "page": "news-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "23a2a8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "input#searchInput (search), the skin-client-pref radios and the dropdown checkboxes have listed roles, but none carries any form field error indicator: no aria-invalid, aria-errormessage, error text or error styling exists on the page. With nothing for the expectations to test, per the corpus convention the rule is inapplicable."
+    },
+    {
+      "page": "news-02",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "5c01ea",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "5f99a7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "c487ae",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-02",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The page has no svg or canvas elements. Every img (including img.mw-logo-icon alt=\"\" aria-hidden and the noscript 1x1 alt=\"\" img) has a remote https src; with the network off the browser reports naturalWidth 0 (broken), so each img's current request is not completely available and the rule's exception removes all of them."
+    },
+    {
+      "page": "news-02",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-02",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "news-04",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.gem-c-share-links__svg (aria-hidden, 30x30, visible) in the links \"Share on Facebook\" and \"Share on X\" are the Facebook and X logos, informative icons whose meaning is only duplicated by adjacent text, which per the rule's note and Inapplicable Example 8 is not purely decorative. svg.govuk-footer__licence-logo (OGL logo, aria-hidden) fails for the same reason."
+    },
+    {
+      "page": "news-04",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "news-04",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "3ea0c8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "7d6734",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "search-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "svg.govuk-footer__licence-logo (aria-hidden, visible 41x17, no aria-label/labelledby ancestor) is the Open Government Licence logo, an informative mark only duplicated by the adjacent licence sentence, so not purely decorative. The main search icon is excepted (ancestor div#keywords[role=search][aria-label=Sitewide]), as is the pagination arrow (nav[aria-label=Pagination])."
+    },
+    {
+      "page": "search-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "search-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "b40fd1",
+      "answer": "cantTell",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "main#content is the only candidate landmark; its first perceivable content is h4 \"Business settings\" plus nav[aria-label=Business settings] (links My Account, Plans -> ./settings-plan.html). Whether that sub-navigation is repeated depends on settings-plan.html, which is not in the file: if repeated, main starts with repeated content and fails; if not, it passes. The h1 sits outside any landmark."
+    },
+    {
+      "page": "settings-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "settings-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "settings-01",
+      "rule": "ye5d6e",
+      "answer": "cantTell",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "a.skip-link \"Skip to main content\" href=\"#content\" moves focus to main#content, which is just before h4 \"Business settings\" and the settings sub-navigation, not before the \"My Account\" form. Whether that sub-navigation is repeated on the linked ./settings-plan.html cannot be determined from the file, and the answer flips on it. No other in-page instrument targets later content."
+    },
+    {
+      "page": "shop-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "6cfa84",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "No explicit roles exist, but four ul elements have the implicit list role, which has required owned elements (listitem), and all are in the accessibility tree. ul[data-testid=products-list] owns eight li, the footer Collections ul four li and the Medusa ul three li, all plain li (listitem); ul[data-testid=footer-categories] owns nothing. No list owns a non-listitem element."
+    },
+    {
+      "page": "shop-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "c487ae",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Input rule 047fe0 passes: h1[data-testid=store-page-title] 'All products' is visible (955x48), in the accessibility tree, and is non-repeated content that follows the repeated header block (nav with Medusa Store / Account / Cart links, repeated on the linked /us and /us/account pages). The composite passes when any one input rule passes."
+    },
+    {
+      "page": "shop-01",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-01",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "36b590",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "6cfa84",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "97a4e1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "c487ae",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "e086e5",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-02",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-02",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "2ee8b8",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "input#criteria_search_value (type=text, HTML element with semantic role textbox) is a test target; applicability does not depend on errors. It has no aria-invalid, is not :invalid, and the page has no error message, alert or error styling, so it has no form field error indicator and all expectations hold."
+    },
+    {
+      "page": "shop-03",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-03",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "ff89c9",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-03",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "047fe0",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "23a2a8",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "2ee8b8",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "46ca7f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "4e8ab6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "5c01ea",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "5f99a7",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "674b10",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "b40fd1",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Implicit roles count as semantic roles. Two visible table elements (table.table.mb-3 and table.table-borderless) have role table and own only tbody (rowgroup); each tbody owns only tr (row); each tr owns only td (cell). No aria-busy ancestor, no aria-owns. Every target owns only roles from its required owned elements list."
+    },
+    {
+      "page": "shop-04",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "c487ae",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "cf77f2",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "e88epe",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "shop-04",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "ffd0e9",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "shop-04",
+      "rule": "ye5d6e",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "047fe0",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "09o5cg",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "23a2a8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "24afc2",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "2779a5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "2ee8b8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "3ea0c8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "46ca7f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "4e8ab6",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "59796f",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "5b7ae0",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "5c01ea",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "5f99a7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "674b10",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "6a7281",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "6cfa84",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "78fd32",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "7d6734",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "8fc3b6",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "97a4e1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "9e45ec",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "9eb3f6",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "b4f0c3",
+      "answer": "inapplicable",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only meta[name=viewport] has content=\"width=1120\", which contains neither a maximum-scale nor a user-scalable key, so no content attribute meets the applicability."
+    },
+    {
+      "page": "table-01",
+      "rule": "b5c3f8",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "bc4a75",
+      "answer": "failed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "table#mwQg (implicit role table, visible, in the accessibility tree) has a direct child caption element (\"List of countries and territories by total population\", display table-caption) whose semantic role is caption and which is exposed as a child of the table. WAI-ARIA 1.2 lists only row and rowgroup -> row as required owned elements of table, so the table owns an element outside that list."
+    },
+    {
+      "page": "table-01",
+      "rule": "bc659a",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "bf051a",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "bisz58",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "c487ae",
+      "answer": "passed",
+      "source": "resolution",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The ten backlinks a#mwD1I, #mwD2g, #mwELE, #mwERE, #mwFDc, #mwFDk, #mwF5k, #mwGTY, #mwGTg, #mwGeM hide their span but have ::before { content: counter(mw-ref-linkback, lower-alpha) } rendered as a visible letter; accname step 2F.ii includes CSS generated text in name from content, so the name is non-empty. Every other in-tree link has a text, alt or aria-label name."
+    },
+    {
+      "page": "table-01",
+      "rule": "cae760",
+      "answer": "inapplicable",
+      "source": "prescreen"
+    },
+    {
+      "page": "table-01",
+      "rule": "cf77f2",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "de46e4",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "e086e5",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "e6952f",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "ff89c9",
+      "answer": "inapplicable",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "ffd0e9",
+      "answer": "passed",
+      "source": "agreement"
+    },
+    {
+      "page": "table-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "source": "agreement"
+    }
+  ]
+}

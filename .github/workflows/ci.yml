@@ -143,6 +143,11 @@ jobs:
         # drift from the harness and every other required check would say nothing about it.
         run: node packages/calibrate/dist/bin.js --check
 
+      - name: Check the real-page raters' accuracy report against their answers
+        # RATER-VALIDITY.md grades the raters behind the real-page ground truth on the
+        # official cases. It is generated, so it must match the answers it is built from.
+        run: node scripts/rater-validity.mjs --check
+
   test:
     name: Test (node ${{ matrix.node }})
     runs-on: ubuntu-latest
