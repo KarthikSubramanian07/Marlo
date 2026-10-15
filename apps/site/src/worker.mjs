@@ -78,7 +78,7 @@ async function readJson(request) {
   }
 }
 
-export function createSiteWorker({ origin, pages, api }) {
+export function createSiteWorker({ origin, pages, api, tryCsp }) {
   const object = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
   const json = (value, status = 200, headers = {}) =>
     new Response(JSON.stringify(value), {
@@ -438,6 +438,10 @@ export function createSiteWorker({ origin, pages, api }) {
       const response = await handle(request, env);
       const headers = new Headers(response.headers);
       for (const [name, value] of Object.entries(SECURITY)) headers.set(name, value);
+      // /try/ is the one page that runs a script, and the script is Marlo. Its policy allows
+      // script from this origin, inline styles in the markup a visitor pastes, and no request.
+      if (tryCsp && new URL(request.url).pathname.startsWith('/try/'))
+        headers.set('Content-Security-Policy', tryCsp);
       headers.set(
         'Vary',
         [
