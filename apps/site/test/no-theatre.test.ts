@@ -84,21 +84,44 @@ describe('the site has no theatre', () => {
     expect(pages.length).toBeGreaterThanOrEqual(5);
   });
 
-  it('runs no script at all', () => {
-    // The strongest form of the sibling project's no-setTimeout test. There is no client
-    // script on this site, so there is nothing that could animate a fake progress bar, and
-    // the CSP forbids script entirely.
+  it('runs no script except Marlo itself, on /try/', () => {
+    // The strongest form of the sibling project's no-setTimeout test. Every page but one
+    // serves no script, so nothing could animate a fake progress bar, and their CSP forbids
+    // script entirely. /try/ loads exactly one script from this origin, the playground,
+    // which is Marlo's own rules evaluating what the visitor pasted.
+    const TRY = `${sep}try${sep}index.html`;
     for (const page of pages) {
       const scripts = [...page.html.matchAll(/<script\b([^>]*)>/gi)].map((m) => m[1] ?? '');
-      for (const attributes of scripts) {
-        // The only permitted script element is the structured data block, which is data.
-        expect(attributes, `${page.path} has an executable script`).toMatch(
-          /type="application\/ld\+json"/,
-        );
+      const executable = scripts.filter((a) => !a.includes('type="application/ld+json"'));
+      if (page.path.endsWith(TRY)) {
+        expect(executable, `${page.path} scripts`).toEqual([
+          ' type="module" src="/try/playground.js"',
+        ]);
+      } else {
+        expect(executable, `${page.path} has an executable script`).toEqual([]);
       }
       expect(page.html).not.toContain('setTimeout');
       expect(page.html).not.toContain('setInterval');
       expect(page.html).not.toMatch(/\son[a-z]+=/i);
+    }
+  });
+
+  it('serves scripts that cannot fake progress or make a request', () => {
+    // The playground and the bookmarklet are the only scripts served. Neither has a timer
+    // to animate with, and neither has a way to send what it reads anywhere.
+    for (const file of ['playground.js', 'marlo-page.js']) {
+      const source = readFileSync(join(DIST, 'try', file), 'utf8');
+      for (const banned of [
+        'setTimeout',
+        'setInterval',
+        'fetch(',
+        'XMLHttpRequest',
+        'sendBeacon',
+        'WebSocket',
+        'EventSource',
+      ]) {
+        expect(source, `${file} contains ${banned}`).not.toContain(banned);
+      }
     }
   });
 
@@ -707,11 +730,18 @@ describe('SEO and delivery', () => {
     }
   });
 
-  it('serves a CSP that forbids script, because there is none', () => {
+  it('serves a CSP that forbids script everywhere but /try/', () => {
     const headers = readFileSync(join(DIST, '_headers'), 'utf8');
-    expect(headers).toContain("default-src 'none'");
-    expect(headers).not.toContain('script-src');
-    expect(headers).toContain('X-Content-Type-Options: nosniff');
+    const [site, ...rest] = headers.split('\n/try/*\n');
+    expect(site).toContain("default-src 'none'");
+    expect(site).not.toContain('script-src');
+    expect(site).toContain('X-Content-Type-Options: nosniff');
+    expect(rest).toHaveLength(1);
+    const tryPolicy = rest.join('');
+    expect(tryPolicy).toContain('! Content-Security-Policy');
+    expect(tryPolicy).toContain("script-src 'self'");
+    expect(tryPolicy).toContain("connect-src 'none'");
+    expect(tryPolicy).not.toContain('unsafe-eval');
   });
 
   it('references no external origin, so nothing blocks first paint', () => {

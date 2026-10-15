@@ -332,3 +332,22 @@ describe('stateless Streamable HTTP MCP', () => {
     ).toBe(true);
   });
 });
+
+describe('the try page policy', () => {
+  it('allows script on /try/ only, and no request there', async () => {
+    const { TRY_CSP } = await import('../apps/site/src/try-page.mjs');
+    const withTry = createSiteWorker({ origin, pages, api, tryCsp: TRY_CSP });
+    const get = (path) => withTry.fetch(new Request(`${origin}${path}`), env);
+    const tryPolicy = (await get('/try/playground.js')).headers.get('content-security-policy');
+    expect(tryPolicy).toBe(TRY_CSP);
+    expect(tryPolicy).toContain("script-src 'self'");
+    expect(tryPolicy).toContain("connect-src 'none'");
+    const home = (await get('/')).headers.get('content-security-policy');
+    expect(home).not.toContain('script-src');
+  });
+
+  it('leaves every policy alone when no try policy is configured', async () => {
+    const response = await fetch('/try/');
+    expect(response.headers.get('content-security-policy')).not.toContain('script-src');
+  });
+});
