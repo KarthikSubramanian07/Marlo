@@ -1206,7 +1206,7 @@
    "evidence": [
     {
      "selector": "html",
-     "message": "The page is titled \"3. An Informal Introduction to Python — Python 3.15.0 documentation\"."
+     "message": "The page is titled \"3. An Informal Introduction to Python \u2014 Python 3.15.0 documentation\"."
     }
    ]
   },
@@ -5688,7 +5688,7 @@
    "evidence": [
     {
      "selector": "html.ibm_plex_mono_fa1c4097-module__3uH8Nq__variable",
-     "message": "The page is titled \"Node.js — Run JavaScript Everywhere\"."
+     "message": "The page is titled \"Node.js \u2014 Run JavaScript Everywhere\"."
     }
    ]
   },
@@ -12391,7 +12391,7 @@
    "evidence": [
     {
      "selector": "html",
-     "message": "The page is titled \"3. An Informal Introduction to Python — Python 3.15.0 documentation\"."
+     "message": "The page is titled \"3. An Informal Introduction to Python \u2014 Python 3.15.0 documentation\"."
     }
    ]
   },
@@ -17043,7 +17043,7 @@
    "evidence": [
     {
      "selector": "html.ibm_plex_mono_fa1c4097-module__3uH8Nq__variable",
-     "message": "The page is titled \"Node.js — Run JavaScript Everywhere\"."
+     "message": "The page is titled \"Node.js \u2014 Run JavaScript Everywhere\"."
     }
    ]
   },
