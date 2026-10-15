@@ -34,6 +34,7 @@ import { developerPages } from './developer-content.mjs';
 import { markdownForPage } from './markdown.mjs';
 import { createPublicApi } from './public-api.mjs';
 import { TRY_CSP, buildTryBundles, tryPage } from './try-page.mjs';
+import { scribble } from './scribble.mjs';
 
 import sharp from 'sharp';
 
@@ -205,7 +206,6 @@ const NAV = [
   ['/method/', 'method', 'Method'],
   ['/honesty/', 'honesty', 'Honesty'],
   ['/developers/', 'developers', 'Developers'],
-  ['/try/', 'try', 'Try it'],
 ];
 
 function layout({ slug, title, description, body, canonical, notFound = false, scripts = [] }) {
@@ -301,7 +301,10 @@ ${JSON.stringify(jsonLd, null, 6)}
           ${nav}
           </div>
         </nav>
-        <a class="masthead__source" href="${REPO}">${ICON.github}Source</a>
+        <div class="masthead__end">
+          <a class="masthead__cta" href="/try/"${slug === 'try' ? ' aria-current="page"' : ''}>Try it${ICON.arrow}</a>
+          <a class="masthead__source" href="${REPO}">${ICON.github}Source</a>
+        </div>
       </div>
     </header>
 
@@ -327,7 +330,7 @@ ${body}
             <h2>The argument</h2>
             <ul>
               <li><a href="${REPO}/blob/main/RESEARCH.md">What was measured first</a></li>
-              <li><a href="${REPO}/blob/main/DECISIONS.md">Thirteen decisions</a></li>
+              <li><a href="${REPO}/blob/main/DECISIONS.md">Fifteen decisions</a></li>
               <li><a href="/honesty/">Where Marlo was wrong</a></li>
             </ul>
           </div>
@@ -475,12 +478,17 @@ pages.push({
         <div class="wrap hero__inner">
           <span class="eyebrow eyebrow--accent">Measured over ${num(table.corpus.testCases, { field: 'corpus.testCases' })} official W3C test cases</span>
           <h1>Marlo checks accessibility. Here is our receipt.</h1>
+          ${scribble('yes, the embarrassing lines too', { arrow: 'left', place: 'receipt' })}
           <p class="lede">
             Marlo checks your pages against the official ACT rule corpus. Then it turns the
             same corpus on itself and commits the score, including the part where it loses.
           </p>
           <div class="hero__actions">
-            <a class="btn btn-primary" href="/accuracy/">See the numbers${ICON.arrow}</a>
+            <span class="hero__start">
+              ${scribble('start here!', { arrow: 'right', place: 'cta' })}
+              <a class="btn btn-primary" href="/try/">Try it on any site${ICON.arrow}</a>
+            </span>
+            <a class="btn btn-ghost" href="/accuracy/">See the numbers</a>
             <a class="btn btn-ghost" href="${REPO}">${ICON.github}Read the source</a>
           </div>
           <div class="hero__preview">
@@ -973,6 +981,7 @@ ${
           <div class="section-head">
             <span class="eyebrow">A second corpus</span>
             <h2>${real.aggregate.accuracy.sampleSize === 0 ? 'Real pages, with no accuracy figure yet, on purpose' : 'Real pages, where the accuracy falls'}</h2>
+            ${real.aggregate.accuracy.sampleSize === 0 ? '' : scribble('the uncomfortable one. read this bit.', { arrow: 'down-left', place: 'real' })}
             <p>
               Every number above comes from hand-written test cases built to isolate one
               condition. ${num(real.pages, { field: 'realCorpus.pages' })} real pages from
@@ -1415,6 +1424,7 @@ pages.push({
         <div class="wrap hero__inner">
           <span class="eyebrow eyebrow--accent">This page existed before the product did</span>
           <h1>Where Marlo was wrong</h1>
+          ${scribble('still adding to it', { arrow: 'left', place: 'honesty' })}
           <p class="lede">
             Not a postmortem. A design constraint. A project whose pitch is "we tell you when we
             are wrong" needs somewhere to write that down before it has anything to be wrong
@@ -1685,7 +1695,9 @@ mkdirSync(resolve(OUT, 'fonts'), { recursive: true });
 
 pages.push(...developerPages({ ORIGIN, REPO }));
 const tryBundles = await buildTryBundles({ root: ROOT, out: OUT, browserTable });
-pages.push(tryPage({ origin: ORIGIN, repo: REPO, samples: tryBundles.samples, escapeHtml }));
+pages.push(
+  tryPage({ origin: ORIGIN, repo: REPO, samples: tryBundles.samples, escapeHtml, scribble }),
+);
 const api = createPublicApi({ origin: ORIGIN, table, manifest });
 const markdownPages = {};
 
@@ -1731,7 +1743,7 @@ writeFileSync(
 );
 writeFileSync(
   resolve(OUT, 'llms.txt'),
-  `# Marlo\n\n> Marlo is an open-source accessibility checker with published ACT corpus measurements, visible coverage limits, and evidence for each engine.\n\nWhen to use: inspect measured accessibility rule coverage, compare engine accuracy, understand a finding, or scan trusted local HTML with the CLI. Read coverage before interpreting results. A rule that was not evaluated is not a pass. The public REST API and HTTP MCP tools return published metadata only; they do not accept HTML or run scans. Use the local CLI for evaluation. No API key is required for metadata.\n\n## Documentation\n\n- [Playground](${ORIGIN}/try/): Run Marlo's own rules on pasted HTML in the browser, or on any page with the bookmarklet. Nothing is uploaded.\n- [Developer portal](${ORIGIN}/developers/index.md): API, CLI, and MCP entry points.\n- [API and CLI documentation](${ORIGIN}/docs/index.md): Authentication, endpoints, error handling, and local scan commands.\n- [OpenAPI specification](${ORIGIN}/openapi.json): Typed REST operations and response schemas.\n- [MCP discovery](${ORIGIN}/.well-known/mcp): Streamable HTTP endpoint and read-only tools.\n\n## Evidence\n\n- [Coverage API](${ORIGIN}/api/v1/coverage): Current corpus coverage and engine accuracy.\n- [Rule catalog API](${ORIGIN}/api/v1/rules): ACT identifiers, metadata, measurements, and routing.\n- [Calibration API](${ORIGIN}/api/v1/calibration): Published calibration table.\n- [Measured accuracy](${ORIGIN}/accuracy/index.md): Strict accuracy results and limitations.\n- [Method](${ORIGIN}/method/index.md): How the corpus is graded.\n- [Known defects](${ORIGIN}/honesty/index.md): Where earlier results were wrong.\n\n## Project\n\n- [About Marlo](${ORIGIN}/about/index.md): Purpose and boundaries.\n- [Contact](${ORIGIN}/contact/index.md): Public reporting channel.\n- [Privacy](${ORIGIN}/privacy/index.md): Website requests and local scans.\n- [Sitemap](${ORIGIN}/sitemap.xml): Published pages.\n`,
+  `# Marlo\n\n> Marlo is an open-source accessibility checker with published ACT corpus measurements, visible coverage limits, and evidence for each engine.\n\nWhen to use: inspect measured accessibility rule coverage, compare engine accuracy, understand a finding, or scan trusted local HTML with the CLI. Read coverage before interpreting results. A rule that was not evaluated is not a pass. The public REST API and HTTP MCP tools return published metadata only; they do not accept HTML or run scans. The playground at /try/ checks a URL, a GitHub repository or pasted HTML in the visitor's browser. Use the local CLI for the full four-engine evaluation. No API key is required for metadata.\n\n## Documentation\n\n- [Playground](${ORIGIN}/try/): Run Marlo's own rules in the browser on a web address, a GitHub repository or pasted HTML, or on any page with the bookmarklet.\n- [Developer portal](${ORIGIN}/developers/index.md): API, CLI, and MCP entry points.\n- [API and CLI documentation](${ORIGIN}/docs/index.md): Authentication, endpoints, error handling, and local scan commands.\n- [OpenAPI specification](${ORIGIN}/openapi.json): Typed REST operations and response schemas.\n- [MCP discovery](${ORIGIN}/.well-known/mcp): Streamable HTTP endpoint and read-only tools.\n\n## Evidence\n\n- [Coverage API](${ORIGIN}/api/v1/coverage): Current corpus coverage and engine accuracy.\n- [Rule catalog API](${ORIGIN}/api/v1/rules): ACT identifiers, metadata, measurements, and routing.\n- [Calibration API](${ORIGIN}/api/v1/calibration): Published calibration table.\n- [Measured accuracy](${ORIGIN}/accuracy/index.md): Strict accuracy results and limitations.\n- [Method](${ORIGIN}/method/index.md): How the corpus is graded.\n- [Known defects](${ORIGIN}/honesty/index.md): Where earlier results were wrong.\n\n## Project\n\n- [About Marlo](${ORIGIN}/about/index.md): Purpose and boundaries.\n- [Contact](${ORIGIN}/contact/index.md): Public reporting channel.\n- [Privacy](${ORIGIN}/privacy/index.md): Website requests and local scans.\n- [Sitemap](${ORIGIN}/sitemap.xml): Published pages.\n`,
   'utf8',
 );
 writeFileSync(
@@ -1741,7 +1753,7 @@ writeFileSync(
 );
 
 copyFileSync(resolve(HERE, 'style.css'), resolve(OUT, 'style.css'));
-for (const font of ['dm-sans-latin.woff2', 'jetbrains-mono-latin.woff2']) {
+for (const font of ['dm-sans-latin.woff2', 'jetbrains-mono-latin.woff2', 'caveat-latin.woff2']) {
   copyFileSync(resolve(HERE, 'fonts', font), resolve(OUT, 'fonts', font));
 }
 writeFileSync(resolve(OUT, 'favicon.svg'), FAVICON, 'utf8');
