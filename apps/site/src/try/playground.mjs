@@ -98,9 +98,14 @@ function doneMessage(summary, where) {
 }
 
 const SCRIPT_RENDERED =
-  ' This page builds itself with JavaScript, which the playground does not run, so there ' +
-  'is little here to check. Open the page and use the bookmarklet below, which sees it as ' +
-  'your browser draws it.';
+  ' This page builds itself with JavaScript and even a browser left little in it to check. ' +
+  'Open the page and use the bookmarklet below, which sees it as your browser draws it.';
+
+const VIA_BROWSER = {
+  refused:
+    ' The site refuses automated requests, so a real browser in Cloudflare loaded it instead.',
+  rendered: ' The page builds itself with JavaScript, so a real browser loaded it first.',
+};
 
 async function checkPasted() {
   const html = source.value;
@@ -125,15 +130,12 @@ async function readProblem(response) {
   }
 }
 
-async function checkUrl(url) {
-  files.replaceChildren();
-  say(`Fetching ${url}.`);
-  const response = await fetch(`/try/fetch?url=${encodeURIComponent(url)}`);
-  if (!response.ok) {
-    say(await readProblem(response));
-    return;
-  }
-  const finalUrl = response.headers.get('x-marlo-final-url') ?? url;
+/** Fetches a page through /try/fetch, decoded with the charset the site declared. */
+async function fetchPage(url, render) {
+  const response = await fetch(
+    `/try/fetch?url=${encodeURIComponent(url)}${render ? '&render=1' : ''}`,
+  );
+  if (!response.ok) return { error: await readProblem(response) };
   const bytes = await response.arrayBuffer();
   let html;
   try {
@@ -141,13 +143,42 @@ async function checkUrl(url) {
   } catch {
     html = new TextDecoder().decode(bytes);
   }
-  say(`Checking ${finalUrl}.`);
+  return {
+    html,
+    finalUrl: response.headers.get('x-marlo-final-url') ?? url,
+    via: response.headers.get('x-marlo-via') ?? 'fetch',
+  };
+}
+
+async function checkUrl(url) {
+  files.replaceChildren();
+  say(`Fetching ${url}.`);
+  let page = await fetchPage(url, false);
+  if (page.error !== undefined) {
+    say(page.error);
+    return;
+  }
+  let note = page.via === 'browser' ? VIA_BROWSER.refused : '';
+  say(`Checking ${page.finalUrl}.`);
   // The page's own URL as the base, so its stylesheets and images load in the preview and
   // the layout rules see it styled. Its scripts still do not run.
-  const outcome = await checkMarkup(html, { base: finalUrl, url: finalUrl });
+  let outcome = await checkMarkup(page.html, { base: page.finalUrl, url: page.finalUrl });
+  if (outcome.scriptRendered && page.via !== 'browser') {
+    say(`${page.finalUrl} builds itself with JavaScript. Loading it in a real browser.`);
+    const rendered = await fetchPage(page.finalUrl, true);
+    if (rendered.error === undefined) {
+      page = rendered;
+      note = VIA_BROWSER.rendered;
+      outcome = await checkMarkup(page.html, { base: page.finalUrl, url: page.finalUrl });
+    }
+  }
   show(outcome);
   lastDownload = outcome.report;
-  say(doneMessage(outcome.summary, finalUrl) + (outcome.scriptRendered ? SCRIPT_RENDERED : ''));
+  say(
+    doneMessage(outcome.summary, page.finalUrl) +
+      note +
+      (outcome.scriptRendered ? SCRIPT_RENDERED : ''),
+  );
 }
 
 async function github(path) {

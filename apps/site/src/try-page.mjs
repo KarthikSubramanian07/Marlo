@@ -31,9 +31,10 @@ export const TRY_CSP =
 
 /** Addresses to try, shown as buttons under the address box. */
 const ADDRESSES = [
-  // Each one is fetched from the site's Worker in production. The W3C's inaccessible demo
-  // refuses requests from Cloudflare's network, so it is not offered here.
+  // Each one is checked against production before it is listed. The W3C's demo refuses
+  // Cloudflare's Workers, so it shows the browser fallback at work.
   ['https://dequeuniversity.com/demo/mars/', "Deque's deliberately inaccessible demo"],
+  ['https://www.w3.org/WAI/demos/bad/before/home.html', "The W3C's inaccessible demo"],
   ['https://www.gov.uk/', 'GOV.UK, a well-built real site'],
   ['github.com/KarthikSubramanian07/Marlo/tree/main/apps/demo', "Marlo's demo pages on GitHub"],
 ];
@@ -184,8 +185,10 @@ export function tryPage({ origin, repo, samples, escapeHtml, scribble }) {
             </div>
             <p id="mt-url-hint" class="try__hint dim">
               A web address is fetched once by this site, which hands back that page's HTML and
-              keeps nothing. A repository is read straight from GitHub, up to twenty-five of its
-              HTML files. Either way the page's scripts do not run.
+              keeps nothing. If the site refuses automated requests, or builds itself with
+              JavaScript, a real browser in Cloudflare loads it instead. A repository is read
+              straight from GitHub, up to twenty-five of its HTML files. The preview never runs
+              the page's scripts.
             </p>
             <div class="try__samples" role="group" aria-label="Addresses to try">
               <span class="dim">Try:</span>
