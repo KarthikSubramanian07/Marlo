@@ -91,6 +91,17 @@ const FETCH_LIMIT_BYTES = 3 * 1024 * 1024;
 const FETCH_TIMEOUT_MS = 10000;
 const FETCH_MAX_REDIRECTS = 5;
 const FETCH_USER_AGENT = 'MarloPlayground/0.1 (+https://trymarlo.pages.dev/try/)';
+const BROWSER_TIMEOUT_MS = 40000;
+/** Statuses that mean "not you" rather than "not here": worth a real browser's try. */
+const REFUSALS = new Set([401, 403, 406, 418, 419, 429, 451]);
+const FALLBACK_HINT =
+  'Some sites refuse every automated request. Open the page and use the bookmarklet, which checks it inside your own browser.';
+const PROBLEM_HINT = {
+  REDIRECT_REFUSED: 'Enter the final address directly.',
+  TOO_MANY_REDIRECTS: 'Enter the final address directly.',
+  NOT_HTML: 'Enter the address of a web page.',
+  PAGE_TOO_LARGE: 'Save the page and paste the part you want checked.',
+};
 
 /** A public http(s) URL on a default port, or a sentence saying why not. */
 export function fetchableUrl(raw, ownHost) {
@@ -358,23 +369,15 @@ export function createSiteWorker({ origin, pages, api, tryCsp, outbound = (...a)
     );
   }
 
-  async function fetchPage(request) {
-    // Browsers send Sec-Fetch-Site on every request. Requiring same-origin keeps other
-    // websites' scripts from using this as a proxy; a client that forges it gains a capped,
-    // HTML-only fetch it could make itself.
-    if (request.headers.get('sec-fetch-site') !== 'same-origin')
-      return problem(
-        request,
-        403,
-        'SAME_ORIGIN_ONLY',
-        'This fetch serves the playground on this site only.',
-        'Use the playground at /try/, or fetch the page yourself and paste its HTML.',
-      );
-    const ownHost = new URL(origin).hostname;
-    const first = fetchableUrl(new URL(request.url).searchParams.get('url'), ownHost);
-    if (first.error)
-      return problem(request, 400, 'URL_REFUSED', first.error, 'Enter a public https address.');
-    let current = first.url;
+  /**
+   * The plain fetch: one GET from this Worker, following public redirects only. Returns the
+   * page as a response, or the problem to report and whether a real browser might succeed
+   * where this did not. Sites that refuse Cloudflare's Workers by network or by header
+   * often serve the same page to a browser, so a refusal is worth one more try; an address
+   * the rules refuse, a page that is not HTML or is too large, is not.
+   */
+  async function plainFetch(first, ownHost) {
+    let current = first;
     const deadline = AbortSignal.timeout(FETCH_TIMEOUT_MS);
     for (let hop = 0; hop <= FETCH_MAX_REDIRECTS; hop += 1) {
       let upstream;
@@ -388,15 +391,12 @@ export function createSiteWorker({ origin, pages, api, tryCsp, outbound = (...a)
       } catch (error) {
         const timedOut =
           error instanceof Error && /timeout|abort/i.test(error.name + error.message);
-        return problem(
-          request,
-          timedOut ? 504 : 502,
-          timedOut ? 'UPSTREAM_TIMEOUT' : 'UPSTREAM_UNREACHABLE',
-          timedOut
-            ? 'The site took longer than ten seconds to answer.'
-            : 'The site could not be reached.',
-          'Check the address, or open the page and use the bookmarklet.',
-        );
+        return {
+          retryable: true,
+          problem: timedOut
+            ? [504, 'UPSTREAM_TIMEOUT', 'The site took longer than ten seconds to answer.']
+            : [502, 'UPSTREAM_UNREACHABLE', 'The site could not be reached.'],
+        };
       }
       if ([301, 302, 303, 307, 308].includes(upstream.status)) {
         const location = upstream.headers.get('location');
@@ -405,42 +405,42 @@ export function createSiteWorker({ origin, pages, api, tryCsp, outbound = (...a)
             ? { error: 'A redirect without a destination.' }
             : fetchableUrl(new URL(location, current).href, ownHost);
         if (next.error)
-          return problem(
-            request,
-            502,
-            'REDIRECT_REFUSED',
-            `The site redirected somewhere this fetch will not follow. ${next.error}`,
-            'Enter the final address directly.',
-          );
+          return {
+            retryable: false,
+            problem: [
+              502,
+              'REDIRECT_REFUSED',
+              `The site redirected somewhere this fetch will not follow. ${next.error}`,
+            ],
+          };
         current = next.url;
         continue;
       }
       if (!upstream.ok)
-        return problem(
-          request,
-          502,
-          'UPSTREAM_STATUS',
-          `The site answered with status ${String(upstream.status)}.`,
-          'Some sites refuse automated requests. Open the page and use the bookmarklet instead.',
-        );
+        return {
+          retryable: REFUSALS.has(upstream.status) || upstream.status >= 500,
+          problem: [
+            502,
+            'UPSTREAM_STATUS',
+            `The site answered with status ${String(upstream.status)}.`,
+          ],
+        };
       const type = upstream.headers.get('content-type') ?? '';
       if (!/^\s*(text\/html|application\/xhtml\+xml)/i.test(type))
-        return problem(
-          request,
-          422,
-          'NOT_HTML',
-          `The address returned ${type || 'an unlabelled response'}, not an HTML page.`,
-          'Enter the address of a web page.',
-        );
+        return {
+          retryable: false,
+          problem: [
+            422,
+            'NOT_HTML',
+            `The address returned ${type || 'an unlabelled response'}, not an HTML page.`,
+          ],
+        };
       const declared = Number(upstream.headers.get('content-length'));
       if (declared > FETCH_LIMIT_BYTES)
-        return problem(
-          request,
-          413,
-          'PAGE_TOO_LARGE',
-          'The page is larger than three megabytes.',
-          'Save the page and paste the part you want checked.',
-        );
+        return {
+          retryable: false,
+          problem: [413, 'PAGE_TOO_LARGE', 'The page is larger than three megabytes.'],
+        };
       let seen = 0;
       const capped = (upstream.body ?? new Response('').body).pipeThrough(
         new TransformStream({
@@ -452,25 +452,109 @@ export function createSiteWorker({ origin, pages, api, tryCsp, outbound = (...a)
           },
         }),
       );
-      // Bytes, labelled so a browser will never render them as a page of this origin. The
-      // playground decodes them with the charset the site declared.
-      return new Response(capped, {
-        headers: {
-          'Content-Type': 'application/octet-stream',
-          'X-Marlo-Final-Url': current.href,
-          'X-Marlo-Content-Type': type,
-          'Cache-Control': 'no-store',
-          'Cross-Origin-Resource-Policy': 'same-origin',
-        },
-      });
+      return { response: pageResponse(capped, current.href, type, 'fetch') };
     }
-    return problem(
-      request,
-      502,
-      'TOO_MANY_REDIRECTS',
-      'The site redirected more than five times.',
-      'Enter the final address directly.',
-    );
+    return {
+      retryable: false,
+      problem: [502, 'TOO_MANY_REDIRECTS', 'The site redirected more than five times.'],
+    };
+  }
+
+  /** Bytes, labelled so a browser will never render them as a page of this origin. */
+  function pageResponse(body, finalUrl, type, via) {
+    return new Response(body, {
+      headers: {
+        'Content-Type': 'application/octet-stream',
+        'X-Marlo-Final-Url': finalUrl,
+        'X-Marlo-Content-Type': type,
+        'X-Marlo-Via': via,
+        'Cache-Control': 'no-store',
+        'Cross-Origin-Resource-Policy': 'same-origin',
+      },
+    });
+  }
+
+  /**
+   * The same page, loaded by a real browser in Cloudflare's Browser Run, through the
+   * marlo-fetcher Worker. That Worker has no public address; this service binding is the
+   * only way to reach it. DECISIONS.md D-015.
+   */
+  async function browserFetch(fetcher, url) {
+    let reply;
+    try {
+      reply = await fetcher.fetch('https://marlo-fetcher/render', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url.href }),
+        signal: AbortSignal.timeout(BROWSER_TIMEOUT_MS),
+      });
+    } catch {
+      return { problem: [504, 'BROWSER_TIMEOUT', 'A browser could not load the page in time.'] };
+    }
+    if (!reply.ok) {
+      let detail = 'A browser could not load the page either.';
+      try {
+        detail = (await reply.json()).detail ?? detail;
+      } catch {
+        // Keep the general sentence.
+      }
+      return { problem: [502, 'BROWSER_FAILED', detail] };
+    }
+    const bytes = new Uint8Array(await reply.arrayBuffer());
+    if (bytes.byteLength > FETCH_LIMIT_BYTES)
+      return { problem: [413, 'PAGE_TOO_LARGE', 'The page is larger than three megabytes.'] };
+    return { response: pageResponse(bytes, url.href, 'text/html; charset=utf-8', 'browser') };
+  }
+
+  async function fetchPage(request, env) {
+    // Browsers send Sec-Fetch-Site on every request. Requiring same-origin keeps other
+    // websites' scripts from using this as a proxy; a client that forges it gains a capped,
+    // HTML-only fetch it could make itself.
+    if (request.headers.get('sec-fetch-site') !== 'same-origin')
+      return problem(
+        request,
+        403,
+        'SAME_ORIGIN_ONLY',
+        'This fetch serves the playground on this site only.',
+        'Use the playground at /try/, or fetch the page yourself and paste its HTML.',
+      );
+    const ownHost = new URL(origin).hostname;
+    const params = new URL(request.url).searchParams;
+    const first = fetchableUrl(params.get('url'), ownHost);
+    if (first.error)
+      return problem(request, 400, 'URL_REFUSED', first.error, 'Enter a public https address.');
+    const fetcher = env?.FETCHER;
+    // render=1 asks for the browser directly: the playground sends it when the plain HTML
+    // turned out to be a page that builds itself with JavaScript.
+    const wantsBrowser = params.get('render') === '1';
+    let refused = null;
+    if (!wantsBrowser) {
+      const plain = await plainFetch(first.url, ownHost);
+      if (plain.response) return plain.response;
+      if (!plain.retryable || fetcher === undefined) {
+        const [status, code, detail] = plain.problem;
+        return problem(request, status, code, detail, PROBLEM_HINT[code] ?? FALLBACK_HINT);
+      }
+      refused = plain.problem;
+    } else if (fetcher === undefined) {
+      return problem(
+        request,
+        503,
+        'BROWSER_UNAVAILABLE',
+        'No browser is available to load this page.',
+        FALLBACK_HINT,
+      );
+    }
+    const viaBrowser = await browserFetch(fetcher, first.url);
+    if (viaBrowser.response) return viaBrowser.response;
+    // The browser got further than the plain fetch when it found the page and it was too
+    // large, so that is the answer to give.
+    if (refused === null || viaBrowser.problem[1] === 'PAGE_TOO_LARGE') {
+      const [status, code, detail] = viaBrowser.problem;
+      return problem(request, status, code, detail, PROBLEM_HINT[code] ?? FALLBACK_HINT);
+    }
+    const [status, code, detail] = refused;
+    return problem(request, status, code, `${detail} ${viaBrowser.problem[2]}`, FALLBACK_HINT);
   }
 
   async function handle(request, env) {
@@ -496,7 +580,7 @@ export function createSiteWorker({ origin, pages, api, tryCsp, outbound = (...a)
         'Use GET or HEAD to read this resource.',
         { Allow: 'GET, HEAD, OPTIONS' },
       );
-    if (path === '/try/fetch') return fetchPage(request);
+    if (path === '/try/fetch') return fetchPage(request, env);
     if (machine) {
       if (quality(request.headers.get('accept'), 'application/json') === 0)
         return problem(
