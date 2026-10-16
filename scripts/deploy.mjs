@@ -41,19 +41,30 @@ if (dryRun) {
   process.exit(0);
 }
 
+// The fetcher first: the site's FETCHER binding points at it, and a site deployed before
+// it would have a playground whose browser fallback answers with an error. D-015.
+console.log("\nDeploying marlo-fetcher, the playground's browser fallback.");
+run('pnpm', ['exec', 'wrangler', 'deploy', '--config', 'apps/fetcher/wrangler.toml']);
+
+// From apps/site, so Wrangler reads apps/site/wrangler.toml and its FETCHER binding. Run from
+// the root it finds no configuration and deploys the site with no bindings at all.
 console.log('\nDeploying to Cloudflare Pages.');
-run('pnpm', [
-  'exec',
-  'wrangler',
-  'pages',
-  'deploy',
-  'apps/site/dist',
-  '--project-name',
-  'trymarlo',
-  '--branch',
-  'main',
-  '--commit-dirty=true',
-]);
+run(
+  'pnpm',
+  [
+    'exec',
+    'wrangler',
+    'pages',
+    'deploy',
+    'dist',
+    '--project-name',
+    'trymarlo',
+    '--branch',
+    'main',
+    '--commit-dirty=true',
+  ],
+  { cwd: resolve(ROOT, 'apps/site') },
+);
 
 console.log('\nhttps://trymarlo.pages.dev');
 await verifyPublished(() => run('node', ['scripts/verify-site.mjs', 'https://trymarlo.pages.dev']));
