@@ -1,3 +1,9 @@
 name = "trymarlo"
 compatibility_date = "2026-07-29"
 pages_build_output_dir = "./dist"
+
+# The playground's fallback for pages that refuse a plain fetch or build themselves with
+# JavaScript: apps/fetcher, which loads the page in Cloudflare Browser Run. D-015.
+[[services]]
+binding = "FETCHER"
+service = "marlo-fetcher"

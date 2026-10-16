@@ -482,3 +482,95 @@ describe('the playground page fetch', () => {
     );
   });
 });
+
+describe('the browser fallback for pages that refuse a plain fetch', () => {
+  const ok = () =>
+    new Response('<p>plain</p>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  const status = (n) => async () => new Response('no', { status: n });
+  const fetcherThat = (reply) => {
+    const calls = [];
+    return {
+      calls,
+      FETCHER: {
+        async fetch(url, init) {
+          calls.push(JSON.parse(init.body).url);
+          return typeof reply === 'function' ? reply() : reply;
+        },
+      },
+    };
+  };
+  const call = (outbound, extraEnv, target, query = '') =>
+    createSiteWorker({ origin, pages, api, outbound }).fetch(
+      new Request(`${origin}/try/fetch?url=${encodeURIComponent(target)}${query}`, {
+        headers: { 'Sec-Fetch-Site': 'same-origin' },
+      }),
+      { ...env, ...extraEnv },
+    );
+  const browserPage = () =>
+    new Response('<p>from a browser</p>', { headers: { 'Content-Type': 'text/html' } });
+
+  it('asks a real browser when the site refuses the plain fetch, and says it did', async () => {
+    const f = fetcherThat(browserPage);
+    const response = await call(status(403), f, 'https://www.w3.org/demo');
+    expect(response.status).toBe(200);
+    expect(response.headers.get('x-marlo-via')).toBe('browser');
+    expect(await response.text()).toBe('<p>from a browser</p>');
+    expect(f.calls).toEqual(['https://www.w3.org/demo']);
+  });
+
+  it('uses the plain fetch when it works, and never starts a browser', async () => {
+    const f = fetcherThat(browserPage);
+    const response = await call(async () => ok(), f, 'https://example.com/');
+    expect(response.headers.get('x-marlo-via')).toBe('fetch');
+    expect(f.calls).toEqual([]);
+  });
+
+  it('does not ask a browser about a page that is simply not there', async () => {
+    const f = fetcherThat(browserPage);
+    const response = await call(status(404), f, 'https://example.com/missing');
+    expect((await response.json()).code).toBe('UPSTREAM_STATUS');
+    expect(f.calls).toEqual([]);
+  });
+
+  it('never sends a refused address to the browser', async () => {
+    const f = fetcherThat(browserPage);
+    expect((await call(status(403), f, 'http://10.0.0.5/')).status).toBe(400);
+    expect(f.calls).toEqual([]);
+  });
+
+  it('reports both refusals when the browser fails too', async () => {
+    const f = fetcherThat(
+      () => new Response(JSON.stringify({ detail: 'The browser is busy.' }), { status: 503 }),
+    );
+    const body = await (await call(status(419), f, 'https://news.example.com/')).json();
+    expect(body.code).toBe('UPSTREAM_STATUS');
+    expect(body.detail).toBe('The site answered with status 419. The browser is busy.');
+    expect(body.hint).toMatch(/bookmarklet/);
+  });
+
+  it('goes straight to the browser when the playground asks for a rendered page', async () => {
+    let plain = 0;
+    const f = fetcherThat(browserPage);
+    const response = await call(
+      async () => {
+        plain += 1;
+        return ok();
+      },
+      f,
+      'https://app.example.com/',
+      '&render=1',
+    );
+    expect(response.headers.get('x-marlo-via')).toBe('browser');
+    expect(plain).toBe(0);
+  });
+
+  it('says so when no browser is configured', async () => {
+    const response = await call(async () => ok(), {}, 'https://app.example.com/', '&render=1');
+    expect((await response.json()).code).toBe('BROWSER_UNAVAILABLE');
+  });
+
+  it('refuses a browser page over the size cap', async () => {
+    const f = fetcherThat(() => new Response(new Uint8Array(3 * 1024 * 1024 + 1)));
+    expect((await call(status(403), f, 'https://example.com/')).status).toBe(413);
+  });
+});
