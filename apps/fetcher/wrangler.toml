@@ -1,0 +1,11 @@
+# marlo-fetcher: loads one page in Cloudflare Browser Run for the playground on /try/.
+# No public address (workers_dev and preview URLs off); the site reaches it only through
+# its FETCHER service binding. DECISIONS.md D-015.
+name = "marlo-fetcher"
+main = "src/worker.mjs"
+compatibility_date = "2026-10-13"
+workers_dev = false
+preview_urls = false
+
+[browser]
+binding = "BROWSER"
