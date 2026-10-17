@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import type { Capability } from '@marlo/schema';
+import type { Capability } from '@trymarlo/schema';
 
 import {
   DEFAULT_URL,

@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { Window } from 'happy-dom';
-import type { Capability, RendererId } from '@marlo/schema';
-import { RENDERER_CAPABILITIES } from '@marlo/schema';
+import type { Capability, RendererId } from '@trymarlo/schema';
+import { RENDERER_CAPABILITIES } from '@trymarlo/schema';
 import type { RenderRequest, RenderedPage, Renderer } from './renderer.js';
 import { DEFAULT_URL, validateRequest } from './renderer.js';
 
@@ -168,7 +168,7 @@ export class StaticRenderer implements Renderer {
  * in the same process, and a leaked `globalThis.document` makes an unrelated test
  * fail somewhere else entirely.
  *
- * It lives in @marlo/render rather than in the Alfa adapter because
+ * It lives in @trymarlo/render rather than in the Alfa adapter because
  * `engines-go-through-the-render-seam` in .dependency-cruiser.cjs forbids an engine
  * adapter from importing happy-dom directly: an adapter that reaches for the DOM
  * itself could bypass the capability model, and then a rule needing layout could

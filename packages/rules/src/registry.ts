@@ -1,4 +1,4 @@
-import type { ActRuleId, Capability } from '@marlo/schema';
+import type { ActRuleId, Capability } from '@trymarlo/schema';
 import type { MarloRule } from './define.js';
 import {
   elementLangValid,

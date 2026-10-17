@@ -1,8 +1,28 @@
 {
-  "name": "@marlo/engines",
+  "name": "@trymarlo/engines",
   "version": "0.1.0",
   "description": "Peer engine adapters, and the hand-written mapping from each engine's rule identifiers to ACT rule identifiers.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/engines"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "axe-core",
+    "alfa",
+    "htmlcs"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -21,9 +41,9 @@
     "build": "tsc --build && esbuild src/alfa/browser-entry.ts --bundle --format=iife --global-name=MarloAlfa --platform=browser --target=es2022 --outfile=dist/alfa.browser.js --log-level=warning"
   },
   "dependencies": {
-    "@marlo/act": "workspace:*",
-    "@marlo/render": "workspace:*",
-    "@marlo/schema": "workspace:*",
+    "@trymarlo/act": "workspace:*",
+    "@trymarlo/render": "workspace:*",
+    "@trymarlo/schema": "workspace:*",
     "@siteimprove/alfa-act": "0.119.0",
     "@siteimprove/alfa-device": "0.119.0",
     "@siteimprove/alfa-dom": "0.119.0",

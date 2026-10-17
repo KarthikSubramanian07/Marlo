@@ -1,5 +1,5 @@
 /**
- * @marlo/schema
+ * @trymarlo/schema
  *
  * Every artifact Marlo produces, and its runtime validator. This package is the
  * vocabulary: it depends on nothing else in the repository, because a vocabulary

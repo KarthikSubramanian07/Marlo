@@ -1,4 +1,4 @@
-# @marlo/schema
+# @trymarlo/schema
 
 Every artifact Marlo produces, and its runtime validator.
 

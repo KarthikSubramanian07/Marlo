@@ -133,7 +133,7 @@ What matters architecturally is the shape, and the shape is: `RemoteRenderer` im
 
 The sibling project's worst defect survived because its auditor searched for the same incorrect URI its writer emitted. It confirmed its own bug and reported full compliance. Two of three checkers agreed and both were wrong.
 
-`@marlo/rules` therefore appears in `calibration/table.json` as one engine among four, measured by the same harness against the same corpus, with the same two accuracy views. `@marlo/rules` does not import `@marlo/engines`, so it cannot see peer results while deciding, and the dependency direction is enforced by a dependency rule rather than by convention.
+`@trymarlo/rules` therefore appears in `calibration/table.json` as one engine among four, measured by the same harness against the same corpus, with the same two accuracy views. `@trymarlo/rules` does not import `@trymarlo/engines`, so it cannot see peer results while deciding, and the dependency direction is enforced by a dependency rule rather than by convention.
 
 The uncomfortable consequence is accepted deliberately: where a peer is measurably better at a rule, the router sends that rule to the peer, and the table shows Marlo losing. That is the correct outcome and it is publicly visible.
 

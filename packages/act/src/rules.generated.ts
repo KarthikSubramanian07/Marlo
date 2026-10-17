@@ -5,7 +5,7 @@
  * Regenerate with `pnpm act:index`; `pnpm act:index --check` fails if this
  * file is stale, and CI runs the check.
  *
- * It is generated rather than read at import time because @marlo/act is pure:
+ * It is generated rather than read at import time because @trymarlo/act is pure:
  * no filesystem, no network, asserted by dependency-cruiser. rules.generated.test.ts
  * reads the manifest and asserts this file agrees with it field by field, so the
  * two cannot drift.

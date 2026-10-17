@@ -1,6 +1,6 @@
 import { parentPort, workerData } from 'node:worker_threads';
-import { StaticRenderer } from '@marlo/render';
-import { peerEngines } from '@marlo/engines';
+import { StaticRenderer } from '@trymarlo/render';
+import { peerEngines } from '@trymarlo/engines';
 import { MarloEngine } from './marlo-engine.js';
 import { evaluatePage, type WorkerJob } from './real-pool.js';
 

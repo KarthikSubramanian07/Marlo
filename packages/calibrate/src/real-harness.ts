@@ -6,8 +6,8 @@ import type {
   RealCorpusEntry,
   RealEngineAgreement,
   RoutingDecision,
-} from '@marlo/schema';
-import { aggregateStrictAccuracy, strictAccuracyOf, type GradedCase } from '@marlo/act';
+} from '@trymarlo/schema';
+import { aggregateStrictAccuracy, strictAccuracyOf, type GradedCase } from '@trymarlo/act';
 import type { Adjudication, RealCorpusSource, RealPage, SheetCell } from './real-corpus.js';
 import { cellKey } from './real-corpus.js';
 import type { PageEvaluation } from './real-pool.js';
@@ -299,7 +299,7 @@ export async function runRealHarness(options: RealHarnessOptions): Promise<RealH
     findings: Object.fromEntries(engines.map(({ id }) => [id, findingsOn(page, id)])),
   }));
 
-  // The invariant, as decideRule in @marlo/report applies it: the routed engine's outcome
+  // The invariant, as decideRule in @trymarlo/report applies it: the routed engine's outcome
   // is the starting point, and any other engine reporting a failure overrides a routed
   // verdict that is not a failure. A routed engine that errored has no verdict, which
   // decideRule treats as cantTell, so a peer failure fires the invariant there too.

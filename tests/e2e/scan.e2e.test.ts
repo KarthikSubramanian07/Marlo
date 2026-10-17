@@ -14,10 +14,10 @@ import { execFileSync, execSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { StaticRenderer } from '@marlo/render';
-import { renderSarif, renderTerminal } from '@marlo/report';
-import { scan } from '@marlo/cli';
-import { CalibrationTable } from '@marlo/schema';
+import { StaticRenderer } from '@trymarlo/render';
+import { renderSarif, renderTerminal } from '@trymarlo/report';
+import { scan } from '@trymarlo/cli';
+import { CalibrationTable } from '@trymarlo/schema';
 
 const ROOT = resolve(import.meta.dirname, '..', '..');
 const GOLDEN = resolve(ROOT, 'tests/golden');

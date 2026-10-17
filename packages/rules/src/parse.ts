@@ -4,12 +4,12 @@ import type { Box, ComputedStyle, MarloAttribute, MarloDocument, MarloElement } 
  * Builds the pure DOM view from a renderer's own DOM.
  *
  * The input is described structurally rather than by importing a DOM library, because
- * @marlo/rules is pure and a dependency rule forbids it from reaching for happy-dom.
+ * @trymarlo/rules is pure and a dependency rule forbids it from reaching for happy-dom.
  * The caller passes an object with the three methods this needs, which every DOM
  * implementation has.
  *
  * `range` is null here, always. Byte ranges come from the source parser in
- * @marlo/repair, which parses the original bytes rather than a serialised tree: a
+ * @trymarlo/repair, which parses the original bytes rather than a serialised tree: a
  * serialisation has already normalised attribute quoting and self-closing tags, so
  * offsets taken from it would not describe the file a fix has to edit.
  */

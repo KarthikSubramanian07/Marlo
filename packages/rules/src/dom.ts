@@ -1,7 +1,7 @@
 /**
  * A structural DOM view, hand-written.
  *
- * @marlo/rules is a pure package: no filesystem, no network, no DOM library. A rule is
+ * @trymarlo/rules is a pure package: no filesystem, no network, no DOM library. A rule is
  * a function over these interfaces, which means it can be run against a fixture built
  * by hand in a test without a renderer anywhere. That is what makes the contribution
  * path "one rule, one function, one fixture set" true rather than aspirational.

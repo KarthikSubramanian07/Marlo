@@ -130,7 +130,7 @@ runs:
         node "${GITHUB_ACTION_PATH}/resolve-files.mjs" >> "$GITHUB_OUTPUT"
 
     # Before the scan, so a scan that fails the job on its findings still leaves the pull
-    # request that fixes some of them. Every write goes through the client in @marlo/repair,
+    # request that fixes some of them. Every write goes through the client in @trymarlo/repair,
     # which refuses any branch outside marlo/, the default branch and a forced ref update.
     - name: Open a pull request with the verified fixes
       id: pull-request

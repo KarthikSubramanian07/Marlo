@@ -1,4 +1,4 @@
-import type { EngineId, EngineVerdict, RuleResult } from '@marlo/schema';
+import type { EngineId, EngineVerdict, RuleResult } from '@trymarlo/schema';
 
 /**
  * The one-directional invariant, applied to elements as well as to rules.

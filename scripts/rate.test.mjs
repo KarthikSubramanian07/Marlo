@@ -422,7 +422,7 @@ describe('what the server will and will not serve', () => {
 describe('independence from every engine and every published number', () => {
   const files = ['scripts/rate.mjs', 'scripts/adjudicate.mjs', 'scripts/rate/app.js'];
   const forbiddenImport =
-    /@marlo\/(?:engines|calibrate)\b|packages\/(?:engines|calibrate)\b|calibration\//;
+    /@trymarlo\/(?:engines|calibrate)\b|packages\/(?:engines|calibrate)\b|calibration\//;
 
   /** Every module specifier in a file: static imports, re-exports and dynamic imports. */
   function specifiers(file) {
@@ -443,19 +443,22 @@ describe('independence from every engine and every published number', () => {
 
   it('reaches no engine or harness through the workspace packages it does import', () => {
     const seen = new Set();
-    const queue = files.flatMap(specifiers).filter((s) => s.startsWith('@marlo/'));
+    const queue = files.flatMap(specifiers).filter((s) => s.startsWith('@trymarlo/'));
     expect(queue.length).toBeGreaterThan(0);
     while (queue.length > 0) {
       const name = String(queue.shift());
       if (seen.has(name)) continue;
       seen.add(name);
       const pkg = JSON.parse(
-        readFileSync(join(ROOT, 'packages', name.slice('@marlo/'.length), 'package.json'), 'utf8'),
+        readFileSync(
+          join(ROOT, 'packages', name.slice('@trymarlo/'.length), 'package.json'),
+          'utf8',
+        ),
       );
-      queue.push(...Object.keys(pkg.dependencies ?? {}).filter((d) => d.startsWith('@marlo/')));
+      queue.push(...Object.keys(pkg.dependencies ?? {}).filter((d) => d.startsWith('@trymarlo/')));
     }
-    expect([...seen].sort()).not.toContain('@marlo/engines');
-    expect([...seen].sort()).not.toContain('@marlo/calibrate');
+    expect([...seen].sort()).not.toContain('@trymarlo/engines');
+    expect([...seen].sort()).not.toContain('@trymarlo/calibrate');
   });
 
   it('reads no file outside its allow-list, so calibration output cannot reach the page', () => {

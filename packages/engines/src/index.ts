@@ -1,5 +1,5 @@
 /**
- * @marlo/engines
+ * @trymarlo/engines
  *
  * Peer engine adapters, and the hand-written mapping from each engine's rule
  * identifiers to ACT rule identifiers.
@@ -70,7 +70,7 @@ import { HtmlcsEngine } from './htmlcs/adapter.js';
 /**
  * The peer engines, in the order the calibration table lists them.
  *
- * Marlo's own engine is deliberately absent: it lives in @marlo/rules, which cannot
+ * Marlo's own engine is deliberately absent: it lives in @trymarlo/rules, which cannot
  * import this package, so that its column in the table is produced without ever
  * observing a peer. DECISIONS.md D-008.
  */

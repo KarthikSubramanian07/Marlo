@@ -264,8 +264,8 @@ async function main(argv) {
   const check = argv.includes('--check');
   const manifest = JSON.parse(readFileSync(join(ROOT, 'corpus', 'act', 'MANIFEST.json'), 'utf8'));
   const [{ IMPLEMENTED_RULES }, { findRule }] = await Promise.all([
-    import('@marlo/rules'),
-    import('@marlo/act'),
+    import('@trymarlo/rules'),
+    import('@trymarlo/act'),
   ]);
   const implemented = new Set(IMPLEMENTED_RULES);
   const expected = new Map(

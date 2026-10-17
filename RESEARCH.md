@@ -113,7 +113,7 @@ Consequence for the repository: `packages/engines/src/*/mapping.ts` is the highe
 
 **QualWeb.** Painful, because `@qualweb/act-rules` is the only engine that implements ACT rules under their own identifiers, which would remove hand-mapping for that engine entirely. It was archived on 2024-12-30. Marlo's whole claim is that its accuracy numbers are current and reproducible; depending on an archived engine for the mapping backbone would put a dead dependency under the load-bearing artifact. Adapter seam left in place, adapter not written. If QualWeb is un-archived this decision should be revisited first.
 
-**Nu Html Checker.** MIT, actively maintained, and the authoritative HTML validator, which matters for the two ACT rules about duplicate attributes and unique `id` values (`e6952f`, `3ea0c8`). It is a Java jar. Adding a JVM to the toolchain for two rules that are decidable directly from the DOM is a bad trade, and both rules are implemented in `@marlo/rules` instead. If a WCAG 4.1.1 parsing rule ever needs real HTML5 parser conformance, this is where to reach.
+**Nu Html Checker.** MIT, actively maintained, and the authoritative HTML validator, which matters for the two ACT rules about duplicate attributes and unique `id` values (`e6952f`, `3ea0c8`). It is a Java jar. Adding a JVM to the toolchain for two rules that are decidable directly from the DOM is a bad trade, and both rules are implemented in `@trymarlo/rules` instead. If a WCAG 4.1.1 parsing rule ever needs real HTML5 parser conformance, this is where to reach.
 
 ### Rejected
 
@@ -201,7 +201,7 @@ The hard part, and the place where prior art is thinnest. A violation is found o
 
 What was found: source-mapping approaches from the React DevTools lineage, which need a build-time transform; heuristic matching from the codemod lineage; and, in the accessibility tools specifically, almost nothing, because checkers do not need to locate anything.
 
-Marlo's position, stated as a limit rather than a solution: **locate exactly, or flag.** The static renderer path is unambiguous, because the DOM node came from a byte range in an HTML file and the parser records it, which is why HTML is the first-class input. For JSX and templates, `@marlo/repair` locates through the same recorded-offset mechanism when the construct is literal, and refuses when the attribute value is an expression, a spread, or comes from a prop. A refusal is a flag with the source location and the reason. Guessing which prop to change is how a tool ends up editing twenty call sites to fix one.
+Marlo's position, stated as a limit rather than a solution: **locate exactly, or flag.** The static renderer path is unambiguous, because the DOM node came from a byte range in an HTML file and the parser records it, which is why HTML is the first-class input. For JSX and templates, `@trymarlo/repair` locates through the same recorded-offset mechanism when the construct is literal, and refuses when the attribute value is an expression, a spread, or comes from a prop. A refusal is a flag with the source location and the reason. Guessing which prop to change is how a tool ends up editing twenty call sites to fix one.
 
 Component-system location is the largest deferred item in the build and it is the first workstream in [WORKSTREAMS.md](WORKSTREAMS.md).
 

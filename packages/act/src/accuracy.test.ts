@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { ExpectedOutcome, Outcome, StrictAccuracy } from '@marlo/schema';
+import type { ExpectedOutcome, Outcome, StrictAccuracy } from '@trymarlo/schema';
 
 import type { GradedCase } from './protocol.js';
 import {

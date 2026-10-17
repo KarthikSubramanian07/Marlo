@@ -20,8 +20,8 @@ import { frozenRecord } from './freeze.js';
  * An ACT rule identifier. Six characters, lower-case alphanumeric, assigned by
  * the ACT-Rules Community. Examples: `b5c3f8`, `c487ae`, `qt1vmo`.
  *
- * Validated by shape rather than against the corpus, because @marlo/schema is
- * pure and does not read files. @marlo/act checks membership.
+ * Validated by shape rather than against the corpus, because @trymarlo/schema is
+ * pure and does not read files. @trymarlo/act checks membership.
  */
 export const ActRuleId = z
   .string()

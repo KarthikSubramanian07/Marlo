@@ -31,11 +31,11 @@ Nine of the eleven merged in dependency order with green CI. The two things that
 
 ## Streams
 
-**A. Measurement.** Research gate, corpus vendoring, `@marlo/act`, `@marlo/calibrate`. The critical path, because nothing downstream can claim anything until the table exists. Ends at `calibration/table.json`.
+**A. Measurement.** Research gate, corpus vendoring, `@trymarlo/act`, `@trymarlo/calibrate`. The critical path, because nothing downstream can claim anything until the table exists. Ends at `calibration/table.json`.
 
-**B. Detection.** `@marlo/render`, `@marlo/engines`, `@marlo/rules`. Blocked only on `@marlo/schema`. Once schema landed, all three could have proceeded independently, and `rules` was written without reference to `engines` because the dependency rule forbids the import.
+**B. Detection.** `@trymarlo/render`, `@trymarlo/engines`, `@trymarlo/rules`. Blocked only on `@trymarlo/schema`. Once schema landed, all three could have proceeded independently, and `rules` was written without reference to `engines` because the dependency rule forbids the import.
 
-**C. Product.** `@marlo/report`, `@marlo/cli`, the site. Blocked on the table, since routing decisions and every published figure read from it.
+**C. Product.** `@trymarlo/report`, `@trymarlo/cli`, the site. Blocked on the table, since routing decisions and every published figure read from it.
 
 **D. Discipline.** The claim and prose scanners, the DCO check, the architecture rules, the duplicate check, the licence ledger. Landed in the foundation on purpose. Every one of them caught something afterwards, which is the only evidence a check is worth having.
 
@@ -54,7 +54,7 @@ Four of those six are unblocked, which is what the package boundaries were for.
 
 ## How the work was sized
 
-Every pull request answers one question and can be reviewed in one sitting. `@marlo/act` is separate from `@marlo/calibrate` even though nothing else consumes `@marlo/act` on its own, because "is this arithmetic correct" and "is this harness measuring the right thing" are two different reviews, and the second one is much harder to do while also checking a ratio.
+Every pull request answers one question and can be reviewed in one sitting. `@trymarlo/act` is separate from `@trymarlo/calibrate` even though nothing else consumes `@trymarlo/act` on its own, because "is this arithmetic correct" and "is this harness measuring the right thing" are two different reviews, and the second one is much harder to do while also checking a ratio.
 
 The one place that broke down: the foundation pull request is large, because a repository standard is not divisible. It introduces the type configuration, the architecture rules and the four scanners at once, and none of them work in isolation.
 

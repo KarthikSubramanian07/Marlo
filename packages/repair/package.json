@@ -1,8 +1,27 @@
 {
-  "name": "@marlo/repair",
+  "name": "@trymarlo/repair",
   "version": "0.1.0",
   "description": "Source location, minimal diffs, and the verification that makes a fix a fix.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/repair"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "codemod",
+    "repair"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -21,12 +40,12 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@marlo/act": "workspace:*",
-    "@marlo/engines": "workspace:*",
-    "@marlo/render": "workspace:*",
-    "@marlo/report": "workspace:*",
-    "@marlo/rules": "workspace:*",
-    "@marlo/schema": "workspace:*",
+    "@trymarlo/act": "workspace:*",
+    "@trymarlo/engines": "workspace:*",
+    "@trymarlo/render": "workspace:*",
+    "@trymarlo/report": "workspace:*",
+    "@trymarlo/rules": "workspace:*",
+    "@trymarlo/schema": "workspace:*",
     "parse5": "8.0.1"
   },
   "publishConfig": {

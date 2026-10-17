@@ -1,4 +1,4 @@
-# @marlo/repair
+# @trymarlo/repair
 
 Source location, minimal diffs, and the verification that makes a fix a fix.
 
@@ -42,7 +42,7 @@ That is the gate working rather than a shortfall. A codemod admitted because it 
 
 They are separate because passing two and failing the third is a fix that broke something else, and that has to be a flag rather than a success with a footnote. `noNewViolations` is the one that matters most and is easiest to skip: a codemod that closes its target and opens a different violation has made the page worse while reporting a win. Answering it honestly means a full re-run, and this does one.
 
-`Repair = VerifiedFix | Flag` in `@marlo/schema` has no `attempted` case, so an unverified fix has no representation to construct. This package cannot produce one however it is called.
+`Repair = VerifiedFix | Flag` in `@trymarlo/schema` has no `attempted` case, so an unverified fix has no representation to construct. This package cannot produce one however it is called.
 
 ## Why a rule gets a codemod
 

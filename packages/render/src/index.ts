@@ -1,5 +1,5 @@
 /**
- * @marlo/render
+ * @trymarlo/render
  *
  * The renderer seam and the capability model.
  *

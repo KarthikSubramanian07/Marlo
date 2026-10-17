@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Capability, ExpectedOutcome, Outcome } from '@marlo/schema';
+import type { Capability, ExpectedOutcome, Outcome } from '@trymarlo/schema';
 import type { Box, MarloDocument } from './dom.js';
 import { evaluateRules, fixture } from './index.js';
 import { contrastApplicability, measureContrast } from './paint.js';

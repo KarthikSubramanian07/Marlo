@@ -9,9 +9,9 @@ import type {
   Outcome,
   Proportion,
   StrategyScore,
-} from '@marlo/schema';
-import { AnalysisReport as AnalysisReportSchema } from '@marlo/schema';
-import { consistencyOf, strictAccuracyOf, type GradedCase } from '@marlo/act';
+} from '@trymarlo/schema';
+import { AnalysisReport as AnalysisReportSchema } from '@trymarlo/schema';
+import { consistencyOf, strictAccuracyOf, type GradedCase } from '@trymarlo/act';
 import { routeRule } from './harness.js';
 import { cohensKappa } from './real-harness.js';
 

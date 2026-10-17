@@ -1,11 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import type { CalibrationTable, Finding, FixReport, Flag, VerifiedFix } from '@marlo/schema';
+import type { CalibrationTable, Finding, FixReport, Flag, VerifiedFix } from '@trymarlo/schema';
 import {
   CalibrationTable as CalibrationTableSchema,
   FixReport as FixReportSchema,
-} from '@marlo/schema';
+} from '@trymarlo/schema';
 import { branchNameFor, planPullRequest, refusedPath } from './pull-request.js';
 
 /**

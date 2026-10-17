@@ -18,31 +18,31 @@ importers:
         specifier: 4.6.5
         version: 4.6.5
     devDependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:packages/act
-      '@marlo/calibrate':
+      '@trymarlo/calibrate':
         specifier: workspace:*
         version: link:packages/calibrate
-      '@marlo/cli':
+      '@trymarlo/cli':
         specifier: workspace:*
         version: link:packages/cli
-      '@marlo/engines':
+      '@trymarlo/engines':
         specifier: workspace:*
         version: link:packages/engines
-      '@marlo/mcp':
+      '@trymarlo/mcp':
         specifier: workspace:*
         version: link:packages/mcp
-      '@marlo/render':
+      '@trymarlo/render':
         specifier: workspace:*
         version: link:packages/render
-      '@marlo/report':
+      '@trymarlo/report':
         specifier: workspace:*
         version: link:packages/report
-      '@marlo/rules':
+      '@trymarlo/rules':
         specifier: workspace:*
         version: link:packages/rules
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:packages/schema
       '@types/node':
@@ -100,25 +100,25 @@ importers:
 
   packages/act:
     dependencies:
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
 
   packages/calibrate:
     dependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
-      '@marlo/engines':
+      '@trymarlo/engines':
         specifier: workspace:*
         version: link:../engines
-      '@marlo/render':
+      '@trymarlo/render':
         specifier: workspace:*
         version: link:../render
-      '@marlo/rules':
+      '@trymarlo/rules':
         specifier: workspace:*
         version: link:../rules
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
       zod:
@@ -131,42 +131,33 @@ importers:
 
   packages/cli:
     dependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
-      '@marlo/calibrate':
+      '@trymarlo/calibrate':
         specifier: workspace:*
         version: link:../calibrate
-      '@marlo/engines':
+      '@trymarlo/engines':
         specifier: workspace:*
         version: link:../engines
-      '@marlo/render':
+      '@trymarlo/render':
         specifier: workspace:*
         version: link:../render
-      '@marlo/repair':
+      '@trymarlo/repair':
         specifier: workspace:*
         version: link:../repair
-      '@marlo/report':
+      '@trymarlo/report':
         specifier: workspace:*
         version: link:../report
-      '@marlo/rules':
+      '@trymarlo/rules':
         specifier: workspace:*
         version: link:../rules
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
 
   packages/engines:
     dependencies:
-      '@marlo/act':
-        specifier: workspace:*
-        version: link:../act
-      '@marlo/render':
-        specifier: workspace:*
-        version: link:../render
-      '@marlo/schema':
-        specifier: workspace:*
-        version: link:../schema
       '@siteimprove/alfa-act':
         specifier: 0.119.0
         version: 0.119.0
@@ -188,6 +179,15 @@ importers:
       '@siteimprove/alfa-web':
         specifier: 0.119.0
         version: 0.119.0
+      '@trymarlo/act':
+        specifier: workspace:*
+        version: link:../act
+      '@trymarlo/render':
+        specifier: workspace:*
+        version: link:../render
+      '@trymarlo/schema':
+        specifier: workspace:*
+        version: link:../schema
       axe-core:
         specifier: 4.14.0
         version: 4.14.0
@@ -201,25 +201,25 @@ importers:
 
   packages/mcp:
     dependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
-      '@marlo/cli':
+      '@trymarlo/cli':
         specifier: workspace:*
         version: link:../cli
-      '@marlo/render':
+      '@trymarlo/render':
         specifier: workspace:*
         version: link:../render
-      '@marlo/rules':
+      '@trymarlo/rules':
         specifier: workspace:*
         version: link:../rules
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
 
   packages/render:
     dependencies:
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
       happy-dom:
@@ -228,22 +228,22 @@ importers:
 
   packages/repair:
     dependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
-      '@marlo/engines':
+      '@trymarlo/engines':
         specifier: workspace:*
         version: link:../engines
-      '@marlo/render':
+      '@trymarlo/render':
         specifier: workspace:*
         version: link:../render
-      '@marlo/report':
+      '@trymarlo/report':
         specifier: workspace:*
         version: link:../report
-      '@marlo/rules':
+      '@trymarlo/rules':
         specifier: workspace:*
         version: link:../rules
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
       parse5:
@@ -252,19 +252,19 @@ importers:
 
   packages/report:
     dependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
 
   packages/rules:
     dependencies:
-      '@marlo/act':
+      '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
-      '@marlo/schema':
+      '@trymarlo/schema':
         specifier: workspace:*
         version: link:../schema
 

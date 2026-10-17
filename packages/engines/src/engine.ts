@@ -5,9 +5,9 @@ import type {
   EngineReport,
   Outcome,
   RuleResult,
-} from '@marlo/schema';
-import type { RenderedPage } from '@marlo/render';
-import { checkCapabilities } from '@marlo/render';
+} from '@trymarlo/schema';
+import type { RenderedPage } from '@trymarlo/render';
+import { checkCapabilities } from '@trymarlo/render';
 
 /**
  * The engine adapter interface, and the mapping vocabulary that is the real work.

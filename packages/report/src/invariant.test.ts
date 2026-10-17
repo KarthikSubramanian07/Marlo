@@ -9,8 +9,8 @@ import type {
   EngineVerdict,
   Outcome,
   RuleResult,
-} from '@marlo/schema';
-import { CalibrationTable as CalibrationTableSchema } from '@marlo/schema';
+} from '@trymarlo/schema';
+import { CalibrationTable as CalibrationTableSchema } from '@trymarlo/schema';
 
 import { decideRule, invariantViolations } from './invariant.js';
 

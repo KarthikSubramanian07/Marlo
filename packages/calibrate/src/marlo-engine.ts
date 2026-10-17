@@ -1,9 +1,9 @@
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
-import type { ActRuleId, Capability, EngineId } from '@marlo/schema';
-import { EngineReport } from '@marlo/schema';
-import type { RenderedPage } from '@marlo/render';
-import type { Engine } from '@marlo/engines';
+import type { ActRuleId, Capability, EngineId } from '@trymarlo/schema';
+import { EngineReport } from '@trymarlo/schema';
+import type { RenderedPage } from '@trymarlo/render';
+import type { Engine } from '@trymarlo/engines';
 import {
   assembleReport,
   buildMapping,
@@ -12,21 +12,21 @@ import {
   evaluateInPage,
   narrowHandle,
   readBundle,
-} from '@marlo/engines';
+} from '@trymarlo/engines';
 import {
   IMPLEMENTED_RULES,
   buildDocument,
   evaluateRules,
   findMarloRule,
   type SourceElement,
-} from '@marlo/rules';
+} from '@trymarlo/rules';
 
 /**
- * Wraps @marlo/rules in the peer `Engine` interface so the harness measures Marlo the
+ * Wraps @trymarlo/rules in the peer `Engine` interface so the harness measures Marlo the
  * same way it measures everyone else.
  *
- * The wrapper lives here rather than in @marlo/rules because a dependency rule forbids
- * @marlo/rules from importing @marlo/engines, per D-008. That is not an inconvenience
+ * The wrapper lives here rather than in @trymarlo/rules because a dependency rule forbids
+ * @trymarlo/rules from importing @trymarlo/engines, per D-008. That is not an inconvenience
  * being worked around: it is the reason the wrapper is a separate, thin file that adds
  * no logic. Marlo's rules produce their verdicts without any knowledge that peers exist,
  * and this file only relabels the result.
@@ -50,20 +50,20 @@ let cachedBundle: string | null = null;
 function marloVersion(): string {
   cachedVersion ??= ((): string => {
     const pkg: unknown = JSON.parse(
-      readFileSync(require.resolve('@marlo/rules/package.json'), 'utf8'),
+      readFileSync(require.resolve('@trymarlo/rules/package.json'), 'utf8'),
     );
     if (typeof pkg === 'object' && pkg !== null && 'version' in pkg) {
       const version: unknown = Reflect.get(pkg, 'version');
       if (typeof version === 'string') return version;
     }
-    throw new Error('cannot read the @marlo/rules version');
+    throw new Error('cannot read the @trymarlo/rules version');
   })();
   return cachedVersion;
 }
 
 /** Where the build puts the rules browser bundle. Works from `src` and from `dist`. */
 export function marloBundlePath(): string {
-  return bundlePath(require.resolve('@marlo/calibrate/package.json'), 'marlo.browser.js');
+  return bundlePath(require.resolve('@trymarlo/calibrate/package.json'), 'marlo.browser.js');
 }
 
 function marloBundleSource(): string {
@@ -71,7 +71,7 @@ function marloBundleSource(): string {
   return cachedBundle;
 }
 
-/** Narrows a renderer handle to the DOM shape @marlo/rules can convert. */
+/** Narrows a renderer handle to the DOM shape @trymarlo/rules can convert. */
 function documentOf(handle: unknown): { root: SourceElement; hasDoctype: boolean } {
   if (typeof handle !== 'object' || handle === null || !('document' in handle)) {
     throw new TypeError('the marlo engine needs a DOM window');
@@ -154,7 +154,7 @@ export class MarloEngine implements Engine {
           `return MarloRules.evaluate(${JSON.stringify(actRuleIds)}, ${options});`,
         );
         // Validated rather than cast. The report was produced in another process by a
-        // bundle built from some revision of @marlo/rules, and the schema is the contract.
+        // bundle built from some revision of @trymarlo/rules, and the schema is the contract.
         return EngineReport.parse(raw);
       } catch (error) {
         // A real page can fail in ways a happy-dom window cannot: a meta refresh or a

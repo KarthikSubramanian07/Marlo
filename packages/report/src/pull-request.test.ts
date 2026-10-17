@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { Finding, Flag, PullRequestBody, VerifiedFix } from '@marlo/schema';
-import { PullRequestBody as PullRequestBodySchema } from '@marlo/schema';
+import type { Finding, Flag, PullRequestBody, VerifiedFix } from '@trymarlo/schema';
+import { PullRequestBody as PullRequestBodySchema } from '@trymarlo/schema';
 import { pullRequestTitle, renderPullRequestBody } from './pull-request.js';
 
 /**

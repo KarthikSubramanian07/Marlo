@@ -1,9 +1,9 @@
 /**
- * @marlo/repair
+ * @trymarlo/repair
  *
  * Source location, minimal diffs, and the verification that makes a fix a fix.
  *
- * The shape to know: `Repair = VerifiedFix | Flag`, from `@marlo/schema`, with no `attempted`
+ * The shape to know: `Repair = VerifiedFix | Flag`, from `@trymarlo/schema`, with no `attempted`
  * case and no verification-optional variant. An unverified fix has no representation, so this
  * package cannot produce one however it is called. What it can do is fail to earn the
  * `VerifiedFix` side, and then it says which of the three verification questions went wrong.

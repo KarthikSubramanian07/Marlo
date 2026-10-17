@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { ActRuleId, EngineReport, FixedFile, Repair, ScanReport } from '@marlo/schema';
-import { CalibrationTable, EXIT_CODES, FixReport } from '@marlo/schema';
-import type { Renderer } from '@marlo/render';
-import { BrowserRenderer, PlaywrightMissingError, StaticRenderer } from '@marlo/render';
-import { peerEngines } from '@marlo/engines';
-import { MarloEngine } from '@marlo/calibrate';
-import { renderSarif, renderTerminal, shouldUseColour } from '@marlo/report';
-import { repairFinding, repairedText } from '@marlo/repair';
+import type { ActRuleId, EngineReport, FixedFile, Repair, ScanReport } from '@trymarlo/schema';
+import { CalibrationTable, EXIT_CODES, FixReport } from '@trymarlo/schema';
+import type { Renderer } from '@trymarlo/render';
+import { BrowserRenderer, PlaywrightMissingError, StaticRenderer } from '@trymarlo/render';
+import { peerEngines } from '@trymarlo/engines';
+import { MarloEngine } from '@trymarlo/calibrate';
+import { renderSarif, renderTerminal, shouldUseColour } from '@trymarlo/report';
+import { repairFinding, repairedText } from '@trymarlo/repair';
 import { exitCodeFor, newRunId, scan } from './pipeline.js';
 import {
   calibrationTableFor,

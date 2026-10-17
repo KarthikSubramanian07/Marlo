@@ -1,5 +1,5 @@
-import type { ActRuleId, Capability, EngineReport, RendererId } from '@marlo/schema';
-import { buildDocument, evaluateRules, type Box, type SourceElement } from '@marlo/rules';
+import type { ActRuleId, Capability, EngineReport, RendererId } from '@trymarlo/schema';
+import { buildDocument, evaluateRules, type Box, type SourceElement } from '@trymarlo/rules';
 
 /**
  * The entry point of the Marlo rules browser bundle.
@@ -10,14 +10,14 @@ import { buildDocument, evaluateRules, type Box, type SourceElement } from '@mar
  * `MarloRules.evaluate(actRuleIds, options)`, which returns the finished `EngineReport`
  * as plain JSON.
  *
- * @marlo/rules is pure, so the bundle is the rules plus this file. What this file adds is
+ * @trymarlo/rules is pure, so the bundle is the rules plus this file. What this file adds is
  * the two things only a laid-out page can supply and that `ParseOptions` otherwise takes
  * as null: resolved styles from the real `getComputedStyle`, and each element's border
  * box in document coordinates. Resolving styles for every element at build time is
  * acceptable here because a scan is not a hot path, and it is what makes the layout
  * rules evaluated rather than `unsupported`.
  *
- * It lives here rather than in @marlo/rules because this is where `MarloEngine` lives,
+ * It lives here rather than in @trymarlo/rules because this is where `MarloEngine` lives,
  * and because a browser entry is a packaging concern, not a rule.
  */
 

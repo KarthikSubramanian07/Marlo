@@ -1,10 +1,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { CalibrationTable } from '@marlo/schema';
-import { BrowserRenderer } from '@marlo/render';
-import { renderSarif, renderTerminal } from '@marlo/report';
-import { calibrationTableFor, scan } from '@marlo/cli';
+import { CalibrationTable } from '@trymarlo/schema';
+import { BrowserRenderer } from '@trymarlo/render';
+import { renderSarif, renderTerminal } from '@trymarlo/report';
+import { calibrationTableFor, scan } from '@trymarlo/cli';
 
 /**
  * The whole pipeline through a real browser, compared to committed output.

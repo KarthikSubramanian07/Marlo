@@ -3,9 +3,9 @@ import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { CalibrationTable, EXIT_CODES, FixReport } from '@marlo/schema';
-import { StaticRenderer } from '@marlo/render';
-import { renderSarif, renderTerminal } from '@marlo/report';
+import { CalibrationTable, EXIT_CODES, FixReport } from '@trymarlo/schema';
+import { StaticRenderer } from '@trymarlo/render';
+import { renderSarif, renderTerminal } from '@trymarlo/report';
 
 import { exitCodeFor, newRunId, scan } from './pipeline.js';
 import {

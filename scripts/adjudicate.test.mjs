@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { IMPLEMENTED_RULES } from '@marlo/rules';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
 import {
   PRESCREEN,
   buildSheet,

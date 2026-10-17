@@ -1,5 +1,5 @@
 /**
- * @marlo/rules
+ * @trymarlo/rules
  *
  * Marlo's own ACT rule implementations. One rule is one file and one registry line.
  *
@@ -8,7 +8,7 @@
  * test with no renderer anywhere. That is what makes "one rule, one function, one
  * fixture set" true rather than aspirational.
  *
- * It cannot import @marlo/engines. A dependency rule enforces that, per DECISIONS.md
+ * It cannot import @trymarlo/engines. A dependency rule enforces that, per DECISIONS.md
  * D-008: Marlo's engine is graded in the same calibration table as its peers, so it
  * must not be able to observe them while deciding. The sibling PDF project's worst
  * defect survived precisely because its auditor could see what its writer had done.

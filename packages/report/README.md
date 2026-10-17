@@ -1,4 +1,4 @@
-# @marlo/report
+# @trymarlo/report
 
 The four surfaces a finding can leave through: the terminal, a pull request body, SARIF, and the JSON report.
 

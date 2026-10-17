@@ -1,8 +1,16 @@
-# @marlo/cli
+# @trymarlo/cli
 
+```sh
+npx @trymarlo/cli scan index.html
 ```
-marlo scan index.html
+
+Or install it, and `marlo` is on the path of your scripts and CI:
+
+```sh
+npm install --save-dev @trymarlo/cli
 ```
+
+Node 22.13 or later. With nothing but Docker: `docker run --rm -v "$PWD:/work" ghcr.io/karthiksubramanian07/marlo scan index.html`.
 
 ## What it does that other scanners do not
 
@@ -10,13 +18,14 @@ marlo scan index.html
 
 **It tells you what it did not check, first.** The static renderer has no layout, so the contrast rules report as not evaluated, printed above the findings with the words "This is not a pass". A scanner that quietly omits what it could not do is how a page ships broken with a clean report.
 
-**It refuses to pretend.** `marlo fix` exits 2 and says the repair layer is not merged. There is deliberately no `--fix` flag that does nothing, and `--renderer browser` is refused rather than silently downgraded to static, because a silent downgrade would report layout rules as unevaluated while the caller believed they had been checked.
+**It refuses to pretend.** `marlo fix` applies only edits it has verified, and only for rules whose engine clears the published accuracy threshold; everything else comes back as a flag with the change attached and not applied. Without `--write` it changes nothing. `--renderer browser` without Playwright installed is refused rather than silently downgraded to static, because a silent downgrade would report layout rules as unevaluated while the caller believed they had been checked.
 
 ## Verbs
 
 |                          |                                                 |
 | ------------------------ | ----------------------------------------------- |
 | `marlo scan <file...>`   | Findings, with provenance and measured accuracy |
+| `marlo fix <file...>`    | Verified fixes; `--write` to apply them         |
 | `marlo explain <act-id>` | Every engine's numbers for one rule, both views |
 | `marlo coverage`         | The fraction, with its denominator              |
 

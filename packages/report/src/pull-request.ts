@@ -1,5 +1,5 @@
-import type { PullRequestBody, VerifiedFix, Flag, Edit } from '@marlo/schema';
-import { SEVERITY_PRESENTATION, formatCoverage } from '@marlo/schema';
+import type { PullRequestBody, VerifiedFix, Flag, Edit } from '@trymarlo/schema';
+import { SEVERITY_PRESENTATION, formatCoverage } from '@trymarlo/schema';
 
 /**
  * The generated pull request body. The other thing developers judge Marlo by.

@@ -41,7 +41,7 @@
  *
  *   node scripts/discover-mappings.mjs --engine alfa
  *
- * Alfa goes through @marlo/render's StaticRenderer and withDomGlobals rather than a
+ * Alfa goes through @trymarlo/render's StaticRenderer and withDomGlobals rather than a
  * bare happy-dom window, because its modules read DOM globals at import time. That is
  * the same path the calibration harness uses, so what this reports for Alfa is what the
  * table will measure. It needs `pnpm build` to have run.
@@ -68,7 +68,7 @@ if (!['axe', 'htmlcs', 'alfa'].includes(engineName)) {
   process.exit(2);
 }
 
-// happy-dom is a dependency of @marlo/render, not of this script, because the
+// happy-dom is a dependency of @trymarlo/render, not of this script, because the
 // dependency rules keep DOM construction behind the render seam. Resolving from there
 // rather than adding a root dependency keeps that boundary honest.
 const { Window } = await import(

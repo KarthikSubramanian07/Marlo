@@ -1,6 +1,6 @@
 import { parse } from 'parse5';
 import type { DefaultTreeAdapterTypes } from 'parse5';
-import type { SourceRange } from '@marlo/schema';
+import type { SourceRange } from '@trymarlo/schema';
 
 /**
  * Where things are in the source bytes.

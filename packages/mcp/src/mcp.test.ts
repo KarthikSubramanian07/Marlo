@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import type { CalibrationTable } from '@marlo/schema';
-import { CalibrationTable as CalibrationTableSchema } from '@marlo/schema';
+import type { CalibrationTable } from '@trymarlo/schema';
+import { CalibrationTable as CalibrationTableSchema } from '@trymarlo/schema';
 import { TOOLS, callTool, refusedTools } from './server.js';
 import { handle } from './transport.js';
 

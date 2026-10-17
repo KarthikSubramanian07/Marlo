@@ -2,11 +2,11 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import type { ActRuleId, CalibrationTable, Edit, Finding } from '@marlo/schema';
-import { CalibrationTable as CalibrationTableSchema } from '@marlo/schema';
-import { StaticRenderer } from '@marlo/render';
-import { peerEngines } from '@marlo/engines';
-import { type SourceElement, buildDocument, evaluateRules } from '@marlo/rules';
+import type { ActRuleId, CalibrationTable, Edit, Finding } from '@trymarlo/schema';
+import { CalibrationTable as CalibrationTableSchema } from '@trymarlo/schema';
+import { StaticRenderer } from '@trymarlo/render';
+import { peerEngines } from '@trymarlo/engines';
+import { type SourceElement, buildDocument, evaluateRules } from '@trymarlo/rules';
 import {
   EditConflictError,
   applyEdits,

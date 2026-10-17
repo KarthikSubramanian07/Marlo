@@ -1,8 +1,27 @@
 {
-  "name": "@marlo/render",
+  "name": "@trymarlo/render",
   "version": "0.1.0",
   "description": "The renderer seam and the capability model. What Marlo is allowed to conclude depends on what rendered the page.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/render"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "happy-dom",
+    "playwright"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -21,7 +40,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@marlo/schema": "workspace:*",
+    "@trymarlo/schema": "workspace:*",
     "happy-dom": "20.14.6"
   },
   "peerDependencies": {

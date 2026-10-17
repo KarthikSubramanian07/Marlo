@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
-import { ActRuleId, Outcome } from '@marlo/schema';
+import { ActRuleId, Outcome } from '@trymarlo/schema';
 
 /**
  * Reads corpus/real from disk: the snapshotted pages and the human adjudication record.
