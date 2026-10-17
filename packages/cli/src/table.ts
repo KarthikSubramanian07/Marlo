@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import type { RendererId } from '@marlo/schema';
 
 /**
@@ -18,7 +19,7 @@ import type { RendererId } from '@marlo/schema';
 /** The renderers a scan can be run with. `remote` is a seam with nothing behind it. */
 export type ScanRenderer = Extract<RendererId, 'static' | 'browser'>;
 
-/** The committed table for each renderer, relative to the repository root. */
+/** The committed table for each renderer, relative to the repository root or the package. */
 export const TABLE_BY_RENDERER: Readonly<Record<ScanRenderer, string>> = Object.freeze({
   static: 'calibration/table.json',
   browser: 'calibration/browser.json',
@@ -38,6 +39,29 @@ export function calibrationTableFor(
   const preferred = TABLE_BY_RENDERER[renderer];
   if (renderer === 'static' || exists(preferred)) return { relative: preferred, fellBack: false };
   return { relative: TABLE_BY_RENDERER.static, fellBack: true };
+}
+
+const PACKAGE_DIR = resolve(import.meta.dirname, '..');
+
+/**
+ * Where a table may be on disk, in the order they are tried.
+ *
+ * An installed package carries its own copy, staged into the package when it is packed
+ * (scripts/stage-calibration.mjs), because node_modules has no repository root above it. A
+ * checkout has no such copy and reads the committed file at the root, so a fresh
+ * `pnpm calibrate` is what the next scan reads.
+ */
+export function tableCandidates(relative: string, packageDir: string = PACKAGE_DIR): string[] {
+  return [resolve(packageDir, relative), resolve(packageDir, '..', '..', relative)];
+}
+
+/** The first candidate that exists, or null when the table is nowhere to be found. */
+export function locateTable(
+  relative: string,
+  exists: (path: string) => boolean,
+  packageDir: string = PACKAGE_DIR,
+): string | null {
+  return tableCandidates(relative, packageDir).find((path) => exists(path)) ?? null;
 }
 
 /** The footer line naming the table, so a reader can go and check the figure. */

@@ -10,8 +10,6 @@ import { resolve } from 'node:path';
 import { loadTable } from './server.js';
 import { serve } from './transport.js';
 
-const ROOT = resolve(import.meta.dirname, '..', '..', '..');
-
 function version(): string {
   try {
     const pkg = JSON.parse(
@@ -35,13 +33,13 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
       'Add to a client config as:',
       '  { "command": "marlo-mcp" }',
       '',
-      `Version ${version()}. Needs calibration/table.json, which is committed.`,
+      `Version ${version()}. Reads calibration/table.json from the CLI package.`,
       '',
     ].join('\n'),
   );
 } else {
   try {
-    const table = loadTable(ROOT);
+    const table = loadTable();
     await serve({ table, marloVersion: version() });
   } catch (error) {
     process.stderr.write(`marlo-mcp: ${error instanceof Error ? error.message : String(error)}\n`);

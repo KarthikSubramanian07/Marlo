@@ -1,4 +1,6 @@
 node_modules/
+# Staged into the CLI package only while it is packed. scripts/stage-calibration.mjs.
+packages/cli/calibration/
 dist/
 build/
 coverage/

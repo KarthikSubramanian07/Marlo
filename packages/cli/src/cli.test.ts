@@ -8,7 +8,13 @@ import { StaticRenderer } from '@marlo/render';
 import { renderSarif, renderTerminal } from '@marlo/report';
 
 import { exitCodeFor, newRunId, scan } from './pipeline.js';
-import { TABLE_BY_RENDERER, calibrationTableFor, describeTableChoice } from './table.js';
+import {
+  TABLE_BY_RENDERER,
+  calibrationTableFor,
+  describeTableChoice,
+  locateTable,
+  tableCandidates,
+} from './table.js';
 
 const ROOT = resolve(import.meta.dirname, '..', '..', '..');
 const table = CalibrationTable.parse(
@@ -463,6 +469,27 @@ describe('which calibration table a scan reads', () => {
   it('does not apologise when nothing fell back', () => {
     const line = describeTableChoice({ relative: 'calibration/browser.json', fellBack: false });
     expect(line).toBe('  calibration table: calibration/browser.json');
+  });
+
+  it('looks inside an installed package before the repository root', () => {
+    const pkg = '/srv/app/node_modules/@scope/cli';
+    expect(tableCandidates('calibration/table.json', pkg)).toEqual([
+      '/srv/app/node_modules/@scope/cli/calibration/table.json',
+      '/srv/app/node_modules/calibration/table.json',
+    ]);
+    const shipped = (path: string) => path.startsWith(pkg);
+    expect(locateTable('calibration/table.json', shipped, pkg)).toBe(
+      '/srv/app/node_modules/@scope/cli/calibration/table.json',
+    );
+  });
+
+  it('reads the root table in a checkout, where the package carries no copy', () => {
+    const pkg = '/work/marlo/packages/cli';
+    const atRoot = (path: string) => path === '/work/marlo/calibration/table.json';
+    expect(locateTable('calibration/table.json', atRoot, pkg)).toBe(
+      '/work/marlo/calibration/table.json',
+    );
+    expect(locateTable('calibration/table.json', () => false, pkg)).toBeNull();
   });
 
   it('keeps the two file names where the harness writes them', () => {

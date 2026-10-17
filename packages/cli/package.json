@@ -15,10 +15,13 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "calibration",
     "README.md"
   ],
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build",
+    "prepack": "node ../../scripts/stage-calibration.mjs",
+    "postpack": "node ../../scripts/stage-calibration.mjs --clean"
   },
   "dependencies": {
     "@marlo/act": "workspace:*",
