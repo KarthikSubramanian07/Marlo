@@ -3,7 +3,7 @@
 ## How a page moves through
 
 ```
-                   .-- @marlo/rules ------.
+                   .-- @trymarlo/rules ------.
 source ---> render -+-- axe-core ---------+--> normalise --> route --> invariant --> report
               |     +-- Alfa -------------+       to ACT       |          |
               |     `-- HTML CodeSniffer -'        ids         |          |
@@ -25,19 +25,19 @@ Two artifacts are load-bearing. Everything else consumes them.
 
 Pure logic is separated from I/O by package boundary rather than by convention, and a dependency-cruiser rule enforces it.
 
-| Package            | I/O          | Responsibility                                                                                                             |
-| ------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| `@marlo/schema`    | none         | Every artifact type and its Zod validator. The vocabulary.                                                                 |
-| `@marlo/act`       | none         | The 94 rules as generated data, the W3C grading protocol, accuracy and coverage arithmetic. Every line and branch covered. |
-| `@marlo/rules`     | none         | Marlo's own rule implementations, the colour arithmetic and the paint-order walk. One rule, one file, one fixture set.     |
-| `@marlo/render`    | DOM, browser | The renderer seam and the capability model.                                                                                |
-| `@marlo/engines`   | via render   | Three peer adapters, each able to run in-process or inside a browser page, and the hand-written ACT mappings.              |
-| `@marlo/calibrate` | fs           | Runs every engine over both corpora, on either renderer, and produces the tables.                                          |
-| `@marlo/report`    | none         | The invariant per rule and per element, the terminal surface, SARIF, the pull request body.                                |
-| `@marlo/repair`    | GitHub REST  | Source location, minimal verified diffs, the pull request planner, and the GitHub client the Action uses.                  |
-| `@marlo/cli`       | everything   | `marlo scan`, `fix`, `explain`, `coverage`.                                                                                |
-| `@marlo/mcp`       | stdio        | Three read-only tools over MCP. No tool that writes.                                                                       |
-| `apps/site`        | Cloudflare   | trymarlo.pages.dev, generated from the table.                                                                              |
+| Package               | I/O          | Responsibility                                                                                                             |
+| --------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `@trymarlo/schema`    | none         | Every artifact type and its Zod validator. The vocabulary.                                                                 |
+| `@trymarlo/act`       | none         | The 94 rules as generated data, the W3C grading protocol, accuracy and coverage arithmetic. Every line and branch covered. |
+| `@trymarlo/rules`     | none         | Marlo's own rule implementations, the colour arithmetic and the paint-order walk. One rule, one file, one fixture set.     |
+| `@trymarlo/render`    | DOM, browser | The renderer seam and the capability model.                                                                                |
+| `@trymarlo/engines`   | via render   | Three peer adapters, each able to run in-process or inside a browser page, and the hand-written ACT mappings.              |
+| `@trymarlo/calibrate` | fs           | Runs every engine over both corpora, on either renderer, and produces the tables.                                          |
+| `@trymarlo/report`    | none         | The invariant per rule and per element, the terminal surface, SARIF, the pull request body.                                |
+| `@trymarlo/repair`    | GitHub REST  | Source location, minimal verified diffs, the pull request planner, and the GitHub client the Action uses.                  |
+| `@trymarlo/cli`       | everything   | `marlo scan`, `fix`, `explain`, `coverage`.                                                                                |
+| `@trymarlo/mcp`       | stdio        | Three read-only tools over MCP. No tool that writes.                                                                       |
+| `apps/site`           | Cloudflare   | trymarlo.pages.dev, generated from the table.                                                                              |
 
 ## The three rules that shape everything
 
@@ -51,9 +51,9 @@ Enforced structurally rather than by review: `rules.test.ts` runs every rule twi
 
 ### Marlo's engine cannot see its peers
 
-`@marlo/rules` may not import `@marlo/engines`. The sibling project's worst defect survived because its auditor searched for the same wrong URI its writer emitted, confirming its own bug and reporting success.
+`@trymarlo/rules` may not import `@trymarlo/engines`. The sibling project's worst defect survived because its auditor searched for the same wrong URI its writer emitted, confirming its own bug and reporting success.
 
-The cost is a small duplication: `@marlo/rules` assembles an `EngineReport` and so does `@marlo/engines`. That duplication _is_ the enforcement, and it is cheaper than the alternative. `MarloEngine` in `@marlo/calibrate` is the wrapper that lets the harness treat Marlo like any other engine, and a test strips its comments and asserts the code contains no verdict logic.
+The cost is a small duplication: `@trymarlo/rules` assembles an `EngineReport` and so does `@trymarlo/engines`. That duplication _is_ the enforcement, and it is cheaper than the alternative. `MarloEngine` in `@trymarlo/calibrate` is the wrapper that lets the harness treat Marlo like any other engine, and a test strips its comments and asserts the code contains no verdict logic.
 
 ### Routing decides who speaks, not who may be silenced
 

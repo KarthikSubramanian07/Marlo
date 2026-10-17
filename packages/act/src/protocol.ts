@@ -1,11 +1,11 @@
-import type { ActConsistency, AutomationLevel, ExpectedOutcome, Outcome } from '@marlo/schema';
-import { ACT_ALLOWED_OUTCOMES } from '@marlo/schema';
+import type { ActConsistency, AutomationLevel, ExpectedOutcome, Outcome } from '@trymarlo/schema';
+import { ACT_ALLOWED_OUTCOMES } from '@trymarlo/schema';
 
 /**
  * The official W3C grading protocol, implemented.
  *
  * Source: `pages/implementations/mapping.md` in `act-rules/act-rules.github.io`.
- * The allowed-outcome table itself lives in @marlo/schema as frozen data, so this
+ * The allowed-outcome table itself lives in @trymarlo/schema as frozen data, so this
  * module and the calibration harness cannot hold different opinions about what the
  * protocol says.
  *

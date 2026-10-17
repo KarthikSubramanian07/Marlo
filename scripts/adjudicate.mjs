@@ -464,8 +464,8 @@ export async function corpusContext() {
   let rules;
   try {
     const [{ IMPLEMENTED_RULES }, { findRule }] = await Promise.all([
-      import('@marlo/rules'),
-      import('@marlo/act'),
+      import('@trymarlo/rules'),
+      import('@trymarlo/act'),
     ]);
     rules = IMPLEMENTED_RULES.map((id) => ({ id, name: findRule(id)?.name ?? id }));
   } catch (error) {

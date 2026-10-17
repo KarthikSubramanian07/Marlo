@@ -8,7 +8,7 @@ import { defineConfig } from 'vitest/config';
  * Their `exports` point into `dist`, which is correct for a consumer and wrong for the
  * test suite: it makes `pnpm test` depend on a prior `pnpm build`. That passes locally,
  * where the built output happens to exist, and fails in CI on a clean checkout with
- * "Failed to resolve entry for package @marlo/schema".
+ * "Failed to resolve entry for package @trymarlo/schema".
  *
  * Aliasing to source is the fix rather than adding a build step, for three reasons. A
  * suite that needs a build is a suite contributors run against stale output. The coverage
@@ -32,7 +32,7 @@ if (existsSync(packagesDir)) {
   for (const entry of readdirSync(packagesDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     const source = resolve(packagesDir, entry.name, 'src', 'index.ts');
-    if (existsSync(source)) workspaceAliases['@marlo/' + entry.name] = source;
+    if (existsSync(source)) workspaceAliases['@trymarlo/' + entry.name] = source;
   }
 }
 
@@ -52,7 +52,7 @@ if (existsSync(packagesDir)) {
  *
  * The per-path overrides matter more than the global figure. A pipeline whose
  * grading protocol is partly covered has an unmeasured accuracy claim, so
- * @marlo/act and the one-directional invariant are held at 100.
+ * @trymarlo/act and the one-directional invariant are held at 100.
  */
 export default defineConfig({
   test: {

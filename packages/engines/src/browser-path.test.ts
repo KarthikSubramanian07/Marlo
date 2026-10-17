@@ -2,8 +2,8 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import type { RenderedPage } from '@marlo/render';
-import { StaticRenderer, withDomGlobals } from '@marlo/render';
+import type { RenderedPage } from '@trymarlo/render';
+import { StaticRenderer, withDomGlobals } from '@trymarlo/render';
 
 import {
   AlfaEngine,

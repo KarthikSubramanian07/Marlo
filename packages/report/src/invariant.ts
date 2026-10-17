@@ -6,7 +6,7 @@ import type {
   EngineReport,
   Outcome,
   RuleResult,
-} from '@marlo/schema';
+} from '@trymarlo/schema';
 
 /**
  * The one-directional invariant, and the routing it constrains.

@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
-import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@marlo/schema';
-import type { RenderedPage } from '@marlo/render';
+import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@trymarlo/schema';
+import type { RenderedPage } from '@trymarlo/render';
 import type { CarriedTarget, Engine, RawVerdict } from '../engine.js';
 import { assembleReport, narrowCarriedTarget, truncateSnippet } from '../engine.js';
 import { describeSelectorSource, ensureScript, evaluateInPage, narrowHandle } from '../dom.js';

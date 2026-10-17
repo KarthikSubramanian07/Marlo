@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
-import type { Capability, RendererId } from '@marlo/schema';
-import { RENDERER_CAPABILITIES } from '@marlo/schema';
+import type { Capability, RendererId } from '@trymarlo/schema';
+import { RENDERER_CAPABILITIES } from '@trymarlo/schema';
 import type { RenderRequest, RenderedPage, Renderer } from './renderer.js';
 import { DEFAULT_URL, validateRequest } from './renderer.js';
 

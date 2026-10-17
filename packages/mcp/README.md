@@ -1,18 +1,16 @@
-# @marlo/mcp
+# @trymarlo/mcp
 
 Marlo over the Model Context Protocol. Three tools, all of them read-only.
-
-```bash
-pnpm add -D @marlo/mcp
-```
 
 ```json
 {
   "mcpServers": {
-    "marlo": { "command": "marlo-mcp" }
+    "marlo": { "command": "npx", "args": ["-y", "@trymarlo/mcp"] }
   }
 }
 ```
+
+Or install it in a project with `npm install --save-dev @trymarlo/mcp` and use `{ "command": "marlo-mcp" }`. To connect without installing anything, `https://trymarlo.pages.dev/mcp` serves the calibration side only: coverage, the rule list and per-rule accuracy, with no scanning.
 
 ## Why every tool here reads and nothing writes
 

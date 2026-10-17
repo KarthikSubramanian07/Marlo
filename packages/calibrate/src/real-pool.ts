@@ -1,10 +1,10 @@
 import type { Worker } from 'node:worker_threads';
 import { z } from 'zod';
-import type { ActRuleId, EngineId } from '@marlo/schema';
-import { ActRuleId as ActRuleIdSchema, Outcome } from '@marlo/schema';
-import type { Engine } from '@marlo/engines';
-import { collapseOutcome } from '@marlo/engines';
-import type { Renderer } from '@marlo/render';
+import type { ActRuleId, EngineId } from '@trymarlo/schema';
+import { ActRuleId as ActRuleIdSchema, Outcome } from '@trymarlo/schema';
+import type { Engine } from '@trymarlo/engines';
+import { collapseOutcome } from '@trymarlo/engines';
+import type { Renderer } from '@trymarlo/render';
 
 /**
  * Evaluating a real page, bounded in time.

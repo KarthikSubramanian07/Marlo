@@ -4,7 +4,7 @@
  * opens it through the GitHub client. Only reached when `open-pull-request: true`, and only
  * after check-scopes.mjs has accepted the token for that mode.
  *
- * Every decision is made elsewhere and tested there. The planner in @marlo/repair decides what
+ * Every decision is made elsewhere and tested there. The planner in @trymarlo/repair decides what
  * the pull request contains and is pure; the client in the same package is the only code that
  * talks to GitHub, over the REST API with `fetch`, and it refuses any branch outside `marlo/`,
  * the default branch, a head equal to its base, and a forced ref update. This file wires them

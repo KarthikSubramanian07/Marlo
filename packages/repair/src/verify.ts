@@ -10,9 +10,9 @@ import type {
   RuleResult,
   Verification,
   VerifiedFix,
-} from '@marlo/schema';
-import type { Renderer } from '@marlo/render';
-import { meetsAutoFixThreshold } from '@marlo/act';
+} from '@trymarlo/schema';
+import type { Renderer } from '@trymarlo/render';
+import { meetsAutoFixThreshold } from '@trymarlo/act';
 import { applyEdits, isIdempotent } from './apply.js';
 import { runCodemod } from './codemod.js';
 

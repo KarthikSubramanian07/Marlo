@@ -1,4 +1,4 @@
-# @marlo/act
+# @trymarlo/act
 
 The ACT rule corpus as data, the official W3C grading protocol, and the accuracy and coverage arithmetic every published number is computed with.
 

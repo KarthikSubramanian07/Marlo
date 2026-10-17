@@ -7,7 +7,7 @@ import { EngineId } from './primitives.js';
  * Configuration, parsed rather than read.
  *
  * `parseEnvironment` takes the environment as an argument instead of reaching for
- * `process.env`. Two reasons. @marlo/schema is a pure package, asserted by
+ * `process.env`. Two reasons. @trymarlo/schema is a pure package, asserted by
  * dependency-cruiser, and a package that reads ambient state is not pure. And a
  * function taking its input as a parameter is testable without mutating a global
  * that every other test in the process shares.

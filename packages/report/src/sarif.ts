@@ -1,5 +1,5 @@
-import type { Finding, ScanReport } from '@marlo/schema';
-import { findRule } from '@marlo/act';
+import type { Finding, ScanReport } from '@trymarlo/schema';
+import { findRule } from '@trymarlo/act';
 
 /**
  * SARIF 2.1.0, with per-engine provenance on every result.

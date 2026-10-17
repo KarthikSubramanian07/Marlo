@@ -11,7 +11,7 @@ import importX from 'eslint-plugin-import-x';
  *   no-floating-promises catches a re-scan that was never awaited, which would
  *   report a fix as verified before the verification finished.
  *
- *   consistent-type-assertions set to never in @marlo/schema: a trust boundary
+ *   consistent-type-assertions set to never in @trymarlo/schema: a trust boundary
  *   that casts instead of parsing is the whole failure mode Zod is there to
  *   prevent.
  *
@@ -80,13 +80,13 @@ export default tseslint.config(
           object: 'process',
           property: 'env',
           message:
-            'Read configuration through the validated config in @marlo/schema. Direct ' +
+            'Read configuration through the validated config in @trymarlo/schema. Direct ' +
             'process.env access skips validation and hides required keys from SETUP.md.',
         },
       ],
 
       // Console output is a product surface here, so it goes through
-      // @marlo/report rather than being sprinkled around. Exemptions below.
+      // @trymarlo/report rather than being sprinkled around. Exemptions below.
       'no-console': 'error',
       'no-debugger': 'error',
       eqeqeq: ['error', 'always'],

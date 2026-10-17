@@ -1,4 +1,4 @@
-# @marlo/rules
+# @trymarlo/rules
 
 Marlo's own ACT rule implementations. **36 of the 94 published ACT rules.**
 
@@ -10,9 +10,9 @@ The package is pure: no filesystem, no network, no DOM library. A rule is a func
 
 ## It cannot see its peers, by construction
 
-A dependency-cruiser rule forbids `@marlo/rules` from importing `@marlo/engines`, per [D-008](../../DECISIONS.md#d-008).
+A dependency-cruiser rule forbids `@trymarlo/rules` from importing `@trymarlo/engines`, per [D-008](../../DECISIONS.md#d-008).
 
-The sibling PDF project's worst defect survived because its auditor searched for the same wrong URI its writer emitted, so it confirmed its own bug and reported success. Marlo's engine is graded in the same calibration table as axe-core, Alfa and HTML CodeSniffer, and it must not be able to observe them while deciding. The small cost is that `evaluate.ts` assembles a report and so does `@marlo/engines`. That duplication is the enforcement mechanism.
+The sibling PDF project's worst defect survived because its auditor searched for the same wrong URI its writer emitted, so it confirmed its own bug and reported success. Marlo's engine is graded in the same calibration table as axe-core, Alfa and HTML CodeSniffer, and it must not be able to observe them while deciding. The small cost is that `evaluate.ts` assembles a report and so does `@trymarlo/engines`. That duplication is the enforcement mechanism.
 
 ## Two habits that run through every rule
 

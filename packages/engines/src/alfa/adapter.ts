@@ -1,8 +1,8 @@
 import { createRequire } from 'node:module';
 import { readFileSync } from 'node:fs';
-import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@marlo/schema';
-import type { RenderedPage } from '@marlo/render';
-import { withDomGlobals } from '@marlo/render';
+import type { ActRuleId, Capability, EngineId, EngineReport, Outcome } from '@trymarlo/schema';
+import type { RenderedPage } from '@trymarlo/render';
+import { withDomGlobals } from '@trymarlo/render';
 import { ensureScript, evaluateInPage, narrowHandle } from '../dom.js';
 import { bundlePath, readBundle } from '../bundle.js';
 import type { Engine, RawVerdict } from '../engine.js';
@@ -57,7 +57,7 @@ function alfaVersion(): string {
 
 /** Where the build puts the Alfa browser bundle. Works from `src` and from `dist`. */
 export function alfaBundlePath(): string {
-  return bundlePath(require.resolve('@marlo/engines/package.json'), 'alfa.browser.js');
+  return bundlePath(require.resolve('@trymarlo/engines/package.json'), 'alfa.browser.js');
 }
 
 function alfaBundleSource(): string {

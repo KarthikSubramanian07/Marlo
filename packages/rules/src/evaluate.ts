@@ -5,7 +5,7 @@ import type {
   Outcome,
   RendererId,
   RuleResult,
-} from '@marlo/schema';
+} from '@trymarlo/schema';
 import type { MarloDocument, MarloElement } from './dom.js';
 import { findMarloRule } from './registry.js';
 
@@ -13,14 +13,14 @@ import { findMarloRule } from './registry.js';
  * Runs Marlo's own rules and produces an `EngineReport`, the same shape a peer adapter
  * produces.
  *
- * It does not import @marlo/engines, and it cannot: a dependency rule forbids it, per
+ * It does not import @trymarlo/engines, and it cannot: a dependency rule forbids it, per
  * DECISIONS.md D-008. The sibling PDF project's worst defect survived because its
  * auditor searched for the same wrong URI its writer emitted, so it confirmed its own
  * bug and reported success. Marlo's engine is graded in the same table as its peers and
  * must not be able to observe them while deciding.
  *
  * The consequence is a small duplication: this file assembles a report and so does
- * @marlo/engines. That duplication is the enforcement mechanism, and it is cheaper than
+ * @trymarlo/engines. That duplication is the enforcement mechanism, and it is cheaper than
  * the alternative.
  */
 

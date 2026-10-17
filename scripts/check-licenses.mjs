@@ -103,7 +103,7 @@ const missing = [];
 
 for (const dep of deps) {
   // Workspace packages are Marlo's own and are MIT by the root LICENSE.
-  if (dep.name.startsWith('@marlo/') || dep.name === 'marlo') continue;
+  if (dep.name.startsWith('@trymarlo/') || dep.name === 'marlo') continue;
 
   for (const part of expressionParts(dep.license)) {
     if (Object.hasOwn(REFUSED, part)) {

@@ -13,7 +13,7 @@ RUN npm install -g pnpm@9.15.9
 COPY . .
 RUN pnpm install --frozen-lockfile --ignore-scripts \
   && pnpm build \
-  && pnpm --filter @marlo/cli deploy --prod /app/packages/cli
+  && pnpm --filter @trymarlo/cli deploy --prod /app/packages/cli
 
 FROM node:22.13.0-bookworm-slim
 ENV NODE_ENV=production

@@ -1,4 +1,4 @@
-# @marlo/engines
+# @trymarlo/engines
 
 Peer engine adapters, and the hand-written mapping from each engine's rule identifiers to ACT rule identifiers.
 

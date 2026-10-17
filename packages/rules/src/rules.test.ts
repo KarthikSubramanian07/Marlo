@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { Capability, Outcome } from '@marlo/schema';
-import { PUBLISHED_ACT_RULE_COUNT, findRule } from '@marlo/act';
+import type { Capability, Outcome } from '@trymarlo/schema';
+import { PUBLISHED_ACT_RULE_COUNT, findRule } from '@trymarlo/act';
 
 import {
   IMPLEMENTED_RULES,

@@ -7,14 +7,14 @@ import type {
   PageResult,
   ScanReport,
   Severity,
-} from '@marlo/schema';
-import { EXIT_CODES, type CalibrationTable } from '@marlo/schema';
-import { computeCoverage, findRule } from '@marlo/act';
-import type { Renderer } from '@marlo/render';
-import { peerEngines } from '@marlo/engines';
-import { IMPLEMENTED_RULES } from '@marlo/rules';
-import { MarloEngine } from '@marlo/calibrate';
-import { decideRule, uncoveredPeerFailures } from '@marlo/report';
+} from '@trymarlo/schema';
+import { EXIT_CODES, type CalibrationTable } from '@trymarlo/schema';
+import { computeCoverage, findRule } from '@trymarlo/act';
+import type { Renderer } from '@trymarlo/render';
+import { peerEngines } from '@trymarlo/engines';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
+import { MarloEngine } from '@trymarlo/calibrate';
+import { decideRule, uncoveredPeerFailures } from '@trymarlo/report';
 import { severityOf } from './severity.js';
 
 /**

@@ -5,8 +5,8 @@ import type {
   EngineId,
   Outcome,
   RoutingDecision,
-} from '@marlo/schema';
-import { FLATTERY_RECALL_THRESHOLD } from '@marlo/schema';
+} from '@trymarlo/schema';
+import { FLATTERY_RECALL_THRESHOLD } from '@trymarlo/schema';
 import {
   PUBLISHED_ACT_RULE_COUNT,
   UNMEASURABLE_ACT_RULES,
@@ -19,11 +19,11 @@ import {
   outcomeMatrixOf,
   strictAccuracyOf,
   type GradedCase,
-} from '@marlo/act';
-import type { Engine } from '@marlo/engines';
-import { collapseOutcome } from '@marlo/engines';
-import type { Renderer } from '@marlo/render';
-import { IMPLEMENTED_RULES } from '@marlo/rules';
+} from '@trymarlo/act';
+import type { Engine } from '@trymarlo/engines';
+import { collapseOutcome } from '@trymarlo/engines';
+import type { Renderer } from '@trymarlo/render';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
 import type { Corpus, CorpusCase } from './corpus.js';
 
 /**

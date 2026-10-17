@@ -1,4 +1,4 @@
-import type { ActRuleId, Edit } from '@marlo/schema';
+import type { ActRuleId, Edit } from '@trymarlo/schema';
 import { attributeOccurrences, indexElements, locate, matchesOf } from './locate.js';
 
 /**

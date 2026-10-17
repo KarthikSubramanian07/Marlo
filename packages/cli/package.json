@@ -1,8 +1,28 @@
 {
-  "name": "@marlo/cli",
+  "name": "@trymarlo/cli",
   "version": "0.1.0",
   "description": "The marlo command.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "cli",
+    "wcag",
+    "sarif"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -24,14 +44,14 @@
     "postpack": "node ../../scripts/stage-calibration.mjs --clean"
   },
   "dependencies": {
-    "@marlo/act": "workspace:*",
-    "@marlo/calibrate": "workspace:*",
-    "@marlo/engines": "workspace:*",
-    "@marlo/render": "workspace:*",
-    "@marlo/repair": "workspace:*",
-    "@marlo/report": "workspace:*",
-    "@marlo/rules": "workspace:*",
-    "@marlo/schema": "workspace:*"
+    "@trymarlo/act": "workspace:*",
+    "@trymarlo/calibrate": "workspace:*",
+    "@trymarlo/engines": "workspace:*",
+    "@trymarlo/render": "workspace:*",
+    "@trymarlo/repair": "workspace:*",
+    "@trymarlo/report": "workspace:*",
+    "@trymarlo/rules": "workspace:*",
+    "@trymarlo/schema": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

@@ -1,12 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
-import { ExpectedOutcome } from '@marlo/schema';
+import { ExpectedOutcome } from '@trymarlo/schema';
 
 /**
  * Reads the vendored corpus from disk. The one place in the pipeline that does.
  *
- * @marlo/act holds the rule index as generated data because it is pure; the 1134 test
+ * @trymarlo/act holds the rule index as generated data because it is pure; the 1134 test
  * case documents are too large for that and are read here, where filesystem access is
  * expected.
  *

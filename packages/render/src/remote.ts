@@ -1,4 +1,4 @@
-import type { Capability, RendererId } from '@marlo/schema';
+import type { Capability, RendererId } from '@trymarlo/schema';
 import type { RenderRequest, RenderedPage, Renderer } from './renderer.js';
 
 /**

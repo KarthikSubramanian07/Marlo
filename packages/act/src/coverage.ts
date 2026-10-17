@@ -1,4 +1,4 @@
-import type { Capability, Coverage } from '@marlo/schema';
+import type { Capability, Coverage } from '@trymarlo/schema';
 import { PUBLISHED_ACT_RULE_COUNT, findRule } from './rules.js';
 
 /**
@@ -6,7 +6,7 @@ import { PUBLISHED_ACT_RULE_COUNT, findRule } from './rules.js';
  *
  * One function, because coverage is the number most likely to be overstated and
  * the point of having a single computation is that there is one place to audit.
- * `formatCoverage` in @marlo/schema is the only sanctioned way to render the
+ * `formatCoverage` in @trymarlo/schema is the only sanctioned way to render the
  * result, and it never produces a percentage.
  */
 

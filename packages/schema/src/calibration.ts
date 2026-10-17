@@ -166,7 +166,7 @@ export const RoutingDecision = z
   })
   /*
    * Two reasons mean nobody was chosen, so they may not name an engine. This started as a
-   * defensive branch in @marlo/report's decideRule, checking for a `no-implementer` routing
+   * defensive branch in @trymarlo/report's decideRule, checking for a `no-implementer` routing
    * that also named an engine. No valid table can contain that, so the branch was a line no
    * test could reach, and an unreachable branch on a file the README says is fully covered is
    * either a false coverage claim or a state the schema should have forbidden.
@@ -450,7 +450,7 @@ export type CalibrationTable = z.infer<typeof CalibrationTable>;
  * The official ACT allowed-outcome protocol, as data.
  *
  * Transcribed from `pages/implementations/mapping.md` in the ACT rules repository.
- * It lives here, in the vocabulary, so that @marlo/act and the calibration
+ * It lives here, in the vocabulary, so that @trymarlo/act and the calibration
  * harness cannot hold different opinions about what the protocol says.
  */
 export const ACT_ALLOWED_OUTCOMES: Readonly<Record<ExpectedOutcome, readonly Outcome[]>> =

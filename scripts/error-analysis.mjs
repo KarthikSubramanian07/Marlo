@@ -226,7 +226,7 @@ export const CAUSES = [
   },
 ];
 
-/** The outcome a verdict list collapses to, as @marlo/engines collapses it. */
+/** The outcome a verdict list collapses to, as @trymarlo/engines collapses it. */
 export function collapse(verdicts) {
   const outcomes = new Set(verdicts.map((v) => v.outcome));
   if (outcomes.has('failed')) return 'failed';
@@ -569,8 +569,8 @@ export function summarise(result) {
 /** Runs Marlo on every real page, once per renderer, keeping what the report needs. */
 async function scan() {
   const [{ MarloEngine, loadRealCorpus }, { StaticRenderer, BrowserRenderer }] = await Promise.all([
-    import('@marlo/calibrate'),
-    import('@marlo/render'),
+    import('@trymarlo/calibrate'),
+    import('@trymarlo/render'),
   ]);
   const corpus = loadRealCorpus(ROOT);
   const resolved = JSON.parse(readFileSync(join(ADJ, 'resolved.json'), 'utf8'));

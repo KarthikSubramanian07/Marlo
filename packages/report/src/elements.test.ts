@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
-import type { EngineId, EngineVerdict, Outcome, RuleResult } from '@marlo/schema';
+import type { EngineId, EngineVerdict, Outcome, RuleResult } from '@trymarlo/schema';
 import { attributeKey, elementKey, uncoveredPeerFailures } from './elements.js';
 
 /**

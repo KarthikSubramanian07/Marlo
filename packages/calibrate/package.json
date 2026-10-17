@@ -1,8 +1,27 @@
 {
-  "name": "@marlo/calibrate",
+  "name": "@trymarlo/calibrate",
   "version": "0.1.0",
   "description": "Measures every engine against the official ACT test cases and publishes the calibration table.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/calibrate"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "calibration",
+    "act-rules"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -24,11 +43,11 @@
     "build": "tsc --build && esbuild src/marlo-browser-entry.ts --bundle --format=iife --global-name=MarloRules --platform=browser --target=es2022 --outfile=dist/marlo.browser.js --log-level=warning"
   },
   "dependencies": {
-    "@marlo/act": "workspace:*",
-    "@marlo/engines": "workspace:*",
-    "@marlo/render": "workspace:*",
-    "@marlo/rules": "workspace:*",
-    "@marlo/schema": "workspace:*",
+    "@trymarlo/act": "workspace:*",
+    "@trymarlo/engines": "workspace:*",
+    "@trymarlo/render": "workspace:*",
+    "@trymarlo/rules": "workspace:*",
+    "@trymarlo/schema": "workspace:*",
     "zod": "4.6.5"
   },
   "publishConfig": {

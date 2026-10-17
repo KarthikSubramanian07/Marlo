@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { ExpectedOutcome, Outcome } from '@marlo/schema';
-import { FLATTERY_RECALL_THRESHOLD } from '@marlo/schema';
+import type { ExpectedOutcome, Outcome } from '@trymarlo/schema';
+import { FLATTERY_RECALL_THRESHOLD } from '@trymarlo/schema';
 
 import type { GradedCase } from './protocol.js';
 import {

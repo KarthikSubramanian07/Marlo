@@ -1,4 +1,4 @@
-import type { Edit } from '@marlo/schema';
+import type { Edit } from '@trymarlo/schema';
 
 /**
  * Applying edits to text.

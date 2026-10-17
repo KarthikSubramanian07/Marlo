@@ -1,4 +1,4 @@
-import type { StrictAccuracy } from '@marlo/schema';
+import type { StrictAccuracy } from '@trymarlo/schema';
 import type { GradedCase } from './protocol.js';
 
 /**

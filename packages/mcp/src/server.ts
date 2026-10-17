@@ -1,10 +1,10 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { computeCoverage, findRule } from '@marlo/act';
-import type { ActRuleId, CalibrationTable, ScanReport } from '@marlo/schema';
-import { CalibrationTable as CalibrationTableSchema, formatCoverage } from '@marlo/schema';
-import { IMPLEMENTED_RULES } from '@marlo/rules';
-import { StaticRenderer } from '@marlo/render';
-import { TABLE_BY_RENDERER, locateTable, scan } from '@marlo/cli';
+import { computeCoverage, findRule } from '@trymarlo/act';
+import type { ActRuleId, CalibrationTable, ScanReport } from '@trymarlo/schema';
+import { CalibrationTable as CalibrationTableSchema, formatCoverage } from '@trymarlo/schema';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
+import { StaticRenderer } from '@trymarlo/render';
+import { TABLE_BY_RENDERER, locateTable, scan } from '@trymarlo/cli';
 
 /**
  * Marlo over the Model Context Protocol.

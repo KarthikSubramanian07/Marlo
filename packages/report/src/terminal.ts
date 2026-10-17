@@ -1,5 +1,5 @@
-import type { Coverage, Finding, ScanReport, Severity } from '@marlo/schema';
-import { SEVERITY_PRESENTATION, formatCoverage } from '@marlo/schema';
+import type { Coverage, Finding, ScanReport, Severity } from '@trymarlo/schema';
+import { SEVERITY_PRESENTATION, formatCoverage } from '@trymarlo/schema';
 
 /**
  * The terminal surface. One of the two things developers judge Marlo by.

@@ -1,11 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import type { CalibrationEntry, CalibrationTable } from '@marlo/schema';
-import { CalibrationTable as CalibrationTableSchema } from '@marlo/schema';
-import { PUBLISHED_ACT_RULE_COUNT } from '@marlo/act';
-import { IMPLEMENTED_RULES } from '@marlo/rules';
-import { StaticRenderer } from '@marlo/render';
+import type { CalibrationEntry, CalibrationTable } from '@trymarlo/schema';
+import { CalibrationTable as CalibrationTableSchema } from '@trymarlo/schema';
+import { PUBLISHED_ACT_RULE_COUNT } from '@trymarlo/act';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
+import { StaticRenderer } from '@trymarlo/render';
 
 import { MarloEngine } from './marlo-engine.js';
 import { declaredRootElement, rendererCanRepresent, routeRule } from './harness.js';

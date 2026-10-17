@@ -2,7 +2,7 @@
  * Marlo's own rules, run on a document in the visitor's browser.
  *
  * This is the same code `marlo scan --renderer browser` injects into Chromium, bundled for
- * the site: @marlo/rules is pure, so the bundle is the rules plus the two things only a
+ * the site: @trymarlo/rules is pure, so the bundle is the rules plus the two things only a
  * laid-out page supplies, resolved styles and border boxes. It is shared by the playground,
  * which runs it on markup pasted into a sandboxed frame, and the bookmarklet, which runs it
  * on the page the visitor is looking at.
@@ -12,7 +12,7 @@
  * when any engine failed it. None of that happens in the browser, and every surface that
  * uses this module says so.
  */
-import { buildDocument, evaluateRules, IMPLEMENTED_RULES } from '@marlo/rules';
+import { buildDocument, evaluateRules, IMPLEMENTED_RULES } from '@trymarlo/rules';
 import { META } from 'marlo:meta';
 
 export { META };

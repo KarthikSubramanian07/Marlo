@@ -1,4 +1,4 @@
-import type { Severity } from '@marlo/schema';
+import type { Severity } from '@trymarlo/schema';
 
 /**
  * Severity per ACT rule.

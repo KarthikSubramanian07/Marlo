@@ -1,8 +1,27 @@
 {
-  "name": "@marlo/report",
+  "name": "@trymarlo/report",
   "version": "0.1.0",
   "description": "SARIF, the terminal surface, and the generated pull request body.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/report"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "sarif",
+    "report"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -21,8 +40,8 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@marlo/act": "workspace:*",
-    "@marlo/schema": "workspace:*"
+    "@trymarlo/act": "workspace:*",
+    "@trymarlo/schema": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

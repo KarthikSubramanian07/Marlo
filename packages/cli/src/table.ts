@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import type { RendererId } from '@marlo/schema';
+import type { RendererId } from '@trymarlo/schema';
 
 /**
  * Which calibration table a scan reads its confidence numbers from.

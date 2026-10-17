@@ -1,8 +1,27 @@
 {
-  "name": "@marlo/schema",
+  "name": "@trymarlo/schema",
   "version": "0.1.0",
   "description": "Every artifact Marlo produces, and its runtime validator. The vocabulary.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/schema"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "zod",
+    "schema"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {

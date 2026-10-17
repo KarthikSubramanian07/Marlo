@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { EngineReport } from '@marlo/schema';
-import type { RenderedPage } from '@marlo/render';
-import { StaticRenderer } from '@marlo/render';
+import { EngineReport } from '@trymarlo/schema';
+import type { RenderedPage } from '@trymarlo/render';
+import { StaticRenderer } from '@trymarlo/render';
 
 import { evaluate } from './marlo-browser-entry.js';
 import { MarloEngine, marloBundlePath } from './marlo-engine.js';

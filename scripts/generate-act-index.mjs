@@ -2,7 +2,7 @@
 /**
  * Generates packages/act/src/rules.generated.ts from corpus/act/MANIFEST.json.
  *
- * @marlo/act is a pure package: no filesystem, no network, asserted by
+ * @trymarlo/act is a pure package: no filesystem, no network, asserted by
  * dependency-cruiser. So the rule index cannot be read at import time, and it is
  * generated into source instead.
  *
@@ -74,7 +74,7 @@ const body = `/**
  * Regenerate with \`pnpm act:index\`; \`pnpm act:index --check\` fails if this
  * file is stale, and CI runs the check.
  *
- * It is generated rather than read at import time because @marlo/act is pure:
+ * It is generated rather than read at import time because @trymarlo/act is pure:
  * no filesystem, no network, asserted by dependency-cruiser. rules.generated.test.ts
  * reads the manifest and asserts this file agrees with it field by field, so the
  * two cannot drift.

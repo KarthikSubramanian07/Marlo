@@ -9,9 +9,9 @@ import type {
   PullRequestBody,
   SuccessCriterion,
   VerifiedFix,
-} from '@marlo/schema';
-import { PullRequestBody as PullRequestBodySchema } from '@marlo/schema';
-import { renderPullRequestBody } from '@marlo/report';
+} from '@trymarlo/schema';
+import { PullRequestBody as PullRequestBodySchema } from '@trymarlo/schema';
+import { renderPullRequestBody } from '@trymarlo/report';
 import { applyEdits, conflicts } from './apply.js';
 
 /**

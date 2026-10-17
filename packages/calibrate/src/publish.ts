@@ -6,8 +6,8 @@ import type {
   Proportion,
   RealCorpus,
   StrategyScore,
-} from '@marlo/schema';
-import { findRule } from '@marlo/act';
+} from '@trymarlo/schema';
+import { findRule } from '@trymarlo/act';
 
 /**
  * Renders the calibration table as markdown, for `calibration/README.md`.

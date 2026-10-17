@@ -16,7 +16,7 @@ import {
 import { UnknownRuleError, computeCoverage, describeGap } from './coverage.js';
 
 /**
- * @marlo/act is a pure package and its production code touches no filesystem,
+ * @trymarlo/act is a pure package and its production code touches no filesystem,
  * asserted by dependency-cruiser. This test file is the one narrow exception, and
  * it exists for a specific reason: rules.generated.ts is generated from
  * corpus/act/MANIFEST.json, and the only thing standing between the two is a check

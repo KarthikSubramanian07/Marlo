@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { CalibrationEntry, CalibrationTable, EngineId, Outcome } from '@marlo/schema';
+import type { CalibrationEntry, CalibrationTable, EngineId, Outcome } from '@trymarlo/schema';
 import { analyse, collectCases, routeFrom, wilson, type CaseRecord } from './analysis.js';
 
 /**

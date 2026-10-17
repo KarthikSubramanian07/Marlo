@@ -1,8 +1,27 @@
 {
-  "name": "@marlo/rules",
+  "name": "@trymarlo/rules",
   "version": "0.1.0",
   "description": "Marlo's own ACT rule implementations. One rule, one function, one fixture set.",
   "license": "MIT",
+  "author": "Karthik Subramanian",
+  "homepage": "https://trymarlo.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarthikSubramanian07/Marlo.git",
+    "directory": "packages/rules"
+  },
+  "bugs": {
+    "url": "https://github.com/KarthikSubramanian07/Marlo/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "act-rules",
+    "wcag"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -21,8 +40,8 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@marlo/act": "workspace:*",
-    "@marlo/schema": "workspace:*"
+    "@trymarlo/act": "workspace:*",
+    "@trymarlo/schema": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

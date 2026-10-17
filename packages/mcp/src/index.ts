@@ -1,5 +1,5 @@
 /**
- * @marlo/mcp
+ * @trymarlo/mcp
  *
  * Marlo over the Model Context Protocol. Three tools, all read-only, and a list of the write
  * tools this server refuses on principle rather than for lack of implementation.

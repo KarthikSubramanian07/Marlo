@@ -5,7 +5,7 @@
  * WHY THIS EXISTS
  *
  * The paint-order walk in packages/rules/src/paint.ts is developed against hand-built
- * fixtures, because @marlo/rules is pure. A fixture carries the computed styles its
+ * fixtures, because @trymarlo/rules is pure. A fixture carries the computed styles its
  * author believes a browser resolves, and the author can be wrong in exactly the way
  * that matters: a value that looks right and is not. This script removes the author
  * from the loop. It loads each afw4f7 and 09o5cg test case in Chromium, reads the
@@ -86,8 +86,8 @@ try {
 }
 
 if (chromium !== undefined) {
-  const { buildDocument, evaluateRules } = await import('@marlo/rules');
-  const { strictAccuracyOf, isAllowed, consistencyOf } = await import('@marlo/act');
+  const { buildDocument, evaluateRules } = await import('@trymarlo/rules');
+  const { strictAccuracyOf, isAllowed, consistencyOf } = await import('@trymarlo/act');
 
   const manifest = JSON.parse(readFileSync(resolve(ROOT, 'corpus/act/MANIFEST.json'), 'utf8'));
   const cases = manifest.testCases.filter(

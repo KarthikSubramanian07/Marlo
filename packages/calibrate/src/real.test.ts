@@ -3,11 +3,11 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { Worker } from 'node:worker_threads';
 import { describe, expect, it } from 'vitest';
-import type { ActRuleId, EngineId, Outcome, RoutingDecision } from '@marlo/schema';
-import { CalibrationTable, RealCorpus as RealCorpusSchema } from '@marlo/schema';
-import type { Engine } from '@marlo/engines';
-import { StaticRenderer } from '@marlo/render';
-import { IMPLEMENTED_RULES } from '@marlo/rules';
+import type { ActRuleId, EngineId, Outcome, RoutingDecision } from '@trymarlo/schema';
+import { CalibrationTable, RealCorpus as RealCorpusSchema } from '@trymarlo/schema';
+import type { Engine } from '@trymarlo/engines';
+import { StaticRenderer } from '@trymarlo/render';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
 
 import type { Adjudication, RealCorpusSource, RealPage, SheetCell } from './real-corpus.js';
 import { cellKey, loadAdjudication, loadRealCorpus, pageLabel } from './real-corpus.js';

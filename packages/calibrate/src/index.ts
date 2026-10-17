@@ -1,5 +1,5 @@
 /**
- * @marlo/calibrate
+ * @trymarlo/calibrate
  *
  * Measures every engine against the official ACT test cases, and separately against the
  * real pages in corpus/real, and produces the calibration table, which is the artifact every downstream claim rests on.

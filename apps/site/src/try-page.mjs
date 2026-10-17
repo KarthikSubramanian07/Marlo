@@ -48,7 +48,7 @@ const SAMPLES = [
 /**
  * Bundles the playground and the bookmarklet into `out/try/`.
  *
- * `marlo:meta` is generated: rule names and success criteria from @marlo/act, severity from
+ * `marlo:meta` is generated: rule names and success criteria from @trymarlo/act, severity from
  * the CLI's own table, and Marlo's measured precision per rule from calibration/browser.json,
  * because both surfaces run the rules in a browser.
  */
@@ -71,8 +71,8 @@ export async function buildTryBundles({ root, out, browserTable }) {
     readFileSync(resolve(root, 'packages/rules/package.json'), 'utf8'),
   ).version;
   const metaSource = `
-import { IMPLEMENTED_RULES } from '@marlo/rules';
-import { findRule } from '@marlo/act';
+import { IMPLEMENTED_RULES } from '@trymarlo/rules';
+import { findRule } from '@trymarlo/act';
 import { severityOf } from ${JSON.stringify(resolve(root, 'packages/cli/src/severity.ts'))};
 const PRECISION = ${JSON.stringify(precision)};
 const rules = {};
@@ -92,7 +92,7 @@ export const META = { version: ${JSON.stringify(version)}, rules, samples: ${JSO
     name: 'marlo-workspace',
     setup(b) {
       // Rule sources, not built packages: the site build runs where nothing is built yet.
-      b.onResolve({ filter: /^@marlo\// }, (args) => ({
+      b.onResolve({ filter: /^@trymarlo\// }, (args) => ({
         path: resolve(root, 'packages', args.path.split('/')[1], 'src', 'index.ts'),
       }));
       b.onResolve({ filter: /^marlo:meta$/ }, () => ({ path: 'marlo:meta', namespace: 'meta' }));
@@ -315,7 +315,7 @@ node packages/cli/dist/bin.js scan page.html</code></pre>
               <div class="row__body prose">
                 <p>
                   A remote, read-only endpoint for coverage and per-rule accuracy at
-                  <code>${origin}/mcp</code>, and a local server, <code>@marlo/mcp</code>, that
+                  <code>${origin}/mcp</code>, and a local server, <code>@trymarlo/mcp</code>, that
                   scans the markup an agent just wrote. Neither has a tool that writes.
                 </p>
                 <p><a class="textlink" href="/developers/">Developer portal</a></p>

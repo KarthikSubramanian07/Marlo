@@ -1,5 +1,5 @@
-import type { ActRuleId, Capability, Outcome, SuccessCriterion } from '@marlo/schema';
-import { findRule } from '@marlo/act';
+import type { ActRuleId, Capability, Outcome, SuccessCriterion } from '@trymarlo/schema';
+import { findRule } from '@trymarlo/act';
 import type { MarloDocument, MarloElement } from './dom.js';
 
 /**

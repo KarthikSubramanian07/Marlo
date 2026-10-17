@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import type { ActRuleId } from '@marlo/schema';
-import { isPublishedRule } from '@marlo/act';
-import { StaticRenderer } from '@marlo/render';
+import type { ActRuleId } from '@trymarlo/schema';
+import { isPublishedRule } from '@trymarlo/act';
+import { StaticRenderer } from '@trymarlo/render';
 
 import {
   ALFA_MAPPING,
@@ -303,7 +303,7 @@ describe('the adapters run against a real page', () => {
   it('gives three peer engines, and Marlo is not among them', async () => {
     const peers = peerEngines();
     expect(peers.map((e) => e.id).sort()).toEqual(['alfa', 'axe-core', 'htmlcs']);
-    // DECISIONS.md D-008: Marlo's own engine lives in @marlo/rules, which cannot
+    // DECISIONS.md D-008: Marlo's own engine lives in @trymarlo/rules, which cannot
     // import this package, so its column is produced without ever seeing a peer.
     expect(peers.map((e) => e.id)).not.toContain('marlo');
     await Promise.resolve();

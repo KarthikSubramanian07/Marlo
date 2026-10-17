@@ -56,7 +56,7 @@ None of these are hidden behind a flag that does nothing.
 
 Things that will cost you an hour if nobody tells you.
 
-**Vitest aliases workspace packages to source, per project.** `vitest.config.ts` reads `packages/` off disk and rebuilds the alias map inside **every** project entry, because Vitest 4 does not inherit the root `resolve`. Without it, `pnpm test` on a clean checkout cannot resolve `@marlo/schema`. If you add a package and its tests cannot find a sibling, this is why.
+**Vitest aliases workspace packages to source, per project.** `vitest.config.ts` reads `packages/` off disk and rebuilds the alias map inside **every** project entry, because Vitest 4 does not inherit the root `resolve`. Without it, `pnpm test` on a clean checkout cannot resolve `@trymarlo/schema`. If you add a package and its tests cannot find a sibling, this is why.
 
 **`scripts/lib/rule-data.mjs` is the only file the claim and prose scanners skip.** It has to be, because a pattern forbidding a phrase contains the phrase. Do not add a second exclusion; `rule-data.test.mjs` asserts the skip list is exactly one path and will fail. If you need to quote a forbidden phrase, put it in that file's data.
 

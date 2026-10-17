@@ -1,4 +1,4 @@
-import type { Capability, RendererId } from '@marlo/schema';
+import type { Capability, RendererId } from '@trymarlo/schema';
 
 /**
  * The renderer seam, and the capability model that makes it honest.

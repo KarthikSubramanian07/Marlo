@@ -66,7 +66,7 @@ This project's own engine is graded in the same table as its peers with no exemp
 
 - A rule declares the renderer capabilities it needs in `requires`. Anything reading a computed style, a bounding box, or a value downstream of CSS declares `layout`. Get this wrong and the rule passes under the static renderer, which is a false negative nothing can see.
 - A rule is merged with a measurement the calibration harness produced. A poor measured number is publishable and gets routed to a better peer engine. An estimate is not publishable at all.
-- Architecture is enforced by `.dependency-cruiser.cjs` rather than by convention: `@marlo/rules` cannot import its peers, engines reach the page through the render seam, and `@marlo/schema` depends on nothing else in the workspace.
+- Architecture is enforced by `.dependency-cruiser.cjs` rather than by convention: `@trymarlo/rules` cannot import its peers, engines reach the page through the render seam, and `@trymarlo/schema` depends on nothing else in the workspace.
 - No direct `process.env` outside `packages/schema/src/config.ts`, so a required key cannot be introduced without appearing in SETUP.md. No `console` outside the bin entrypoints listed in `eslint.config.js`.
 
 ## Anything visual

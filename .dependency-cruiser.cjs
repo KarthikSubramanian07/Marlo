@@ -7,12 +7,12 @@
  *
  *   marlo-rules-cannot-see-peers (D-008). The sibling project's worst defect
  *   survived because its auditor searched for the same wrong URI its writer
- *   emitted, so it confirmed its own bug and reported success. If @marlo/rules
- *   could import @marlo/engines, Marlo's engine could see peer results while
+ *   emitted, so it confirmed its own bug and reported success. If @trymarlo/rules
+ *   could import @trymarlo/engines, Marlo's engine could see peer results while
  *   deciding, and its column in the calibration table would stop meaning
  *   anything.
  *
- *   pure-packages-have-no-io. @marlo/schema, @marlo/act and @marlo/rules are
+ *   pure-packages-have-no-io. @trymarlo/schema, @trymarlo/act and @trymarlo/rules are
  *   callable as pure functions over fixtures, which is what makes the whole
  *   pipeline testable without a browser or a network.
  */
@@ -22,7 +22,7 @@ module.exports = {
       name: 'marlo-rules-cannot-see-peers',
       severity: 'error',
       comment:
-        'DECISIONS.md D-008: @marlo/rules is graded in the same table as its peers, so it must ' +
+        'DECISIONS.md D-008: @trymarlo/rules is graded in the same table as its peers, so it must ' +
         'not be able to observe them. Marking its own homework is the defect this project ' +
         'exists to argue against.',
       from: { path: '^packages/rules' },
@@ -36,7 +36,7 @@ module.exports = {
         'processes. A rule that reads a file cannot be run as a pure function over a fixture.',
       from: {
         path: '^packages/(schema|act|rules)/src',
-        // One narrow exception, and it earns itself. @marlo/act's rule index is
+        // One narrow exception, and it earns itself. @trymarlo/act's rule index is
         // generated into source from corpus/act/MANIFEST.json, and the only thing
         // standing between the two is a test that reads the manifest and asserts
         // they agree field by field. Without filesystem access in that test, the
@@ -52,7 +52,7 @@ module.exports = {
       name: 'schema-depends-on-nothing-of-ours',
       severity: 'error',
       comment:
-        '@marlo/schema is the vocabulary. If it imported a package that uses it, the vocabulary ' +
+        '@trymarlo/schema is the vocabulary. If it imported a package that uses it, the vocabulary ' +
         'would depend on a speaker.',
       from: { path: '^packages/schema/src' },
       to: { path: '^packages/(?!schema)' },
