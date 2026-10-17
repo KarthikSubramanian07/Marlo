@@ -53,7 +53,7 @@ jobs:
         run: pnpm run lint:code
 
       - name: Architecture rules
-        # DECISIONS.md D-008: @marlo/rules must not be able to see its peers.
+        # DECISIONS.md D-008: @trymarlo/rules must not be able to see its peers.
         # This is the job that enforces it.
         run: pnpm run lint:deps
 
@@ -213,6 +213,13 @@ jobs:
         # `--json` through a pipe still parses.
         run: pnpm run test:e2e
 
+      - name: The packed packages work when installed
+        # Packs every package, installs the tarballs into an empty project with
+        # no workspace above it, and runs the commands a user would. The first
+        # packed CLI could not find its own calibration table and every
+        # workspace test passed regardless.
+        run: node scripts/release.mjs --check
+
   browser:
     name: The browser renderer, in a real browser
     runs-on: ubuntu-latest
@@ -273,7 +280,7 @@ jobs:
       - name: Coverage
         # The global figure is 85/80/85/85 and is defensible rather than round;
         # the reasoning is in CONTRIBUTING.md. The per-path overrides matter
-        # more: @marlo/act and the one-directional invariant are held at 100,
+        # more: @trymarlo/act and the one-directional invariant are held at 100,
         # because an uncovered branch in either is an unmeasured accuracy claim
         # or a path where Marlo reports clean while a peer reported a failure.
         # The thresholds live in vitest.config.ts, so this job fails on its own

@@ -106,7 +106,26 @@ Five, and all of them are things a person has to decide rather than a script.
    If this repository ever moves into an organization, replace the override with a real `bypass_actors` entry and delete this paragraph.
 
 2. **`marlo.pages.dev` was taken.** Cloudflare assigned a suffixed subdomain, so the documented fallback `trymarlo.pages.dev` is used consistently everywhere. If you acquire the shorter name, it appears in `apps/site/src/build.mjs` (`ORIGIN`), `README.md`, `package.json` and `SECURITY.md`.
-3. **Publishing to npm.** Nothing is published. `pnpm -r publish` when you want it, and note the brief's instruction that a public release should not be tagged without asking.
+3. **Publishing to npm.** Nothing is published yet, and the brief says a public release is not tagged without asking. The packages are `@trymarlo/*`: `@marlo` on npm belongs to an unrelated account. Every package is checked as a user would get it on every pull request, by `pnpm run release:check`, which packs them, installs the tarballs into an empty project, and runs real scans and an MCP call.
+
+   The first version has to be published from a laptop, because npm only lets trusted publishing be configured on a package that already exists:
+
+   ```bash
+   npm login                 # an npm account with two-factor authentication on
+   # create the free organization "trymarlo" at https://www.npmjs.com/org/create
+   pnpm install && pnpm build
+   pnpm run release          # checks, then publishes all ten in dependency order
+   ```
+
+   Then, for each of the ten packages, open its settings on npmjs.com, add a trusted publisher with repository `KarthikSubramanian07/Marlo` and workflow `release.yml`, and set publishing access to require two-factor authentication and disallow tokens. From then on a release is a version bump and a tag, and `.github/workflows/release.yml` publishes it with provenance and no stored token:
+
+   ```bash
+   pnpm -r --filter './packages/*' exec npm version 0.2.0 --no-git-tag-version
+   git commit -s -am "release 0.2.0" && git tag v0.2.0 && git push --follow-tags
+   ```
+
+   A release that fails halfway is finished by running it again: versions already on npm are skipped.
+
 4. **A language provider, if you ever want generated alt text.** `ANTHROPIC_API_KEY` plus `MARLO_LANGUAGE_PROVIDER=anthropic`. The default is a deterministic stub and there is no fallback that quietly upgrades to a network call.
 5. **Optionally, people to check the real-page ground truth.** The real pages are rated, by two language models and a third that settled their disagreements, under `corpus/real/adjudication/PROTOCOL.md`, and every figure resting on that is labelled model-adjudicated. A human rating of a sample is the strongest check on it. Each person rates fresh sheets with the rating tool, after `pnpm build` and `node scripts/adjudicate.mjs sheet --rater A` in a separate checkout:
 
