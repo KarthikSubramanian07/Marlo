@@ -49,6 +49,8 @@
     "site:verify": "node scripts/verify-site.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "deploy": "node scripts/deploy.mjs",
+    "release:check": "node scripts/release.mjs --check",
+    "release": "node scripts/release.mjs",
     "mcp": "node packages/mcp/dist/bin.js",
     "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run corpus:verify && pnpm run act:index:check && pnpm run test && pnpm run raters:check && pnpm run errors:check && pnpm run test:e2e",
     "hooks": "lefthook install",
