@@ -1,11 +1,10 @@
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
 import { computeCoverage, findRule } from '@marlo/act';
 import type { ActRuleId, CalibrationTable, ScanReport } from '@marlo/schema';
 import { CalibrationTable as CalibrationTableSchema, formatCoverage } from '@marlo/schema';
 import { IMPLEMENTED_RULES } from '@marlo/rules';
 import { StaticRenderer } from '@marlo/render';
-import { scan } from '@marlo/cli';
+import { TABLE_BY_RENDERER, locateTable, scan } from '@marlo/cli';
 
 /**
  * Marlo over the Model Context Protocol.
@@ -38,8 +37,6 @@ import { scan } from '@marlo/cli';
  * browser renderer. The difference is entirely in what the tool returns.
  */
 
-const ROOT = resolve(import.meta.dirname, '..', '..', '..');
-
 /** The wire shape of a tool, kept minimal so no transport detail leaks into the logic. */
 export interface ToolDefinition {
   readonly name: string;
@@ -56,10 +53,19 @@ export interface ToolResult {
   readonly isError?: boolean;
 }
 
-export function loadTable(root: string = ROOT): CalibrationTable {
-  return CalibrationTableSchema.parse(
-    JSON.parse(readFileSync(resolve(root, 'calibration/table.json'), 'utf8')),
-  );
+/**
+ * The static renderer's table, found where the CLI finds it: inside the installed CLI
+ * package, or at the root of a checkout. The server only runs the static renderer.
+ */
+export function loadTable(
+  path: string | null = locateTable(TABLE_BY_RENDERER.static, existsSync),
+): CalibrationTable {
+  if (path === null) {
+    throw new Error(
+      `${TABLE_BY_RENDERER.static} was not found. It ships inside the CLI package, so reinstall.`,
+    );
+  }
+  return CalibrationTableSchema.parse(JSON.parse(readFileSync(path, 'utf8')));
 }
 
 /**

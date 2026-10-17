@@ -13,6 +13,7 @@ import { exitCodeFor, newRunId, scan } from './pipeline.js';
 import {
   calibrationTableFor,
   describeTableChoice,
+  locateTable,
   type ScanRenderer,
   type TableChoice,
 } from './table.js';
@@ -28,8 +29,6 @@ import {
  * It prints where every accuracy number came from. `marlo scan` ends with the calibration
  * date and the corpus date, so a reader can go and check the figure rather than trust it.
  */
-
-const ROOT = resolve(import.meta.dirname, '..', '..', '..');
 
 /**
  * Sets the exit code and returns, rather than calling process.exit.
@@ -159,11 +158,14 @@ function loadTable(renderer: ScanRenderer = 'static'): {
   table: CalibrationTable;
   choice: TableChoice;
 } {
-  const choice = calibrationTableFor(renderer, (relative) => existsSync(resolve(ROOT, relative)));
+  const choice = calibrationTableFor(
+    renderer,
+    (relative) => locateTable(relative, existsSync) !== null,
+  );
   try {
-    const table = CalibrationTable.parse(
-      JSON.parse(readFileSync(resolve(ROOT, choice.relative), 'utf8')),
-    );
+    const path = locateTable(choice.relative, existsSync);
+    if (path === null) throw new Error('it is not in this package or above it');
+    const table = CalibrationTable.parse(JSON.parse(readFileSync(path, 'utf8')));
     return { table, choice };
   } catch (error) {
     // Refusing to run is right. Every confidence figure Marlo prints comes from this
@@ -171,9 +173,8 @@ function loadTable(renderer: ScanRenderer = 'static'): {
     // while looking exactly like one that had.
     fail(
       `could not read ${choice.relative}, so there is no accuracy data to report ` +
-        `against.\n  Run \`pnpm calibrate\` to generate it.\n  ${
-          error instanceof Error ? error.message : String(error)
-        }`,
+        `against.\n  An installed package carries it, so reinstall; in a checkout, run ` +
+        `\`pnpm calibrate\`.\n  ${error instanceof Error ? error.message : String(error)}`,
     );
   }
 }
