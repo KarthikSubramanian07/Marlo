@@ -12,7 +12,7 @@
     "sharp": "0.35.5"
   },
   "dependencies": {
-    "esbuild": "0.28.1",
+    "esbuild": "0.28.2",
     "turndown": "7.2.4",
     "turndown-plugin-gfm": "1.0.2"
   }
