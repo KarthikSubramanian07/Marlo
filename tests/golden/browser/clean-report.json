@@ -4,7 +4,7 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-10-13",
+    "generated": "2026-10-20",
     "commit": null,
     "corpusRetrieved": "2026-07-29"
   },
@@ -488,13 +488,13 @@
               "engineVersion": "0.1.0",
               "engineRuleId": "marlo/5c01ea",
               "actRuleId": "5c01ea",
-              "outcome": "cantTell",
+              "outcome": "passed",
               "target": {
                 "selector": "nav",
                 "snippet": "<nav aria-label=\"Primary\"> <a href=\"/orders\">Orders</a> <a href=\"/help\">Help</a> </nav>",
                 "path": []
               },
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
+              "message": "Every ARIA attribute here is global, so it is permitted on any element."
             },
             {
               "engine": "marlo",
@@ -507,7 +507,7 @@
                 "snippet": "<svg role=\"img\" aria-label=\"Delivered\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"> <title>Delivered</title> <path d=\"M4 12l5 5 11-11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"></path> </svg>",
                 "path": []
               },
-              "message": "Properties are permitted on role=\"img\"."
+              "message": "Every ARIA attribute here is global, so it is permitted on any element."
             }
           ],
           "error": null,
@@ -992,7 +992,21 @@
           "actRuleId": "bc4a75",
           "engine": "marlo",
           "status": "ok",
-          "verdicts": [],
+          "verdicts": [
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/bc4a75",
+              "actRuleId": "bc4a75",
+              "outcome": "passed",
+              "target": {
+                "selector": "ul",
+                "snippet": "<ul> <li>14 Example Street</li> <li>London</li> </ul>",
+                "path": []
+              },
+              "message": "Everything <ul> (list) owns has one of the roles ARIA 1.2 permits: listitem."
+            }
+          ],
           "error": null,
           "missingCapabilities": [],
           "durationMs": 0
@@ -1048,13 +1062,13 @@
               "engineVersion": "0.1.0",
               "engineRuleId": "marlo/c487ae",
               "actRuleId": "c487ae",
-              "outcome": "cantTell",
+              "outcome": "passed",
               "target": {
                 "selector": "a",
                 "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"Marlo\"></a>",
                 "path": []
               },
-              "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
+              "message": "This link is named \"Marlo\" via content."
             },
             {
               "engine": "marlo",
@@ -1751,7 +1765,7 @@
                 "snippet": "<img src=\"divider.svg\" alt=\"\">",
                 "path": []
               },
-              "message": "This image is hidden from assistive technology (divider.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+              "message": "This image (divider.svg) has an empty alt, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
             }
           ],
           "error": null,

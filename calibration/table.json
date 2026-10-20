@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generated": "2026-10-20",
-  "commit": "0f91c614c056cbde91a2f2f99234337b80203baf",
+  "commit": "1aef7382565d1fb4f29d72895aa356ecdd4c59fd",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -2799,44 +2799,44 @@
       "testCaseCount": 15,
       "matrix": {
         "passed": {
-          "passed": 7,
+          "passed": 10,
           "failed": 0,
-          "cantTell": 3,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
           "passed": 0,
-          "failed": 0,
-          "cantTell": 2,
+          "failed": 2,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 1,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
-          "inapplicable": 1
+          "inapplicable": 2
         },
         "errored": 0,
         "unsupported": 1
       },
       "act": {
         "consistency": "consistent",
-        "automation": "semi-automated",
+        "automation": "automated",
         "disallowed": 0
       },
       "strict": {
-        "truePositives": 0,
+        "truePositives": 2,
         "falsePositives": 0,
-        "falseNegatives": 2,
+        "falseNegatives": 0,
         "trueNegatives": 12,
-        "cantTellOnFailed": 2,
-        "cantTellOnPassed": 3,
-        "precision": null,
-        "recall": 0,
-        "f1": null,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
         "falsePositiveRate": 0
       },
-      "flatteredByProtocol": true
+      "flatteredByProtocol": false
     },
     {
       "actRuleId": "5c01ea",
@@ -3393,14 +3393,14 @@
       "testCaseCount": 24,
       "matrix": {
         "passed": {
-          "passed": 8,
-          "failed": 1,
-          "cantTell": 1,
+          "passed": 10,
+          "failed": 0,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 0,
-          "failed": 10,
+          "passed": 1,
+          "failed": 9,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -3414,21 +3414,21 @@
         "unsupported": 1
       },
       "act": {
-        "consistency": "incorrect",
-        "automation": "semi-automated",
+        "consistency": "partial",
+        "automation": "automated",
         "disallowed": 1
       },
       "strict": {
-        "truePositives": 10,
-        "falsePositives": 1,
-        "falseNegatives": 0,
-        "trueNegatives": 12,
+        "truePositives": 9,
+        "falsePositives": 0,
+        "falseNegatives": 1,
+        "trueNegatives": 13,
         "cantTellOnFailed": 0,
-        "cantTellOnPassed": 1,
-        "precision": 0.9090909090909091,
-        "recall": 1,
-        "f1": 0.9523809523809523,
-        "falsePositiveRate": 0.07692307692307693
+        "cantTellOnPassed": 0,
+        "precision": 1,
+        "recall": 0.9,
+        "f1": 0.9473684210526316,
+        "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
     },
@@ -3591,8 +3591,8 @@
       "testCaseCount": 14,
       "matrix": {
         "passed": {
-          "passed": 3,
-          "failed": 2,
+          "passed": 4,
+          "failed": 1,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -3614,19 +3614,19 @@
       "act": {
         "consistency": "incorrect",
         "automation": "automated",
-        "disallowed": 2
+        "disallowed": 1
       },
       "strict": {
         "truePositives": 6,
-        "falsePositives": 2,
+        "falsePositives": 1,
         "falseNegatives": 0,
-        "trueNegatives": 6,
+        "trueNegatives": 7,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": 0.75,
+        "precision": 0.8571428571428571,
         "recall": 1,
-        "f1": 0.8571428571428571,
-        "falsePositiveRate": 0.25
+        "f1": 0.923076923076923,
+        "falsePositiveRate": 0.125
       },
       "flatteredByProtocol": false
     },
@@ -6553,20 +6553,20 @@
       "testCaseCount": 19,
       "matrix": {
         "passed": {
-          "passed": 4,
+          "passed": 6,
           "failed": 1,
-          "cantTell": 2,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 1,
-          "failed": 3,
-          "cantTell": 3,
+          "passed": 0,
+          "failed": 7,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 0,
-          "failed": 1,
+          "passed": 1,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 4
         },
@@ -6575,20 +6575,20 @@
       },
       "act": {
         "consistency": "incorrect",
-        "automation": "semi-automated",
-        "disallowed": 3
+        "automation": "automated",
+        "disallowed": 1
       },
       "strict": {
-        "truePositives": 3,
-        "falsePositives": 2,
-        "falseNegatives": 4,
-        "trueNegatives": 10,
-        "cantTellOnFailed": 3,
-        "cantTellOnPassed": 2,
-        "precision": 0.6,
-        "recall": 0.42857142857142855,
-        "f1": 0.5,
-        "falsePositiveRate": 0.16666666666666666
+        "truePositives": 7,
+        "falsePositives": 1,
+        "falseNegatives": 0,
+        "trueNegatives": 11,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 0.875,
+        "recall": 1,
+        "f1": 0.9333333333333333,
+        "falsePositiveRate": 0.08333333333333333
       },
       "flatteredByProtocol": false
     },
@@ -7351,15 +7351,15 @@
       "testCaseCount": 28,
       "matrix": {
         "passed": {
-          "passed": 5,
+          "passed": 9,
           "failed": 0,
-          "cantTell": 4,
+          "cantTell": 0,
           "inapplicable": 2
         },
         "failed": {
           "passed": 0,
-          "failed": 3,
-          "cantTell": 8,
+          "failed": 11,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
@@ -7373,22 +7373,22 @@
       },
       "act": {
         "consistency": "consistent",
-        "automation": "semi-automated",
+        "automation": "automated",
         "disallowed": 0
       },
       "strict": {
-        "truePositives": 3,
+        "truePositives": 11,
         "falsePositives": 0,
-        "falseNegatives": 8,
+        "falseNegatives": 0,
         "trueNegatives": 17,
-        "cantTellOnFailed": 8,
-        "cantTellOnPassed": 4,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
         "precision": 1,
-        "recall": 0.2727272727272727,
-        "f1": 0.42857142857142855,
+        "recall": 1,
+        "f1": 1,
         "falsePositiveRate": 0
       },
-      "flatteredByProtocol": true
+      "flatteredByProtocol": false
     },
     {
       "actRuleId": "c487ae",
@@ -8339,8 +8339,8 @@
       "testCaseCount": 17,
       "matrix": {
         "passed": {
-          "passed": 3,
-          "failed": 1,
+          "passed": 4,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 3
         },
@@ -8360,21 +8360,21 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "incorrect",
+        "consistency": "partial",
         "automation": "automated",
-        "disallowed": 5
+        "disallowed": 4
       },
       "strict": {
         "truePositives": 3,
-        "falsePositives": 1,
+        "falsePositives": 0,
         "falseNegatives": 4,
-        "trueNegatives": 9,
+        "trueNegatives": 10,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": 0.75,
+        "precision": 1,
         "recall": 0.42857142857142855,
-        "f1": 0.5454545454545454,
-        "falsePositiveRate": 0.1
+        "f1": 0.6,
+        "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
     },
@@ -8737,14 +8737,14 @@
         "passed": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 3,
-          "inapplicable": 2
+          "cantTell": 5,
+          "inapplicable": 0
         },
         "failed": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 3,
-          "inapplicable": 2
+          "cantTell": 5,
+          "inapplicable": 0
         },
         "inapplicable": {
           "passed": 0,
@@ -8756,23 +8756,23 @@
         "unsupported": 1
       },
       "act": {
-        "consistency": "partial",
+        "consistency": "consistent",
         "automation": "semi-automated",
-        "disallowed": 2
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 0,
         "falsePositives": 0,
         "falseNegatives": 5,
         "trueNegatives": 14,
-        "cantTellOnFailed": 3,
-        "cantTellOnPassed": 6,
+        "cantTellOnFailed": 5,
+        "cantTellOnPassed": 8,
         "precision": null,
         "recall": 0,
         "f1": null,
         "falsePositiveRate": 0
       },
-      "flatteredByProtocol": false
+      "flatteredByProtocol": true
     },
     {
       "actRuleId": "e88epe",
@@ -9321,15 +9321,15 @@
       "testCaseCount": 15,
       "matrix": {
         "passed": {
-          "passed": 4,
+          "passed": 5,
           "failed": 0,
-          "cantTell": 1,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 1,
-          "failed": 4,
-          "cantTell": 2,
+          "passed": 0,
+          "failed": 7,
+          "cantTell": 0,
           "inapplicable": 1
         },
         "inapplicable": {
@@ -9343,19 +9343,19 @@
       },
       "act": {
         "consistency": "partial",
-        "automation": "semi-automated",
-        "disallowed": 2
+        "automation": "automated",
+        "disallowed": 1
       },
       "strict": {
-        "truePositives": 4,
+        "truePositives": 7,
         "falsePositives": 0,
-        "falseNegatives": 4,
+        "falseNegatives": 1,
         "trueNegatives": 7,
-        "cantTellOnFailed": 2,
-        "cantTellOnPassed": 1,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
         "precision": 1,
-        "recall": 0.5,
-        "f1": 0.6666666666666666,
+        "recall": 0.875,
+        "f1": 0.9333333333333333,
         "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
@@ -10212,9 +10212,15 @@
     },
     {
       "actRuleId": "5c01ea",
-      "chosen": "alfa",
+      "chosen": "marlo",
       "reason": "best-measured",
       "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        },
         {
           "engine": "alfa",
           "strictRecall": 1,
@@ -10226,12 +10232,6 @@
           "strictRecall": 0.5,
           "strictPrecision": 1,
           "consistency": "partial"
-        },
-        {
-          "engine": "marlo",
-          "strictRecall": 0,
-          "strictPrecision": null,
-          "consistency": "consistent"
         }
       ],
       "autoFixPermitted": false
@@ -10301,9 +10301,9 @@
         },
         {
           "engine": "marlo",
-          "strictRecall": 1,
-          "strictPrecision": 0.9090909090909091,
-          "consistency": "incorrect"
+          "strictRecall": 0.9,
+          "strictPrecision": 1,
+          "consistency": "partial"
         },
         {
           "engine": "axe-core",
@@ -10320,15 +10320,15 @@
       "reason": "sole-implementer",
       "candidates": [
         {
-          "engine": "alfa",
+          "engine": "marlo",
           "strictRecall": 1,
           "strictPrecision": 0.8571428571428571,
           "consistency": "incorrect"
         },
         {
-          "engine": "marlo",
+          "engine": "alfa",
           "strictRecall": 1,
-          "strictPrecision": 0.75,
+          "strictPrecision": 0.8571428571428571,
           "consistency": "incorrect"
         },
         {
@@ -10680,6 +10680,12 @@
       "reason": "sole-implementer",
       "candidates": [
         {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 0.875,
+          "consistency": "incorrect"
+        },
+        {
           "engine": "axe-core",
           "strictRecall": 1,
           "strictPrecision": 0.875,
@@ -10690,12 +10696,6 @@
           "strictRecall": 0.8571428571428571,
           "strictPrecision": 1,
           "consistency": "partial"
-        },
-        {
-          "engine": "marlo",
-          "strictRecall": 0.42857142857142855,
-          "strictPrecision": 0.6,
-          "consistency": "incorrect"
         }
       ],
       "autoFixPermitted": true
@@ -10798,9 +10798,15 @@
     },
     {
       "actRuleId": "c487ae",
-      "chosen": "axe-core",
+      "chosen": "marlo",
       "reason": "best-measured",
       "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        },
         {
           "engine": "axe-core",
           "strictRecall": 1,
@@ -10810,12 +10816,6 @@
         {
           "engine": "alfa",
           "strictRecall": 1,
-          "strictPrecision": 1,
-          "consistency": "consistent"
-        },
-        {
-          "engine": "marlo",
-          "strictRecall": 0.2727272727272727,
           "strictPrecision": 1,
           "consistency": "consistent"
         },
@@ -10934,8 +10934,8 @@
         {
           "engine": "marlo",
           "strictRecall": 0.42857142857142855,
-          "strictPrecision": 0.75,
-          "consistency": "incorrect"
+          "strictPrecision": 1,
+          "consistency": "partial"
         },
         {
           "engine": "htmlcs",
@@ -10969,7 +10969,7 @@
           "engine": "marlo",
           "strictRecall": 0,
           "strictPrecision": null,
-          "consistency": "partial"
+          "consistency": "consistent"
         }
       ],
       "autoFixPermitted": false
@@ -11033,7 +11033,7 @@
         },
         {
           "engine": "marlo",
-          "strictRecall": 0.5,
+          "strictRecall": 0.875,
           "strictPrecision": 1,
           "consistency": "partial"
         }
@@ -11087,9 +11087,9 @@
     "implementedButUnmeasurable": []
   },
   "aggregate": {
-    "strictPrecision": 0.8527131782945736,
-    "strictRecall": 0.6395348837209303,
-    "falsePositiveRate": 0.05571847507331378,
+    "strictPrecision": 0.8936170212765957,
+    "strictRecall": 0.7325581395348837,
+    "falsePositiveRate": 0.04398826979472141,
     "sampleSize": 513
   },
   "realCorpus": {
@@ -11921,29 +11921,29 @@
         "actRuleId": "4e8ab6",
         "engine": "marlo",
         "outcomes": {
-          "passed": 2,
-          "failed": 1,
+          "passed": 3,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 22
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 1,
+        "findings": 0,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 0,
-            "falsePositives": 1,
+            "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 24,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
-            "precision": 0,
+            "precision": null,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.04
+            "falsePositiveRate": 0
           }
         }
       },
@@ -12161,28 +12161,28 @@
         "actRuleId": "5c01ea",
         "engine": "marlo",
         "outcomes": {
-          "passed": 0,
-          "failed": 0,
-          "cantTell": 23,
-          "inapplicable": 2
+          "passed": 20,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 0,
+        "findings": 2,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 0,
+            "truePositives": 2,
             "falsePositives": 0,
-            "falseNegatives": 2,
+            "falseNegatives": 0,
             "trueNegatives": 23,
-            "cantTellOnFailed": 2,
-            "cantTellOnPassed": 21,
-            "precision": null,
-            "recall": 0,
-            "f1": null,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
             "falsePositiveRate": 0
           }
         }
@@ -12251,28 +12251,28 @@
         "actRuleId": "5f99a7",
         "engine": "marlo",
         "outcomes": {
-          "passed": 22,
-          "failed": 1,
+          "passed": 19,
+          "failed": 4,
           "cantTell": 0,
           "inapplicable": 2
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 2,
+        "findings": 5,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 1,
+            "truePositives": 4,
             "falsePositives": 0,
-            "falseNegatives": 3,
+            "falseNegatives": 0,
             "trueNegatives": 21,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 1,
-            "recall": 0.25,
-            "f1": 0.4,
+            "recall": 1,
+            "f1": 1,
             "falsePositiveRate": 0
           }
         }
@@ -12341,29 +12341,29 @@
         "actRuleId": "674b10",
         "engine": "marlo",
         "outcomes": {
-          "passed": 20,
-          "failed": 1,
+          "passed": 21,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 4
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 6,
+        "findings": 0,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 0,
-            "falsePositives": 1,
+            "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 24,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
-            "precision": 0,
+            "precision": null,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.04
+            "falsePositiveRate": 0
           }
         }
       },
@@ -12431,29 +12431,29 @@
         "actRuleId": "6a7281",
         "engine": "marlo",
         "outcomes": {
-          "passed": 15,
-          "failed": 8,
+          "passed": 23,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 2
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 9,
+        "findings": 0,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 0,
-            "falsePositives": 8,
+            "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 17,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
-            "precision": 0,
+            "precision": null,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.32
+            "falsePositiveRate": 0
           }
         }
       },
@@ -12521,29 +12521,29 @@
         "actRuleId": "6cfa84",
         "engine": "marlo",
         "outcomes": {
-          "passed": 16,
-          "failed": 2,
+          "passed": 17,
+          "failed": 1,
           "cantTell": 0,
           "inapplicable": 7
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 8,
+        "findings": 1,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 0,
-            "falsePositives": 2,
+            "falsePositives": 1,
             "falseNegatives": 0,
-            "trueNegatives": 23,
+            "trueNegatives": 24,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 0,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.08
+            "falsePositiveRate": 0.04
           }
         }
       },
@@ -12919,14 +12919,14 @@
         "actRuleId": "97a4e1",
         "engine": "marlo",
         "outcomes": {
-          "passed": 22,
+          "passed": 23,
           "failed": 2,
-          "cantTell": 1,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 3,
+        "findings": 5,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
@@ -12937,7 +12937,7 @@
             "falseNegatives": 0,
             "trueNegatives": 23,
             "cantTellOnFailed": 0,
-            "cantTellOnPassed": 1,
+            "cantTellOnPassed": 0,
             "precision": 0.5,
             "recall": 1,
             "f1": 0.6666666666666666,
@@ -13404,9 +13404,9 @@
         "actRuleId": "b40fd1",
         "engine": "marlo",
         "outcomes": {
-          "passed": 20,
+          "passed": 15,
           "failed": 1,
-          "cantTell": 4,
+          "cantTell": 9,
           "inapplicable": 0
         },
         "errored": 0,
@@ -13421,8 +13421,8 @@
             "falsePositives": 0,
             "falseNegatives": 6,
             "trueNegatives": 17,
-            "cantTellOnFailed": 3,
-            "cantTellOnPassed": 1,
+            "cantTellOnFailed": 6,
+            "cantTellOnPassed": 3,
             "precision": 1,
             "recall": 0.14285714285714285,
             "f1": 0.25,
@@ -13674,29 +13674,29 @@
         "actRuleId": "bc4a75",
         "engine": "marlo",
         "outcomes": {
-          "passed": 3,
-          "failed": 3,
+          "passed": 20,
+          "failed": 2,
           "cantTell": 0,
-          "inapplicable": 19
+          "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 3,
+        "findings": 2,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 0,
-            "falsePositives": 3,
-            "falseNegatives": 2,
-            "trueNegatives": 20,
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
-            "precision": 0,
-            "recall": 0,
-            "f1": 0,
-            "falsePositiveRate": 0.13043478260869565
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
           }
         }
       },
@@ -14124,28 +14124,28 @@
         "actRuleId": "c487ae",
         "engine": "marlo",
         "outcomes": {
-          "passed": 11,
-          "failed": 3,
-          "cantTell": 11,
+          "passed": 17,
+          "failed": 8,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 3,
+        "findings": 19,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 1,
+            "truePositives": 6,
             "falsePositives": 2,
-            "falseNegatives": 5,
+            "falseNegatives": 0,
             "trueNegatives": 17,
-            "cantTellOnFailed": 5,
-            "cantTellOnPassed": 6,
-            "precision": 0.3333333333333333,
-            "recall": 0.16666666666666666,
-            "f1": 0.2222222222222222,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.75,
+            "recall": 1,
+            "f1": 0.8571428571428571,
             "falsePositiveRate": 0.10526315789473684
           }
         }
@@ -14492,29 +14492,29 @@
         "actRuleId": "e086e5",
         "engine": "marlo",
         "outcomes": {
-          "passed": 11,
-          "failed": 5,
+          "passed": 15,
+          "failed": 1,
           "cantTell": 0,
           "inapplicable": 9
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 5,
+        "findings": 1,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 0,
-            "falsePositives": 5,
+            "falsePositives": 1,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 24,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 0,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.2
+            "falsePositiveRate": 0.04
           }
         }
       },
@@ -14644,8 +14644,8 @@
         "outcomes": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 9,
-          "inapplicable": 16
+          "cantTell": 22,
+          "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 0,
@@ -14659,8 +14659,8 @@
             "falsePositives": 0,
             "falseNegatives": 16,
             "trueNegatives": 9,
-            "cantTellOnFailed": 5,
-            "cantTellOnPassed": 4,
+            "cantTellOnFailed": 16,
+            "cantTellOnPassed": 6,
             "precision": null,
             "recall": 0,
             "f1": null,
@@ -14781,9 +14781,9 @@
         "actRuleId": "ffd0e9",
         "engine": "marlo",
         "outcomes": {
-          "passed": 23,
+          "passed": 24,
           "failed": 0,
-          "cantTell": 1,
+          "cantTell": 0,
           "inapplicable": 1
         },
         "errored": 0,
@@ -14799,7 +14799,7 @@
             "falseNegatives": 0,
             "trueNegatives": 25,
             "cantTellOnFailed": 0,
-            "cantTellOnPassed": 1,
+            "cantTellOnPassed": 0,
             "precision": null,
             "recall": null,
             "f1": null,
@@ -15204,8 +15204,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.36,
-        "kappa": 0.093
+        "percentAgreement": 0.4,
+        "kappa": 0.1197
       },
       {
         "actRuleId": "4e8ab6",
@@ -15214,8 +15214,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.36,
-        "kappa": 0.0805
+        "percentAgreement": 0.4,
+        "kappa": 0.1007
       },
       {
         "actRuleId": "4e8ab6",
@@ -15274,8 +15274,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.2,
-        "kappa": 0.0909
+        "percentAgreement": 0.84,
+        "kappa": 0.5763
       },
       {
         "actRuleId": "5c01ea",
@@ -15284,8 +15284,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.08,
-        "kappa": 0.0711
+        "percentAgreement": 0.88,
+        "kappa": 0.6739
       },
       {
         "actRuleId": "5c01ea",
@@ -15305,7 +15305,7 @@
         ],
         "pages": 25,
         "percentAgreement": 0.84,
-        "kappa": 0.5495
+        "kappa": 0.6337
       },
       {
         "actRuleId": "5f99a7",
@@ -15314,8 +15314,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.88,
-        "kappa": 0.6231
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "5f99a7",
@@ -15334,8 +15334,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.4108
+        "percentAgreement": 0.76,
+        "kappa": 0.4681
       },
       {
         "actRuleId": "674b10",
@@ -15344,8 +15344,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.84,
-        "kappa": 0.5781
+        "percentAgreement": 0.88,
+        "kappa": 0.6575
       },
       {
         "actRuleId": "674b10",
@@ -15364,8 +15364,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.68,
-        "kappa": 0.4135
+        "percentAgreement": 0.8,
+        "kappa": 0.3902
       },
       {
         "actRuleId": "6a7281",
@@ -15374,8 +15374,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.68,
-        "kappa": 0.2754
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "6a7281",
@@ -15394,8 +15394,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.8,
-        "kappa": 0.6334
+        "percentAgreement": 0.84,
+        "kappa": 0.6942
       },
       {
         "actRuleId": "6cfa84",
@@ -15404,8 +15404,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.92,
-        "kappa": 0.8294
+        "percentAgreement": 0.96,
+        "kappa": 0.9094
       },
       {
         "actRuleId": "6cfa84",
@@ -15524,8 +15524,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.1337
+        "percentAgreement": 0.76,
+        "kappa": 0.1935
       },
       {
         "actRuleId": "97a4e1",
@@ -15534,8 +15534,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.88,
-        "kappa": 0.359
+        "percentAgreement": 0.92,
+        "kappa": 0.4681
       },
       {
         "actRuleId": "97a4e1",
@@ -15544,8 +15544,8 @@
           "htmlcs"
         ],
         "pages": 20,
-        "percentAgreement": 0.95,
-        "kappa": 0.6491
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "97a4e1",
@@ -15714,8 +15714,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.2972
+        "percentAgreement": 0.52,
+        "kappa": 0.0741
       },
       {
         "actRuleId": "b4f0c3",
@@ -15814,8 +15814,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.2152
+        "percentAgreement": 0.16,
+        "kappa": 0.0314
       },
       {
         "actRuleId": "bc4a75",
@@ -15824,8 +15824,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.28,
-        "kappa": 0.0741
+        "percentAgreement": 0.64,
+        "kappa": 0.3323
       },
       {
         "actRuleId": "bc4a75",
@@ -16024,8 +16024,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.44,
-        "kappa": 0.1026
+        "percentAgreement": 0.88,
+        "kappa": 0.7466
       },
       {
         "actRuleId": "c487ae",
@@ -16034,8 +16034,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.56,
-        "kappa": 0.3357
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "c487ae",
@@ -16044,8 +16044,8 @@
           "htmlcs"
         ],
         "pages": 20,
-        "percentAgreement": 0.55,
-        "kappa": 0.1549
+        "percentAgreement": 0.85,
+        "kappa": 0.4828
       },
       {
         "actRuleId": "c487ae",
@@ -16154,8 +16154,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.5658
+        "percentAgreement": 0.76,
+        "kappa": 0.5775
       },
       {
         "actRuleId": "e086e5",
@@ -16164,8 +16164,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.527
+        "percentAgreement": 0.88,
+        "kappa": 0.7581
       },
       {
         "actRuleId": "e086e5",
@@ -16174,8 +16174,8 @@
           "htmlcs"
         ],
         "pages": 20,
-        "percentAgreement": 0.6,
-        "kappa": 0.1534
+        "percentAgreement": 0.55,
+        "kappa": -0.0526
       },
       {
         "actRuleId": "e086e5",
@@ -16244,8 +16244,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.84,
-        "kappa": 0.2754
+        "percentAgreement": 0.88,
+        "kappa": 0.375
       },
       {
         "actRuleId": "ffd0e9",
@@ -16254,8 +16254,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.96,
-        "kappa": 0.6528
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "ffd0e9",
@@ -16283,8 +16283,8 @@
         {
           "engine": "marlo",
           "pages": 25,
-          "findings": 87,
-          "mean": 3.48
+          "findings": 82,
+          "mean": 3.28
         },
         {
           "engine": "axe-core",
@@ -16309,7 +16309,7 @@
         {
           "page": "application (140e297c3fb9)",
           "findings": {
-            "marlo": 5,
+            "marlo": 9,
             "axe-core": 14,
             "alfa": 105,
             "htmlcs": 1
@@ -16318,7 +16318,7 @@
         {
           "page": "application (339528b65ae8)",
           "findings": {
-            "marlo": 5,
+            "marlo": 9,
             "axe-core": 14,
             "alfa": 58,
             "htmlcs": 1
@@ -16327,7 +16327,7 @@
         {
           "page": "application (29d051888ee8)",
           "findings": {
-            "marlo": 5,
+            "marlo": 3,
             "axe-core": 1,
             "alfa": 1,
             "htmlcs": 0
@@ -16336,7 +16336,7 @@
         {
           "page": "documentation (7487de8b9f8f)",
           "findings": {
-            "marlo": 11,
+            "marlo": 4,
             "axe-core": 0,
             "alfa": 39,
             "htmlcs": 0
@@ -16354,7 +16354,7 @@
         {
           "page": "documentation (9364dcbac87f)",
           "findings": {
-            "marlo": 6,
+            "marlo": 5,
             "axe-core": 2,
             "alfa": 2,
             "htmlcs": 0
@@ -16363,7 +16363,7 @@
         {
           "page": "documentation (ada6b8fb59cd)",
           "findings": {
-            "marlo": 8,
+            "marlo": 1,
             "axe-core": 0,
             "alfa": 66,
             "htmlcs": null
@@ -16408,7 +16408,7 @@
         {
           "page": "government (ab2ca3d5ac91)",
           "findings": {
-            "marlo": 1,
+            "marlo": 0,
             "axe-core": 0,
             "alfa": 3,
             "htmlcs": 0
@@ -16417,7 +16417,7 @@
         {
           "page": "government (2b6bea051603)",
           "findings": {
-            "marlo": 1,
+            "marlo": 3,
             "axe-core": 0,
             "alfa": 0,
             "htmlcs": 3
@@ -16435,7 +16435,7 @@
         {
           "page": "login (3b077de399e3)",
           "findings": {
-            "marlo": 1,
+            "marlo": 0,
             "axe-core": 0,
             "alfa": 1,
             "htmlcs": 0
@@ -16444,7 +16444,7 @@
         {
           "page": "news (1266362a16c3)",
           "findings": {
-            "marlo": 7,
+            "marlo": 6,
             "axe-core": 0,
             "alfa": 597,
             "htmlcs": null
@@ -16453,7 +16453,7 @@
         {
           "page": "news (68833e124745)",
           "findings": {
-            "marlo": 14,
+            "marlo": 16,
             "axe-core": 0,
             "alfa": 121,
             "htmlcs": null
@@ -16480,7 +16480,7 @@
         {
           "page": "settings (45fd35c19415)",
           "findings": {
-            "marlo": 4,
+            "marlo": 3,
             "axe-core": 0,
             "alfa": 4,
             "htmlcs": 0
@@ -16489,7 +16489,7 @@
         {
           "page": "shop (b640eddff8aa)",
           "findings": {
-            "marlo": 0,
+            "marlo": 2,
             "axe-core": 3,
             "alfa": 18,
             "htmlcs": 2
@@ -16498,7 +16498,7 @@
         {
           "page": "shop (b049aafa903b)",
           "findings": {
-            "marlo": 2,
+            "marlo": 4,
             "axe-core": 7,
             "alfa": 13,
             "htmlcs": null
@@ -16507,7 +16507,7 @@
         {
           "page": "shop (db52c72978e7)",
           "findings": {
-            "marlo": 3,
+            "marlo": 2,
             "axe-core": 1,
             "alfa": 8,
             "htmlcs": 1
@@ -16516,7 +16516,7 @@
         {
           "page": "shop (e59fc248b2aa)",
           "findings": {
-            "marlo": 2,
+            "marlo": 3,
             "axe-core": 3,
             "alfa": 2,
             "htmlcs": 1
@@ -16609,13 +16609,13 @@
           },
           {
             "actRuleId": "5c01ea",
-            "routedTo": "alfa",
-            "pagesWhereItWouldFire": 0
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 2
           },
           {
             "actRuleId": "5f99a7",
             "routedTo": "marlo",
-            "pagesWhereItWouldFire": 3
+            "pagesWhereItWouldFire": 0
           },
           {
             "actRuleId": "674b10",
@@ -16625,12 +16625,12 @@
           {
             "actRuleId": "6a7281",
             "routedTo": "alfa",
-            "pagesWhereItWouldFire": 8
+            "pagesWhereItWouldFire": 1
           },
           {
             "actRuleId": "6cfa84",
             "routedTo": "axe-core",
-            "pagesWhereItWouldFire": 1
+            "pagesWhereItWouldFire": 0
           },
           {
             "actRuleId": "73f2c2",
@@ -16724,8 +16724,8 @@
           },
           {
             "actRuleId": "c487ae",
-            "routedTo": "axe-core",
-            "pagesWhereItWouldFire": 4
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 1
           },
           {
             "actRuleId": "cae760",
@@ -16750,7 +16750,7 @@
           {
             "actRuleId": "e086e5",
             "routedTo": "axe-core",
-            "pagesWhereItWouldFire": 5
+            "pagesWhereItWouldFire": 2
           },
           {
             "actRuleId": "e6952f",
@@ -16790,9 +16790,9 @@
         ]
       },
       "accuracy": {
-        "strictPrecision": 0.37209302325581395,
-        "strictRecall": 0.17204301075268819,
-        "falsePositiveRate": 0.02903225806451613,
+        "strictPrecision": 0.7567567567567568,
+        "strictRecall": 0.3010752688172043,
+        "falsePositiveRate": 0.00967741935483871,
         "sampleSize": 1023
       },
       "engines": [
@@ -16835,13 +16835,13 @@
         {
           "engine": "marlo",
           "rules": 41,
-          "truePositives": 16,
-          "falsePositives": 27,
-          "falseNegatives": 77,
-          "trueNegatives": 903,
-          "strictPrecision": 0.37209302325581395,
-          "strictRecall": 0.17204301075268819,
-          "falsePositiveRate": 0.02903225806451613,
+          "truePositives": 28,
+          "falsePositives": 9,
+          "falseNegatives": 65,
+          "trueNegatives": 921,
+          "strictPrecision": 0.7567567567567568,
+          "strictRecall": 0.3010752688172043,
+          "falsePositiveRate": 0.00967741935483871,
           "sampleSize": 1023
         }
       ]
@@ -17916,28 +17916,28 @@
         "actRuleId": "5c01ea",
         "engine": "marlo",
         "outcomes": {
-          "passed": 0,
-          "failed": 0,
-          "cantTell": 22,
+          "passed": 21,
+          "failed": 1,
+          "cantTell": 0,
           "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 0,
+        "findings": 2,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 0,
+            "truePositives": 1,
             "falsePositives": 0,
-            "falseNegatives": 2,
+            "falseNegatives": 1,
             "trueNegatives": 23,
-            "cantTellOnFailed": 2,
-            "cantTellOnPassed": 20,
-            "precision": null,
-            "recall": 0,
-            "f1": null,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
             "falsePositiveRate": 0
           }
         }
@@ -18186,29 +18186,29 @@
         "actRuleId": "6a7281",
         "engine": "marlo",
         "outcomes": {
-          "passed": 16,
-          "failed": 5,
-          "cantTell": 1,
+          "passed": 22,
+          "failed": 0,
+          "cantTell": 0,
           "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 8,
+        "findings": 0,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 0,
-            "falsePositives": 5,
+            "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
-            "cantTellOnPassed": 1,
-            "precision": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.2
+            "falsePositiveRate": 0
           }
         }
       },
@@ -18276,29 +18276,29 @@
         "actRuleId": "6cfa84",
         "engine": "marlo",
         "outcomes": {
-          "passed": 9,
-          "failed": 5,
+          "passed": 10,
+          "failed": 4,
           "cantTell": 0,
           "inapplicable": 11
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 88,
+        "findings": 63,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 2,
-            "falsePositives": 3,
+            "falsePositives": 2,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 21,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
-            "precision": 0.4,
+            "precision": 0.5,
             "recall": 1,
-            "f1": 0.5714285714285715,
-            "falsePositiveRate": 0.13043478260869565
+            "f1": 0.6666666666666666,
+            "falsePositiveRate": 0.08695652173913043
           }
         }
       },
@@ -18674,29 +18674,29 @@
         "actRuleId": "97a4e1",
         "engine": "marlo",
         "outcomes": {
-          "passed": 12,
-          "failed": 2,
-          "cantTell": 8,
+          "passed": 19,
+          "failed": 3,
+          "cantTell": 0,
           "inapplicable": 3
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 2,
+        "findings": 16,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 1,
-            "falsePositives": 1,
+            "falsePositives": 2,
             "falseNegatives": 0,
-            "trueNegatives": 23,
+            "trueNegatives": 22,
             "cantTellOnFailed": 0,
-            "cantTellOnPassed": 8,
-            "precision": 0.5,
+            "cantTellOnPassed": 0,
+            "precision": 0.3333333333333333,
             "recall": 1,
-            "f1": 0.6666666666666666,
-            "falsePositiveRate": 0.041666666666666664
+            "f1": 0.5,
+            "falsePositiveRate": 0.08333333333333333
           }
         }
       },
@@ -19159,9 +19159,9 @@
         "actRuleId": "b40fd1",
         "engine": "marlo",
         "outcomes": {
-          "passed": 19,
+          "passed": 14,
           "failed": 1,
-          "cantTell": 5,
+          "cantTell": 10,
           "inapplicable": 0
         },
         "errored": 0,
@@ -19177,7 +19177,7 @@
             "falseNegatives": 2,
             "trueNegatives": 20,
             "cantTellOnFailed": 2,
-            "cantTellOnPassed": 2,
+            "cantTellOnPassed": 6,
             "precision": 1,
             "recall": 0.3333333333333333,
             "f1": 0.5,
@@ -19429,28 +19429,28 @@
         "actRuleId": "bc4a75",
         "engine": "marlo",
         "outcomes": {
-          "passed": 2,
-          "failed": 2,
-          "cantTell": 2,
-          "inapplicable": 19
+          "passed": 17,
+          "failed": 5,
+          "cantTell": 1,
+          "inapplicable": 2
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 4,
+        "findings": 5,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 1,
+            "truePositives": 4,
             "falsePositives": 1,
-            "falseNegatives": 3,
+            "falseNegatives": 0,
             "trueNegatives": 20,
             "cantTellOnFailed": 0,
-            "cantTellOnPassed": 2,
-            "precision": 0.5,
-            "recall": 0.25,
-            "f1": 0.3333333333333333,
+            "cantTellOnPassed": 1,
+            "precision": 0.8,
+            "recall": 1,
+            "f1": 0.888888888888889,
             "falsePositiveRate": 0.047619047619047616
           }
         }
@@ -19879,29 +19879,29 @@
         "actRuleId": "c487ae",
         "engine": "marlo",
         "outcomes": {
-          "passed": 4,
-          "failed": 2,
-          "cantTell": 19,
+          "passed": 16,
+          "failed": 9,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 4,
+        "findings": 29,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
-            "truePositives": 1,
-            "falsePositives": 1,
-            "falseNegatives": 6,
-            "trueNegatives": 17,
-            "cantTellOnFailed": 6,
-            "cantTellOnPassed": 13,
-            "precision": 0.5,
-            "recall": 0.14285714285714285,
-            "f1": 0.22222222222222224,
-            "falsePositiveRate": 0.05555555555555555
+            "truePositives": 7,
+            "falsePositives": 2,
+            "falseNegatives": 0,
+            "trueNegatives": 16,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.7777777777777778,
+            "recall": 1,
+            "f1": 0.8750000000000001,
+            "falsePositiveRate": 0.1111111111111111
           }
         }
       },
@@ -20247,29 +20247,29 @@
         "actRuleId": "e086e5",
         "engine": "marlo",
         "outcomes": {
-          "passed": 11,
-          "failed": 12,
+          "passed": 15,
+          "failed": 8,
           "cantTell": 0,
           "inapplicable": 2
         },
         "errored": 0,
         "unsupported": 0,
-        "findings": 24,
+        "findings": 17,
         "graded": {
           "resolvedCells": 25,
           "unresolvedCells": 0,
           "cantTellTruth": 0,
           "strict": {
             "truePositives": 7,
-            "falsePositives": 5,
+            "falsePositives": 1,
             "falseNegatives": 0,
-            "trueNegatives": 13,
+            "trueNegatives": 17,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
-            "precision": 0.5833333333333334,
+            "precision": 0.875,
             "recall": 1,
-            "f1": 0.7368421052631579,
-            "falsePositiveRate": 0.2777777777777778
+            "f1": 0.9333333333333333,
+            "falsePositiveRate": 0.05555555555555555
           }
         }
       },
@@ -20399,8 +20399,8 @@
         "outcomes": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 11,
-          "inapplicable": 14
+          "cantTell": 20,
+          "inapplicable": 5
         },
         "errored": 0,
         "unsupported": 0,
@@ -20414,8 +20414,8 @@
             "falsePositives": 0,
             "falseNegatives": 11,
             "trueNegatives": 14,
-            "cantTellOnFailed": 2,
-            "cantTellOnPassed": 9,
+            "cantTellOnFailed": 10,
+            "cantTellOnPassed": 10,
             "precision": null,
             "recall": 0,
             "f1": null,
@@ -20536,9 +20536,9 @@
         "actRuleId": "ffd0e9",
         "engine": "marlo",
         "outcomes": {
-          "passed": 22,
+          "passed": 23,
           "failed": 0,
-          "cantTell": 1,
+          "cantTell": 0,
           "inapplicable": 2
         },
         "errored": 0,
@@ -20554,7 +20554,7 @@
             "falseNegatives": 0,
             "trueNegatives": 25,
             "cantTellOnFailed": 0,
-            "cantTellOnPassed": 1,
+            "cantTellOnPassed": 0,
             "precision": null,
             "recall": null,
             "f1": null,
@@ -21029,8 +21029,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.12,
-        "kappa": 0.0939
+        "percentAgreement": 0.88,
+        "kappa": 0.6711
       },
       {
         "actRuleId": "5c01ea",
@@ -21039,8 +21039,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.12,
-        "kappa": 0.0939
+        "percentAgreement": 0.68,
+        "kappa": 0.3902
       },
       {
         "actRuleId": "5c01ea",
@@ -21119,8 +21119,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.68,
-        "kappa": 0.3994
+        "percentAgreement": 0.8,
+        "kappa": 0.4635
       },
       {
         "actRuleId": "6a7281",
@@ -21129,8 +21129,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.76,
-        "kappa": 0.4318
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "6a7281",
@@ -21149,8 +21149,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.76,
-        "kappa": 0.6231
+        "percentAgreement": 0.8,
+        "kappa": 0.6753
       },
       {
         "actRuleId": "6cfa84",
@@ -21159,8 +21159,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.84,
-        "kappa": 0.7423
+        "percentAgreement": 0.88,
+        "kappa": 0.8011
       },
       {
         "actRuleId": "6cfa84",
@@ -21279,8 +21279,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.52,
-        "kappa": 0.2105
+        "percentAgreement": 0.76,
+        "kappa": 0.3902
       },
       {
         "actRuleId": "97a4e1",
@@ -21289,8 +21289,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.6,
-        "kappa": 0.3606
+        "percentAgreement": 0.88,
+        "kappa": 0.7137
       },
       {
         "actRuleId": "97a4e1",
@@ -21299,8 +21299,8 @@
           "htmlcs"
         ],
         "pages": 19,
-        "percentAgreement": 0.5263,
-        "kappa": 0.1739
+        "percentAgreement": 0.7368,
+        "kappa": 0.3357
       },
       {
         "actRuleId": "97a4e1",
@@ -21469,8 +21469,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.72,
-        "kappa": 0.3217
+        "percentAgreement": 0.52,
+        "kappa": 0.1501
       },
       {
         "actRuleId": "b4f0c3",
@@ -21569,8 +21569,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.88,
-        "kappa": 0.6269
+        "percentAgreement": 0.16,
+        "kappa": 0.0314
       },
       {
         "actRuleId": "bc4a75",
@@ -21579,8 +21579,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.2,
-        "kappa": 0.0458
+        "percentAgreement": 0.8,
+        "kappa": 0.5734
       },
       {
         "actRuleId": "bc4a75",
@@ -21779,8 +21779,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.2,
-        "kappa": 0.0792
+        "percentAgreement": 0.84,
+        "kappa": 0.6528
       },
       {
         "actRuleId": "c487ae",
@@ -21789,8 +21789,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.2,
-        "kappa": 0.0758
+        "percentAgreement": 0.96,
+        "kappa": 0.911
       },
       {
         "actRuleId": "c487ae",
@@ -21799,8 +21799,8 @@
           "htmlcs"
         ],
         "pages": 19,
-        "percentAgreement": 0.2105,
-        "kappa": 0.1176
+        "percentAgreement": 0.7895,
+        "kappa": 0.519
       },
       {
         "actRuleId": "c487ae",
@@ -21909,8 +21909,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.8,
-        "kappa": 0.6622
+        "percentAgreement": 0.92,
+        "kappa": 0.8521
       },
       {
         "actRuleId": "e086e5",
@@ -21919,8 +21919,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.8,
-        "kappa": 0.6622
+        "percentAgreement": 0.92,
+        "kappa": 0.8521
       },
       {
         "actRuleId": "e086e5",
@@ -21929,8 +21929,8 @@
           "htmlcs"
         ],
         "pages": 19,
-        "percentAgreement": 0.8421,
-        "kappa": 0.6984
+        "percentAgreement": 0.6842,
+        "kappa": 0.3214
       },
       {
         "actRuleId": "e086e5",
@@ -21999,8 +21999,8 @@
           "axe-core"
         ],
         "pages": 25,
-        "percentAgreement": 0.96,
-        "kappa": 0.7826
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "ffd0e9",
@@ -22009,8 +22009,8 @@
           "alfa"
         ],
         "pages": 25,
-        "percentAgreement": 0.96,
-        "kappa": 0.7826
+        "percentAgreement": 1,
+        "kappa": 1
       },
       {
         "actRuleId": "ffd0e9",
@@ -22038,8 +22038,8 @@
         {
           "engine": "marlo",
           "pages": 25,
-          "findings": 232,
-          "mean": 9.28
+          "findings": 234,
+          "mean": 9.36
         },
         {
           "engine": "axe-core",
@@ -22073,7 +22073,7 @@
         {
           "page": "application (937b7bdb3cb2)",
           "findings": {
-            "marlo": 4,
+            "marlo": 21,
             "axe-core": 35,
             "alfa": 24,
             "htmlcs": null
@@ -22091,7 +22091,7 @@
         {
           "page": "documentation (c823959fcd56)",
           "findings": {
-            "marlo": 18,
+            "marlo": 1,
             "axe-core": 1,
             "alfa": 1,
             "htmlcs": 1
@@ -22100,7 +22100,7 @@
         {
           "page": "documentation (d35001a75524)",
           "findings": {
-            "marlo": 1,
+            "marlo": 2,
             "axe-core": 3,
             "alfa": 2,
             "htmlcs": 1
@@ -22109,7 +22109,7 @@
         {
           "page": "documentation (bf4ceee67380)",
           "findings": {
-            "marlo": 7,
+            "marlo": 4,
             "axe-core": 3,
             "alfa": 104,
             "htmlcs": 2
@@ -22127,7 +22127,7 @@
         {
           "page": "error (d89ee06c9755)",
           "findings": {
-            "marlo": 5,
+            "marlo": 1,
             "axe-core": 1,
             "alfa": 2,
             "htmlcs": 6
@@ -22136,7 +22136,7 @@
         {
           "page": "form (8f8d60d6c406)",
           "findings": {
-            "marlo": 1,
+            "marlo": 0,
             "axe-core": 0,
             "alfa": 4,
             "htmlcs": null
@@ -22163,7 +22163,7 @@
         {
           "page": "government (0a76b0494c93)",
           "findings": {
-            "marlo": 6,
+            "marlo": 12,
             "axe-core": 0,
             "alfa": 13,
             "htmlcs": 4
@@ -22172,7 +22172,7 @@
         {
           "page": "government (09a11ba4c53a)",
           "findings": {
-            "marlo": 69,
+            "marlo": 65,
             "axe-core": 1,
             "alfa": 66,
             "htmlcs": 10
@@ -22190,7 +22190,7 @@
         {
           "page": "login (8c28574c8eaa)",
           "findings": {
-            "marlo": 11,
+            "marlo": 13,
             "axe-core": 9,
             "alfa": 14,
             "htmlcs": null
@@ -22199,7 +22199,7 @@
         {
           "page": "news (0292a3d7d86c)",
           "findings": {
-            "marlo": 55,
+            "marlo": 54,
             "axe-core": 0,
             "alfa": 0,
             "htmlcs": 22
@@ -22217,7 +22217,7 @@
         {
           "page": "news (35fe3d89afd4)",
           "findings": {
-            "marlo": 3,
+            "marlo": 0,
             "axe-core": 0,
             "alfa": 1,
             "htmlcs": 0
@@ -22226,7 +22226,7 @@
         {
           "page": "search (6ac0f59a729e)",
           "findings": {
-            "marlo": 0,
+            "marlo": 1,
             "axe-core": 0,
             "alfa": 1,
             "htmlcs": 0
@@ -22244,7 +22244,7 @@
         {
           "page": "shop (1d1ec8505558)",
           "findings": {
-            "marlo": 1,
+            "marlo": 0,
             "axe-core": 0,
             "alfa": 10,
             "htmlcs": 1
@@ -22253,7 +22253,7 @@
         {
           "page": "shop (b47d2166c25a)",
           "findings": {
-            "marlo": 2,
+            "marlo": 4,
             "axe-core": 3,
             "alfa": 12,
             "htmlcs": 0
@@ -22262,7 +22262,7 @@
         {
           "page": "shop (373ce6879fca)",
           "findings": {
-            "marlo": 16,
+            "marlo": 21,
             "axe-core": 21,
             "alfa": 26,
             "htmlcs": null
@@ -22271,7 +22271,7 @@
         {
           "page": "shop (2f27af976502)",
           "findings": {
-            "marlo": 11,
+            "marlo": 13,
             "axe-core": 9,
             "alfa": 14,
             "htmlcs": null
@@ -22289,8 +22289,8 @@
       ],
       "invariant": {
         "pages": 25,
-        "pagesWhereItWouldFire": 20,
-        "fraction": 0.8,
+        "pagesWhereItWouldFire": 21,
+        "fraction": 0.84,
         "perRule": [
           {
             "actRuleId": "047fe0",
@@ -22364,8 +22364,8 @@
           },
           {
             "actRuleId": "5c01ea",
-            "routedTo": "alfa",
-            "pagesWhereItWouldFire": 0
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 5
           },
           {
             "actRuleId": "5f99a7",
@@ -22380,12 +22380,12 @@
           {
             "actRuleId": "6a7281",
             "routedTo": "alfa",
-            "pagesWhereItWouldFire": 5
+            "pagesWhereItWouldFire": 0
           },
           {
             "actRuleId": "6cfa84",
             "routedTo": "axe-core",
-            "pagesWhereItWouldFire": 5
+            "pagesWhereItWouldFire": 4
           },
           {
             "actRuleId": "73f2c2",
@@ -22460,7 +22460,7 @@
           {
             "actRuleId": "bc4a75",
             "routedTo": "alfa",
-            "pagesWhereItWouldFire": 1
+            "pagesWhereItWouldFire": 2
           },
           {
             "actRuleId": "bc659a",
@@ -22479,7 +22479,7 @@
           },
           {
             "actRuleId": "c487ae",
-            "routedTo": "axe-core",
+            "routedTo": "marlo",
             "pagesWhereItWouldFire": 4
           },
           {
@@ -22505,7 +22505,7 @@
           {
             "actRuleId": "e086e5",
             "routedTo": "axe-core",
-            "pagesWhereItWouldFire": 5
+            "pagesWhereItWouldFire": 4
           },
           {
             "actRuleId": "e6952f",
@@ -22545,9 +22545,9 @@
         ]
       },
       "accuracy": {
-        "strictPrecision": 0.68,
-        "strictRecall": 0.30357142857142855,
-        "falsePositiveRate": 0.01756311745334797,
+        "strictPrecision": 0.8461538461538461,
+        "strictRecall": 0.39285714285714285,
+        "falsePositiveRate": 0.008781558726673985,
         "sampleSize": 1023
       },
       "engines": [
@@ -22590,13 +22590,13 @@
         {
           "engine": "marlo",
           "rules": 41,
-          "truePositives": 34,
-          "falsePositives": 16,
-          "falseNegatives": 78,
-          "trueNegatives": 895,
-          "strictPrecision": 0.68,
-          "strictRecall": 0.30357142857142855,
-          "falsePositiveRate": 0.01756311745334797,
+          "truePositives": 44,
+          "falsePositives": 8,
+          "falseNegatives": 68,
+          "trueNegatives": 903,
+          "strictPrecision": 0.8461538461538461,
+          "strictRecall": 0.39285714285714285,
+          "falsePositiveRate": 0.008781558726673985,
           "sampleSize": 1023
         }
       ]

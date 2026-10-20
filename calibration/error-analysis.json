@@ -2,73 +2,87 @@
   "gradedCells": 1023,
   "graded": {
     "static": {
-      "truePositives": 16,
-      "falsePositives": 27,
-      "falseNegatives": 77,
-      "trueNegatives": 903,
+      "truePositives": 28,
+      "falsePositives": 9,
+      "falseNegatives": 65,
+      "trueNegatives": 921,
       "precision": {
-        "value": 0.3721,
+        "value": 0.7568,
         "interval": {
-          "low": 0.2438,
-          "high": 0.5214
+          "low": 0.5988,
+          "high": 0.8664
         }
       },
       "recall": {
-        "value": 0.172,
+        "value": 0.3011,
         "interval": {
-          "low": 0.1088,
-          "high": 0.2613
+          "low": 0.2173,
+          "high": 0.4007
         }
       },
       "falsePositiveRate": {
-        "value": 0.029,
+        "value": 0.0097,
         "interval": {
-          "low": 0.02,
-          "high": 0.0419
+          "low": 0.0051,
+          "high": 0.0183
         }
       },
       "unsupported": 50
     },
     "browser": {
-      "truePositives": 44,
-      "falsePositives": 16,
-      "falseNegatives": 49,
-      "trueNegatives": 914,
+      "truePositives": 56,
+      "falsePositives": 2,
+      "falseNegatives": 37,
+      "trueNegatives": 928,
       "precision": {
-        "value": 0.7333,
+        "value": 0.9655,
         "interval": {
-          "low": 0.6099,
-          "high": 0.8287
+          "low": 0.8827,
+          "high": 0.9905
         }
       },
       "recall": {
-        "value": 0.4731,
+        "value": 0.6022,
         "interval": {
-          "low": 0.3747,
-          "high": 0.5736
+          "low": 0.5005,
+          "high": 0.6957
         }
       },
       "falsePositiveRate": {
-        "value": 0.0172,
+        "value": 0.0022,
         "interval": {
-          "low": 0.0106,
-          "high": 0.0278
+          "low": 0.0006,
+          "high": 0.0078
         }
       },
       "unsupported": 0
     }
   },
-  "falsePositives": 27,
-  "falseNegatives": 43,
+  "falsePositives": 9,
+  "falseNegatives": 31,
   "unsupportedFailures": 34,
   "byCause": [
+    {
+      "id": "decorative-judgment",
+      "family": "abstention",
+      "kind": "FN",
+      "title": "Cannot tell whether a hidden image is decorative",
+      "detail": "Whether an image left out of the accessibility tree carries information is a judgment about its content. Marlo finds the image, an `img`, an unnamed or `aria-hidden` inline `svg` or a `canvas`, and asks for a person to check; the raters found brand logos, close glyphs and a search icon whose meaning was otherwise lost.",
+      "cells": 16,
+      "pages": 16,
+      "rules": [
+        "e88epe"
+      ],
+      "rulesPerfectOnAct": [],
+      "browserCorrects": 0
+    },
     {
       "id": "repeated-content",
       "family": "abstention",
       "kind": "FN",
       "title": "Cannot tell what repeats across pages",
-      "detail": "Bypass rules turn on whether a block repeats on other pages of the site, which one page cannot show. Marlo answers cantTell; the raters judged the site header repeated and found no skip link, landmark or other way past it.",
-      "cells": 12,
+      "detail": "Bypass rules turn on whether a block repeats on other pages of the site, which one page cannot show. Marlo answers cantTell; the raters judged the site header repeated and found no skip link, landmark or other way past it. That includes a `main` landmark that opens with the logo link or a header holding the menu, which Marlo used to pass and now asks about.",
+      "cells": 15,
       "pages": 8,
       "rules": [
         "b40fd1",
@@ -81,174 +95,32 @@
       "browserCorrects": 0
     },
     {
-      "id": "svg-not-considered",
-      "family": "rule logic",
-      "kind": "FN",
-      "title": "Looks only at img elements, not inline svg",
-      "detail": "The failing images are inline `svg` elements (a licence logo, a close icon, a store logo) that are `aria-hidden` or have no name. Marlo finds no applicable image and answers inapplicable.",
-      "cells": 11,
-      "pages": 11,
-      "rules": [
-        "e88epe"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 0
-    },
-    {
-      "id": "decorative-judgment",
-      "family": "abstention",
-      "kind": "FN",
-      "title": "Cannot tell whether a hidden image is decorative",
-      "detail": "Whether an image hidden from assistive technology carries information is a judgment about its content. Marlo asks for a person to check; the raters found brand logos, close glyphs and a search icon whose meaning was otherwise lost.",
-      "cells": 5,
-      "pages": 5,
-      "rules": [
-        "e88epe"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 0
-    },
-    {
-      "id": "image-name-abstention",
-      "family": "abstention",
-      "kind": "FN",
-      "title": "Abstains on a link named only by an image",
-      "detail": "A link holds only an `img` with no alt or an `svg` with no title, so its name is empty. Marlo abstains because an image contributes to the name and it does not trust the renderer's answer, which costs a failure the raters found unambiguous.",
-      "cells": 5,
-      "pages": 5,
-      "rules": [
-        "c487ae"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 0
-    },
-    {
-      "id": "landmark-first-content",
-      "family": "rule logic",
-      "kind": "FN",
-      "title": "Passes any main landmark",
-      "detail": "Marlo passes when a main landmark exists. The rule needs a landmark whose first perceivable content is non-repeated, and on these pages `main` opens with the repeated header or logo.",
-      "cells": 3,
-      "pages": 3,
-      "rules": [
-        "b40fd1"
-      ],
-      "rulesPerfectOnAct": [
-        "b40fd1"
-      ],
-      "browserCorrects": 0
-    },
-    {
-      "id": "aria-1-3",
-      "family": "specification version",
-      "kind": "FN",
-      "title": "Accepts aria-description, which ARIA 1.2 does not define",
-      "detail": "The ACT rule pins WAI-ARIA 1.2. `aria-description` exists only in the 1.3 draft, and Marlo's attribute list includes it. Browsers support it, so this is a disagreement about the specification version more than a defect.",
-      "cells": 3,
-      "pages": 3,
-      "rules": [
-        "5f99a7"
-      ],
-      "rulesPerfectOnAct": [
-        "5f99a7"
-      ],
-      "browserCorrects": 0
-    },
-    {
-      "id": "implicit-role",
-      "family": "abstention",
-      "kind": "FN",
-      "title": "Does not compute the implicit role of every element",
-      "detail": "`aria-expanded` on a `label` and on a `span` with no role is not permitted. Deciding that needs the implicit role, which Marlo does not compute for every element, so it abstains.",
-      "cells": 2,
-      "pages": 2,
-      "rules": [
-        "5c01ea"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 0
-    },
-    {
-      "id": "owned-elements",
-      "family": "rule logic",
-      "kind": "FN",
-      "title": "Misses an owned element of the wrong role",
-      "detail": "A list owns headings and separators, and a table owns a `caption`, which ARIA 1.2 does not list among its required owned elements. Marlo passes the list and finds the table inapplicable.",
-      "cells": 2,
-      "pages": 2,
-      "rules": [
-        "bc4a75"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 0
-    },
-    {
-      "id": "idref-exception",
-      "family": "rule logic",
-      "kind": "FP",
-      "title": "Fails an ID reference whose target is missing",
-      "detail": "Marlo fails `aria-controls`, `aria-labelledby` or `aria-describedby` when no element has the referenced id. The ACT rule says, as an exception, that ID Reference values need no referenced element, and leaves missing targets to a separate rule (in6db8). On three pages the target does exist and the static renderer lost it, which only adds to the count.",
-      "cells": 8,
-      "pages": 8,
-      "rules": [
-        "6a7281"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 3
-    },
-    {
       "id": "renderer-hidden",
       "family": "renderer",
       "kind": "FP",
       "title": "Evaluates an element a stylesheet hides",
-      "detail": "A listbox, menu, search field or button is hidden by a page stylesheet. The static renderer does no layout and reports it as present, so Marlo checks something nobody can perceive. In headless Chromium the element is hidden and the error goes away.",
+      "detail": "A button, link, field or focusable descendant is hidden by a page stylesheet: a `display:none` class on an empty edit link, a sidebar toggle with a mismatched `aria-label`, a `.hidden` link inside an `aria-hidden` region. The static renderer resolves no styles, so the rule checks something nobody can perceive. These rules read resolved `display` and `visibility` where a renderer supplies them (D-016), so in headless Chromium the element is left out and the error goes away.",
       "cells": 8,
       "pages": 6,
       "rules": [
+        "2ee8b8",
+        "6cfa84",
         "97a4e1",
-        "bc4a75",
+        "c487ae",
         "e086e5"
       ],
-      "rulesPerfectOnAct": [],
+      "rulesPerfectOnAct": [
+        "2ee8b8",
+        "c487ae"
+      ],
       "browserCorrects": 8
     },
     {
-      "id": "hidden-applicability",
-      "family": "rule logic",
+      "id": "abbreviation-dispute",
+      "family": "disputed ground truth",
       "kind": "FP",
-      "title": "Ignores display:none when deciding applicability",
-      "detail": "Links inside a `display:none` panel are counted as focusable content of an `aria-hidden` region (6cfa84), and `display:none` buttons are checked for their visible label (2ee8b8). The browser renderer resolves the style and Marlo still flags them, so the rule, not the renderer, skips the visibility test.",
-      "cells": 5,
-      "pages": 5,
-      "rules": [
-        "2ee8b8",
-        "6cfa84"
-      ],
-      "rulesPerfectOnAct": [
-        "2ee8b8"
-      ],
-      "browserCorrects": 0
-    },
-    {
-      "id": "renderer-generated-content",
-      "family": "renderer",
-      "kind": "FP",
-      "title": "Cannot see CSS generated content in a name",
-      "detail": "Citation backlinks are named only by a `::before` counter (a, b, c). The accessible name computation includes generated content; the static renderer has none, so the links look unnamed. In Chromium Marlo abstains instead of failing.",
-      "cells": 2,
-      "pages": 2,
-      "rules": [
-        "c487ae"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 2
-    },
-    {
-      "id": "abbreviation-exception",
-      "family": "rule logic",
-      "kind": "FP",
-      "title": "Misses the abbreviation exception in label-in-name",
-      "detail": "The visible labels \"EN\" and \"UI Designer\" contain abbreviations, which the rule's applicability excludes. Marlo applies the rule and fails both links.",
+      "title": "Applies label-in-name where the raters saw abbreviations",
+      "detail": "The visible labels \"EN\" and \"Paweł Kuna UI Designer\" differ from the names \"Select language\" and \"Open user menu\". The raters put both links outside the rule because the labels hold abbreviations. The pinned rule does exclude abbreviations, but its own Failed Example 1, a link showing \"ACT rules\" named \"WCAG\", treats initialisms in the label and the name as in scope, so nothing in the text separates \"EN\" or \"UI\" from them. Marlo keeps the rule as its examples apply it and reports the cell as a suspected ground-truth error rather than changing the rule toward the raters.",
       "cells": 1,
       "pages": 1,
       "rules": [
@@ -256,64 +128,11 @@
       ],
       "rulesPerfectOnAct": [
         "2ee8b8"
-      ],
-      "browserCorrects": 0
-    },
-    {
-      "id": "placeholder-name",
-      "family": "rule logic",
-      "kind": "FP",
-      "title": "Does not accept a placeholder as an accessible name",
-      "detail": "HTML-AAM lets `placeholder` supply a name when nothing else does, so the field has a non-empty name and passes. Marlo treats the placeholder as no name. It is weak labelling, but the rule asks only for a non-empty name.",
-      "cells": 1,
-      "pages": 1,
-      "rules": [
-        "e086e5"
-      ],
-      "rulesPerfectOnAct": [],
-      "browserCorrects": 0
-    },
-    {
-      "id": "dpub-roles",
-      "family": "rule logic",
-      "kind": "FP",
-      "title": "Does not know DPUB-ARIA roles",
-      "detail": "`role=\"doc-noteref\"` is a valid DPUB-ARIA role, which the rule counts. Marlo checks only the WAI-ARIA role list.",
-      "cells": 1,
-      "pages": 1,
-      "rules": [
-        "674b10"
-      ],
-      "rulesPerfectOnAct": [
-        "674b10"
-      ],
-      "browserCorrects": 0
-    },
-    {
-      "id": "separator-focusable",
-      "family": "rule logic",
-      "kind": "FP",
-      "title": "Requires aria-valuenow on a non-focusable separator",
-      "detail": "Only a focusable separator is a widget with required value properties. Marlo requires `aria-valuenow` on an `li role=\"separator\"` that is not focusable.",
-      "cells": 1,
-      "pages": 1,
-      "rules": [
-        "4e8ab6"
-      ],
-      "rulesPerfectOnAct": [
-        "4e8ab6"
       ],
       "browserCorrects": 0
     }
   ],
   "browserOnly": [
-    {
-      "page": "application-03",
-      "rule": "6cfa84",
-      "truth": "passed",
-      "static": "passed",
-      "browser": "failed"
-    },
     {
       "page": "documentation-03",
       "rule": "cae760",
@@ -330,121 +149,6 @@
     }
   ],
   "errors": [
-    {
-      "kind": "FN",
-      "page": "documentation-03",
-      "rule": "5c01ea",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "implicit-role",
-      "marlo": [
-        {
-          "selector": "nav#mdbook-sidebar",
-          "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
-        },
-        {
-          "selector": "strong",
-          "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
-        }
-      ],
-      "raterA": "label#mdbook-sidebar-toggle (visible, in the accessibility tree with aria-label) has aria-expanded='true'; aria-expanded is not global and is not supported on a label element with no role. Other ARIA attributes on visible elements are global or supported (button aria-haspopup/expanded).",
-      "raterB": "label#mdbook-sidebar-toggle (visible, in tree) has aria-expanded=\"true\"; label has no corresponding role and aria-expanded is not global, so not permitted on it.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "news-02",
-      "rule": "5c01ea",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "implicit-role",
-      "marlo": [
-        {
-          "selector": "div#mw-aria-live-region",
-          "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
-        },
-        {
-          "selector": "nav.vector-main-menu-landmark",
-          "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
-        }
-      ],
-      "raterA": "span.wn-social-bookmarks-btn ('More sharing options', tabindex=0, visible, in tree) has aria-expanded='true'; its role is generic, aria-expanded is not global, not supported by generic, and not allowed on a span without role per ARIA in HTML.",
-      "raterB": "span.wn-social-bookmarks-btn (title \"More sharing options\", tabindex=0, no role, visible 38x38) has aria-expanded=\"true\"; generic role does not support aria-expanded and it is not global in ARIA 1.2.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "news-01",
-      "rule": "5f99a7",
-      "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "aria-1-3",
-      "marlo": [
-        {
-          "selector": "div#mw-aria-live-region",
-          "message": "Every aria- attribute is defined in ARIA 1.2."
-        },
-        {
-          "selector": "nav.vector-main-menu-landmark",
-          "message": "Every aria- attribute is defined in ARIA 1.2."
-        }
-      ],
-      "raterA": "input#p-lang-btn-checkbox has aria-description=\"Go to an article in another language...\"; aria-description is not defined in WAI-ARIA 1.2, Graphics or DPUB modules (only in the 1.3 draft).",
-      "raterB": "input#p-lang-btn-checkbox has aria-description, which is not defined in WAI-ARIA 1.2 or the listed modules (only draft 1.3).",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "news-02",
-      "rule": "5f99a7",
-      "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "aria-1-3",
-      "marlo": [
-        {
-          "selector": "div#mw-aria-live-region",
-          "message": "Every aria- attribute is defined in ARIA 1.2."
-        },
-        {
-          "selector": "nav.vector-main-menu-landmark",
-          "message": "Every aria- attribute is defined in ARIA 1.2."
-        }
-      ],
-      "raterA": "input#p-lang-btn-checkbox has aria-description='Go to an article in another language...'; aria-description is not defined in WAI-ARIA 1.2, Graphics ARIA or DPUB-ARIA (it is only in the ARIA 1.3 draft).",
-      "raterB": "input#p-lang-btn-checkbox has aria-description=\"Go to an article in another language...\"; aria-description is not defined in WAI-ARIA 1.2/Graphics/DPUB (only the 1.3 draft). All other aria-* attributes are defined.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "table-01",
-      "rule": "5f99a7",
-      "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "aria-1-3",
-      "marlo": [
-        {
-          "selector": "div#mw-aria-live-region",
-          "message": "Every aria- attribute is defined in ARIA 1.2."
-        },
-        {
-          "selector": "nav.vector-main-menu-landmark",
-          "message": "Every aria- attribute is defined in ARIA 1.2."
-        }
-      ],
-      "raterA": "input#p-lang-btn-checkbox has aria-description=\"Go to an article in another language...\"; aria-description is not defined in WAI-ARIA 1.2 / Graphics 1.0 / DPUB 1.0 (it exists only in the ARIA 1.3 draft). All other aria-* attributes are defined.",
-      "raterB": "input#p-lang-btn-checkbox has aria-description=\"Go to an article in another language...\", which is not defined in WAI-ARIA 1.2 (added in 1.3 draft).",
-      "resolution": null
-    },
     {
       "kind": "FN",
       "page": "application-01",
@@ -488,14 +192,14 @@
       "page": "login-01",
       "rule": "b40fd1",
       "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "landmark-first-content",
+      "cause": "repeated-content",
       "marlo": [
         {
           "selector": "html",
-          "message": "<main id=\"content\"> is a main landmark, so a screen reader user can jump to the page's own content."
+          "message": "<main id=\"content\"> is a main landmark, but it opens with <svg>, inside a link or a header, nav, footer or aside, which is usually site content repeated on every page. If that is so, the landmark starts with repeated content and does not satisfy the rule; one page cannot show which."
         }
       ],
       "raterA": "Only landmark is main#content; its first perceivable content is a.navbar-brand (Tabler logo link to home '.'), a site logo block repeated on other Tabler pages, so first content is not non-repeated. No other landmark (form unnamed, banner div has no role).",
@@ -507,14 +211,14 @@
       "page": "shop-01",
       "rule": "b40fd1",
       "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "landmark-first-content",
+      "cause": "repeated-content",
       "marlo": [
         {
           "selector": "html",
-          "message": "<main> is a main landmark, so a screen reader user can jump to the page's own content."
+          "message": "<main> is a main landmark, but it opens with \"Menu\", inside a link or a header, nav, footer or aside, which is usually site content repeated on every page. If that is so, the landmark starts with repeated content and does not satisfy the rule; one page cannot show which."
         }
       ],
       "raterA": "Only landmarks: main.relative (its first perceivable content is main itself/header 'Menu' button, repeated content, not after it) and nav inside header (repeated). header/footer are inside main so not banner/contentinfo. h1 'All products' is in no qualifying landmark.",
@@ -526,14 +230,14 @@
       "page": "shop-02",
       "rule": "b40fd1",
       "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "landmark-first-content",
+      "cause": "repeated-content",
       "marlo": [
         {
           "selector": "html",
-          "message": "<main> is a main landmark, so a screen reader user can jump to the page's own content."
+          "message": "<main> is a main landmark, but it opens with \"Menu\", inside a link or a header, nav, footer or aside, which is usually site content repeated on every page. If that is so, the landmark starts with repeated content and does not satisfy the rule; one page cannot show which."
         }
       ],
       "raterA": "No landmark starts with non-repeated content: main's first perceivable content is the repeated header (button 'Menu'); nav starts with 'Menu'; header/footer are inside main so not banner/contentinfo; role=region divs are hidden.",
@@ -557,154 +261,6 @@
       ],
       "raterA": "No main landmark; landmarks are header account div[role=navigation], nav#navbarNav, footer navs and footer (contentinfo), all repeated content. Main content (breadcrumb, h1 'Men', product grid) is in plain divs.",
       "raterB": "No main landmark. Landmarks are nav (Taxon navigation, account, footer navs) and footer, whose first content is the repeated site header/menu/links. Page content (h1 \"Men\", product grid) sits in plain divs outside any landmark. Assumes the shared header/footer is repeated across the shop.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "documentation-04",
-      "rule": "bc4a75",
-      "truth": "failed",
-      "actual": "passed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "owned-elements",
-      "marlo": [
-        {
-          "selector": "div.sp-tabs-scrollable-container",
-          "message": "role=\"tablist\" owns a permitted child role."
-        },
-        {
-          "selector": "div.sp-tabs-scrollable-container",
-          "message": "role=\"tablist\" owns a permitted child role."
-        }
-      ],
-      "raterA": "Sidebar nav ul (first ul inside aside nav[role=navigation]) has implicit role list but owns h3 'GET STARTED'/'LEARN REACT' (heading) and li role=separator children, which are not listitem.",
-      "raterB": "Sidebar nav ul (implicit list) owns h3 \"GET STARTED\"/h3 and li[role=separator], none of which is a listitem. tablist owns only tab buttons (ok).",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "table-01",
-      "rule": "bc4a75",
-      "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
-      "truthSource": "resolution",
-      "cause": "owned-elements",
-      "marlo": [],
-      "raterA": "table#mwQg (implicit role table) owns caption#mwQw (role caption), not in ARIA 1.2's required owned list for table (row, rowgroup>row); ARIA 1.3 allows it. Also its tr rows own a generic ::before pseudo node (static-row-numbers). Lists own only listitems.",
-      "raterB": "table.wikitable has a caption child; Chromium exposes role caption as a child of the table, which is not in the table required-owned list (row, rowgroup>row). Literal rule vs intent unclear. Lists, rows and other tables pass.",
-      "resolution": "table#mwQg (implicit role table, visible, in the accessibility tree) has a direct child caption element (\"List of countries and territories by total population\", display table-caption) whose semantic role is caption and which is exposed as a child of the table. WAI-ARIA 1.2 lists only row and rowgroup -> row as required owned elements of table, so the table owns an element outside that list."
-    },
-    {
-      "kind": "FN",
-      "page": "application-01",
-      "rule": "c487ae",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "image-name-abstention",
-      "marlo": [
-        {
-          "selector": "a.navbar-brand",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        },
-        {
-          "selector": "a",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        }
-      ],
-      "raterA": "Avatar links a[href=\"/profile/johndoe\"] (also janesmith, mikewilson, sarahchen) in .article-meta contain only an img without alt; accessible name empty. Other links have text or img alt \"Conduit\".",
-      "raterB": "a[href=\"/profile/johndoe\"] (and janesmith, mikewilson, sarahchen) in .article-meta contains only an img with no alt; accessible name is empty.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "application-02",
-      "rule": "c487ae",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "image-name-abstention",
-      "marlo": [
-        {
-          "selector": "a.navbar-brand",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        },
-        {
-          "selector": "a",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        }
-      ],
-      "raterA": "Avatar links a[href='/profile/johndoe'] (2, .article-meta) and a.comment-author[href='/profile/janesmith'|'/profile/mikewilson'] wrapping img have only an img without alt; accessible name empty.",
-      "raterB": "a[href=\"/profile/johndoe\"] (2x, wraps img with no alt) and a.comment-author[href=\"/profile/janesmith\"]/mikewilson avatar links contain only an alt-less img, no text or aria-label; accessible name empty.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "shop-01",
-      "rule": "c487ae",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "image-name-abstention",
-      "marlo": [
-        {
-          "selector": "a",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        },
-        {
-          "selector": "a",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        }
-      ],
-      "raterA": "Footer 'Powered by' links a[href='https://www.medusajs.com'] and a[href='https://nextjs.org'] contain only an svg logo with no title/aria-label; accessible name is empty. Other links have text names.",
-      "raterB": "Footer a[href=\"https://www.medusajs.com\"] and a[href=\"https://nextjs.org\"] contain only an svg with no title/aria-label/text; accessible name empty.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "shop-02",
-      "rule": "c487ae",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "image-name-abstention",
-      "marlo": [
-        {
-          "selector": "a",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        },
-        {
-          "selector": "a",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        }
-      ],
-      "raterA": "Footer links a[href='https://www.medusajs.com'] and a[href='https://nextjs.org'] contain only an svg with no title/aria-label and have no text: accessible name empty. Other links are named.",
-      "raterB": "Footer links a[href=\"https://www.medusajs.com\"] and a[href=\"https://nextjs.org\"] (\"Powered by ... &\") each contain only an svg with no title, aria-label or text; accessible name is empty. Both are visible and in the tree.",
-      "resolution": null
-    },
-    {
-      "kind": "FN",
-      "page": "shop-04",
-      "rule": "c487ae",
-      "truth": "failed",
-      "actual": "cantTell",
-      "browser": "cantTell",
-      "truthSource": "agreement",
-      "cause": "image-name-abstention",
-      "marlo": [
-        {
-          "selector": "a.link-reset",
-          "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
-        }
-      ],
-      "raterA": "Header logo link a.link-reset[href=\"/en_US/\"] contains only an svg with no title/desc/aria-label/role; no text, no aria-label, no title, so its accessible name is empty. Other links (Sign in, Address, Back to store) have names.",
-      "raterB": "a.link-reset[href=\"/en_US/\"] in the header contains only an svg logo (div.py-1 > svg); the svg has no title, aria-label or text and the link has no aria-label or title, so its accessible name is empty.",
       "resolution": null
     },
     {
@@ -737,12 +293,12 @@
       "cause": "decorative-judgment",
       "marlo": [
         {
-          "selector": "img.w-6",
-          "message": "This image is hidden from assistive technology (https://preview.tabler.io/static/brands/amazon.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg.icon",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         },
         {
-          "selector": "img.w-6",
-          "message": "This image is hidden from assistive technology (https://preview.tabler.io/static/brands/android.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg.icon",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         }
       ],
       "raterA": "Visible aria-hidden svg icons with no named ancestor carry information: the brand-facebook icon in span.bg-facebook.avatar beside '132 Likes', brand-x in span.bg-x beside '623 Shares', and the message icon beside comment counts ('3') in the Tasks table. None is purely decorative.",
@@ -754,11 +310,20 @@
       "page": "documentation-04",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.text-sm",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.align-middle",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "Header home link a[href='/'] (div.uwu-hidden) contains a visible 40x40 React logo svg with no name and no role (ignored svg); the logo identifies the brand and is not purely decorative. Sidebar chevron svgs in a[title] links also convey expanded/collapsed state. imgs excluded (not loaded).",
       "raterB": "Visible unnamed svg icons (nav section icons, search, copy, download/reload/clear/fork, show more, arrow, logo) sit beside text labels and are decorative; svgs inside aria-label ancestors excluded; all imgs have alt.",
       "resolution": "The header home link a[href='/'] in div.uwu-hidden holds a visible 40x40 React atom svg with no role, no title, empty accessible name, and no ancestor named from author (the link has no aria-label/title). The svg is the brand logo, informative rather than purely decorative; adjacent 'React' text does not change that under this rule. The unnamed search and Copy-page icon svgs are similar."
@@ -768,11 +333,20 @@
       "page": "error-01",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.govuk-footer__crown",
+          "message": "This svg has a presentational role, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.govuk-footer__licence-logo",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "svg.govuk-footer__licence-logo (OGL logo, aria-hidden=\"true\", visible 41x17) is not in the tree and conveys the Open Government Licence logo, information given by adjacent text, so not purely decorative (rule note). Crown svg role=presentation judged decorative; search icon excepted (button aria-label).",
       "raterB": "Applicable: svg.govuk-footer__crown (role=presentation) and svg.govuk-footer__licence-logo (aria-hidden), both visible, not in tree; both purely decorative alongside adjacent text. Search icon svg is inside a button named by aria-label, so excluded.",
       "resolution": "svg.govuk-footer__licence-logo is visible (41x17 at 160,1595), aria-hidden=true so not in the accessibility tree, and has no named-from-author ancestor. Its path draws the Open Government Licence 'OGL' mark, which identifies the licence; that is information, not pure decoration. Adjacent licence text makes it redundant, which the rule note says still fails."
@@ -782,11 +356,20 @@
       "page": "form-01",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.govuk-footer__crown",
+          "message": "This svg has a presentational role, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.govuk-footer__licence-logo",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "svg.govuk-footer__licence-logo (aria-hidden=true, visible 41x17) is the Open Government Licence 'OGL' logo, informative rather than pure decoration; adjacent text only makes it redundant, which the rule note says still fails. svg.govuk-footer__crown (role=presentation) is a crown emblem, arguably decorative.",
       "raterB": "Applicable: footer svg.govuk-footer__crown (role=presentation) and svg.govuk-footer__licence-logo (aria-hidden); both decorative, adjacent to text.",
       "resolution": "svg.govuk-footer__licence-logo is visible (41x17 at 160,725), aria-hidden=true so excluded from the accessibility tree, with no named-from-author ancestor. Its path draws the Open Government Licence 'OGL' mark identifying the licence, so it conveys information and is not purely decorative; the adjacent licence text only makes it redundant, which per the rule note still fails."
@@ -796,11 +379,20 @@
       "page": "form-02",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.govuk-footer__crown",
+          "message": "This svg has a presentational role, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.govuk-footer__licence-logo",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "svg.govuk-footer__licence-logo (visible, aria-hidden=true, so excluded from the tree) draws the Open Government Licence 'OGL' logo lettering, which conveys information (redundant with adjacent text), so it is not purely decorative. svg.govuk-footer__crown (role=presentation) is decorative.",
       "raterB": "svg.govuk-footer__crown (role=presentation) and svg.govuk-footer__licence-logo (aria-hidden) are visible, excluded from tree, and purely decorative (OGL text adjacent).",
       "resolution": "svg.govuk-footer__licence-logo is visible and aria-hidden=true, so it is excluded from the accessibility tree and applicable. It draws the Open Government Licence (OGL) logo; adjacent text makes it redundant, but per the rule note an informative icon with adjacent text is not purely decorative, so it fails. svg.govuk-footer__crown (role=presentation) is also applicable."
@@ -816,12 +408,12 @@
       "cause": "decorative-judgment",
       "marlo": [
         {
-          "selector": "img.gem-c-image-card__image",
-          "message": "This image is hidden from assistive technology (https://www.gov.uk/assets/frontend/homepage/find-a-job-4d38717b0451da3bb223ddea7f681d79e48c1c022da5a08f16aba3f681503150.png). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg.gem-c-search__icon",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         },
         {
           "selector": "img.gem-c-image-card__image",
-          "message": "This image is hidden from assistive technology (https://www.gov.uk/assets/frontend/homepage/national-insurance-featured-7169e3631b639dcfc7be22469daf155ad0aa7516143ff8cf2e6f95ba29c8656c.png). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "message": "This image (https://www.gov.uk/assets/frontend/homepage/find-a-job-4d38717b0451da3bb223ddea7f681d79e48c1c022da5a08f16aba3f681503150.png) has an empty alt, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         }
       ],
       "raterA": "svg.govuk-footer__licence-logo (aria-hidden=true, visible 41x17, footer) is the Open Government Licence logo, an informative logo, not purely decorative (text alternative only adjacent). Other applicable: action-link arrow svgs, search icon, footer crown. imgs excluded (broken, not completely available).",
@@ -839,12 +431,12 @@
       "cause": "decorative-judgment",
       "marlo": [
         {
-          "selector": "img.attachment-large",
-          "message": "This image is hidden from assistive technology (https://www.nasa.gov/wp-content/uploads/2026/10/spacex-35.jpg?w=1024). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         },
         {
-          "selector": "img.attachment-large",
-          "message": "This image is hidden from assistive technology (https://www.nasa.gov/wp-content/uploads/2023/04/mmx-mars-mission.jpg?w=985). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         }
       ],
       "raterA": "Applicable: visible unnamed svg icons not under named-from-author ancestors (arrow circles in links, Explore chevron, content-type icons beside 'News Release'/'Article'/'Blog' text). All are decorative/redundant with adjacent text. alt=\"\" imgs are broken (network off), excepted.",
@@ -856,11 +448,20 @@
       "page": "landing-01",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.index-module__EJ526G__icon",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.index-module__EJ526G__icon",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "svg.index-module__EJ526G__icon (aria-hidden) in nav links 'Beta Docs' and 'Contribute' (target=_blank): visible external-link arrow icon conveying new-window/external destination, not purely decorative. Backdrop svg is decorative; search/copy icons are adjacent-text icons.",
       "raterB": "Visible aria-hidden svgs: external-link arrow icons in a[href=beta.docs...] and Contribute links (convey opens in new tab, only visually), copy and search icons beside text, hero background art (decorative). Whether the arrows are purely decorative is a judgment call.",
       "resolution": "svg.index-module__EJ526G__icon (aria-hidden, 12x12, visible) inside the nav links \"Beta Docs\" and \"Contribute\" (target=_blank, no aria-label on any ancestor) is an external-link arrow conveying that the link opens an external site in a new tab; that information is nowhere in the text, so the image is not purely decorative."
@@ -870,11 +471,20 @@
       "page": "login-01",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.icon",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.icon",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "div.tblr-banner-close > svg.icon-tabler-x: visible 20x20 'X' close icon, no role/name (ignored graphics-document); it signals the banner close control, so it is not purely decorative. Also applicable: aria-hidden GitHub/X brand icons in 'Login with ...' buttons (redundant with adjacent text).",
       "raterB": "div.tblr-banner-close > svg.icon-tabler-x (banner dismiss \"x\"): visible, no role/name/aria-hidden, graphics-document with empty name, no named ancestor; it conveys a close function so not decorative.",
       "resolution": null
@@ -891,7 +501,11 @@
       "marlo": [
         {
           "selector": "img.gem-c-figure__image",
-          "message": "This image is hidden from assistive technology (https://assets.publishing.service.gov.uk/media/6ac9f70ba57ddfe32196aa90/s300_Flood_warning_sign.jpg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "message": "This image (https://assets.publishing.service.gov.uk/media/6ac9f70ba57ddfe32196aa90/s300_Flood_warning_sign.jpg) has an empty alt, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.gem-c-share-links__svg",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         }
       ],
       "raterA": "svg.gem-c-share-links__svg (Facebook and X logos, aria-hidden, 30x30, visible) and svg.govuk-footer__licence-logo (OGL logo, aria-hidden) are informative icons hidden from AT; their info is only duplicated by adjacent text, which the rule's note says fails. Crown svg is decorative.",
@@ -903,11 +517,20 @@
       "page": "search-01",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "resolution",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.govuk-footer__crown",
+          "message": "This svg has a presentational role, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.govuk-footer__licence-logo",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "svg.gem-c-search__icon in main search button.gem-c-search__submit is aria-hidden and visible; button text 'Search' is hidden by text-indent:-5000px, so the magnifier icon is the only visual label (informative, not purely decorative). Button named from content, not author.",
       "raterB": "Applicable visible svgs not in tree: search icon in button.gem-c-search__submit (text \"Search\"), pagination next arrow, OGL licence logo, footer crown (role=presentation); all purely decorative beside text. Header toggle svg excluded (ancestor aria-label).",
       "resolution": "svg.govuk-footer__licence-logo (aria-hidden, visible 41x17, no aria-label/labelledby ancestor) is the Open Government Licence logo, an informative mark only duplicated by the adjacent licence sentence, so not purely decorative. The main search icon is excepted (ancestor div#keywords[role=search][aria-label=Sitewide]), as is the pagination arrow (nav[aria-label=Pagination])."
@@ -923,12 +546,12 @@
       "cause": "decorative-judgment",
       "marlo": [
         {
-          "selector": "img.w-6",
-          "message": "This image is hidden from assistive technology (https://preview.tabler.io/static/brands/amazon.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg.icon",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         },
         {
-          "selector": "img.w-6",
-          "message": "This image is hidden from assistive technology (https://preview.tabler.io/static/brands/android.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+          "selector": "svg.icon",
+          "message": "This svg is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
         }
       ],
       "raterA": "div.tblr-banner-close svg.icon-tabler-x (visible, top right of banner) is an svg with empty name and graphics-document role, so ignored; it is an X close icon conveying the dismiss action, not purely decorative. Other visible aria-hidden icons (All Package, Customize brush) are decorative next to text.",
@@ -940,11 +563,20 @@
       "page": "shop-01",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "Footer svg logos inside a[href='https://www.medusajs.com'] and a[href='https://nextjs.org'] are visible svg (graphics-document) with empty name and no author-named ancestor; they convey brand identity ('Powered by' Medusa & Next.js), not purely decorative. img thumbnails excluded: image requests broken (network off).",
       "raterB": "Visible svgs with empty name: footer logos in links (svg in a[href=\"https://www.medusajs.com\"] and nextjs.org) convey the link purpose, not decorative; also placeholder icon svg in first product card.",
       "resolution": null
@@ -954,11 +586,20 @@
       "page": "shop-02",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.fill-[#9ca3af]",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "Footer svgs (18x18, visible) in a[href='https://www.medusajs.com'] and a[href='https://nextjs.org'] have no role and empty name (graphics-document), ancestors named from content. They are the Medusa/Next.js logos conveying the link targets, not decorative. imgs excluded: not loaded (network off).",
       "raterB": "The two footer svgs (inside a[href=medusajs.com] and a[href=nextjs.org]) are 18x18 visible, role graphics-document with empty accessible name, and their links are not named by the author. They are the sole content of the links, so not purely decorative.",
       "resolution": null
@@ -968,11 +609,20 @@
       "page": "shop-03",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg.bi",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.bi",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "div#info-toggle > svg.bi-x-lg (visible 24x24 at 52,948, no role, no name, generic ancestors only) is an svg graphics-document with empty name; it is the X icon of the floating info-box toggle and conveys a close/toggle function, so it is not purely decorative. Product imgs excluded (not loaded).",
       "raterB": "div#info-toggle > svg.bi-x-lg (visible 24x24, no aria-hidden, no name, no named ancestor) is an informative control glyph (close/toggle of the info box), not purely decorative. Other icon svgs are decorative or sit inside aria-labelled controls.",
       "resolution": null
@@ -982,11 +632,20 @@
       "page": "shop-04",
       "rule": "e88epe",
       "truth": "failed",
-      "actual": "inapplicable",
-      "browser": "inapplicable",
+      "actual": "cantTell",
+      "browser": "cantTell",
       "truthSource": "agreement",
-      "cause": "svg-not-considered",
-      "marlo": [],
+      "cause": "decorative-judgment",
+      "marlo": [
+        {
+          "selector": "svg",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        },
+        {
+          "selector": "svg.icon",
+          "message": "This svg has no accessible name, so assistive technology ignores the svg. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+        }
+      ],
       "raterA": "Header logo svg (in a.link-reset to /en_US/, viewBox 0 0 3512 1033) is visible, has no role/title so is ignored svg with empty name; it is the Sylius store logo and the link's only content, so not purely decorative. Chevron svg.icon-sm (aria-hidden) and Sign in user icon are decorative.",
       "raterB": "Header logo svg (a.link-reset > div > svg, viewBox 0 0 3512 1033) is visible, has empty name and no role so is ignored (graphics-document), but it carries the store logo as the link's only content, so it is not purely decorative.",
       "resolution": null
@@ -1149,9 +808,9 @@
       "rule": "2ee8b8",
       "truth": "passed",
       "actual": "failed",
-      "browser": "failed",
+      "browser": "passed",
       "truthSource": "agreement",
-      "cause": "hidden-applicability",
+      "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "button.vector-pinnable-header-toggle-button",
@@ -1172,9 +831,9 @@
       "rule": "2ee8b8",
       "truth": "passed",
       "actual": "failed",
-      "browser": "failed",
+      "browser": "passed",
       "truthSource": "agreement",
-      "cause": "hidden-applicability",
+      "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "button.vector-pinnable-header-toggle-button",
@@ -1197,7 +856,7 @@
       "actual": "failed",
       "browser": "failed",
       "truthSource": "agreement",
-      "cause": "abbreviation-exception",
+      "cause": "abbreviation-dispute",
       "marlo": [
         {
           "selector": "a.nav-link",
@@ -1218,9 +877,9 @@
       "rule": "2ee8b8",
       "truth": "passed",
       "actual": "failed",
-      "browser": "failed",
+      "browser": "passed",
       "truthSource": "agreement",
-      "cause": "hidden-applicability",
+      "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "button.vector-pinnable-header-toggle-button",
@@ -1237,234 +896,13 @@
     },
     {
       "kind": "FP",
-      "page": "documentation-04",
-      "rule": "4e8ab6",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "separator-focusable",
-      "marlo": [
-        {
-          "selector": "li.mt-4",
-          "message": "role=\"separator\" requires aria-valuenow. Without it the widget announces its role but not its state."
-        }
-      ],
-      "raterA": "Explicit roles in tree: div role=region (visible panel), li role=separator (not focusable), div role=textbox, p#__next-route-announcer__ role=alert. None has required states/properties. nav role=navigation excluded (same implicit role); tabs are visibility:hidden.",
-      "raterB": "Explicit roles (region, separator on non-focusable li, tablist, tab, textbox, alert) have no required props missing; nav role=navigation is implicit-identical, excluded.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "documentation-01",
-      "rule": "674b10",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "dpub-roles",
-      "marlo": [
-        {
-          "selector": "a#id1",
-          "message": "role=\"doc-noteref\" contains no valid ARIA role, so the element keeps its native semantics and the author's intent is lost silently."
-        },
-        {
-          "selector": "a#id2",
-          "message": "role=\"doc-noteref\" contains no valid ARIA role, so the element keeps its native semantics and the author's intent is lost silently."
-        }
-      ],
-      "raterA": "Non-hidden role values: navigation, search, main, note, doc-noteref, doc-footnote, doc-backlink; all valid non-abstract roles (DPUB-ARIA included).",
-      "raterB": "role values used (button, navigation, search, main, note, doc-noteref, doc-footnote, doc-backlink) are all valid.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "application-03",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "button.nav-link",
-          "message": "aria-controls references offcanvas-settings, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        },
-        {
-          "selector": "button.nav-link",
-          "message": "aria-controls references offcanvas-settings, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "All ARIA values are valid for their types: true/false tokens, aria-current page/true, aria-live polite, integer values, and ID references to existing ids.",
-      "raterB": "Values valid for their types: aria-expanded true/false, aria-haspopup true, aria-hidden true, aria-current page/true, aria-live polite, aria-atomic true, aria-valuenow numeric, ID refs allowed.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "documentation-01",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "input#menuToggler",
-          "message": "aria-controls references navigation, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "aria-pressed='false', aria-expanded='false' valid; aria-controls='navigation' is a valid ID reference (target not required); aria-label strings.",
-      "raterB": "aria-label strings, aria-pressed=\"false\", aria-expanded=\"false\", aria-controls=\"navigation\" (idref, existence not required) are valid.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "documentation-03",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "input#mdbook-searchbar",
-          "message": "aria-describedby references searchresults-header, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "Checked aria-hidden (true/false), aria-expanded, aria-haspopup='true', aria-controls and aria-describedby (ID refs), aria-keyshortcuts ('/ s', 'Left', 'Right'), aria-label; all values valid for their types.",
-      "raterB": "Defined ARIA attributes checked (aria-expanded true/false, aria-haspopup true, aria-hidden, aria-controls, aria-describedby, aria-keyshortcuts, aria-label) all have valid values; missing idref targets are excepted.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "login-01",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "form#offcanvas-settings",
-          "message": "aria-labelledby references offcanvas-settings-title, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "aria-pressed=false, aria-hidden=true, aria-modal=true valid tokens; aria-label strings; aria-labelledby/aria-controls reference existing ids.",
-      "raterB": "Values valid: aria-hidden=\"true\", aria-pressed=\"false\", aria-modal=\"true\", aria-label strings, aria-labelledby/aria-controls id refs.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "news-01",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "a#ca-watchstar-sticky-header",
-          "message": "aria-controls references mw-watchlink-notification, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "Values checked: aria-expanded true/false, aria-haspopup true/dialog, aria-live polite, aria-hidden true, aria-controls/labelledby ID refs (exception), aria-label strings. All valid for their types.",
-      "raterB": "Values valid: aria-haspopup true, aria-expanded true/false, aria-live polite, aria-hidden true, ID refs and strings fine.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "news-02",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "a#ca-watchstar-sticky-header",
-          "message": "aria-controls references mw-watchlink-notification, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "All ARIA values valid: aria-haspopup=true, aria-expanded=true/false, aria-hidden=true, aria-live=polite, aria-multiselectable=false, aria-labelledby/aria-controls ID refs, aria-label strings.",
-      "raterB": "aria-live=polite, aria-haspopup=true, aria-hidden=true, aria-expanded true/false, aria-multiselectable=false, aria-controls/labelledby id refs, aria-label strings: all valid value types.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "settings-01",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "form#offcanvas-settings",
-          "message": "aria-labelledby references offcanvas-settings-title, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "Values valid: aria-expanded true/false, aria-haspopup true, aria-hidden true, aria-current page, aria-modal true, aria-controls/aria-labelledby ID refs, aria-label strings.",
-      "raterB": "Values valid: aria-expanded/haspopup/hidden/modal true|false|true, aria-current=page, aria-controls and aria-labelledby id refs, aria-label strings.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "table-01",
-      "rule": "6a7281",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "idref-exception",
-      "marlo": [
-        {
-          "selector": "a#ca-watchstar-sticky-header",
-          "message": "aria-controls references mw-watchlink-notification, which does not exist. An invalid value is ignored, so the state is not conveyed."
-        }
-      ],
-      "raterA": "Values checked: aria-hidden=true, aria-expanded=false, aria-haspopup=true/dialog, aria-live=polite, aria-label strings, aria-labelledby/aria-controls ID refs; all valid for their types.",
-      "raterB": "aria-haspopup true/dialog, aria-expanded false, aria-hidden true, aria-live polite, ID refs and strings all valid. aria-description not a 1.2 property.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "documentation-04",
-      "rule": "6cfa84",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "hidden-applicability",
-      "marlo": [
-        {
-          "selector": "div#react-collapsed-panel-:R26m6:",
-          "message": "aria-hidden=\"true\" hides this from assistive technology, but it still contains 3 focusable elements (a, a, a). A keyboard user reaches something a screen reader cannot describe."
-        },
-        {
-          "selector": "div#react-collapsed-panel-:R28m6:",
-          "message": "aria-hidden=\"true\" hides this from assistive technology, but it still contains 3 focusable elements (a, a, a). A keyboard user reaches something a screen reader cannot describe."
-        }
-      ],
-      "raterA": "Seven div#react-collapsed-panel-* with aria-hidden=true contain sidebar links, but each panel has display:none (inline style), so no descendant is focusable or in sequential focus navigation.",
-      "raterB": "7 div[role=region][aria-hidden=true] collapsed sidebar panels have display:none, so their links are not focusable; no other aria-hidden=true.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
       "page": "landing-01",
       "rule": "6cfa84",
       "truth": "passed",
       "actual": "failed",
-      "browser": "failed",
+      "browser": "passed",
       "truthSource": "agreement",
-      "cause": "hidden-applicability",
+      "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "a.hidden",
@@ -1481,12 +919,16 @@
       "rule": "97a4e1",
       "truth": "passed",
       "actual": "failed",
-      "browser": "cantTell",
+      "browser": "passed",
       "truthSource": "agreement",
       "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "button#global-navigation-trigger--mobile",
+          "message": "The button has no accessible name, so it is announced as \"button\" and nothing more."
+        },
+        {
+          "selector": "button.hds-search-panel-mobile-trigger",
           "message": "The button has no accessible name, so it is announced as \"button\" and nothing more."
         }
       ],
@@ -1496,70 +938,13 @@
     },
     {
       "kind": "FP",
-      "page": "documentation-03",
-      "rule": "bc4a75",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "inapplicable",
-      "truthSource": "resolution",
-      "cause": "renderer-hidden",
-      "marlo": [
-        {
-          "selector": "ul#mdbook-theme-list",
-          "message": "role=\"menu\" requires menuitem or menuitemcheckbox or menuitemradio or group children, and none of its children have one of those roles."
-        }
-      ],
-      "raterA": "Lists in the accessibility tree (sidebar ol.chapter and ol.section lists) own only li listitems; ul[role=menu] is display:none and not in the tree.",
-      "raterB": "Only role with required owned elements is menu on ul#mdbook-theme-list, which is display:none (not in the tree).",
-      "resolution": "The role list has required owned elements (listitem). The visible sidebar ol.chapter (280px wide, in the accessibility tree) and its nested ol.section lists own only li children (no aria-owns on the page). The only menu, ul#mdbook-theme-list, is display:none so it is not a target. Every applicable list owns only listitems."
-    },
-    {
-      "kind": "FP",
-      "page": "government-02",
-      "rule": "bc4a75",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "inapplicable",
-      "truthSource": "agreement",
-      "cause": "renderer-hidden",
-      "marlo": [
-        {
-          "selector": "ul#search-main-c89cbc73__listbox",
-          "message": "role=\"listbox\" requires at least one option or group and has no exposed children at all."
-        }
-      ],
-      "raterA": "Exposed ul lists own only li children (hidden li excluded); listbox uls are display:none or in hidden menu, so not in tree. No violations.",
-      "raterB": "In-tree list roles (ul) own li items; combobox has no required owned elements in ARIA 1.2; listbox ul elements are display:none (not in tree).",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "news-02",
-      "rule": "bc4a75",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "inapplicable",
-      "truthSource": "agreement",
-      "cause": "renderer-hidden",
-      "marlo": [
-        {
-          "selector": "div#ooui-1",
-          "message": "role=\"listbox\" requires at least one option or group and has no exposed children at all."
-        }
-      ],
-      "raterA": "Visible ul/ol lists own only li (listitem); visible tables own tbody/tr/td. The only role=listbox (div#ooui-1) is display:none. No aria-busy.",
-      "raterB": "Checked roles with required owned elements: every ul/ol contains only li, 4 tables contain tbody>tr>td; no violations. Explicit roles used have no required owned elements.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
       "page": "news-01",
       "rule": "c487ae",
       "truth": "passed",
       "actual": "failed",
-      "browser": "cantTell",
+      "browser": "passed",
       "truthSource": "resolution",
-      "cause": "renderer-generated-content",
+      "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "a.oo-ui-element-hidden",
@@ -1576,9 +961,9 @@
       "rule": "c487ae",
       "truth": "passed",
       "actual": "failed",
-      "browser": "cantTell",
+      "browser": "passed",
       "truthSource": "resolution",
-      "cause": "renderer-generated-content",
+      "cause": "renderer-hidden",
       "marlo": [
         {
           "selector": "a.oo-ui-element-hidden",
@@ -1600,88 +985,12 @@
       "cause": "renderer-hidden",
       "marlo": [
         {
-          "selector": "input#mdbook-searchbar",
-          "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Search this book ...\") is not a label: it disappears on focus and is not reliably announced."
+          "selector": "input#mdbook-sidebar-toggle-anchor",
+          "message": "The field has no accessible name, so it is announced only by its type."
         }
       ],
       "raterA": "Only form fields are input#mdbook-searchbar (in display:none #mdbook-search-wrapper) and checkbox #mdbook-sidebar-toggle-anchor (display:none); neither is in the accessibility tree.",
       "raterB": "Search input (type=search) is in display:none div#mdbook-search-wrapper and the checkbox is display:none; neither is in the tree.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "news-01",
-      "rule": "e086e5",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "renderer-hidden",
-      "marlo": [
-        {
-          "selector": "input.cdx-text-input__input",
-          "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Search Wikipedia\") is not a label: it disappears on focus and is not reliably announced."
-        }
-      ],
-      "raterA": "In-tree fields: input#searchInput (aria-label 'Search Wikipedia') and 8 Appearance radios (labelled 'Small','Standard','Large','Wide','Automatic','Light','Dark'). All non-empty.",
-      "raterB": "Applicable: input#searchInput (searchbox, aria-label \"Search Wikipedia\") and 8 radios in appearance menu with labels Small, Standard, Large, Wide, Automatic, Light, Dark; all named.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "news-02",
-      "rule": "e086e5",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "renderer-hidden",
-      "marlo": [
-        {
-          "selector": "input.cdx-text-input__input",
-          "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Search Wikinews\") is not a label: it disappears on focus and is not reliably announced."
-        }
-      ],
-      "raterA": "input#searchInput type=search has aria-label 'Search Wikinews'; appearance radios (Small/Standard/Large, Standard/Wide, Automatic/Light/Dark) labelled via label[for]. Sticky search input is display:none.",
-      "raterB": "Applicable fields (input#searchInput aria-label \"Search Wikinews\", skin-client-pref radios with label text Small/Standard/Large/Light/Dark/etc.) all have non-empty names.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "shop-03",
-      "rule": "e086e5",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "failed",
-      "truthSource": "agreement",
-      "cause": "placeholder-name",
-      "marlo": [
-        {
-          "selector": "input#criteria_search_value",
-          "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Value\") is not a label: it disappears on focus and is not reliably announced."
-        }
-      ],
-      "raterA": "Only form field input#criteria_search_value (type text) gets accessible name 'Value' from its placeholder.",
-      "raterB": "Only field is input#criteria_search_value (textbox); no label, but placeholder=\"Value\" supplies a non-empty accessible name per HTML-AAM.",
-      "resolution": null
-    },
-    {
-      "kind": "FP",
-      "page": "table-01",
-      "rule": "e086e5",
-      "truth": "passed",
-      "actual": "failed",
-      "browser": "passed",
-      "truthSource": "agreement",
-      "cause": "renderer-hidden",
-      "marlo": [
-        {
-          "selector": "input.cdx-text-input__input",
-          "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Search Wikipedia\") is not a label: it disappears on focus and is not reliably announced."
-        }
-      ],
-      "raterA": "input#searchInput (searchbox 'Search Wikipedia') and 8 radios (Small, Standard, Large, Standard, Wide, Automatic, Light, Dark) all have non-empty names; hidden sticky-header search excluded.",
-      "raterB": "Searchbox input.mw-searchInput has aria-label \"Search Wikipedia\"; 8 radios named by labels (Small, Standard, Large, Wide, Automatic, Light, Dark).",
       "resolution": null
     }
   ]

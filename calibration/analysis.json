@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generated": "2026-10-20",
-  "commit": "0f91c614c056cbde91a2f2f99234337b80203baf",
+  "commit": "1aef7382565d1fb4f29d72895aa356ecdd4c59fd",
   "renderer": "static",
   "interval": "wilson-95",
   "scopes": [
@@ -16,15 +16,15 @@
           "label": "What marlo scan reports",
           "description": "A rule fails on a page when any engine claiming it fails it, because the one-directional invariant forbids reporting clean once a peer has failed. At the level of a test case's outcome this is the union of the engines' failures.",
           "truePositives": 162,
-          "falsePositives": 33,
+          "falsePositives": 29,
           "falseNegatives": 28,
-          "trueNegatives": 345,
+          "trueNegatives": 349,
           "precision": {
-            "value": 0.8308,
-            "low": 0.7719,
-            "high": 0.8769,
+            "value": 0.8482,
+            "low": 0.7904,
+            "high": 0.8922,
             "successes": 162,
-            "trials": 195
+            "trials": 191
           },
           "recall": {
             "value": 0.8526,
@@ -34,10 +34,10 @@
             "trials": 190
           },
           "falsePositiveRate": {
-            "value": 0.0873,
-            "low": 0.0628,
-            "high": 0.1201,
-            "successes": 33,
+            "value": 0.0767,
+            "low": 0.0539,
+            "high": 0.108,
+            "successes": 29,
             "trials": 378
           }
         },
@@ -45,29 +45,29 @@
           "id": "routed-held-out",
           "label": "Routed engine, leave one out",
           "description": "For each case, the routing is recomputed from every other case of the rule with the table's own routeRule, and the case is decided by the engine chosen without it.",
-          "truePositives": 140,
-          "falsePositives": 10,
-          "falseNegatives": 50,
-          "trueNegatives": 368,
+          "truePositives": 139,
+          "falsePositives": 9,
+          "falseNegatives": 51,
+          "trueNegatives": 369,
           "precision": {
-            "value": 0.9333,
-            "low": 0.8816,
-            "high": 0.9634,
-            "successes": 140,
-            "trials": 150
+            "value": 0.9392,
+            "low": 0.8885,
+            "high": 0.9677,
+            "successes": 139,
+            "trials": 148
           },
           "recall": {
-            "value": 0.7368,
-            "low": 0.67,
-            "high": 0.7943,
-            "successes": 140,
+            "value": 0.7316,
+            "low": 0.6644,
+            "high": 0.7895,
+            "successes": 139,
             "trials": 190
           },
           "falsePositiveRate": {
-            "value": 0.0265,
-            "low": 0.0144,
-            "high": 0.048,
-            "successes": 10,
+            "value": 0.0238,
+            "low": 0.0126,
+            "high": 0.0446,
+            "successes": 9,
             "trials": 378
           }
         },
@@ -105,22 +105,22 @@
           "id": "majority",
           "label": "Majority of engines",
           "description": "A rule fails when at least two of the engines claiming it fail it.",
-          "truePositives": 134,
+          "truePositives": 136,
           "falsePositives": 10,
-          "falseNegatives": 56,
+          "falseNegatives": 54,
           "trueNegatives": 368,
           "precision": {
-            "value": 0.9306,
-            "low": 0.8769,
-            "high": 0.9618,
-            "successes": 134,
-            "trials": 144
+            "value": 0.9315,
+            "low": 0.8785,
+            "high": 0.9624,
+            "successes": 136,
+            "trials": 146
           },
           "recall": {
-            "value": 0.7053,
-            "low": 0.6369,
-            "high": 0.7655,
-            "successes": 134,
+            "value": 0.7158,
+            "low": 0.6479,
+            "high": 0.7752,
+            "successes": 136,
             "trials": 190
           },
           "falsePositiveRate": {
@@ -135,29 +135,29 @@
           "id": "single-marlo",
           "label": "Marlo alone",
           "description": "Marlo on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
-          "truePositives": 110,
-          "falsePositives": 19,
-          "falseNegatives": 80,
-          "trueNegatives": 359,
+          "truePositives": 126,
+          "falsePositives": 15,
+          "falseNegatives": 64,
+          "trueNegatives": 363,
           "precision": {
-            "value": 0.8527,
-            "low": 0.7814,
-            "high": 0.9036,
-            "successes": 110,
-            "trials": 129
+            "value": 0.8936,
+            "low": 0.8319,
+            "high": 0.9345,
+            "successes": 126,
+            "trials": 141
           },
           "recall": {
-            "value": 0.5789,
-            "low": 0.5079,
-            "high": 0.6469,
-            "successes": 110,
+            "value": 0.6632,
+            "low": 0.5933,
+            "high": 0.7265,
+            "successes": 126,
             "trials": 190
           },
           "falsePositiveRate": {
-            "value": 0.0503,
-            "low": 0.0324,
-            "high": 0.0772,
-            "successes": 19,
+            "value": 0.0397,
+            "low": 0.0242,
+            "high": 0.0644,
+            "successes": 15,
             "trials": 378
           }
         },
@@ -264,15 +264,15 @@
           "label": "What marlo scan reports",
           "description": "A rule fails on a page when any engine claiming it fails it, because the one-directional invariant forbids reporting clean once a peer has failed. At the level of a test case's outcome this is the union of the engines' failures.",
           "truePositives": 181,
-          "falsePositives": 34,
+          "falsePositives": 30,
           "falseNegatives": 44,
-          "trueNegatives": 450,
+          "trueNegatives": 454,
           "precision": {
-            "value": 0.8419,
-            "low": 0.7871,
-            "high": 0.8846,
+            "value": 0.8578,
+            "low": 0.8043,
+            "high": 0.8986,
             "successes": 181,
-            "trials": 215
+            "trials": 211
           },
           "recall": {
             "value": 0.8044,
@@ -282,10 +282,10 @@
             "trials": 225
           },
           "falsePositiveRate": {
-            "value": 0.0702,
-            "low": 0.0507,
-            "high": 0.0966,
-            "successes": 34,
+            "value": 0.062,
+            "low": 0.0438,
+            "high": 0.0871,
+            "successes": 30,
             "trials": 484
           }
         },
@@ -293,29 +293,29 @@
           "id": "routed-held-out",
           "label": "Routed engine, leave one out",
           "description": "For each case, the routing is recomputed from every other case of the rule with the table's own routeRule, and the case is decided by the engine chosen without it.",
-          "truePositives": 159,
-          "falsePositives": 11,
-          "falseNegatives": 66,
-          "trueNegatives": 473,
+          "truePositives": 158,
+          "falsePositives": 10,
+          "falseNegatives": 67,
+          "trueNegatives": 474,
           "precision": {
-            "value": 0.9353,
-            "low": 0.8879,
-            "high": 0.9635,
-            "successes": 159,
-            "trials": 170
+            "value": 0.9405,
+            "low": 0.8939,
+            "high": 0.9673,
+            "successes": 158,
+            "trials": 168
           },
           "recall": {
-            "value": 0.7067,
-            "low": 0.6441,
-            "high": 0.7623,
-            "successes": 159,
+            "value": 0.7022,
+            "low": 0.6395,
+            "high": 0.7582,
+            "successes": 158,
             "trials": 225
           },
           "falsePositiveRate": {
-            "value": 0.0227,
-            "low": 0.0127,
-            "high": 0.0402,
-            "successes": 11,
+            "value": 0.0207,
+            "low": 0.0113,
+            "high": 0.0376,
+            "successes": 10,
             "trials": 484
           }
         },
@@ -353,22 +353,22 @@
           "id": "majority",
           "label": "Majority of engines",
           "description": "A rule fails when at least two of the engines claiming it fail it.",
-          "truePositives": 148,
+          "truePositives": 150,
           "falsePositives": 10,
-          "falseNegatives": 77,
+          "falseNegatives": 75,
           "trueNegatives": 474,
           "precision": {
-            "value": 0.9367,
-            "low": 0.8874,
-            "high": 0.9653,
-            "successes": 148,
-            "trials": 158
+            "value": 0.9375,
+            "low": 0.8888,
+            "high": 0.9657,
+            "successes": 150,
+            "trials": 160
           },
           "recall": {
-            "value": 0.6578,
-            "low": 0.5936,
-            "high": 0.7167,
-            "successes": 148,
+            "value": 0.6667,
+            "low": 0.6027,
+            "high": 0.725,
+            "successes": 150,
             "trials": 225
           },
           "falsePositiveRate": {
@@ -383,29 +383,29 @@
           "id": "single-marlo",
           "label": "Marlo alone",
           "description": "Marlo on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
-          "truePositives": 110,
-          "falsePositives": 19,
-          "falseNegatives": 115,
-          "trueNegatives": 465,
+          "truePositives": 126,
+          "falsePositives": 15,
+          "falseNegatives": 99,
+          "trueNegatives": 469,
           "precision": {
-            "value": 0.8527,
-            "low": 0.7814,
-            "high": 0.9036,
-            "successes": 110,
-            "trials": 129
+            "value": 0.8936,
+            "low": 0.8319,
+            "high": 0.9345,
+            "successes": 126,
+            "trials": 141
           },
           "recall": {
-            "value": 0.4889,
-            "low": 0.4243,
-            "high": 0.5538,
-            "successes": 110,
+            "value": 0.56,
+            "low": 0.4947,
+            "high": 0.6233,
+            "successes": 126,
             "trials": 225
           },
           "falsePositiveRate": {
-            "value": 0.0393,
-            "low": 0.0253,
-            "high": 0.0605,
-            "successes": 19,
+            "value": 0.031,
+            "low": 0.0189,
+            "high": 0.0505,
+            "successes": 15,
             "trials": 484
           }
         },
@@ -508,7 +508,6 @@
     "rulesWhereChoiceChanges": [
       "09o5cg",
       "23a2a8",
-      "5c01ea",
       "6a7281",
       "6cfa84",
       "78fd32",
@@ -520,6 +519,7 @@
       "bc659a",
       "cae760",
       "ff89c9",
+      "ffd0e9",
       "m6b1q3"
     ]
   },
@@ -527,23 +527,23 @@
     {
       "engines": ["marlo", "axe-core"],
       "cases": 412,
-      "percentAgreement": 0.6553,
-      "kappa": 0.5091,
-      "kappaFailed": 0.5724
+      "percentAgreement": 0.7306,
+      "kappa": 0.6031,
+      "kappaFailed": 0.6941
     },
     {
       "engines": ["marlo", "alfa"],
       "cases": 400,
-      "percentAgreement": 0.7125,
-      "kappa": 0.5966,
-      "kappaFailed": 0.6338
+      "percentAgreement": 0.79,
+      "kappa": 0.6965,
+      "kappaFailed": 0.7442
     },
     {
       "engines": ["marlo", "htmlcs"],
       "cases": 127,
-      "percentAgreement": 0.4094,
-      "kappa": 0.2326,
-      "kappaFailed": 0.6286
+      "percentAgreement": 0.4331,
+      "kappa": 0.2188,
+      "kappaFailed": 0.4833
     },
     {
       "engines": ["axe-core", "alfa"],
@@ -574,29 +574,29 @@
         "id": "scan-output",
         "label": "What marlo scan reports",
         "description": "A rule fails on a page when any engine claiming it fails it, because the one-directional invariant forbids reporting clean once a peer has failed. At the level of a test case's outcome this is the union of the engines' failures.",
-        "truePositives": 53,
-        "falsePositives": 38,
-        "falseNegatives": 40,
-        "trueNegatives": 892,
+        "truePositives": 55,
+        "falsePositives": 24,
+        "falseNegatives": 38,
+        "trueNegatives": 906,
         "precision": {
-          "value": 0.5824,
-          "low": 0.4798,
-          "high": 0.6784,
-          "successes": 53,
-          "trials": 91
+          "value": 0.6962,
+          "low": 0.5877,
+          "high": 0.7866,
+          "successes": 55,
+          "trials": 79
         },
         "recall": {
-          "value": 0.5699,
-          "low": 0.4685,
-          "high": 0.6658,
-          "successes": 53,
+          "value": 0.5914,
+          "low": 0.4898,
+          "high": 0.6857,
+          "successes": 55,
           "trials": 93
         },
         "falsePositiveRate": {
-          "value": 0.0409,
-          "low": 0.0299,
-          "high": 0.0556,
-          "successes": 38,
+          "value": 0.0258,
+          "low": 0.0174,
+          "high": 0.0381,
+          "successes": 24,
           "trials": 930
         }
       },
@@ -604,16 +604,46 @@
         "id": "routed-in-sample",
         "label": "Routed engine, in sample",
         "description": "The published routing, chosen from every case including the one being scored. Optimistic by construction, and kept only for comparison.",
-        "truePositives": 19,
-        "falsePositives": 17,
-        "falseNegatives": 74,
-        "trueNegatives": 913,
+        "truePositives": 24,
+        "falsePositives": 15,
+        "falseNegatives": 69,
+        "trueNegatives": 915,
         "precision": {
-          "value": 0.5278,
-          "low": 0.3701,
-          "high": 0.6801,
+          "value": 0.6154,
+          "low": 0.459,
+          "high": 0.7511,
+          "successes": 24,
+          "trials": 39
+        },
+        "recall": {
+          "value": 0.2581,
+          "low": 0.18,
+          "high": 0.3553,
+          "successes": 24,
+          "trials": 93
+        },
+        "falsePositiveRate": {
+          "value": 0.0161,
+          "low": 0.0098,
+          "high": 0.0264,
+          "successes": 15,
+          "trials": 930
+        }
+      },
+      {
+        "id": "majority",
+        "label": "Majority of engines",
+        "description": "A rule fails when at least two of the engines claiming it fail it.",
+        "truePositives": 19,
+        "falsePositives": 4,
+        "falseNegatives": 74,
+        "trueNegatives": 926,
+        "precision": {
+          "value": 0.8261,
+          "low": 0.6286,
+          "high": 0.9302,
           "successes": 19,
-          "trials": 36
+          "trials": 23
         },
         "recall": {
           "value": 0.2043,
@@ -623,40 +653,10 @@
           "trials": 93
         },
         "falsePositiveRate": {
-          "value": 0.0183,
-          "low": 0.0114,
-          "high": 0.0291,
-          "successes": 17,
-          "trials": 930
-        }
-      },
-      {
-        "id": "majority",
-        "label": "Majority of engines",
-        "description": "A rule fails when at least two of the engines claiming it fail it.",
-        "truePositives": 14,
-        "falsePositives": 8,
-        "falseNegatives": 79,
-        "trueNegatives": 922,
-        "precision": {
-          "value": 0.6364,
-          "low": 0.4295,
-          "high": 0.8027,
-          "successes": 14,
-          "trials": 22
-        },
-        "recall": {
-          "value": 0.1505,
-          "low": 0.0918,
-          "high": 0.237,
-          "successes": 14,
-          "trials": 93
-        },
-        "falsePositiveRate": {
-          "value": 0.0086,
-          "low": 0.0044,
-          "high": 0.0169,
-          "successes": 8,
+          "value": 0.0043,
+          "low": 0.0017,
+          "high": 0.011,
+          "successes": 4,
           "trials": 930
         }
       },
@@ -664,29 +664,29 @@
         "id": "single-marlo",
         "label": "Marlo alone",
         "description": "Marlo on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
-        "truePositives": 16,
-        "falsePositives": 27,
-        "falseNegatives": 77,
-        "trueNegatives": 903,
+        "truePositives": 28,
+        "falsePositives": 9,
+        "falseNegatives": 65,
+        "trueNegatives": 921,
         "precision": {
-          "value": 0.3721,
-          "low": 0.2438,
-          "high": 0.5214,
-          "successes": 16,
-          "trials": 43
+          "value": 0.7568,
+          "low": 0.5988,
+          "high": 0.8664,
+          "successes": 28,
+          "trials": 37
         },
         "recall": {
-          "value": 0.172,
-          "low": 0.1088,
-          "high": 0.2613,
-          "successes": 16,
+          "value": 0.3011,
+          "low": 0.2173,
+          "high": 0.4007,
+          "successes": 28,
           "trials": 93
         },
         "falsePositiveRate": {
-          "value": 0.029,
-          "low": 0.02,
-          "high": 0.0419,
-          "successes": 27,
+          "value": 0.0097,
+          "low": 0.0051,
+          "high": 0.0183,
+          "successes": 9,
           "trials": 930
         }
       },
@@ -790,13 +790,13 @@
     },
     {
       "recallBelow": 0.5,
-      "entries": 9,
-      "marloEntries": 5
+      "entries": 8,
+      "marloEntries": 4
     },
     {
       "recallBelow": 0.75,
-      "entries": 9,
-      "marloEntries": 5
+      "entries": 8,
+      "marloEntries": 4
     }
   ]
 }

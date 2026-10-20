@@ -18,24 +18,23 @@ apps/demo/checkout.html
         Zooming and scaling must not be disabled
 
   ▲▲▲ critical c487ae  Link has non-empty accessible name
-      WCAG 1.1.1, 2.4.4, 2.4.9, 4.1.2  axe-core precision 1.00 over 28 official test cases
-      disagreement: marlo says cantTell
+      WCAG 1.1.1, 2.4.4, 2.4.9, 4.1.2  marlo precision 1.00 over 28 official test cases
       disagreement: htmlcs says passed
       img[src$="product-8842.jpg"] (not located in source)
+        INVARIANT axe-core failed this element and the routed engine did not report it.
         Images must have alternative text
-      a[href="/"] (not located in source)
-        Links must have discernible text
+      a (not located in source)
+        This link has no accessible name. A screen reader announces "link" with no destination, which is unusable in a links list.
 
   ▲▲▲ critical e086e5  Form field has non-empty accessible name
       WCAG 1.3.1, 2.5.3, 4.1.2  axe-core precision 1.00 over 17 official test cases
-      input (not located in source)
-        INVARIANT marlo failed this element and the routed engine did not report it: axe-core says passed, alfa says passed.
-        The field has no accessible name, so it is announced only by its type. A placeholder ("Email") is not a label: it disappears on focus and is not reliably announced.
       input (not located in source)
         INVARIANT marlo failed this element and the routed engine did not report it: axe-core says passed.
         The field has no accessible name, so it is announced only by its type.
       div[role="slider"] (not located in source)
         ARIA input fields must have an accessible name
+      input[type="email"] (not located in source)
+        Form elements must have labels
       input[name="postcode"] (not located in source)
         Form elements must have labels
       input[name="postcode-confirm"] (not located in source)
@@ -152,10 +151,9 @@ apps/demo/checkout.html
         This element is marked decorative but tabindex="0" puts it in the focus order, which puts it back in the accessibility tree with its role stripped. It ends up announced as a generic element.
 
   ▲   moderate 5c01ea  ARIA state or property is permitted
-      WCAG 1.3.1, 4.1.2  axe-core precision 1.00 over 15 official test cases
-      disagreement: marlo says cantTell
-      a[href$="cart"] (not located in source)
-        Elements must only use supported ARIA attributes
+      WCAG 1.3.1, 4.1.2  marlo precision 1.00 over 15 official test cases
+      a (not located in source)
+        aria-checked is not permitted on <a> (implicit role link), so assistive technology ignores it, and the state or property it was meant to convey is lost.
 
   ▲   moderate 5f99a7  ARIA attribute is defined in WAI-ARIA
       WCAG 1.3.1, 4.1.2  marlo precision 1.00 over 7 official test cases
@@ -174,7 +172,6 @@ apps/demo/checkout.html
 
   ▲   moderate bc4a75  ARIA required owned elements
       WCAG 1.3.1  alfa precision 1.00 over 19 official test cases
-      disagreement: marlo says cantTell
       xpath /html[1]/body[1]/main[1]/div[3] (not located in source)
         The element owns no elements as required by its semantic role
 
@@ -208,5 +205,5 @@ apps/demo/settings.html
   ------------------------------------------------------------------------
   39 findings   0 fixed   0 flagged   0 not evaluated   0 crashed
   coverage: 41 of 94 published ACT rules
-  one-directional invariant enforced on 6 rule(s): a peer reported a failure the routed engine did not.
-  calibration 2026-10-13, corpus 2026-07-29
+  one-directional invariant enforced on 7 rule(s): a peer reported a failure the routed engine did not.
+  calibration 2026-10-20, corpus 2026-07-29

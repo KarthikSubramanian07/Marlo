@@ -5,7 +5,7 @@
   "startedAt": "<time>",
   "calibration": {
     "generated": "2026-10-20",
-    "commit": "0f91c614c056cbde91a2f2f99234337b80203baf",
+    "commit": "1aef7382565d1fb4f29d72895aa356ecdd4c59fd",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [
@@ -447,32 +447,25 @@
             "4.1.2"
           ],
           "severity": "moderate",
-          "reportedBy": "alfa",
+          "reportedBy": "marlo",
           "routingReason": "best-measured",
           "agreedBy": [
-            "axe-core"
+            "axe-core",
+            "alfa"
           ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/5c01ea",
-              "outcome": "cantTell",
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element.",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
+          "disagreements": [],
           "verdict": {
-            "engine": "alfa",
-            "engineVersion": "0.119.0",
-            "engineRuleId": "sia-r18",
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/5c01ea",
             "actRuleId": "5c01ea",
             "outcome": "failed",
             "target": {
-              "selector": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
-              "snippet": "aria-checked=\"true\"",
+              "selector": "a",
+              "snippet": "<a href=\"/cart\" aria-checked=\"true\">Cart</a>",
               "path": []
             },
-            "message": "The attribute is not allowed for the element on which it is specified"
+            "message": "aria-checked is not permitted on <a> (implicit role link), so assistive technology ignores it, and the state or property it was meant to convey is lost."
           },
           "confidence": {
             "source": "calibrated",
@@ -484,7 +477,7 @@
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
-          "help": "The attribute is not allowed for the element on which it is specified",
+          "help": "aria-checked is not permitted on <a> (implicit role link), so assistive technology ignores it, and the state or property it was meant to convey is lost.",
           "helpUrl": "https://act-rules.github.io/rules/5c01ea"
         },
         {
@@ -1009,17 +1002,10 @@
           "reportedBy": "alfa",
           "routingReason": "sole-implementer",
           "agreedBy": [
+            "marlo",
             "axe-core"
           ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/bc4a75",
-              "outcome": "cantTell",
-              "message": "role=\"list\" requires listitem. None of its children declare an explicit role, so the answer depends on implicit roles Marlo does not compute here.",
-              "chosenEngineStrictRecall": 0.8571428571428571
-            }
-          ],
+          "disagreements": [],
           "verdict": {
             "engine": "alfa",
             "engineVersion": "0.119.0",
@@ -1152,19 +1138,13 @@
             "4.1.2"
           ],
           "severity": "critical",
-          "reportedBy": "axe-core",
+          "reportedBy": "marlo",
           "routingReason": "best-measured",
           "agreedBy": [
+            "axe-core",
             "alfa"
           ],
           "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/c487ae",
-              "outcome": "cantTell",
-              "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive.",
-              "chosenEngineStrictRecall": 1
-            },
             {
               "engine": "htmlcs",
               "engineRuleId": "4_1_2.H91.A.NoContent",
@@ -1173,6 +1153,47 @@
               "chosenEngineStrictRecall": 1
             }
           ],
+          "verdict": {
+            "engine": "marlo",
+            "engineVersion": "0.1.0",
+            "engineRuleId": "marlo/c487ae",
+            "actRuleId": "c487ae",
+            "outcome": "failed",
+            "target": {
+              "selector": "a",
+              "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"\"></a>",
+              "path": []
+            },
+            "message": "This link has no accessible name. A screen reader announces \"link\" with no destination, which is unusable in a links list."
+          },
+          "confidence": {
+            "source": "calibrated",
+            "precision": 1,
+            "recall": 1,
+            "sampleSize": 28,
+            "meetsAutoFixThreshold": true
+          },
+          "source": null,
+          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
+          "renderer": "static",
+          "help": "This link has no accessible name. A screen reader announces \"link\" with no destination, which is unusable in a links list.",
+          "helpUrl": "https://act-rules.github.io/rules/c487ae"
+        },
+        {
+          "id": "c487ae-1",
+          "actRuleId": "c487ae",
+          "actRuleName": "Link has non-empty accessible name",
+          "successCriteria": [
+            "1.1.1",
+            "2.4.4",
+            "2.4.9",
+            "4.1.2"
+          ],
+          "severity": "critical",
+          "reportedBy": "axe-core",
+          "routingReason": "invariant",
+          "agreedBy": [],
+          "disagreements": [],
           "verdict": {
             "engine": "axe-core",
             "engineVersion": "4.14.0",
@@ -1191,70 +1212,12 @@
             "precision": 1,
             "recall": 1,
             "sampleSize": 28,
-            "meetsAutoFixThreshold": true
+            "meetsAutoFixThreshold": false
           },
           "source": null,
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
           "help": "Images must have alternative text",
-          "helpUrl": "https://act-rules.github.io/rules/c487ae"
-        },
-        {
-          "id": "c487ae-1",
-          "actRuleId": "c487ae",
-          "actRuleName": "Link has non-empty accessible name",
-          "successCriteria": [
-            "1.1.1",
-            "2.4.4",
-            "2.4.9",
-            "4.1.2"
-          ],
-          "severity": "critical",
-          "reportedBy": "axe-core",
-          "routingReason": "best-measured",
-          "agreedBy": [
-            "alfa"
-          ],
-          "disagreements": [
-            {
-              "engine": "marlo",
-              "engineRuleId": "marlo/c487ae",
-              "outcome": "cantTell",
-              "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive.",
-              "chosenEngineStrictRecall": 1
-            },
-            {
-              "engine": "htmlcs",
-              "engineRuleId": "4_1_2.H91.A.NoContent",
-              "outcome": "passed",
-              "message": "HTML CodeSniffer reported nothing for this check. It emits only what it has something to say about, so silence is read as a pass.",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
-          "verdict": {
-            "engine": "axe-core",
-            "engineVersion": "4.14.0",
-            "engineRuleId": "link-name",
-            "actRuleId": "c487ae",
-            "outcome": "failed",
-            "target": {
-              "selector": "a[href=\"/\"]",
-              "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"\"></a>",
-              "path": []
-            },
-            "message": "Links must have discernible text"
-          },
-          "confidence": {
-            "source": "calibrated",
-            "precision": 1,
-            "recall": 1,
-            "sampleSize": 28,
-            "meetsAutoFixThreshold": true
-          },
-          "source": null,
-          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
-          "renderer": "static",
-          "help": "Links must have discernible text",
           "helpUrl": "https://act-rules.github.io/rules/c487ae"
         },
         {
@@ -1367,6 +1330,50 @@
             "actRuleId": "e086e5",
             "outcome": "failed",
             "target": {
+              "selector": "input[type=\"email\"]",
+              "snippet": "<input type=\"email\" name=\"email\">",
+              "path": []
+            },
+            "message": "Form elements must have labels"
+          },
+          "confidence": {
+            "source": "calibrated",
+            "precision": 1,
+            "recall": 1,
+            "sampleSize": 17,
+            "meetsAutoFixThreshold": true
+          },
+          "source": null,
+          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
+          "renderer": "static",
+          "help": "Form elements must have labels",
+          "helpUrl": "https://act-rules.github.io/rules/e086e5"
+        },
+        {
+          "id": "e086e5-2",
+          "actRuleId": "e086e5",
+          "actRuleName": "Form field has non-empty accessible name",
+          "successCriteria": [
+            "1.3.1",
+            "2.5.3",
+            "4.1.2"
+          ],
+          "severity": "critical",
+          "reportedBy": "axe-core",
+          "routingReason": "best-measured",
+          "agreedBy": [
+            "marlo",
+            "alfa",
+            "htmlcs"
+          ],
+          "disagreements": [],
+          "verdict": {
+            "engine": "axe-core",
+            "engineVersion": "4.14.0",
+            "engineRuleId": "label",
+            "actRuleId": "e086e5",
+            "outcome": "failed",
+            "target": {
               "selector": "input[name=\"postcode\"]",
               "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode\">",
               "path": []
@@ -1387,7 +1394,7 @@
           "helpUrl": "https://act-rules.github.io/rules/e086e5"
         },
         {
-          "id": "e086e5-2",
+          "id": "e086e5-3",
           "actRuleId": "e086e5",
           "actRuleName": "Form field has non-empty accessible name",
           "successCriteria": [
@@ -1431,7 +1438,7 @@
           "helpUrl": "https://act-rules.github.io/rules/e086e5"
         },
         {
-          "id": "e086e5-3",
+          "id": "e086e5-4",
           "actRuleId": "e086e5",
           "actRuleName": "Form field has non-empty accessible name",
           "successCriteria": [
@@ -1475,7 +1482,7 @@
           "helpUrl": "https://act-rules.github.io/rules/e086e5"
         },
         {
-          "id": "e086e5-4",
+          "id": "e086e5-5",
           "actRuleId": "e086e5",
           "actRuleName": "Form field has non-empty accessible name",
           "successCriteria": [
@@ -1516,61 +1523,6 @@
           "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
           "renderer": "static",
           "help": "Form elements must have labels",
-          "helpUrl": "https://act-rules.github.io/rules/e086e5"
-        },
-        {
-          "id": "e086e5-5",
-          "actRuleId": "e086e5",
-          "actRuleName": "Form field has non-empty accessible name",
-          "successCriteria": [
-            "1.3.1",
-            "2.5.3",
-            "4.1.2"
-          ],
-          "severity": "critical",
-          "reportedBy": "marlo",
-          "routingReason": "invariant",
-          "agreedBy": [],
-          "disagreements": [
-            {
-              "engine": "axe-core",
-              "engineRuleId": "label",
-              "outcome": "passed",
-              "message": "Form elements must have labels",
-              "chosenEngineStrictRecall": 1
-            },
-            {
-              "engine": "alfa",
-              "engineRuleId": "sia-r8",
-              "outcome": "passed",
-              "message": "The form field has an accessible name",
-              "chosenEngineStrictRecall": 1
-            }
-          ],
-          "verdict": {
-            "engine": "marlo",
-            "engineVersion": "0.1.0",
-            "engineRuleId": "marlo/e086e5",
-            "actRuleId": "e086e5",
-            "outcome": "failed",
-            "target": {
-              "selector": "input",
-              "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
-              "path": []
-            },
-            "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced."
-          },
-          "confidence": {
-            "source": "calibrated",
-            "precision": 0.75,
-            "recall": 0.42857142857142855,
-            "sampleSize": 17,
-            "meetsAutoFixThreshold": false
-          },
-          "source": null,
-          "locationNote": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page.",
-          "renderer": "static",
-          "help": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced.",
           "helpUrl": "https://act-rules.github.io/rules/e086e5"
         },
         {
@@ -1801,7 +1753,7 @@
               "outcome": "passed",
               "target": {
                 "selector": "input",
-                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
+                "snippet": "<input type=\"email\" name=\"email\">",
                 "path": []
               },
               "message": "No error indicator is present for this field as rendered. A message that appears only after submission has to be checked in that state."
@@ -2039,52 +1991,26 @@
               "engineVersion": "0.1.0",
               "engineRuleId": "marlo/5c01ea",
               "actRuleId": "5c01ea",
-              "outcome": "cantTell",
+              "outcome": "failed",
               "target": {
                 "selector": "a",
                 "snippet": "<a href=\"/cart\" aria-checked=\"true\">Cart</a>",
                 "path": []
               },
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
+              "message": "aria-checked is not permitted on <a> (implicit role link), so assistive technology ignores it, and the state or property it was meant to convey is lost."
             },
             {
               "engine": "marlo",
               "engineVersion": "0.1.0",
               "engineRuleId": "marlo/5c01ea",
               "actRuleId": "5c01ea",
-              "outcome": "cantTell",
-              "target": {
-                "selector": "img",
-                "snippet": "<img src=\"delivery-van.png\" alt=\"Arrives Tuesday\" aria-hidden=\"true\">",
-                "path": []
-              },
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
-            },
-            {
-              "engine": "marlo",
-              "engineVersion": "0.1.0",
-              "engineRuleId": "marlo/5c01ea",
-              "actRuleId": "5c01ea",
-              "outcome": "cantTell",
+              "outcome": "passed",
               "target": {
                 "selector": "input",
                 "snippet": "<input type=\"text\" aria-required=\"yes\" aria-label=\"Card number\">",
                 "path": []
               },
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
-            },
-            {
-              "engine": "marlo",
-              "engineVersion": "0.1.0",
-              "engineRuleId": "marlo/5c01ea",
-              "actRuleId": "5c01ea",
-              "outcome": "cantTell",
-              "target": {
-                "selector": "div",
-                "snippet": "<div aria-hidden=\"true\"> <a href=\"/saver\">Saver delivery</a> </div>",
-                "path": []
-              },
-              "message": "The element has no explicit role, so deciding which ARIA properties are permitted needs its implicit role, which Marlo does not compute for every element."
+              "message": "aria-required is permitted on <input> (implicit role textbox)."
             }
           ],
           "error": null,
@@ -2332,7 +2258,7 @@
                 "snippet": "<img src=\"delivery-van.png\" alt=\"Arrives Tuesday\" aria-hidden=\"true\">",
                 "path": []
               },
-              "message": "Nothing inside the hidden element is focusable."
+              "message": "Nothing inside the hidden element is in the sequential focus order."
             },
             {
               "engine": "marlo",
@@ -2594,13 +2520,13 @@
               "engineVersion": "0.1.0",
               "engineRuleId": "marlo/bc4a75",
               "actRuleId": "bc4a75",
-              "outcome": "cantTell",
+              "outcome": "failed",
               "target": {
                 "selector": "div",
                 "snippet": "<div role=\"list\"> <p>Express delivery is unavailable to this postcode.</p> </div>",
                 "path": []
               },
-              "message": "role=\"list\" requires listitem. None of its children declare an explicit role, so the answer depends on implicit roles Marlo does not compute here."
+              "message": "role=\"list\" may own only listitem, and it owns <p> (paragraph). A screen reader announcing the structure reports the wrong number of items, or none, and the ARIA 1.2 relationship it relies on is broken."
             }
           ],
           "error": null,
@@ -2672,13 +2598,13 @@
               "engineVersion": "0.1.0",
               "engineRuleId": "marlo/c487ae",
               "actRuleId": "c487ae",
-              "outcome": "cantTell",
+              "outcome": "failed",
               "target": {
                 "selector": "a",
                 "snippet": "<a href=\"/\"><img src=\"logo.svg\" alt=\"\"></a>",
                 "path": []
               },
-              "message": "Marlo could not compute a reliable accessible name for This link. An image contributes to the name, and whether it does depends on how the renderer resolves it. Reporting a failure here could be a false positive."
+              "message": "This link has no accessible name. A screen reader announces \"link\" with no destination, which is unusable in a links list."
             },
             {
               "engine": "marlo",
@@ -2766,10 +2692,10 @@
               "outcome": "failed",
               "target": {
                 "selector": "input",
-                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
+                "snippet": "<input type=\"email\" name=\"email\">",
                 "path": []
               },
-              "message": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced."
+              "message": "The field has no accessible name, so it is announced only by its type."
             },
             {
               "engine": "marlo",
@@ -3101,7 +3027,20 @@
               "outcome": "passed",
               "target": {
                 "selector": "form",
-                "snippet": "<form action=\"/pay\" method=\"post\"> <!-- e086e5: a placeholder is not a label. It disappears on focus and is not reliably announced. --> <input type=\"email\" placeholder=\"Email\" name=\"email\"> <!-- e086e5 again, from the other direction: the …",
+                "snippet": "<form action=\"/pay\" method=\"post\"> <!-- e086e5: a field with no accessible name at all. \"Email\" is printed beside it but is not its label, and nothing else names it. (This field once had only a placeholder, which HTML-AAM does accept as a …",
+                "path": []
+              },
+              "message": "No attribute is duplicated."
+            },
+            {
+              "engine": "marlo",
+              "engineVersion": "0.1.0",
+              "engineRuleId": "marlo/e6952f",
+              "actRuleId": "e6952f",
+              "outcome": "passed",
+              "target": {
+                "selector": "span",
+                "snippet": "<span>Email</span>",
                 "path": []
               },
               "message": "No attribute is duplicated."
@@ -3114,7 +3053,7 @@
               "outcome": "passed",
               "target": {
                 "selector": "input",
-                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
+                "snippet": "<input type=\"email\" name=\"email\">",
                 "path": []
               },
               "message": "No attribute is duplicated."
@@ -3465,7 +3404,7 @@
                 "snippet": "<img src=\"logo.svg\" alt=\"\">",
                 "path": []
               },
-              "message": "This image is hidden from assistive technology (logo.svg). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+              "message": "This image (logo.svg) has an empty alt, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
             },
             {
               "engine": "marlo",
@@ -3478,7 +3417,7 @@
                 "snippet": "<img src=\"delivery-van.png\" alt=\"Arrives Tuesday\" aria-hidden=\"true\">",
                 "path": []
               },
-              "message": "This image is hidden from assistive technology (delivery-van.png). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+              "message": "This image (delivery-van.png) is hidden from assistive technology by aria-hidden. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
             }
           ],
           "error": null,
@@ -4717,6 +4656,19 @@
               "actRuleId": "e086e5",
               "outcome": "failed",
               "target": {
+                "selector": "input[type=\"email\"]",
+                "snippet": "<input type=\"email\" name=\"email\">",
+                "path": []
+              },
+              "message": "Form elements must have labels"
+            },
+            {
+              "engine": "axe-core",
+              "engineVersion": "4.14.0",
+              "engineRuleId": "label",
+              "actRuleId": "e086e5",
+              "outcome": "failed",
+              "target": {
                 "selector": "input[name=\"postcode\"]",
                 "snippet": "<input type=\"text\" id=\"postcode\" name=\"postcode\">",
                 "path": []
@@ -4758,19 +4710,6 @@
               "target": {
                 "selector": "input[type=\"tel\"]",
                 "snippet": "<input type=\"tel\" aria-labeledby=\"phone-hint\">",
-                "path": []
-              },
-              "message": "Form elements must have labels"
-            },
-            {
-              "engine": "axe-core",
-              "engineVersion": "4.14.0",
-              "engineRuleId": "label",
-              "actRuleId": "e086e5",
-              "outcome": "passed",
-              "target": {
-                "selector": "input[type=\"email\"]",
-                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
                 "path": []
               },
               "message": "Form elements must have labels"
@@ -4965,6 +4904,19 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "snippet": "Email",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 7:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r66",
+              "actRuleId": "09o5cg",
+              "outcome": "passed",
+              "target": {
                 "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
                 "snippet": "Postcode",
                 "path": []
@@ -4978,7 +4930,7 @@
               "actRuleId": "09o5cg",
               "outcome": "passed",
               "target": {
-                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[2]/text()[1]",
                 "snippet": "Mobile number",
                 "path": []
               },
@@ -5844,6 +5796,19 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "snippet": "Email",
+                "path": []
+              },
+              "message": "The highest possible contrast of the text is 21:1 which is above the required contrast of 4.5:1"
+            },
+            {
+              "engine": "alfa",
+              "engineVersion": "0.119.0",
+              "engineRuleId": "sia-r69",
+              "actRuleId": "afw4f7",
+              "outcome": "passed",
+              "target": {
                 "selector": "xpath /html[1]/body[1]/main[1]/form[1]/label[1]/text()[1]",
                 "snippet": "Postcode",
                 "path": []
@@ -5857,7 +5822,7 @@
               "actRuleId": "afw4f7",
               "outcome": "passed",
               "target": {
-                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[1]/text()[1]",
+                "selector": "xpath /html[1]/body[1]/main[1]/form[1]/span[2]/text()[1]",
                 "snippet": "Mobile number",
                 "path": []
               },
@@ -6207,13 +6172,13 @@
               "engineVersion": "0.119.0",
               "engineRuleId": "sia-r8",
               "actRuleId": "e086e5",
-              "outcome": "passed",
+              "outcome": "failed",
               "target": {
                 "selector": "xpath /html[1]/body[1]/main[1]/form[1]/input[1]",
-                "snippet": "<input type=\"email\" placeholder=\"Email\" name=\"email\">",
+                "snippet": "<input type=\"email\" name=\"email\">",
                 "path": []
               },
-              "message": "The form field has an accessible name"
+              "message": "The form field does not have an accessible name"
             },
             {
               "engine": "alfa",
@@ -7431,7 +7396,7 @@
                 "snippet": "<html lang=\"engRish\" xml:lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is repo…",
                 "path": []
               },
-              "message": "<main> is a main landmark, so a screen reader user can jump to the page's own content."
+              "message": "<main> is a main landmark that opens with \"Account settings\", so a screen reader user can jump to the page's own content."
             }
           ],
           "error": null,
@@ -7582,7 +7547,7 @@
                 "snippet": "<html lang=\"engRish\" xml:lang=\"en\"><head> <meta charset=\"utf-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> <!-- 2779a5 passes here, deliberately. A demo page where every rule fails cannot show that a pass is repo…",
                 "path": []
               },
-              "message": "<main> is a main landmark, so a screen reader user can jump to the page's own content. (b40fd1)"
+              "message": "<main> is a main landmark that opens with \"Account settings\", so a screen reader user can jump to the page's own content. (b40fd1)"
             }
           ],
           "error": null,
@@ -7856,7 +7821,7 @@
                 "snippet": "<img src=\"avatar.png\" alt=\"\">",
                 "path": []
               },
-              "message": "This image is hidden from assistive technology (avatar.png). Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
+              "message": "This image (avatar.png) has an empty alt, so it is removed from the accessibility tree. Whether that is correct depends on whether it carries meaning, which is a judgment about the page rather than about the markup. Marlo does not guess either way."
             }
           ],
           "error": null,
@@ -10378,9 +10343,9 @@
       "chosenEngine": "axe-core"
     },
     {
-      "actRuleId": "e086e5",
-      "dissentingEngine": "marlo",
-      "chosenEngine": "axe-core"
+      "actRuleId": "c487ae",
+      "dissentingEngine": "axe-core",
+      "chosenEngine": "marlo"
     }
   ]
 }
