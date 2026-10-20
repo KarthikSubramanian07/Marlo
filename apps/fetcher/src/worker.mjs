@@ -11,10 +11,34 @@
  * the site has already applied the address rules; they are applied again here so this
  * Worker is safe on its own. Images, fonts and media are not downloaded: only the HTML
  * is wanted, and every skipped request is browser time not spent.
+ *
+ * Browser time is capped per UTC day by this Worker, not only by the plan. On the Workers
+ * Free plan Cloudflare stops at ten minutes a day; on a paid plan it bills past the
+ * included hours instead, so a busy day would cost money nobody decided to spend. The
+ * budget lives in the BUDGET KV namespace, keyed by date, and every render is charged the
+ * browser time Browser Run reports for it (or its wall time, when it reports none). With no
+ * BUDGET binding the Worker refuses to render at all. KV is eventually consistent, so the
+ * cap can be overrun by the renders already in flight when it is reached, a few browser
+ * minutes at most; that bound is the reason the default is the free allowance rather than
+ * something closer to the paid one.
  */
 import { fetchableUrl } from '../../site/src/worker.mjs';
 
 const LIMIT_BYTES = 3 * 1024 * 1024;
+
+/**
+ * Browser milliseconds per UTC day when DAILY_BROWSER_MS is not set: the Workers Free
+ * allowance. Thirty-one such days are about 5.2 hours, inside the ten a paid plan includes.
+ */
+export const DEFAULT_DAILY_BROWSER_MS = 10 * 60 * 1000;
+
+const budgetKey = (now) => `browser-ms:${now.toISOString().slice(0, 10)}`;
+
+/** The clock, injected in tests. */
+let clock = () => new Date();
+export const setClock = (fn) => {
+  clock = fn;
+};
 
 /** A pause, for the rate limit only. Injected in tests so they do not wait. */
 let wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -34,10 +58,31 @@ export async function render(request, env) {
   }
   const checked = fetchableUrl(body?.url, 'trymarlo.pages.dev');
   if (checked.error) return refuse(400, checked.error);
+  if (env.BUDGET === undefined) {
+    return refuse(503, 'The browser fallback has no daily budget configured, so it is off.');
+  }
+  const limit = Number(env.DAILY_BROWSER_MS);
+  const budget = Number.isFinite(limit) && limit > 0 ? limit : DEFAULT_DAILY_BROWSER_MS;
+  const key = budgetKey(clock());
+  const spent = Number(await env.BUDGET.get(key)) || 0;
+  if (spent >= budget) {
+    return refuse(
+      503,
+      "Today's browser time for blocked pages is used up. It resets at midnight UTC, and the " +
+        'CLI checks any page on your own machine.',
+    );
+  }
+  let charged = 0;
+  const charge = async (ms) => {
+    charged += Math.max(0, Math.ceil(ms));
+    // Two days, so yesterday's counter is still readable across midnight and then goes.
+    await env.BUDGET.put(key, String(spent + charged), { expirationTtl: 2 * 24 * 60 * 60 });
+  };
   // Browser Run limits how many browsers start per minute. When it says to wait, this
   // waits once, up to eight seconds, rather than sending the visitor away.
   let reply;
   for (let attempt = 0; attempt < 2; attempt += 1) {
+    const started = clock().getTime();
     try {
       reply = await env.BROWSER.quickAction('content', {
         url: checked.url.href,
@@ -45,10 +90,16 @@ export async function render(request, env) {
         rejectResourceTypes: ['image', 'media', 'font'],
       });
     } catch (error) {
+      await charge(clock().getTime() - started);
       return refuse(
         502,
         `Browser Run could not load the page: ${error instanceof Error ? error.message : String(error)}`,
       );
+    }
+    // A 429 started no browser. Anything else is charged what Browser Run says it used.
+    if (reply.status !== 429) {
+      const used = Number(reply.headers.get('x-browser-ms-used'));
+      await charge(Number.isFinite(used) && used > 0 ? used : clock().getTime() - started);
     }
     if (reply.status !== 429 || attempt === 1) break;
     const after = Number(reply.headers.get('retry-after'));

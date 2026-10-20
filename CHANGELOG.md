@@ -18,6 +18,7 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ### Fixed
 
+- The playground's browser fallback has its own daily cap. `marlo-fetcher` keeps a budget of browser time per UTC day in Workers KV, charges each render what Browser Run reports it used, and refuses once the budget is spent, without starting a browser. It defaults to the Workers Free allowance of ten minutes, so moving the account to a paid plan can no longer turn a busy day into a bill. With no budget binding it refuses to render at all.
 - An installed CLI can find its calibration tables. It read them from two directories above its package, which inside `node_modules` is nowhere, so a scan from an npm install refused to run. The tables now ship inside the package, staged from the committed files when it is packed.
 
 ### Added
