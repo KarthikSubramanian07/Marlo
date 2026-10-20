@@ -463,9 +463,9 @@
       "rule": "bc4a75",
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
-      "answer": "inapplicable",
-      "prescreened": true,
-      "note": "Prescreened: no applicable element in source (no ids, roles, aria, forms, iframes, svg, inline styles, lang attrs, or meta refresh)."
+      "answer": "passed",
+      "prescreened": false,
+      "note": "7 ul elements (implicit list) in the accessibility tree; every child is li (listitem), no stray text or role overrides, no aria-busy."
     },
     {
       "page": "form-02",
@@ -1421,8 +1421,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Applicable: ~243 img alt=\"\" marked decorative (flags). None focusable or carrying exposing global ARIA; excluded from the a11y tree (img.mw-logo-icon is aria-hidden and display:none)."
+      "prescreened": false,
+      "note": "243 img alt=\"\" marked decorative; the one with aria-hidden=true is display:none; none has other aria-*, tabindex, role or usemap, none focusable."
     },
     {
       "page": "documentation-03",
@@ -3445,8 +3445,8 @@
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Applicable via implicit roles: two <table> (role table) own tbody/rowgroup which owns tr/row which owns td/cell. All owned roles are allowed. No explicit roles needed. Select/combobox not treated as needing owned elements."
+      "prescreened": false,
+      "note": "2 tables (implicit table/row): table>tbody>tr>td structure only, valid owned elements. 2 selects are single-select comboboxes (no required owned elements). No aria-busy."
     },
     {
       "page": "shop-01",
@@ -3643,8 +3643,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "73 img alt=\"\" (brand icons in My Apps dropdown) are marked as decorative; they have no exposed role (alt=\"\" gives presentation) and are display:none, so not in the tree. Prescreen was wrong."
+      "prescreened": false,
+      "note": "73 img alt=\"\" (no role) are marked as decorative; none has a global aria-* attribute or is focusable, all are non-exposed (images in display:none dropdown, none visible)."
     },
     {
       "page": "shop-04",
@@ -4886,8 +4886,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Marked-as-decorative elements are the 73 img alt=\"\" in the My Apps dropdown, which is display:none, so not in the accessibility tree. No role none/presentation anywhere."
+      "prescreened": false,
+      "note": "73 img alt=\"\" marked decorative, all inside display:none dropdown; no aria-* attributes, not focusable, not exposed."
     },
     {
       "page": "settings-01",
@@ -6151,8 +6151,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen was wrong: img.mw-logo-icon alt=\"\" aria-hidden=\"true\", and noscript 1x1 img alt=\"\" are marked as decorative; both are not exposed (aria-hidden / presentation role)."
+      "prescreened": false,
+      "note": "2 img alt=\"\" marked decorative (one aria-hidden=true, one 1x1 tracking pixel); no aria-* conflict, not focusable."
     },
     {
       "page": "documentation-01",
@@ -6811,8 +6811,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Many img alt=\"\" are marked as decorative (prescreen missed this); they have no role/aria/tabindex so role is presentation/none. No elements with explicit role none/presentation."
+      "prescreened": false,
+      "note": "31 img alt=\"\" marked decorative; none has aria-*, title, tabindex, usemap or role, so they have no conflict and are treated as presentational."
     },
     {
       "page": "news-04",
@@ -8317,9 +8317,9 @@
       "rule": "bc4a75",
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
-      "answer": "inapplicable",
-      "prescreened": true,
-      "note": "No applicable element: nothing of this kind occurs in the page source (checked; no match)."
+      "answer": "passed",
+      "prescreened": false,
+      "note": "4 ul elements (implicit list), all children are li/listitem; no explicit roles or aria-busy."
     },
     {
       "page": "form-02",
@@ -10462,9 +10462,9 @@
       "rule": "bc4a75",
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
-      "answer": "inapplicable",
-      "prescreened": true,
-      "note": "No role attributes or elements with required owned elements (no table/list roles in use beyond native ul)."
+      "answer": "passed",
+      "prescreened": false,
+      "note": "3 ul elements (implicit list), all children are li/listitem; no explicit roles or aria-busy."
     },
     {
       "page": "landing-01",
@@ -11013,8 +11013,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Marked decorative: five img alt=\"\" (flag, 2 banner icons, jump arrow, benefits icon). None is focusable or has ARIA other than aria-hidden=true; all have role none or are not in the accessibility tree. Prescreen was wrong, but all pass."
+      "prescreened": false,
+      "note": "5 img alt=\"\" marked decorative; 3 carry aria-hidden=true (not exposed), none focusable or with other aria-* attributes."
     },
     {
       "page": "table-01",

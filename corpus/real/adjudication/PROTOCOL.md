@@ -162,3 +162,24 @@ cases are public, so a model may have seen them in training; the ACT measurement
 check on how much that matters for the cases, and it cannot be one for the pages. A
 person who rates these pages later uses fresh sheets with `raterKind` `person`, and the
 two sets of figures are published side by side rather than merged.
+
+## Corrections
+
+**2026-10-20: ten cells pre-filled by patterns narrower than their rules.** The
+pre-screen for `bc4a75` looked only for a `role` attribute, but the rule applies to
+implicit roles too (`ul`, `ol`, `table` and others), and the pre-screen for `46ca7f`
+missed `img alt=""`, which the ACT glossary counts as marked as decorative. Ten cells here
+were pre-filled `inapplicable` on pages the rule applies to: `bc4a75` on two application
+pages and two shop pages, and `46ca7f` on six pages. On the six, both raters had already
+overridden the suggestion with `passed`. On the two shop pages the raters had disagreed and
+the resolver had decided `passed`. On the two application pages both raters had left the
+suggestion alone, so `inapplicable` had become ground truth.
+
+The patterns were corrected and tested, and the same two raters rated all ten cells again
+in a fresh context, with no pre-screen hint, under the same instructions. Both answered
+`passed` on all ten, independently. Their answers replace the first-round answers on both
+sheets, the two shop-page resolutions are withdrawn because nothing is left to resolve,
+and `resolved.json` was rebuilt. The ground truth changed on the two application-page
+cells, from `inapplicable` to `passed`; the other eight already said `passed`. The
+held-out pages had seventeen cells pre-filled the same way, and they were corrected the
+same way before their ground truth was committed.
