@@ -231,6 +231,18 @@ This is the first use of the line item D-007 named, and it is deliberately narro
 
 **Wrong if:** the endpoint is used for something other than the playground at a volume that matters, or a request can be made to reach an address the rules refuse. Either would mean it is a proxy with a playground attached, and it would be removed rather than patched around. Or the daily budget stops being the binding limit: if it is raised past what a paid plan includes, the fallback starts costing money per visitor, which is exactly what D-007 warns about.
 
+## D-016: A rule may read resolved display and visibility to narrow its scope, and still declare only `dom`
+
+**Status:** accepted. Narrows the "wrong if" of D-005.
+
+Several ACT rules leave out what is not rendered or not perceivable: an element that is not in the sequential focus navigation (6cfa84), a control with no visible text content (2ee8b8), an owned element or an image outside the accessibility tree (bc4a75, 5c01ea, e88epe). From the DOM alone those rules can see the `hidden` attribute and inline styles, and nothing a stylesheet does. Declaring `layout` would make each of them `unsupported` on the static renderer, which publishes no verdict at all for a rule that is otherwise decidable from the markup.
+
+So they declare `dom`, and `isNotRendered` and `isVisibilityHidden` in `packages/rules/src/dom.ts` read the resolved `display` and `visibility` where the renderer supplied them, and the attribute and inline styles where it did not. The test for whether that is allowed is the direction of the gap. Each of these rules uses the answer only to take an element out of scope, so on the static renderer a stylesheet-hidden element stays in scope and the rule over-reports, naming an element a reader can check. It does not turn a failure into a pass nobody can see, which is the false negative AGENTS.md's `layout` rule exists to prevent, with one known exception: an element carrying the `hidden` attribute that a stylesheet displays anyway reads as unrendered on the static renderer, as it always has for `isHiddenFromAssistiveTech`, which already read the resolved `display` this way.
+
+This does mean these rules can give different answers under the two renderers, which D-005 named as the sign of a wrong declaration. The divergence is expected for them, it is always the browser seeing a stylesheet the static renderer cannot, and the error analysis counts it under the renderer rather than under the rule. The accessible name computation is the exception: it reads markup only in both renderers, because CSS generated content can name an element whose only text a stylesheet hides, and no renderer here reports generated content.
+
+**Wrong if:** a rule using these helpers passes on the static renderer where it fails in a browser for any reason other than that exception, or uses them for anything other than leaving an element out. Either is a hidden false negative, and that rule declares `layout`.
+
 ---
 
 ## Working agreements
