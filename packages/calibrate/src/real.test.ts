@@ -390,6 +390,60 @@ describe('the real-page pass', () => {
     expect(block.aggregate.accuracy.sampleSize).toBe(1);
   });
 
+  it('grades a declined or crashed evaluation as no detection, never as a cell left out', async () => {
+    // Marlo declines the rule as unsupported on shop-01 and times out on form-01, both
+    // failed in truth; it declines news-01 too, which passed. axe-core answers every page.
+    const declining = (
+      p: RealPage,
+      engine: EngineId,
+      rules: readonly ActRuleId[],
+    ): Promise<PageEvaluation> =>
+      engine === 'marlo' && p.id !== 'form-01'
+        ? Promise.resolve({
+            errored: null,
+            results: rules.map((actRuleId) => ({
+              actRuleId,
+              status: 'unsupported' as const,
+              outcome: null,
+              findings: 0,
+            })),
+          })
+        : evaluate(p, engine, rules);
+    const resolved = new Map<string, Outcome>([
+      [cellKey('shop-01', rule), 'failed'],
+      [cellKey('form-01', rule), 'failed'],
+      [cellKey('news-01', rule), 'passed'],
+    ]);
+    const sheet: SheetCell[] = pages.map((p) => ({
+      page: p.id,
+      rule,
+      answer: 'failed',
+      prescreened: false,
+    }));
+    const { block } = await runRealHarness({
+      corpus,
+      adjudication: { sheetA: sheet, sheetB: sheet, resolved, ...models },
+      engines,
+      implementedRules: [rule],
+      routing,
+      evaluate: declining,
+      concurrency: 1,
+    });
+    const marlo = block.entries.find((e) => e.engine === 'marlo')?.graded.strict;
+    expect(marlo).toMatchObject({
+      truePositives: 0,
+      falsePositives: 0,
+      falseNegatives: 2,
+      trueNegatives: 1,
+      cantTellOnFailed: 0,
+      recall: 0,
+    });
+    const axe = block.entries.find((e) => e.engine === 'axe-core')?.graded.strict;
+    expect(axe?.truePositives).toBe(1);
+    expect((axe?.truePositives ?? 0) + (axe?.falseNegatives ?? 0)).toBe(2);
+    expect(block.aggregate.accuracy.sampleSize).toBe(3);
+  });
+
   it('leaves pre-screened cells both raters left alone out of the agreement figure', () => {
     const left: SheetCell[] = [
       { page: 'shop-01', rule, answer: 'inapplicable', prescreened: true },
@@ -410,7 +464,12 @@ describe('the real-page pass', () => {
   });
 
   it('publishes its own section, says no accuracy figure exists, and fails --check on any movement', async () => {
-    const act = CalibrationTable.parse(
+    // The ACT part of the committed table only: the real-page blocks are built here.
+    const {
+      realCorpus: _real,
+      heldOutCorpus: _heldOut,
+      ...act
+    } = CalibrationTable.parse(
       JSON.parse(readFileSync(resolve(ROOT, 'calibration/table.json'), 'utf8')),
     );
     const { block } = await runRealHarness({

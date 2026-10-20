@@ -226,7 +226,14 @@ export async function runRealHarness(options: RealHarnessOptions): Promise<RealH
           cantTellTruth += 1;
           continue;
         }
-        const actual = result?.status === 'ok' ? result.outcome : null;
+        // A rule the engine declined as unsupported, or a page it crashed or timed out on,
+        // is graded as no detection: a miss on a failed cell, harmless on any other. On the
+        // ACT cases an unsupported case is excluded, because there the renderer cannot
+        // represent the document for any engine. Here only the engine that declines is
+        // affected, and excluding its cells would compare it on a smaller, easier set than
+        // the engines that answered every page. `inapplicable` is the outcome that means
+        // nothing was flagged without adding to the cantTell counts.
+        const actual = result?.status === 'ok' ? result.outcome : 'inapplicable';
         graded.push({ expected: truth, actual });
       }
 
