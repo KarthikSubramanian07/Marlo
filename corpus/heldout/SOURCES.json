@@ -1,0 +1,255 @@
+{
+  "about": "The page list scripts/snapshot-real-pages.mjs reads for corpus/heldout. Every entry names the licence that permits vendoring a modified copy (inlining CSS is a modification) and the URL of the licence page that was read when the page was chosen. Ids are category and a counter rather than a name, because published tables identify a page by category and digest; see NOTICE.md.",
+  "pages": [
+    {
+      "id": "application-01",
+      "category": "application",
+      "url": "https://adminlte.io/themes/v4/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE",
+        "attribution": "AdminLTE v4 dashboard demo, Copyright (c) 2014-2023 ColorlibHQ, licensed under the MIT License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "application-02",
+      "category": "application",
+      "url": "https://coreui.io/demos/bootstrap/5.3/free/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/coreui/coreui-free-bootstrap-admin-template/blob/main/LICENSE",
+        "attribution": "CoreUI Free Bootstrap Admin Template demo, Copyright (c) 2026 creativeLabs Łukasz Holeczek, licensed under the MIT License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "application-03",
+      "category": "application",
+      "url": "https://todomvc.com/examples/react/dist/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tastejs/todomvc/blob/master/license.md",
+        "attribution": "TodoMVC React example, Copyright (c) Addy Osmani, Sindre Sorhus, Pascal Hartig, Stephen Sawchuk, licensed under the MIT License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "documentation-01",
+      "category": "documentation",
+      "url": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/github/docs/blob/main/LICENSE",
+        "attribution": "\"Basic writing and formatting syntax\", GitHub Docs, GitHub, Inc. and contributors, licensed under CC BY 4.0 (site code under MIT, see LICENSE-CODE). Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "documentation-02",
+      "category": "documentation",
+      "url": "https://kubernetes.io/docs/concepts/overview/",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/kubernetes/website/blob/main/LICENSE",
+        "attribution": "\"Overview\", Kubernetes documentation, (c) The Kubernetes Authors, licensed under CC BY 4.0. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "documentation-03",
+      "category": "documentation",
+      "url": "https://vuejs.org/guide/essentials/forms.html",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/vuejs/docs/blob/main/LICENSE",
+        "attribution": "\"Form Input Bindings\", Vue.js documentation, Copyright (c) 2019-present Yuxi (Evan) You and Vue documentation contributors, licensed under CC BY 4.0 (image files excepted; images are not vendored). Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "documentation-04",
+      "category": "documentation",
+      "url": "https://docs.deno.com/runtime/test/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/denoland/docs/blob/main/LICENSE",
+        "attribution": "\"Testing\", Deno Docs, Copyright (c) 2018-2024 the Deno authors, licensed under the MIT License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "error-01",
+      "category": "error",
+      "url": "https://www.nps.gov/this-page-does-not-exist.htm",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.nps.gov/aboutus/disclaimer.htm",
+        "attribution": "National Park Service 404 page. No claim to original U.S. Government works. The NPS Arrowhead is a registered trademark and appears only as part of the page. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "form-01",
+      "category": "form",
+      "url": "https://getbootstrap.com/docs/5.3/examples/checkout/",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/twbs/bootstrap/blob/main/LICENSE",
+        "attribution": "Bootstrap checkout example, Copyright (c) 2011-2026 The Bootstrap Authors, code released under the MIT License (documentation under CC BY 3.0). Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "form-02",
+      "category": "form",
+      "url": "https://designsystem.digital.gov/templates/form-templates/address-form/",
+      "licence": {
+        "name": "Public domain (United States government work) and CC0 1.0",
+        "url": "https://github.com/uswds/uswds-site/blob/main/LICENSE.md",
+        "attribution": "\"Address form\", U.S. Web Design System, General Services Administration. A work of the United States government in the public domain within the United States, with copyright waived worldwide under CC0 1.0. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "government-01",
+      "category": "government",
+      "url": "https://www.weather.gov/",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.weather.gov/disclaimer",
+        "attribution": "National Weather Service (NOAA) home page. Information on NWS web pages is in the public domain and not subject to copyright protection (17 U.S.C. 403 notice). This modified copy is not official government material and implies no endorsement by NOAA or NWS. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "government-02",
+      "category": "government",
+      "url": "https://commission.europa.eu/index_en",
+      "licence": {
+        "name": "CC BY 4.0 (Commission Decision 2011/833/EU)",
+        "url": "https://commission.europa.eu/legal-notice_en",
+        "attribution": "© European Union, 1995-2026. European Commission website home page, reused under CC BY 4.0 in accordance with Commission Decision 2011/833/EU. The EU emblem and third-party content are not covered by the licence. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "government-03",
+      "category": "government",
+      "url": "https://www.nps.gov/yell/index.htm",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.nps.gov/aboutus/disclaimer.htm",
+        "attribution": "Yellowstone National Park home page, National Park Service. No claim to original U.S. Government works. Third-party photographs are not vendored; the NPS Arrowhead is a registered trademark and appears only as part of the page. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "landing-01",
+      "category": "landing",
+      "url": "https://www.typescriptlang.org/",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/microsoft/TypeScript-Website/blob/v2/LICENSE",
+        "attribution": "TypeScript website home page, © Microsoft Corporation, content licensed under CC BY 4.0 and code under the MIT License (LICENSE-CODE). Microsoft trademarks are not licensed. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "login-01",
+      "category": "login",
+      "url": "https://demo.solidus.io/login",
+      "licence": {
+        "name": "BSD 3-Clause",
+        "url": "https://github.com/solidusio/solidus_starter_frontend/blob/main/LICENSE",
+        "attribution": "Solidus sample store login page, Copyright (c) 2024 Nebulab SRLs (solidus_starter_frontend) and Copyright (c) 2015-2026 Solidus contributors, licensed under the BSD 3-Clause License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "news-01",
+      "category": "news",
+      "url": "https://globalvoices.org/2026/10/14/norways-telenor-telecom-faces-lawsuit-for-giving-user-data-to-myanmars-junta/",
+      "licence": {
+        "name": "CC BY 3.0",
+        "url": "https://globalvoices.org/about/global-voices-attribution-policy/",
+        "attribution": "This story by Mong Palatino originally appeared on Global Voices on 14 October 2026, licensed under CC BY 3.0. Third-party images are not vendored. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "news-02",
+      "category": "news",
+      "url": "https://diff.wikimedia.org/2026/10/19/tech-news-2026-issue-43/",
+      "licence": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://diff.wikimedia.org/about/",
+        "attribution": "\"Tech News 2026, Issue 43\", Diff, Wikimedia Foundation and Tech News writers, licensed under CC BY-SA 4.0. This modified copy is distributed under CC BY-SA 4.0. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "news-03",
+      "category": "news",
+      "url": "https://www.nsf.gov/news/nsf-invests-translating-low-dimensional-semiconductor",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.nsf.gov/policies/digital",
+        "attribution": "Courtesy: U.S. National Science Foundation. News release text prepared by U.S. government employees and not subject to copyright. The NSF logo is not in the public domain and appears only as part of the page. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "search-01",
+      "category": "search",
+      "url": "https://catalog.data.gov/?q=wildfire&org_type=Federal+Government",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://data.gov/privacy-policy/",
+        "attribution": "Data.gov catalog search results, U.S. General Services Administration, filtered to federal publishers. Federal data and content are not subject to domestic copyright protection under 17 U.S.C. 105; the catalog software is CC0 (https://github.com/GSA/data.gov/blob/main/LICENSE.md). Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "settings-01",
+      "category": "settings",
+      "url": "https://zuramai.github.io/mazer/demo/account-security.html",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/zuramai/mazer/blob/main/LICENSE",
+        "attribution": "Mazer admin dashboard account security page, Copyright (c) 2021-current Ahmad Saugi, licensed under the MIT License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "shop-01",
+      "category": "shop",
+      "url": "https://laravel.demo.aimeos.org/shop/t-shirts~8",
+      "licence": {
+        "name": "LGPL-3.0",
+        "url": "https://github.com/aimeos/ai-client-html/blob/master/LICENSE",
+        "attribution": "Aimeos demo shop category listing. HTML client and theme (aimeos/ai-client-html) and demo catalogue (aimeos/aimeos-core, setup/default/data) Copyright Metaways Infosystems GmbH 2014 and Aimeos 2015-2026, licensed under LGPL-3.0; Laravel distribution (aimeos/aimeos) under MIT. Product images are remote and not vendored. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "shop-02",
+      "category": "shop",
+      "url": "https://laravel.demo.aimeos.org/shop/red-t-shirt",
+      "licence": {
+        "name": "LGPL-3.0",
+        "url": "https://github.com/aimeos/ai-client-html/blob/master/LICENSE",
+        "attribution": "Aimeos demo shop product page. HTML client and theme (aimeos/ai-client-html) and demo catalogue (aimeos/aimeos-core, setup/default/data) Copyright Metaways Infosystems GmbH 2014 and Aimeos 2015-2026, licensed under LGPL-3.0; Laravel distribution (aimeos/aimeos) under MIT. Product images are remote and not vendored. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "shop-03",
+      "category": "shop",
+      "url": "https://demo.solidus.io/products/solidus-t-shirt",
+      "licence": {
+        "name": "BSD 3-Clause",
+        "url": "https://github.com/solidusio/solidus_starter_frontend/blob/main/LICENSE",
+        "attribution": "Solidus sample store product page, Copyright (c) 2024 Nebulab SRLs (solidus_starter_frontend) and Copyright (c) 2007-2014 Spree Commerce, Inc., 2015-2026 Solidus contributors (sample data, solidusio/solidus sample/), licensed under the BSD 3-Clause License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "shop-04",
+      "category": "shop",
+      "url": "https://demo.solidus.io/cart",
+      "licence": {
+        "name": "BSD 3-Clause",
+        "url": "https://github.com/solidusio/solidus_starter_frontend/blob/main/LICENSE",
+        "attribution": "Solidus sample store cart page, Copyright (c) 2024 Nebulab SRLs (solidus_starter_frontend) and Copyright (c) 2015-2026 Solidus contributors, licensed under the BSD 3-Clause License. Modified: stylesheets inlined, scripts removed."
+      }
+    },
+    {
+      "id": "table-01",
+      "category": "table",
+      "url": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_06_a",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.eia.gov/about/copyrights_reuse.php",
+        "attribution": "Source: U.S. Energy Information Administration, Electric Power Monthly, Table 5.6.A (retrieved October 2026). A U.S. government publication in the public domain. Modified: stylesheets inlined, scripts removed."
+      }
+    }
+  ]
+}
