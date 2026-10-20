@@ -190,6 +190,59 @@ export const ARIA_ROLES: ReadonlySet<string> = new Set([
   'treeitem',
 ]);
 
+/**
+ * The non-abstract roles of the two ARIA modules ACT counts among the WAI-ARIA
+ * Specifications: Digital Publishing WAI-ARIA Module 1.0, all 39 of its roles, and the
+ * WAI-ARIA Graphics Module 1.0. Transcribed from the published modules. 674b10 accepts
+ * them as valid role values. `explicitRole` does not resolve them, because every table it
+ * feeds is an ARIA 1.2 table: a module role reads as no explicit role there, which leaves
+ * the element its implicit role, the superclass of most of these.
+ */
+export const MODULE_ROLES: ReadonlySet<string> = new Set([
+  'doc-abstract',
+  'doc-acknowledgments',
+  'doc-afterword',
+  'doc-appendix',
+  'doc-backlink',
+  'doc-biblioentry',
+  'doc-bibliography',
+  'doc-biblioref',
+  'doc-chapter',
+  'doc-colophon',
+  'doc-conclusion',
+  'doc-cover',
+  'doc-credit',
+  'doc-credits',
+  'doc-dedication',
+  'doc-endnote',
+  'doc-endnotes',
+  'doc-epigraph',
+  'doc-epilogue',
+  'doc-errata',
+  'doc-example',
+  'doc-footnote',
+  'doc-foreword',
+  'doc-glossary',
+  'doc-glossref',
+  'doc-index',
+  'doc-introduction',
+  'doc-noteref',
+  'doc-notice',
+  'doc-pagebreak',
+  'doc-pagelist',
+  'doc-part',
+  'doc-preface',
+  'doc-prologue',
+  'doc-pullquote',
+  'doc-qna',
+  'doc-subtitle',
+  'doc-tip',
+  'doc-toc',
+  'graphics-document',
+  'graphics-object',
+  'graphics-symbol',
+]);
+
 /** Roles that prohibit a naming attribute, from ARIA 1.2's prohibited-attributes table. */
 const NAME_PROHIBITED_ROLES: ReadonlySet<string> = new Set([
   'caption',
@@ -362,7 +415,11 @@ export const roleValueValid = defineRule({
     const raw = normalise(attr(element, 'role') ?? '');
     const tokens = raw.split(' ').filter((t) => t !== '');
     // A role list is valid if any token is valid: the browser takes the first valid one.
-    const valid = tokens.filter((t) => ARIA_ROLES.has(t.toLowerCase()));
+    // Valid means a non-abstract role from the WAI-ARIA Specifications, which ACT defines
+    // as ARIA 1.2 together with the Graphics and DPUB modules.
+    const valid = tokens.filter(
+      (t) => ARIA_ROLES.has(t.toLowerCase()) || MODULE_ROLES.has(t.toLowerCase()),
+    );
     if (valid.length > 0) {
       return { outcome: 'passed', message: `role="${valid[0] ?? ''}" is a valid ARIA role.` };
     }

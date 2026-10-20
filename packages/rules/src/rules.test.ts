@@ -6,6 +6,7 @@ import {
   ARIA_ATTRIBUTES,
   IMPLEMENTED_RULES,
   MARLO_RULES,
+  MODULE_ROLES,
   accessibleName,
   classifyLanguageTag,
   evaluateRules,
@@ -280,6 +281,32 @@ describe('674b10 role values are valid', () => {
       'failed',
     );
   });
+
+  // ACT's "WAI-ARIA Specifications" are ARIA 1.2, the Graphics Module 1.0 and the DPUB
+  // Module 1.0, so a role from either module is a valid value.
+  it('knows every DPUB-ARIA 1.0 and Graphics ARIA 1.0 role', () => {
+    expect([...MODULE_ROLES].filter((r) => r.startsWith('doc-'))).toHaveLength(39);
+    expect([...MODULE_ROLES].filter((r) => r.startsWith('graphics-')).sort()).toEqual([
+      'graphics-document',
+      'graphics-object',
+      'graphics-symbol',
+    ]);
+  });
+
+  it.each([...MODULE_ROLES])('passes role="%s"', (role) => {
+    expect(
+      check('674b10', `<html><body><a href="#n" role="${role}">1</a></body></html>`).outcome,
+    ).toBe('passed');
+  });
+
+  it.each(['doc-sidebar', 'doc-pagefooter', 'graphics-widget', 'doc'])(
+    'still fails %s, which no specification ACT counts defines',
+    (role) => {
+      expect(check('674b10', `<html><body><div role="${role}">x</div></body></html>`).outcome).toBe(
+        'failed',
+      );
+    },
+  );
 });
 
 describe('4e8ab6 role has required states and properties', () => {
