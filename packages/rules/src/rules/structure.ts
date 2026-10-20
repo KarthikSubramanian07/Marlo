@@ -1,5 +1,17 @@
 import { defineRule } from '../define.js';
-import { attr, findAll, findFirst, normalise, walk } from '../dom.js';
+import { accessibleName } from '../accname.js';
+import type { MarloDocument, MarloElement } from '../dom.js';
+import {
+  ancestors,
+  attr,
+  findAll,
+  findFirst,
+  isNotRendered,
+  isVisibilityHidden,
+  normalise,
+  walk,
+} from '../dom.js';
+import { explicitRole, semanticRoles } from '../roles.js';
 
 /** Structural and metadata rules. The most reliably auto-fixable group after language. */
 
@@ -201,7 +213,46 @@ export const viewportAllowsZoom = defineRule({
   },
 });
 
-/** e88epe: an image not in the accessibility tree is decorative. */
+/** Why an image is out of the accessibility tree, for e88epe, or null when it is in it. */
+function ignoredBecause(element: MarloElement, document: MarloDocument): string | null {
+  if ([element, ...ancestors(element)].some((a) => attr(a, 'aria-hidden') === 'true')) {
+    return 'is hidden from assistive technology by aria-hidden';
+  }
+  const role = semanticRoles(element);
+  if (role.kind === 'role' && role.roles.every((r) => r === 'none' || r === 'presentation')) {
+    return element.tag === 'img' && attr(element, 'role') === null
+      ? 'has an empty alt, so it is removed from the accessibility tree'
+      : 'has a presentational role, so it is removed from the accessibility tree';
+  }
+  if (element.tag === 'img') return null;
+  // An svg or a canvas with no role of its own and an empty name is ignored by the
+  // assistive technologies ACT tested, per the rule's assumptions. An svg's own role,
+  // graphics-document, is a module role that `explicitRole` does not resolve.
+  const token = normalise(attr(element, 'role') ?? '')
+    .toLowerCase()
+    .split(' ')[0];
+  const ownRole =
+    explicitRole(element) !== null ||
+    (token !== undefined && token !== '' && token !== 'graphics-document');
+  if (ownRole) return null;
+  const title = element.tag === 'svg' ? element.children.find((c) => c.tag === 'title') : undefined;
+  const named =
+    accessibleName(element, document).name !== '' ||
+    (title !== undefined && normalise(title.text) !== '');
+  if (named) return null;
+  return `has no accessible name, so assistive technology ignores the ${element.tag}`;
+}
+
+/**
+ * e88epe: an image left out of the accessibility tree is purely decorative.
+ *
+ * Applies to a visible `img`, `svg` or `canvas` that is either excluded from the tree,
+ * by aria-hidden or a presentational role, or is an svg or canvas whose empty name makes
+ * assistive technology ignore it; unless an ancestor is named by the author, which
+ * names the image's content for it. An svg inside another svg is part of that graphic
+ * and is judged with it. Visibility is read as `isNotRendered` reads it, so a
+ * stylesheet-hidden image stays in scope on the static renderer.
+ */
 export const decorativeImageNotExposed = defineRule({
   actId: 'e88epe',
   name: 'Image not in the accessibility tree is decorative',
@@ -210,30 +261,30 @@ export const decorativeImageNotExposed = defineRule({
   fixability: 'never',
   applicability: (document) => {
     const targets = [];
-    for (const element of findAll(document, ['img'])) {
-      // Applies to images removed from the tree, whether by aria-hidden, role, or an
-      // empty alt.
-      const role = (attr(element, 'role') ?? '').toLowerCase();
-      const hidden =
-        attr(element, 'aria-hidden') === 'true' ||
-        role === 'presentation' ||
-        role === 'none' ||
-        attr(element, 'alt') === '';
-      if (hidden) targets.push({ element });
+    for (const element of findAll(document, ['img', 'svg', 'canvas'])) {
+      if (element.tag === 'svg' && ancestors(element).some((a) => a.tag === 'svg')) continue;
+      if (isNotRendered(element) || isVisibilityHidden(element)) continue;
+      const namedAncestor = ancestors(element).some((a) =>
+        ['aria-label', 'aria-labelledby'].some((name) => normalise(attr(a, name) ?? '') !== ''),
+      );
+      if (namedAncestor) continue;
+      const why = ignoredBecause(element, document);
+      if (why !== null) targets.push({ element, note: why });
     }
     return targets;
   },
-  expectation: ({ element }) => {
+  expectation: ({ element, note }) => {
     // Whether an image is genuinely decorative is a judgment about the page's meaning.
     // Marlo does not have that judgment and says so, per D-009: a confident wrong
     // answer here is worse than an absent one, in both directions.
     const src = attr(element, 'src') ?? '';
+    const what = element.tag === 'img' ? 'This image' : `This ${element.tag}`;
     return {
       outcome: 'cantTell',
       message:
-        `This image is hidden from assistive technology${src === '' ? '' : ` (${src})`}. Whether ` +
-        'that is correct depends on whether it carries meaning, which is a judgment about the ' +
-        'page rather than about the markup. Marlo does not guess either way.',
+        `${what}${src === '' ? '' : ` (${src})`} ${note ?? 'is hidden from assistive technology'}. ` +
+        'Whether that is correct depends on whether it carries meaning, which is a judgment ' +
+        'about the page rather than about the markup. Marlo does not guess either way.',
     };
   },
 });

@@ -724,6 +724,55 @@ describe('6cfa84 aria-hidden hides nothing focusable', () => {
   });
 });
 
+describe('e88epe image not in the accessibility tree is decorative', () => {
+  const outcome = (html: string) => check('e88epe', `<html><body>${html}</body></html>`).outcome;
+  const POLYGON = '<polygon points="1,1 9,9 1,9"></polygon>';
+
+  // Applicability covers img, svg and canvas that are visible and either excluded from
+  // the tree or, for svg and canvas, ignored because their name is empty. Whether such an
+  // image is purely decorative is a judgment, so an applicable one is always cantTell.
+  it.each([
+    ['an img with an empty alt', '<img src="a.png" alt="">'],
+    [
+      'an img under an aria-hidden ancestor',
+      '<span aria-hidden="true"><img src="a.png" alt="A"></span>',
+    ],
+    ['an aria-hidden svg', `<svg aria-hidden="true">${POLYGON}</svg>`],
+    ['a presentational svg', `<svg role="presentation">${POLYGON}</svg>`],
+    ['an svg with no name', `<svg viewBox="0 0 9 9">${POLYGON}</svg>`],
+    [
+      'an svg with an explicit graphics-document role and no name',
+      `<svg role="graphics-document">${POLYGON}</svg>`,
+    ],
+    ['a canvas with no role and no name', '<canvas width="9" height="9"></canvas>'],
+  ])('applies to %s, and asks rather than guesses', (_what, html) => {
+    expect(outcome(html)).toBe('cantTell');
+  });
+
+  it.each([
+    ['an img with alt text', '<img src="a.png" alt="A">'],
+    ['an svg named by its title', `<svg><title>Logo</title>${POLYGON}</svg>`],
+    ['an svg named by aria-label', `<svg aria-label="Logo">${POLYGON}</svg>`],
+    ['an svg with role img', `<svg role="img">${POLYGON}</svg>`],
+    [
+      'an svg inside a link named by its author',
+      `<a href="/" aria-label="Home"><svg>${POLYGON}</svg></a>`,
+    ],
+    ['an svg that is not rendered', `<svg style="display:none">${POLYGON}</svg>`],
+    ['a canvas with a role and a name', '<canvas role="img" aria-label="Chart"></canvas>'],
+  ])('does not apply to %s', (_what, html) => {
+    expect(outcome(html)).toBe('inapplicable');
+  });
+
+  it('judges an svg nested in another as part of the outer graphic', () => {
+    const result = check(
+      'e88epe',
+      `<html><body><svg aria-label="Map"><svg>${POLYGON}</svg></svg></body></html>`,
+    );
+    expect(result.outcome).toBe('inapplicable');
+  });
+});
+
 describe('3ea0c8 ids are unique', () => {
   it('fails a duplicate', () => {
     const result = check('3ea0c8', '<html><body><p id="a">1</p><p id="a">2</p></body></html>');
