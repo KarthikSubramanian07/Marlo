@@ -50,6 +50,11 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ### Accuracy
 
+- Eleven of Marlo's rules corrected against the pinned ACT rule text, from the defects the real-page error analysis found: `6a7281` no longer fails an ID reference whose target is missing; `6cfa84` and `2ee8b8` leave out what is not rendered, hidden, inert or disabled; `e086e5` names a field from its placeholder as HTML-AAM does; `674b10` accepts DPUB-ARIA and Graphics ARIA roles; `4e8ab6` requires `aria-valuenow` only on a focusable separator; `5f99a7` holds attributes to ARIA 1.2's list; `bc4a75` checks implicit roles and owned roles as ARIA 1.2 lists them; `5c01ea` decides permitted attributes from the implicit role; `c487ae` names content from its images' text alternatives; `e88epe` applies to `svg` and `canvas`; `b40fd1` stops passing any main landmark. The abbreviation case in `2ee8b8` was not changed, because the rule's own examples contradict it.
+- On the official cases Marlo's static figures move from precision 0.853, recall 0.640 and a 5.6% false positive rate to 0.894, 0.733 and 4.4%, and what `marlo scan` reports from an 8.7% false positive rate to 7.7%. Two cases got worse, both where the vendored test cases are older than the pinned rule text: `6a7281` Failed Example 10 and `bc4a75` Passed Example 6.
+- On the held-out real pages, which no fix was written against, Marlo's precision moves from 0.680 to 0.846 and its recall from 0.304 to 0.393. On `corpus/real`, where the defects were found, the same fixes move precision from 0.372 to 0.757: in-sample, and published as such.
+- The demo checkout's email field had only a placeholder, and the README showed Marlo failing it as a disagreement between engines. The peers that passed it were right. The field now has no accessible name at all, and the sample output was regenerated. HONESTY.md entry 18.
+
 - First accuracy figures on real pages, model-adjudicated. What `marlo scan` reports: precision 0.582, recall 0.570, false positive rate 4.1%, against 0.831, 0.853 and 8.7% on the official cases. Marlo's own engine: precision 0.372, recall 0.172. The routing chosen on the official corpus, scored on these pages: precision 0.528, recall 0.204, below Alfa alone at 0.737 and 0.452.
 
 ### Fixed

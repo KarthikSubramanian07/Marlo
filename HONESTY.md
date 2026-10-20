@@ -304,7 +304,47 @@ The routing figure had a second problem. The router chooses each rule's engine f
 
 ---
 
-## 18. Standing limitations
+## 18. The README's showcase of a disagreement between engines was Marlo's own false positive
+
+**What it claimed.** The README's sample output led with an email input on the demo checkout page whose only label was a placeholder. Marlo's rule failed it, axe-core and Alfa passed it, and the README presented the field as the one-directional invariant at work: a peer may not be silenced about a single element, so the field was listed first with the engines that disagreed named.
+
+**What was true.** HTML-AAM lets a placeholder supply an accessible name when nothing else does, and the ACT rule `e086e5` asks only for a non-empty name; its own passed examples include a field named by its placeholder. axe-core and Alfa were right. The invariant did what it should, but the example the README chose to show it off was a defect in Marlo's own rule.
+
+**What reported success.** Everything. The golden files recorded the false positive faithfully, the site's recorded scan matched them, and the demo's `expected.json` listed the field as a failure, so every test agreed with every other test about the wrong answer.
+
+**How it was found.** The error analysis on the real pages listed a placeholder-named field among Marlo's false positives. Correcting the rule made the demo field pass, and the README's story went with it.
+
+**What changed.** The rule names a field from its placeholder, as HTML-AAM does. The demo field now has no accessible name at all, which is the failure the comment always meant to show, and the README's sample output and the site's recorded scan were regenerated from the scan rather than edited.
+
+---
+
+## 19. The real-page figures left out the cells Marlo declined, and the error analysis said they did not
+
+**What it claimed.** `calibration/ERROR-ANALYSIS.md` said the failures on rules Marlo cannot evaluate without layout "count against its recall in the calibration table", and that its own static row reproduced the table exactly.
+
+**What was true.** The table left those cells out. A cell an engine declined as unsupported, or crashed on, was dropped from that engine's strict figures, as the ACT harness does for documents the renderer cannot represent. On real pages that is not symmetric: Marlo declines the layout rules under the static renderer while the three peers answer every page, so Marlo was graded on a smaller and easier set. Its real-page recall was published as 0.27. Counting its declined cells as misses, as the error analysis did, it was 0.172.
+
+**What reported success.** The error analysis's own consistency check, which compared the two rule by rule after filtering out exactly the cells in question.
+
+**What changed.** On the real pages, a declined or crashed cell is graded as no detection for every engine: a miss on a failed cell, harmless on any other. Marlo's real-page recall is published as 0.172, the error analysis reproduces the table with nothing filtered, and HTML CodeSniffer's recall fell too, for its errored pages.
+
+---
+
+## 20. The adjudication pre-screen was narrower than three of the rules it screened
+
+**What it claimed.** That a cell is pre-filled `inapplicable` only when nothing the rule applies to occurs in the page source.
+
+**What was true.** The pattern for `bc4a75` looked for a `role` attribute, but the rule applies to implicit roles too, so a page whose lists and tables carried no `role` attribute was pre-filled inapplicable. The pattern for `46ca7f` missed `img alt=""`, which the ACT glossary counts as marked as decorative, and `36b590` omitted two roles. On `corpus/real` ten cells were pre-filled wrongly; on eight the raters had overridden the suggestion or disagreed and been resolved correctly, and on two both had left it, so `inapplicable` was ground truth on two cells where the right answer was `passed`.
+
+**What reported success.** A test that the pre-screen table covers exactly the implemented rules, which it did.
+
+**How it was found.** Raters on the held-out pages kept overriding the same pre-filled cells and saying why.
+
+**What changed.** The patterns, and a test listing, per rule, markup written from the rule text that the pre-screen must never mark inapplicable, implicit roles included. All ten cells on `corpus/real` and the seventeen on `corpus/heldout` were rated again by both raters with no pre-screen hint, as `corpus/real/adjudication/PROTOCOL.md` records.
+
+---
+
+## 21. Standing limitations
 
 Not defects. Things Marlo cannot currently do, written here so their absence is a decision rather than an omission.
 
@@ -316,7 +356,7 @@ Not defects. Things Marlo cannot currently do, written here so their absence is 
 
 **The published headline is measured on the static renderer.** It needs no browser, so anybody can reproduce it from a clean clone, and the browser table sits beside it as `calibration/browser.json` rather than replacing it. The browser table records "a dirty tree" in place of a commit, because Playwright has to be added to the workspace manifest for the run and is deliberately not a dependency. Two rules, the meta refresh pair, navigate the page away during evaluation in a real browser, and those cases are recorded as errors rather than graded.
 
-**Real-page ground truth comes from language models, not people.** Every cell of `corpus/real` is resolved, by two models rating independently and a third settling their 40 disagreements, because two independent people were never available and waiting for them left the most important measurement permanently open. Every figure resting on it is labelled model-adjudicated, and the raters are graded on the official cases, whose answers people wrote: the adjudicated labels match on 95.8% of 594. That is a floor on their error on real pages, not an estimate of it, and a human rating of a sample is the test that would confirm or withdraw the real-page figures. What those figures showed was not flattering: on real pages what the scan reports had a precision of 0.582 and a recall of 0.570, and Marlo's own engine was the least precise of the four, at 0.372. The rule defects behind most of that were then fixed, and on the same pages the scan now reports 0.696 and 0.591, and Marlo's engine 0.757 and 0.301. Those later figures are in-sample, because the defects were found on these pages, so they say the fixes fit these pages and not yet that they generalise. A second set of real pages, rated before the fixes are measured on it, is the measurement that decides.
+**Real-page ground truth comes from language models, not people.** Every cell of `corpus/real` and `corpus/heldout` is resolved, by two models rating independently and a third settling their 38 and 26 disagreements, because two independent people were never available and waiting for them left the most important measurement permanently open. Every figure resting on it is labelled model-adjudicated, and the raters are graded on the official cases, whose answers people wrote: the adjudicated labels match on 95.8% of 594. That is a floor on their error on real pages, not an estimate of it, and a human rating of a sample is the test that would confirm or withdraw the real-page figures. What those figures showed was not flattering: on real pages what the scan reports had a precision of 0.582 and a recall of 0.570, and Marlo's own engine was the least precise of the four, at 0.372. The rule defects behind most of that were then fixed, and on the same pages the scan now reports 0.696 and 0.591, and Marlo's engine 0.757 and 0.301. Those later figures are in-sample, because the defects were found on these pages. The held-out pages, from other sites and rated before the fixes were measured on them, are the measurement that decides, and there the fixes held: Marlo's engine went from 0.680 to 0.846 in precision and from 0.304 to 0.393 in recall. Both sets rest on the same model raters, so a human rating of a sample would test the held-out figures too.
 
 **Element identity rests on the evidence engines supply.** Matching failures across engines uses the opening tag in each verdict's markup. Two engines that locate one defect at two different elements, other than the document itself, can still produce two findings, and a verdict whose evidence is not an element is never added, only reported at rule level.
 

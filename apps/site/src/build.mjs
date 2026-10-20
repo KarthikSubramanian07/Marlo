@@ -1547,6 +1547,32 @@ pages.push({
               </p>
             </div>
             <div class="row">
+              <span class="row__tag">Reported success: a consistency check that skipped the cells in question</span>
+              <span class="row__title">The real-page figures left out the cells Marlo declined</span>
+              <p class="row__body">
+                On real pages, a rule Marlo declined as unsupported was dropped from its grading,
+                while the other three engines answered every page. Marlo was graded on a smaller,
+                easier set, and its published recall there was higher than the error analysis
+                said, while the error analysis claimed the two agreed.
+              </p>
+              <p class="row__body">
+                A declined or crashed cell now counts as no detection for every engine. Marlo's
+                real-page recall fell when that changed, and the two documents now reproduce
+                each other with nothing filtered.
+              </p>
+            </div>
+            <div class="row">
+              <span class="row__tag">Reported success: golden files agreeing with each other</span>
+              <span class="row__title">The showcase disagreement was Marlo's own false positive</span>
+              <p class="row__body">
+                The sample output led with an email field labelled only by a placeholder, which
+                Marlo failed and two peers passed, as the invariant at work. HTML-AAM accepts a
+                placeholder as a name, so the peers were right. The rule was corrected, the demo
+                field now has no name at all, and the recorded scan on the home page was regenerated rather
+                than edited.
+              </p>
+            </div>
+            <div class="row">
               <span class="row__tag">Reported success: every required check</span>
               <span class="row__title">The calibration gate was described as CI, and nothing ran it</span>
               <p class="row__body">
