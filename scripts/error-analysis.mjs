@@ -298,8 +298,7 @@ export function buildReport({ verdicts, resolved, sheets, resolutions, table, ca
     if (strict === null) continue;
     const pairs = [...truth]
       .filter(([k, c]) => k.endsWith(`/${entry.actRuleId}`) && c.answer !== 'cantTell')
-      .map(([k, c]) => ({ truth: c.answer, actual: outcomeOf('static', k) }))
-      .filter((p) => p.actual !== 'unsupported' && p.actual !== 'error');
+      .map(([k, c]) => ({ truth: c.answer, actual: outcomeOf('static', k) }));
     const mine = confusion(pairs);
     for (const field of ['truePositives', 'falsePositives', 'falseNegatives']) {
       if (mine[field] !== strict[field]) {
