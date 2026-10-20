@@ -385,9 +385,8 @@ export const ariaValueValid = defineRule({
     }
     return targets;
   },
-  expectation: ({ element }, document) => {
+  expectation: ({ element }) => {
     const problems: string[] = [];
-    let uncertain = false;
 
     for (const attribute of ariaAttributesOf(element)) {
       const spec = ARIA_ATTRIBUTES[attribute.name];
@@ -439,27 +438,21 @@ export const ariaValueValid = defineRule({
           }
           break;
         case 'id-reference':
-        case 'id-reference-list': {
-          if (value === '') break;
-          const ids = value.split(' ').filter((t) => t !== '');
-          const present = new Set<string>();
-          for (const node of walk(document.root)) {
-            const id = attr(node, 'id');
-            if (id !== null) present.add(id);
-          }
-          const dangling = ids.filter((id) => !present.has(id));
-          if (dangling.length === ids.length && ids.length > 0) {
+          // One id, and an id never contains whitespace, so two tokens cannot be a
+          // value of this type whatever the document holds.
+          if (value.includes(' ')) {
             problems.push(
-              `${attribute.name} references ${dangling.join(', ')}, which ${dangling.length === 1 ? 'does' : 'do'} not exist`,
+              `${attribute.name}="${value}" must be a single id, and an id cannot contain a space`,
             );
-          } else if (dangling.length > 0) {
-            // Some resolve and some do not. The ACT rule treats a partially resolving
-            // list as valid, so this is not a failure, but it is worth not asserting a
-            // clean pass either.
-            uncertain = true;
           }
           break;
-        }
+        case 'id-reference-list':
+          // Neither type is checked against the document. The rule's expectation carries
+          // an exception: "For value types ID Reference and ID Reference List no ID
+          // referenced elements are required." Referring to an element that does not
+          // exist has the same effect as no reference at all, and a missing target is
+          // in6db8's question, not this rule's.
+          break;
         case 'string':
           // Any string is valid, including an empty one.
           break;
@@ -470,14 +463,6 @@ export const ariaValueValid = defineRule({
       return {
         outcome: 'failed',
         message: `${problems.join('; ')}. An invalid value is ignored, so the state is not conveyed.`,
-      };
-    }
-    if (uncertain) {
-      return {
-        outcome: 'cantTell',
-        message:
-          'Some ids in an ARIA reference list do not resolve. The specification permits a ' +
-          'partially resolving list, so this is not a failure, but it is probably not intended.',
       };
     }
     return { outcome: 'passed', message: 'Every ARIA value is valid for its attribute type.' };
