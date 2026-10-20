@@ -7,13 +7,14 @@ apps/demo/checkout.html
                 09o5cg afw4f7
                 This is not a pass. Use --renderer browser to evaluate them.
 
-  ▲▲▲ critical e086e5  Form field has non-empty accessible name
-      WCAG 1.3.1, 2.5.3, 4.1.2  axe-core precision 1.00 over 17 official test cases
-      input (not located in source)
-        INVARIANT marlo failed this element and the routed engine did not report it: axe-core says passed, alfa says passed.
-        The field has no accessible name, so it is announced only by its type. A placeholder ("Email") is not a label: it disappears on focus and is not reliably announced.
-      div[role="slider"] (not located in source)
-        ARIA input fields must have an accessible name
+  ▲▲▲ critical c487ae  Link has non-empty accessible name
+      WCAG 1.1.1, 2.4.4, 2.4.9, 4.1.2  marlo precision 1.00 over 28 official test cases
+      disagreement: htmlcs says passed
+      img[src$="product-8842.jpg"] (not located in source)
+        INVARIANT axe-core failed this element and the routed engine did not report it.
+        Images must have alternative text
+      a (not located in source)
+        This link has no accessible name. A screen reader announces "link" with no destination, which is unusable in a links list.
 
   ▲▲  serious  afw4f7  Text has minimum contrast
       WCAG 1.4.3, 1.4.6  alfa precision 0.83 over 28 official test cases
