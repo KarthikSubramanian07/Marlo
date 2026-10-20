@@ -426,7 +426,9 @@ describe('the real-page pass', () => {
     const markdown = renderCalibrationMarkdown(before);
     expect(markdown).toMatch(/## Real pages/);
     expect(markdown).toMatch(/0 of 3 cells/);
-    expect(markdown).toMatch(/No real-page accuracy figure exists yet/);
+    expect(markdown).toMatch(/No accuracy figure exists for these pages yet/);
+    expect(markdown).not.toMatch(/## Held-out real pages/);
+    expect(markdown).not.toMatch(/Every engine on the resolved cells/);
     expect(markdown).toMatch(/On 1 of 3 pages \(33\.3%\)/);
     expect(markdown).toMatch(/\| `97a4e1` \| Marlo and axe-core \| 2 \| 50\.0% \| 0\.00 \|/);
     expect(markdown).not.toContain('https://example.com');
@@ -484,5 +486,35 @@ describe('the real-page pass', () => {
     expect(graded).toMatch(/Marlo against the resolved cells only/);
     expect(graded).toMatch(/Cohen's kappa undefined/);
     expect(graded).toMatch(/\| `97a4e1` \| nobody \| 2 \|/);
+
+    // Every engine is pooled the same way, with the counts behind each rate.
+    const pooled = resolved.block.aggregate.engines ?? [];
+    expect(pooled.map((row) => row.engine)).toEqual(['axe-core', 'marlo']);
+    for (const row of pooled) {
+      expect(row.rules).toBe(1);
+      expect(row.sampleSize).toBe(
+        row.truePositives + row.falsePositives + row.falseNegatives + row.trueNegatives,
+      );
+    }
+    expect(graded).toMatch(/### Every engine on the resolved cells/);
+    expect(graded).toMatch(/\| Marlo \| 1 \| \d+ \| \d+ \| \d+ \| /);
+    expect(block.aggregate.engines).toEqual([]);
+
+    // The held-out corpus gets its own section and its own change detection, and is
+    // never folded into the real-page block.
+    const both = CalibrationTable.parse({
+      ...act,
+      realCorpus: block,
+      heldOutCorpus: resolved.block,
+    });
+    const twoSections = renderCalibrationMarkdown(both);
+    expect(twoSections).toMatch(/## Real pages[\s\S]*## Held-out real pages/);
+    expect(twoSections).toMatch(/out-of-sample/);
+    expect(twoSections).toMatch(/corpus\/heldout\/NOTICE\.md/);
+    expect(findRealCorpusChanges(both, both)).toEqual([]);
+    const withoutHeldOut = CalibrationTable.parse({ ...act, realCorpus: block });
+    const dropped = findRealCorpusChanges(both, withoutHeldOut, 10_000);
+    expect(dropped.length).toBeGreaterThan(0);
+    expect(dropped.every((change) => change.startsWith('heldOutCorpus'))).toBe(true);
   });
 });

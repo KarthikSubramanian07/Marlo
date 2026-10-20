@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execFileSync } from 'node:child_process';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { Worker } from 'node:worker_threads';
@@ -21,7 +21,7 @@ import {
   renderAnalysisMarkdown,
   renderCalibrationMarkdown,
 } from './publish.js';
-import { loadAdjudication, loadRealCorpus } from './real-corpus.js';
+import { loadAdjudication, loadRealCorpus, type RealCorpusName } from './real-corpus.js';
 import { runRealHarness } from './real-harness.js';
 import { runWorker, type WorkerJob } from './real-pool.js';
 
@@ -37,9 +37,10 @@ import { runWorker, type WorkerJob } from './real-pool.js';
  * `--check` is the CI gate. It is a required status, because a false positive rate that
  * can drift without failing a build is a marketing number.
  *
- * The static run measures both corpora: the ACT test cases first, then the real pages in
- * corpus/real, graded separately and written to their own block of the table. The real
- * pages are measured on the static renderer only, and `--rule` skips them.
+ * The static run measures every corpus: the ACT test cases first, then the real pages in
+ * corpus/real, then the held-out pages in corpus/heldout, each graded separately and
+ * written to its own block of the table. The real pages are measured on the static
+ * renderer only, and `--rule` skips them.
  *
  * The two renderers write two tables, never one. A layout rule is `unsupported` under the
  * static renderer and a measured number under the browser one, so a single file would
@@ -130,17 +131,18 @@ const REAL_PAGE_HEAP_MB = 4_096;
 async function measureRealPages(
   actOnly: CalibrationTable,
   engines: readonly Engine[],
-): Promise<{ table: CalibrationTable; cells: readonly RealPageCell[] }> {
-  const real = loadRealCorpus(ROOT);
+  name: RealCorpusName,
+): Promise<{ block: NonNullable<CalibrationTable['realCorpus']>; cells: readonly RealPageCell[] }> {
+  const real = loadRealCorpus(ROOT, name);
   const concurrency = Math.max(1, Math.min(4, availableParallelism() - 1));
   console.log(
-    `\nMeasuring ${String(engines.length)} engines over ${String(real.pages.length)} real pages, ` +
+    `\nMeasuring ${String(engines.length)} engines over ${String(real.pages.length)} pages in corpus/${name}, ` +
       `${String(concurrency)} at a time, each capped at ${String(REAL_PAGE_TIMEOUT_MS / 1000)} s.`,
   );
   let logged = 0;
   const { block, errors, cells } = await runRealHarness({
     corpus: real,
-    adjudication: loadAdjudication(ROOT),
+    adjudication: loadAdjudication(ROOT, name),
     engines: engines.map((e) => ({ id: e.id, claimedRules: e.mapping.claimedRules })),
     implementedRules: IMPLEMENTED_RULES,
     routing: actOnly.routing,
@@ -169,10 +171,29 @@ async function measureRealPages(
   }
   const { adjudication } = block;
   console.log(
-    `Real pages: ${String(adjudication.ratedCells)} of ${String(adjudication.totalCells)} cells rated, ` +
+    `corpus/${name}: ${String(adjudication.ratedCells)} of ${String(adjudication.totalCells)} cells rated, ` +
       `${String(adjudication.resolvedCells)} resolved (${adjudication.status}).`,
   );
-  return { table: CalibrationTable.parse({ ...actOnly, realCorpus: block }), cells };
+  return { block, cells };
+}
+
+/** Both real-page corpora, each in its own block. The held-out one only once it exists. */
+async function measureAllRealPages(
+  actOnly: CalibrationTable,
+  engines: readonly Engine[],
+): Promise<{ table: CalibrationTable; cells: readonly RealPageCell[] }> {
+  const real = await measureRealPages(actOnly, engines, 'real');
+  const heldOut = existsSync(resolve(ROOT, 'corpus/heldout/MANIFEST.json'))
+    ? await measureRealPages(actOnly, engines, 'heldout')
+    : null;
+  return {
+    table: CalibrationTable.parse({
+      ...actOnly,
+      realCorpus: real.block,
+      ...(heldOut === null ? {} : { heldOutCorpus: heldOut.block }),
+    }),
+    cells: real.cells,
+  };
 }
 
 async function main(): Promise<number> {
@@ -253,7 +274,7 @@ async function main(): Promise<number> {
   const actOnly = CalibrationTable.parse(table);
   const measured =
     onlyRule === undefined && rendererName === 'static'
-      ? await measureRealPages(actOnly, engines)
+      ? await measureAllRealPages(actOnly, engines)
       : { table: actOnly, cells: [] };
   const validated = measured.table;
   const analysis =
@@ -316,7 +337,7 @@ async function main(): Promise<number> {
 
     const realChanges = findRealCorpusChanges(committed, validated);
     if (realChanges.length > 0) {
-      console.error(`\nThe real-page block moved (${String(realChanges.length)} change(s)):\n`);
+      console.error(`\nA real-page block moved (${String(realChanges.length)} change(s)):\n`);
       for (const change of realChanges) console.error(`  ${change}`);
       console.error(
         '\nThese figures have no better or worse until ground truth exists, so any movement fails.\n' +
@@ -371,7 +392,7 @@ async function main(): Promise<number> {
 
     console.log(
       rendererName === 'static'
-        ? '\ncalibrate --check: no regression, and the real-page block did not move.'
+        ? '\ncalibrate --check: no regression, and neither real-page block moved.'
         : '\ncalibrate --check: no regression.',
     );
     return 0;

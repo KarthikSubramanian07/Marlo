@@ -8,6 +8,7 @@ import type {
   StrategyScore,
 } from '@trymarlo/schema';
 import { findRule } from '@trymarlo/act';
+import { wilson } from './analysis.js';
 
 /**
  * Renders the calibration table as markdown, for `calibration/README.md`.
@@ -205,7 +206,10 @@ export function renderCalibrationMarkdown(table: CalibrationTable): string {
   }
   lines.push('');
 
-  if (table.realCorpus !== undefined) lines.push(...renderRealCorpus(table.realCorpus));
+  if (table.realCorpus !== undefined) lines.push(...renderRealCorpus(table.realCorpus, 'real'));
+  if (table.heldOutCorpus !== undefined) {
+    lines.push(...renderRealCorpus(table.heldOutCorpus, 'heldout'));
+  }
 
   return `${lines.join('\n')}\n`;
 }
@@ -244,22 +248,47 @@ function ratersSentence(adjudication: RealCorpus['adjudication']): string {
   );
 }
 
-function renderRealCorpus(real: RealCorpus): string[] {
+/** A rate with its 95 percent Wilson interval, from the counts the table carries. */
+function withInterval(successes: number, trials: number): string {
+  const p = wilson(successes, trials);
+  return p === null
+    ? 'not measured'
+    : `${p.value.toFixed(2)} (${p.low.toFixed(2)} to ${p.high.toFixed(2)})`;
+}
+
+function renderRealCorpus(real: RealCorpus, kind: 'real' | 'heldout'): string[] {
   const lines: string[] = [];
   const { adjudication } = real;
   const categories = real.categories.length;
 
-  lines.push('## Real pages');
-  lines.push('');
-  lines.push(
-    `A second corpus: ${String(real.pages)} pages in ${String(categories)} categories, ` +
-      `snapshotted from the public web on ${real.retrieved} and vendored in \`corpus/real\`. ` +
-      'Everything in this section is measured on those pages alone and is never pooled with ' +
-      'the ACT figures above, because a precision on hand-written minimal examples and a ' +
-      'precision on real pages are different claims. Pages are named by category and the ' +
-      'first twelve hex digits of their SHA-256; ' +
-      '[corpus/real/NOTICE.md](../corpus/real/NOTICE.md) says why, and the manifest has the URLs.',
-  );
+  if (kind === 'real') {
+    lines.push('## Real pages');
+    lines.push('');
+    lines.push(
+      `A second corpus: ${String(real.pages)} pages in ${String(categories)} categories, ` +
+        `snapshotted from the public web on ${real.retrieved} and vendored in \`corpus/real\`. ` +
+        'Everything in this section is measured on those pages alone and is never pooled with ' +
+        'the ACT figures above, because a precision on hand-written minimal examples and a ' +
+        'precision on real pages are different claims. Pages are named by category and the ' +
+        'first twelve hex digits of their SHA-256; ' +
+        '[corpus/real/NOTICE.md](../corpus/real/NOTICE.md) says why, and the manifest has the URLs. ' +
+        "Marlo's errors on these pages were analysed cell by cell in " +
+        '[ERROR-ANALYSIS.md](ERROR-ANALYSIS.md), so a rule corrected after that analysis scores ' +
+        'in-sample here. The held-out pages below are the out-of-sample check.',
+    );
+  } else {
+    lines.push('## Held-out real pages');
+    lines.push('');
+    lines.push(
+      `A third corpus: ${String(real.pages)} pages in ${String(categories)} categories from ` +
+        'sites `corpus/real` does not use, snapshotted the same way on ' +
+        `${real.retrieved} and vendored in \`corpus/heldout\`. Their ground truth was rated ` +
+        'under the same protocol by the same raters and committed before any rule change ' +
+        "made after the error analysis was measured on them, so for Marlo's corrected rules " +
+        'this is the out-of-sample figure. It is never pooled with the sections above. ' +
+        '[corpus/heldout/NOTICE.md](../corpus/heldout/NOTICE.md) has the attributions.',
+    );
+  }
   lines.push('');
 
   lines.push('### Ground truth');
@@ -273,8 +302,8 @@ function renderRealCorpus(real: RealCorpus): string[] {
   lines.push('');
   if (adjudication.resolvedCells === 0) {
     lines.push(
-      '**No real-page accuracy figure exists yet**, and none will until two raters have rated ' +
-        'the pages independently under ' +
+      '**No accuracy figure exists for these pages yet**, and none will until two raters ' +
+        'have rated them independently under ' +
         '[the adjudication protocol](../corpus/real/adjudication/PROTOCOL.md). ' +
         'The figures below need no ground truth.',
     );
@@ -293,6 +322,33 @@ function renderRealCorpus(real: RealCorpus): string[] {
     lines.push(`| Resolved cells behind these | ${String(real.aggregate.accuracy.sampleSize)} |`);
   }
   lines.push('');
+
+  const engines = real.aggregate.engines ?? [];
+  if (engines.length > 0) {
+    lines.push('### Every engine on the resolved cells');
+    lines.push('');
+    lines.push(
+      'Strict grading, as in the ACT table: a cantTell on a failed cell is a miss, and an ' +
+        'unsupported rule reports nothing. Each engine is pooled over the rules it claims among ' +
+        'the ones Marlo implements, so the rule counts differ. Intervals are 95 percent Wilson ' +
+        'intervals from the counts.',
+    );
+    lines.push('');
+    lines.push(
+      '| Engine | Rules | True positives | False positives | False negatives | Strict precision | Strict recall | False positive rate |',
+    );
+    lines.push('|---|---|---|---|---|---|---|---|');
+    for (const row of engines) {
+      lines.push(
+        `| ${ENGINE_LABELS[row.engine]} | ${String(row.rules)} | ${String(row.truePositives)} | ` +
+          `${String(row.falsePositives)} | ${String(row.falseNegatives)} | ` +
+          `${withInterval(row.truePositives, row.truePositives + row.falsePositives)} | ` +
+          `${withInterval(row.truePositives, row.truePositives + row.falseNegatives)} | ` +
+          `${pct(row.falsePositiveRate)} |`,
+      );
+    }
+    lines.push('');
+  }
 
   lines.push('### Findings per page');
   lines.push('');
@@ -381,6 +437,8 @@ export function findRealCorpusChanges(
   const right = new Map<string, string>();
   flatten(before.realCorpus ?? null, 'realCorpus', left);
   flatten(after.realCorpus ?? null, 'realCorpus', right);
+  flatten(before.heldOutCorpus ?? null, 'heldOutCorpus', left);
+  flatten(after.heldOutCorpus ?? null, 'heldOutCorpus', right);
   const changes: string[] = [];
   for (const key of [...new Set([...left.keys(), ...right.keys()])].sort()) {
     if (left.get(key) === right.get(key)) continue;

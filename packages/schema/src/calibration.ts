@@ -330,6 +330,28 @@ export const RealCorpus = z
         falsePositiveRate: z.number().min(0).max(1).nullable(),
         sampleSize: z.number().int().nonnegative(),
       }),
+      /**
+       * Every engine against the resolved cells, pooled over the rules it claims, with the
+       * confusion counts behind each rate so an interval can be computed from the table.
+       * Empty until something is resolved. Optional so older tables still parse.
+       */
+      engines: z
+        .array(
+          z.object({
+            engine: EngineId,
+            /** Rules this engine claims among the ones graded here. */
+            rules: z.number().int().nonnegative(),
+            truePositives: z.number().int().nonnegative(),
+            falsePositives: z.number().int().nonnegative(),
+            falseNegatives: z.number().int().nonnegative(),
+            trueNegatives: z.number().int().nonnegative(),
+            strictPrecision: z.number().min(0).max(1).nullable(),
+            strictRecall: z.number().min(0).max(1).nullable(),
+            falsePositiveRate: z.number().min(0).max(1).nullable(),
+            sampleSize: z.number().int().nonnegative(),
+          }),
+        )
+        .optional(),
     }),
   })
   /*
@@ -443,6 +465,15 @@ export const CalibrationTable = z.object({
    * before corpus/real existed still parses, and so `schemaVersion` stays 1.
    */
   realCorpus: RealCorpus.optional(),
+
+  /**
+   * The third corpus: real pages from sites corpus/real does not use, whose ground truth
+   * was committed before any rule change made after the error analysis on corpus/real was
+   * measured on them. Same shape and same grading as `realCorpus`, never pooled with it:
+   * figures on pages the rules were corrected against and figures on pages they were not
+   * are different claims. Optional so older tables still parse.
+   */
+  heldOutCorpus: RealCorpus.optional(),
 });
 export type CalibrationTable = z.infer<typeof CalibrationTable>;
 

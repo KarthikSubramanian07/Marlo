@@ -344,6 +344,30 @@ export async function runRealHarness(options: RealHarnessOptions): Promise<RealH
       ? { strictPrecision: null, strictRecall: null, falsePositiveRate: null, sampleSize: 0 }
       : aggregateStrictAccuracy(marloStrict);
 
+  // Every engine the same way, pooled over the rules it claims, so the engines can be
+  // compared on the pages as they were compared on the ACT cases. Engines claim different
+  // rules, so `rules` travels with each figure. Empty until something is resolved.
+  const byEngine =
+    adjudication.resolvedCells === 0
+      ? []
+      : [...new Set(entries.map((e) => e.engine))].sort().map((engine) => {
+          const strict = entries
+            .filter((e) => e.engine === engine)
+            .map((e) => e.graded.strict)
+            .filter((s) => s !== null);
+          const sum = (pick: (s: (typeof strict)[number]) => number): number =>
+            strict.reduce((total, s) => total + pick(s), 0);
+          return {
+            engine,
+            rules: strict.length,
+            truePositives: sum((s) => s.truePositives),
+            falsePositives: sum((s) => s.falsePositives),
+            falseNegatives: sum((s) => s.falseNegatives),
+            trueNegatives: sum((s) => s.trueNegatives),
+            ...aggregateStrictAccuracy(strict),
+          };
+        });
+
   const cells = corpus.pages.flatMap((page) =>
     options.implementedRules.map((rule) => {
       const actual: Partial<Record<EngineId, Outcome | null>> = {};
@@ -380,6 +404,7 @@ export async function runRealHarness(options: RealHarnessOptions): Promise<RealH
           perRule,
         },
         accuracy,
+        engines: byEngine,
       },
     },
   };
