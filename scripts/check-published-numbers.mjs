@@ -191,21 +191,14 @@ expect(
 );
 expect(
   'engine rate beside the headline',
-  claim('engine rate beside the headline', /which is the rate of Marlo's own rule engine/g)?.map(
-    () => percent(marlo.falsePositiveRate),
-  ),
+  // The line once printed the engine's rate instead of the product's, so the README names
+  // the engine's current rate beside the headline, and this holds it to the table.
+  claim(
+    'engine rate beside the headline',
+    /Until recently this line printed the rate of Marlo's own rule engine, now ([\d.]+%)/g,
+  )?.map((m) => m[1]),
   percent(marlo.falsePositiveRate),
 );
-{
-  const said = claim('previous headline', /Until recently this line printed ([\d.]+%)/g);
-  if (said !== null) {
-    expect(
-      'previous headline',
-      said.map((m) => m[1]),
-      percent(marlo.falsePositiveRate),
-    );
-  }
-}
 
 expect(
   'coverage badge',
@@ -545,7 +538,6 @@ expect(
     const errors = JSON.parse(
       readFileSync(resolve(ROOT, 'calibration/error-analysis.json'), 'utf8'),
     );
-    const causeCells = (id) => errors.byCause.find((c) => c.id === id)?.cells ?? 0;
     const familyCells = (family, kind) =>
       errors.byCause
         .filter((c) => c.family === family && c.kind === kind)
@@ -554,14 +546,14 @@ expect(
       'error analysis',
       claim(
         'error analysis',
-        /It makes (\d+) false positives and (\d+) false negatives on rules it evaluates, and each has a named root cause\. (\d+) of the false positives are rule logic that contradicts the ACT rule text, (\d+) of them from one defect: failing an ID reference whose target is missing, which the rule explicitly allows\. (\d+) of the false negatives are abstentions/g,
+        /Now it makes (\d+) false positives and (\d+) false negatives\. (None|\d+) of the false positives (?:is|are) rule logic: (\d+) are elements a stylesheet hides[\s\S]*?All (\d+) false negatives are abstentions/g,
         REAL_SECTION,
-      )?.map((m) => m.slice(1, 6).join('/')),
+      )?.map((m) => [m[1], m[2], m[3] === 'None' ? '0' : m[3], m[4], m[5]].join('/')),
       [
         errors.falsePositives,
         errors.falseNegatives,
         familyCells('rule logic', 'FP'),
-        causeCells('idref-exception'),
+        familyCells('renderer', 'FP'),
         familyCells('abstention', 'FN'),
       ].join('/'),
     );
