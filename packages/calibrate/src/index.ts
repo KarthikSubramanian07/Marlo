@@ -25,7 +25,7 @@ export {
 } from './publish.js';
 export type { CaseRecord, RealPageCell } from './analysis.js';
 export { analyse, collectCases, routeFrom, wilson } from './analysis.js';
-export type { Adjudication, RealCorpusSource, RealPage } from './real-corpus.js';
+export type { Adjudication, RealCorpusName, RealCorpusSource, RealPage } from './real-corpus.js';
 export { loadAdjudication, loadRealCorpus, pageLabel } from './real-corpus.js';
 export type { RealHarnessOptions, RealHarnessResult } from './real-harness.js';
 export { cohensKappa, runRealHarness, summariseAdjudication } from './real-harness.js';

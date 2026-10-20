@@ -38,6 +38,9 @@ function schemas() {
     // Null on a table measured before the real-page corpus existed, so the property is
     // always present and typed, as every property in these schemas is.
     realCorpus: { anyOf: [ref('RealCorpus'), { type: 'null' }] },
+    // The held-out pages, from sites corpus/real does not use, in the same shape. Null on a
+    // table measured before they existed.
+    heldOutCorpus: { anyOf: [ref('RealCorpus'), { type: 'null' }] },
   });
   return {
     Corpus: object({
@@ -207,6 +210,20 @@ function schemas() {
           ),
         }),
         accuracy: ref('Aggregate'),
+        engines: list(
+          object({
+            engine,
+            rules: count,
+            truePositives: count,
+            falsePositives: count,
+            falseNegatives: count,
+            trueNegatives: count,
+            strictPrecision: rate,
+            strictRecall: rate,
+            falsePositiveRate: rate,
+            sampleSize: count,
+          }),
+        ),
       }),
     }),
     Problem: object({
@@ -354,6 +371,16 @@ export function createPublicApi({ origin, table, manifest }) {
     openapi: `${origin}/openapi.json`,
     tools: ['marlo_coverage', 'marlo_list_rules', 'marlo_explain_rule'],
   };
-  const calibration = { ...table, realCorpus: table.realCorpus ?? null };
+  // Every property present, as the schema requires: absent blocks are null, and a block
+  // from before the per-engine figures existed carries an empty list.
+  const pages = (block) =>
+    block === undefined
+      ? null
+      : { ...block, aggregate: { ...block.aggregate, engines: block.aggregate.engines ?? [] } };
+  const calibration = {
+    ...table,
+    realCorpus: pages(table.realCorpus),
+    heldOutCorpus: pages(table.heldOutCorpus),
+  };
   return { coverage, rules, calibration, openapi, mcpManifest };
 }

@@ -4,7 +4,10 @@ import { z } from 'zod';
 import { ActRuleId, Outcome } from '@trymarlo/schema';
 
 /**
- * Reads corpus/real from disk: the snapshotted pages and the human adjudication record.
+ * Reads a real-page corpus from disk: the snapshotted pages and the adjudication record.
+ * There are two, with the same layout: corpus/real, where the engine's errors were
+ * analysed, and corpus/heldout, from different sites, rated before any change made after
+ * that analysis was measured on it.
  *
  * Kept apart from corpus.ts, which reads the ACT corpus, so the two can never be loaded
  * through the same path by accident and pooled. A real page has no expected outcome in
@@ -31,6 +34,9 @@ const Manifest = z.object({
   pages: z.array(ManifestPage).min(1),
 });
 
+/** The real-page corpora, by directory name under corpus/. */
+export type RealCorpusName = 'real' | 'heldout';
+
 export type RealPage = z.infer<typeof ManifestPage> & {
   /** Category and digest prefix: how every published table names this page. */
   readonly label: string;
@@ -49,21 +55,24 @@ export function pageLabel(page: { readonly category: string; readonly sha256: st
   return `${page.category} (${page.sha256.slice(0, 12)})`;
 }
 
-export function loadRealCorpus(repositoryRoot: string): RealCorpusSource {
-  const dir = resolve(repositoryRoot, 'corpus/real');
+export function loadRealCorpus(
+  repositoryRoot: string,
+  name: RealCorpusName = 'real',
+): RealCorpusSource {
+  const dir = resolve(repositoryRoot, 'corpus', name);
   const parsed = Manifest.safeParse(
     JSON.parse(readFileSync(resolve(dir, 'MANIFEST.json'), 'utf8')),
   );
   if (!parsed.success) {
     throw new Error(
-      'corpus/real/MANIFEST.json is not a valid manifest:\n' +
+      `corpus/${name}/MANIFEST.json is not a valid manifest:\n` +
         parsed.error.issues.map((i) => `  ${i.path.join('.')}: ${i.message}`).join('\n'),
     );
   }
   const manifest = parsed.data;
   if (manifest.totals.pages !== manifest.pages.length) {
     throw new Error(
-      `corpus/real/MANIFEST.json claims ${String(manifest.totals.pages)} pages and lists ` +
+      `corpus/${name}/MANIFEST.json claims ${String(manifest.totals.pages)} pages and lists ` +
         `${String(manifest.pages.length)}. Run \`node scripts/verify-real-corpus.mjs\`.`,
     );
   }
@@ -137,8 +146,11 @@ function readOptional<T>(file: string, schema: z.ZodType<T>, what: string): T | 
   return parsed.data;
 }
 
-export function loadAdjudication(repositoryRoot: string): Adjudication {
-  const dir = resolve(repositoryRoot, 'corpus/real/adjudication');
+export function loadAdjudication(
+  repositoryRoot: string,
+  name: RealCorpusName = 'real',
+): Adjudication {
+  const dir = resolve(repositoryRoot, 'corpus', name, 'adjudication');
   const a = readOptional(resolve(dir, 'sheet-A.json'), Sheet, 'sheet-A.json');
   const b = readOptional(resolve(dir, 'sheet-B.json'), Sheet, 'sheet-B.json');
   const resolved = readOptional(resolve(dir, 'resolved.json'), Resolved, 'resolved.json');
