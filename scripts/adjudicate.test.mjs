@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { IMPLEMENTED_RULES } from '@trymarlo/rules';
 import {
+  CORPORA,
   PRESCREEN,
   buildSheet,
   cohensKappa,
+  corpusPaths,
   pairSheets,
   prescreenSource,
   prescreened,
@@ -15,6 +17,20 @@ import {
 
 /** n copies of a pair, for building a contingency table by hand. */
 const times = (n, pair) => Array.from({ length: n }, () => pair);
+
+describe('the corpora', () => {
+  it('rates corpus/real and corpus/heldout under one protocol, and nothing else', () => {
+    expect(CORPORA).toEqual(['real', 'heldout']);
+    expect(corpusPaths().name).toBe('real');
+    for (const name of CORPORA) {
+      const paths = corpusPaths(name);
+      expect(paths.dir.endsWith(`corpus/${name}`)).toBe(true);
+      expect(paths.adjudication.endsWith(`corpus/${name}/adjudication`)).toBe(true);
+    }
+    expect(() => corpusPaths('act')).toThrow(/unknown corpus/);
+    expect(() => corpusPaths('../real')).toThrow(/unknown corpus/);
+  });
+});
 
 describe("Cohen's kappa", () => {
   it('matches a hand-computed two by two table', () => {

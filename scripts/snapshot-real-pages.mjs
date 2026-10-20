@@ -39,6 +39,11 @@
  *   node scripts/snapshot-real-pages.mjs              snapshot every page, rebuild MANIFEST.json
  *   node scripts/snapshot-real-pages.mjs --only <id>  snapshot one page, rebuild MANIFEST.json
  *   node scripts/snapshot-real-pages.mjs --manifest   rebuild MANIFEST.json from disk only
+ *   ... --corpus heldout                              any of the above, on corpus/heldout
+ *
+ * corpus/heldout is a second set of pages from different sites, snapshotted the same way,
+ * whose ground truth was committed before any rule change made after the error analysis
+ * on corpus/real was measured on it.
  *
  * Needs network. Everything else in this repository does not.
  */
@@ -46,14 +51,20 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { join, resolve } from 'node:path';
+import { hygieneProblems } from './lib/snapshot-hygiene.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const REAL = join(ROOT, 'corpus', 'real');
+const argv = process.argv.slice(2);
+const corpusAt = argv.indexOf('--corpus');
+const CORPUS = corpusAt === -1 ? 'real' : argv[corpusAt + 1];
+if (CORPUS !== 'real' && CORPUS !== 'heldout') {
+  throw new Error(`--corpus must be real or heldout, not "${String(CORPUS)}"`);
+}
+const REAL = join(ROOT, 'corpus', CORPUS);
 const PAGES = join(REAL, 'pages');
 const SOURCES = join(REAL, 'SOURCES.json');
 const MANIFEST = join(REAL, 'MANIFEST.json');
 
-const argv = process.argv.slice(2);
 const manifestOnly = argv.includes('--manifest');
 const onlyIndex = argv.indexOf('--only');
 const only = onlyIndex === -1 ? null : argv[onlyIndex + 1];
@@ -72,7 +83,7 @@ const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 function readSources() {
   const parsed = JSON.parse(readFileSync(SOURCES, 'utf8'));
   if (!Array.isArray(parsed.pages) || parsed.pages.length === 0) {
-    throw new Error('corpus/real/SOURCES.json has no pages');
+    throw new Error(`corpus/${CORPUS}/SOURCES.json has no pages`);
   }
   const ids = new Set();
   for (const page of parsed.pages) {
@@ -379,6 +390,10 @@ async function snapshot(browser, entry, retrieved) {
       `${page.url() === entry.url ? '' : `; landed ${page.url()}`} -->`;
 
     const document = `${doctype === '' ? '' : `${doctype}\n`}${provenance}\n${result.html}\n`;
+    // The verifier's own check, before anything is written. A page that would fail
+    // `corpus:verify` is never vendored, whatever the passes above missed.
+    const unclean = hygieneProblems(entry.id, document);
+    if (unclean.length > 0) throw new Error(unclean.join(' '));
     const bytes = Buffer.from(document, 'utf8');
     if (bytes.length > MAX_PAGE_BYTES) {
       throw new Error(
@@ -429,10 +444,10 @@ function writeManifest(sources) {
   for (const id of onDisk) {
     const source = byId.get(id);
     if (source === undefined) {
-      throw new Error(`corpus/real/pages/${id} is on disk but not in SOURCES.json`);
+      throw new Error(`corpus/${CORPUS}/pages/${id} is on disk but not in SOURCES.json`);
     }
     const file = join(PAGES, id, 'index.html');
-    if (!existsSync(file)) throw new Error(`corpus/real/pages/${id}/index.html is missing`);
+    if (!existsSync(file)) throw new Error(`corpus/${CORPUS}/pages/${id}/index.html is missing`);
     const bytes = readFileSync(file);
     const html = bytes.toString('utf8');
     const provenance = readProvenance(html);
