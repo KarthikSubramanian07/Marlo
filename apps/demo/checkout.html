@@ -64,9 +64,13 @@
       <img src="delivery-van.png" alt="Arrives Tuesday" aria-hidden="true" />
 
       <form action="/pay" method="post">
-        <!-- e086e5: a placeholder is not a label. It disappears on focus and is not
-             reliably announced. -->
-        <input type="email" placeholder="Email" name="email" />
+        <!-- e086e5: a field with no accessible name at all. "Email" is printed beside it
+             but is not its label, and nothing else names it. (This field once had only a
+             placeholder, which HTML-AAM does accept as a name: weak labelling, but not this
+             rule's failure. Marlo's rule failed it anyway, and the README showed that false
+             positive as a disagreement between engines. HONESTY.md entry 17.) -->
+        <span>Email</span>
+        <input type="email" name="email" />
 
         <!-- e086e5 again, from the other direction: the label is not associated with the
              field, because the for attribute names an id that does not exist. -->

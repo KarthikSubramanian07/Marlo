@@ -30,7 +30,7 @@
     "c487ae": "link whose only content is an image with an empty alt",
     "cae760": "iframe with no title",
     "de46e4": "lang=\"xyzzy\" on a paragraph",
-    "e086e5": "placeholder used as a label, and a label whose for names no id",
+    "e086e5": "a field with no accessible name, and a label whose for names no id",
     "ff89c9": "role=listitem with no list ancestor",
     "ffd0e9": "empty h1"
   },
