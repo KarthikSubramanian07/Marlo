@@ -11,7 +11,15 @@ import {
   walk,
 } from '../dom.js';
 import type { RoleAnswer } from '../roles.js';
-import { ARIA_ROLES, canReceiveFocus, explicitRole, semanticRoles } from '../roles.js';
+import {
+  ARIA_ROLES,
+  GLOBAL_ATTRIBUTES,
+  canReceiveFocus,
+  explicitRole,
+  languageFeaturePermits,
+  rolePermits,
+  semanticRoles,
+} from '../roles.js';
 
 export { ARIA_ROLES, explicitRole };
 
@@ -164,24 +172,6 @@ export const MODULE_ROLES: ReadonlySet<string> = new Set([
   'graphics-document',
   'graphics-object',
   'graphics-symbol',
-]);
-
-/** Roles that prohibit a naming attribute, from ARIA 1.2's prohibited-attributes table. */
-const NAME_PROHIBITED_ROLES: ReadonlySet<string> = new Set([
-  'caption',
-  'code',
-  'deletion',
-  'emphasis',
-  'generic',
-  'insertion',
-  'paragraph',
-  'presentation',
-  'none',
-  'strong',
-  'subscript',
-  'superscript',
-  'term',
-  'time',
 ]);
 
 /**
@@ -637,7 +627,27 @@ export const ariaValueValid = defineRule({
   },
 });
 
-/** 5c01ea: an ARIA state or property is permitted on the element. */
+/** How one element's role is described in a message. */
+function describeRole(element: MarloElement, answer: RoleAnswer): string {
+  if (answer.kind === 'no-role') return `<${element.tag}> (no corresponding ARIA role)`;
+  if (answer.kind === 'unknown') return `<${element.tag}>`;
+  const roles = answer.roles.join(' or ');
+  return attr(element, 'role') === null
+    ? `<${element.tag}> (implicit role ${roles})`
+    : `role="${roles}"`;
+}
+
+/**
+ * 5c01ea: every ARIA state or property is permitted where it is used.
+ *
+ * Permitted means global, or required, supported or inherited by the element's semantic
+ * role, or allowed on that HTML element by ARIA in HTML. The semantic role comes from
+ * `semanticRoles`, so an element with no role attribute is judged by its implicit role:
+ * a `span` is generic and a `label` has no corresponding role, and neither may carry
+ * `aria-expanded`. Where the implicit role is not decided here, or several candidates
+ * disagree, the answer is `cantTell`. A prohibited global, such as aria-label on a
+ * generic element, is still global, and kb1m8s rather than this rule is about it.
+ */
 export const ariaPropertyPermitted = defineRule({
   actId: '5c01ea',
   name: 'ARIA state or property is permitted',
@@ -647,42 +657,67 @@ export const ariaPropertyPermitted = defineRule({
   applicability: (document) => {
     const targets = [];
     for (const element of walk(document.root)) {
-      if (ariaAttributesOf(element).some((a) => Object.hasOwn(ARIA_ATTRIBUTES, a.name))) {
-        targets.push({ element });
-      }
+      if (!ariaAttributesOf(element).some((a) => Object.hasOwn(ARIA_ATTRIBUTES, a.name))) continue;
+      // Only an element included in the accessibility tree is in scope.
+      if (notExposed(element)) continue;
+      targets.push({ element });
     }
     return targets;
   },
   expectation: ({ element }) => {
-    const role = explicitRole(element);
-    if (role === null) {
-      // Without an explicit role, deciding what is permitted needs the implicit role,
-      // which depends on the full HTML-AAM mapping including context. Marlo declines
-      // rather than guessing.
+    const specific = ariaAttributesOf(element)
+      .map((a) => a.name)
+      .filter((name) => Object.hasOwn(ARIA_ATTRIBUTES, name) && !GLOBAL_ATTRIBUTES.has(name));
+    if (specific.length === 0) {
       return {
-        outcome: 'cantTell',
-        message:
-          'The element has no explicit role, so deciding which ARIA properties are permitted ' +
-          'needs its implicit role, which Marlo does not compute for every element.',
+        outcome: 'passed',
+        message: 'Every ARIA attribute here is global, so it is permitted on any element.',
       };
     }
 
-    if (!NAME_PROHIBITED_ROLES.has(role)) {
-      return { outcome: 'passed', message: `Properties are permitted on role="${role}".` };
+    const answer = semanticRoles(element);
+    const who = describeRole(element, answer);
+    if (answer.kind === 'unknown') {
+      return {
+        outcome: 'cantTell',
+        message:
+          `${specific.join(', ')} ${specific.length === 1 ? 'is' : 'are'} permitted only on some ` +
+          `roles, and Marlo does not decide the implicit role of ${who}.`,
+      };
     }
 
-    const prohibited = ariaAttributesOf(element)
-      .map((a) => a.name)
-      .filter((name) => name === 'aria-label' || name === 'aria-labelledby');
+    const wrong: string[] = [];
+    const unsure: string[] = [];
+    for (const name of specific) {
+      if (answer.kind === 'no-role') {
+        if (!languageFeaturePermits(element, name)) wrong.push(name);
+        continue;
+      }
+      const verdicts = answer.roles.map((r) => rolePermits(r, name, element));
+      if (verdicts.every((v) => v === false)) wrong.push(name);
+      else if (!verdicts.every((v) => v === true)) unsure.push(name);
+    }
 
-    if (prohibited.length === 0) {
-      return { outcome: 'passed', message: `No prohibited property on role="${role}".` };
+    if (wrong.length > 0) {
+      return {
+        outcome: 'failed',
+        message:
+          `${wrong.join(', ')} ${wrong.length === 1 ? 'is' : 'are'} not permitted on ${who}, so ` +
+          'assistive technology ignores it, and the state or property it was meant to convey ' +
+          'is lost.',
+      };
+    }
+    if (unsure.length > 0) {
+      return {
+        outcome: 'cantTell',
+        message:
+          `Whether ${unsure.join(', ')} ${unsure.length === 1 ? 'is' : 'are'} permitted on ${who} ` +
+          'depends on which of those roles it takes, which the DOM does not settle.',
+      };
     }
     return {
-      outcome: 'failed',
-      message:
-        `role="${role}" prohibits ${prohibited.join(' and ')}. ARIA 1.2 forbids naming this role, ` +
-        'so the name is ignored and the author believes it was applied.',
+      outcome: 'passed',
+      message: `${specific.join(', ')} ${specific.length === 1 ? 'is' : 'are'} permitted on ${who}.`,
     };
   },
 });

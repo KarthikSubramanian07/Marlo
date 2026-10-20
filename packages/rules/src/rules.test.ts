@@ -16,7 +16,7 @@ import {
 } from './index.js';
 import { defineRule } from './define.js';
 import { walk as walkAll } from './dom.js';
-import { semanticRoles } from './roles.js';
+import { ARIA_ROLES, GLOBAL_ATTRIBUTES, ROLE_ATTRIBUTES, semanticRoles } from './roles.js';
 
 /**
  * Rule tests, written the way a contributor is asked to write them: a fixture, an
@@ -455,6 +455,94 @@ describe('implicit roles, from HTML-AAM and ARIA in HTML', () => {
     ['<my-widget>x</my-widget>', 'my-widget', 'unknown'],
   ])('%s: <%s> is %s', (html, tag, expected) => {
     expect(roleOf(html, tag)).toBe(expected);
+  });
+});
+
+describe('5c01ea aria state or property is permitted', () => {
+  const permitted = (html: string) => check('5c01ea', `<html><body>${html}</body></html>`).outcome;
+
+  it('holds a role entry for every ARIA 1.2 role and every Graphics ARIA role', () => {
+    expect(Object.keys(ROLE_ATTRIBUTES).sort()).toEqual(
+      [...ARIA_ROLES, 'graphics-document', 'graphics-object', 'graphics-symbol'].sort(),
+    );
+    expect(GLOBAL_ATTRIBUTES.size).toBe(21);
+    // Every name in the table is a defined, non-global ARIA 1.2 attribute.
+    for (const names of Object.values(ROLE_ATTRIBUTES)) {
+      for (const name of names) {
+        expect(Object.hasOwn(ARIA_ATTRIBUTES, name), name).toBe(true);
+        expect(GLOBAL_ATTRIBUTES.has(name), name).toBe(false);
+      }
+    }
+  });
+
+  // The implicit role decides when there is no role attribute. A generic element and one
+  // with no corresponding role may carry only global states and properties.
+  it.each([
+    ['a span, which is generic', '<span tabindex="0" aria-expanded="true">More</span>'],
+    ['a label, which has no corresponding role', '<label aria-expanded="true">Menu</label>'],
+    ['a div, which is generic', '<div aria-checked="true">x</div>'],
+    ['a button, which does not support sorting', '<button aria-sort="ascending">Year</button>'],
+    ['a heading, which supports only a level', '<h2 aria-pressed="true">x</h2>'],
+    ['a link, which does not support pressed', '<a href="/" aria-pressed="true">x</a>'],
+    ['an explicit role that does not support it', '<div role="button" aria-checked="true">x</div>'],
+    ['a static separator, which takes no value', '<div role="separator" aria-valuenow="5"></div>'],
+    [
+      'a presentational span, with nothing to restore it',
+      '<span role="none" aria-expanded="true">x</span>',
+    ],
+    ['a colour input, which allows only globals', '<input type="color" aria-required="true">'],
+  ])('fails a non-global attribute on %s', (_what, html) => {
+    expect(permitted(html)).toBe('failed');
+  });
+
+  it.each([
+    ['a global attribute anywhere', '<span aria-describedby="d" aria-hidden="false">x</span>'],
+    [
+      'a name on a generic element, which is global though prohibited',
+      '<span aria-label="x">y</span>',
+    ],
+    ['pressed on an implicit button', '<button aria-pressed="false">x</button>'],
+    ['expanded on an implicit link', '<a href="/" aria-expanded="false">x</a>'],
+    [
+      'required on a password input, by ARIA in HTML',
+      '<input type="password" aria-required="true">',
+    ],
+    ['required on a date input, by ARIA in HTML', '<input type="date" aria-required="true">'],
+    [
+      'expanded on a video, as the application role allows',
+      '<video aria-expanded="false"></video>',
+    ],
+    ['level on an implicit list item', '<ul><li aria-level="2">x</li></ul>'],
+    [
+      'inherited required on a switch',
+      '<div role="switch" aria-checked="false" aria-required="true">x</div>',
+    ],
+    [
+      'value properties on a focusable separator',
+      '<div role="separator" tabindex="0" aria-valuenow="5"></div>',
+    ],
+    [
+      'a column span on a header cell, whichever role it takes',
+      '<table><tr><th aria-colspan="2">x</th></tr></table>',
+    ],
+  ])('passes %s', (_what, html) => {
+    expect(permitted(html)).toBe('passed');
+  });
+
+  it.each([
+    ['an element whose role Marlo does not decide', '<my-menu aria-expanded="true">x</my-menu>'],
+    [
+      // A th is a column header, a row header or a cell, and only the headers sort.
+      'sort on a header cell, which a plain cell does not permit',
+      '<table><tr><th aria-sort="none">x</th></tr></table>',
+    ],
+  ])('asks rather than guesses on %s', (_what, html) => {
+    expect(permitted(html)).toBe('cantTell');
+  });
+
+  it('is inapplicable to an element outside the accessibility tree', () => {
+    expect(permitted('<button aria-sort="" style="display:none">x</button>')).toBe('inapplicable');
+    expect(permitted('<span hidden aria-expanded="true">x</span>')).toBe('inapplicable');
   });
 });
 

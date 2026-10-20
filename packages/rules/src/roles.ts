@@ -402,3 +402,243 @@ export function semanticRoles(element: MarloElement): RoleAnswer {
   }
   return role(explicit);
 }
+
+/**
+ * WAI-ARIA 1.2: for each non-abstract role, the states and properties other than the
+ * global ones that the role requires, supports or inherits, transcribed from its role
+ * table. A global state or property is permitted everywhere and is not repeated here.
+ * `separator` takes the value properties only when focusable, which `rolePermits` adds.
+ */
+export const ROLE_ATTRIBUTES: Readonly<Record<string, readonly string[]>> = Object.freeze({
+  alert: [],
+  alertdialog: ['aria-modal'],
+  application: ['aria-activedescendant', 'aria-expanded'],
+  article: ['aria-posinset', 'aria-setsize'],
+  banner: [],
+  blockquote: [],
+  button: ['aria-expanded', 'aria-pressed'],
+  caption: [],
+  cell: ['aria-colindex', 'aria-colspan', 'aria-rowindex', 'aria-rowspan'],
+  checkbox: ['aria-checked', 'aria-expanded', 'aria-readonly', 'aria-required'],
+  code: [],
+  columnheader: [
+    'aria-colindex',
+    'aria-colspan',
+    'aria-expanded',
+    'aria-readonly',
+    'aria-required',
+    'aria-rowindex',
+    'aria-rowspan',
+    'aria-selected',
+    'aria-sort',
+  ],
+  combobox: [
+    'aria-activedescendant',
+    'aria-autocomplete',
+    'aria-expanded',
+    'aria-readonly',
+    'aria-required',
+  ],
+  complementary: [],
+  contentinfo: [],
+  definition: [],
+  deletion: [],
+  dialog: ['aria-modal'],
+  directory: [],
+  document: [],
+  emphasis: [],
+  feed: [],
+  figure: [],
+  form: [],
+  generic: [],
+  grid: [
+    'aria-activedescendant',
+    'aria-colcount',
+    'aria-multiselectable',
+    'aria-readonly',
+    'aria-rowcount',
+  ],
+  gridcell: [
+    'aria-colindex',
+    'aria-colspan',
+    'aria-expanded',
+    'aria-readonly',
+    'aria-required',
+    'aria-rowindex',
+    'aria-rowspan',
+    'aria-selected',
+  ],
+  group: ['aria-activedescendant'],
+  heading: ['aria-level'],
+  img: [],
+  insertion: [],
+  link: ['aria-expanded'],
+  list: [],
+  listbox: [
+    'aria-activedescendant',
+    'aria-expanded',
+    'aria-multiselectable',
+    'aria-orientation',
+    'aria-readonly',
+    'aria-required',
+  ],
+  listitem: ['aria-level', 'aria-posinset', 'aria-setsize'],
+  log: [],
+  main: [],
+  marquee: [],
+  math: [],
+  meter: ['aria-valuemax', 'aria-valuemin', 'aria-valuenow', 'aria-valuetext'],
+  menu: ['aria-activedescendant', 'aria-orientation'],
+  menubar: ['aria-activedescendant', 'aria-orientation'],
+  menuitem: ['aria-expanded', 'aria-posinset', 'aria-setsize'],
+  menuitemcheckbox: ['aria-checked', 'aria-expanded', 'aria-posinset', 'aria-setsize'],
+  menuitemradio: ['aria-checked', 'aria-expanded', 'aria-posinset', 'aria-setsize'],
+  navigation: [],
+  none: [],
+  note: [],
+  option: ['aria-checked', 'aria-posinset', 'aria-selected', 'aria-setsize'],
+  paragraph: [],
+  presentation: [],
+  progressbar: ['aria-valuemax', 'aria-valuemin', 'aria-valuenow', 'aria-valuetext'],
+  radio: ['aria-checked', 'aria-posinset', 'aria-setsize'],
+  radiogroup: ['aria-activedescendant', 'aria-orientation', 'aria-readonly', 'aria-required'],
+  region: [],
+  row: [
+    'aria-activedescendant',
+    'aria-colindex',
+    'aria-expanded',
+    'aria-level',
+    'aria-posinset',
+    'aria-rowindex',
+    'aria-selected',
+    'aria-setsize',
+  ],
+  rowgroup: [],
+  rowheader: [
+    'aria-colindex',
+    'aria-colspan',
+    'aria-expanded',
+    'aria-readonly',
+    'aria-required',
+    'aria-rowindex',
+    'aria-rowspan',
+    'aria-selected',
+    'aria-sort',
+  ],
+  scrollbar: [
+    'aria-orientation',
+    'aria-valuemax',
+    'aria-valuemin',
+    'aria-valuenow',
+    'aria-valuetext',
+  ],
+  search: [],
+  searchbox: [
+    'aria-activedescendant',
+    'aria-autocomplete',
+    'aria-multiline',
+    'aria-placeholder',
+    'aria-readonly',
+    'aria-required',
+  ],
+  separator: ['aria-orientation'],
+  slider: [
+    'aria-orientation',
+    'aria-readonly',
+    'aria-valuemax',
+    'aria-valuemin',
+    'aria-valuenow',
+    'aria-valuetext',
+  ],
+  spinbutton: [
+    'aria-activedescendant',
+    'aria-readonly',
+    'aria-required',
+    'aria-valuemax',
+    'aria-valuemin',
+    'aria-valuenow',
+    'aria-valuetext',
+  ],
+  status: [],
+  strong: [],
+  subscript: [],
+  superscript: [],
+  switch: ['aria-checked', 'aria-expanded', 'aria-readonly', 'aria-required'],
+  tab: ['aria-expanded', 'aria-posinset', 'aria-selected', 'aria-setsize'],
+  table: ['aria-colcount', 'aria-rowcount'],
+  tablist: ['aria-activedescendant', 'aria-multiselectable', 'aria-orientation'],
+  tabpanel: [],
+  term: [],
+  textbox: [
+    'aria-activedescendant',
+    'aria-autocomplete',
+    'aria-multiline',
+    'aria-placeholder',
+    'aria-readonly',
+    'aria-required',
+  ],
+  time: [],
+  timer: [],
+  toolbar: ['aria-activedescendant', 'aria-orientation'],
+  tooltip: [],
+  tree: ['aria-activedescendant', 'aria-multiselectable', 'aria-orientation', 'aria-required'],
+  treegrid: [
+    'aria-activedescendant',
+    'aria-colcount',
+    'aria-multiselectable',
+    'aria-orientation',
+    'aria-readonly',
+    'aria-required',
+    'aria-rowcount',
+  ],
+  treeitem: [
+    'aria-checked',
+    'aria-expanded',
+    'aria-level',
+    'aria-posinset',
+    'aria-selected',
+    'aria-setsize',
+  ],
+  // WAI-ARIA Graphics Module 1.0, written against ARIA 1.1, where aria-expanded was
+  // inherited by every role.
+  'graphics-document': ['aria-expanded'],
+  'graphics-object': ['aria-activedescendant', 'aria-expanded'],
+  'graphics-symbol': ['aria-expanded'],
+});
+
+const FOCUSABLE_SEPARATOR: readonly string[] = [
+  'aria-valuemax',
+  'aria-valuemin',
+  'aria-valuenow',
+  'aria-valuetext',
+];
+
+/**
+ * Whether ARIA 1.2 lets `role` carry the non-global state or property `name`, or null for
+ * a role this table does not hold.
+ */
+export function rolePermits(role: string, name: string, element: MarloElement): boolean | null {
+  const permitted = ROLE_ATTRIBUTES[role];
+  if (permitted === undefined) return null;
+  if (permitted.includes(name)) return true;
+  return role === 'separator' && FOCUSABLE_SEPARATOR.includes(name) && canReceiveFocus(element);
+}
+
+/**
+ * What ARIA in HTML allows on an element with no corresponding role, beyond the global
+ * states and properties: "any aria-* attributes applicable to" a named role, or a short
+ * list. An element missing here allows the global ones only.
+ */
+export function languageFeaturePermits(element: MarloElement, name: string): boolean {
+  if (element.tag === 'audio' || element.tag === 'video') {
+    return ROLE_ATTRIBUTES['application']?.includes(name) ?? false;
+  }
+  if (element.tag === 'input') {
+    const type = normalise(attr(element, 'type') ?? '').toLowerCase();
+    if (['date', 'datetime-local', 'month', 'password', 'time', 'week'].includes(type)) {
+      return ROLE_ATTRIBUTES['textbox']?.includes(name) ?? false;
+    }
+    if (type === 'file') return name === 'aria-required';
+  }
+  return false;
+}
