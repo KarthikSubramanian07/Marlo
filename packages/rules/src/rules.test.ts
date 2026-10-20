@@ -15,6 +15,8 @@ import {
   requiredCapabilities,
 } from './index.js';
 import { defineRule } from './define.js';
+import { walk as walkAll } from './dom.js';
+import { semanticRoles } from './roles.js';
 
 /**
  * Rule tests, written the way a contributor is asked to write them: a fixture, an
@@ -405,6 +407,140 @@ describe('4e8ab6 role has required states and properties', () => {
     expect(
       check('4e8ab6', '<html><body><input type="text" role="checkbox" /></body></html>').outcome,
     ).toBe('failed');
+  });
+});
+
+describe('implicit roles, from HTML-AAM and ARIA in HTML', () => {
+  const roleOf = (html: string, tag: string) => {
+    const document = fixture(`<html><body>${html}</body></html>`);
+    const found = [...walkAll(document.root)].find((e) => e.tag === tag);
+    if (found === undefined) throw new Error(`no ${tag}`);
+    const answer = semanticRoles(found);
+    return answer.kind === 'role' ? answer.roles.join(' ') : answer.kind;
+  };
+
+  it.each([
+    ['<ul><li>x</li></ul>', 'ul', 'list'],
+    ['<ol><li>x</li></ol>', 'li', 'listitem'],
+    ['<menu><li>x</li></menu>', 'li', 'listitem'],
+    ['<div><li>x</li></div>', 'li', 'generic'],
+    ['<ul role="none"><li>x</li></ul>', 'li', 'generic'],
+    ['<a href="/">x</a>', 'a', 'link'],
+    ['<a>x</a>', 'a', 'generic'],
+    ['<span>x</span>', 'span', 'generic'],
+    ['<label>x</label>', 'label', 'no-role'],
+    ['<img src="a.png" alt="">', 'img', 'none'],
+    ['<img src="a.png" alt="" aria-describedby="d">', 'img', 'img'],
+    ['<img src="a.png" alt="A">', 'img', 'img'],
+    ['<input>', 'input', 'textbox'],
+    ['<input type="email" list="l">', 'input', 'combobox'],
+    ['<input type="search">', 'input', 'searchbox'],
+    ['<input type="password">', 'input', 'no-role'],
+    ['<input type="range">', 'input', 'slider'],
+    ['<select><option>x</option></select>', 'select', 'combobox'],
+    ['<select size="4"><option>x</option></select>', 'select', 'listbox'],
+    ['<header>x</header>', 'header', 'banner'],
+    ['<main><header>x</header></main>', 'header', 'generic'],
+    ['<article><footer>x</footer></article>', 'footer', 'generic'],
+    ['<section>x</section>', 'section', 'generic'],
+    ['<section aria-label="News">x</section>', 'section', 'region'],
+    ['<table><tr><td>x</td></tr></table>', 'td', 'cell'],
+    ['<table role="grid"><tr><td>x</td></tr></table>', 'td', 'gridcell'],
+    ['<table><tr><th>x</th></tr></table>', 'th', 'columnheader rowheader cell'],
+    ['<table role="presentation"><tr><td>x</td></tr></table>', 'tr', 'none'],
+    ['<table role="list"><tr><td>x</td></tr></table>', 'td', 'unknown'],
+    ['<button role="none">x</button>', 'button', 'button'],
+    ['<span role="none" aria-label="x">x</span>', 'span', 'generic'],
+    ['<span role="none">x</span>', 'span', 'none'],
+    ['<my-widget>x</my-widget>', 'my-widget', 'unknown'],
+  ])('%s: <%s> is %s', (html, tag, expected) => {
+    expect(roleOf(html, tag)).toBe(expected);
+  });
+});
+
+describe('bc4a75 required owned elements', () => {
+  const owned = (html: string, options?: Parameters<typeof check>[2]) =>
+    check('bc4a75', `<html><body>${html}</body></html>`, options).outcome;
+
+  it('applies to implicit roles, and passes a list that owns only list items', () => {
+    expect(owned('<ul><li>a</li><li>b</li></ul>')).toBe('passed');
+    expect(
+      owned('<select multiple><optgroup label="g"><option>a</option></optgroup></select>'),
+    ).toBe('passed');
+    expect(
+      owned('<table><thead><tr><th>h</th></tr></thead><tbody><tr><td>c</td></tr></tbody></table>'),
+    ).toBe('passed');
+  });
+
+  it.each([
+    ['a heading', '<ul><li>a</li><h3>Section</h3></ul>'],
+    ['a separator', '<ul><li>a</li><li role="separator"></li></ul>'],
+    ['a generic element', '<ol><div>a</div></ol>'],
+    [
+      'a group of list items, which ARIA 1.2 dropped',
+      '<div role="list"><div role="group"><span role="listitem">a</span></div></div>',
+    ],
+    [
+      'a caption, which only ARIA 1.3 permits in a table',
+      '<table><caption>T</caption><tr><td>c</td></tr></table>',
+    ],
+    ['a link behind a presentational list item', '<ul><li role="none"><a href="/">x</a></li></ul>'],
+    [
+      'a group in a menu that owns a treeitem',
+      '<div role="menu"><div role="group"><span role="treeitem">x</span></div></div>',
+    ],
+    [
+      'a tab brought in by aria-owns',
+      '<div role="list" aria-owns="t"><span role="listitem">a</span></div><span id="t" role="tab">x</span>',
+    ],
+  ])('fails an owner that owns %s', (_what, html) => {
+    expect(owned(html)).toBe('failed');
+  });
+
+  it.each([
+    ['nothing at all', '<div role="list"></div>'],
+    [
+      'only content that is not exposed',
+      '<ul><template><p>x</p></template><script></script><li hidden><h3>x</h3></li></ul>',
+    ],
+    [
+      'a presentational wrapper around tabs',
+      '<ul role="tablist"><li role="none"><span role="tab">a</span></li></ul>',
+    ],
+    [
+      'nested groups of menu items',
+      '<div role="menu"><div role="group"><span role="menuitem">a</span><div role="group"><span role="menuitem">b</span></div></div></div>',
+    ],
+    [
+      'a list item another element takes with aria-owns',
+      '<ul><li>a</li><h3 id="h">x</h3></ul><div role="region" aria-owns="h"></div>',
+    ],
+  ])('passes an owner of %s', (_what, html) => {
+    expect(owned(html)).toBe('passed');
+  });
+
+  it('is inapplicable under aria-busy, or when the owner is not exposed', () => {
+    expect(owned('<ul aria-busy="true"><h3>x</h3></ul>')).toBe('inapplicable');
+    expect(owned('<div aria-busy="true"><ul><h3>x</h3></ul></div>')).toBe('inapplicable');
+    expect(owned('<ul hidden><h3>x</h3></ul>')).toBe('inapplicable');
+    expect(owned('<ul aria-hidden="true"><h3>x</h3></ul>')).toBe('inapplicable');
+  });
+
+  it.each([
+    ['an element with no corresponding role', '<ul><li>a</li><label>x</label></ul>'],
+    ['a custom element', '<ul><li>a</li><my-item>x</my-item></ul>'],
+    [
+      'an id two elements claim with aria-owns',
+      '<div role="list" aria-owns="i"></div><div aria-owns="i"></div><span id="i" role="listitem">x</span>',
+    ],
+  ])('asks rather than guesses when it owns %s', (_what, html) => {
+    expect(owned(html)).toBe('cantTell');
+  });
+
+  it('reads a stylesheet-hidden child from resolved styles where layout exists', () => {
+    const html = '<ul><li>a</li><h3 id="h" class="sr">x</h3></ul>';
+    expect(owned(html)).toBe('failed');
+    expect(owned(html, { computed: { computed: { '#h': { display: 'none' } } } })).toBe('passed');
   });
 });
 
