@@ -155,6 +155,21 @@ describe('5f99a7 aria attributes are defined', () => {
     ).toBe('passed');
   });
 
+  // The rule asks for attributes defined in the WAI-ARIA Specifications, ACT's name for
+  // ARIA 1.2 and its Graphics and DPUB modules. These three exist only in the 1.3 draft.
+  it.each(['aria-description', 'aria-braillelabel', 'aria-brailleroledescription'])(
+    'fails %s, which ARIA 1.2 does not define',
+    (name) => {
+      const result = check('5f99a7', `<html><body><input ${name}="More"></body></html>`);
+      expect(result.outcome).toBe('failed');
+      expect(result.messages.join(' ')).toContain(name);
+    },
+  );
+
+  it('knows exactly the 48 states and properties ARIA 1.2 defines', () => {
+    expect(Object.keys(ARIA_ATTRIBUTES)).toHaveLength(48);
+  });
+
   it('names the offending attribute so the fix is obvious', () => {
     const { messages } = check(
       '5f99a7',
