@@ -8,7 +8,7 @@
   "retrieved": "2026-10-20",
   "totals": {
     "pages": 25,
-    "bytes": 12561091,
+    "bytes": 12563683,
     "scriptsRemoved": 412,
     "categories": {
       "application": 3,
@@ -112,8 +112,8 @@
       },
       "title": "Form Input Bindings | Vue.js",
       "path": "pages/documentation-03/index.html",
-      "sha256": "46b2962db5ba6bbca9a0ad1f7f1fd69da4d03020f225abd702769b6551749a46",
-      "bytes": 320846,
+      "sha256": "bf4ceee6738066568e5efac1b20f9555ccdd3fda4bccee399b06a90598723633",
+      "bytes": 323438,
       "scriptsRemoved": 9
     },
     {

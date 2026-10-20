@@ -49,6 +49,13 @@ Ids are stable, so a number missing from the list below was dropped on purpose.
   initials. That is personal data, and a measurement corpus has no need of it, so the page
   was re-snapshotted from a search for "wildfire", which lists none, before anything was
   rated.
+- `documentation-03` was first snapshotted with its stylesheets broken. The page imports a
+  web font through a URL with semicolons inside its query, and the snapshot script ended
+  the `@import` rule at the first one: it inlined the fonts and left the rest of the URL as
+  stray text that opened a CSS string, so Chromium dropped every rule after the seventh and
+  the page rendered almost unstyled. The parser was fixed (`scripts/lib/css-imports.mjs`)
+  and the page re-snapshotted, and both raters' answers on the broken copy were discarded
+  and the page rated again. No other page in either corpus carried the fault.
 
 ## Attribution, per page
 
@@ -57,7 +64,7 @@ Ids are stable, so a number missing from the list below was dropped on purpose.
 - `application-03` (`8ffc4fbb79ca`), <https://todomvc.com/examples/react/dist/>. Licence: [MIT](https://github.com/tastejs/todomvc/blob/master/license.md). TodoMVC React example, Copyright (c) Addy Osmani, Sindre Sorhus, Pascal Hartig, Stephen Sawchuk, licensed under the MIT License. Modified: stylesheets inlined, scripts removed.
 - `documentation-01` (`c823959fcd56`), <https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax>. Licence: [CC BY 4.0](https://github.com/github/docs/blob/main/LICENSE). "Basic writing and formatting syntax", GitHub Docs, GitHub, Inc. and contributors, licensed under CC BY 4.0 (site code under MIT, see LICENSE-CODE). Modified: stylesheets inlined, scripts removed.
 - `documentation-02` (`d35001a75524`), <https://kubernetes.io/docs/concepts/overview/>. Licence: [CC BY 4.0](https://github.com/kubernetes/website/blob/main/LICENSE). "Overview", Kubernetes documentation, (c) The Kubernetes Authors, licensed under CC BY 4.0. Modified: stylesheets inlined, scripts removed.
-- `documentation-03` (`46b2962db5ba`), <https://vuejs.org/guide/essentials/forms.html>. Licence: [CC BY 4.0](https://github.com/vuejs/docs/blob/main/LICENSE). "Form Input Bindings", Vue.js documentation, Copyright (c) 2019-present Yuxi (Evan) You and Vue documentation contributors, licensed under CC BY 4.0 (image files excepted; images are not vendored). Modified: stylesheets inlined, scripts removed.
+- `documentation-03` (`bf4ceee67380`), <https://vuejs.org/guide/essentials/forms.html>. Licence: [CC BY 4.0](https://github.com/vuejs/docs/blob/main/LICENSE). "Form Input Bindings", Vue.js documentation, Copyright (c) 2019-present Yuxi (Evan) You and Vue documentation contributors, licensed under CC BY 4.0 (image files excepted; images are not vendored). Modified: stylesheets inlined, scripts removed.
 - `documentation-04` (`be333a42cad3`), <https://docs.deno.com/runtime/test/>. Licence: [MIT](https://github.com/denoland/docs/blob/main/LICENSE). "Testing", Deno Docs, Copyright (c) 2018-2024 the Deno authors, licensed under the MIT License. Modified: stylesheets inlined, scripts removed.
 - `error-01` (`d89ee06c9755`), <https://www.nps.gov/this-page-does-not-exist.htm>. Licence: [United States government work (17 U.S.C. 105)](https://www.nps.gov/aboutus/disclaimer.htm). National Park Service 404 page. No claim to original U.S. Government works. The NPS Arrowhead is a registered trademark and appears only as part of the page. Modified: stylesheets inlined, scripts removed.
 - `form-01` (`8f8d60d6c406`), <https://getbootstrap.com/docs/5.3/examples/checkout/>. Licence: [MIT](https://github.com/twbs/bootstrap/blob/main/LICENSE). Bootstrap checkout example, Copyright (c) 2011-2026 The Bootstrap Authors, code released under the MIT License (documentation under CC BY 3.0). Modified: stylesheets inlined, scripts removed.

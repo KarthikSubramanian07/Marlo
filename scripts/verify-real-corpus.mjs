@@ -36,7 +36,7 @@ const ROOT = resolve(import.meta.dirname, '..');
  */
 const CORPORA = [
   { name: 'real', expected: { pages: 25, bytes: 13_257_475 } },
-  { name: 'heldout', expected: { pages: 25, bytes: 12_561_091 } },
+  { name: 'heldout', expected: { pages: 25, bytes: 12_563_683 } },
 ];
 
 /** Forty problems are enough to act on. The rest are counted. */
