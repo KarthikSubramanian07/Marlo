@@ -985,14 +985,49 @@ describe('the accessible name rules', () => {
     expect(check('c487ae', '<html><body><a></a></body></html>').outcome).toBe('inapplicable');
   });
 
-  it('fails an unlabelled field and explains why placeholder is not a label', () => {
-    const result = check(
-      'e086e5',
-      '<html><body><input type="text" placeholder="Email"></body></html>',
-    );
-    expect(result.outcome).toBe('failed');
+  it('fails a field with no name at all', () => {
+    expect(check('e086e5', '<html><body><input type="text"></body></html>').outcome).toBe('failed');
+  });
+
+  // HTML-AAM 4.1.1: for these input types and textarea, the placeholder, then
+  // aria-placeholder, supply the name when nothing else does. The rule asks only that
+  // the name is not empty.
+  it.each([
+    '<input type="text" placeholder="Email">',
+    '<input placeholder="Email">',
+    '<input type="TYPO" placeholder="Email">',
+    '<input type="password" placeholder="Email">',
+    '<input type="number" placeholder="Email">',
+    '<input type="search" placeholder="Email">',
+    '<input type="tel" placeholder="Email">',
+    '<input type="email" placeholder="Email">',
+    '<input type="url" placeholder="Email">',
+    '<textarea placeholder="Email"></textarea>',
+    '<input type="text" aria-placeholder="Email">',
+    '<label for="e"></label><input type="text" id="e" placeholder="Email">',
+  ])('passes %s, named by its placeholder, and says it is the weakest name', (field) => {
+    const result = check('e086e5', `<html><body>${field}</body></html>`);
+    expect(result.outcome).toBe('passed');
     expect(result.messages.join(' ')).toContain('placeholder');
-    expect(result.messages.join(' ')).toContain('disappears on focus');
+  });
+
+  it('prefers a label, then title, to the placeholder', () => {
+    const named = (html: string): string => {
+      const document = fixture(`<html><body>${html}</body></html>`);
+      const field = document.root.children[0]?.children.find((c) => c.tag === 'input');
+      return field === undefined ? '' : accessibleName(field, document).name;
+    };
+    expect(named('<label for="e">Mail</label><input id="e" placeholder="Email">')).toBe('Mail');
+    expect(named('<input title="Mail" placeholder="Email">')).toBe('Mail');
+  });
+
+  it.each([
+    '<input type="date" placeholder="Date">',
+    '<input type="color" placeholder="Colour">',
+    '<input type="file" placeholder="File">',
+    '<input type="checkbox" placeholder="Agree">',
+  ])('does not name %s from a placeholder HTML-AAM does not use', (field) => {
+    expect(check('e086e5', `<html><body>${field}</body></html>`).outcome).toBe('failed');
   });
 
   it('passes a field labelled by for', () => {

@@ -20,7 +20,7 @@ import { attr, isHiddenFromAssistiveTech, normalise, walk } from './dom.js';
  * hiding it.
  *
  * Order follows HTML-AAM: aria-labelledby, aria-label, the element's own native
- * mechanism, then title as a last resort.
+ * mechanism, then title, and for a text field the placeholder as a last resort.
  */
 
 export type NameConfidence = 'certain' | 'uncertain';
@@ -30,7 +30,14 @@ export interface AccessibleName {
   readonly confidence: NameConfidence;
   /** Which step produced it. Reported so a fix knows what to change. */
   readonly from:
-    'aria-labelledby' | 'aria-label' | 'native' | 'content' | 'title' | 'value' | 'none';
+    | 'aria-labelledby'
+    | 'aria-label'
+    | 'native'
+    | 'content'
+    | 'title'
+    | 'value'
+    | 'placeholder'
+    | 'none';
   /** Why the answer is uncertain, when it is. Shown to the reader. */
   readonly reason: string | null;
 }
@@ -153,6 +160,45 @@ function nativeName(element: MarloElement, document: MarloDocument): AccessibleN
   }
 }
 
+/** Input types HTML-AAM 4.1.1 names from a placeholder. */
+const PLACEHOLDER_TYPES: ReadonlySet<string> = new Set([
+  'text',
+  'password',
+  'number',
+  'search',
+  'tel',
+  'email',
+  'url',
+]);
+
+/** Every input type HTML defines. Any other value is the Text state. */
+const INPUT_TYPES: ReadonlySet<string> = new Set([
+  ...PLACEHOLDER_TYPES,
+  'hidden',
+  'date',
+  'month',
+  'week',
+  'time',
+  'datetime-local',
+  'range',
+  'color',
+  'checkbox',
+  'radio',
+  'file',
+  'submit',
+  'image',
+  'reset',
+  'button',
+]);
+
+/** Whether HTML-AAM lets the element take its name from a placeholder. */
+function takesPlaceholderName(element: MarloElement): boolean {
+  if (element.tag === 'textarea') return true;
+  if (element.tag !== 'input') return false;
+  const type = normalise(attr(element, 'type') ?? '').toLowerCase();
+  return PLACEHOLDER_TYPES.has(type) || !INPUT_TYPES.has(type);
+}
+
 /** A form control's name from a `label`, either wrapping or by `for`. */
 function labelName(element: MarloElement, document: MarloDocument): AccessibleName | null {
   const id = attr(element, 'id');
@@ -238,10 +284,22 @@ export function accessibleName(
     if (content.name !== '' || content.confidence === 'uncertain') return content;
   }
 
-  // 5. title, last resort.
+  // 5. title.
   const title = attr(element, 'title');
   if (title !== null && normalise(title) !== '') {
     return { name: normalise(title), confidence: 'certain', from: 'title', reason: null };
+  }
+
+  // 6. For a text field, the placeholder, then aria-placeholder. HTML-AAM 4.1.1 names
+  // these the last steps for input types text, password, number, search, tel, email and
+  // url, and for textarea. Weak labelling, since it vanishes on input, but a name.
+  if (takesPlaceholderName(element)) {
+    for (const source of ['placeholder', 'aria-placeholder']) {
+      const value = normalise(attr(element, source) ?? '');
+      if (value !== '') {
+        return { name: value, confidence: 'certain', from: 'placeholder', reason: null };
+      }
+    }
   }
 
   // A native mechanism that produced an empty string is a deliberate empty name, which
