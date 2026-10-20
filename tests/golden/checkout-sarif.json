@@ -608,7 +608,7 @@
             "act-rules-calibrated": 41,
             "act-rules-unmeasurable": [],
             "calibration-generated": "2026-10-20",
-            "calibration-commit": "0f91c614c056cbde91a2f2f99234337b80203baf",
+            "calibration-commit": "1aef7382565d1fb4f29d72895aa356ecdd4c59fd",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
@@ -2464,41 +2464,36 @@
           "ruleId": "5c01ea",
           "level": "warning",
           "message": {
-            "text": "The attribute is not allowed for the element on which it is specified"
+            "text": "aria-checked is not permitted on <a> (implicit role link), so assistive technology ignores it, and the state or property it was meant to convey is lost."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
+                  "uri": "a"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked",
+                  "name": "a",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "5c01ea:xpath /html[1]/body[1]/header[1]/nav[1]/a[1]/@aria-checked"
+            "marloFinding": "5c01ea:a"
           },
           "properties": {
-            "reported-by": "alfa",
-            "engine-rule-id": "sia-r18",
-            "engine-version": "0.119.0",
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/5c01ea",
+            "engine-version": "0.1.0",
             "routing-reason": "best-measured",
             "agreed-by": [
-              "axe-core"
+              "axe-core",
+              "alfa"
             ],
-            "disagreements": [
-              {
-                "engine": "marlo",
-                "outcome": "cantTell",
-                "chosen-engine-strict-recall": 1
-              }
-            ],
+            "disagreements": [],
             "measured-precision": 1,
             "measured-recall": 1,
             "official-test-cases-behind-measurement": 15,
@@ -3077,15 +3072,10 @@
             "engine-version": "0.119.0",
             "routing-reason": "sole-implementer",
             "agreed-by": [
+              "marlo",
               "axe-core"
             ],
-            "disagreements": [
-              {
-                "engine": "marlo",
-                "outcome": "cantTell",
-                "chosen-engine-strict-recall": 0.8571428571428571
-              }
-            ],
+            "disagreements": [],
             "measured-precision": 1,
             "measured-recall": 0.8571428571428571,
             "official-test-cases-behind-measurement": 19,
@@ -3195,6 +3185,56 @@
           "ruleId": "c487ae",
           "level": "error",
           "message": {
+            "text": "This link has no accessible name. A screen reader announces \"link\" with no destination, which is unusable in a links list."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "a"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "a",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "c487ae:a"
+          },
+          "properties": {
+            "reported-by": "marlo",
+            "engine-rule-id": "marlo/c487ae",
+            "engine-version": "0.1.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "axe-core",
+              "alfa"
+            ],
+            "disagreements": [
+              {
+                "engine": "htmlcs",
+                "outcome": "passed",
+                "chosen-engine-strict-recall": 1
+              }
+            ],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 28,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "c487ae",
+          "level": "error",
+          "message": {
             "text": "Images must have alternative text"
           },
           "locations": [
@@ -3219,81 +3259,14 @@
             "reported-by": "axe-core",
             "engine-rule-id": "image-alt",
             "engine-version": "4.14.0",
-            "routing-reason": "best-measured",
-            "agreed-by": [
-              "alfa"
-            ],
-            "disagreements": [
-              {
-                "engine": "marlo",
-                "outcome": "cantTell",
-                "chosen-engine-strict-recall": 1
-              },
-              {
-                "engine": "htmlcs",
-                "outcome": "passed",
-                "chosen-engine-strict-recall": 1
-              }
-            ],
+            "routing-reason": "invariant",
+            "agreed-by": [],
+            "disagreements": [],
             "measured-precision": 1,
             "measured-recall": 1,
             "official-test-cases-behind-measurement": 28,
             "accuracy-source": "calibrated",
-            "meets-auto-fix-threshold": true,
-            "renderer": "static",
-            "located-in-source": false,
-            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
-          }
-        },
-        {
-          "ruleId": "c487ae",
-          "level": "error",
-          "message": {
-            "text": "Links must have discernible text"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "a[href=\"/\"]"
-                }
-              },
-              "logicalLocations": [
-                {
-                  "name": "a[href=\"/\"]",
-                  "kind": "element"
-                }
-              ]
-            }
-          ],
-          "partialFingerprints": {
-            "marloFinding": "c487ae:a[href=\"/\"]"
-          },
-          "properties": {
-            "reported-by": "axe-core",
-            "engine-rule-id": "link-name",
-            "engine-version": "4.14.0",
-            "routing-reason": "best-measured",
-            "agreed-by": [
-              "alfa"
-            ],
-            "disagreements": [
-              {
-                "engine": "marlo",
-                "outcome": "cantTell",
-                "chosen-engine-strict-recall": 1
-              },
-              {
-                "engine": "htmlcs",
-                "outcome": "passed",
-                "chosen-engine-strict-recall": 1
-              }
-            ],
-            "measured-precision": 1,
-            "measured-recall": 1,
-            "official-test-cases-behind-measurement": 28,
-            "accuracy-source": "calibrated",
-            "meets-auto-fix-threshold": true,
+            "meets-auto-fix-threshold": false,
             "renderer": "static",
             "located-in-source": false,
             "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
@@ -3370,6 +3343,51 @@
           "properties": {
             "reported-by": "axe-core",
             "engine-rule-id": "aria-input-field-name",
+            "engine-version": "4.14.0",
+            "routing-reason": "best-measured",
+            "agreed-by": [
+              "marlo",
+              "alfa",
+              "htmlcs"
+            ],
+            "disagreements": [],
+            "measured-precision": 1,
+            "measured-recall": 1,
+            "official-test-cases-behind-measurement": 17,
+            "accuracy-source": "calibrated",
+            "meets-auto-fix-threshold": true,
+            "renderer": "static",
+            "located-in-source": false,
+            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
+          }
+        },
+        {
+          "ruleId": "e086e5",
+          "level": "error",
+          "message": {
+            "text": "Form elements must have labels"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "input[type=\"email\"]"
+                }
+              },
+              "logicalLocations": [
+                {
+                  "name": "input[type=\"email\"]",
+                  "kind": "element"
+                }
+              ]
+            }
+          ],
+          "partialFingerprints": {
+            "marloFinding": "e086e5:input[type=\"email\"]"
+          },
+          "properties": {
+            "reported-by": "axe-core",
+            "engine-rule-id": "label",
             "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
@@ -3563,58 +3581,6 @@
             "official-test-cases-behind-measurement": 17,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": true,
-            "renderer": "static",
-            "located-in-source": false,
-            "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."
-          }
-        },
-        {
-          "ruleId": "e086e5",
-          "level": "error",
-          "message": {
-            "text": "The field has no accessible name, so it is announced only by its type. A placeholder (\"Email\") is not a label: it disappears on focus and is not reliably announced."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "input"
-                }
-              },
-              "logicalLocations": [
-                {
-                  "name": "input",
-                  "kind": "element"
-                }
-              ]
-            }
-          ],
-          "partialFingerprints": {
-            "marloFinding": "e086e5:input"
-          },
-          "properties": {
-            "reported-by": "marlo",
-            "engine-rule-id": "marlo/e086e5",
-            "engine-version": "0.1.0",
-            "routing-reason": "invariant",
-            "agreed-by": [],
-            "disagreements": [
-              {
-                "engine": "axe-core",
-                "outcome": "passed",
-                "chosen-engine-strict-recall": 1
-              },
-              {
-                "engine": "alfa",
-                "outcome": "passed",
-                "chosen-engine-strict-recall": 1
-              }
-            ],
-            "measured-precision": 0.75,
-            "measured-recall": 0.42857142857142855,
-            "official-test-cases-behind-measurement": 17,
-            "accuracy-source": "calibrated",
-            "meets-auto-fix-threshold": false,
             "renderer": "static",
             "located-in-source": false,
             "location-note": "Source location arrives with the repair layer. The selector above is where the problem is in the rendered page."

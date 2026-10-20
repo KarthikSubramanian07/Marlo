@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-13",
+  "generated": "2026-10-20",
   "commit": null,
   "corpus": {
     "retrieved": "2026-07-29",
@@ -2801,44 +2801,44 @@
       "testCaseCount": 15,
       "matrix": {
         "passed": {
-          "passed": 7,
+          "passed": 11,
           "failed": 0,
-          "cantTell": 4,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
           "passed": 0,
-          "failed": 0,
-          "cantTell": 2,
+          "failed": 2,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 1,
+          "passed": 0,
           "failed": 0,
           "cantTell": 0,
-          "inapplicable": 1
+          "inapplicable": 2
         },
         "errored": 0,
         "unsupported": 0
       },
       "act": {
         "consistency": "consistent",
-        "automation": "semi-automated",
+        "automation": "automated",
         "disallowed": 0
       },
       "strict": {
-        "truePositives": 0,
+        "truePositives": 2,
         "falsePositives": 0,
-        "falseNegatives": 2,
+        "falseNegatives": 0,
         "trueNegatives": 13,
-        "cantTellOnFailed": 2,
-        "cantTellOnPassed": 4,
-        "precision": null,
-        "recall": 0,
-        "f1": null,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
         "falsePositiveRate": 0
       },
-      "flatteredByProtocol": true
+      "flatteredByProtocol": false
     },
     {
       "actRuleId": "5c01ea",
@@ -3395,14 +3395,14 @@
       "testCaseCount": 24,
       "matrix": {
         "passed": {
-          "passed": 8,
-          "failed": 1,
-          "cantTell": 1,
+          "passed": 10,
+          "failed": 0,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 0,
-          "failed": 10,
+          "passed": 1,
+          "failed": 9,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -3416,21 +3416,21 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "incorrect",
-        "automation": "semi-automated",
+        "consistency": "partial",
+        "automation": "automated",
         "disallowed": 1
       },
       "strict": {
-        "truePositives": 10,
-        "falsePositives": 1,
-        "falseNegatives": 0,
-        "trueNegatives": 13,
+        "truePositives": 9,
+        "falsePositives": 0,
+        "falseNegatives": 1,
+        "trueNegatives": 14,
         "cantTellOnFailed": 0,
-        "cantTellOnPassed": 1,
-        "precision": 0.9090909090909091,
-        "recall": 1,
-        "f1": 0.9523809523809523,
-        "falsePositiveRate": 0.07142857142857142
+        "cantTellOnPassed": 0,
+        "precision": 1,
+        "recall": 0.9,
+        "f1": 0.9473684210526316,
+        "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
     },
@@ -3593,8 +3593,8 @@
       "testCaseCount": 14,
       "matrix": {
         "passed": {
-          "passed": 3,
-          "failed": 2,
+          "passed": 4,
+          "failed": 1,
           "cantTell": 0,
           "inapplicable": 0
         },
@@ -3616,19 +3616,19 @@
       "act": {
         "consistency": "incorrect",
         "automation": "automated",
-        "disallowed": 2
+        "disallowed": 1
       },
       "strict": {
         "truePositives": 6,
-        "falsePositives": 2,
+        "falsePositives": 1,
         "falseNegatives": 0,
-        "trueNegatives": 6,
+        "trueNegatives": 7,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": 0.75,
+        "precision": 0.8571428571428571,
         "recall": 1,
-        "f1": 0.8571428571428571,
-        "falsePositiveRate": 0.25
+        "f1": 0.923076923076923,
+        "falsePositiveRate": 0.125
       },
       "flatteredByProtocol": false
     },
@@ -6557,20 +6557,20 @@
       "testCaseCount": 19,
       "matrix": {
         "passed": {
-          "passed": 4,
+          "passed": 6,
           "failed": 1,
-          "cantTell": 2,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 1,
-          "failed": 3,
-          "cantTell": 3,
+          "passed": 0,
+          "failed": 7,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
-          "passed": 0,
-          "failed": 1,
+          "passed": 1,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 4
         },
@@ -6579,20 +6579,20 @@
       },
       "act": {
         "consistency": "incorrect",
-        "automation": "semi-automated",
-        "disallowed": 3
+        "automation": "automated",
+        "disallowed": 1
       },
       "strict": {
-        "truePositives": 3,
-        "falsePositives": 2,
-        "falseNegatives": 4,
-        "trueNegatives": 10,
-        "cantTellOnFailed": 3,
-        "cantTellOnPassed": 2,
-        "precision": 0.6,
-        "recall": 0.42857142857142855,
-        "f1": 0.5,
-        "falsePositiveRate": 0.16666666666666666
+        "truePositives": 7,
+        "falsePositives": 1,
+        "falseNegatives": 0,
+        "trueNegatives": 11,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 0.875,
+        "recall": 1,
+        "f1": 0.9333333333333333,
+        "falsePositiveRate": 0.08333333333333333
       },
       "flatteredByProtocol": false
     },
@@ -7355,15 +7355,15 @@
       "testCaseCount": 28,
       "matrix": {
         "passed": {
-          "passed": 5,
+          "passed": 9,
           "failed": 0,
-          "cantTell": 4,
+          "cantTell": 0,
           "inapplicable": 2
         },
         "failed": {
           "passed": 0,
-          "failed": 3,
-          "cantTell": 8,
+          "failed": 11,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "inapplicable": {
@@ -7377,22 +7377,22 @@
       },
       "act": {
         "consistency": "consistent",
-        "automation": "semi-automated",
+        "automation": "automated",
         "disallowed": 0
       },
       "strict": {
-        "truePositives": 3,
+        "truePositives": 11,
         "falsePositives": 0,
-        "falseNegatives": 8,
+        "falseNegatives": 0,
         "trueNegatives": 17,
-        "cantTellOnFailed": 8,
-        "cantTellOnPassed": 4,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
         "precision": 1,
-        "recall": 0.2727272727272727,
-        "f1": 0.42857142857142855,
+        "recall": 1,
+        "f1": 1,
         "falsePositiveRate": 0
       },
-      "flatteredByProtocol": true
+      "flatteredByProtocol": false
     },
     {
       "actRuleId": "c487ae",
@@ -8343,8 +8343,8 @@
       "testCaseCount": 17,
       "matrix": {
         "passed": {
-          "passed": 3,
-          "failed": 1,
+          "passed": 4,
+          "failed": 0,
           "cantTell": 0,
           "inapplicable": 3
         },
@@ -8364,21 +8364,21 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "incorrect",
+        "consistency": "partial",
         "automation": "automated",
-        "disallowed": 5
+        "disallowed": 4
       },
       "strict": {
         "truePositives": 3,
-        "falsePositives": 1,
+        "falsePositives": 0,
         "falseNegatives": 4,
-        "trueNegatives": 9,
+        "trueNegatives": 10,
         "cantTellOnFailed": 0,
         "cantTellOnPassed": 0,
-        "precision": 0.75,
+        "precision": 1,
         "recall": 0.42857142857142855,
-        "f1": 0.5454545454545454,
-        "falsePositiveRate": 0.1
+        "f1": 0.6,
+        "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
     },
@@ -8741,14 +8741,14 @@
         "passed": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 3,
-          "inapplicable": 2
+          "cantTell": 5,
+          "inapplicable": 0
         },
         "failed": {
           "passed": 0,
           "failed": 0,
-          "cantTell": 3,
-          "inapplicable": 2
+          "cantTell": 5,
+          "inapplicable": 0
         },
         "inapplicable": {
           "passed": 0,
@@ -8760,23 +8760,23 @@
         "unsupported": 0
       },
       "act": {
-        "consistency": "partial",
+        "consistency": "consistent",
         "automation": "semi-automated",
-        "disallowed": 2
+        "disallowed": 0
       },
       "strict": {
         "truePositives": 0,
         "falsePositives": 0,
         "falseNegatives": 5,
         "trueNegatives": 15,
-        "cantTellOnFailed": 3,
-        "cantTellOnPassed": 6,
+        "cantTellOnFailed": 5,
+        "cantTellOnPassed": 8,
         "precision": null,
         "recall": 0,
         "f1": null,
         "falsePositiveRate": 0
       },
-      "flatteredByProtocol": false
+      "flatteredByProtocol": true
     },
     {
       "actRuleId": "e88epe",
@@ -9325,15 +9325,15 @@
       "testCaseCount": 15,
       "matrix": {
         "passed": {
-          "passed": 4,
+          "passed": 5,
           "failed": 0,
-          "cantTell": 1,
+          "cantTell": 0,
           "inapplicable": 0
         },
         "failed": {
-          "passed": 1,
-          "failed": 4,
-          "cantTell": 2,
+          "passed": 0,
+          "failed": 7,
+          "cantTell": 0,
           "inapplicable": 1
         },
         "inapplicable": {
@@ -9347,19 +9347,19 @@
       },
       "act": {
         "consistency": "partial",
-        "automation": "semi-automated",
-        "disallowed": 2
+        "automation": "automated",
+        "disallowed": 1
       },
       "strict": {
-        "truePositives": 4,
+        "truePositives": 7,
         "falsePositives": 0,
-        "falseNegatives": 4,
+        "falseNegatives": 1,
         "trueNegatives": 7,
-        "cantTellOnFailed": 2,
-        "cantTellOnPassed": 1,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
         "precision": 1,
-        "recall": 0.5,
-        "f1": 0.6666666666666666,
+        "recall": 0.875,
+        "f1": 0.9333333333333333,
         "falsePositiveRate": 0
       },
       "flatteredByProtocol": false
@@ -10222,9 +10222,15 @@
     },
     {
       "actRuleId": "5c01ea",
-      "chosen": "axe-core",
+      "chosen": "marlo",
       "reason": "best-measured",
       "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        },
         {
           "engine": "axe-core",
           "strictRecall": 1,
@@ -10235,12 +10241,6 @@
           "engine": "alfa",
           "strictRecall": 1,
           "strictPrecision": 1,
-          "consistency": "consistent"
-        },
-        {
-          "engine": "marlo",
-          "strictRecall": 0,
-          "strictPrecision": null,
           "consistency": "consistent"
         }
       ],
@@ -10311,9 +10311,9 @@
         },
         {
           "engine": "marlo",
-          "strictRecall": 1,
-          "strictPrecision": 0.9090909090909091,
-          "consistency": "incorrect"
+          "strictRecall": 0.9,
+          "strictPrecision": 1,
+          "consistency": "partial"
         },
         {
           "engine": "axe-core",
@@ -10330,15 +10330,15 @@
       "reason": "sole-implementer",
       "candidates": [
         {
-          "engine": "alfa",
+          "engine": "marlo",
           "strictRecall": 1,
           "strictPrecision": 0.8571428571428571,
           "consistency": "incorrect"
         },
         {
-          "engine": "marlo",
+          "engine": "alfa",
           "strictRecall": 1,
-          "strictPrecision": 0.75,
+          "strictPrecision": 0.8571428571428571,
           "consistency": "incorrect"
         },
         {
@@ -10696,6 +10696,12 @@
       "reason": "sole-implementer",
       "candidates": [
         {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 0.875,
+          "consistency": "incorrect"
+        },
+        {
           "engine": "axe-core",
           "strictRecall": 1,
           "strictPrecision": 0.875,
@@ -10706,12 +10712,6 @@
           "strictRecall": 0.8571428571428571,
           "strictPrecision": 1,
           "consistency": "partial"
-        },
-        {
-          "engine": "marlo",
-          "strictRecall": 0.42857142857142855,
-          "strictPrecision": 0.6,
-          "consistency": "incorrect"
         }
       ],
       "autoFixPermitted": true
@@ -10814,9 +10814,15 @@
     },
     {
       "actRuleId": "c487ae",
-      "chosen": "axe-core",
+      "chosen": "marlo",
       "reason": "best-measured",
       "candidates": [
+        {
+          "engine": "marlo",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        },
         {
           "engine": "axe-core",
           "strictRecall": 1,
@@ -10826,12 +10832,6 @@
         {
           "engine": "alfa",
           "strictRecall": 1,
-          "strictPrecision": 1,
-          "consistency": "consistent"
-        },
-        {
-          "engine": "marlo",
-          "strictRecall": 0.2727272727272727,
           "strictPrecision": 1,
           "consistency": "consistent"
         },
@@ -10950,8 +10950,8 @@
         {
           "engine": "marlo",
           "strictRecall": 0.42857142857142855,
-          "strictPrecision": 0.75,
-          "consistency": "incorrect"
+          "strictPrecision": 1,
+          "consistency": "partial"
         },
         {
           "engine": "htmlcs",
@@ -10985,7 +10985,7 @@
           "engine": "marlo",
           "strictRecall": 0,
           "strictPrecision": null,
-          "consistency": "partial"
+          "consistency": "consistent"
         }
       ],
       "autoFixPermitted": false
@@ -11049,7 +11049,7 @@
         },
         {
           "engine": "marlo",
-          "strictRecall": 0.5,
+          "strictRecall": 0.875,
           "strictPrecision": 1,
           "consistency": "partial"
         }
@@ -11103,9 +11103,9 @@
     "implementedButUnmeasurable": []
   },
   "aggregate": {
-    "strictPrecision": 0.8581560283687943,
-    "strictRecall": 0.6302083333333334,
-    "falsePositiveRate": 0.05025125628140704,
+    "strictPrecision": 0.8954248366013072,
+    "strictRecall": 0.7135416666666666,
+    "falsePositiveRate": 0.04020100502512563,
     "sampleSize": 590
   }
 }
