@@ -45,118 +45,51 @@ const round = (v) => (v === null ? null : Math.round(v * 10_000) / 10_000);
  */
 export const CAUSES = [
   {
-    id: 'idref-exception',
-    family: 'rule logic',
-    kind: 'FP',
-    match: (r) => r.rule === '6a7281',
-    title: 'Fails an ID reference whose target is missing',
-    detail:
-      'Marlo fails `aria-controls`, `aria-labelledby` or `aria-describedby` when no element ' +
-      'has the referenced id. The ACT rule says, as an exception, that ID Reference values ' +
-      'need no referenced element, and leaves missing targets to a separate rule (in6db8). On ' +
-      'three pages the target does exist and the static renderer lost it, which only adds to ' +
-      'the count.',
-  },
-  {
-    id: 'hidden-applicability',
-    family: 'rule logic',
-    kind: 'FP',
-    match: (r) => r.rule === '6cfa84' || (r.rule === '2ee8b8' && r.page !== 'settings-01'),
-    title: 'Ignores display:none when deciding applicability',
-    detail:
-      'Links inside a `display:none` panel are counted as focusable content of an ' +
-      '`aria-hidden` region (6cfa84), and `display:none` buttons are checked for their visible ' +
-      'label (2ee8b8). The browser renderer resolves the style and Marlo still flags them, so ' +
-      'the rule, not the renderer, skips the visibility test.',
-  },
-  {
     id: 'renderer-hidden',
     family: 'renderer',
     kind: 'FP',
     match: (r) =>
-      (r.rule === 'bc4a75' && r.actual === 'failed') ||
-      (r.rule === 'e086e5' && r.page !== 'shop-03') ||
-      r.rule === '97a4e1',
+      r.rule === '97a4e1' ||
+      r.rule === 'e086e5' ||
+      r.rule === '6cfa84' ||
+      r.rule === 'c487ae' ||
+      (r.rule === '2ee8b8' && r.page !== 'settings-01'),
     title: 'Evaluates an element a stylesheet hides',
     detail:
-      'A listbox, menu, search field or button is hidden by a page stylesheet. The static ' +
-      'renderer does no layout and reports it as present, so Marlo checks something nobody ' +
-      'can perceive. In headless Chromium the element is hidden and the error goes away.',
+      'A button, link, field or focusable descendant is hidden by a page stylesheet: a ' +
+      '`display:none` class on an empty edit link, a sidebar toggle with a mismatched ' +
+      '`aria-label`, a `.hidden` link inside an `aria-hidden` region. The static renderer ' +
+      'resolves no styles, so the rule checks something nobody can perceive. These rules ' +
+      'read resolved `display` and `visibility` where a renderer supplies them (D-016), so ' +
+      'in headless Chromium the element is left out and the error goes away.',
   },
   {
-    id: 'renderer-generated-content',
-    family: 'renderer',
-    kind: 'FP',
-    match: (r) => r.rule === 'c487ae' && r.actual === 'failed',
-    title: 'Cannot see CSS generated content in a name',
-    detail:
-      'Citation backlinks are named only by a `::before` counter (a, b, c). The accessible ' +
-      'name computation includes generated content; the static renderer has none, so the ' +
-      'links look unnamed. In Chromium Marlo abstains instead of failing.',
-  },
-  {
-    id: 'abbreviation-exception',
-    family: 'rule logic',
+    id: 'abbreviation-dispute',
+    family: 'disputed ground truth',
     kind: 'FP',
     match: (r) => r.rule === '2ee8b8' && r.page === 'settings-01',
-    title: 'Misses the abbreviation exception in label-in-name',
+    title: 'Applies label-in-name where the raters saw abbreviations',
     detail:
-      'The visible labels "EN" and "UI Designer" contain abbreviations, which the ' +
-      "rule's applicability excludes. Marlo applies the rule and fails both links.",
-  },
-  {
-    id: 'placeholder-name',
-    family: 'rule logic',
-    kind: 'FP',
-    match: (r) => r.rule === 'e086e5' && r.page === 'shop-03',
-    title: 'Does not accept a placeholder as an accessible name',
-    detail:
-      'HTML-AAM lets `placeholder` supply a name when nothing else does, so the field has a ' +
-      'non-empty name and passes. Marlo treats the placeholder as no name. It is weak ' +
-      'labelling, but the rule asks only for a non-empty name.',
-  },
-  {
-    id: 'dpub-roles',
-    family: 'rule logic',
-    kind: 'FP',
-    match: (r) => r.rule === '674b10',
-    title: 'Does not know DPUB-ARIA roles',
-    detail:
-      '`role="doc-noteref"` is a valid DPUB-ARIA role, which the rule counts. Marlo checks ' +
-      'only the WAI-ARIA role list.',
-  },
-  {
-    id: 'separator-focusable',
-    family: 'rule logic',
-    kind: 'FP',
-    match: (r) => r.rule === '4e8ab6',
-    title: 'Requires aria-valuenow on a non-focusable separator',
-    detail:
-      'Only a focusable separator is a widget with required value properties. Marlo requires ' +
-      '`aria-valuenow` on an `li role="separator"` that is not focusable.',
+      'The visible labels "EN" and "Paweł Kuna UI Designer" differ from the names "Select ' +
+      'language" and "Open user menu". The raters put both links outside the rule because ' +
+      'the labels hold abbreviations. The pinned rule does exclude abbreviations, but its ' +
+      'own Failed Example 1, a link showing "ACT rules" named "WCAG", treats initialisms in ' +
+      'the label and the name as in scope, so nothing in the text separates "EN" or "UI" ' +
+      'from them. Marlo keeps the rule as its examples apply it and reports the cell as a ' +
+      'suspected ground-truth error rather than changing the rule toward the raters.',
   },
   {
     id: 'repeated-content',
     family: 'abstention',
     kind: 'FN',
-    match: (r) =>
-      r.rule === 'ye5d6e' || r.rule === 'cf77f2' || (r.rule === 'b40fd1' && r.actual !== 'passed'),
+    match: (r) => r.rule === 'ye5d6e' || r.rule === 'cf77f2' || r.rule === 'b40fd1',
     title: 'Cannot tell what repeats across pages',
     detail:
       'Bypass rules turn on whether a block repeats on other pages of the site, which one ' +
       'page cannot show. Marlo answers cantTell; the raters judged the site header repeated ' +
-      'and found no skip link, landmark or other way past it.',
-  },
-  {
-    id: 'landmark-first-content',
-    family: 'rule logic',
-    kind: 'FN',
-    match: (r) => r.rule === 'b40fd1' && r.actual === 'passed',
-    title: 'Passes any main landmark',
-    detail:
-      'Marlo passes when a main landmark exists. The rule needs a landmark whose first ' +
-      'perceivable content is non-repeated, and on these pages `main` opens with the ' +
-      'repeated header or logo.',
+      'and found no skip link, landmark or other way past it. That includes a `main` ' +
+      'landmark that opens with the logo link or a header holding the menu, which Marlo ' +
+      'used to pass and now asks about.',
   },
   {
     id: 'decorative-judgment',
@@ -165,64 +98,10 @@ export const CAUSES = [
     match: (r) => r.rule === 'e88epe' && r.actual === 'cantTell',
     title: 'Cannot tell whether a hidden image is decorative',
     detail:
-      'Whether an image hidden from assistive technology carries information is a judgment ' +
-      'about its content. Marlo asks for a person to check; the raters found brand logos, ' +
-      'close glyphs and a search icon whose meaning was otherwise lost.',
-  },
-  {
-    id: 'svg-not-considered',
-    family: 'rule logic',
-    kind: 'FN',
-    match: (r) => r.rule === 'e88epe' && r.actual !== 'cantTell',
-    title: 'Looks only at img elements, not inline svg',
-    detail:
-      'The failing images are inline `svg` elements (a licence logo, a close icon, a store ' +
-      'logo) that are `aria-hidden` or have no name. Marlo finds no applicable image and ' +
-      'answers inapplicable.',
-  },
-  {
-    id: 'image-name-abstention',
-    family: 'abstention',
-    kind: 'FN',
-    match: (r) => r.rule === 'c487ae' && r.actual !== 'failed',
-    title: 'Abstains on a link named only by an image',
-    detail:
-      'A link holds only an `img` with no alt or an `svg` with no title, so its name is empty. ' +
-      'Marlo abstains because an image contributes to the name and it does not trust the ' +
-      "renderer's answer, which costs a failure the raters found unambiguous.",
-  },
-  {
-    id: 'implicit-role',
-    family: 'abstention',
-    kind: 'FN',
-    match: (r) => r.rule === '5c01ea',
-    title: 'Does not compute the implicit role of every element',
-    detail:
-      '`aria-expanded` on a `label` and on a `span` with no role is not permitted. Deciding ' +
-      'that needs the implicit role, which Marlo does not compute for every element, so it ' +
-      'abstains.',
-  },
-  {
-    id: 'aria-1-3',
-    family: 'specification version',
-    kind: 'FN',
-    match: (r) => r.rule === '5f99a7',
-    title: 'Accepts aria-description, which ARIA 1.2 does not define',
-    detail:
-      'The ACT rule pins WAI-ARIA 1.2. `aria-description` exists only in the 1.3 draft, and ' +
-      "Marlo's attribute list includes it. Browsers support it, so this is a disagreement " +
-      'about the specification version more than a defect.',
-  },
-  {
-    id: 'owned-elements',
-    family: 'rule logic',
-    kind: 'FN',
-    match: (r) => r.rule === 'bc4a75' && r.actual !== 'failed',
-    title: 'Misses an owned element of the wrong role',
-    detail:
-      'A list owns headings and separators, and a table owns a `caption`, which ARIA 1.2 does ' +
-      'not list among its required owned elements. Marlo passes the list and finds the table ' +
-      'inapplicable.',
+      'Whether an image left out of the accessibility tree carries information is a ' +
+      'judgment about its content. Marlo finds the image, an `img`, an unnamed or ' +
+      '`aria-hidden` inline `svg` or a `canvas`, and asks for a person to check; the raters ' +
+      'found brand logos, close glyphs and a search icon whose meaning was otherwise lost.',
   },
 ];
 
@@ -440,6 +319,8 @@ export function renderMarkdown(report) {
     .filter((c) => c.kind === 'FP')
     .reduce((s, c) => s + c.browserCorrects, 0);
   const suiteBlind = report.byCause.flatMap((c) => c.rulesPerfectOnAct);
+  const largest = [...report.byCause].sort((x, y) => y.cells - x.cells)[0];
+  const fpDisputed = families['disputed ground truth']?.FP ?? 0;
   const row = (label, x) =>
     `| ${label} | ${String(x.truePositives)} | ${String(x.falsePositives)} | ${String(x.falseNegatives)} | ` +
     `${String(x.unsupported)} | ${dec(x.precision)}${ci(x.precision)} | ${dec(x.recall)}${ci(x.recall)} | ` +
@@ -461,12 +342,17 @@ export function renderMarkdown(report) {
     '',
     '## Findings',
     '',
-    `1. **Rule logic, not the renderer, causes most false positives.** ` +
+    `1. **${(families['rule logic']?.FP ?? 0) > fpRenderer ? 'Rule logic, not the renderer' : 'The static renderer, not rule logic'}, causes most false positives.** ` +
       `${String(families['rule logic']?.FP ?? 0)} of ${String(report.falsePositives)} come from rule logic that ` +
       `contradicts the ACT rule text. ${String(fpRenderer)} come from the static renderer, which does ` +
-      'no layout and so cannot see that a stylesheet hides an element.',
-    `2. **One defect causes ${String(report.byCause.find((c) => c.id === 'idref-exception')?.cells ?? 0)} false positives.** ` +
-      'Marlo fails an ID reference whose target is missing, which the rule explicitly allows.',
+      'no layout and so cannot see that a stylesheet hides an element.' +
+      (fpDisputed > 0
+        ? ` ${String(fpDisputed)} ${fpDisputed === 1 ? 'is a cell' : 'are cells'} whose ground truth ` +
+          'the pinned rule text does not support, listed rather than fixed toward the raters.'
+        : ''),
+    `2. **The largest single cause accounts for ${String(largest?.cells ?? 0)} of the ` +
+      `${String(report.falsePositives + report.falseNegatives)} wrong cells.** ` +
+      `${largest === undefined ? 'There is none.' : `${largest.title} (${largest.family}).`}`,
     `3. **Most false negatives are abstentions.** ` +
       `${String(families.abstention?.FN ?? 0)} of ${String(report.falseNegatives)} are cells where Marlo answered ` +
       'cantTell, mostly because a bypass rule depends on what repeats across pages, or because ' +
@@ -536,9 +422,11 @@ export function renderMarkdown(report) {
     '',
     '## What this does not do',
     '',
-    'None of these defects is fixed here. Fixing a rule because it was wrong on these pages ' +
-      'would turn the real-page corpus into training data, and the published real-page figures ' +
-      'would stop being a held-out measurement. A fix belongs with new pages to measure it on.',
+    'The rule-logic defects an earlier version of this analysis found on these pages have since ' +
+      'been fixed, each from the normative text of its ACT rule rather than from the labels here. ' +
+      'That makes these 25 pages in-sample for those fixes: the figures above flatter the engine ' +
+      'by however much the fixes fit these pages rather than the rules. The measurement that ' +
+      'counts is a second set of real pages, rated before the fixes were measured on it.',
     '',
   ];
   return `${lines.join('\n')}\n`;
