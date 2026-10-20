@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-15",
-  "commit": "4a6b005f583d2daf4881abd2aefa6f67e4548ef4",
+  "generated": "2026-10-20",
+  "commit": "0f91c614c056cbde91a2f2f99234337b80203baf",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -11147,11 +11147,11 @@
     ],
     "adjudication": {
       "status": "adjudicated",
-      "ratedCells": 736,
+      "ratedCells": 738,
       "resolvedCells": 1025,
       "totalCells": 1025,
-      "kappa": 0.8849,
-      "percentAgreement": 0.9457,
+      "kappa": 0.8904,
+      "percentAgreement": 0.9485,
       "raters": [
         {
           "rater": "A",
@@ -11166,7 +11166,7 @@
       ],
       "resolutions": {
         "person": 0,
-        "model": 40
+        "model": 38
       }
     },
     "entries": [
@@ -11219,14 +11219,14 @@
           "strict": {
             "truePositives": 0,
             "falsePositives": 0,
-            "falseNegatives": 0,
-            "trueNegatives": 0,
+            "falseNegatives": 24,
+            "trueNegatives": 1,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
-            "recall": null,
+            "recall": 0,
             "f1": null,
-            "falsePositiveRate": null
+            "falsePositiveRate": 0
           }
         }
       },
@@ -11309,7 +11309,7 @@
           "strict": {
             "truePositives": 0,
             "falsePositives": 0,
-            "falseNegatives": 19,
+            "falseNegatives": 24,
             "trueNegatives": 1,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
@@ -11429,8 +11429,8 @@
           "strict": {
             "truePositives": 0,
             "falsePositives": 0,
-            "falseNegatives": 2,
-            "trueNegatives": 18,
+            "falseNegatives": 3,
+            "trueNegatives": 22,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
@@ -11640,7 +11640,7 @@
             "truePositives": 0,
             "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
@@ -13024,14 +13024,14 @@
           "strict": {
             "truePositives": 0,
             "falsePositives": 1,
-            "falseNegatives": 0,
-            "trueNegatives": 19,
+            "falseNegatives": 1,
+            "trueNegatives": 23,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 0,
-            "recall": null,
-            "f1": null,
-            "falsePositiveRate": 0.05
+            "recall": 0,
+            "f1": 0,
+            "falsePositiveRate": 0.041666666666666664
           }
         }
       },
@@ -13261,14 +13261,14 @@
           "strict": {
             "truePositives": 0,
             "falsePositives": 0,
-            "falseNegatives": 0,
-            "trueNegatives": 0,
+            "falseNegatives": 10,
+            "trueNegatives": 15,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
-            "recall": null,
+            "recall": 0,
             "f1": null,
-            "falsePositiveRate": null
+            "falsePositiveRate": 0
           }
         }
       },
@@ -13351,8 +13351,8 @@
           "strict": {
             "truePositives": 0,
             "falsePositives": 0,
-            "falseNegatives": 7,
-            "trueNegatives": 13,
+            "falseNegatives": 10,
+            "trueNegatives": 15,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
@@ -13660,7 +13660,7 @@
             "truePositives": 2,
             "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 18,
+            "trueNegatives": 23,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 1,
@@ -13870,7 +13870,7 @@
             "truePositives": 0,
             "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
@@ -13990,7 +13990,7 @@
             "truePositives": 0,
             "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
@@ -14110,7 +14110,7 @@
             "truePositives": 0,
             "falsePositives": 0,
             "falseNegatives": 0,
-            "trueNegatives": 20,
+            "trueNegatives": 25,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": null,
@@ -14229,14 +14229,14 @@
           "strict": {
             "truePositives": 2,
             "falsePositives": 1,
-            "falseNegatives": 2,
-            "trueNegatives": 15,
+            "falseNegatives": 4,
+            "trueNegatives": 18,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 0.6666666666666666,
-            "recall": 0.5,
-            "f1": 0.5714285714285715,
-            "falsePositiveRate": 0.0625
+            "recall": 0.3333333333333333,
+            "f1": 0.4444444444444444,
+            "falsePositiveRate": 0.05263157894736842
           }
         }
       },
@@ -14598,13 +14598,13 @@
             "truePositives": 0,
             "falsePositives": 1,
             "falseNegatives": 0,
-            "trueNegatives": 19,
+            "trueNegatives": 24,
             "cantTellOnFailed": 0,
             "cantTellOnPassed": 0,
             "precision": 0,
             "recall": null,
             "f1": null,
-            "falsePositiveRate": 0.05
+            "falsePositiveRate": 0.04
           }
         }
       },
@@ -16791,10 +16791,5815 @@
       },
       "accuracy": {
         "strictPrecision": 0.37209302325581395,
-        "strictRecall": 0.2711864406779661,
-        "falsePositiveRate": 0.02954048140043764,
-        "sampleSize": 973
+        "strictRecall": 0.17204301075268819,
+        "falsePositiveRate": 0.02903225806451613,
+        "sampleSize": 1023
+      },
+      "engines": [
+        {
+          "engine": "alfa",
+          "rules": 31,
+          "truePositives": 42,
+          "falsePositives": 15,
+          "falseNegatives": 14,
+          "trueNegatives": 704,
+          "strictPrecision": 0.7368421052631579,
+          "strictRecall": 0.75,
+          "falsePositiveRate": 0.02086230876216968,
+          "sampleSize": 775
+        },
+        {
+          "engine": "axe-core",
+          "rules": 33,
+          "truePositives": 15,
+          "falsePositives": 2,
+          "falseNegatives": 50,
+          "trueNegatives": 757,
+          "strictPrecision": 0.8823529411764706,
+          "strictRecall": 0.23076923076923078,
+          "falsePositiveRate": 0.002635046113306983,
+          "sampleSize": 824
+        },
+        {
+          "engine": "htmlcs",
+          "rules": 11,
+          "truePositives": 4,
+          "falsePositives": 3,
+          "falseNegatives": 42,
+          "trueNegatives": 226,
+          "strictPrecision": 0.5714285714285714,
+          "strictRecall": 0.08695652173913043,
+          "falsePositiveRate": 0.013100436681222707,
+          "sampleSize": 275
+        },
+        {
+          "engine": "marlo",
+          "rules": 41,
+          "truePositives": 16,
+          "falsePositives": 27,
+          "falseNegatives": 77,
+          "trueNegatives": 903,
+          "strictPrecision": 0.37209302325581395,
+          "strictRecall": 0.17204301075268819,
+          "falsePositiveRate": 0.02903225806451613,
+          "sampleSize": 1023
+        }
+      ]
+    }
+  },
+  "heldOutCorpus": {
+    "retrieved": "2026-10-20",
+    "pages": 25,
+    "categories": [
+      {
+        "category": "application",
+        "pages": 3
+      },
+      {
+        "category": "documentation",
+        "pages": 4
+      },
+      {
+        "category": "error",
+        "pages": 1
+      },
+      {
+        "category": "form",
+        "pages": 2
+      },
+      {
+        "category": "government",
+        "pages": 3
+      },
+      {
+        "category": "landing",
+        "pages": 1
+      },
+      {
+        "category": "login",
+        "pages": 1
+      },
+      {
+        "category": "news",
+        "pages": 3
+      },
+      {
+        "category": "search",
+        "pages": 1
+      },
+      {
+        "category": "settings",
+        "pages": 1
+      },
+      {
+        "category": "shop",
+        "pages": 4
+      },
+      {
+        "category": "table",
+        "pages": 1
       }
+    ],
+    "adjudication": {
+      "status": "adjudicated",
+      "ratedCells": 750,
+      "resolvedCells": 1025,
+      "totalCells": 1025,
+      "kappa": 0.9315,
+      "percentAgreement": 0.9653,
+      "raters": [
+        {
+          "rater": "A",
+          "kind": "model",
+          "model": "claude-opus-5-5"
+        },
+        {
+          "rater": "B",
+          "kind": "model",
+          "model": "claude-sonnet-5-5"
+        }
+      ],
+      "resolutions": {
+        "person": 0,
+        "model": 26
+      }
+    },
+    "entries": [
+      {
+        "actRuleId": "047fe0",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 25,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 23,
+            "trueNegatives": 2,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 24,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 23,
+            "trueNegatives": 2,
+            "cantTellOnFailed": 22,
+            "cantTellOnPassed": 2,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 6,
+          "failed": 11,
+          "cantTell": 5,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 188,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 11,
+            "falsePositives": 0,
+            "falseNegatives": 12,
+            "trueNegatives": 2,
+            "cantTellOnFailed": 4,
+            "cantTellOnPassed": 1,
+            "precision": 1,
+            "recall": 0.4782608695652174,
+            "f1": 0.6470588235294118,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 23,
+            "trueNegatives": 2,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 17,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 17,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 4,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.8,
+            "f1": 0.888888888888889,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 17,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 13,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 4,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.8,
+            "f1": 0.888888888888889,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 17,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 13,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 4,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.8,
+            "f1": 0.888888888888889,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 18,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 4,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.2,
+            "f1": 0.33333333333333337,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "24afc2",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "24afc2",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 13,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "24afc2",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "2779a5",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "2ee8b8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 7,
+          "failed": 3,
+          "cantTell": 3,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 3,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 2,
+            "cantTellOnPassed": 1,
+            "precision": 1,
+            "recall": 0.6,
+            "f1": 0.7499999999999999,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "307n5z",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 24,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "307n5z",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "36b590",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 20,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 3,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "3ea0c8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 17,
+          "failed": 7,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 71,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 16,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.7777777777777778,
+            "f1": 0.8750000000000001,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "3ea0c8",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 5
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 9,
+            "trueNegatives": 16,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 10,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 14
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 3,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 6,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 10,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 14
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 3,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "4b1c6c",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 3,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 21
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 14,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 11
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 13,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "59796f",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "59796f",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "59796f",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5b7ae0",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5b7ae0",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 22,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 2,
+            "cantTellOnPassed": 20,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 18,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.5,
+            "f1": 0.6666666666666666,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 13,
+          "failed": 6,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 27,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 4,
+            "falseNegatives": 0,
+            "trueNegatives": 19,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "f1": 0.5,
+            "falsePositiveRate": 0.17391304347826086
+          }
+        }
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 22,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 22,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "674b10",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 16,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 9
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "674b10",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 14,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 11
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "674b10",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 14,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 11
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "6a7281",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 16,
+          "failed": 5,
+          "cantTell": 1,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 8,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 5,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": 0,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0.2
+          }
+        }
+      },
+      {
+        "actRuleId": "6a7281",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 17,
+          "failed": 0,
+          "cantTell": 2,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 2,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "6a7281",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 22,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 9,
+          "failed": 5,
+          "cantTell": 0,
+          "inapplicable": 11
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 88,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 3,
+            "falseNegatives": 0,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.4,
+            "recall": 1,
+            "f1": 0.5714285714285715,
+            "falsePositiveRate": 0.13043478260869565
+          }
+        }
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 13,
+          "failed": 0,
+          "cantTell": 2,
+          "inapplicable": 10
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 2,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 13,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 10
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 57,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "73f2c2",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 11,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 14
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "73f2c2",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "78fd32",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "78fd32",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 13,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "78fd32",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "7d6734",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 5,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "7d6734",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 5,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "7d6734",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 5,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 12,
+          "failed": 2,
+          "cantTell": 8,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 8,
+            "precision": 0.5,
+            "recall": 1,
+            "f1": 0.6666666666666666,
+            "falsePositiveRate": 0.041666666666666664
+          }
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 5
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 14,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 18,
+          "failed": 3,
+          "cantTell": 0,
+          "inapplicable": 4
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 17,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 2,
+            "falseNegatives": 0,
+            "trueNegatives": 22,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "f1": 0.5,
+            "falsePositiveRate": 0.08333333333333333
+          }
+        }
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 15,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 13,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 4,
+            "falseNegatives": 1,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "falsePositiveRate": 0.16666666666666666
+          }
+        }
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 13,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 12
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "9eb3f6",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 16,
+          "failed": 0,
+          "cantTell": 2,
+          "inapplicable": 7
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 2,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "9eb3f6",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "a25f45",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 3,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "a25f45",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "a25f45",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 25,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 13,
+            "trueNegatives": 12,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 24,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 13,
+            "trueNegatives": 12,
+            "cantTellOnFailed": 13,
+            "cantTellOnPassed": 11,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 8,
+          "failed": 7,
+          "cantTell": 7,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 36,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 0,
+            "falseNegatives": 6,
+            "trueNegatives": 12,
+            "cantTellOnFailed": 3,
+            "cantTellOnPassed": 4,
+            "precision": 1,
+            "recall": 0.5384615384615384,
+            "f1": 0.7000000000000001,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 18,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 12,
+            "trueNegatives": 12,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.07692307692307693,
+            "f1": 0.14285714285714288,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b20e66",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 6,
+          "failed": 0,
+          "cantTell": 10,
+          "inapplicable": 9
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b33eff",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "b40fd1",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 19,
+          "failed": 1,
+          "cantTell": 5,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 2,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 2,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 2,
+            "cantTellOnPassed": 2,
+            "precision": 1,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b40fd1",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 6,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 6,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 2,
+          "strict": {
+            "truePositives": 3,
+            "falsePositives": 3,
+            "falseNegatives": 0,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.5,
+            "recall": 1,
+            "f1": 0.6666666666666666,
+            "falsePositiveRate": 0.15
+          }
+        }
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 23,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 23,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 1
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 2,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 23,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 23,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 17,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 2,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 23,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 2,
+          "failed": 2,
+          "cantTell": 2,
+          "inapplicable": 19
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 1,
+            "falseNegatives": 3,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 2,
+            "precision": 0.5,
+            "recall": 0.25,
+            "f1": 0.3333333333333333,
+            "falsePositiveRate": 0.047619047619047616
+          }
+        }
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 2,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 3,
+            "trueNegatives": 21,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 0.25,
+            "f1": 0.4,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 18,
+          "failed": 4,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 9,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 3,
+            "falsePositives": 1,
+            "falseNegatives": 1,
+            "trueNegatives": 20,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75,
+            "falsePositiveRate": 0.047619047619047616
+          }
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bc659a",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bf051a",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "bisz58",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 19,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 4,
+          "failed": 2,
+          "cantTell": 19,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 4,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 1,
+            "falseNegatives": 6,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 6,
+            "cantTellOnPassed": 13,
+            "precision": 0.5,
+            "recall": 0.14285714285714285,
+            "f1": 0.22222222222222224,
+            "falsePositiveRate": 0.05555555555555555
+          }
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 16,
+          "failed": 9,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 37,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 6,
+            "falsePositives": 3,
+            "falseNegatives": 1,
+            "trueNegatives": 15,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.6666666666666666,
+            "recall": 0.8571428571428571,
+            "f1": 0.75,
+            "falsePositiveRate": 0.16666666666666666
+          }
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 17,
+          "failed": 8,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 27,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 1,
+            "falseNegatives": 0,
+            "trueNegatives": 17,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.875,
+            "recall": 1,
+            "f1": 0.9333333333333333,
+            "falsePositiveRate": 0.05555555555555555
+          }
+        }
+      },
+      {
+        "actRuleId": "c487ae",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 12,
+          "failed": 7,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 40,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 5,
+            "falseNegatives": 5,
+            "trueNegatives": 13,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.2857142857142857,
+            "recall": 0.2857142857142857,
+            "f1": 0.2857142857142857,
+            "falsePositiveRate": 0.2777777777777778
+          }
+        }
+      },
+      {
+        "actRuleId": "cae760",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 3,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "cae760",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 3,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "cae760",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 3,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "cf77f2",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "d0f69e",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 3,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "d0f69e",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "de46e4",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 3,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 21
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 1,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "de46e4",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 4,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 21
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "de46e4",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 4,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 21
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 1,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 11,
+          "failed": 12,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 24,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 5,
+            "falseNegatives": 0,
+            "trueNegatives": 13,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.5833333333333334,
+            "recall": 1,
+            "f1": 0.7368421052631579,
+            "falsePositiveRate": 0.2777777777777778
+          }
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 15,
+          "failed": 7,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 12,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 18,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 15,
+          "failed": 7,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 12,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 7,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 18,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "e086e5",
+        "engine": "htmlcs",
+        "outcomes": {
+          "passed": 13,
+          "failed": 6,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 6,
+        "unsupported": 0,
+        "findings": 7,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 2,
+            "falsePositives": 4,
+            "falseNegatives": 5,
+            "trueNegatives": 14,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 0.3333333333333333,
+            "recall": 0.2857142857142857,
+            "f1": 0.30769230769230765,
+            "falsePositiveRate": 0.2222222222222222
+          }
+        }
+      },
+      {
+        "actRuleId": "e6952f",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 25,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "e88epe",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 11,
+          "inapplicable": 14
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 11,
+            "trueNegatives": 14,
+            "cantTellOnFailed": 2,
+            "cantTellOnPassed": 9,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "fd3a94",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 7,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 15
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 1,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 23
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 1,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 23
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 21,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 1,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 1,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 24,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 22,
+          "failed": 0,
+          "cantTell": 1,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 1,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 23,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 0,
+            "trueNegatives": 25,
+            "cantTellOnFailed": 0,
+            "cantTellOnPassed": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      },
+      {
+        "actRuleId": "m6b1q3",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 19,
+          "failed": 1,
+          "cantTell": 0,
+          "inapplicable": 5
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 14,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "m6b1q3",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 1,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 24
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "ye5d6e",
+        "engine": "marlo",
+        "outcomes": {
+          "passed": 9,
+          "failed": 0,
+          "cantTell": 16,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 25,
+          "unresolvedCells": 0,
+          "cantTellTruth": 0,
+          "strict": {
+            "truePositives": 0,
+            "falsePositives": 0,
+            "falseNegatives": 10,
+            "trueNegatives": 15,
+            "cantTellOnFailed": 10,
+            "cantTellOnPassed": 6,
+            "precision": null,
+            "recall": 0,
+            "f1": null,
+            "falsePositiveRate": 0
+          }
+        }
+      }
+    ],
+    "agreement": [
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.24,
+        "kappa": 0.0538
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "09o5cg",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.3158,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.8355
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.8421,
+        "kappa": 0.3667
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.8355
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.7895,
+        "kappa": 0.2963
+      },
+      {
+        "actRuleId": "23a2a8",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.8421,
+        "kappa": 0.3667
+      },
+      {
+        "actRuleId": "24afc2",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.48,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "24afc2",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "24afc2",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.48,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "2779a5",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "307n5z",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "3ea0c8",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.6,
+        "kappa": 0.1582
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.76,
+        "kappa": 0.4983
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "46ca7f",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.76,
+        "kappa": 0.4983
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.56,
+        "kappa": 0.2188
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.6,
+        "kappa": 0.2515
+      },
+      {
+        "actRuleId": "4e8ab6",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0.9196
+      },
+      {
+        "actRuleId": "59796f",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "59796f",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "59796f",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "5b7ae0",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.12,
+        "kappa": 0.0939
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.12,
+        "kappa": 0.0939
+      },
+      {
+        "actRuleId": "5c01ea",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.8,
+        "kappa": 0.6418
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0.6032
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "5f99a7",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0.6032
+      },
+      {
+        "actRuleId": "674b10",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.8344
+      },
+      {
+        "actRuleId": "674b10",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.8344
+      },
+      {
+        "actRuleId": "674b10",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "6a7281",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.68,
+        "kappa": 0.3994
+      },
+      {
+        "actRuleId": "6a7281",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.76,
+        "kappa": 0.4318
+      },
+      {
+        "actRuleId": "6a7281",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.8,
+        "kappa": 0.4635
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.76,
+        "kappa": 0.6231
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.84,
+        "kappa": 0.7423
+      },
+      {
+        "actRuleId": "6cfa84",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.8596
+      },
+      {
+        "actRuleId": "73f2c2",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.6,
+        "kappa": 0.1007
+      },
+      {
+        "actRuleId": "78fd32",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.48,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "78fd32",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "78fd32",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.48,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "7d6734",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.7899
+      },
+      {
+        "actRuleId": "7d6734",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "7d6734",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.7899
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "8fc3b6",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.52,
+        "kappa": 0.2105
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.6,
+        "kappa": 0.3606
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.5263,
+        "kappa": 0.1739
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.8,
+        "kappa": 0.5192
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.6316,
+        "kappa": 0.1192
+      },
+      {
+        "actRuleId": "97a4e1",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.6316,
+        "kappa": 0.1582
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.48,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "9e45ec",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.48,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "9eb3f6",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.28,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "a25f45",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "a25f45",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.1053,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "a25f45",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 0,
+        "percentAgreement": null,
+        "kappa": null
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.32,
+        "kappa": 0.0639
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "afw4f7",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.4211,
+        "kappa": 0.0991
+      },
+      {
+        "actRuleId": "b40fd1",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.72,
+        "kappa": 0.3217
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.16,
+        "kappa": 0.0558
+      },
+      {
+        "actRuleId": "b4f0c3",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.16,
+        "kappa": 0.0558
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "b5c3f8",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0.6269
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.2,
+        "kappa": 0.0458
+      },
+      {
+        "actRuleId": "bc4a75",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.2,
+        "kappa": 0.0366
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bc659a",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.8947,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.8947,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bf051a",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.8947,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "bisz58",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.2,
+        "kappa": 0.0792
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.2,
+        "kappa": 0.0758
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.2105,
+        "kappa": 0.1176
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0.7331
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.6842,
+        "kappa": 0.2785
+      },
+      {
+        "actRuleId": "c487ae",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.7368,
+        "kappa": 0.3791
+      },
+      {
+        "actRuleId": "cae760",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "cae760",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "cae760",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "d0f69e",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0
+      },
+      {
+        "actRuleId": "de46e4",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.7093
+      },
+      {
+        "actRuleId": "de46e4",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.92,
+        "kappa": 0.7093
+      },
+      {
+        "actRuleId": "de46e4",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.8,
+        "kappa": 0.6622
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.8,
+        "kappa": 0.6622
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "marlo",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.8421,
+        "kappa": 0.6984
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "axe-core",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.6316,
+        "kappa": 0.2356
+      },
+      {
+        "actRuleId": "e086e5",
+        "engines": [
+          "alfa",
+          "htmlcs"
+        ],
+        "pages": 19,
+        "percentAgreement": 0.6316,
+        "kappa": 0.2356
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.2,
+        "kappa": 0.0637
+      },
+      {
+        "actRuleId": "ff89c9",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.2,
+        "kappa": 0.0637
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engines": [
+          "marlo",
+          "axe-core"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0.7826
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engines": [
+          "marlo",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.96,
+        "kappa": 0.7826
+      },
+      {
+        "actRuleId": "ffd0e9",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": 1
+      },
+      {
+        "actRuleId": "m6b1q3",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.24,
+        "kappa": 0.0226
+      }
+    ],
+    "aggregate": {
+      "findingsPerPage": [
+        {
+          "engine": "marlo",
+          "pages": 25,
+          "findings": 232,
+          "mean": 9.28
+        },
+        {
+          "engine": "axe-core",
+          "pages": 25,
+          "findings": 104,
+          "mean": 4.16
+        },
+        {
+          "engine": "alfa",
+          "pages": 25,
+          "findings": 394,
+          "mean": 15.76
+        },
+        {
+          "engine": "htmlcs",
+          "pages": 19,
+          "findings": 67,
+          "mean": 3.5263
+        }
+      ],
+      "perPage": [
+        {
+          "page": "application (cc8c4baec1da)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "application (937b7bdb3cb2)",
+          "findings": {
+            "marlo": 4,
+            "axe-core": 35,
+            "alfa": 24,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "application (8ffc4fbb79ca)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "documentation (c823959fcd56)",
+          "findings": {
+            "marlo": 18,
+            "axe-core": 1,
+            "alfa": 1,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "documentation (d35001a75524)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 3,
+            "alfa": 2,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "documentation (bf4ceee67380)",
+          "findings": {
+            "marlo": 7,
+            "axe-core": 3,
+            "alfa": 104,
+            "htmlcs": 2
+          }
+        },
+        {
+          "page": "documentation (be333a42cad3)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 1,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "error (d89ee06c9755)",
+          "findings": {
+            "marlo": 5,
+            "axe-core": 1,
+            "alfa": 2,
+            "htmlcs": 6
+          }
+        },
+        {
+          "page": "form (8f8d60d6c406)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 4,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "form (96bc0eef964f)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "government (3bee53602674)",
+          "findings": {
+            "marlo": 6,
+            "axe-core": 8,
+            "alfa": 4,
+            "htmlcs": 5
+          }
+        },
+        {
+          "page": "government (0a76b0494c93)",
+          "findings": {
+            "marlo": 6,
+            "axe-core": 0,
+            "alfa": 13,
+            "htmlcs": 4
+          }
+        },
+        {
+          "page": "government (09a11ba4c53a)",
+          "findings": {
+            "marlo": 69,
+            "axe-core": 1,
+            "alfa": 66,
+            "htmlcs": 10
+          }
+        },
+        {
+          "page": "landing (1b54a1f985cd)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 31,
+            "htmlcs": 2
+          }
+        },
+        {
+          "page": "login (8c28574c8eaa)",
+          "findings": {
+            "marlo": 11,
+            "axe-core": 9,
+            "alfa": 14,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "news (0292a3d7d86c)",
+          "findings": {
+            "marlo": 55,
+            "axe-core": 0,
+            "alfa": 0,
+            "htmlcs": 22
+          }
+        },
+        {
+          "page": "news (cd50437c3c64)",
+          "findings": {
+            "marlo": 6,
+            "axe-core": 1,
+            "alfa": 39,
+            "htmlcs": 6
+          }
+        },
+        {
+          "page": "news (35fe3d89afd4)",
+          "findings": {
+            "marlo": 3,
+            "axe-core": 0,
+            "alfa": 1,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "search (6ac0f59a729e)",
+          "findings": {
+            "marlo": 0,
+            "axe-core": 0,
+            "alfa": 1,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "settings (4ab2647430ec)",
+          "findings": {
+            "marlo": 3,
+            "axe-core": 2,
+            "alfa": 21,
+            "htmlcs": 2
+          }
+        },
+        {
+          "page": "shop (1d1ec8505558)",
+          "findings": {
+            "marlo": 1,
+            "axe-core": 0,
+            "alfa": 10,
+            "htmlcs": 1
+          }
+        },
+        {
+          "page": "shop (b47d2166c25a)",
+          "findings": {
+            "marlo": 2,
+            "axe-core": 3,
+            "alfa": 12,
+            "htmlcs": 0
+          }
+        },
+        {
+          "page": "shop (373ce6879fca)",
+          "findings": {
+            "marlo": 16,
+            "axe-core": 21,
+            "alfa": 26,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "shop (2f27af976502)",
+          "findings": {
+            "marlo": 11,
+            "axe-core": 9,
+            "alfa": 14,
+            "htmlcs": null
+          }
+        },
+        {
+          "page": "table (d25dbf4e66da)",
+          "findings": {
+            "marlo": 5,
+            "axe-core": 6,
+            "alfa": 5,
+            "htmlcs": 5
+          }
+        }
+      ],
+      "invariant": {
+        "pages": 25,
+        "pagesWhereItWouldFire": 20,
+        "fraction": 0.8,
+        "perRule": [
+          {
+            "actRuleId": "047fe0",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "09o5cg",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 11
+          },
+          {
+            "actRuleId": "23a2a8",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "24afc2",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "2779a5",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "2ee8b8",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "307n5z",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "36b590",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "3ea0c8",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "46ca7f",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "4b1c6c",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "4e8ab6",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "59796f",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "5b7ae0",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "5c01ea",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "5f99a7",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "674b10",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "6a7281",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 5
+          },
+          {
+            "actRuleId": "6cfa84",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 5
+          },
+          {
+            "actRuleId": "73f2c2",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "78fd32",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "7d6734",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "8fc3b6",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "97a4e1",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 5
+          },
+          {
+            "actRuleId": "9e45ec",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "9eb3f6",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "a25f45",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "afw4f7",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 7
+          },
+          {
+            "actRuleId": "b20e66",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "b33eff",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "b40fd1",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 5
+          },
+          {
+            "actRuleId": "b4f0c3",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "b5c3f8",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "bc4a75",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "bc659a",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "bf051a",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "bisz58",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "c487ae",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 4
+          },
+          {
+            "actRuleId": "cae760",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "cf77f2",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "d0f69e",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "de46e4",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "e086e5",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 5
+          },
+          {
+            "actRuleId": "e6952f",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "e88epe",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "fd3a94",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "ff89c9",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "ffd0e9",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
+            "actRuleId": "m6b1q3",
+            "routedTo": "alfa",
+            "pagesWhereItWouldFire": 1
+          },
+          {
+            "actRuleId": "ye5d6e",
+            "routedTo": "marlo",
+            "pagesWhereItWouldFire": 0
+          }
+        ]
+      },
+      "accuracy": {
+        "strictPrecision": 0.68,
+        "strictRecall": 0.30357142857142855,
+        "falsePositiveRate": 0.01756311745334797,
+        "sampleSize": 1023
+      },
+      "engines": [
+        {
+          "engine": "alfa",
+          "rules": 31,
+          "truePositives": 50,
+          "falsePositives": 8,
+          "falseNegatives": 22,
+          "trueNegatives": 695,
+          "strictPrecision": 0.8620689655172413,
+          "strictRecall": 0.6944444444444444,
+          "falsePositiveRate": 0.011379800853485065,
+          "sampleSize": 775
+        },
+        {
+          "engine": "axe-core",
+          "rules": 33,
+          "truePositives": 28,
+          "falsePositives": 6,
+          "falseNegatives": 56,
+          "trueNegatives": 733,
+          "strictPrecision": 0.8235294117647058,
+          "strictRecall": 0.3333333333333333,
+          "falsePositiveRate": 0.008119079837618403,
+          "sampleSize": 823
+        },
+        {
+          "engine": "htmlcs",
+          "rules": 11,
+          "truePositives": 8,
+          "falsePositives": 13,
+          "falseNegatives": 50,
+          "trueNegatives": 204,
+          "strictPrecision": 0.38095238095238093,
+          "strictRecall": 0.13793103448275862,
+          "falsePositiveRate": 0.059907834101382486,
+          "sampleSize": 275
+        },
+        {
+          "engine": "marlo",
+          "rules": 41,
+          "truePositives": 34,
+          "falsePositives": 16,
+          "falseNegatives": 78,
+          "trueNegatives": 895,
+          "strictPrecision": 0.68,
+          "strictRecall": 0.30357142857142855,
+          "falsePositiveRate": 0.01756311745334797,
+          "sampleSize": 1023
+        }
+      ]
     }
   }
 }

@@ -141,6 +141,30 @@ const browserContrast = browserTable.entries.find(
   (e) => e.actRuleId === 'afw4f7' && e.engine === 'marlo',
 );
 const real = table.realCorpus ?? null;
+/** The held-out pages: sites corpus/real does not use, rated before any later rule change. */
+const heldOut = table.heldOutCorpus ?? null;
+
+/**
+ * The 95 percent Wilson interval for a rate, from counts the table carries. Derived, not
+ * measured a second time: the same formula `calibration/README.md` prints.
+ */
+function wilsonInterval(successes, trials) {
+  if (trials === 0) return null;
+  const z = 1.959963984540054;
+  const p = successes / trials;
+  const z2 = z * z;
+  const centre = (p + z2 / (2 * trials)) / (1 + z2 / trials);
+  const half =
+    (z * Math.sqrt((p * (1 - p)) / trials + z2 / (4 * trials * trials))) / (1 + z2 / trials);
+  return { value: p, low: Math.max(0, centre - half), high: Math.min(1, centre + half) };
+}
+
+/** One rate and its interval, or "not measured", for the held-out comparison table. */
+function rateCell(successes, trials, field) {
+  const w = wilsonInterval(successes, trials);
+  if (w === null) return 'not measured';
+  return `${num(w.value, { as: 'rate', field })} <span class="dim">(${num(w.low, { as: 'rate', field: `${field}.low` })} to ${num(w.high, { as: 'rate', field: `${field}.high` })})</span>`;
+}
 /** What the scan reports on the rated real pages, or null before any are rated. */
 const realScan = analysis.realPages?.strategies.find((x) => x.id === 'scan-output') ?? null;
 const flattered = table.entries.filter((e) => e.flatteredByProtocol);
@@ -1055,6 +1079,67 @@ ${real.aggregate.findingsPerPage
                   <td class="num">${num(f.mean === null ? null : Math.round(f.mean * 10) / 10, { field: `realCorpus.findingsPerPage.${f.engine}.mean` })}</td>
                 </tr>`,
   )
+  .join('\n')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>`
+}
+${
+  real === null || heldOut === null || (heldOut.aggregate.engines ?? []).length === 0
+    ? ''
+    : `
+      <section class="reveal" id="held-out">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">A third corpus</span>
+            <h2>Held-out pages, from sites nothing was tuned on</h2>
+            <p>
+              Marlo's errors on the first ${num(real.pages, { field: 'realCorpus.pages' })} real
+              pages were analysed cell by cell, so a rule corrected after reading that analysis
+              would score better there whether or not the correction holds anywhere else.
+              ${num(heldOut.pages, { field: 'heldOutCorpus.pages' })} more pages, from sites the
+              first set does not use, were snapshotted, rated by the same raters and committed
+              before any such correction was measured on them. They are the out-of-sample check.
+            </p>
+          </div>
+          <div class="prose stack">
+            <p>
+              The raters agreed on the held-out cells with a Cohen's kappa of
+              ${num(heldOut.adjudication.kappa, { field: 'heldOutCorpus.adjudication.kappa', as: 'rate' })}.
+              Every engine is graded the same way on both sets: a cell an engine declined or
+              crashed on counts as no detection, and each engine is pooled over the rules it
+              claims, so the rule counts differ. Ranges are 95% intervals.
+            </p>
+          </div>
+          <div class="scroller" role="region" aria-label="Every engine on both sets of real pages, scrollable" tabindex="0">
+            <table>
+              <caption>Strict precision and recall on resolved cells, first set and held-out set.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Engine</th>
+                  <th scope="col">Precision, first set</th>
+                  <th scope="col">Recall, first set</th>
+                  <th scope="col">Precision, held out</th>
+                  <th scope="col">Recall, held out</th>
+                </tr>
+              </thead>
+              <tbody>
+${(heldOut.aggregate.engines ?? [])
+  .map((h) => {
+    const r = (real.aggregate.engines ?? []).find((x) => x.engine === h.engine);
+    const cells = (row, block) =>
+      row === undefined
+        ? '<td class="num">not measured</td><td class="num">not measured</td>'
+        : `<td class="num">${rateCell(row.truePositives, row.truePositives + row.falsePositives, `${block}.engines.${row.engine}.strictPrecision`)}</td>
+                  <td class="num">${rateCell(row.truePositives, row.truePositives + row.falseNegatives, `${block}.engines.${row.engine}.strictRecall`)}</td>`;
+    return `                <tr${h.engine === 'marlo' ? ' class="is-marlo"' : ''}>
+                  <th scope="row">${escapeHtml(ENGINE_LABEL[h.engine])}</th>
+                  ${cells(r, 'realCorpus')}
+                  ${cells(h, 'heldOutCorpus')}
+                </tr>`;
+  })
   .join('\n')}
               </tbody>
             </table>
