@@ -3,6 +3,7 @@ import type { Capability, Outcome } from '@trymarlo/schema';
 import { PUBLISHED_ACT_RULE_COUNT, findRule } from '@trymarlo/act';
 
 import {
+  ARIA_ATTRIBUTES,
   IMPLEMENTED_RULES,
   MARLO_RULES,
   accessibleName,
@@ -190,12 +191,6 @@ describe('6a7281 aria values are valid', () => {
     ).toBe('failed');
   });
 
-  it('fails a reference list where nothing resolves', () => {
-    expect(
-      check('6a7281', '<html><body><div aria-labelledby="nope">x</div></body></html>').outcome,
-    ).toBe('failed');
-  });
-
   it('passes a reference that resolves', () => {
     expect(
       check(
@@ -205,15 +200,65 @@ describe('6a7281 aria values are valid', () => {
     ).toBe('passed');
   });
 
-  it('declines a partially resolving list rather than failing it', () => {
-    // The specification permits it, so it is not a failure, but asserting a clean pass
-    // would hide something the author almost certainly did not intend.
+  // The rule's exception: "For value types ID Reference and ID Reference List no ID
+  // referenced elements are required." A missing target is in6db8's question. Every
+  // attribute of both types is covered, single and list, wholly and partly dangling, so
+  // the exception cannot hold for one attribute and not another.
+  const idReferences = Object.entries(ARIA_ATTRIBUTES).filter(
+    ([, spec]) => spec.type === 'id-reference' || spec.type === 'id-reference-list',
+  );
+
+  it('covers every ID reference attribute ARIA 1.2 defines', () => {
+    expect(idReferences.map(([name]) => name).sort()).toEqual([
+      'aria-activedescendant',
+      'aria-controls',
+      'aria-describedby',
+      'aria-details',
+      'aria-errormessage',
+      'aria-flowto',
+      'aria-labelledby',
+      'aria-owns',
+    ]);
+  });
+
+  it.each(idReferences.map(([name]) => name))('passes %s whose target does not exist', (name) => {
+    expect(
+      check('6a7281', `<html><body><div role="textbox" ${name}="nowhere">x</div></body></html>`)
+        .outcome,
+    ).toBe('passed');
+  });
+
+  it.each(idReferences.filter(([, spec]) => spec.type === 'id-reference-list').map(([n]) => n))(
+    'passes %s when only some of its ids resolve',
+    (name) => {
+      expect(
+        check(
+          '6a7281',
+          `<html><body><span id="a">A</span><div role="textbox" ${name}="a missing">x</div></body></html>`,
+        ).outcome,
+      ).toBe('passed');
+    },
+  );
+
+  it.each(idReferences.filter(([, spec]) => spec.type === 'id-reference').map(([n]) => n))(
+    'fails %s holding two ids, since a single reference cannot contain a space',
+    (name) => {
+      expect(
+        check(
+          '6a7281',
+          `<html><body><i id="a"></i><i id="b"></i><div role="textbox" ${name}="a b">x</div></body></html>`,
+        ).outcome,
+      ).toBe('failed');
+    },
+  );
+
+  it('still fails an invalid value beside a dangling reference', () => {
     expect(
       check(
         '6a7281',
-        '<html><body><span id="a">A</span><div aria-labelledby="a missing">x</div></body></html>',
+        '<html><body><div role="checkbox" aria-controls="nowhere" aria-checked="yes">x</div></body></html>',
       ).outcome,
-    ).toBe('cantTell');
+    ).toBe('failed');
   });
 });
 
