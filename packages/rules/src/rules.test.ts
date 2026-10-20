@@ -359,6 +359,33 @@ describe('4e8ab6 role has required states and properties', () => {
     ).toBe('inapplicable');
   });
 
+  // ARIA 1.2 separator: "Required States and Properties: aria-valuenow (if focusable)".
+  it.each([
+    '<li role="separator"></li>',
+    '<div role="separator"></div>',
+    '<div role="separator" tabindex="x"></div>',
+  ])('passes %s, a static separator with no value', (html) => {
+    expect(check('4e8ab6', `<html><body><ul>${html}</ul></body></html>`).outcome).toBe('passed');
+  });
+
+  it.each([
+    '<div role="separator" tabindex="0"></div>',
+    '<div role="separator" tabindex="-1"></div>',
+    '<button role="separator"></button>',
+    '<a href="#" role="separator"></a>',
+  ])('fails %s, a focusable separator with no aria-valuenow', (html) => {
+    expect(check('4e8ab6', `<html><body>${html}</body></html>`).outcome).toBe('failed');
+  });
+
+  it('passes a focusable separator that has its value', () => {
+    expect(
+      check(
+        '4e8ab6',
+        '<html><body><div role="separator" tabindex="0" aria-valuenow="50"></div></body></html>',
+      ).outcome,
+    ).toBe('passed');
+  });
+
   it('still applies when the explicit role differs from the native one', () => {
     expect(
       check('4e8ab6', '<html><body><input type="text" role="checkbox" /></body></html>').outcome,

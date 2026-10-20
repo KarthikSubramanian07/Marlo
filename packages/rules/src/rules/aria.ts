@@ -1,4 +1,5 @@
 import { defineRule } from '../define.js';
+import type { MarloElement } from '../dom.js';
 import {
   attr,
   findAll,
@@ -296,7 +297,21 @@ const REQUIRED_CONTEXT: Readonly<Record<string, readonly string[]>> = Object.fre
   treeitem: ['group', 'tree'],
 });
 
-/** Required states and properties per role, from ARIA 1.2. */
+/**
+ * ACT's "focusable": part of sequential focus navigation, or carrying a tabindex that
+ * parses as an integer, negative ones included, since `tabindex="-1"` makes an element
+ * focusable by script and by pointer even though Tab skips it.
+ */
+function isFocusableByDefinition(element: MarloElement): boolean {
+  const tabindex = attr(element, 'tabindex');
+  if (tabindex !== null && !Number.isNaN(Number.parseInt(tabindex.trim(), 10))) return true;
+  return isInSequentialFocusOrder(element);
+}
+
+/**
+ * Required states and properties per role, from ARIA 1.2. `separator` requires
+ * `aria-valuenow` only when focusable, which 4e8ab6 checks before reading this table.
+ */
 const REQUIRED_PROPERTIES: Readonly<Record<string, readonly string[]>> = Object.freeze({
   checkbox: ['aria-checked'],
   // ARIA 1.2 redefined combobox as a composite widget that always owns a popup, so
@@ -606,6 +621,16 @@ export const roleRequiredProperties = defineRule({
   },
   expectation: ({ element }) => {
     const role = explicitRole(element) ?? '';
+    // ARIA 1.2 requires aria-valuenow on a separator only "if focusable": a focusable
+    // separator is a widget that moves, and a static one is structure with no value.
+    if (role === 'separator' && !isFocusableByDefinition(element)) {
+      return {
+        outcome: 'passed',
+        message:
+          'role="separator" is not focusable, so it is a static divider and ARIA 1.2 requires ' +
+          'no value on it.',
+      };
+    }
     const required = REQUIRED_PROPERTIES[role] ?? [];
     // "Set and not empty", per the rule's expectation text: an attribute present with an
     // empty value has not supplied the property any more than an absent one has.
