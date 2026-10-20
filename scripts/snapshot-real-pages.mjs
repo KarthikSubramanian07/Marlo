@@ -51,6 +51,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { join, resolve } from 'node:path';
+import { findImports } from './lib/css-imports.mjs';
 import { hygieneProblems } from './lib/snapshot-hygiene.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -160,13 +161,12 @@ async function fetchStylesheet(page, href, depth, seen) {
   css = absolutiseCss(css, href);
 
   // @import lines are replaced inline, in place, so cascade order is preserved.
-  const imports = [
-    ...css.matchAll(/@import\s+(?:url\(\s*)?["']?([^"')\s;]+)["']?\s*\)?([^;]*);/gi),
-  ];
-  for (const match of imports) {
-    const nested = await fetchStylesheet(page, match[1], depth + 1, seen);
-    const media = match[2].trim();
-    css = css.replace(match[0], media === '' ? nested : `@media ${media} {\n${nested}\n}`);
+  for (const found of findImports(css)) {
+    const nested = await fetchStylesheet(page, found.url, depth + 1, seen);
+    css = css.replace(
+      found.text,
+      found.media === '' ? nested : `@media ${found.media} {\n${nested}\n}`,
+    );
   }
   return css;
 }
