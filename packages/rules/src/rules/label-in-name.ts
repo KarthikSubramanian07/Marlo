@@ -1,7 +1,15 @@
 import { defineRule } from '../define.js';
 import { accessibleName } from '../accname.js';
 import type { MarloElement } from '../dom.js';
-import { ancestors, attr, hasAttr, isVisuallyHidden, normalise, walk } from '../dom.js';
+import {
+  ancestors,
+  attr,
+  hasAttr,
+  isNotRendered,
+  isVisibilityHidden,
+  normalise,
+  walk,
+} from '../dom.js';
 import { explicitRole } from './aria.js';
 
 /**
@@ -15,8 +23,12 @@ import { explicitRole } from './aria.js';
  * The input to it is not exact, because the label is the "visible inner text", which
  * depends on CSS. A block element puts a line break between two words that sit side by
  * side in the DOM, a class can hide a word, and an icon font draws the word "search" as
- * a magnifying glass. This rule declares only `dom`, so it reads visibility from the
- * `hidden` attribute and inline styles, and for everything else it computes the answer
+ * a magnifying glass. This rule declares only `dom`. Whether an element is rendered and
+ * visible is read from resolved `display` and `visibility` where the renderer supplied
+ * them, and from the `hidden` attribute and inline styles where it did not; an element
+ * that is not rendered has no visible text content and is outside the rule. Without
+ * resolved styles a stylesheet-hidden control stays in scope, so the gap is a finding a
+ * reader can check rather than a silent pass. For the rest, it computes the answer
  * under each reading CSS could produce and commits only when they agree:
  *
  *   with and without a word break at every element boundary;
@@ -70,13 +82,13 @@ function widgetRole(element: MarloElement): string | null {
 /** Content that never renders, even though `textContent` includes it. */
 const UNRENDERED: ReadonlySet<string> = new Set(['script', 'style', 'template', 'noscript']);
 
-/** Hidden by its own attributes, as opposed to by an ancestor. */
+/**
+ * Whether an element contributes no visible text: it is not rendered, or `visibility`
+ * hides it. Resolved styles decide where the renderer supplied them, so a class in a
+ * stylesheet counts; without them only the `hidden` attribute and inline styles do.
+ */
 function hidesItself(element: MarloElement): boolean {
-  if (hasAttr(element, 'hidden')) return true;
-  const style = attr(element, 'style') ?? '';
-  return /(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*hidden)\s*(?:!\s*important)?\s*(?:;|$)/i.test(
-    style,
-  );
+  return isNotRendered(element) || isVisibilityHidden(element);
 }
 
 /**
@@ -190,7 +202,9 @@ export const labelInName = defineRule({
     for (const element of walk(document.root)) {
       if (widgetRole(element) === null) continue;
       if (!hasAttr(element, 'aria-label') && !hasAttr(element, 'aria-labelledby')) continue;
-      if (isVisuallyHidden(element)) continue;
+      // Applicability asks for visible text content, which an element that is not
+      // rendered, or that visibility hides, does not have.
+      if (hidesItself(element)) continue;
       if (normalise(visibleText(element, false, null) ?? element.text) === '') continue;
       targets.push({ element });
     }

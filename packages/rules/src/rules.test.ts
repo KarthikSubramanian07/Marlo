@@ -1358,6 +1358,44 @@ describe('2ee8b8 visible label is part of the accessible name', () => {
     expect(check('2ee8b8', html).outcome).toBe('passed');
   });
 
+  // Applicability needs visible text content. A control that is not rendered, or that
+  // visibility hides, has none, however its label and name disagree.
+  it.each([
+    ['an inline display:none', '<button style="display:none" aria-label="Move menu">hide</button>'],
+    ['the hidden attribute', '<button hidden aria-label="Move menu">hide</button>'],
+    [
+      'a display:none ancestor',
+      '<p style="display:none"><a href="/" aria-label="Move menu">hide</a></p>',
+    ],
+    ['visibility:hidden', '<button style="visibility:hidden" aria-label="Move menu">hide</button>'],
+    [
+      'a closed details element',
+      '<details><summary>s</summary><button aria-label="Move menu">hide</button></details>',
+    ],
+  ])('is inapplicable to a control removed by %s', (_why, html) => {
+    expect(check('2ee8b8', html).outcome).toBe('inapplicable');
+  });
+
+  it('reads display from resolved styles, so a stylesheet class counts where layout exists', () => {
+    const html = '<button id="b" class="collapsed" aria-label="Move menu">Hide panel</button>';
+    // Without resolved styles the class hides nothing Marlo can see, and the mismatch is
+    // reported: the static renderer's gap is a finding to check, not a silent pass.
+    expect(check('2ee8b8', html).outcome).toBe('failed');
+    expect(
+      check('2ee8b8', html, { computed: { computed: { '#b': { display: 'none' } } } }).outcome,
+    ).toBe('inapplicable');
+    expect(
+      check('2ee8b8', html, {
+        computed: { computed: { '#b': { display: 'inline-block', visibility: 'hidden' } } },
+      }).outcome,
+    ).toBe('inapplicable');
+    expect(
+      check('2ee8b8', html, {
+        computed: { computed: { '#b': { display: 'inline-block', visibility: 'visible' } } },
+      }).outcome,
+    ).toBe('failed');
+  });
+
   it('asks rather than fails when screen-reader-only text could be the difference', () => {
     // The dialog close button every component library ships. A stylesheet hides the span,
     // the visible label is the symbol, and the rule is satisfied. Marlo cannot see the
