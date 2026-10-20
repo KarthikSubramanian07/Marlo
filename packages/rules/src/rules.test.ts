@@ -1274,6 +1274,70 @@ describe('the accessible name rules', () => {
     );
   });
 
+  // Name from content takes an image's text alternative: aria-labelledby, aria-label, then
+  // alt or title for an img, the title child for an svg. Without any of them the image
+  // adds nothing, so a link holding only that image has an empty name.
+  it.each([
+    ['an img with no alt', '<img src="a.png">'],
+    ['an img with an empty alt', '<img src="a.png" alt="">'],
+    ['a presentational img', '<img src="a.png" role="presentation" alt="Home">'],
+    [
+      'an img whose aria-labelledby resolves to nothing',
+      '<img src="a.png" aria-labelledby="gone">',
+    ],
+    ['an svg with no title or label', '<svg viewBox="0 0 8 8"><path d="M0 0h8v8z"></path></svg>'],
+    ['an svg whose title is only in a hidden description', '<svg><desc>Logo</desc></svg>'],
+    [
+      'an image hidden from assistive technology',
+      '<img src="a.png" alt="Home" aria-hidden="true">',
+    ],
+    ['text hidden from assistive technology', '<span aria-hidden="true">Home</span>'],
+    ['script text', '<script>var home = 1;</script>'],
+  ])('fails a link whose only content is %s', (_what, inner) => {
+    expect(check('c487ae', `<html><body><a href="/x">${inner}</a></body></html>`).outcome).toBe(
+      'failed',
+    );
+  });
+
+  it.each([
+    ['an img with alt', '<img src="a.png" alt="Home">'],
+    ['an img with only a title', '<img src="a.png" title="Home">'],
+    ['an img with aria-label', '<img src="a.png" aria-label="Home">'],
+    [
+      'an img labelled by another element',
+      '<img src="a.png" aria-labelledby="t"><b id="t">Home</b>',
+    ],
+    ['an svg with a title', '<svg><title>Home</title></svg>'],
+    ['an svg with aria-label', '<svg aria-label="Home"></svg>'],
+    ['a hidden icon beside text', '<svg aria-hidden="true"></svg> Home'],
+  ])('passes a link named by %s', (_what, inner) => {
+    expect(check('c487ae', `<html><body><a href="/x">${inner}</a></body></html>`).outcome).toBe(
+      'passed',
+    );
+  });
+
+  it('asks rather than guesses for an img HTML-AAM may name from a figcaption', () => {
+    const html = '<figure><a href="/x"><img src="a.png"></a><figcaption>Home</figcaption></figure>';
+    expect(check('c487ae', `<html><body>${html}</body></html>`).outcome).toBe('cantTell');
+  });
+
+  it('passes an svg that draws text, the reading under which a name exists', () => {
+    // Whether browsers add svg text to the name differs, so the name is uncertain, but a
+    // link that is named under the uncertain reading is not reported.
+    const html = '<a href="/x"><svg><text x="0" y="8">Home</text></svg></a>';
+    expect(check('c487ae', `<html><body>${html}</body></html>`).outcome).toBe('passed');
+  });
+
+  it('applies the same image naming to a button', () => {
+    expect(
+      check('97a4e1', '<html><body><button><img src="x.png"></button></body></html>').outcome,
+    ).toBe('failed');
+    expect(
+      check('97a4e1', '<html><body><button><img src="x.png" alt="Close"></button></body></html>')
+        .outcome,
+    ).toBe('passed');
+  });
+
   it('does not treat an anchor with no href as a link', () => {
     expect(check('c487ae', '<html><body><a></a></body></html>').outcome).toBe('inapplicable');
   });
@@ -1382,18 +1446,38 @@ describe('accessibleName declines rather than guessing', () => {
     expect(name.from).toBe('aria-label');
   });
 
-  it('is uncertain when a descendant image would contribute', () => {
-    // A complete computation recurses into the image's alt text. This one does not, so it
-    // says so rather than returning a name that might be wrong.
+  it('takes a descendant image into the name by its text alternative', () => {
+    const nameOf = (inner: string) => {
+      const document = fixture(`<html><body><a href="/x">${inner}</a></body></html>`);
+      const link = document.root.children[0]?.children[0];
+      if (link === undefined) throw new Error('no link');
+      return accessibleName(link, document, { nameFromContent: true });
+    };
+    expect(nameOf('<img src="i.png" alt="Home">')).toMatchObject({
+      name: 'Home',
+      confidence: 'certain',
+    });
+    expect(nameOf('<span>Go</span><img src="i.png" alt="Home">')).toMatchObject({
+      name: 'Go Home',
+      confidence: 'certain',
+    });
+    // Beside a bare text node the image's place is not recorded: the words are known and
+    // their order is not, which the answer says rather than asserting one.
+    const beside = nameOf('Go <img src="i.png" alt="Home">');
+    expect(beside.name.split(' ').sort()).toEqual(['Go', 'Home']);
+    expect(beside.confidence).toBe('uncertain');
+  });
+
+  it('is uncertain when an svg draws text, which browsers treat differently', () => {
     const document = fixture(
-      '<html><body><a href="/x"><img src="i.png" alt="Home"></a></body></html>',
+      '<html><body><a href="/x"><svg><text>Home</text></svg></a></body></html>',
     );
     const link = document.root.children[0]?.children[0];
     expect(link).toBeDefined();
     if (link === undefined) return;
     const name = accessibleName(link, document, { nameFromContent: true });
     expect(name.confidence).toBe('uncertain');
-    expect(name.reason).toContain('image');
+    expect(name.reason).toContain('svg');
   });
 
   it('reports a dangling aria-labelledby as producing no name', () => {

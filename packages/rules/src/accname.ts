@@ -1,5 +1,5 @@
 import type { MarloDocument, MarloElement } from './dom.js';
-import { attr, isHiddenFromAssistiveTech, normalise, walk } from './dom.js';
+import { ancestors, attr, isHiddenFromAssistiveTech, normalise, walk } from './dom.js';
 
 /**
  * Accessible name computation, for the subset of HTML-AAM the implemented rules need.
@@ -51,41 +51,141 @@ function byId(document: MarloDocument, id: string): MarloElement | null {
   return null;
 }
 
+/** Elements whose text is never rendered as content, though `textContent` includes it. */
+const NO_TEXT: ReadonlySet<string> = new Set(['script', 'style', 'template', 'noscript']);
+
+/**
+ * Hidden by markup alone: `aria-hidden="true"`, the `hidden` attribute, or an inline
+ * `display: none` or `visibility: hidden` on the element itself, whose subtree then adds
+ * nothing to a name.
+ *
+ * Resolved styles are deliberately not read here. CSS generated content can name an
+ * element whose only text a stylesheet hides, a citation backlink with a `::before`
+ * counter for one, and no renderer here reports generated content. Reading a resolved
+ * `display: none` would turn that link's name into an empty one in a browser, which is a
+ * finding against a named link. So the name is computed from the markup in both
+ * renderers, and stylesheet-hidden text counts as before.
+ */
+function hiddenByMarkup(node: MarloElement): boolean {
+  if (attr(node, 'aria-hidden') === 'true' || attr(node, 'hidden') !== null) return true;
+  return /(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*hidden)\s*(?:!\s*important)?\s*(?:;|$)/i.test(
+    attr(node, 'style') ?? '',
+  );
+}
+
+const IMAGE_UNSETTLED =
+  'An svg in the content holds text elements, and whether a browser adds them to the name ' +
+  'differs between browsers.';
+const FIGURE_UNSETTLED =
+  'An image with no alt or title sits in a figure, and HTML-AAM may name it from the ' +
+  'figcaption, which depends on the rest of the figure.';
+const DESCENDANT_LABEL =
+  'A descendant carries aria-label or aria-labelledby, so the name depends on a ' +
+  'recursive computation this implementation does not perform.';
+
+/**
+ * The text an embedded `img` or `svg` adds to its ancestor's name, from accname 1.2,
+ * HTML-AAM and SVG-AAM: aria-labelledby, aria-label, then the `alt` or `title` of an img,
+ * or the `title` child of an svg. An image with none of them adds nothing, which is a
+ * fact about the markup rather than a guess. A reason instead of text where the answer
+ * is not settled.
+ */
+function imageText(node: MarloElement, document: MarloDocument): string | { reason: string } {
+  // Accname step 2B uses the ids that resolve and skips the step when none does.
+  const targets = normalise(attr(node, 'aria-labelledby') ?? '')
+    .split(' ')
+    .filter((id) => id !== '')
+    .map((id) => byId(document, id))
+    .filter((target) => target !== null);
+  const joined = normalise(targets.map((t) => normalise(t.text)).join(' '));
+  if (joined !== '') return joined;
+  const label = normalise(attr(node, 'aria-label') ?? '');
+  if (label !== '') return label;
+  if (node.tag === 'img') {
+    const role = normalise(attr(node, 'role') ?? '').toLowerCase();
+    if (role === 'none' || role === 'presentation') return '';
+    const alt = attr(node, 'alt') ?? attr(node, 'title');
+    if (alt !== null) return normalise(alt);
+    // HTML-AAM 4.1.10 names an img with neither from a figcaption in some figures.
+    const inFigure = ancestors(node).some(
+      (a) => a.tag === 'figure' && a.children.some((c) => c.tag === 'figcaption'),
+    );
+    return inFigure ? { reason: FIGURE_UNSETTLED } : '';
+  }
+  const title = node.children.find((c) => c.tag === 'title');
+  if (title !== undefined && normalise(title.text) !== '') return normalise(title.text);
+  const drawnText = [...walk(node)].some((n) => n.tag === 'text' && normalise(n.text) !== '');
+  return drawnText ? { reason: IMAGE_UNSETTLED } : '';
+}
+
+/**
+ * The content of an element, as name from content computes it: text in document order,
+ * the text alternative of each image, nothing from a subtree hidden by markup or from
+ * script and style. A descendant with its own aria-label or aria-labelledby is the case
+ * still declined, because its contribution needs the full recursive computation.
+ *
+ * An element with no text of its own, such as an image, cannot be placed among the text
+ * nodes around it, because the view keeps text only per element. Where such an element
+ * adds words beside text, the words are right and their order may not be, which `doubt`
+ * says.
+ */
+function contentText(
+  node: MarloElement,
+  document: MarloDocument,
+): { readonly text: string; readonly doubt: string | null } | { readonly reason: string } {
+  let out = '';
+  let cursor = 0;
+  let doubt: string | null = null;
+  const ownText = node.ownText.trim() !== '';
+  for (const child of node.children) {
+    const at = node.text.indexOf(child.text, cursor);
+    if (at === -1) return { reason: 'Marlo could not put the text of this content in order.' };
+    let inner: string | { readonly reason: string };
+    if (NO_TEXT.has(child.tag) || hiddenByMarkup(child)) inner = '';
+    else if (child.tag === 'img' || child.tag === 'svg') inner = imageText(child, document);
+    else if (attr(child, 'aria-label') !== null || attr(child, 'aria-labelledby') !== null) {
+      inner = { reason: DESCENDANT_LABEL };
+    } else {
+      const nested = contentText(child, document);
+      if ('reason' in nested) return nested;
+      doubt ??= nested.doubt;
+      inner = nested.text;
+    }
+    if (typeof inner !== 'string') return inner;
+    if (child.text === '' && normalise(inner) !== '' && ownText) {
+      doubt ??=
+        'An image adds words beside text, and the order of the two is not recorded, so the ' +
+        'words of the name are known and their order is not.';
+    }
+    out += `${node.text.slice(cursor, at)} ${inner} `;
+    cursor = at + child.text.length;
+  }
+  return { text: out + node.text.slice(cursor), doubt };
+}
+
 /**
  * Text content of an element for naming purposes.
  *
  * `uncertain` when a descendant carries `aria-label` or `aria-labelledby`, because the
- * real computation would recurse into those and this does not, or when CSS generated
- * content could contribute, which cannot be ruled out from the DOM.
+ * real computation would recurse into those and this does not, when an image's
+ * contribution is not settled, or when the order of its words is not. CSS generated
+ * content is not seen at all: see `hiddenByMarkup`.
  */
-function contentName(element: MarloElement): AccessibleName {
-  let uncertainReason: string | null = null;
-
-  for (const node of walk(element)) {
-    if (node === element) continue;
-    if (attr(node, 'aria-label') !== null || attr(node, 'aria-labelledby') !== null) {
-      uncertainReason =
-        'A descendant carries aria-label or aria-labelledby, so the name depends on a ' +
-        'recursive computation this implementation does not perform.';
-      break;
-    }
-    // An image inside a link or button contributes its alt text to the name.
-    if (node.tag === 'img' || node.tag === 'svg') {
-      uncertainReason =
-        'An image contributes to the name, and whether it does depends on how the ' +
-        'renderer resolves it.';
-      break;
-    }
+function contentName(element: MarloElement, document: MarloDocument): AccessibleName {
+  const computed = contentText(element, document);
+  if ('reason' in computed) {
+    return {
+      name: normalise(element.text),
+      confidence: 'uncertain',
+      from: 'content',
+      reason: computed.reason,
+    };
   }
-
-  const text = normalise(element.text);
-  if (text === '' && uncertainReason === null) return { ...NONE, from: 'content' };
-  return {
-    name: text,
-    confidence: uncertainReason === null ? 'certain' : 'uncertain',
-    from: 'content',
-    reason: uncertainReason,
-  };
+  const text = normalise(computed.text);
+  if (text === '') return { ...NONE, from: 'content' };
+  return computed.doubt === null
+    ? { name: text, confidence: 'certain', from: 'content', reason: null }
+    : { name: text, confidence: 'uncertain', from: 'content', reason: computed.doubt };
 }
 
 /** The native naming mechanism for elements that have one. */
@@ -140,13 +240,13 @@ function nativeName(element: MarloElement, document: MarloDocument): AccessibleN
 
     case 'fieldset': {
       const legend = element.children.find((c) => c.tag === 'legend');
-      if (legend !== undefined) return contentName(legend);
+      if (legend !== undefined) return contentName(legend, document);
       return null;
     }
 
     case 'table': {
       const caption = element.children.find((c) => c.tag === 'caption');
-      if (caption !== undefined) return contentName(caption);
+      if (caption !== undefined) return contentName(caption, document);
       return null;
     }
 
@@ -205,14 +305,14 @@ function labelName(element: MarloElement, document: MarloDocument): AccessibleNa
   if (id !== null && id !== '') {
     for (const candidate of walk(document.root)) {
       if (candidate.tag === 'label' && attr(candidate, 'for') === id) {
-        return contentName(candidate);
+        return contentName(candidate, document);
       }
     }
   }
   // A wrapping label.
   let current = element.parent;
   while (current !== null) {
-    if (current.tag === 'label') return contentName(current);
+    if (current.tag === 'label') return contentName(current, document);
     current = current.parent;
   }
   return null;
@@ -280,7 +380,7 @@ export function accessibleName(
 
   // 4. Content, for roles that permit it.
   if (options.nameFromContent) {
-    const content = contentName(element);
+    const content = contentName(element, document);
     if (content.name !== '' || content.confidence === 'uncertain') return content;
   }
 
