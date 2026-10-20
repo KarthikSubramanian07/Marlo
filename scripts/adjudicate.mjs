@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 /**
- * The tooling for rated ground truth on the real-page corpus. The protocol it implements
- * is corpus/real/adjudication/PROTOCOL.md; read that first.
+ * The tooling for rated ground truth on the real-page corpora. The protocol it implements
+ * is corpus/real/adjudication/PROTOCOL.md; read that first. It serves two corpora with the
+ * same protocol: corpus/real, where the engine's errors were analysed, and corpus/heldout,
+ * whose ground truth was committed before any change made after that analysis was measured
+ * on it. Every command takes `--corpus real|heldout` and defaults to `real`.
  *
  * The unit is one page by one ACT rule, for every rule Marlo implements. Two raters each
  * fill in a worksheet without seeing the other's, an agreement step measures how often
@@ -12,6 +15,7 @@
  *
  * Usage:
  *   node scripts/adjudicate.mjs sheet --rater A|B   write that rater's empty worksheet
+ *   ... --corpus heldout                            any command, on corpus/heldout
  *   node scripts/adjudicate.mjs validate            check both worksheets and resolutions
  *   node scripts/adjudicate.mjs agreement           kappa and percent agreement, and write
  *                                                   DISAGREEMENTS.md
@@ -25,8 +29,18 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const REAL = join(ROOT, 'corpus', 'real');
-const ADJUDICATION = join(REAL, 'adjudication');
+
+/** The corpora rated under this protocol, by directory name under corpus/. */
+export const CORPORA = Object.freeze(['real', 'heldout']);
+
+/** The corpus directory and its adjudication directory, refusing a name not in CORPORA. */
+export function corpusPaths(name = 'real') {
+  if (!CORPORA.includes(name)) {
+    throw new Error(`unknown corpus "${String(name)}"; expected one of ${CORPORA.join(', ')}`);
+  }
+  const dir = join(ROOT, 'corpus', name);
+  return { name, dir, adjudication: join(dir, 'adjudication') };
+}
 
 export const RATERS = Object.freeze(['A', 'B']);
 export const ANSWERS = Object.freeze(['passed', 'failed', 'cantTell', 'inapplicable']);
@@ -459,8 +473,9 @@ function readJson(file) {
  * The pages, the implemented rules and the cell keys a complete worksheet covers. Exported
  * so scripts/rate.mjs validates against exactly the cell set `validate` uses.
  */
-export async function corpusContext() {
-  const manifest = readJson(join(REAL, 'MANIFEST.json'));
+export async function corpusContext(name = 'real') {
+  const paths = corpusPaths(name);
+  const manifest = readJson(join(paths.dir, 'MANIFEST.json'));
   let rules;
   try {
     const [{ IMPLEMENTED_RULES }, { findRule }] = await Promise.all([
@@ -482,27 +497,27 @@ export async function corpusContext() {
   }));
   const expected = new Set(pages.flatMap((p) => rules.map((r) => cellKey(p.id, r.id))));
   const labels = new Map(pages.map((p) => [p.id, `${p.category} (${p.sha256.slice(0, 12)})`]));
-  return { pages, rules, expected, labels };
+  return { pages, rules, expected, labels, paths };
 }
 
-const sheetPath = (rater) => join(ADJUDICATION, `sheet-${rater}.json`);
-const RESOLUTIONS = join(ADJUDICATION, 'resolutions.json');
+const sheetPath = (paths, rater) => join(paths.adjudication, `sheet-${rater}.json`);
 
-function readResolutions() {
-  if (!existsSync(RESOLUTIONS)) return [];
-  const parsed = readJson(RESOLUTIONS);
+function readResolutions(paths) {
+  const file = join(paths.adjudication, 'resolutions.json');
+  if (!existsSync(file)) return [];
+  const parsed = readJson(file);
   return Array.isArray(parsed.resolutions) ? parsed.resolutions : [];
 }
 
-function readBoth(expected) {
+function readBoth(paths, expected) {
   const sheets = {};
   const problems = [];
   for (const rater of RATERS) {
-    if (!existsSync(sheetPath(rater))) {
+    if (!existsSync(sheetPath(paths, rater))) {
       problems.push(`sheet-${rater}.json does not exist. Run \`sheet --rater ${rater}\`.`);
       continue;
     }
-    sheets[rater] = readJson(sheetPath(rater));
+    sheets[rater] = readJson(sheetPath(paths, rater));
     for (const p of validateSheet(sheets[rater], expected)) problems.push(`sheet-${rater}: ${p}`);
   }
   return { a: sheets.A, b: sheets.B, problems };
@@ -517,7 +532,15 @@ function report(problems, what) {
 
 async function main(argv) {
   const command = argv[0];
-  const context = await corpusContext();
+  const corpusAt = argv.indexOf('--corpus');
+  const name = corpusAt === -1 ? 'real' : argv[corpusAt + 1];
+  if (!CORPORA.includes(name)) {
+    console.error(`--corpus must be one of ${CORPORA.join(', ')}`);
+    process.exitCode = 2;
+    return;
+  }
+  const context = await corpusContext(name);
+  const { paths } = context;
 
   if (command === 'sheet') {
     const rater = argv[argv.indexOf('--rater') + 1];
@@ -526,7 +549,7 @@ async function main(argv) {
       process.exitCode = 2;
       return;
     }
-    const file = sheetPath(rater);
+    const file = sheetPath(paths, rater);
     if (existsSync(file)) {
       const existing = readJson(file);
       const started = (existing.cells ?? []).some(
@@ -543,7 +566,7 @@ async function main(argv) {
       }
     }
     const sheet = buildSheet(rater, context.pages, context.rules, (p) =>
-      readFileSync(join(REAL, p.path), 'utf8'),
+      readFileSync(join(paths.dir, p.path), 'utf8'),
     );
     writeFileSync(file, `${JSON.stringify(sheet, null, 2)}\n`, 'utf8');
     const screened = sheet.cells.filter((c) => c.prescreened).length;
@@ -555,11 +578,14 @@ async function main(argv) {
   }
 
   if (command === 'validate') {
-    const { a, b, problems } = readBoth(context.expected);
+    const { a, b, problems } = readBoth(paths, context.expected);
     if (a !== undefined && b !== undefined) {
       const paired = pairSheets(a, b);
       problems.push(
-        ...validateResolutions(readResolutions(), new Set(paired.disagreements.map((d) => d.key))),
+        ...validateResolutions(
+          readResolutions(paths),
+          new Set(paired.disagreements.map((d) => d.key)),
+        ),
       );
     }
     if (problems.length > 0) report(problems, 'validate');
@@ -568,16 +594,16 @@ async function main(argv) {
   }
 
   if (command === 'agreement' || command === 'resolve') {
-    const { a, b, problems } = readBoth(context.expected);
+    const { a, b, problems } = readBoth(paths, context.expected);
     if (problems.length > 0) {
       report(problems, command);
       return;
     }
-    const resolutions = readResolutions();
+    const resolutions = readResolutions(paths);
     if (command === 'agreement') {
       const paired = pairSheets(a, b);
       writeFileSync(
-        join(ADJUDICATION, 'DISAGREEMENTS.md'),
+        join(paths.adjudication, 'DISAGREEMENTS.md'),
         renderDisagreements(paired, resolutions, context.labels),
         'utf8',
       );
@@ -598,7 +624,7 @@ async function main(argv) {
       return;
     }
     writeFileSync(
-      join(ADJUDICATION, 'resolved.json'),
+      join(paths.adjudication, 'resolved.json'),
       `${JSON.stringify(
         {
           protocol: 'PROTOCOL.md',
@@ -622,7 +648,8 @@ async function main(argv) {
   }
 
   console.error(
-    'usage: node scripts/adjudicate.mjs sheet --rater A|B | validate | agreement | resolve',
+    'usage: node scripts/adjudicate.mjs sheet --rater A|B | validate | agreement | resolve ' +
+      '[--corpus real|heldout]',
   );
   process.exitCode = 2;
 }
