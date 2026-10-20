@@ -372,6 +372,63 @@ describe('6cfa84 aria-hidden hides nothing focusable', () => {
         .outcome,
     ).toBe('passed');
   });
+
+  // The expectation is about content "focusable and part of the sequential focus
+  // navigation". Each of these removes a natively focusable element from that order
+  // without touching its tag or tabindex.
+  it.each([
+    ['an inline display:none on the control', '<a href="/" style="display:none">x</a>'],
+    ['display:none on a wrapper', '<p style="display: none"><a href="/">x</a></p>'],
+    ['the hidden attribute on a wrapper', '<p hidden><button>x</button></p>'],
+    ['visibility:hidden inherited', '<p style="visibility:hidden"><button>x</button></p>'],
+    ['an inert ancestor', '<p inert><button>x</button></p>'],
+    ['a disabled fieldset', '<fieldset disabled><input /></fieldset>'],
+    [
+      'a closed details element',
+      '<details><summary tabindex="-1">s</summary><a href="/">x</a></details>',
+    ],
+    ['an input of type hidden', '<input type="hidden" name="x" />'],
+  ])('passes when the only focusable content is removed by %s', (_why, inner) => {
+    expect(
+      check('6cfa84', `<html><body><div aria-hidden="true">${inner}</div></body></html>`).outcome,
+    ).toBe('passed');
+  });
+
+  it.each([
+    [
+      'visibility set back to visible',
+      '<p style="visibility:hidden"><a href="/" style="visibility:visible">x</a></p>',
+    ],
+    ['the summary of a closed details element', '<details><summary>s</summary><p>x</p></details>'],
+    [
+      'a control in the first legend of a disabled fieldset',
+      '<fieldset disabled><legend><input /></legend></fieldset>',
+    ],
+  ])('still fails %s, which stays in the focus order', (_why, inner) => {
+    expect(
+      check('6cfa84', `<html><body><div aria-hidden="true">${inner}</div></body></html>`).outcome,
+    ).toBe('failed');
+  });
+
+  it('reads display from resolved styles, so a stylesheet class counts where layout exists', () => {
+    const html =
+      '<html><body><div aria-hidden="true"><a id="l" href="/" class="hidden">x</a></div></body></html>';
+    // Without resolved styles the class is invisible and the link is reported, which is
+    // the static renderer's gap: an over-report a reader can check, never a silent pass.
+    expect(check('6cfa84', html).outcome).toBe('failed');
+    expect(
+      check('6cfa84', html, { computed: { computed: { '#l': { display: 'none' } } } }).outcome,
+    ).toBe('passed');
+  });
+
+  it('lets resolved styles override the hidden attribute, as a stylesheet can', () => {
+    const html =
+      '<html><body><div aria-hidden="true"><a id="l" href="/" hidden>x</a></div></body></html>';
+    expect(check('6cfa84', html).outcome).toBe('passed');
+    expect(
+      check('6cfa84', html, { computed: { computed: { '#l': { display: 'inline' } } } }).outcome,
+    ).toBe('failed');
+  });
 });
 
 describe('3ea0c8 ids are unique', () => {

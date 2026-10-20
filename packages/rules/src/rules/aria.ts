@@ -1,5 +1,12 @@
 import { defineRule } from '../define.js';
-import { attr, findAll, isFocusable, isHiddenFromAssistiveTech, normalise, walk } from '../dom.js';
+import {
+  attr,
+  findAll,
+  isHiddenFromAssistiveTech,
+  isInSequentialFocusOrder,
+  normalise,
+  walk,
+} from '../dom.js';
 
 /**
  * The ARIA validity rules. Decidable from the DOM, mechanically fixable, and the
@@ -728,9 +735,17 @@ export const ariaHiddenNoFocusable = defineRule({
     return targets;
   },
   expectation: ({ element }) => {
-    const focusable = [...walk(element)].filter((node) => isFocusable(node));
+    // "Focusable and part of the sequential focus navigation": an element that is not
+    // rendered, is hidden by visibility, is inert or is disabled is in neither, whatever
+    // its tag or tabindex says. Display is read from resolved styles where the renderer
+    // has them; without them a stylesheet-hidden element still counts, so this rule can
+    // over-report on the static renderer and cannot under-report. See `isNotRendered`.
+    const focusable = [...walk(element)].filter((node) => isInSequentialFocusOrder(node));
     if (focusable.length === 0) {
-      return { outcome: 'passed', message: 'Nothing inside the hidden element is focusable.' };
+      return {
+        outcome: 'passed',
+        message: 'Nothing inside the hidden element is in the sequential focus order.',
+      };
     }
     const names = focusable.map((f) => f.tag).join(', ');
     return {

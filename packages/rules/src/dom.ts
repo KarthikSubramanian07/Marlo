@@ -193,6 +193,101 @@ export function isVisuallyHidden(element: MarloElement): boolean {
   return false;
 }
 
+const INLINE_DISPLAY_NONE = /(?:^|;)\s*display\s*:\s*none\s*(?:!\s*important)?\s*(?:;|$)/i;
+
+/** A resolved style value, or null where the renderer resolved none. */
+function resolved(element: MarloElement, property: string): string | null {
+  const value = element.computed?.get(property) ?? null;
+  return value === null || value.trim() === '' ? null : value.trim().toLowerCase();
+}
+
+/**
+ * Whether an element is not rendered: it or an ancestor generates no box, or it sits in
+ * a closed `details` element anywhere but that element's summary.
+ *
+ * Where the renderer resolved styles, `display` is read from them, so a class in a
+ * stylesheet counts the same as an inline style, and `[hidden]` overridden by CSS
+ * counts as shown. Where it did not, the `hidden` attribute and an inline
+ * `display: none` are the only evidence, which is the static renderer's best available
+ * signal.
+ *
+ * The direction of that gap matters to every caller. An element a stylesheet hides
+ * reads as rendered on the static renderer, so a rule that drops unrendered elements
+ * from scope keeps that element in scope there. It over-applies, and whatever it
+ * reports names an element a reader can check. It never turns into a pass nobody can
+ * see, which is why a rule using this needs only `dom`: it reads `layout` when it is
+ * there and does not depend on it.
+ */
+export function isNotRendered(element: MarloElement): boolean {
+  let below: MarloElement | null = null;
+  for (const node of [element, ...ancestors(element)]) {
+    if (node.tag === 'template' || node.tag === 'head') return true;
+    const display = resolved(node, 'display');
+    if (display !== null) {
+      if (display === 'none') return true;
+    } else if (
+      hasAttr(node, 'hidden') ||
+      INLINE_DISPLAY_NONE.test(attr(node, 'style') ?? '') ||
+      (node.tag === 'input' && (attr(node, 'type') ?? '').toLowerCase() === 'hidden')
+    ) {
+      return true;
+    }
+    // A closed details element renders its first summary and nothing else.
+    if (node.tag === 'details' && below !== null && !hasAttr(node, 'open')) {
+      if (below !== node.children.find((c) => c.tag === 'summary')) return true;
+    }
+    below = node;
+  }
+  return false;
+}
+
+/**
+ * Whether `visibility` hides an element. It inherits and a descendant may set it back to
+ * `visible`, so the resolved value on the element itself decides where styles were
+ * resolved, and otherwise the nearest inline declaration on the way up does.
+ */
+export function isVisibilityHidden(element: MarloElement): boolean {
+  const own = resolved(element, 'visibility');
+  if (own !== null) return own !== 'visible';
+  for (const node of [element, ...ancestors(element)]) {
+    const visibility = /(?:^|;)\s*visibility\s*:\s*([a-z]+)/i.exec(attr(node, 'style') ?? '');
+    if (visibility !== null) return visibility[1]?.toLowerCase() !== 'visible';
+  }
+  return false;
+}
+
+const FORM_CONTROLS: ReadonlySet<string> = new Set(['button', 'input', 'select', 'textarea']);
+
+/**
+ * Whether a form control is disabled, by its own attribute or by a disabled `fieldset`
+ * around it. A control inside that fieldset's first `legend` stays enabled, as HTML
+ * specifies.
+ */
+function isDisabledControl(element: MarloElement): boolean {
+  if (!FORM_CONTROLS.has(element.tag)) return false;
+  if (hasAttr(element, 'disabled')) return true;
+  let below: MarloElement = element;
+  for (const node of ancestors(element)) {
+    if (node.tag === 'fieldset' && hasAttr(node, 'disabled')) {
+      const legend = node.children.find((c) => c.tag === 'legend');
+      if (legend === undefined || below !== legend) return true;
+    }
+    below = node;
+  }
+  return false;
+}
+
+/**
+ * Whether an element is part of sequential focus navigation: focusable by default or by
+ * a non-negative tabindex, and not removed from the order by being unrendered, hidden by
+ * `visibility`, inert, or disabled. The stylesheet caveat on `isNotRendered` applies.
+ */
+export function isInSequentialFocusOrder(element: MarloElement): boolean {
+  if (!isFocusable(element) || isDisabledControl(element)) return false;
+  if (isNotRendered(element) || isVisibilityHidden(element)) return false;
+  return ![element, ...ancestors(element)].some((node) => hasAttr(node, 'inert'));
+}
+
 /** Focusable by default, or made focusable by a non-negative tabindex. */
 export function isFocusable(element: MarloElement): boolean {
   const tabindex = attr(element, 'tabindex');
