@@ -75,7 +75,7 @@ Still third of four. On minimum contrast, which every scan before this reported 
 
 Every number above comes from hand-written test cases, each built to isolate one condition. Real pages are not like that, so `corpus/real` vendors 25 pages from 12 kinds of site (government, documentation, shops, checkouts, forms, application shells and more), all under licences that allow it, and the harness measures every engine on them separately and never pools the result with the table above.
 
-Every one of the 1025 cells, each page against each rule Marlo implements, now has a resolved ground truth. **It is model-adjudicated, not human judgment**: two different language models rated every cell independently, blind to every engine, and a third settled the 40 cells where they disagreed. They agreed on 94.6% of the 736 cells that needed a judgment (Cohen's kappa 0.885). How far to trust that is measured rather than assumed: the same raters, under the same instructions, rated the 594 official test cases of the same rules with their names hidden, and the adjudicated labels match the W3C's human-written answers on 95.8% of them ([RATER-VALIDITY.md](corpus/real/adjudication/RATER-VALIDITY.md)). D-014 in [DECISIONS.md](DECISIONS.md) records why, and what would make the figures below wrong.
+Every one of the 1025 cells, each page against each rule Marlo implements, now has a resolved ground truth. **It is model-adjudicated, not human judgment**: two different language models rated every cell independently, blind to every engine, and a third settled the 38 cells where they disagreed. They agreed on 94.8% of the 738 cells that needed a judgment (Cohen's kappa 0.890). How far to trust that is measured rather than assumed: the same raters, under the same instructions, rated the 594 official test cases of the same rules with their names hidden, and the adjudicated labels match the W3C's human-written answers on 95.8% of them ([RATER-VALIDITY.md](corpus/real/adjudication/RATER-VALIDITY.md)). D-014 in [DECISIONS.md](DECISIONS.md) records why, and what would make the figures below wrong.
 
 On real pages the picture is much worse than on the official cases:
 
@@ -89,7 +89,22 @@ On real pages the picture is much worse than on the official cases:
 
 Precision falls from 0.831 to 0.582 and recall from 0.853 to 0.570. The routing chosen on the official corpus, scored on pages it never saw, finds a third as many violations as the union and is no more precise, which settles the open question above: routing is not an accuracy mechanism. And Marlo's own engine, third of four on the official cases, is the least precise engine on real ones. Intervals and the full table are in [calibration/ANALYSIS.md](calibration/ANALYSIS.md). Beyond accuracy, on 19 of the 25 pages some engine reports a failure for a rule the routed engine passes, and engines that agree closely on the official cases report findings at rates two orders of magnitude apart.
 
-Why Marlo's own engine does so badly is written down cell by cell in [calibration/ERROR-ANALYSIS.md](calibration/ERROR-ANALYSIS.md). It makes 27 false positives and 43 false negatives on rules it evaluates, and each has a named root cause. 17 of the false positives are rule logic that contradicts the ACT rule text, 8 of them from one defect: failing an ID reference whose target is missing, which the rule explicitly allows. 24 of the false negatives are abstentions, mostly on bypass rules that turn on what repeats across a site. Five rules with real-page errors score perfectly on their official test cases, because no case exercises what fails. Rerun in headless Chromium, the engine's precision is 0.733 and its recall 0.473. None of this is fixed yet, because fixing rules on these pages would make them training data rather than a held-out measurement.
+Why Marlo's own engine does so badly is written down cell by cell in [calibration/ERROR-ANALYSIS.md](calibration/ERROR-ANALYSIS.md). It makes 27 false positives and 43 false negatives on rules it evaluates, and each has a named root cause. 17 of the false positives are rule logic that contradicts the ACT rule text, 8 of them from one defect: failing an ID reference whose target is missing, which the rule explicitly allows. 24 of the false negatives are abstentions, mostly on bypass rules that turn on what repeats across a site. Five rules with real-page errors score perfectly on their official test cases, because no case exercises what fails. Rerun in headless Chromium, the engine's precision is 0.733 and its recall 0.473. Fixing rules on these pages and measuring them here again would make the pages training data, so the fixes are measured on a second set of pages instead.
+
+### A third corpus, held out
+
+`corpus/heldout` vendors 25 more pages from 12 kinds of site, none from a site `corpus/real` uses (the verifier refuses one that is), snapshotted and rated the same way. Their ground truth was committed, and pushed, before any rule change made after the error analysis was measured on them, so they say how well a correction generalises rather than how well it fits the pages it was written against. The same two raters rated every held-out cell independently and the same resolver decided where they differed: agreement was 96.5% over the 750 cells that needed a judgment, a kappa of 0.931, with 26 cells left to the resolver.
+
+Every engine on the held-out cells, graded strictly and pooled over the rules it claims, with the rules as they stood when that ground truth was committed:
+
+| Held-out pages, every engine | Precision | Recall |
+| ---------------------------- | --------- | ------ |
+| Alfa                         | 0.862     | 0.694  |
+| axe-core                     | 0.824     | 0.333  |
+| HTML CodeSniffer             | 0.381     | 0.138  |
+| Marlo's own engine           | 0.680     | 0.304  |
+
+These pool each engine over its own rules, so they are not the per-strategy figures in the table above, and every cell an engine declined or crashed on counts as a miss. The intervals are in [calibration/README.md](calibration/README.md#held-out-real-pages).
 
 ---
 

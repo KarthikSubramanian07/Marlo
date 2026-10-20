@@ -19,9 +19,15 @@ Nothing is published to a registry yet. There is no installable release, so ther
 ### Fixed
 
 - The playground's browser fallback has its own daily cap. `marlo-fetcher` keeps a budget of browser time per UTC day in Workers KV, charges each render what Browser Run reports it used, and refuses once the budget is spent, without starting a browser. It defaults to the Workers Free allowance of ten minutes, so moving the account to a paid plan can no longer turn a busy day into a bill. With no budget binding it refuses to render at all.
+- Three adjudication pre-screen patterns were narrower than their rules: `bc4a75` ignored implicit roles such as `ul` and `table`, `46ca7f` ignored `img alt=""`, and `36b590` omitted two roles. On `corpus/real` this had left two cells wrongly resolved `inapplicable`; all ten affected cells were re-rated by both raters and now say `passed`.
+- On the real pages, a cell an engine declined as unsupported or crashed on is now graded as no detection for every engine, instead of being left out. Leaving it out compared Marlo, which declines the layout rules under the static renderer, on an easier set than the peers, which answer every page. Marlo's real-page recall is 0.172, not 0.27, and the error analysis and the table now agree.
+- The snapshot script ended an `@import` at a semicolon inside its URL, which left one held-out page almost unstyled. It was fixed and the page re-snapshotted and re-rated before any ground truth was committed.
+
 - An installed CLI can find its calibration tables. It read them from two directories above its package, which inside `node_modules` is nowhere, so a scan from an npm install refused to run. The tables now ship inside the package, staged from the committed files when it is packed.
 
 ### Added
+
+- A held-out corpus of 25 real pages (`corpus/heldout`) from sites `corpus/real` does not use, rated by the same two model raters under the same protocol, with the 26 disagreements resolved, and committed before any rule change made after the error analysis was measured on it. The harness grades every engine on it in its own `heldOutCorpus` block, and each real-page block now carries every engine's pooled figures with the counts behind them. With the rules as they stood, Marlo's own engine scores precision 0.680 and recall 0.304 there.
 
 - `pnpm run release:check`, required in CI, packs every package, installs the tarballs into an empty project and runs real scans and an MCP call, so packaging is tested as a user would receive it. `pnpm run release` publishes, and a tag publishes from `.github/workflows/release.yml` with provenance and no stored token. SETUP.md has the first-release steps.
 

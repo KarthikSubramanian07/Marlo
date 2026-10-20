@@ -87,7 +87,11 @@ const BROWSER_SECTION = section(
   '### The same corpus, inside a real browser',
   '### A second corpus, from real pages',
 );
-const REAL_SECTION = section('### A second corpus, from real pages', '\n---');
+const REAL_SECTION = section(
+  '### A second corpus, from real pages',
+  '### A third corpus, held out',
+);
+const HELDOUT_SECTION = section('### A third corpus, held out', '\n---');
 const SCAN_SECTION = section('## What using it looks like', 'Three things there that');
 
 /** Pools the confusion counts the way `aggregateStrictAccuracy` does. */
@@ -410,6 +414,55 @@ expect(
 
 // The real-page corpus, against its own block.
 {
+  const held = table.heldOutCorpus;
+  if (held === undefined) {
+    if (HELDOUT_SECTION !== '') {
+      problems.push('held-out pages: README describes a held-out corpus and the table has none');
+    }
+  } else {
+    expect(
+      'held-out pages and categories',
+      claim(
+        'held-out pages and categories',
+        /vendors (\d+) more pages from (\d+) kinds of site/g,
+        HELDOUT_SECTION,
+      )?.map((m) => `${m[1]}/${m[2]}`),
+      `${String(held.pages)}/${String(held.categories.length)}`,
+    );
+    const hadj = held.adjudication;
+    expect(
+      'held-out agreement',
+      claim(
+        'held-out agreement',
+        /agreement was ([\d.]+%) over the (\d+) cells that needed a judgment, a kappa of ([\d.]+), with (\d+) cells left to the resolver/g,
+        HELDOUT_SECTION,
+      )?.map((m) => `${m[1]}/${m[2]}/${m[3]}/${m[4]}`),
+      `${percent(hadj.percentAgreement)}/${String(hadj.ratedCells)}/${rate(hadj.kappa)}/${String(hadj.resolutions.model + hadj.resolutions.person)}`,
+    );
+    const rows = [
+      ['alfa', 'Alfa'],
+      ['axe-core', 'axe-core'],
+      ['htmlcs', 'HTML CodeSniffer'],
+      ['marlo', "Marlo's own engine"],
+    ];
+    for (const [id, label] of rows) {
+      const row = (held.aggregate.engines ?? []).find((e) => e.engine === id);
+      const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      expect(
+        `held-out ${id}`,
+        claim(
+          `held-out ${id}`,
+          new RegExp(
+            `\\| ${escaped} +\\| ([\\d.]+|not measured) +\\| ([\\d.]+|not measured) +\\|`,
+            'g',
+          ),
+          HELDOUT_SECTION,
+        )?.map((m) => `${m[1]}/${m[2]}`),
+        row === undefined ? 'no row' : `${rate(row.strictPrecision)}/${rate(row.strictRecall)}`,
+      );
+    }
+  }
+
   const real = table.realCorpus;
   const NUMBER_RE = /vendors (\d+) pages from (\d+) kinds of site/g;
   if (real === undefined) {
