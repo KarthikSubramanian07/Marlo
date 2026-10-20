@@ -1626,8 +1626,40 @@ describe('b40fd1 landmark with non-repeated content', () => {
     const html = bypassPage(
       '<main><nav><a href="/">Home</a> <a href="/docs">Docs</a></nav><p>Text</p></main>',
     );
-    expect(check('b40fd1', html).outcome).toBe('passed');
+    // Not a failure, since the trail is not taken for the opening navigation. Not a pass
+    // either: the main opens with links in a nav, and whether that is repeated is not
+    // something one page shows.
+    expect(check('b40fd1', html).outcome).toBe('cantTell');
     expect(check('047fe0', html).outcome).not.toBe('failed');
+  });
+
+  // With no opening navigation recognised, a main landmark passes only when its first
+  // perceivable content is plausibly the page's own: the rule needs a landmark whose first
+  // perceivable content is non-repeated, not merely a landmark.
+  it.each([
+    ['a logo link', '<main><a href="/"><img src="logo.png" alt="Shop"></a><h1>Cart</h1></main>'],
+    [
+      'a header holding the menu',
+      '<main><header><button>Menu</button></header><h1>Cart</h1></main>',
+    ],
+    ['a nav', '<main><nav><a href="/a">A</a></nav><h1>Cart</h1></main>'],
+    ['an explicit banner', '<main><div role="banner"><p>Shop</p></div><h1>Cart</h1></main>'],
+  ])('asks rather than passes when main opens with %s', (_what, inner) => {
+    // A link to another page, so the page is one whose content could repeat elsewhere.
+    const result = check('b40fd1', bypassPage(`${inner}<a href="/about">About</a>`));
+    expect(result.outcome).toBe('cantTell');
+    expect(result.messages.join(' ')).toContain('one page cannot show');
+  });
+
+  it('passes a main that opens with content of its own', () => {
+    expect(
+      check('b40fd1', bypassPage('<main><h1>Cart</h1><a href="/">Home</a></main>')).outcome,
+    ).toBe('passed');
+  });
+
+  it('passes a main whatever it opens with when nothing leads to another page', () => {
+    const html = '<html><body><main><header><p>Shop</p></header><h1>Cart</h1></main></body></html>';
+    expect(check('b40fd1', html).outcome).toBe('passed');
   });
 
   it('asks rather than fails when the only landmark after the navigation is an aside', () => {

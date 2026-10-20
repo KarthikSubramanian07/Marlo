@@ -494,6 +494,30 @@ function landmarkRole(element: MarloElement): string | null {
   }
 }
 
+/** Elements that usually hold a site's repeated header, menu, footer or sidebar. */
+const CHROME_TAGS: ReadonlySet<string> = new Set(['header', 'nav', 'footer', 'aside']);
+const CHROME_ROLES: ReadonlySet<string> = new Set([
+  'banner',
+  'navigation',
+  'contentinfo',
+  'complementary',
+]);
+
+/**
+ * Whether the first perceivable content of a landmark sits in a link, or in a header,
+ * nav, footer or aside inside it. The tag counts as well as the landmark role, because a
+ * header inside `main` is no banner and still holds the site's logo and menu.
+ */
+function opensWithChrome(landmark: MarloElement, first: MarloElement): boolean {
+  if (enclosingLink(first) !== null) return true;
+  for (const node of [first, ...ancestors(first)]) {
+    if (node === landmark) return false;
+    const role = explicitRole(node);
+    if (CHROME_TAGS.has(node.tag) || (role !== null && CHROME_ROLES.has(role))) return true;
+  }
+  return false;
+}
+
 /** The verdict for b40fd1, shared with the composite. */
 function landmarkVerdict(document: MarloDocument): RuleVerdict {
   const model = modelOf(document);
@@ -502,13 +526,40 @@ function landmarkVerdict(document: MarloDocument): RuleVerdict {
   );
 
   if (model.leadingLink === null) {
-    const main = landmarks.find(
+    // No opening navigation was recognised, so where repeated content ends is unknown.
+    // A main landmark satisfies the rule only if its first perceivable content is
+    // non-repeated, and a main that opens with a link, or inside a header, nav, footer or
+    // aside, opens with what is usually the site's logo or menu. That is not a pass on
+    // one page's evidence. A main that opens with anything else is read as content, the
+    // same reading the rest of this family gives content after the navigation.
+    const mains = landmarks.filter(
       (l) => landmarkRole(l) === 'main' && firstPerceivableWithin(model, l) !== null,
     );
-    if (main !== undefined) {
+    const clear = mains.find((main) => {
+      const first = firstPerceivableWithin(model, main);
+      return first !== null && !opensWithChrome(main, first);
+    });
+    if (clear !== undefined) {
+      const first = firstPerceivableWithin(model, clear);
       return {
         outcome: 'passed',
-        message: `${describe(main)} is a main landmark, so a screen reader user can jump to the page's own content.`,
+        message:
+          `${describe(clear)} is a main landmark that opens with ` +
+          `${first === null ? 'content' : excerpt(first)}, so a screen reader user can jump to ` +
+          "the page's own content.",
+      };
+    }
+    const main = mains[0];
+    if (main !== undefined && model.leadsElsewhere) {
+      const first = firstPerceivableWithin(model, main);
+      return {
+        outcome: 'cantTell',
+        message:
+          `${describe(main)} is a main landmark, but it opens with ` +
+          `${first === null ? 'nothing perceivable' : excerpt(first)}, inside a link or a ` +
+          'header, nav, footer or aside, which is usually site content repeated on every page. ' +
+          'If that is so, the landmark starts with repeated content and does not satisfy the ' +
+          'rule; one page cannot show which.',
       };
     }
     return unrecognised(model, 'the page wraps its own content in a main landmark');
