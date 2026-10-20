@@ -194,6 +194,16 @@ export const formFieldHasName = defineRule({
   },
   expectation: ({ element }, document) => {
     const computed = accessibleName(element, document, { nameFromContent: false });
+    if (computed.from === 'placeholder' && computed.name !== '') {
+      // The rule asks only for a non-empty name, and HTML-AAM supplies one from the
+      // placeholder. Said plainly, because it is the weakest name a field can have.
+      return {
+        outcome: 'passed',
+        message:
+          `The field is named "${computed.name}" by its placeholder, which HTML-AAM accepts as ` +
+          'a last resort. It disappears once the field has a value, so a visible label is better.',
+      };
+    }
     if (computed.name !== '') {
       return {
         outcome: 'passed',
