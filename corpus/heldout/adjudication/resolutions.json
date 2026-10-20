@@ -1,0 +1,212 @@
+{
+  "resolutions": [
+    {
+      "page": "application-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "div#world-map > svg (365x220, visible, no role, no name, no author-named ancestor) is a jsvectormap world map of 176 country paths with zoom buttons in the 'Sales Value' card. A map widget is content, not pure decoration, so this ignored svg fails. The four aria-hidden svg.small-box-icon are also applicable; canvas#revenue-chart has role=img plus aria-label so it is not applicable."
+    },
+    {
+      "page": "application-02",
+      "rule": "e88epe",
+      "answer": "inapplicable",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "No applicable element is visible: all 82 svgs contain only <use> of external sprites (assets/brand/coreui.svg, vendors/@coreui/icons/svg/free.svg) that never load with the network off, so nothing is painted; the canvases (#main-chart, #card-chart1-4) are blank with scripts off; the 7 img.avatar-img requests fail, so the image-request exception removes them."
+    },
+    {
+      "page": "application-03",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only lang attribute is on the html element (lang=\"en\"). The applicability requires the element to be an inclusive descendant of body; html is not, and no element inside body carries a lang attribute, so no test target exists."
+    },
+    {
+      "page": "documentation-01",
+      "rule": "e88epe",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "12 visible svg.octicon.mr-2 icons (aria-hidden=true, no author-named ancestor) sit in p.ghd-alert-title before the words 'Note' (info circle) and 'Tip' (lightbulb). They convey the alert type and are hidden from AT with the text alternative adjacent, the pattern the rule's note says fails. The octicon-briefcase product-statement icon and OverviewMenu chevron are applicable too."
+    },
+    {
+      "page": "documentation-02",
+      "rule": "36b590",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Applicable targets exist: the visible sidebar input[type=search] (searchbox, 180x38) and 856 display:none nav checkboxes (role checkbox); visibility is not an applicability condition. None has any form field error indicator (no aria-invalid, no error text or styling), so all three expectations hold."
+    },
+    {
+      "page": "documentation-03",
+      "rule": "de46e4",
+      "answer": "inapplicable",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The only lang attribute in the page is on the html element (lang=\"en-US\"). html is not an inclusive descendant of body, and no body descendant has a lang attribute, so the rule has no test target."
+    },
+    {
+      "page": "documentation-04",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "main#content (landmark main, visible, in the tree) follows the repeated header, nav#main-nav and aside#nav. Being palpable, it is itself the first perceivable inclusive descendant in tree order; it is after repeated blocks and not inside one, as it holds the unique 'Testing' article. nav[aria-label='Previous and next page'] also starts with page-specific prev/next links."
+    },
+    {
+      "page": "documentation-04",
+      "rule": "e88epe",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "a.btn 'Edit this page' (href github.com/denoland/docs/edit/...) holds a visible 16x16 aria-hidden svg of the GitHub mark with no author-named ancestor; it tells sighted users the edit happens on GitHub, which the text does not, so it is not purely decorative. Also applicable: thumbs icons in label.btn Yes/No and the 'Copy page' icon. svg.copy-icon and the Deno logo have title-named ancestors."
+    },
+    {
+      "page": "error-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "div#main[role=main] (visible, in the tree) comes after the repeated banner, search form and nav#GlobalNav. As a palpable element it is the first perceivable inclusive descendant of itself; it is not part of any repeated block since it contains the unique 'Page not found' 404 text. The unstyled div#modal-contact-us (h4 'Contact Us') inside it is template markup hidden on normally styled pages."
+    },
+    {
+      "page": "error-01",
+      "rule": "ye5d6e",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "a[href='#main'] 'Skip to main content' (second link in the page) is an instrument moving focus to div#main[role=main]. div#main is perceivable content that is after the repeated header/nav blocks and not inside any repeated block (it holds the unique 404 message), so the focus target and the non-repeated node are the same node, satisfying 'just before'."
+    },
+    {
+      "page": "form-02",
+      "rule": "36b590",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Applicable visible fields: #query-mobile (searchbox), #mailing-address-1/-2, #city, #zip, #urbanization, #question_30602_answer_02 (textbox), select#state (combobox), two radios. None carries a form field error indicator: no aria-invalid, no error styling, and the only alert (div.fba-alert-error 'Error alert message') is display:none inside a hidden modal. Expectations hold."
+    },
+    {
+      "page": "government-01",
+      "rule": "afw4f7",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "span#myfcst-title 'Customize Your Weather.gov' (white, 18.67px bold) and .myfcst-policy a 'Privacy Policy' (white, 9px) are visible text whose background is form#myfcst-form (transparent, image myfcst-bg.png not loaded with the network off) over div.center rgb(197,229,245): contrast 1.32:1, below 3:1 and 4.5:1. Other form text (labels 6.5:1) passes."
+    },
+    {
+      "page": "government-02",
+      "rule": "5c01ea",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Six li.ecl-mega-menu__item elements (e.g. #ecl-mega-menu-item-ecl-mega-menu-466402272-1) carry aria-haspopup=\"true\", have no explicit role, are visible and in the accessibility tree. Their semantic role is listitem; aria-haspopup is not global in ARIA 1.2 and is not supported or inherited by listitem, and ARIA in HTML allows li only attributes of its role, so it is not permitted."
+    },
+    {
+      "page": "government-02",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "span.ecl-banner__title-text and __description-text are white over img.ecl-banner__image, which does not load (network off): rendered white on white, 0 pixels change when the text is made transparent, so not visible and outside applicability. Remaining visible text passes (e.g. 'Learn more' 12.3:1; cookie links 5.3:1)."
+    },
+    {
+      "page": "government-03",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "The span.ContentPromo-title and CarouselGalleryCard kicker/title texts sit on CSS background images that are absent in the snapshot; rendered pixels are #0000EE text on white (9.4:1 highest possible contrast, even where titles overlap other text). All other text nodes are at least 4.5:1 (lowest dt 'Duration:' 4.53:1)."
+    },
+    {
+      "page": "login-01",
+      "rule": "b40fd1",
+      "answer": "cantTell",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Only candidate landmark is main; its first perceivable content is nav>ol 'Home / Products'. That trail names no current page, so it is likely the identical block shown on /products (linked from header 'All'), which would make it repeated content, but the file cannot confirm it. form#new_spree_user has no accessible name, so no other landmark qualifies."
+    },
+    {
+      "page": "news-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Applicable by role: input#author, #email, #url (textbox), textarea#comment, checkbox#subscribe, radios mc_interest_*, search input[name=s]. No element on the page shows any form field error indicator (no aria-invalid, no error text, no error styling), so each target satisfies the 'has no error indicators' branch of all three expectations."
+    },
+    {
+      "page": "news-01",
+      "rule": "afw4f7",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "a.donatebutton texts are large scale (40px/1000 and 20px/700 = 15pt bold). Pixel check: white glyphs on rgb(255,144,0) with text-shadow rgb(133,75,0); shadow pixels do not change with color so count as background; brightest foreground vs darkest background gives 3.77:1, 4.24:1 and 3.92:1, all >= 3:1. Other text >= 4.5:1 (lowest 4.55)."
+    },
+    {
+      "page": "news-03",
+      "rule": "36b590",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "input#QueryText (textbox, visible) is applicable, as are the display:none feedback fields (role is independent of visibility). No form field error indicator exists: the only error-styled element, div.fba-alert-error 'alert message', is display:none placeholder text not tied to any field. Expectations are met via the 'no error indicators' branch."
+    },
+    {
+      "page": "search-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Applicability is by semantic role only: input#search-query (textbox), select#sort-select (combobox) and the org_type checkboxes #filter-federal etc. exist and are visible. No element carries an error indicator (no aria-invalid, error text or error styling), so every target meets the 'has no form field error indicators' branch; not inapplicable."
+    },
+    {
+      "page": "settings-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "nav[aria-label=breadcrumb] (navigation landmark, visible, not aria-hidden) comes after the repeated #sidebar menu and its first perceivable content is the page-specific trail 'Dashboard / Security' (ol.breadcrumb), which identifies this page and so is not a repeated block. No main landmark, but the rule only needs one qualifying landmark."
+    },
+    {
+      "page": "settings-01",
+      "rule": "bc4a75",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Implicit roles count: ul.menu, the ul.submenu lists and ol.breadcrumb have semantic role list (required owned: listitem) and are in the accessibility tree. Each owns only li (listitem) children, no stray text or other elements, and no ancestor has aria-busy=true. The aria-hidden svg is excluded, but the lists make the rule applicable and satisfied."
+    },
+    {
+      "page": "shop-01",
+      "rule": "b40fd1",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "nav.breadcrumb (navigation landmark, in the tree) follows the repeated nav.navbar-top and starts with the page-specific trail 'You are here: Home > Best sellers > Men > T-Shirts', which is not a repeated block. main does not qualify (it starts with the aside filter form shared by catalogue pages), but one qualifying landmark suffices."
+    },
+    {
+      "page": "table-01",
+      "rule": "047fe0",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "Only visible in-tree heading is h1 'Electric Power Monthly' inside div.l-report-header (See all Reports, release dates, Previous Issues): the report-wide template whose equivalent appears on /electricity/monthly/, linked by the 'Go Back' link in that block, so it is repeated content. Non-repeated content (the data table) exists and has no heading."
+    },
+    {
+      "page": "table-01",
+      "rule": "36b590",
+      "answer": "passed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "input#query (type=text, textbox role, visible in the header search form) is applicable, plus the hidden mega-menu text inputs. No field has any form field error indicator (no aria-invalid, error message or error styling), so each target satisfies the 'has no error indicators' branch of all expectations."
+    },
+    {
+      "page": "table-01",
+      "rule": "cf77f2",
+      "answer": "failed",
+      "resolver": "claude-fable-5-1",
+      "resolverKind": "model",
+      "reasoning": "No input rule passes: the only visible heading (h1 'Electric Power Monthly') is repeated report-header content (047fe0 fails); no main landmark, header/nav/footer are repeated and form#search_form has no accessible name (b40fd1 fails); skip link a.eia-accessibility targets #page-sub-nav which does not exist (ye5d6e fails); nothing collapses the header with scripts off."
+    }
+  ]
+}
