@@ -1,0 +1,405 @@
+{
+  "source": {
+    "name": "Real pages, snapshotted from the public web",
+    "sourcesFile": "SOURCES.json",
+    "notice": "NOTICE.md",
+    "identification": "Published tables name a page by category and the first twelve hex digits of its SHA-256. The source URL for each is in this file."
+  },
+  "retrieved": "2026-10-20",
+  "totals": {
+    "pages": 25,
+    "bytes": 12561091,
+    "scriptsRemoved": 412,
+    "categories": {
+      "application": 3,
+      "documentation": 4,
+      "error": 1,
+      "form": 2,
+      "government": 3,
+      "landing": 1,
+      "login": 1,
+      "news": 3,
+      "search": 1,
+      "settings": 1,
+      "shop": 4,
+      "table": 1
+    }
+  },
+  "pages": [
+    {
+      "id": "application-01",
+      "category": "application",
+      "url": "https://adminlte.io/themes/v4/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE"
+      },
+      "title": "AdminLTE v4 | Dashboard",
+      "path": "pages/application-01/index.html",
+      "sha256": "cc8c4baec1da836c33471656f463f5a44bf124e39151354fa78428a1e098ddbb",
+      "bytes": 674182,
+      "scriptsRemoved": 25
+    },
+    {
+      "id": "application-02",
+      "category": "application",
+      "url": "https://coreui.io/demos/bootstrap/5.3/free/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/coreui/coreui-free-bootstrap-admin-template/blob/main/LICENSE"
+      },
+      "title": "CoreUI Free Bootstrap Admin Template",
+      "path": "pages/application-02/index.html",
+      "sha256": "937b7bdb3cb2a88f7d0c957d327306b1d27fe38a0b6707060abd3e3d78c1f9a0",
+      "bytes": 454801,
+      "scriptsRemoved": 18
+    },
+    {
+      "id": "application-03",
+      "category": "application",
+      "url": "https://todomvc.com/examples/react/dist/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/tastejs/todomvc/blob/master/license.md"
+      },
+      "title": "TodoMVC: React",
+      "path": "pages/application-03/index.html",
+      "sha256": "8ffc4fbb79ca10628c11fa5e2c092840b67ae0ec0b445f1a35d52c928a9e7247",
+      "bytes": 10701,
+      "scriptsRemoved": 4
+    },
+    {
+      "id": "documentation-01",
+      "category": "documentation",
+      "url": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/github/docs/blob/main/LICENSE"
+      },
+      "title": "Basic writing and formatting syntax - GitHub Docs",
+      "path": "pages/documentation-01/index.html",
+      "sha256": "c823959fcd56fb38a4e81df666895761c333d50b2fa76ce12e7d727075a82d2d",
+      "bytes": 393952,
+      "scriptsRemoved": 19
+    },
+    {
+      "id": "documentation-02",
+      "category": "documentation",
+      "url": "https://kubernetes.io/docs/concepts/overview/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/kubernetes/website/blob/main/LICENSE"
+      },
+      "title": "Overview | Kubernetes",
+      "path": "pages/documentation-02/index.html",
+      "sha256": "d35001a75524bec62c5eadd16b3370d95d0572c4c7e95f51011d7e194ae84018",
+      "bytes": 1117407,
+      "scriptsRemoved": 16
+    },
+    {
+      "id": "documentation-03",
+      "category": "documentation",
+      "url": "https://vuejs.org/guide/essentials/forms.html",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/vuejs/docs/blob/main/LICENSE"
+      },
+      "title": "Form Input Bindings | Vue.js",
+      "path": "pages/documentation-03/index.html",
+      "sha256": "46b2962db5ba6bbca9a0ad1f7f1fd69da4d03020f225abd702769b6551749a46",
+      "bytes": 320846,
+      "scriptsRemoved": 9
+    },
+    {
+      "id": "documentation-04",
+      "category": "documentation",
+      "url": "https://docs.deno.com/runtime/test/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/denoland/docs/blob/main/LICENSE"
+      },
+      "title": "Testing | Deno Docs",
+      "path": "pages/documentation-04/index.html",
+      "sha256": "be333a42cad35aaa56f176bc18ca47a392afa27a723fc2e165c8d9ceb6ea4450",
+      "bytes": 307807,
+      "scriptsRemoved": 10
+    },
+    {
+      "id": "error-01",
+      "category": "error",
+      "url": "https://www.nps.gov/this-page-does-not-exist.htm",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.nps.gov/aboutus/disclaimer.htm"
+      },
+      "title": "Requested Page Not Found (404)",
+      "path": "pages/error-01/index.html",
+      "sha256": "d89ee06c9755606663a224e279506f52cd97f847fb2c8258dd52a61a032ed9e3",
+      "bytes": 100557,
+      "scriptsRemoved": 22
+    },
+    {
+      "id": "form-01",
+      "category": "form",
+      "url": "https://getbootstrap.com/docs/5.3/examples/checkout/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/twbs/bootstrap/blob/main/LICENSE"
+      },
+      "title": "Checkout example · Bootstrap v5.3",
+      "path": "pages/form-01/index.html",
+      "sha256": "8f8d60d6c4062e09395b4dc4caa44ba48949c0205585558e0405f95adcfdf560",
+      "bytes": 245796,
+      "scriptsRemoved": 3
+    },
+    {
+      "id": "form-02",
+      "category": "form",
+      "url": "https://designsystem.digital.gov/templates/form-templates/address-form/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "Public domain (United States government work) and CC0 1.0",
+        "url": "https://github.com/uswds/uswds-site/blob/main/LICENSE.md"
+      },
+      "title": "Address form | U.S. Web Design System (USWDS)",
+      "path": "pages/form-02/index.html",
+      "sha256": "96bc0eef964f60a146c86f1244127ca09e3ea617d607d0b2495d42a6fbb4f13c",
+      "bytes": 1488728,
+      "scriptsRemoved": 13
+    },
+    {
+      "id": "government-01",
+      "category": "government",
+      "url": "https://www.weather.gov/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.weather.gov/disclaimer"
+      },
+      "title": "National Weather Service",
+      "path": "pages/government-01/index.html",
+      "sha256": "3bee5360267440425bc15fdf78111f249085aeadf887df75c4a52d1d09bb248d",
+      "bytes": 201447,
+      "scriptsRemoved": 22
+    },
+    {
+      "id": "government-02",
+      "category": "government",
+      "url": "https://commission.europa.eu/index_en",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY 4.0 (Commission Decision 2011/833/EU)",
+        "url": "https://commission.europa.eu/legal-notice_en"
+      },
+      "title": "European Commission, official website - European Commission",
+      "path": "pages/government-02/index.html",
+      "sha256": "0a76b0494c93e72d6febc4cc53d0edbdc43d3183e99a143512a1ff8456592187",
+      "bytes": 1258196,
+      "scriptsRemoved": 34
+    },
+    {
+      "id": "government-03",
+      "category": "government",
+      "url": "https://www.nps.gov/yell/index.htm",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.nps.gov/aboutus/disclaimer.htm"
+      },
+      "title": "Yellowstone National Park (U.S. National Park Service)",
+      "path": "pages/government-03/index.html",
+      "sha256": "09a11ba4c53a6dd56eea4538ea7aa8ac46f9280bd8d814dd9b8dbdbc3613ac1c",
+      "bytes": 376357,
+      "scriptsRemoved": 43
+    },
+    {
+      "id": "landing-01",
+      "category": "landing",
+      "url": "https://www.typescriptlang.org/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY 4.0",
+        "url": "https://github.com/microsoft/TypeScript-Website/blob/v2/LICENSE"
+      },
+      "title": "TypeScript: JavaScript With Syntax For Types.",
+      "path": "pages/landing-01/index.html",
+      "sha256": "1b54a1f985cd87196e4c3534f7ba1d0e3bd8764645028a49e041f8a9b6634427",
+      "bytes": 274901,
+      "scriptsRemoved": 8
+    },
+    {
+      "id": "login-01",
+      "category": "login",
+      "url": "https://demo.solidus.io/login",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "BSD 3-Clause",
+        "url": "https://github.com/solidusio/solidus_starter_frontend/blob/main/LICENSE"
+      },
+      "title": "Login - Sample Store",
+      "path": "pages/login-01/index.html",
+      "sha256": "8c28574c8eaa9d8a147e273a2a6a22823ff71b1c2655610a6c93b24961164d96",
+      "bytes": 72478,
+      "scriptsRemoved": 7
+    },
+    {
+      "id": "news-01",
+      "category": "news",
+      "url": "https://globalvoices.org/2026/10/14/norways-telenor-telecom-faces-lawsuit-for-giving-user-data-to-myanmars-junta/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY 3.0",
+        "url": "https://globalvoices.org/about/global-voices-attribution-policy/"
+      },
+      "title": "Norway’s Telenor telecom faces lawsuit for giving user data to Myanmar junta · Global Voices",
+      "path": "pages/news-01/index.html",
+      "sha256": "0292a3d7d86c4511ce9d56faf9eed7077cc0f6f6364407f5da84401576c9e32e",
+      "bytes": 266976,
+      "scriptsRemoved": 37
+    },
+    {
+      "id": "news-02",
+      "category": "news",
+      "url": "https://diff.wikimedia.org/2026/10/19/tech-news-2026-issue-43/",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "CC BY-SA 4.0",
+        "url": "https://diff.wikimedia.org/about/"
+      },
+      "title": "Tech News 2026 – Issue 43 – Diff",
+      "path": "pages/news-02/index.html",
+      "sha256": "cd50437c3c64db4737d0c9e7d0f06c5b715e1135fd0b3fdbba9e2b08c5fa6427",
+      "bytes": 448933,
+      "scriptsRemoved": 18
+    },
+    {
+      "id": "news-03",
+      "category": "news",
+      "url": "https://www.nsf.gov/news/nsf-invests-translating-low-dimensional-semiconductor",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.nsf.gov/policies/digital"
+      },
+      "title": "NSF invests in translating low-dimensional semiconductor technologies to establish U.S. leadership in microelectronics | NSF - U.S. National Science Foundation",
+      "path": "pages/news-03/index.html",
+      "sha256": "35fe3d89afd4462946f2a99ada922bd406775b3fac19928988f33f81dd146e7b",
+      "bytes": 1457066,
+      "scriptsRemoved": 23
+    },
+    {
+      "id": "search-01",
+      "category": "search",
+      "url": "https://catalog.data.gov/?q=wildfire&org_type=Federal+Government",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://data.gov/privacy-policy/"
+      },
+      "title": "Catalog - Data.gov",
+      "path": "pages/search-01/index.html",
+      "sha256": "6ac0f59a729e271b9e055e1aed066dd46a13b1d6c6ce35537762dd9717e95ba4",
+      "bytes": 797600,
+      "scriptsRemoved": 18
+    },
+    {
+      "id": "settings-01",
+      "category": "settings",
+      "url": "https://zuramai.github.io/mazer/demo/account-security.html",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "MIT",
+        "url": "https://github.com/zuramai/mazer/blob/main/LICENSE"
+      },
+      "title": "Account Security - Mazer Admin Dashboard",
+      "path": "pages/settings-01/index.html",
+      "sha256": "4ab2647430ecaa22d16a866c2530cc556c8da76f501895bb1954895592291217",
+      "bytes": 642505,
+      "scriptsRemoved": 5
+    },
+    {
+      "id": "shop-01",
+      "category": "shop",
+      "url": "https://laravel.demo.aimeos.org/shop/t-shirts~8",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "LGPL-3.0",
+        "url": "https://github.com/aimeos/ai-client-html/blob/master/LICENSE"
+      },
+      "title": "T-Shirts | Default",
+      "path": "pages/shop-01/index.html",
+      "sha256": "1d1ec8505558d9d8daab7644bf7c425154243748efeae381e6faac156128cea1",
+      "bytes": 160155,
+      "scriptsRemoved": 11
+    },
+    {
+      "id": "shop-02",
+      "category": "shop",
+      "url": "https://laravel.demo.aimeos.org/shop/red-t-shirt",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "LGPL-3.0",
+        "url": "https://github.com/aimeos/ai-client-html/blob/master/LICENSE"
+      },
+      "title": "Red T-Shirt H&amp;R | Default",
+      "path": "pages/shop-02/index.html",
+      "sha256": "b47d2166c25a641cf3abb88e6c587efaeeb20fec0e5d7c9b622cd9d778445b80",
+      "bytes": 202021,
+      "scriptsRemoved": 11
+    },
+    {
+      "id": "shop-03",
+      "category": "shop",
+      "url": "https://demo.solidus.io/products/solidus-t-shirt",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "BSD 3-Clause",
+        "url": "https://github.com/solidusio/solidus_starter_frontend/blob/main/LICENSE"
+      },
+      "title": "Solidus t-shirt - Sample Store",
+      "path": "pages/shop-03/index.html",
+      "sha256": "373ce6879fca8c315f46988b7994b709c068bf2f61424514c888f4b0bcc1ee18",
+      "bytes": 81845,
+      "scriptsRemoved": 7
+    },
+    {
+      "id": "shop-04",
+      "category": "shop",
+      "url": "https://demo.solidus.io/cart",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "BSD 3-Clause",
+        "url": "https://github.com/solidusio/solidus_starter_frontend/blob/main/LICENSE"
+      },
+      "title": "Shopping Cart - Sample Store",
+      "path": "pages/shop-04/index.html",
+      "sha256": "2f27af97650214d96c7a308ed83efd26904d15231439c5784ef8b4965932bcb4",
+      "bytes": 71172,
+      "scriptsRemoved": 7
+    },
+    {
+      "id": "table-01",
+      "category": "table",
+      "url": "https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_06_a",
+      "retrieved": "2026-10-20",
+      "licence": {
+        "name": "United States government work (17 U.S.C. 105)",
+        "url": "https://www.eia.gov/about/copyrights_reuse.php"
+      },
+      "title": "Electric Power Monthly - U.S. Energy Information Administration (EIA)",
+      "path": "pages/table-01/index.html",
+      "sha256": "d25dbf4e66da3b0eeac53c91cff1e767df47dc9b962d81be0ee39b3f47d44d30",
+      "bytes": 1134662,
+      "scriptsRemoved": 22
+    }
+  ]
+}
