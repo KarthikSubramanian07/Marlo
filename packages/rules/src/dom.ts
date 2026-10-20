@@ -141,7 +141,9 @@ export function findFirst(document: MarloDocument, tag: string): MarloElement | 
  * Deliberately conservative and deliberately incomplete. It covers what is decidable
  * from the DOM alone: `hidden`, `aria-hidden="true"`, `display:none` or
  * `visibility:hidden` in a style attribute, an ancestor with any of those, and the
- * `<template>` and `<head>` subtrees.
+ * `<template>` and `<head>` subtrees. Where the renderer resolved styles it also reads
+ * the resolved `display` of the element and its ancestors and the resolved `visibility`
+ * of the element, which only ever takes an element out (D-016).
  *
  * What it cannot see is a class in a stylesheet that hides the element. That is a
  * `layout` question, and a rule whose correctness depends on it must declare `layout`
@@ -150,6 +152,11 @@ export function findFirst(document: MarloDocument, tag: string): MarloElement | 
  * the developer looks at the page and sees nothing wrong.
  */
 export function isHiddenFromAssistiveTech(element: MarloElement): boolean {
+  // ACT's "programmatically hidden" includes a computed visibility other than visible.
+  // Visibility inherits, so the element's own resolved value already reflects its
+  // ancestors, and a descendant set back to visible is not hidden by this test.
+  const visibility = resolved(element, 'visibility');
+  if (visibility !== null && visibility !== 'visible') return true;
   for (const node of [element, ...ancestors(element)]) {
     if (node.tag === 'template' || node.tag === 'head') return true;
     if (hasAttr(node, 'hidden')) return true;

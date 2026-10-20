@@ -1377,6 +1377,19 @@ describe('the accessible name rules', () => {
     expect(check('c487ae', `<html><body>${html}</body></html>`).outcome).toBe('passed');
   });
 
+  it('leaves out a control whose resolved visibility hides it, as ACT programmatically hidden says', () => {
+    const html =
+      '<html><body><div class="panel"><button id="b"><svg></svg></button></div></body></html>';
+    expect(check('97a4e1', html).outcome).toBe('failed');
+    expect(
+      check('97a4e1', html, { computed: { computed: { '#b': { visibility: 'hidden' } } } }).outcome,
+    ).toBe('inapplicable');
+    expect(
+      check('97a4e1', html, { computed: { computed: { '#b': { visibility: 'visible' } } } })
+        .outcome,
+    ).toBe('failed');
+  });
+
   it('applies the same image naming to a button', () => {
     expect(
       check('97a4e1', '<html><body><button><img src="x.png"></button></body></html>').outcome,
