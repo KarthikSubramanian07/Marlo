@@ -123,6 +123,50 @@ describe('the pre-screen', () => {
     expect(prescreened('2779a5', '')).toBe(false);
   });
 
+  // Markup each rule's applicability covers, written from the rule text and the ACT
+  // glossary, including the forms with no role attribute at all. A pattern that misses one
+  // pre-fills inapplicable on a page the rule applies to, and if both raters leave the
+  // suggestion alone it becomes ground truth. bc4a75 and 46ca7f once did exactly that.
+  const APPLICABLE = {
+    bc4a75: [
+      '<ul><li>a</li></ul>',
+      '<ol><li>a</li></ol>',
+      '<menu><li>a</li></menu>',
+      '<table><tr><td>a</td></tr></table>',
+      '<tbody><tr><td>a</td></tr></tbody>',
+      '<select><option>a</option></select>',
+      '<datalist><option>a</option></datalist>',
+      '<div role="tablist"></div>',
+    ],
+    '46ca7f': [
+      '<img src="a.png" alt="">',
+      "<img src='a.png' alt=''>",
+      '<img src="a.png" alt>',
+      '<div role="presentation"></div>',
+    ],
+    '36b590': [
+      '<input name="a">',
+      '<textarea></textarea>',
+      '<div role="menuitemcheckbox"></div>',
+      '<div role="menuitemradio"></div>',
+    ],
+    e086e5: ['<select></select>', '<input type="date">', '<div role="menuitemradio"></div>'],
+    '97a4e1': ['<button>a</button>', '<input type="submit">', '<div role="button"></div>'],
+    c487ae: ['<a href="/">a</a>', '<area href="/" alt="a">', '<span role="link">a</span>'],
+    '23a2a8': ['<img src="a.png">', '<div role="img"></div>'],
+    e88epe: ['<img src="a.png">', '<svg></svg>', '<canvas></canvas>'],
+    '6cfa84': ['<div aria-hidden="true"></div>'],
+    cae760: ['<iframe src="a.html"></iframe>'],
+  };
+
+  it.each(Object.entries(APPLICABLE))(
+    'never pre-screens away what %s applies to',
+    (rule, pages) => {
+      for (const page of pages)
+        expect([rule, page, prescreened(rule, prescreenSource(page))]).toEqual([rule, page, false]);
+    },
+  );
+
   it('ignores elements named only in comments and stylesheets', () => {
     const source = prescreenSource('<!-- <iframe> --><style>iframe { border: 0 }</style><p>');
     expect(prescreened('cae760', source)).toBe(true);

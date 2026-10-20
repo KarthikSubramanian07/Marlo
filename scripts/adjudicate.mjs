@@ -82,10 +82,14 @@ export const PRESCREEN = Object.freeze({
   '2ee8b8': null,
   '36b590': any(
     /<(?:input|select|textarea)\b/i,
-    /\srole\s*=\s*["']?[^"'>]*\b(?:textbox|combobox|listbox|searchbox|spinbutton|checkbox|radio|slider|switch)\b/i,
+    /\srole\s*=\s*["']?[^"'>]*\b(?:textbox|combobox|listbox|searchbox|spinbutton|checkbox|radio|slider|switch|menuitemcheckbox|menuitemradio)\b/i,
   ),
   '3ea0c8': any(/\sid\s*=/i),
-  '46ca7f': any(/\srole\s*=\s*["']?[^"'>]*\b(?:none|presentation)\b/i),
+  // Marked as decorative: an explicit role of none or presentation, or an img with alt="".
+  '46ca7f': any(
+    /\srole\s*=\s*["']?[^"'>]*\b(?:none|presentation)\b/i,
+    /<img\b[^>]*\salt(?:\s*=\s*(?:""|''))?(?=[\s/>])/i,
+  ),
   '4e8ab6': any(/\srole\s*=/i),
   '59796f': any(/<input\b[^>]*\stype\s*=\s*["']?image\b/i),
   '5b7ae0': any(/\sxml:lang\s*=/i),
@@ -108,7 +112,9 @@ export const PRESCREEN = Object.freeze({
   b40fd1: null,
   b4f0c3: any(/<meta\b[^>]*\sname\s*=\s*["']?viewport\b/i),
   b5c3f8: null,
-  bc4a75: any(/\srole\s*=/i),
+  // A semantic role with required owned elements, implicit roles included: list, table,
+  // rowgroup, row and listbox come from these elements with no role attribute at all.
+  bc4a75: any(/\srole\s*=/i, /<(?:ul|ol|menu|table|thead|tbody|tfoot|tr|datalist|select)\b/i),
   bc659a: any(/<meta\b[^>]*\shttp-equiv\s*=\s*["']?refresh\b/i),
   bf051a: any(/<html\b[^>]*\slang\s*=/i),
   bisz58: any(/<meta\b[^>]*\shttp-equiv\s*=\s*["']?refresh\b/i),
