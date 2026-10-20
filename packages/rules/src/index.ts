@@ -72,5 +72,5 @@ export { buildDocument } from './parse.js';
 export type { EvaluateOptions, MarloVerdictDetail } from './evaluate.js';
 export { evaluateRules } from './evaluate.js';
 
-export { ARIA_ATTRIBUTES, ARIA_ROLES, explicitRole } from './rules/aria.js';
+export { ARIA_ATTRIBUTES, ARIA_ROLES, MODULE_ROLES, explicitRole } from './rules/aria.js';
 export { classifyLanguageTag } from './rules/language.js';
