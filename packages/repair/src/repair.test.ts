@@ -236,6 +236,18 @@ describe('the codemods', () => {
     expect(result.declined).toContain('guess');
   });
 
+  it('declines an attribute only the ARIA 1.3 draft defines, rather than leaving it silently', () => {
+    // 5f99a7 fails aria-description, because the rule pins ARIA 1.2. Renaming it to
+    // something else would change what the author meant, so this says it cannot help.
+    const result = runCodemod({
+      html: '<input aria-description="More options">',
+      file: 'x.html',
+      actRuleId: '5f99a7',
+    });
+    expect(result.edits).toEqual([]);
+    expect(result.declined).toContain('aria-description');
+  });
+
   it('declines an ARIA attribute that is one character from two real ones', () => {
     // aria-rowindex and aria-colindex are both one edit from neither, but aria-rowcount and
     // aria-colcount show the shape: where two candidates tie, there is no answer to pick.

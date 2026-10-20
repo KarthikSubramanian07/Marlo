@@ -38,13 +38,16 @@ interface AriaAttributeSpec {
   readonly tokens?: readonly string[];
 }
 
-/** Transcribed from WAI-ARIA 1.2, section 6.6. */
+/**
+ * Transcribed from WAI-ARIA 1.2, section 6.7: its 48 states and properties and no others.
+ * The Graphics and DPUB modules define none of their own. `aria-description`,
+ * `aria-braillelabel` and `aria-brailleroledescription` exist only in the ARIA 1.3 draft,
+ * and the ACT rules pin 1.2, so they are not here however widely browsers support them.
+ */
 export const ARIA_ATTRIBUTES: Readonly<Record<string, AriaAttributeSpec>> = Object.freeze({
   'aria-activedescendant': { type: 'id-reference' },
   'aria-atomic': { type: 'true-false' },
   'aria-autocomplete': { type: 'token', tokens: ['inline', 'list', 'both', 'none'] },
-  'aria-braillelabel': { type: 'string' },
-  'aria-brailleroledescription': { type: 'string' },
   'aria-busy': { type: 'true-false' },
   'aria-checked': { type: 'tristate' },
   'aria-colcount': { type: 'integer' },
@@ -56,7 +59,6 @@ export const ARIA_ATTRIBUTES: Readonly<Record<string, AriaAttributeSpec>> = Obje
     tokens: ['page', 'step', 'location', 'date', 'time', 'true', 'false'],
   },
   'aria-describedby': { type: 'id-reference-list' },
-  'aria-description': { type: 'string' },
   'aria-details': { type: 'id-reference' },
   'aria-disabled': { type: 'true-false' },
   'aria-dropeffect': {

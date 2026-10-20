@@ -169,6 +169,9 @@ function viewport(input: CodemodInput): CodemodResult {
  *
  * Mechanical, but only for a misspelling one edit away from a real attribute name. Anything
  * further than that is a guess about intent, and this declines rather than guessing.
+ *
+ * The list is ARIA 1.2's, the version the rule checks against, so `aria-description`, which
+ * only the 1.3 draft defines, is declined here rather than silently left alone.
  */
 const ARIA_ATTRIBUTES = Object.freeze([
   'aria-activedescendant',
@@ -182,7 +185,6 @@ const ARIA_ATTRIBUTES = Object.freeze([
   'aria-controls',
   'aria-current',
   'aria-describedby',
-  'aria-description',
   'aria-details',
   'aria-disabled',
   'aria-errormessage',
