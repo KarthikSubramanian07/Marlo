@@ -1,13 +1,19 @@
 import { defineRule } from '../define.js';
 import type { MarloElement } from '../dom.js';
 import {
+  ancestors,
   attr,
   findAll,
   isHiddenFromAssistiveTech,
   isInSequentialFocusOrder,
+  isNotRendered,
   normalise,
   walk,
 } from '../dom.js';
+import type { RoleAnswer } from '../roles.js';
+import { ARIA_ROLES, canReceiveFocus, explicitRole, semanticRoles } from '../roles.js';
+
+export { ARIA_ROLES, explicitRole };
 
 /**
  * The ARIA validity rules. Decidable from the DOM, mechanically fixable, and the
@@ -107,92 +113,6 @@ export const ARIA_ATTRIBUTES: Readonly<Record<string, AriaAttributeSpec>> = Obje
   'aria-valuetext': { type: 'string' },
 });
 
-/** ARIA 1.2 non-abstract roles. Abstract roles are invalid as author values. */
-export const ARIA_ROLES: ReadonlySet<string> = new Set([
-  'alert',
-  'alertdialog',
-  'application',
-  'article',
-  'banner',
-  'blockquote',
-  'button',
-  'caption',
-  'cell',
-  'checkbox',
-  'code',
-  'columnheader',
-  'combobox',
-  'complementary',
-  'contentinfo',
-  'definition',
-  'deletion',
-  'dialog',
-  'directory',
-  'document',
-  'emphasis',
-  'feed',
-  'figure',
-  'form',
-  'generic',
-  'grid',
-  'gridcell',
-  'group',
-  'heading',
-  'img',
-  'insertion',
-  'link',
-  'list',
-  'listbox',
-  'listitem',
-  'log',
-  'main',
-  'marquee',
-  'math',
-  'menu',
-  'menubar',
-  'menuitem',
-  'menuitemcheckbox',
-  'menuitemradio',
-  'meter',
-  'navigation',
-  'none',
-  'note',
-  'option',
-  'paragraph',
-  'presentation',
-  'progressbar',
-  'radio',
-  'radiogroup',
-  'region',
-  'row',
-  'rowgroup',
-  'rowheader',
-  'scrollbar',
-  'search',
-  'searchbox',
-  'separator',
-  'slider',
-  'spinbutton',
-  'status',
-  'strong',
-  'subscript',
-  'superscript',
-  'switch',
-  'tab',
-  'table',
-  'tablist',
-  'tabpanel',
-  'term',
-  'textbox',
-  'time',
-  'timer',
-  'toolbar',
-  'tooltip',
-  'tree',
-  'treegrid',
-  'treeitem',
-]);
-
 /**
  * The non-abstract roles of the two ARIA modules ACT counts among the WAI-ARIA
  * Specifications: Digital Publishing WAI-ARIA Module 1.0, all 39 of its roles, and the
@@ -264,22 +184,212 @@ const NAME_PROHIBITED_ROLES: ReadonlySet<string> = new Set([
   'time',
 ]);
 
-/** Roles whose required owned elements the ACT rule checks. */
-const REQUIRED_OWNED: Readonly<Record<string, readonly string[]>> = Object.freeze({
-  feed: ['article'],
-  grid: ['row', 'rowgroup'],
-  list: ['listitem'],
-  listbox: ['option', 'group'],
-  menu: ['menuitem', 'menuitemcheckbox', 'menuitemradio', 'group'],
-  menubar: ['menuitem', 'menuitemcheckbox', 'menuitemradio', 'group'],
-  radiogroup: ['radio'],
-  row: ['cell', 'columnheader', 'gridcell', 'rowheader'],
-  rowgroup: ['row'],
-  table: ['row', 'rowgroup'],
-  tablist: ['tab'],
-  tree: ['treeitem', 'group'],
-  treegrid: ['row', 'rowgroup'],
+/**
+ * WAI-ARIA 1.2's required owned elements, the version bc4a75 names. `direct` roles may be
+ * owned as they are. A `through` role may be owned only if it in turn owns nothing but
+ * the roles listed for it, which is what ARIA writes with an arrow: `group → menuitem`.
+ * ACT adds that a `group` may own another `group` that meets the same requirement.
+ *
+ * Copied from the 1.2 Recommendation rather than a later draft, so `caption`, which ARIA
+ * 1.3 adds for `table` and `grid`, is not here.
+ */
+interface OwnedRequirement {
+  readonly direct: readonly string[];
+  readonly through?: Readonly<Record<string, readonly string[]>>;
+}
+
+const MENU_ITEMS = ['menuitem', 'menuitemcheckbox', 'menuitemradio'];
+
+const REQUIRED_OWNED: Readonly<Record<string, OwnedRequirement>> = Object.freeze({
+  feed: { direct: ['article'] },
+  grid: { direct: ['row'], through: { rowgroup: ['row'] } },
+  list: { direct: ['listitem'] },
+  listbox: { direct: ['option'], through: { group: ['option'] } },
+  menu: { direct: MENU_ITEMS, through: { group: MENU_ITEMS } },
+  menubar: { direct: MENU_ITEMS, through: { group: MENU_ITEMS } },
+  radiogroup: { direct: ['radio'] },
+  row: { direct: ['cell', 'columnheader', 'gridcell', 'rowheader'] },
+  rowgroup: { direct: ['row'] },
+  table: { direct: ['row'], through: { rowgroup: ['row'] } },
+  tablist: { direct: ['tab'] },
+  tree: { direct: ['treeitem'], through: { group: ['treeitem'] } },
+  treegrid: { direct: ['row'], through: { rowgroup: ['row'] } },
 });
+
+/** Elements that never appear in the accessibility tree, whatever their styles. */
+const NEVER_EXPOSED: ReadonlySet<string> = new Set([
+  'base',
+  'col',
+  'colgroup',
+  'datalist',
+  'head',
+  'link',
+  'meta',
+  'noscript',
+  'param',
+  'script',
+  'source',
+  'style',
+  'template',
+  'title',
+  'track',
+]);
+
+function notExposed(element: MarloElement): boolean {
+  return (
+    NEVER_EXPOSED.has(element.tag) || isHiddenFromAssistiveTech(element) || isNotRendered(element)
+  );
+}
+
+/** The single role of an answer, or null when it has none or several. */
+function soleRole(answer: RoleAnswer): string | null {
+  return answer.kind === 'role' && answer.roles.length === 1 ? (answer.roles[0] ?? null) : null;
+}
+
+/**
+ * The aria-owns relationships of a document: for each id, the elements that claim it, and
+ * the element that carries it. Built once per document.
+ */
+interface Ownership {
+  readonly claims: ReadonlyMap<string, readonly MarloElement[]>;
+  readonly byId: ReadonlyMap<string, MarloElement>;
+}
+
+const OWNERSHIP = new WeakMap<MarloElement, Ownership>();
+
+function ownershipOf(root: MarloElement): Ownership {
+  const cached = OWNERSHIP.get(root);
+  if (cached !== undefined) return cached;
+  const claims = new Map<string, MarloElement[]>();
+  const byId = new Map<string, MarloElement>();
+  for (const node of walk(root)) {
+    const id = attr(node, 'id');
+    if (id !== null && id !== '' && !byId.has(id)) byId.set(id, node);
+    for (const claimed of normalise(attr(node, 'aria-owns') ?? '').split(' ')) {
+      if (claimed === '') continue;
+      claims.set(claimed, [...(claims.get(claimed) ?? []), node]);
+    }
+  }
+  const ownership = { claims, byId };
+  OWNERSHIP.set(root, ownership);
+  return ownership;
+}
+
+/** One element owned in the accessibility tree, with the roles it may have. */
+interface Owned {
+  readonly element: MarloElement;
+  readonly answer: RoleAnswer;
+  /** Set when an aria-owns relationship around it is ambiguous. */
+  readonly doubt?: string;
+}
+
+/**
+ * What an element owns: its children in the accessibility tree. A child that is not
+ * exposed is skipped, one whose role is `none` or `presentation` is looked through to its
+ * own children, as the tree does, and text is not an element and is not counted.
+ *
+ * aria-owns moves elements: a child another element claims leaves, and the elements this
+ * one claims join it. An id claimed by more than one element is marked as a doubt,
+ * because ARIA leaves the outcome to the browser.
+ */
+function ownedBy(element: MarloElement, ownership: Ownership): Owned[] {
+  const owned: Owned[] = [];
+  const take = (child: MarloElement, doubt?: string): void => {
+    if (notExposed(child)) return;
+    const answer = semanticRoles(child);
+    const sole = soleRole(answer);
+    if (sole === 'none' || sole === 'presentation') {
+      visit(child);
+      return;
+    }
+    owned.push(
+      doubt === undefined ? { element: child, answer } : { element: child, answer, doubt },
+    );
+  };
+  const visit = (node: MarloElement): void => {
+    for (const child of node.children) {
+      const id = attr(child, 'id');
+      const claimants = id === null ? [] : (ownership.claims.get(id) ?? []);
+      // Claimed by this element too, so it is taken below with the rest of its aria-owns.
+      if (claimants.includes(element)) continue;
+      if (claimants.length > 0) continue;
+      take(child);
+    }
+  };
+  visit(element);
+  for (const id of normalise(attr(element, 'aria-owns') ?? '').split(' ')) {
+    const target = id === '' ? undefined : ownership.byId.get(id);
+    if (target === undefined || target === element) continue;
+    const claimants = ownership.claims.get(id) ?? [];
+    take(
+      target,
+      claimants.length > 1
+        ? 'more than one element claims it with aria-owns, and ARIA leaves which one owns it to the browser'
+        : undefined,
+    );
+  }
+  return owned;
+}
+
+function label(owned: Owned): string {
+  const roles = owned.answer.kind === 'role' ? owned.answer.roles.join(' or ') : 'no role';
+  return `<${owned.element.tag}> (${roles})`;
+}
+
+type OwnedVerdict =
+  | { readonly kind: 'ok' }
+  | { readonly kind: 'wrong'; readonly owned: Owned }
+  | { readonly kind: 'unsure'; readonly owned: Owned; readonly why: string };
+
+/**
+ * Whether every element `element` owns has a permitted role. A definite violation wins
+ * over an undecided element, because one wrong owned element is enough to fail.
+ */
+function checkOwned(
+  element: MarloElement,
+  permitted: readonly string[],
+  through: Readonly<Record<string, readonly string[]>>,
+  ownership: Ownership,
+  // aria-owns can make a cycle, which ARIA forbids and pages still write.
+  seen: ReadonlySet<MarloElement> = new Set([element]),
+): OwnedVerdict {
+  let unsure: OwnedVerdict | null = null;
+  for (const owned of ownedBy(element, ownership)) {
+    if (owned.doubt !== undefined || seen.has(owned.element)) {
+      unsure ??= {
+        kind: 'unsure',
+        owned,
+        why: owned.doubt ?? 'aria-owns makes the ownership circular',
+      };
+      continue;
+    }
+    if (owned.answer.kind !== 'role') {
+      unsure ??= {
+        kind: 'unsure',
+        owned,
+        why: 'its role depends on how a browser exposes an element with no corresponding ARIA role',
+      };
+      continue;
+    }
+    const verdicts = owned.answer.roles.map((candidate): OwnedVerdict => {
+      if (permitted.includes(candidate)) return { kind: 'ok' };
+      const inner = through[candidate];
+      if (inner === undefined) return { kind: 'wrong', owned };
+      // A group may own a group that meets the same requirement.
+      const nested = candidate === 'group' ? { ...through, group: inner } : {};
+      return checkOwned(owned.element, inner, nested, ownership, new Set([...seen, owned.element]));
+    });
+    const wrong = verdicts.find((v) => v.kind === 'wrong');
+    if (wrong !== undefined && verdicts.every((v) => v.kind === 'wrong')) return wrong;
+    if (verdicts.every((v) => v.kind === 'ok')) continue;
+    unsure ??= verdicts.find((v) => v.kind === 'unsure') ?? {
+      kind: 'unsure',
+      owned,
+      why: 'its role depends on context Marlo does not resolve, and only some of its possible roles are permitted',
+    };
+  }
+  return unsure ?? { kind: 'ok' };
+}
 
 /** Roles that require a particular context role, from ARIA 1.2. */
 const REQUIRED_CONTEXT: Readonly<Record<string, readonly string[]>> = Object.freeze({
@@ -300,17 +410,6 @@ const REQUIRED_CONTEXT: Readonly<Record<string, readonly string[]>> = Object.fre
 });
 
 /**
- * ACT's "focusable": part of sequential focus navigation, or carrying a tabindex that
- * parses as an integer, negative ones included, since `tabindex="-1"` makes an element
- * focusable by script and by pointer even though Tab skips it.
- */
-function isFocusableByDefinition(element: MarloElement): boolean {
-  const tabindex = attr(element, 'tabindex');
-  if (tabindex !== null && !Number.isNaN(Number.parseInt(tabindex.trim(), 10))) return true;
-  return isInSequentialFocusOrder(element);
-}
-
-/**
  * Required states and properties per role, from ARIA 1.2. `separator` requires
  * `aria-valuenow` only when focusable, which 4e8ab6 checks before reading this table.
  */
@@ -329,18 +428,6 @@ const REQUIRED_PROPERTIES: Readonly<Record<string, readonly string[]>> = Object.
   slider: ['aria-valuenow'],
   switch: ['aria-checked'],
 });
-
-/** The first valid role token, which is how the role attribute is resolved. */
-export function explicitRole(element: {
-  attributes: readonly { name: string; value: string }[];
-}): string | null {
-  const raw = element.attributes.find((a) => a.name === 'role')?.value;
-  if (raw === undefined) return null;
-  for (const token of normalise(raw).split(' ')) {
-    if (token !== '' && ARIA_ROLES.has(token.toLowerCase())) return token.toLowerCase();
-  }
-  return null;
-}
 
 function ariaAttributesOf(element: { attributes: readonly { name: string; value: string }[] }) {
   return element.attributes.filter((a) => a.name.startsWith('aria-'));
@@ -625,7 +712,7 @@ export const roleRequiredProperties = defineRule({
     const role = explicitRole(element) ?? '';
     // ARIA 1.2 requires aria-valuenow on a separator only "if focusable": a focusable
     // separator is a widget that moves, and a static one is structure with no value.
-    if (role === 'separator' && !isFocusableByDefinition(element)) {
+    if (role === 'separator' && !canReceiveFocus(element)) {
       return {
         outcome: 'passed',
         message:
@@ -701,7 +788,14 @@ export const requiredContextRole = defineRule({
   },
 });
 
-/** bc4a75: a role requiring owned elements has them. */
+/**
+ * bc4a75: an element whose role requires owned elements owns only those.
+ *
+ * The rule applies to the semantic role, so a `ul` is a list and a `table` a table with
+ * no role attribute at all, and it applies only to the WAI-ARIA 1.2 roles with required
+ * owned elements. Its expectation is "only owns", so one owned element of another role
+ * fails it, and an element that owns nothing does not.
+ */
 export const requiredOwnedElements = defineRule({
   actId: 'bc4a75',
   name: 'ARIA required owned elements',
@@ -711,60 +805,49 @@ export const requiredOwnedElements = defineRule({
   applicability: (document) => {
     const targets = [];
     for (const element of walk(document.root)) {
-      const role = explicitRole(element);
-      if (role !== null && Object.hasOwn(REQUIRED_OWNED, role)) {
-        if (!isHiddenFromAssistiveTech(element)) targets.push({ element });
-      }
+      const role = soleRole(semanticRoles(element));
+      if (role === null || !Object.hasOwn(REQUIRED_OWNED, role)) continue;
+      if (notExposed(element)) continue;
+      // "Except if the element has an inclusive ancestor in the accessibility tree with an
+      // aria-busy attribute value of true": its content is still being assembled.
+      if ([element, ...ancestors(element)].some((a) => attr(a, 'aria-busy') === 'true')) continue;
+      targets.push({ element });
     }
     return targets;
   },
-  expectation: ({ element }) => {
-    const role = explicitRole(element) ?? '';
-    const permitted = REQUIRED_OWNED[role] ?? [];
+  expectation: ({ element }, document) => {
+    const role = soleRole(semanticRoles(element)) ?? '';
+    const requirement = REQUIRED_OWNED[role] ?? { direct: [] };
+    const named = attr(element, 'role') === null ? `<${element.tag}> (${role})` : `role="${role}"`;
 
-    // aria-owns can bring in elements from elsewhere in the document, and resolving it
-    // properly means rebuilding the accessibility tree. Declining is the honest answer.
-    if (attr(element, 'aria-owns') !== null) {
-      return {
-        outcome: 'cantTell',
-        message:
-          `role="${role}" uses aria-owns, so its owned elements come from elsewhere in the ` +
-          'document. Marlo does not rebuild the accessibility tree to resolve that.',
-      };
-    }
+    const allowed = [...requirement.direct, ...Object.keys(requirement.through ?? {})];
+    const verdict = checkOwned(
+      element,
+      requirement.direct,
+      requirement.through ?? {},
+      ownershipOf(document.root),
+    );
 
-    const children = element.children.filter((c) => !isHiddenFromAssistiveTech(c));
-    if (children.length === 0) {
+    if (verdict.kind === 'wrong') {
       return {
         outcome: 'failed',
         message:
-          `role="${role}" requires at least one ${permitted.join(' or ')} and has no exposed ` +
-          'children at all.',
+          `${named} may own only ${allowed.join(', ')}, and it owns ${label(verdict.owned)}. ` +
+          'A screen reader announcing the structure reports the wrong number of items, or ' +
+          'none, and the ARIA 1.2 relationship it relies on is broken.',
       };
     }
-
-    const anyExplicit = children.some((c) => explicitRole(c) !== null);
-    if (!anyExplicit) {
+    if (verdict.kind === 'unsure') {
       return {
         outcome: 'cantTell',
         message:
-          `role="${role}" requires ${permitted.join(' or ')}. None of its children declare an ` +
-          'explicit role, so the answer depends on implicit roles Marlo does not compute here.',
+          `${named} may own only ${allowed.join(', ')}. It owns ${label(verdict.owned)}, and ` +
+          `whether that is permitted is not settled here: ${verdict.why}.`,
       };
     }
-
-    const satisfied = children.some((c) => {
-      const childRole = explicitRole(c);
-      return childRole !== null && permitted.includes(childRole);
-    });
-    if (satisfied) {
-      return { outcome: 'passed', message: `role="${role}" owns a permitted child role.` };
-    }
     return {
-      outcome: 'failed',
-      message:
-        `role="${role}" requires ${permitted.join(' or ')} children, and none of its children ` +
-        'have one of those roles.',
+      outcome: 'passed',
+      message: `Everything ${named} owns has one of the roles ARIA 1.2 permits: ${allowed.join(', ')}.`,
     };
   },
 });
