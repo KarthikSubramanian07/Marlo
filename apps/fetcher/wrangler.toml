@@ -9,3 +9,15 @@ preview_urls = false
 
 [browser]
 binding = "BROWSER"
+
+# The daily browser-time budget, enforced by the Worker itself so a paid plan cannot bill
+# past it. Keys are `browser-ms:<UTC date>`. Without this binding the Worker refuses to
+# render. See the comment at the top of src/worker.mjs.
+[[kv_namespaces]]
+binding = "BUDGET"
+id = "69fdbbd2d41e4487b2828dd8f612d622"
+
+[vars]
+# Browser milliseconds per UTC day. Ten minutes is the Workers Free allowance, and
+# thirty-one such days stay inside the ten hours a month a paid plan includes.
+DAILY_BROWSER_MS = "600000"
