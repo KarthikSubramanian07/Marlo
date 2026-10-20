@@ -178,8 +178,8 @@
     {
       "page": "application-01",
       "rule": "bc4a75",
-      "answer": "inapplicable",
-      "source": "prescreen"
+      "answer": "passed",
+      "source": "agreement"
     },
     {
       "page": "application-01",
@@ -424,8 +424,8 @@
     {
       "page": "application-02",
       "rule": "bc4a75",
-      "answer": "inapplicable",
-      "source": "prescreen"
+      "answer": "passed",
+      "source": "agreement"
     },
     {
       "page": "application-02",
@@ -5198,10 +5198,7 @@
       "page": "shop-01",
       "rule": "bc4a75",
       "answer": "passed",
-      "source": "resolution",
-      "resolver": "claude-fable-5-1",
-      "resolverKind": "model",
-      "reasoning": "No explicit roles exist, but four ul elements have the implicit list role, which has required owned elements (listitem), and all are in the accessibility tree. ul[data-testid=products-list] owns eight li, the footer Collections ul four li and the Medusa ul three li, all plain li (listitem); ul[data-testid=footer-categories] owns nothing. No list owns a non-listitem element."
+      "source": "agreement"
     },
     {
       "page": "shop-01",
@@ -5945,10 +5942,7 @@
       "page": "shop-04",
       "rule": "bc4a75",
       "answer": "passed",
-      "source": "resolution",
-      "resolver": "claude-fable-5-1",
-      "resolverKind": "model",
-      "reasoning": "Implicit roles count as semantic roles. Two visible table elements (table.table.mb-3 and table.table-borderless) have role table and own only tbody (rowgroup); each tbody owns only tr (row); each tr owns only td (cell). No aria-busy ancestor, no aria-owns. Every target owns only roles from its required owned elements list."
+      "source": "agreement"
     },
     {
       "page": "shop-04",

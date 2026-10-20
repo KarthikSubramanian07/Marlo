@@ -255,8 +255,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen wrong: img alt='' without explicit role exist (div#jump_block img, .benefits-block img, banner flag, icon-dot-gov/https). Flag/icons have aria-hidden (not in tree); jump and benefits imgs have role presentation. All satisfy."
+      "prescreened": false,
+      "note": "5 img alt=\"\": 3 banner imgs (usa-banner__header-flag, icon-dot-gov, icon-https) have aria-hidden=true so not in tree; Jump_to_Arrow and Benefits icon imgs have no tabindex/global ARIA, so role presentation. No role=none/presentation elements."
     },
     {
       "page": "form-01",
@@ -2092,8 +2092,8 @@
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Not inapplicable as prescreened: ul elements have implicit role list (required owned listitem). ul[data-testid=products-list] and footer collections/medusa ul own only li; ul[data-testid=footer-categories] owns nothing. No explicit roles."
+      "prescreened": false,
+      "note": "4 ul (implicit list): ul.grid-cols-2 with 8 li, footer ul.grid-cols-1 lists with 0, 4 and 3 li. Only listitem children; no explicit roles, aria-owns or aria-busy."
     },
     {
       "page": "shop-01",
@@ -2422,8 +2422,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen wrong: ~243 img alt=\"\" are marked as decorative. None is focusable or carries a global ARIA attribute except img.mw-logo-icon (aria-hidden, not in tree); Chromium exposes none of them, so all are role presentation or excluded."
+      "prescreened": false,
+      "note": "243 img alt=\"\" (flags, icons); none focusable or with global ARIA except img.mw-logo-icon which is aria-hidden=true and display:none (not in tree). Others presentational. No role=none/presentation elements."
     },
     {
       "page": "news-04",
@@ -3852,8 +3852,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen wrong: 31 img elements with alt=\"\" (e.g. featured news card images, mission card images) are marked as decorative; none has global ARIA attributes or focusability, so all get role presentation / are not in the accessibility tree."
+      "prescreened": false,
+      "note": "31 visible img alt=\"\" (article images, thumbnails); none focusable, none with global ARIA attributes, so no conflict; presentational. No role=none/presentation elements on page."
     },
     {
       "page": "application-03",
@@ -4676,9 +4676,9 @@
       "rule": "bc4a75",
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
-      "answer": "inapplicable",
-      "prescreened": true,
-      "note": "No explicit roles; no elements needing required owned elements via role attribute."
+      "answer": "passed",
+      "prescreened": false,
+      "note": "2 tables (table.mb-3, table.table-borderless), each owning one tbody (rowgroup) that owns only tr (row); each tr owns only td (cell). No captions, explicit roles or aria-owns."
     },
     {
       "page": "shop-01",
@@ -5545,9 +5545,9 @@
       "rule": "bc4a75",
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
-      "answer": "inapplicable",
-      "prescreened": true,
-      "note": "Prescreened; confirmed: no explicit roles requiring owned elements."
+      "answer": "passed",
+      "prescreened": false,
+      "note": "3 ul (implicit list): navbar ul (3 li), ul.tag-list (4 li), empty ul.error-messages (owns nothing). Only listitem children; no explicit roles or aria-owns."
     },
     {
       "page": "shop-01",
@@ -5766,8 +5766,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen was wrong. The 73 <img alt=''> in the app menu dropdown are marked as decorative. They are display:none and have role presentation, so none is exposed."
+      "prescreened": false,
+      "note": "73 img alt=\"\" (tabler brand icons), all inside a display:none div, so not included in the accessibility tree. No role=none/presentation on page; none focusable or with global ARIA attributes."
     },
     {
       "page": "news-02",
@@ -6404,8 +6404,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen wrong: 73 img elements with alt=\"\" (brand logos in Apps dropdown) are marked as decorative. None is focusable or has global ARIA attributes, so each has role presentation and is not exposed (also inside display:none menu)."
+      "prescreened": false,
+      "note": "73 img alt=\"\" (tabler brand icons) all inside a display:none div, not in accessibility tree. No role=none/presentation elements; no focusable or global-ARIA conflicts."
     },
     {
       "page": "settings-01",
@@ -7735,8 +7735,8 @@
       "ruleName": "Element marked as decorative is not exposed",
       "ruleUrl": "https://act-rules.github.io/rules/46ca7f",
       "answer": "passed",
-      "prescreened": true,
-      "note": "Prescreen overridden: img alt='' elements exist (img.mw-logo-icon, aria-hidden so not in tree; noscript 1x1 CentralAutoLogin img, role presentation). Both satisfy the expectation."
+      "prescreened": false,
+      "note": "2 img alt=\"\": img.mw-logo-icon has aria-hidden=true (not in tree); 1x1 CentralAutoLogin img has no tabindex or global ARIA, so presentational. No role=none/presentation elements."
     },
     {
       "page": "shop-01",
@@ -10605,9 +10605,9 @@
       "rule": "bc4a75",
       "ruleName": "ARIA required owned elements",
       "ruleUrl": "https://act-rules.github.io/rules/bc4a75",
-      "answer": "inapplicable",
-      "prescreened": true,
-      "note": "No explicit role attributes on the page."
+      "answer": "passed",
+      "prescreened": false,
+      "note": "7 visible ul (implicit list): nav.navbar ul, ul.nav-pills, 4x ul.tag-list, ul.pagination. All owned children are li (listitem); one li is display:none and not owned. No explicit roles, no aria-owns, no aria-busy."
     },
     {
       "page": "documentation-02",
