@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@trymarlo/schema": "workspace:*",
-    "happy-dom": "21.0.3"
+    "happy-dom": "21.0.4"
   },
   "peerDependencies": {
     "playwright": ">=1.49.0"
