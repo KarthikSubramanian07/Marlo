@@ -48,7 +48,7 @@
     "@trymarlo/render": "workspace:*",
     "@trymarlo/rules": "workspace:*",
     "@trymarlo/schema": "workspace:*",
-    "zod": "4.6.6"
+    "zod": "4.6.7"
   },
   "publishConfig": {
     "access": "public"
