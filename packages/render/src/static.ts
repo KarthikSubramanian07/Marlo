@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { Window } from 'happy-dom';
+import { BrowserErrorCaptureEnum, Window } from 'happy-dom';
 import type { Capability, RendererId } from '@trymarlo/schema';
 import { RENDERER_CAPABILITIES } from '@trymarlo/schema';
 import type { RenderRequest, RenderedPage, Renderer } from './renderer.js';
@@ -97,14 +97,14 @@ export class StaticRenderer implements Renderer {
         // fetches a stylesheet would otherwise make findings depend on whether a
         // CDN was reachable.
         disableJavaScriptFileLoading: true,
-        disableCSSFileLoading: true,
+        enableCSSFileLoading: false,
         enableImageFileLoading: false,
-        disableIframePageLoading: true,
+        enableIframePageLoading: false,
         handleDisabledFileLoadingAsSuccess: true,
 
         // A parse error is a finding, not a crash. The duplicate-id and
         // duplicate-attribute rules depend on the parser keeping what it was given.
-        disableErrorCapturing: false,
+        errorCapture: BrowserErrorCaptureEnum.tryAndCatch,
 
         // happy-dom warns on every construction that this is an insecure JavaScript
         // environment. It is right, and the limitation is documented in HONESTY.md
