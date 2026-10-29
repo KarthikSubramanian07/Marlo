@@ -607,13 +607,13 @@
             "act-rules-published": 94,
             "act-rules-calibrated": 41,
             "act-rules-unmeasurable": [],
-            "calibration-generated": "2026-10-20",
-            "calibration-commit": "1aef7382565d1fb4f29d72895aa356ecdd4c59fd",
+            "calibration-generated": "2026-10-29",
+            "calibration-commit": "5f655e3fe7bdd9abd73d56d72aa75f16b0978bab",
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
               "axe-core@4.14.0",
-              "alfa@0.119.0",
+              "alfa@0.120.0",
               "htmlcs@2.5.1"
             ]
           }
@@ -2070,7 +2070,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r66",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "invariant",
             "agreed-by": [],
             "disagreements": [
@@ -2619,7 +2619,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r19",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2928,7 +2928,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r69",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "invariant",
             "agreed-by": [],
             "disagreements": [
@@ -3069,7 +3069,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r68",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "sole-implementer",
             "agreed-by": [
               "marlo",
@@ -3113,7 +3113,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r9",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3163,7 +3163,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r96",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -3613,7 +3613,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r42",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "axe-core"

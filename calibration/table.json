@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-20",
-  "commit": "1aef7382565d1fb4f29d72895aa356ecdd4c59fd",
+  "generated": "2026-10-29",
+  "commit": "5f655e3fe7bdd9abd73d56d72aa75f16b0978bab",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -21,7 +21,7 @@
     },
     {
       "id": "alfa",
-      "version": "0.119.0",
+      "version": "0.120.0",
       "mappedRules": 40
     },
     {
@@ -133,7 +133,7 @@
     {
       "actRuleId": "047fe0",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 14,
@@ -327,7 +327,7 @@
     {
       "actRuleId": "09o5cg",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r66"
       ],
@@ -528,7 +528,7 @@
     {
       "actRuleId": "23a2a8",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r2"
       ],
@@ -728,7 +728,7 @@
     {
       "actRuleId": "24afc2",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r91"
       ],
@@ -926,7 +926,7 @@
     {
       "actRuleId": "2779a5",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r1"
       ],
@@ -1125,7 +1125,7 @@
     {
       "actRuleId": "2ee8b8",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 13,
@@ -1319,7 +1319,7 @@
     {
       "actRuleId": "307n5z",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r90"
       ],
@@ -1515,7 +1515,7 @@
     {
       "actRuleId": "36b590",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 9,
@@ -1711,7 +1711,7 @@
     {
       "actRuleId": "3ea0c8",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 10,
@@ -1907,7 +1907,7 @@
     {
       "actRuleId": "46ca7f",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r86"
       ],
@@ -2101,7 +2101,7 @@
     {
       "actRuleId": "4b1c6c",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r15"
       ],
@@ -2299,7 +2299,7 @@
     {
       "actRuleId": "4e8ab6",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r16"
       ],
@@ -2497,7 +2497,7 @@
     {
       "actRuleId": "59796f",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r28"
       ],
@@ -2695,7 +2695,7 @@
     {
       "actRuleId": "5b7ae0",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 12,
@@ -2891,7 +2891,7 @@
     {
       "actRuleId": "5c01ea",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r18"
       ],
@@ -3089,7 +3089,7 @@
     {
       "actRuleId": "5f99a7",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r20"
       ],
@@ -3287,7 +3287,7 @@
     {
       "actRuleId": "674b10",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r110"
       ],
@@ -3485,7 +3485,7 @@
     {
       "actRuleId": "6a7281",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r19"
       ],
@@ -3683,7 +3683,7 @@
     {
       "actRuleId": "6cfa84",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r17"
       ],
@@ -3879,7 +3879,7 @@
     {
       "actRuleId": "73f2c2",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r10"
       ],
@@ -4077,7 +4077,7 @@
     {
       "actRuleId": "78fd32",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r93"
       ],
@@ -4275,7 +4275,7 @@
     {
       "actRuleId": "7d6734",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r43"
       ],
@@ -4473,7 +4473,7 @@
     {
       "actRuleId": "8fc3b6",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r63"
       ],
@@ -4672,7 +4672,7 @@
     {
       "actRuleId": "97a4e1",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r12"
       ],
@@ -4873,7 +4873,7 @@
     {
       "actRuleId": "9e45ec",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r92"
       ],
@@ -5069,7 +5069,7 @@
     {
       "actRuleId": "9eb3f6",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r39"
       ],
@@ -5265,7 +5265,7 @@
     {
       "actRuleId": "a25f45",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r45"
       ],
@@ -5463,7 +5463,7 @@
     {
       "actRuleId": "afw4f7",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r69"
       ],
@@ -5659,7 +5659,7 @@
     {
       "actRuleId": "b20e66",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r41"
       ],
@@ -5853,7 +5853,7 @@
     {
       "actRuleId": "b33eff",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r44"
       ],
@@ -6051,7 +6051,7 @@
     {
       "actRuleId": "b40fd1",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 8,
@@ -6247,7 +6247,7 @@
     {
       "actRuleId": "b4f0c3",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r47"
       ],
@@ -6445,7 +6445,7 @@
     {
       "actRuleId": "b5c3f8",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r4"
       ],
@@ -6645,7 +6645,7 @@
     {
       "actRuleId": "bc4a75",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r68"
       ],
@@ -6843,7 +6843,7 @@
     {
       "actRuleId": "bc659a",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r9"
       ],
@@ -7043,7 +7043,7 @@
     {
       "actRuleId": "bf051a",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r5"
       ],
@@ -7243,7 +7243,7 @@
     {
       "actRuleId": "bisz58",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r96"
       ],
@@ -7445,7 +7445,7 @@
     {
       "actRuleId": "c487ae",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r11"
       ],
@@ -7645,7 +7645,7 @@
     {
       "actRuleId": "cae760",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r13"
       ],
@@ -7841,7 +7841,7 @@
     {
       "actRuleId": "cf77f2",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 14,
@@ -8035,7 +8035,7 @@
     {
       "actRuleId": "d0f69e",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r46"
       ],
@@ -8233,7 +8233,7 @@
     {
       "actRuleId": "de46e4",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r7"
       ],
@@ -8433,7 +8433,7 @@
     {
       "actRuleId": "e086e5",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r8"
       ],
@@ -8631,7 +8631,7 @@
     {
       "actRuleId": "e6952f",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 10,
@@ -8825,7 +8825,7 @@
     {
       "actRuleId": "e88epe",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 20,
@@ -9017,7 +9017,7 @@
     {
       "actRuleId": "fd3a94",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r81"
       ],
@@ -9215,7 +9215,7 @@
     {
       "actRuleId": "ff89c9",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r42"
       ],
@@ -9413,7 +9413,7 @@
     {
       "actRuleId": "ffd0e9",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r64"
       ],
@@ -9609,7 +9609,7 @@
     {
       "actRuleId": "m6b1q3",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [
         "sia-r94"
       ],
@@ -9805,7 +9805,7 @@
     {
       "actRuleId": "ye5d6e",
       "engine": "alfa",
-      "engineVersion": "0.119.0",
+      "engineVersion": "0.120.0",
       "engineRuleIds": [],
       "mappingKind": "none",
       "testCaseCount": 12,
