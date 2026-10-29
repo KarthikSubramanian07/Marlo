@@ -161,9 +161,9 @@ apps/demo/checkout.html
         aria-labeledby is not defined in ARIA 1.2, so assistive technology ignores it. Usually a typo.
 
   ▲   moderate 78fd32  Important line height in style attributes is wide enough
-      WCAG 1.4.12  marlo precision 1.00 over 21 official test cases
-      p (not located in source)
-        line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix.
+      WCAG 1.4.12  axe-core precision 1.00 over 21 official test cases
+      form > p (not located in source)
+        Inline text spacing must be adjustable with custom stylesheets
 
   ▲   moderate 9e45ec  Important word spacing in style attributes is wide enough
       WCAG 1.4.12  axe-core precision 1.00 over 16 official test cases
@@ -206,4 +206,4 @@ apps/demo/settings.html
   39 findings   0 fixed   0 flagged   0 not evaluated   0 crashed
   coverage: 41 of 94 published ACT rules
   one-directional invariant enforced on 7 rule(s): a peer reported a failure the routed engine did not.
-  calibration 2026-10-20, corpus 2026-07-29
+  calibration 2026-10-29, corpus 2026-07-29

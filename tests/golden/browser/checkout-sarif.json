@@ -607,13 +607,13 @@
             "act-rules-published": 94,
             "act-rules-calibrated": 41,
             "act-rules-unmeasurable": [],
-            "calibration-generated": "2026-10-20",
+            "calibration-generated": "2026-10-29",
             "calibration-commit": null,
             "corpus-retrieved": "2026-07-29",
             "engines": [
               "marlo@0.1.0",
               "axe-core@4.14.0",
-              "alfa@0.119.0",
+              "alfa@0.120.0",
               "htmlcs@2.5.1"
             ]
           }
@@ -2574,7 +2574,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r19",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "marlo",
@@ -2639,38 +2639,38 @@
           "ruleId": "78fd32",
           "level": "warning",
           "message": {
-            "text": "line-height: 1.1 !important cannot be overridden by a user stylesheet, and it is below 1.5 times the font size. Removing !important is usually the whole fix."
+            "text": "Inline text spacing must be adjustable with custom stylesheets"
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "p"
+                  "uri": "form > p"
                 }
               },
               "logicalLocations": [
                 {
-                  "name": "p",
+                  "name": "form > p",
                   "kind": "element"
                 }
               ]
             }
           ],
           "partialFingerprints": {
-            "marloFinding": "78fd32:p"
+            "marloFinding": "78fd32:form > p"
           },
           "properties": {
-            "reported-by": "marlo",
-            "engine-rule-id": "marlo/78fd32",
-            "engine-version": "0.1.0",
+            "reported-by": "axe-core",
+            "engine-rule-id": "avoid-inline-spacing",
+            "engine-version": "4.14.0",
             "routing-reason": "best-measured",
             "agreed-by": [
-              "axe-core",
+              "marlo",
               "alfa"
             ],
             "disagreements": [],
             "measured-precision": 1,
-            "measured-recall": 0.8333333333333334,
+            "measured-recall": 1,
             "official-test-cases-behind-measurement": 21,
             "accuracy-source": "calibrated",
             "meets-auto-fix-threshold": true,
@@ -3038,7 +3038,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r68",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "sole-implementer",
             "agreed-by": [
               "marlo",
@@ -3622,7 +3622,7 @@
           "properties": {
             "reported-by": "alfa",
             "engine-rule-id": "sia-r42",
-            "engine-version": "0.119.0",
+            "engine-version": "0.120.0",
             "routing-reason": "best-measured",
             "agreed-by": [
               "axe-core"
