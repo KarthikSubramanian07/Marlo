@@ -16,8 +16,8 @@ importers:
   .:
     dependencies:
       zod:
-        specifier: 4.6.6
-        version: 4.6.6
+        specifier: 4.6.7
+        version: 4.6.7
     devDependencies:
       '@trymarlo/act':
         specifier: workspace:*
@@ -53,20 +53,20 @@ importers:
         specifier: 4.1.12
         version: 4.1.12(vitest@4.1.12)
       dependency-cruiser:
-        specifier: 18.6.0
-        version: 18.6.0
+        specifier: 18.7.0
+        version: 18.7.0
       eslint:
-        specifier: 10.12.0
-        version: 10.12.0
+        specifier: 10.13.0
+        version: 10.13.0
       eslint-plugin-import-x:
         specifier: 4.17.1
-        version: 4.17.1(@typescript-eslint/utils@8.71.2(eslint@10.12.0)(typescript@6.0.3))(eslint@10.12.0)
+        version: 4.17.1(@typescript-eslint/utils@8.72.0(eslint@10.13.0)(typescript@6.0.3))(eslint@10.13.0)
       fast-check:
         specifier: 4.10.2
         version: 4.10.2
       lefthook:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 2.2.2
+        version: 2.2.2
       prettier:
         specifier: 3.9.10
         version: 3.9.10
@@ -74,14 +74,14 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
       typescript-eslint:
-        specifier: 8.71.2
-        version: 8.71.2(eslint@10.12.0)(typescript@6.0.3)
+        specifier: 8.72.0
+        version: 8.72.0(eslint@10.13.0)(typescript@6.0.3)
       vitest:
         specifier: 4.1.12
         version: 4.1.12(@types/node@26.6.5)(@vitest/coverage-v8@4.1.12)(esbuild@0.28.2)(happy-dom@21.0.4)
       wrangler:
-        specifier: 4.151.0
-        version: 4.151.0(@types/node@26.6.5)
+        specifier: 4.152.0
+        version: 4.152.0(@types/node@26.6.5)
 
   apps/site:
     dependencies:
@@ -123,8 +123,8 @@ importers:
         specifier: workspace:*
         version: link:../schema
       zod:
-        specifier: 4.6.6
-        version: 4.6.6
+        specifier: 4.6.7
+        version: 4.6.7
     devDependencies:
       esbuild:
         specifier: 0.28.2
@@ -160,26 +160,26 @@ importers:
   packages/engines:
     dependencies:
       '@siteimprove/alfa-act':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@siteimprove/alfa-device':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@siteimprove/alfa-dom':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@siteimprove/alfa-http':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@siteimprove/alfa-rules':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@siteimprove/alfa-url':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@siteimprove/alfa-web':
-        specifier: 0.119.0
-        version: 0.119.0
+        specifier: 0.120.0
+        version: 0.120.0
       '@trymarlo/act':
         specifier: workspace:*
         version: link:../act
@@ -272,8 +272,8 @@ importers:
   packages/schema:
     dependencies:
       zod:
-        specifier: 4.6.6
-        version: 4.6.6
+        specifier: 4.6.7
+        version: 4.6.7
 
 packages:
 
@@ -317,32 +317,32 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/workerd-darwin-64@1.20261012.1':
-    resolution: {integrity: sha512-dkTL9aY3V4D40b+jBpGPCistWUPFQ/M61wlWi6i1o8MvHFFgEw7EQkcaYEv6Yd3bkPDD/3TFT4hRsMb2xVZSwQ==}
+  '@cloudflare/workerd-darwin-64@1.20261019.1':
+    resolution: {integrity: sha512-5ZILbAta/fBQvhmAYeCE7dKMMYIr7N9wJEX50fEGLKSIwGtvT0HzSfHNIK/O7cBQ4gHQ2WfIiPClvwcye6E0fA==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [darwin]
 
-  '@cloudflare/workerd-darwin-arm64@1.20261012.1':
-    resolution: {integrity: sha512-2/nVGcKXjNNI+DhxKSepTKvFng9H7aN2WXv6Zu67iqgI6JrxypNt5kTPv4ZHosxrcfyKMci/2RfN7GIrN0BitQ==}
+  '@cloudflare/workerd-darwin-arm64@1.20261019.1':
+    resolution: {integrity: sha512-cww2Ab6lVMxpTiEEjKmPI58p5EMo0vYTZSH+3WkqXJdQgc3ES66GuL247+U2B2YWajhhu2tqj7jySrXneU749g==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [darwin]
 
-  '@cloudflare/workerd-linux-64@1.20261012.1':
-    resolution: {integrity: sha512-uMe7ONHnLxStD1Ye0YFHBO36uj4cStv5P53rW+5GVWXFT8BRjqVixlH0IqCAHe1Pmcwyd1+7fVoGde89MZSCJg==}
+  '@cloudflare/workerd-linux-64@1.20261019.1':
+    resolution: {integrity: sha512-4++VRi9vkQROYqrpZYOixIJuVDmujkwrT4kszsxNFlvcmsX6Mr2GumvxIN3gIixS3vJUh3Umdtkthqj5X0S3Xw==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [linux]
 
-  '@cloudflare/workerd-linux-arm64@1.20261012.1':
-    resolution: {integrity: sha512-I0VMdcXk7ygG5vYDce0ePTBFdnBXC0i9WiBY5mWiv0iTinbfea6/rHqSQ7B1UMpjgrYVs9E0m4bZ9ufsk5GCFA==}
+  '@cloudflare/workerd-linux-arm64@1.20261019.1':
+    resolution: {integrity: sha512-75PVtJOwfjScQ53sbLtQXI7D8yP1c21t+WEUPaYbqkzaz4ZqfR5wAd+zuWs8G5Q7kOj2SQIvEfY5Sn8Y+UVrnA==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
 
-  '@cloudflare/workerd-windows-64@1.20261012.1':
-    resolution: {integrity: sha512-c5hQvNx574UEoknaCFvMa/NdLrrYiALNbe6sx1okW8uOiRYWxrFuA8WpXFnBJ5XJypm0TEAHYaUTGv3rRLpY7Q==}
+  '@cloudflare/workerd-windows-64@1.20261019.1':
+    resolution: {integrity: sha512-z49fvKTETMCnG6wnMcQwxx9CpryFceiKz04FRjq26EkhCyzRNJ6c3UXhyZz3r5f1CXnnBZc5DcU8ZouPkUJCqw==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
@@ -856,284 +856,284 @@ packages:
     resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
     engines: {node: '>=18'}
 
-  '@siteimprove/alfa-act@0.119.0':
-    resolution: {integrity: sha512-bOQutRY+NM69cEHulEKV5Iv7/6iFMQ5QXL9E/JKWkDPQLpTAZLmuV/XzeegymtJu9RerRzHjgCrmpF50W/z89A==}
+  '@siteimprove/alfa-act@0.120.0':
+    resolution: {integrity: sha512-IoGPNWFdRZz3o7ZgQPDbRkekar0zYmsJyx6AdMFMbuWsM523RudSNwL97PlolEJLukDMBOx6ePSEppyBvx0Efw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-affine@0.119.0':
-    resolution: {integrity: sha512-BkKeIuJqi3p5+mZNvcPR2Cut90A498emFWB8EdUtYSB0I0ljbJIXap1hfweWwoxC7fW5wTswfpEqvCnLOcFTrg==}
+  '@siteimprove/alfa-affine@0.120.0':
+    resolution: {integrity: sha512-B0QH45Z6UVkHTLKZdPirIm5DkwJsXtp52hdailmMlC3leZUd5Oi1vPFS2EBpNw4LSxHtHRPc1LfzTqOVYcOHYg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-applicative@0.119.0':
-    resolution: {integrity: sha512-Wq4YlW0Q/VXRElDfmA+LEkj1J1yK4Jynif4Y962m/lU4q2iN1oeIpjNZn00lMvDV6TzNQQGVz/ElJmNrKjatyA==}
+  '@siteimprove/alfa-applicative@0.120.0':
+    resolution: {integrity: sha512-BBN/DOHKuPNW331s8O63UCsvlfPA1Y87yd2RBX7X9NkUyKXfxeC1j0FDDLm01aUO0NPKnkSy4CSRDSyl52fePQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-aria@0.119.0':
-    resolution: {integrity: sha512-HWPfs5kOm/vipL9OZJPX7MYPHB6V44RmHQsg4BOISFXrGP3z71MF4NwZQXbixH/6Qv+Ue/Y1O2PYUFZFVToXsw==}
+  '@siteimprove/alfa-aria@0.120.0':
+    resolution: {integrity: sha512-967oFlW03ZlHDfRtT6gMus+6JUgKY+gLRHY0n/7GzHNaJFLPtkE9B2co0bf+NmiwJitfE65yNCowa9EycPkmhQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-array@0.119.0':
-    resolution: {integrity: sha512-L6F4j329XX4YDtKfmN7NKcc4FoQBWfYH/2ZHS/jDvWJaopERjrvFmzQUzdw2a0psp2huJBuyamP8wVsDhRnUKQ==}
+  '@siteimprove/alfa-array@0.120.0':
+    resolution: {integrity: sha512-tV6kqkr0kl+NYMUIwia9Js37g06EoWmw2Q2p5OZkm3gW3bq7GVKxYCYl0qHWCeBfCPhB5EbmHuwV8VMyZ4T+JA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-bits@0.119.0':
-    resolution: {integrity: sha512-eWny+r/aiCyF5ruQ5lArEAgBjIktjuJi2c5P4QNwoWVU26J80dytQn4OC69g50/Tk2WZXuF8mNuvpCvTrMW0sw==}
+  '@siteimprove/alfa-bits@0.120.0':
+    resolution: {integrity: sha512-/AwLN1GYtaX3odlTBEXm+TFHXNuRU30Cu24EhpJu5fI6lnrqWsjbonZwGfTCIP5L6gZVHQn5Rubd26hJvN8A4g==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-branched@0.119.0':
-    resolution: {integrity: sha512-+DaEWCHCq6eLmUkIWi6ZtSV8FAafISp8qg1Pcx7bvw0uLBZBu/IlvsOYvwNf4Ojp9uE4nCFJ/aw7z8FCieW1Pg==}
+  '@siteimprove/alfa-branched@0.120.0':
+    resolution: {integrity: sha512-Vxfo/VQsZMJj2pMedrBBi+Ivo+8rmeRGXf2A6tayhpEPNlvUmetNpvUwIGLovF5MwBck9y7JSInw4287q9VczQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-cache@0.119.0':
-    resolution: {integrity: sha512-OYbrdlkLziBS1Sfh0EKdVHf2ze6yWmwlQklOaGkw2y9bIs70M7sgWiZHPghAvn/Dbp1+hCerAZG2zqK4rg3ZyQ==}
+  '@siteimprove/alfa-cache@0.120.0':
+    resolution: {integrity: sha512-2rxTTL9Oia5DbT/loZbQ0ZElnEf1EeKpb0NRLHFRotISdpD9aGTMUZLXo8WTwQs0sBLwyo/ta6VyMQchLUln2Q==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-callback@0.119.0':
-    resolution: {integrity: sha512-cmCLiKWJDjyy0FrPNZSB7GHLTG7FCYeeJfqD4YISQ2QPBu5bxEmYCr8Xsm433WCVbiOnXrFZssaXtHp/YJKf/w==}
+  '@siteimprove/alfa-callback@0.120.0':
+    resolution: {integrity: sha512-kBsChCM0ZuKlGT2O89uv9NCzTpDIxsGulQYYXNsA9Fl4k5FFU3a+XtJI35S+E44Aitc1VXoS1sngKmnVeq9Iww==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-cascade@0.119.0':
-    resolution: {integrity: sha512-NWuYWn6tkxegxYcG8+5csiWIcRjYgNZDnjBoPUBGmkQwSrHJzH0wLnHQi75N+JFa1nTm2uWykIcy8kOZbZGDeQ==}
+  '@siteimprove/alfa-cascade@0.120.0':
+    resolution: {integrity: sha512-EnFre6UTESmHR0athoHMC8NEQPZ2f0uimyzu0Rodx3qI3eSRwT9uF7zWXIqzlqwEObVex9WLHH3aDXRIorADfQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-clone@0.119.0':
-    resolution: {integrity: sha512-p6osGHAxUKLC0Mv8cTGAjisW646ZmYQuuqI9cPKpAabx5OXMNYh8FsZcKKRxwVbNtU7ar2BaijyanDTyx/7yVQ==}
+  '@siteimprove/alfa-clone@0.120.0':
+    resolution: {integrity: sha512-Cgoj/Q2RWtm7D2UQfnzZOraSYhncHqbt00wEutLVmMsYu4/eMZTwrB/iMYeb1OH5Pc8Oy6XL4VhBRPvQpgDXmQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-collection@0.119.0':
-    resolution: {integrity: sha512-qucOnoOLju3Jc3A/JSn4IkhhW9GQdR+aMU5//i+JKllLmf50Zw801Dr2ngjWA2W+1Mttc2I+pklxsdEf1AZpng==}
+  '@siteimprove/alfa-collection@0.120.0':
+    resolution: {integrity: sha512-Q9XRYjvOPIRKMd6bwhy1lqItW9nU9zwuhHDDRWqVio+hUKCAEeoaktW8G2pA4twAog38qecVONn7asCkWGQPTw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-comparable@0.119.0':
-    resolution: {integrity: sha512-+X5xcWfZi/l+dqiios0QpCInNBPSAbfaCqa2GJfUlc3jIbjO7by+RhruIbBXwTLObbjLslkuk0mQSQACT24zEA==}
+  '@siteimprove/alfa-comparable@0.120.0':
+    resolution: {integrity: sha512-mNyM8/banc1SAVTL4Q4J8E4XWJkuD3VgvdQ2DIXwZeuQzr8mGswjh3OWuupyVrfBD9MAqBPM+CMpoh3J0frfxQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-continuation@0.119.0':
-    resolution: {integrity: sha512-Clx9t2IT19RVo116o0yU0OA/r7Vxp9sM3SNnkecqdu9Sf1t6KbYwi52IaRKjdPI5lxy0OAXRg4JTUp1RC4icRA==}
+  '@siteimprove/alfa-continuation@0.120.0':
+    resolution: {integrity: sha512-BfIdyiw1eU1NVyzdNOa4CNyyzdOArVKP4794zELht00u7Eh5WP1RsB51Mr1pP1kNkRErYbghXYnosziLp9YSOw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-css-feature@0.119.0':
-    resolution: {integrity: sha512-jIvLkV5duvzEMCMhhaPddd15AwEacReBOKvqRe4vQ9VSBPBNdJ+PEvshOTgjsnSEpx1fJC2IpcaK8LmFfXND3A==}
+  '@siteimprove/alfa-css-feature@0.120.0':
+    resolution: {integrity: sha512-z3iedULawhlQUouEXEmhyzSaw8e+UpMSFJVDSEipbot5z2ntNTHW94kAnJ6JiDpHt2GhYVznn99V/kUj8cXIUg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-css@0.119.0':
-    resolution: {integrity: sha512-RCQpEjN37IGjf1/Lm7zMA073ea14SGAzR+Q+2fXdwHD6ra25sm38CAbC+bem86OoYtuXkeCDD6PG9pBSTOvYug==}
+  '@siteimprove/alfa-css@0.120.0':
+    resolution: {integrity: sha512-hkReRwpw4R2w2e4nloAAHH3eOcIRz6P06Cejc8npV5gqUAysbgNyWHr48QIIZpSkaZWJuvFcXOXSA8wHEXv/Ww==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-device@0.119.0':
-    resolution: {integrity: sha512-d3ULC1aQ2zt3saeGnTcGTOZTGv6L0tt2lzJgXlNw1S8V+Pgnm3S6TdHr8vBg9+oSM+yFQBUOBxdZrykoN9J87w==}
+  '@siteimprove/alfa-device@0.120.0':
+    resolution: {integrity: sha512-cu22dKsUEVL8Ae2wA4FPQF9ya6XUdkpTgWVZeFWJdig5c1I4MbUnQ2bR+FeY1cxYoFo89nkK2DSLBu+Z9wWYRw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-dom@0.119.0':
-    resolution: {integrity: sha512-nV/Q5bcbommfAmQMXI4hF3NlEMfrSAL5hBqk2HCVejNslakX7szBZNUTGHgcN3BfLrg8jG5IFWJYQt3vlXm09g==}
+  '@siteimprove/alfa-dom@0.120.0':
+    resolution: {integrity: sha512-JDORasYsg3bMxgNTf/KhtG5e0mkk14XWrcmFDvszc1xYNe571uyRxyYBJEToDQhwa1s2zGZBU9yN/G7G1Zs4Kg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-eaa@0.119.0':
-    resolution: {integrity: sha512-42BHQf0vGneHGIS4zKEExfD4tR8RS5akIm70ND+PTZqlkkcWNnWOeHVvf4vFSqmUk14qs7AZa200rE53GhYq9Q==}
+  '@siteimprove/alfa-eaa@0.120.0':
+    resolution: {integrity: sha512-oDjLYPA326BcKKZtfe2CfjiBNBsGrh/qZy+gbqvVswawUQczTkzvyojoh5yjWTtHJ9IXJtsHA5dgntLq5Ruh6w==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-earl@0.119.0':
-    resolution: {integrity: sha512-vyG11EiaG+AOVoZyIkAAn4oqG6OcqVNBJAPSNRIwYRiWPEoQMUtw3yxZIIoSHCMSfkmXcEUzNDyNm4OHdJoBOA==}
+  '@siteimprove/alfa-earl@0.120.0':
+    resolution: {integrity: sha512-J0kIF+YyAxawNVvUw+OHueq7k8wACucPYEjGgFWQBrpLUjaolPVnoyZGytHVsvi22W7hKCFj1OIHdJG84vp7zg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-either@0.119.0':
-    resolution: {integrity: sha512-tdZvn+L4eC8oY3n85VF6choCx/+v5tgmgU/xwtRx3/xC9kOg+qHfWa+vDY2fFCGhQg6MVdSfCZNXeaXgSMIzXg==}
+  '@siteimprove/alfa-either@0.120.0':
+    resolution: {integrity: sha512-/uRdiygixZyKj1I2dsLwwr2t9tkM9axBMj1vOFSmlwVXuSSJ4j8VrNvsI+XlAu6HqmfCljO4q7IvGu4SQ2Ld/w==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-emitter@0.119.0':
-    resolution: {integrity: sha512-5hs8o5Oa6OA9VGheYvmok5qw9il8xdMHikh2UFMLddjg09UxYMFvMLytm44laxYbtR7oct2MDYhBpWnTZ+QS1Q==}
+  '@siteimprove/alfa-emitter@0.120.0':
+    resolution: {integrity: sha512-SJ2HqVQngQi/5gUkoW3LJtOs5Q9hi8JpdUEzHd1xVl6YnvBR/TNIdZdx+9VFbqZ+6WfvBRxu0nc1GXQsNi3CwA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-encoding@0.119.0':
-    resolution: {integrity: sha512-2EFfwpSVynMwY67vLccX26MJPbfGpRzq0mL6Su2hTdl0jB8lTUAakUxbTEwydy/GMy8ddZ6lys3IFZlF6OiFOQ==}
+  '@siteimprove/alfa-encoding@0.120.0':
+    resolution: {integrity: sha512-vADIkMGD5zV7nBL0bpynmljfgrnGOQY4vOx2TeBqZa2V1y3jKy9bNM4Y48H05abn/3U02WXIHplAag6LwVtBSA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-equatable@0.119.0':
-    resolution: {integrity: sha512-Tg1mZ16coOp5K7IAXxF0k7sZAMOseovl61/y8NVuK8ZhUony3ZNdZOjshUqjhv7pemRMtY8l1FCrpNwlqxOH4g==}
+  '@siteimprove/alfa-equatable@0.120.0':
+    resolution: {integrity: sha512-0u+5FJngRL4Q1PRRNTn2huj/IemI6ROwhQDEXdCLAu7JPrfinHYqGIllxbe4wvRIBuWXYPBu+T7Rd+vmOpmmEg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-flags@0.119.0':
-    resolution: {integrity: sha512-g81h6An083fGiMkz3R+7RmFQgQ30H4BpixsyqIlW/1SI2LPPG71CaS+7CmJ+OYMyoeP/bt0r/kHVbW88EfeKQw==}
+  '@siteimprove/alfa-flags@0.120.0':
+    resolution: {integrity: sha512-N2twRmLCxk+FrWNs+Xc4+DyPM9mP5nNHJpxvji47Nnt8VsrTHObjRGsGAlKh3pRjMDmyjt58jANqVXBMlOLnIQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-fnv@0.119.0':
-    resolution: {integrity: sha512-a11XLbjNMXtMlLR+0p3kuBVklz3e6LBq470A+6isYvGg2ow3HdHIRYCJHyj7dm87fy9lZRp0kso5bTA5BH2dQA==}
+  '@siteimprove/alfa-fnv@0.120.0':
+    resolution: {integrity: sha512-MOFIityiyVtv/pnTYl85r3VjWTs8X+9IJX6sjmm5i1LDAn9j5G/g/yVKVyryS6BSUyNYsCpux/B6tlTtB2Z7VQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-foldable@0.119.0':
-    resolution: {integrity: sha512-DWmCdZTQpfd2/jGLspuJ+3pJfDeIC1A1vxK7AkRcQgbakt61NLKpbHmJo7Ie4IW2vChwxEKY9CdoO+6kI+WYwA==}
+  '@siteimprove/alfa-foldable@0.120.0':
+    resolution: {integrity: sha512-89hTSet09om4ZuMvT0YXd09AAaXQmY4lEAicwYjT7loF5UVuRWe2Opb2Dkad3n9Xjjdd429ukbGFrrkgXHtU5w==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-functor@0.119.0':
-    resolution: {integrity: sha512-iNb7rqD6045rFCI3y1/1nksdkP40qW1piHU4PBxorcnsLAyyhnGoWUcBw/3mzxFMYejdzVedjttdE5GE6zq0WA==}
+  '@siteimprove/alfa-functor@0.120.0':
+    resolution: {integrity: sha512-2PVcW2gVHkJiduri43a1DOKAAjotHeA283HfhUH7CQpSyIJRernRKC7AuGfxD9/VyJ7WFsO+TeTb3Ylc+MG+Jg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-graph@0.119.0':
-    resolution: {integrity: sha512-Oc1/O0fc2cH9V8Z0Rz0C3VMPMgnrsPWBk868YGtflg7AdbPX+4KOgTf5bQzPD8GcHUtSdZoHRAQoBNw041ERLg==}
+  '@siteimprove/alfa-graph@0.120.0':
+    resolution: {integrity: sha512-YVgk/V8UUCiUfvYw2hnmNg6AYz7u22K/G2kbnCsrP6MsZMWF0oV+ig1aao0KJcdu7beWmrunEy4cb8HqI8GDjw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-hash@0.119.0':
-    resolution: {integrity: sha512-9vt1LS25CnTAyY8Jg37S6n1uTXjNIaWs6wMrQt1lnTjW8hRlGgT0rZunWQZCANSvwqsc2+FdX/XrDOpCAw6EHg==}
+  '@siteimprove/alfa-hash@0.120.0':
+    resolution: {integrity: sha512-WSimLqhGoZeVu6lJztHPk2vwZ4ljUHES3MEGKX/B7qNsR5eIs/hWZiPBReACQPukMpXcQHLO3TMEcU4Ncu6d1w==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-http@0.119.0':
-    resolution: {integrity: sha512-0kTvv+KhAUUHp8MLsgAgwe0y1e1ahFsbUiApTrAWkiPvu0vk80N0iidHZSHmgdu8XiaHWyayJksewO3eHrc57g==}
+  '@siteimprove/alfa-http@0.120.0':
+    resolution: {integrity: sha512-Th4Wn/zSIHmz4npumugpPj1IEXoALn2t89MaNJ3QzmJs5YYgoN3sXFfgyB+FUopNR0xySk/2uNj8G5+jL+Vv1w==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-iana@0.119.0':
-    resolution: {integrity: sha512-UwNV3vDDKKymZCS6Ywp5csl3bhxUS8FAI14WBSQh9AeCUK4Lv6HtaALhrC+PMNSmOBqK/he4JndSw0CuMYgqIg==}
+  '@siteimprove/alfa-iana@0.120.0':
+    resolution: {integrity: sha512-oQ804/Z9Ug1jiVc/vve6Ur4gtijrRJUFs6NYepnDCrvywX1Nm8eo0rGHRJrQCNE+2XrAlunCxbSH6+7R2oI8Jw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-iterable@0.119.0':
-    resolution: {integrity: sha512-XL0TRuKJZc50bXXhyS3VFgQbnp7uk0tQSOgNH/qLFXJNiX2bepcMS7fmD4iBrZ4uSSX9Q0f2xabLzQZH9fKGCw==}
+  '@siteimprove/alfa-iterable@0.120.0':
+    resolution: {integrity: sha512-Uzcm3Ew+4NiuEKVuOywIAYkMAUkpUHHj6OOq5Ixu+y1Mp0AgrYtYTDqzRZulSkhi1R0wbLZKzgywGZLN9KCHjg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-json-ld@0.119.0':
-    resolution: {integrity: sha512-nWEL4xKCaAcyR+pXsIHbfftxvr/NwdXmwdgK3DHRzM0SbqiO7Zun7z7X9ieaX6Sax3guezwh8ed7xs7yvxq2Ew==}
+  '@siteimprove/alfa-json-ld@0.120.0':
+    resolution: {integrity: sha512-Z5A0tJlBWWhgoySIyAwXJ5/0VCK+R/VoZ0AvBoCiiLwe6KLq07aJBDGt2t61QIkBJztKIWrxkcSft29AGG87Zw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-json@0.119.0':
-    resolution: {integrity: sha512-WN3K05v4ekgAXwNqgQO+m0xiLVxlH4kwmadhZW1Ke/HcNqyJKSVaiRMTf6A515dIcLYD3oFkvr9u6lOnU5q3qA==}
+  '@siteimprove/alfa-json@0.120.0':
+    resolution: {integrity: sha512-9aOjZavzlvLHCDVESuMP02yMU7eu7kjBMXozB0HJ9XLGSSMo+sAfFMUnvGokzBp+04KPHPapdxOE/fPfDXBSNA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-lazy@0.119.0':
-    resolution: {integrity: sha512-/64/dMM4AW9RBRWIdB7KYhZMEoYVex0eI99/8nkymigr1hJmf9cP1taH79Typ4gIf+05bdKaQ5pQSq8roKIGJQ==}
+  '@siteimprove/alfa-lazy@0.120.0':
+    resolution: {integrity: sha512-d+/nVQ1wDqXDtL8ji5F3/DTnaVnhOGs3vFfxmLZrfG/5A6nVn50yAFTtuP04GEL/L0Oc/cBp/SVa/2M/eo8Vng==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-list@0.119.0':
-    resolution: {integrity: sha512-SlleVHHf34XAXp3H2akoUfs8QBpc+vVKV8tft5FU2xdPU68xU4IV7sbygxdNcxtAQiUfiHp3NYbmxNzJvuOaJA==}
+  '@siteimprove/alfa-list@0.120.0':
+    resolution: {integrity: sha512-mcRnvHKswUp+Yq01cjrImfwk7mWitB1caQpU1ZgiqlgnM5WQjkDmnZLsMR3dY1B7jT1cZ9FjdIzpqcmhx+8QXg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-map@0.119.0':
-    resolution: {integrity: sha512-+H16kL8qpFnqycSl8qDvpvRH3ZI32UP3Sb7GpV8k+XsgSSzSYu2cswYd5X+W6Dg1MIpJ18cw9pATz497/ldmcw==}
+  '@siteimprove/alfa-map@0.120.0':
+    resolution: {integrity: sha512-pXbzB5r4yb5XTXOn6FbcGdo0hCBkdWHjIO1cTfy3eaGMfGcJs5kF4XHEXwWBFSeeDjV0t8loPERz7cyu8E8caA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-mapper@0.119.0':
-    resolution: {integrity: sha512-XJDWD1FZRAGvYsBHnF2Eu3iYp+eFeFaFknx4cuDMnUOVjxA0AUnWjQ9rmdBexqyVEXVyiim2Gt+sX/6Fw3b78g==}
+  '@siteimprove/alfa-mapper@0.120.0':
+    resolution: {integrity: sha512-Z7+rVooh8wRYHs7Y02YkXtyXneA+ZGCBle9NcqJL1Y8WRGUDePp5LFIZQFsF6WUEv5BJGor0LwDaCe4g1bzBtg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-math@0.119.0':
-    resolution: {integrity: sha512-Cqk2Yvg0D6JGr38nhxEg3AJ1qOqEWHDDesgpdtwWbcyzJUMN7iDfen4H2WJSexiUdFqjpxh9QrTv5ADOzG0Xqg==}
+  '@siteimprove/alfa-math@0.120.0':
+    resolution: {integrity: sha512-Zm0g6+oB5fIBiyFYf36dsRVSrHQni/4pPzxGhTGxGNyZ2BrugTpYAfVl2khWr65RLj6/fxzKPffLuIqOfKKghg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-monad@0.119.0':
-    resolution: {integrity: sha512-CPVwYSar0JzoUwHfm6sq53VuhYgJE0egI42/3u3oyIf/eAgtIC8fTpUwjTE2MoUGJEYeJ+HdgimS7D6NhYH+Hw==}
+  '@siteimprove/alfa-monad@0.120.0':
+    resolution: {integrity: sha512-+irj8EzQieVgrL0k3tE+LG06Es5mN84uRzSxR88wHWotTf2hoIWjjxO4LvtNEUjqPQZgbcgyTHyj7K4+P9C3MA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-option@0.119.0':
-    resolution: {integrity: sha512-45Ifr1/xvn2Xrc+lfWzMh9/ReqImY5RF72m2zb037inLutu4ezYsNngAJYwEQLBDQpPVs0ijkqNCblni+hYSLw==}
+  '@siteimprove/alfa-option@0.120.0':
+    resolution: {integrity: sha512-C6lKG/vQuhrTmIoH1k4fp4LbpA6K8Q9gkWOxPYKv3y47h8yLM5TgbQEv1+1IWPYnEEK5OYDXUe8Kz7f7xlwvCA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-painting-order@0.119.0':
-    resolution: {integrity: sha512-mI3uWSbHsxEV4r3M4UV3HxsAbXAC9KnylBdbwh2SEM0yxCB5MNPDQqK3lX8L4EFGDkhMPTA2RVLfsvaJAImiVA==}
+  '@siteimprove/alfa-painting-order@0.120.0':
+    resolution: {integrity: sha512-0jSnYLFPx/Qte5AVO3otYHePWmK0Biz8nfcZSKDZ0+3QxOLlTGB90BzenNqLaZyhcBRGqTQRd76rSDDdaeBvlg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-parser@0.119.0':
-    resolution: {integrity: sha512-NFF9fjxwn75rt6k2lhkg8xogY4Q314YTpkQwFa+AqjasQ6FOpXBMocWOIMgWgjp5YT0Epfjx+eySuXtvqS9aiw==}
+  '@siteimprove/alfa-parser@0.120.0':
+    resolution: {integrity: sha512-3yl1bO5EVFi/lH/y6SM8zbD5+/QWZRc96tSynJczmC05GBe6chGNXim0p4jV1y3jFD+rj7TIXstxjr/rtzEt5A==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-performance@0.119.0':
-    resolution: {integrity: sha512-Mn96iJHsg2acTR5+mH5HO4btPKiF+8m+mKo6kcaF/6dZl3JEvB0JLt+TgfE9BENi7cj/4pyU5q6fV1m8Wl7gUA==}
+  '@siteimprove/alfa-performance@0.120.0':
+    resolution: {integrity: sha512-dvkUZ/RhY3eI0htM658XzQjUcp4z/IkbquLdWg6K1pNYsypdotHZa8S1gOqb1NL235VLq39Skj7kKCRL6Q1Vww==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-predicate@0.119.0':
-    resolution: {integrity: sha512-EYvDUZGjtKMvN7EBDcuLjs34LXR9s/N//JxsLjMqKuvFDcTIkuiSlPS6TGJ3+GHACrSZCYfY5zpoezF7gn8pvQ==}
+  '@siteimprove/alfa-predicate@0.120.0':
+    resolution: {integrity: sha512-SZmGnqMdcxZXHEKNXVUZUZsOAQj4HZo7Hr0Mrkx9iYQBWabtt/exccCIBGeCZGnZrBf6IAPLMG2ioLV+0J32JQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-record@0.119.0':
-    resolution: {integrity: sha512-DF+UhvZx6I8J9vm4PwhelyDq63tc/EGrGxLCPxGrcLU8Ibm0XbXTlrLF7rgr6SDXK3Yf/jTZ9X9lUPUAQXQc5Q==}
+  '@siteimprove/alfa-record@0.120.0':
+    resolution: {integrity: sha512-gToOQ88/zsELcl9Id98mTZkHKNZyYwm6ER/XEbqffzkmzSczI1RUmjpvZhAtLahTAd1wtZwS+ALsunPIwxuShw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-rectangle@0.119.0':
-    resolution: {integrity: sha512-fVxoVJ/6Yz7hvKLakBjXuz4SIStsbJpob1xq+JMgYy2Ye9Mjahrhepg/JUzO6NqsZ/pAKG22RXOcu16cGkwXbg==}
+  '@siteimprove/alfa-rectangle@0.120.0':
+    resolution: {integrity: sha512-erQGoJ30WIk9oBAYeLoYtvmE3Q8jabrQPcCpRllY4pwhtDizyXrs8BDOYire1kTF3/CKQy/z1PdnikRhqOkgAQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-reducer@0.119.0':
-    resolution: {integrity: sha512-gmI4QfWI+fa3CKh1WtgWOBkwwzcPkLsX++c0hgAcCXstEw8Kqmbv8XU011pJvfwLfAWFPxa+t4DF8lcjE3ry7Q==}
+  '@siteimprove/alfa-reducer@0.120.0':
+    resolution: {integrity: sha512-YWnUq799nOQeWf9i1pxXzXib1bvKrIJm8rrG5clwSiy8z4Y4+xgVd+Jx3oA3ntwZ/vGPGkIiHiupBC/vU5VSTg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-refinement@0.119.0':
-    resolution: {integrity: sha512-KZvaIMqMyXL0dNfEVX7y5ZbhySNzODprQy5Po5JR6OceTGZOhnz+QejYPCh7f5CJqwcLQdHR7OSge9Yx3xsLAw==}
+  '@siteimprove/alfa-refinement@0.120.0':
+    resolution: {integrity: sha512-00WGoz2JuhAhCzlBwYB/06KBzbsdIEO6C4VWnweupuyFKqiBGjHLJjT01CffhTxNdtZ2Ix7eLS1SnrRQn23T7g==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-result@0.119.0':
-    resolution: {integrity: sha512-O0uy4qxb7BSxIvQue+Fc5isuPtlxd8KRRKaqTxXh1TYLdRdIGLH9WCwOu1fY7Taci4rPjXxKUUs+CEcGJfX/lA==}
+  '@siteimprove/alfa-result@0.120.0':
+    resolution: {integrity: sha512-XZgza2BzGl+o1Ry24sus+Cn1UA+HbjJsY0cl3Iigtp/CfvvYTHY0wOtHJkckr/A35z00cGajrFwq8h9cok809A==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-rng@0.119.0':
-    resolution: {integrity: sha512-19ZA8xnGl45jp0NZ5K6eQfSOyroexOy6yMVy7ugzrEe19vJrIhkJbhu0f8mNfCzITkL7960juIZGgdMrg0J9/w==}
+  '@siteimprove/alfa-rng@0.120.0':
+    resolution: {integrity: sha512-AaYiDPxC7xYMwsXfvbwGrKN6/rRTdv3K5sA4VG008hO5otPRnHeOkwTXURdrTbW3BYXcAN0foMnaPktgctN0nA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-rules@0.119.0':
-    resolution: {integrity: sha512-pjYrf3/kuG84NZuPWNLqarTirqYjnd82g2Vj634i/eQuQjjXSZA+qww3v45eG6lRfOTphuRFY7Q23Q7NVTYqKw==}
+  '@siteimprove/alfa-rules@0.120.0':
+    resolution: {integrity: sha512-hQRA9QN8XaW20ICg/Q4MOOeg5t5WuPK5oZmLvy9PY2EWFdCrJ7LLbMi7nOz5C55wcX+LvCOMD7coJ6meUQSxqg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-sarif@0.119.0':
-    resolution: {integrity: sha512-yhSoasHas5PU5p8uyj8l+NM/cFpkS80ua1/Nuz2qqyQSTqYGboAnvQeYJXk81oKOXRdTglG6NE0UmPXwQNHVOA==}
+  '@siteimprove/alfa-sarif@0.120.0':
+    resolution: {integrity: sha512-Kdz9CqEJkWB0to7zyky0z1MxQr2rNHm0VxynTGdWHxafBWX07oPx3hHISxHHmIihX/tsmsmoZ+8MPEiFKvNQ4A==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-selective@0.119.0':
-    resolution: {integrity: sha512-YnyaYvYvNwRKj3l7RHXmE1a/Bo9tey9Ii+cCjgeizT2Pqf/FILTCtWRtFxq6mod6cHU7qNEVjKywriaBkrEtJA==}
+  '@siteimprove/alfa-selective@0.120.0':
+    resolution: {integrity: sha512-h6EpdMyl7P1fHlxsX9HAMlPp5Tvww37QYg51uOf8PKnc+M4/qFypXjh+kck87XYroJthUsl0wViMzsOkUzikjw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-selector@0.119.0':
-    resolution: {integrity: sha512-EUOJk2//3eMBqjGwMuXfJICu1i6f46h1q/N/mjL/nQ18iatX2L3qi7kUzG3S0VQvVou/ZmfBFoHgBG+Xpa9u5w==}
+  '@siteimprove/alfa-selector@0.120.0':
+    resolution: {integrity: sha512-pCJ5e8prIDDMPaJIUwSKAhnwjX403CI7O5gLqPGDLKIt/vi7RQcXl5ld7a4LN2UAe3h0vgjnQXTvcUKM+oNbUA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-sequence@0.119.0':
-    resolution: {integrity: sha512-ccDPLrLnraxge9bw4ugRQIIBkNwooSgE1LrWRAARR2Q5+fgOFcHlDDPWGpeJ0C8ipFO3NRppljAy1vdetkBzDw==}
+  '@siteimprove/alfa-sequence@0.120.0':
+    resolution: {integrity: sha512-2G2kyvwGQKHgLsfQ4KFPrl5nSJm+grXIDErD9Pw78Ni9k7y0o0jhCpyJ2s7Jp/6JiLf3GwJmmvQSo5KeqapdcA==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-set@0.119.0':
-    resolution: {integrity: sha512-lt7eyq9ITzDY/ivJf37/25RROxPiD2W11V1sM9FD9TCz7BkPH1xOuXKNaUHw1XcdE06jLKo9SeZNMfQewX/8mg==}
+  '@siteimprove/alfa-set@0.120.0':
+    resolution: {integrity: sha512-VHjVkP/7KsIMKpWj6jyyTdka/uhN9wfYdQwCyTGzcCcFNT7clQgblqHxwuDa18K69YqIWAiJ/sLikaPXCAj3ZQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-slice@0.119.0':
-    resolution: {integrity: sha512-rqhoPzVK/ynxNJIsMOpcfoROLdaavD1k9QT6l/RYMLLiPYM1Yvas4T/hUN1eoxK6nfGuZnPkevEpNS52R8lesQ==}
+  '@siteimprove/alfa-slice@0.120.0':
+    resolution: {integrity: sha512-KxYaQ5FPomMBMt9qsahsGHlhObjjWHeo5abL93cHPsKHfbcR1nfXHSD9s11byXGGJEpTnqpfIeJdTGsBsEBqZQ==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-string@0.119.0':
-    resolution: {integrity: sha512-xr/D8GkkDNwyoLJZNfjqJU9jBhAfGvwMQXZvl2Of3O82STlZWnV3f5RBf9JalCP2w+W997If5BMuCHFryG+gLw==}
+  '@siteimprove/alfa-string@0.120.0':
+    resolution: {integrity: sha512-I3w1ERtYEfqbIrgDIx1lojatHZ78ywRPA5MkMjpMZkhHxlHRbcQVVCZE5sLno2UPky53Ub6eb+Xj9iJoeEEH9Q==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-style@0.119.0':
-    resolution: {integrity: sha512-DXYjobinjwi4/ifY5JUByk0Qj9BsuadwarQU+Dichgoy70MgLLPjOoIdwA/bWHVtdEF/YNLFALyHE4K95zdtDQ==}
+  '@siteimprove/alfa-style@0.120.0':
+    resolution: {integrity: sha512-w4J0/H7C/ahrxJSe2tW6OwqMfi8IqVDlnmOgIHzWV0Ov/SHHqBVYcQTSz+Ek+3sE15VqaYzIFem+A84QdHzVMg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-table@0.119.0':
-    resolution: {integrity: sha512-e9FCaFxGK0mn4ym/FXDwQ1LmsG13u8GS6eTM8Q7r24sZ5s1ytMlqpg8cpuaw7whUPzfCrbq2LY2egpB6hpicig==}
+  '@siteimprove/alfa-table@0.120.0':
+    resolution: {integrity: sha512-dT+jg6K+Nz3yH00iVMny3QD6Uy95eo3ODu7WMEeCsJwdB/wZAiNoR0TMPbxc4ZhAmxVVWAN3jzewwBKh4Ljsjg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-thunk@0.119.0':
-    resolution: {integrity: sha512-njnf9IRWL9o5TgqR+exhgc5++up3ooUwhcGP7tHYUlU+AMMbkq3OSL7zpf2oSfz2dy4DEeCn1vqpdJBAjpBIPg==}
+  '@siteimprove/alfa-thunk@0.120.0':
+    resolution: {integrity: sha512-B1dfmYOg0jmLQR5HCXxeTCKxjnehtk8xfU5AfnG1sHwr5r+Ohl/DGd3JML0g2CCHn0YavLs847PDN5Y6RaDIlg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-trampoline@0.119.0':
-    resolution: {integrity: sha512-FM7wzCDSIS1TPjxzAnySlFGRY78/ikZaFX66cwhd7kIaAJDJTNiMqvzwvKUx7mcFfyrgBSWYIc0MduugeV/vQQ==}
+  '@siteimprove/alfa-trampoline@0.120.0':
+    resolution: {integrity: sha512-vcyspPaDJ8a7FzFHklNoYLBjp8S5pKflDTkfF+f1Ct0QbvCsgbOQo2ZCQdkFPsLufNLv1aWjUufMaxZJh3eH/A==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-tree@0.119.0':
-    resolution: {integrity: sha512-DQ6sKOa17iMuolA4qUqCdGOFmnxQIJWsuHbCdFFA5As6prsW6CurJ3nCSGBwbdvWaH2bLvYW5NQZ5/cmNM9ksw==}
+  '@siteimprove/alfa-tree@0.120.0':
+    resolution: {integrity: sha512-KUJ9HqX2BYhQpi7peU1ZAXON/fJKYTM5tcS+BmoF1OurGzOHv/YGth0bgz3Mkd6lfNniY3s2F9a+BO+Rql44yg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-trilean@0.119.0':
-    resolution: {integrity: sha512-KvhIwGgX8p6uyMNJxkDwKjfuDnvPtKpxKJ+L06SYrVJ7I18DmyMJj8KSSctzm5zFDv5qfxCgIyIjBZz6sftJ8g==}
+  '@siteimprove/alfa-trilean@0.120.0':
+    resolution: {integrity: sha512-5NIidL248GcREXKF3ZKPcofLNI0QwZ9lePy3W/KbvrGxrjLM+ukJt2uPoKDdLAGW2ZLYzaiN8GuCtduMbWOaIg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-tuple@0.119.0':
-    resolution: {integrity: sha512-W/85P4ACTEfl5dBS0tBF9nxxj1HPTf5+YyIJMib3EtB57vFKUtyVpB+t44uTglejxOxqwkd3wC2SoIKquVadgQ==}
+  '@siteimprove/alfa-tuple@0.120.0':
+    resolution: {integrity: sha512-/wTM4VNIr9iYE+4/ICFChnhfTnmfqt8D9Q2C+I9GElqH3Cm7CRblWMSQGJR9VA1hYlKUV/P5xFxi3SRmiCkX5w==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-url@0.119.0':
-    resolution: {integrity: sha512-rB8hRQre+CwsVv3Hr7WmXUXP7CB/tlHg8ynHKj9Va5Y011CfV5/Oha3S5E7em1E0U3/lCNdbJ2pIecMJGQaZOQ==}
+  '@siteimprove/alfa-url@0.120.0':
+    resolution: {integrity: sha512-PfhyhmqTdyj3sKdWnGACnbrpv4tz+gBYMCavxmzoogI4ZLv9P0hXCrNNoT+AqKvWviJJto/6oP2utbPZ5V4Flg==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-wcag@0.119.0':
-    resolution: {integrity: sha512-33gFFI2fc/AL+63yE9Kd6JxXDr/i9TXWe48MS9PJ2YzYd1PvgwTQst0etCjDBjMclY2wgnrS/ClaMdEXxFielg==}
+  '@siteimprove/alfa-wcag@0.120.0':
+    resolution: {integrity: sha512-fDJdS3B3HsozZqO2v05VTqneJkCOmGTCcOjH8TRgKR0QMdfJ69qT5+OzvzUVN9BAWKVkZiucOB55TQE/k9Kdaw==}
     engines: {node: '>=22.0.0'}
 
-  '@siteimprove/alfa-web@0.119.0':
-    resolution: {integrity: sha512-pn2HJzxEJ8HoO7Y+NAwWDDqZCCI2+b6HQPOGo2KK8xITm428Zm+WdlTuC/jM74Qnl5sCniG54ZYU5qlrPbolDw==}
+  '@siteimprove/alfa-web@0.120.0':
+    resolution: {integrity: sha512-MsrvpvgyAqdm7PAOuvOU8vbGxhhsI2gWI8QgzGBuWQZctkMFRsrQWnOL5G3egETf1L8ihL2z2PvL+VI+6dRtDw==}
     engines: {node: '>=22.0.0'}
 
   '@speed-highlight/core@1.2.24':
@@ -1172,39 +1172,39 @@ packages:
   '@types/ws@8.18.1':
     resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
-  '@typescript-eslint/eslint-plugin@8.71.2':
-    resolution: {integrity: sha512-K72/pvT7qpm8q3k8G5u93NCSN1RcLxX5h7Gw0bQpbMXviBHeY6Nx1WEwmk9wP+eKTSQ8ecxvcgt/ZX/rB938xQ==}
+  '@typescript-eslint/eslint-plugin@8.72.0':
+    resolution: {integrity: sha512-aysKgysPX9XOv/dk95UkvUDe++Q3n3dJPG9CEWT3RUccxfkPJ+Qn6nhKPDhZXU6Ofo9kgwGWwKyQCnZIXTgngg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      '@typescript-eslint/parser': ^8.71.2
+      '@typescript-eslint/parser': ^8.72.0
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/parser@8.71.2':
-    resolution: {integrity: sha512-aTtmZjp/x3gsGHkDs04/1I8kNogBJkpQaeGaN0PfiG43NzDEmW2n+OP5im9wfsvyX0yP1UZWBrAGtDBfH9jEVw==}
+  '@typescript-eslint/parser@8.72.0':
+    resolution: {integrity: sha512-0O+x3ynciD6zuXb1CKSu165haQV6ey53DKhHHUnujP7U+XlltJG+/keT0Xhd1HXCze+IHf7Tvt39ovyepX/LNw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/project-service@8.71.2':
-    resolution: {integrity: sha512-Pd68GsLVh5ZXlcEccFPdhSOvtHZ/2WU0XsA8zmXOS3F158lVlcTLhfQ6qvtL1RzbMie0Kp8xtbVwAg4nejKPHw==}
+  '@typescript-eslint/project-service@8.72.0':
+    resolution: {integrity: sha512-bzHngBbmIgzj6TsTjVUCntGx6FFLgE7mPjpO0PzHycOaZHXqS43XnrkFIHRS16LLr/xO6FHSXG3GJFo/F4bSBQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/scope-manager@8.71.2':
-    resolution: {integrity: sha512-YF4wgg5iUX5Obywoac27B56FhozMNFhdJSbh11H5GBAwmBtfyRhmgTQqW9tRNNmHDvsZ2CX6UGzoz+YfYn2Leg==}
+  '@typescript-eslint/scope-manager@8.72.0':
+    resolution: {integrity: sha512-JewPyJOYcXBSAS7PIgufscHOwZqhTGyBRiQJhhuDln66tMchxvvt7nJ90JKKIoOelmdHA3kAQbm9cEUHc4JSEA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript-eslint/tsconfig-utils@8.71.2':
-    resolution: {integrity: sha512-jz49TAWokm/7yWD9/o837nYax9DyALxIPOImdImvVzo6canBCZYzin8zJyqNR5k1j9K1DE0bVvr0XYB+99uAdg==}
+  '@typescript-eslint/tsconfig-utils@8.72.0':
+    resolution: {integrity: sha512-0vbxCf7xLVPSjcOdm6eQbgViH8EDJ8xnl1laLT9yoqSz2YmcSfSg5Vdl0JUvZf6rcuJ0ZivJIuMD4edTg8obaA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/type-utils@8.71.2':
-    resolution: {integrity: sha512-cC8UaalCViJkb3rH/xLIvidEwoFRtMZMUqDjjJMGEKaTFwYRHYBcoczlEGHuvkHEO8svRDrgZ0yQgOArFmwang==}
+  '@typescript-eslint/type-utils@8.72.0':
+    resolution: {integrity: sha512-gEXxmmbSTSOVTC37IYYvremOM31v+UN2W772bJxmVYPhAOPSUxtacyb7wkm1EhkYKU6KzFJsdU44DCV4to0LWw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
@@ -1214,25 +1214,25 @@ packages:
     resolution: {integrity: sha512-JSSwWNy+H0E/01jJEM+hrX6N0OFDzFzeIhHFSAS01tlVaevpG8cFyYRPhS5yjGOvBUx3sqQHVMjCL1CAZZMxBg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript-eslint/types@8.71.2':
-    resolution: {integrity: sha512-y5Ukl3oVp7e/VGxqIoEXoeb/Roj71PAJ4WG/N/RGj+eeDvKRLM15kGr9MijLbN0i03S52zxu31Z98E5gWChJKw==}
+  '@typescript-eslint/types@8.72.0':
+    resolution: {integrity: sha512-Adfoy59kxNEjT5E5fnyrp7GpHYuWs8ONbdohu4ez6IU46qDq8LltG90tLmkucZB2uhYL8mqBjtXqGd8yhfjXqQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript-eslint/typescript-estree@8.71.2':
-    resolution: {integrity: sha512-DgNOEsl4pdYzwSL+N/Cl33tX1Hlw3FvId73LnKXfq7jnrF2viOEn7X+P7RBkkSWCVm92gnWd28GIC5vJuLREeA==}
+  '@typescript-eslint/typescript-estree@8.72.0':
+    resolution: {integrity: sha512-gwLfFgWcw15tN2KXDCJvxEOQjPn+P3j/n3eSqkZ5sX4VpW9Cosodr+tWwBZRvJT3TcKx6HnPRGZMCNAiP1Xhug==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/utils@8.71.2':
-    resolution: {integrity: sha512-RyKa1G1M9rKHDhrk+HJtiF1MvLD5Ux2JW3TSkzw+02pRALdpJb+QzG1Y5em+LvCgzGwgg8H7mBRFKljNz7ImPw==}
+  '@typescript-eslint/utils@8.72.0':
+    resolution: {integrity: sha512-0up3oArJZBYnzOaEXKo8DmI43QvMZyPoFEt9LWzRJcyl/RcJjfKKPebknN1VbTgXBf3M/KggUh5uUMdURLnseg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
-  '@typescript-eslint/visitor-keys@8.71.2':
-    resolution: {integrity: sha512-zozlN0UA32bSG2zkKAgQyRYSbEISVoyU6vvkKYo2aSny74D8Jh4e+POkJ6Lk0dlezZi5x7TtD+88Xb06IB8nhg==}
+  '@typescript-eslint/visitor-keys@8.72.0':
+    resolution: {integrity: sha512-E2mroviasaWecDzTGiGMtuEguuLVOeRggnrIn93CJuxYJzQBHbyymlT08aVQydbBal5538o+JkBKXh2sRuCyIA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@unrs/resolver-binding-android-arm-eabi@1.12.2':
@@ -1489,8 +1489,8 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  dependency-cruiser@18.6.0:
-    resolution: {integrity: sha512-It7NW5AmCDBCLMq7I91Nfu8VRKzrIE6S+M/FMQzALDceJ0B1PWRHo77q9YJg/HwyBBEWHVtOuTptIQki+xecOw==}
+  dependency-cruiser@18.7.0:
+    resolution: {integrity: sha512-WexT4OswA6Gy86ms2J7SJ4FJscN43dyS+i5skpbtXlPTFQW4yWbontjFip1TOBAVnc+U+9zdH0a56YTRZX/IGw==}
     engines: {node: ^22||^24||>=26}
     hasBin: true
 
@@ -1563,8 +1563,8 @@ packages:
     resolution: {integrity: sha512-tD40eHxA35h0PEIZNeIjkHoDR4YjjJp34biM0mDvplBe//mB+IHCqHDGV7pxF+7MklTvighcCPPZC7ynWyjdTA==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  eslint@10.12.0:
-    resolution: {integrity: sha512-npHjrHb2o4ehH3mE+YuxABR+0gyb0aVWCIolgJDArwCiHEIsonBm3ZKjel5b0U5+a+MbEvIyRCGCzD3eKKK2NA==}
+  eslint@10.13.0:
+    resolution: {integrity: sha512-UohDjD4zSzEwhf58M3O7vc/ycc8O1I7dNlhtD0WxE8Px8EHNJKtUwzBqrzeGhisRuv2ag4sAYswszCJRgKXYUg==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     hasBin: true
     peerDependencies:
@@ -1766,58 +1766,63 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  lefthook-darwin-arm64@2.2.1:
-    resolution: {integrity: sha512-SyuDBT5HqNQfi607vMHrYJu45bRN7JoIFdyxLjEPVe34UnZJCesmeYBODEYTyCfRZjPOaTbton4Padu+qvqfCQ==}
+  lefthook-android-arm64@2.2.2:
+    resolution: {integrity: sha512-wb9rQQFLX7u1dJLxvMrq9VUfMYi5kxM7tJQ6Y4mWEOwaU+SmIm2wjoT/nromKq27Y8fh2Qd7FgCD3G1wfW8CnQ==}
+    cpu: [arm64]
+    os: [android]
+
+  lefthook-darwin-arm64@2.2.2:
+    resolution: {integrity: sha512-6V8D3bLnD/60Xhqn0o2EQD6H3Fe/U9LGkt4WF1O/3eBHbux+5ZJqoH0hfrC+Bi9Dy1Ve1AWxiAY7U2asYl8qVA==}
     cpu: [arm64]
     os: [darwin]
 
-  lefthook-darwin-x64@2.2.1:
-    resolution: {integrity: sha512-qkIdM89T3OxpLp9rssPSdRQ7QKkX0l07xWxxOaZfECn5iB2xVXSD9FQSjYUMNGXtJJWOGqdKqBngGTB/ShDZtQ==}
+  lefthook-darwin-x64@2.2.2:
+    resolution: {integrity: sha512-fH/kArZ9ZZ65wCFtvBMgGcq25qwQpkQ5jp93ba+8wpjgxxzjczYGluwHvM/NQDJWLOFXuKXW0yFs76SramQkyQ==}
     cpu: [x64]
     os: [darwin]
 
-  lefthook-freebsd-arm64@2.2.1:
-    resolution: {integrity: sha512-0jdr/9Q5cGuazrEVquv29AOD77aPc2jAmFU4EtqVVg3PhMJjAyt7bQeA9qdwHhaHhLnaeUZwMwo3IleVm+D4wg==}
+  lefthook-freebsd-arm64@2.2.2:
+    resolution: {integrity: sha512-MCRsU01ju989QQffOfS3gCeFfyVDXs5B/FzR65fmrNvqcxb98fldvfzzoAbnK2q6SBJlRT3QT1tNEMCxddCwlA==}
     cpu: [arm64]
     os: [freebsd]
 
-  lefthook-freebsd-x64@2.2.1:
-    resolution: {integrity: sha512-JFKyNZ9qQp9NsuFyAg/CJIBurIHX3AUayFXxuoDMATWAIhhlyK0YMtpWgEFIl1M2iGLBLQ3TiLoCCRnbwndNDg==}
+  lefthook-freebsd-x64@2.2.2:
+    resolution: {integrity: sha512-LkKuJU0S2oLimeoHwPTy1TLWB6GcN0t5lLxiXNlsBKUkr6R47QRcvPMZMoXmu3IetQtd+WliXMLE8qTwi2fqBg==}
     cpu: [x64]
     os: [freebsd]
 
-  lefthook-linux-arm64@2.2.1:
-    resolution: {integrity: sha512-na8Ezm7pK44+WsQqj9tES7v8VseM1MrNeNJhUnM8eINV22KYptWam8evfjZxY3NYxOTwn6f/Zpe/BBvcLKMaTQ==}
+  lefthook-linux-arm64@2.2.2:
+    resolution: {integrity: sha512-d+HFtS2DEKaOnD7vRU0tUz8pNgHwsUYmQ22+1dyXpOrXGyzNXR0AqX5KsIRF36JGhVvO5X5Anw5QYgR3mxVSuA==}
     cpu: [arm64]
     os: [linux]
 
-  lefthook-linux-x64@2.2.1:
-    resolution: {integrity: sha512-wl7CR5uNkOiZ38SkW4l9O6wf/Nllbkw90ZZonXRFkbgrnPjLMhZGUt9ucewsPwBQ/ckU1t08JuBHeOywB/CFow==}
+  lefthook-linux-x64@2.2.2:
+    resolution: {integrity: sha512-N/OlQyAhcU6RAXjrwFxLsh70sn96rBoi+XkuLJ8CVBkk9Ci3VDXQayDZTNz5B1xML8RwoMcV8Wblniy1xFOmSA==}
     cpu: [x64]
     os: [linux]
 
-  lefthook-openbsd-arm64@2.2.1:
-    resolution: {integrity: sha512-UFwL+AGSqkhQ15kuKl5FMRx/UqbcfcQbGFg5ggYzhT7qBOsTu3a9POXRxt3hsalBeMgkDWsv3IaPlj51YGpCAg==}
+  lefthook-openbsd-arm64@2.2.2:
+    resolution: {integrity: sha512-6G/gKXcpIwC+XcODg7ELZYP/hIrVIHQxhy2GoRdVyecmpGMFj+BZo3iqcUmeWusQMuL+UdNexbkrUaeJalIkNw==}
     cpu: [arm64]
     os: [openbsd]
 
-  lefthook-openbsd-x64@2.2.1:
-    resolution: {integrity: sha512-IMKEuxJLo91C1yjhJ42EadfXUb3ECMkvTKpSt17kwaiyZsvvZ8LGdrXwQZiLNJt2M5ECuTVCQUvDimM6mGraOw==}
+  lefthook-openbsd-x64@2.2.2:
+    resolution: {integrity: sha512-eMJGi3/tqKEqu7XCZlqwQWRtK5JlL/9diaqqgRlEdlRD7GxwzHZN21z6awbITum9emea3lALvXFe6V8odQLGOA==}
     cpu: [x64]
     os: [openbsd]
 
-  lefthook-windows-arm64@2.2.1:
-    resolution: {integrity: sha512-Pi8vOvObjg8HJDl8d96s7jsI6TN33klpqv6tXSXpoKEeoAwEh5Y9NawO6bzoOpLfAxf2SfMBcuaBzFQ5zE2gjA==}
+  lefthook-windows-arm64@2.2.2:
+    resolution: {integrity: sha512-4P1EaQb5xG1zhYD1RLJ6TEGdFkmHkB+Slqx6yRDPKuBDNxMiD0+kTAAdUY2E8xPuRR35xHpVPR+b3/HtzPrjQQ==}
     cpu: [arm64]
     os: [win32]
 
-  lefthook-windows-x64@2.2.1:
-    resolution: {integrity: sha512-7FtuPrc1XzxIFLAbzneOF1hr9r/vGi2lcMpX14QG9d/mnLhwu4EyNBh48JNEqsQqrOB9QKavsNqxVl1e8zcukA==}
+  lefthook-windows-x64@2.2.2:
+    resolution: {integrity: sha512-9Ck4zancQilBfXT3ZeRipm7Lcq4RQfxyMpy8SAVINw0t/BrbjsT25V46ZuziERcwdajnE4myfMzC33GoCBwr7g==}
     cpu: [x64]
     os: [win32]
 
-  lefthook@2.2.1:
-    resolution: {integrity: sha512-aKEwhQzGbLMkZu5vrFYKJzLvLVblWATYITmN7Ak4qRCDPCoFJhmeJZFuYf3nTXuqG9xTBE+J8xaAEPL2tpuWyw==}
+  lefthook@2.2.2:
+    resolution: {integrity: sha512-37fYHAhL12r1twaEV0PA5TwoIT491eTGGYjhhXxlYNMq3DSkiGZBQ++Jfk5maXj0vq52NRauLtMikBKtbNJs3Q==}
     hasBin: true
 
   levn@0.4.1:
@@ -1908,8 +1913,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  miniflare@5.20261012.0-beta:
-    resolution: {integrity: sha512-Cjrs+vHHQ7krLO4HYELYpYBJBuMhcnNZD/Z5z/UcQSnFqWSQY3DhtTCFalXgI1/yO1iK+YrRKK8EYkumrEopxg==}
+  miniflare@5.20261019.2-beta:
+    resolution: {integrity: sha512-QNgCA/axizZ7kv7RV3nwbRoz+w4watBlwIsyXjwgYHw4eSw5BrR1F2152s3Kz+Bzy/YxjKFHrZl3LzBRbPgYoQ==}
     engines: {node: '>=22.0.0'}
 
   minimatch@10.2.6:
@@ -2135,8 +2140,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typescript-eslint@8.71.2:
-    resolution: {integrity: sha512-Rz4effbMy2g9wnvOJZG6SbVavX313Lap1vNEbk1RUochzickvzP8P4HB+bkNg5e50eVz1hQGjh9K1omI1xB4Bw==}
+  typescript-eslint@8.72.0:
+    resolution: {integrity: sha512-r26Fkc8As+mZvqp7SLsMmNFyYUup/6CjK7/eHBHmhOw6GH6n6YFxHVFrG0jN1c5CMpDzelLPxvgeCOzx7BjN+A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
@@ -2269,17 +2274,17 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
-  workerd@1.20261012.1:
-    resolution: {integrity: sha512-tEHoMPsMga0seVjxfsR8Pd3f8IRqYwkq++dTUKI5Gdgj6zuSDluYwisydq+dn90SsIACwBquJUQ1nBpcOqaWTA==}
+  workerd@1.20261019.1:
+    resolution: {integrity: sha512-UUYRUq/7DmeCl11YriNbcVbjUZVLtt8uuCXFu+nz77hGFf8d4DEVXoCYtnA+MlBatE4+wxoj47DVqzK3xGBAiw==}
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.151.0:
-    resolution: {integrity: sha512-ra8MpzSR+ClkbGofu9S+AmAKjytS60MqSuayXKpa1CAYIzP+NIc8q6EiF55Gz5PS3lxT4qcvMuPHihCNhTPpDg==}
+  wrangler@4.152.0:
+    resolution: {integrity: sha512-lmXTF1sCDEqBaEMpreGczvg/x3AIh1d/qxc4BN7utQ4jEDwdA4YG0L6kr3ev0TtVLHRb6QLySNAOAunwn+dHeA==}
     engines: {node: '>=22.0.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^5.20261006.1
+      '@cloudflare/workers-types': ^5.20261019.1
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -2318,8 +2323,8 @@ packages:
   youch@4.1.0-beta.10:
     resolution: {integrity: sha512-rLfVLB4FgQneDr0dv1oddCVZmKjcJ6yX6mS4pU82Mq/Dt9a3cLZQ62pDBL4AUO+uVrCvtWz3ZFUL2HFAFJ/BXQ==}
 
-  zod@4.6.6:
-    resolution: {integrity: sha512-4UmzQUF5fxvfcYHlbjBmejU+w+hbDnWFx4aS8kBx7nPBHcO2SqPbpAG8snbdg+Xse4pRefR98hgjFgIMCI/UhA==}
+  zod@4.6.7:
+    resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
 snapshots:
 
@@ -2352,25 +2357,25 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
-  '@cloudflare/unenv-preset@2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261012.1)':
+  '@cloudflare/unenv-preset@2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261019.1)':
     dependencies:
       unenv: 2.0.0-rc.24
     optionalDependencies:
-      workerd: 1.20261012.1
+      workerd: 1.20261019.1
 
-  '@cloudflare/workerd-darwin-64@1.20261012.1':
+  '@cloudflare/workerd-darwin-64@1.20261019.1':
     optional: true
 
-  '@cloudflare/workerd-darwin-arm64@1.20261012.1':
+  '@cloudflare/workerd-darwin-arm64@1.20261019.1':
     optional: true
 
-  '@cloudflare/workerd-linux-64@1.20261012.1':
+  '@cloudflare/workerd-linux-64@1.20261019.1':
     optional: true
 
-  '@cloudflare/workerd-linux-arm64@1.20261012.1':
+  '@cloudflare/workerd-linux-arm64@1.20261019.1':
     optional: true
 
-  '@cloudflare/workerd-windows-64@1.20261012.1':
+  '@cloudflare/workerd-windows-64@1.20261019.1':
     optional: true
 
   '@cspotcode/source-map-support@0.8.1':
@@ -2476,9 +2481,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@eslint-community/eslint-utils@4.10.1(eslint@10.12.0)':
+  '@eslint-community/eslint-utils@4.10.1(eslint@10.13.0)':
     dependencies:
-      eslint: 10.12.0
+      eslint: 10.13.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.2': {}
@@ -2722,783 +2727,783 @@ snapshots:
 
   '@sindresorhus/is@7.2.0': {}
 
-  '@siteimprove/alfa-act@0.119.0':
+  '@siteimprove/alfa-act@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-earl': 0.119.0
-      '@siteimprove/alfa-either': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-list': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-performance': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-record': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-sarif': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-string': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
-      '@siteimprove/alfa-trilean': 0.119.0
-      '@siteimprove/alfa-tuple': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-earl': 0.120.0
+      '@siteimprove/alfa-either': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-list': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-performance': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-record': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-sarif': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-string': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
+      '@siteimprove/alfa-trilean': 0.120.0
+      '@siteimprove/alfa-tuple': 0.120.0
 
-  '@siteimprove/alfa-affine@0.119.0':
+  '@siteimprove/alfa-affine@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-math': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-math': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
 
-  '@siteimprove/alfa-applicative@0.119.0':
+  '@siteimprove/alfa-applicative@0.120.0':
     dependencies:
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-aria@0.119.0':
+  '@siteimprove/alfa-aria@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-flags': 0.119.0
-      '@siteimprove/alfa-graph': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-selective': 0.119.0
-      '@siteimprove/alfa-selector': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-set': 0.119.0
-      '@siteimprove/alfa-string': 0.119.0
-      '@siteimprove/alfa-style': 0.119.0
-      '@siteimprove/alfa-table': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
-      '@siteimprove/alfa-tree': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-flags': 0.120.0
+      '@siteimprove/alfa-graph': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-selective': 0.120.0
+      '@siteimprove/alfa-selector': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-set': 0.120.0
+      '@siteimprove/alfa-string': 0.120.0
+      '@siteimprove/alfa-style': 0.120.0
+      '@siteimprove/alfa-table': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
+      '@siteimprove/alfa-tree': 0.120.0
 
-  '@siteimprove/alfa-array@0.119.0':
+  '@siteimprove/alfa-array@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-clone': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-clone': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-bits@0.119.0': {}
+  '@siteimprove/alfa-bits@0.120.0': {}
 
-  '@siteimprove/alfa-branched@0.119.0':
+  '@siteimprove/alfa-branched@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-collection': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-list': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-collection': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-list': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-cache@0.119.0':
+  '@siteimprove/alfa-cache@0.120.0':
     dependencies:
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
 
-  '@siteimprove/alfa-callback@0.119.0':
+  '@siteimprove/alfa-callback@0.120.0':
     dependencies:
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-cascade@0.119.0':
+  '@siteimprove/alfa-cascade@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-css-feature': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-selective': 0.119.0
-      '@siteimprove/alfa-selector': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-css-feature': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-selective': 0.120.0
+      '@siteimprove/alfa-selector': 0.120.0
 
-  '@siteimprove/alfa-clone@0.119.0': {}
+  '@siteimprove/alfa-clone@0.120.0': {}
 
-  '@siteimprove/alfa-collection@0.119.0':
+  '@siteimprove/alfa-collection@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-foldable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-foldable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-comparable@0.119.0':
+  '@siteimprove/alfa-comparable@0.120.0':
     dependencies:
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-continuation@0.119.0':
+  '@siteimprove/alfa-continuation@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
 
-  '@siteimprove/alfa-css-feature@0.119.0':
+  '@siteimprove/alfa-css-feature@0.120.0':
     dependencies:
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-parser': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-parser': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
 
-  '@siteimprove/alfa-css@0.119.0':
+  '@siteimprove/alfa-css@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-flags': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-math': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-parser': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-record': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-selective': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
-      '@siteimprove/alfa-string': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
-      '@siteimprove/alfa-tuple': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-flags': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-math': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-parser': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-record': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-selective': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
+      '@siteimprove/alfa-string': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
+      '@siteimprove/alfa-tuple': 0.120.0
       colorjs.io: 0.7.1
 
-  '@siteimprove/alfa-device@0.119.0':
+  '@siteimprove/alfa-device@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
 
-  '@siteimprove/alfa-dom@0.119.0':
+  '@siteimprove/alfa-dom@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-css-feature': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-earl': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-flags': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-lazy': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-parser': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-rectangle': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-sarif': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
-      '@siteimprove/alfa-string': 0.119.0
-      '@siteimprove/alfa-trampoline': 0.119.0
-      '@siteimprove/alfa-tree': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-css-feature': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-earl': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-flags': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-lazy': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-parser': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-rectangle': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-sarif': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
+      '@siteimprove/alfa-string': 0.120.0
+      '@siteimprove/alfa-trampoline': 0.120.0
+      '@siteimprove/alfa-tree': 0.120.0
 
-  '@siteimprove/alfa-eaa@0.119.0':
+  '@siteimprove/alfa-eaa@0.120.0':
     dependencies:
-      '@siteimprove/alfa-act': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
+      '@siteimprove/alfa-act': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
 
-  '@siteimprove/alfa-earl@0.119.0':
+  '@siteimprove/alfa-earl@0.120.0':
     dependencies:
-      '@siteimprove/alfa-json-ld': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-json-ld': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-either@0.119.0':
+  '@siteimprove/alfa-either@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-foldable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-foldable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
 
-  '@siteimprove/alfa-emitter@0.119.0':
+  '@siteimprove/alfa-emitter@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-continuation': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-continuation': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-encoding@0.119.0': {}
+  '@siteimprove/alfa-encoding@0.120.0': {}
 
-  '@siteimprove/alfa-equatable@0.119.0': {}
+  '@siteimprove/alfa-equatable@0.120.0': {}
 
-  '@siteimprove/alfa-flags@0.119.0':
+  '@siteimprove/alfa-flags@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
 
-  '@siteimprove/alfa-fnv@0.119.0':
+  '@siteimprove/alfa-fnv@0.120.0':
     dependencies:
-      '@siteimprove/alfa-hash': 0.119.0
+      '@siteimprove/alfa-hash': 0.120.0
 
-  '@siteimprove/alfa-foldable@0.119.0':
+  '@siteimprove/alfa-foldable@0.120.0':
     dependencies:
-      '@siteimprove/alfa-reducer': 0.119.0
+      '@siteimprove/alfa-reducer': 0.120.0
 
-  '@siteimprove/alfa-functor@0.119.0':
+  '@siteimprove/alfa-functor@0.120.0':
     dependencies:
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-graph@0.119.0':
+  '@siteimprove/alfa-graph@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-set': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-set': 0.120.0
 
-  '@siteimprove/alfa-hash@0.119.0':
+  '@siteimprove/alfa-hash@0.120.0':
     dependencies:
-      '@siteimprove/alfa-encoding': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-encoding': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-http@0.119.0':
+  '@siteimprove/alfa-http@0.120.0':
     dependencies:
-      '@siteimprove/alfa-earl': 0.119.0
-      '@siteimprove/alfa-encoding': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-url': 0.119.0
+      '@siteimprove/alfa-earl': 0.120.0
+      '@siteimprove/alfa-encoding': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-url': 0.120.0
 
-  '@siteimprove/alfa-iana@0.119.0':
+  '@siteimprove/alfa-iana@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
 
-  '@siteimprove/alfa-iterable@0.119.0':
+  '@siteimprove/alfa-iterable@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-json-ld@0.119.0':
+  '@siteimprove/alfa-json-ld@0.120.0':
     dependencies:
-      '@siteimprove/alfa-json': 0.119.0
+      '@siteimprove/alfa-json': 0.120.0
 
-  '@siteimprove/alfa-json@0.119.0':
+  '@siteimprove/alfa-json@0.120.0':
     dependencies:
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-lazy@0.119.0':
+  '@siteimprove/alfa-lazy@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
-      '@siteimprove/alfa-trampoline': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
+      '@siteimprove/alfa-trampoline': 0.120.0
 
-  '@siteimprove/alfa-list@0.119.0':
+  '@siteimprove/alfa-list@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-bits': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-collection': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-set': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-bits': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-collection': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-set': 0.120.0
 
-  '@siteimprove/alfa-map@0.119.0':
+  '@siteimprove/alfa-map@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-bits': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-collection': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-fnv': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-bits': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-collection': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-fnv': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-mapper@0.119.0': {}
+  '@siteimprove/alfa-mapper@0.120.0': {}
 
-  '@siteimprove/alfa-math@0.119.0': {}
+  '@siteimprove/alfa-math@0.120.0': {}
 
-  '@siteimprove/alfa-monad@0.119.0':
+  '@siteimprove/alfa-monad@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-option@0.119.0':
+  '@siteimprove/alfa-option@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-foldable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-foldable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
 
-  '@siteimprove/alfa-painting-order@0.119.0':
+  '@siteimprove/alfa-painting-order@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-selective': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
-      '@siteimprove/alfa-style': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-selective': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
+      '@siteimprove/alfa-style': 0.120.0
 
-  '@siteimprove/alfa-parser@0.119.0':
+  '@siteimprove/alfa-parser@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
 
-  '@siteimprove/alfa-performance@0.119.0':
+  '@siteimprove/alfa-performance@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-emitter': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-emitter': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
 
-  '@siteimprove/alfa-predicate@0.119.0':
+  '@siteimprove/alfa-predicate@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-record@0.119.0':
+  '@siteimprove/alfa-record@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-foldable': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-list': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-foldable': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-list': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
 
-  '@siteimprove/alfa-rectangle@0.119.0':
+  '@siteimprove/alfa-rectangle@0.120.0':
     dependencies:
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
 
-  '@siteimprove/alfa-reducer@0.119.0': {}
+  '@siteimprove/alfa-reducer@0.120.0': {}
 
-  '@siteimprove/alfa-refinement@0.119.0':
+  '@siteimprove/alfa-refinement@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
 
-  '@siteimprove/alfa-result@0.119.0':
+  '@siteimprove/alfa-result@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-foldable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-foldable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
 
-  '@siteimprove/alfa-rng@0.119.0':
+  '@siteimprove/alfa-rng@0.120.0':
     dependencies:
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-rules@0.119.0':
+  '@siteimprove/alfa-rules@0.120.0':
     dependencies:
-      '@siteimprove/alfa-act': 0.119.0
-      '@siteimprove/alfa-affine': 0.119.0
-      '@siteimprove/alfa-aria': 0.119.0
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-cascade': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-css-feature': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-eaa': 0.119.0
-      '@siteimprove/alfa-earl': 0.119.0
-      '@siteimprove/alfa-either': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iana': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-list': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-math': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-painting-order': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-record': 0.119.0
-      '@siteimprove/alfa-rectangle': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-sarif': 0.119.0
-      '@siteimprove/alfa-selector': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-set': 0.119.0
-      '@siteimprove/alfa-string': 0.119.0
-      '@siteimprove/alfa-style': 0.119.0
-      '@siteimprove/alfa-table': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
-      '@siteimprove/alfa-trilean': 0.119.0
-      '@siteimprove/alfa-url': 0.119.0
-      '@siteimprove/alfa-wcag': 0.119.0
-      '@siteimprove/alfa-web': 0.119.0
+      '@siteimprove/alfa-act': 0.120.0
+      '@siteimprove/alfa-affine': 0.120.0
+      '@siteimprove/alfa-aria': 0.120.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-cascade': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-css-feature': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-eaa': 0.120.0
+      '@siteimprove/alfa-earl': 0.120.0
+      '@siteimprove/alfa-either': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iana': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-list': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-math': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-painting-order': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-record': 0.120.0
+      '@siteimprove/alfa-rectangle': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-sarif': 0.120.0
+      '@siteimprove/alfa-selector': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-set': 0.120.0
+      '@siteimprove/alfa-string': 0.120.0
+      '@siteimprove/alfa-style': 0.120.0
+      '@siteimprove/alfa-table': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
+      '@siteimprove/alfa-trilean': 0.120.0
+      '@siteimprove/alfa-url': 0.120.0
+      '@siteimprove/alfa-wcag': 0.120.0
+      '@siteimprove/alfa-web': 0.120.0
 
-  '@siteimprove/alfa-sarif@0.119.0':
+  '@siteimprove/alfa-sarif@0.120.0':
     dependencies:
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
       '@types/sarif': 2.1.7
 
-  '@siteimprove/alfa-selective@0.119.0':
+  '@siteimprove/alfa-selective@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-either': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-either': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-selector@0.119.0':
+  '@siteimprove/alfa-selector@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-parser': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-parser': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
 
-  '@siteimprove/alfa-sequence@0.119.0':
+  '@siteimprove/alfa-sequence@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-collection': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-lazy': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-set': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-collection': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-lazy': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-set': 0.120.0
 
-  '@siteimprove/alfa-set@0.119.0':
+  '@siteimprove/alfa-set@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-collection': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-collection': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-slice@0.119.0':
+  '@siteimprove/alfa-slice@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-collection': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-collection': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-string@0.119.0':
+  '@siteimprove/alfa-string@0.120.0':
     dependencies:
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
 
-  '@siteimprove/alfa-style@0.119.0':
+  '@siteimprove/alfa-style@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-cascade': 0.119.0
-      '@siteimprove/alfa-css': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-either': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-map': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-math': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-parser': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-rectangle': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-selective': 0.119.0
-      '@siteimprove/alfa-selector': 0.119.0
-      '@siteimprove/alfa-set': 0.119.0
-      '@siteimprove/alfa-slice': 0.119.0
-      '@siteimprove/alfa-string': 0.119.0
-      '@siteimprove/alfa-trilean': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-cascade': 0.120.0
+      '@siteimprove/alfa-css': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-either': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-map': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-math': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-parser': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-rectangle': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-selective': 0.120.0
+      '@siteimprove/alfa-selector': 0.120.0
+      '@siteimprove/alfa-set': 0.120.0
+      '@siteimprove/alfa-slice': 0.120.0
+      '@siteimprove/alfa-string': 0.120.0
+      '@siteimprove/alfa-trilean': 0.120.0
 
-  '@siteimprove/alfa-table@0.119.0':
+  '@siteimprove/alfa-table@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-math': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-math': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
 
-  '@siteimprove/alfa-thunk@0.119.0':
+  '@siteimprove/alfa-thunk@0.120.0':
     dependencies:
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
 
-  '@siteimprove/alfa-trampoline@0.119.0':
+  '@siteimprove/alfa-trampoline@0.120.0':
     dependencies:
-      '@siteimprove/alfa-applicative': 0.119.0
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-foldable': 0.119.0
-      '@siteimprove/alfa-functor': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-monad': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-thunk': 0.119.0
+      '@siteimprove/alfa-applicative': 0.120.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-foldable': 0.120.0
+      '@siteimprove/alfa-functor': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-monad': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-thunk': 0.120.0
 
-  '@siteimprove/alfa-tree@0.119.0':
+  '@siteimprove/alfa-tree@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-flags': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-lazy': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-rng': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-flags': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-lazy': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-rng': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
 
-  '@siteimprove/alfa-trilean@0.119.0':
+  '@siteimprove/alfa-trilean@0.120.0':
     dependencies:
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
 
-  '@siteimprove/alfa-tuple@0.119.0':
+  '@siteimprove/alfa-tuple@0.120.0':
     dependencies:
-      '@siteimprove/alfa-array': 0.119.0
-      '@siteimprove/alfa-callback': 0.119.0
-      '@siteimprove/alfa-comparable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-mapper': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-reducer': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-array': 0.120.0
+      '@siteimprove/alfa-callback': 0.120.0
+      '@siteimprove/alfa-comparable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-mapper': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-reducer': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-url@0.119.0':
+  '@siteimprove/alfa-url@0.120.0':
     dependencies:
-      '@siteimprove/alfa-equatable': 0.119.0
-      '@siteimprove/alfa-hash': 0.119.0
-      '@siteimprove/alfa-iterable': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-sequence': 0.119.0
+      '@siteimprove/alfa-equatable': 0.120.0
+      '@siteimprove/alfa-hash': 0.120.0
+      '@siteimprove/alfa-iterable': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-sequence': 0.120.0
 
-  '@siteimprove/alfa-wcag@0.119.0':
+  '@siteimprove/alfa-wcag@0.120.0':
     dependencies:
-      '@siteimprove/alfa-act': 0.119.0
-      '@siteimprove/alfa-branched': 0.119.0
-      '@siteimprove/alfa-option': 0.119.0
-      '@siteimprove/alfa-predicate': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
+      '@siteimprove/alfa-act': 0.120.0
+      '@siteimprove/alfa-branched': 0.120.0
+      '@siteimprove/alfa-option': 0.120.0
+      '@siteimprove/alfa-predicate': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
 
-  '@siteimprove/alfa-web@0.119.0':
+  '@siteimprove/alfa-web@0.120.0':
     dependencies:
-      '@siteimprove/alfa-cache': 0.119.0
-      '@siteimprove/alfa-device': 0.119.0
-      '@siteimprove/alfa-dom': 0.119.0
-      '@siteimprove/alfa-earl': 0.119.0
-      '@siteimprove/alfa-encoding': 0.119.0
-      '@siteimprove/alfa-graph': 0.119.0
-      '@siteimprove/alfa-http': 0.119.0
-      '@siteimprove/alfa-json': 0.119.0
-      '@siteimprove/alfa-refinement': 0.119.0
-      '@siteimprove/alfa-result': 0.119.0
-      '@siteimprove/alfa-sarif': 0.119.0
+      '@siteimprove/alfa-cache': 0.120.0
+      '@siteimprove/alfa-device': 0.120.0
+      '@siteimprove/alfa-dom': 0.120.0
+      '@siteimprove/alfa-earl': 0.120.0
+      '@siteimprove/alfa-encoding': 0.120.0
+      '@siteimprove/alfa-graph': 0.120.0
+      '@siteimprove/alfa-http': 0.120.0
+      '@siteimprove/alfa-json': 0.120.0
+      '@siteimprove/alfa-refinement': 0.120.0
+      '@siteimprove/alfa-result': 0.120.0
+      '@siteimprove/alfa-sarif': 0.120.0
 
   '@speed-highlight/core@1.2.24': {}
 
@@ -3534,15 +3539,15 @@ snapshots:
     dependencies:
       '@types/node': 26.6.5
 
-  '@typescript-eslint/eslint-plugin@8.71.2(@typescript-eslint/parser@8.71.2(eslint@10.12.0)(typescript@6.0.3))(eslint@10.12.0)(typescript@6.0.3)':
+  '@typescript-eslint/eslint-plugin@8.72.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0)(typescript@6.0.3))(eslint@10.13.0)(typescript@6.0.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.2
-      '@typescript-eslint/parser': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
-      '@typescript-eslint/scope-manager': 8.71.2
-      '@typescript-eslint/type-utils': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
-      '@typescript-eslint/utils': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
-      '@typescript-eslint/visitor-keys': 8.71.2
-      eslint: 10.12.0
+      '@typescript-eslint/parser': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
+      '@typescript-eslint/scope-manager': 8.72.0
+      '@typescript-eslint/type-utils': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
+      '@typescript-eslint/visitor-keys': 8.72.0
+      eslint: 10.13.0
       ignore: 7.0.12
       natural-compare: 1.4.0
       ts-api-utils: 2.5.0(typescript@6.0.3)
@@ -3550,43 +3555,43 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.71.2(eslint@10.12.0)(typescript@6.0.3)':
+  '@typescript-eslint/parser@8.72.0(eslint@10.13.0)(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/scope-manager': 8.71.2
-      '@typescript-eslint/types': 8.71.2
-      '@typescript-eslint/typescript-estree': 8.71.2(typescript@6.0.3)
-      '@typescript-eslint/visitor-keys': 8.71.2
+      '@typescript-eslint/scope-manager': 8.72.0
+      '@typescript-eslint/types': 8.72.0
+      '@typescript-eslint/typescript-estree': 8.72.0(typescript@6.0.3)
+      '@typescript-eslint/visitor-keys': 8.72.0
       debug: 4.4.3
-      eslint: 10.12.0
+      eslint: 10.13.0
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/project-service@8.71.2(typescript@6.0.3)':
+  '@typescript-eslint/project-service@8.72.0(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.71.2(typescript@6.0.3)
-      '@typescript-eslint/types': 8.71.2
+      '@typescript-eslint/tsconfig-utils': 8.72.0(typescript@6.0.3)
+      '@typescript-eslint/types': 8.72.0
       debug: 4.4.3
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/scope-manager@8.71.2':
+  '@typescript-eslint/scope-manager@8.72.0':
     dependencies:
-      '@typescript-eslint/types': 8.71.2
-      '@typescript-eslint/visitor-keys': 8.71.2
+      '@typescript-eslint/types': 8.72.0
+      '@typescript-eslint/visitor-keys': 8.72.0
 
-  '@typescript-eslint/tsconfig-utils@8.71.2(typescript@6.0.3)':
+  '@typescript-eslint/tsconfig-utils@8.72.0(typescript@6.0.3)':
     dependencies:
       typescript: 6.0.3
 
-  '@typescript-eslint/type-utils@8.71.2(eslint@10.12.0)(typescript@6.0.3)':
+  '@typescript-eslint/type-utils@8.72.0(eslint@10.13.0)(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/types': 8.71.2
-      '@typescript-eslint/typescript-estree': 8.71.2(typescript@6.0.3)
-      '@typescript-eslint/utils': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
+      '@typescript-eslint/types': 8.72.0
+      '@typescript-eslint/typescript-estree': 8.72.0(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
       debug: 4.4.3
-      eslint: 10.12.0
+      eslint: 10.13.0
       ts-api-utils: 2.5.0(typescript@6.0.3)
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -3594,14 +3599,14 @@ snapshots:
 
   '@typescript-eslint/types@8.65.0': {}
 
-  '@typescript-eslint/types@8.71.2': {}
+  '@typescript-eslint/types@8.72.0': {}
 
-  '@typescript-eslint/typescript-estree@8.71.2(typescript@6.0.3)':
+  '@typescript-eslint/typescript-estree@8.72.0(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/project-service': 8.71.2(typescript@6.0.3)
-      '@typescript-eslint/tsconfig-utils': 8.71.2(typescript@6.0.3)
-      '@typescript-eslint/types': 8.71.2
-      '@typescript-eslint/visitor-keys': 8.71.2
+      '@typescript-eslint/project-service': 8.72.0(typescript@6.0.3)
+      '@typescript-eslint/tsconfig-utils': 8.72.0(typescript@6.0.3)
+      '@typescript-eslint/types': 8.72.0
+      '@typescript-eslint/visitor-keys': 8.72.0
       debug: 4.4.3
       minimatch: 10.2.6
       semver: 7.8.5
@@ -3611,20 +3616,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.71.2(eslint@10.12.0)(typescript@6.0.3)':
+  '@typescript-eslint/utils@8.72.0(eslint@10.13.0)(typescript@6.0.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@10.12.0)
-      '@typescript-eslint/scope-manager': 8.71.2
-      '@typescript-eslint/types': 8.71.2
-      '@typescript-eslint/typescript-estree': 8.71.2(typescript@6.0.3)
-      eslint: 10.12.0
+      '@eslint-community/eslint-utils': 4.10.1(eslint@10.13.0)
+      '@typescript-eslint/scope-manager': 8.72.0
+      '@typescript-eslint/types': 8.72.0
+      '@typescript-eslint/typescript-estree': 8.72.0(typescript@6.0.3)
+      eslint: 10.13.0
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/visitor-keys@8.71.2':
+  '@typescript-eslint/visitor-keys@8.72.0':
     dependencies:
-      '@typescript-eslint/types': 8.71.2
+      '@typescript-eslint/types': 8.72.0
       eslint-visitor-keys: 5.0.1
 
   '@unrs/resolver-binding-android-arm-eabi@1.12.2':
@@ -3844,7 +3849,7 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  dependency-cruiser@18.6.0:
+  dependency-cruiser@18.7.0:
     dependencies:
       acorn: 8.19.0
       acorn-jsx: 5.3.2(acorn@8.19.0)
@@ -3920,12 +3925,12 @@ snapshots:
     optionalDependencies:
       unrs-resolver: 1.12.2
 
-  eslint-plugin-import-x@4.17.1(@typescript-eslint/utils@8.71.2(eslint@10.12.0)(typescript@6.0.3))(eslint@10.12.0):
+  eslint-plugin-import-x@4.17.1(@typescript-eslint/utils@8.72.0(eslint@10.13.0)(typescript@6.0.3))(eslint@10.13.0):
     dependencies:
       '@typescript-eslint/types': 8.65.0
       comment-parser: 1.4.7
       debug: 4.4.3
-      eslint: 10.12.0
+      eslint: 10.13.0
       eslint-import-context: 0.1.9(unrs-resolver@1.12.2)
       is-glob: 4.0.3
       minimatch: 10.2.6
@@ -3933,7 +3938,7 @@ snapshots:
       stable-hash-x: 0.2.0
       unrs-resolver: 1.12.2
     optionalDependencies:
-      '@typescript-eslint/utils': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -3948,9 +3953,9 @@ snapshots:
 
   eslint-visitor-keys@5.0.1: {}
 
-  eslint@10.12.0:
+  eslint@10.13.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@10.12.0)
+      '@eslint-community/eslint-utils': 4.10.1(eslint@10.13.0)
       '@eslint-community/regexpp': 4.12.2
       '@eslint/config-array': 0.23.5
       '@eslint/config-helpers': 0.7.0
@@ -4146,48 +4151,52 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  lefthook-darwin-arm64@2.2.1:
+  lefthook-android-arm64@2.2.2:
     optional: true
 
-  lefthook-darwin-x64@2.2.1:
+  lefthook-darwin-arm64@2.2.2:
     optional: true
 
-  lefthook-freebsd-arm64@2.2.1:
+  lefthook-darwin-x64@2.2.2:
     optional: true
 
-  lefthook-freebsd-x64@2.2.1:
+  lefthook-freebsd-arm64@2.2.2:
     optional: true
 
-  lefthook-linux-arm64@2.2.1:
+  lefthook-freebsd-x64@2.2.2:
     optional: true
 
-  lefthook-linux-x64@2.2.1:
+  lefthook-linux-arm64@2.2.2:
     optional: true
 
-  lefthook-openbsd-arm64@2.2.1:
+  lefthook-linux-x64@2.2.2:
     optional: true
 
-  lefthook-openbsd-x64@2.2.1:
+  lefthook-openbsd-arm64@2.2.2:
     optional: true
 
-  lefthook-windows-arm64@2.2.1:
+  lefthook-openbsd-x64@2.2.2:
     optional: true
 
-  lefthook-windows-x64@2.2.1:
+  lefthook-windows-arm64@2.2.2:
     optional: true
 
-  lefthook@2.2.1:
+  lefthook-windows-x64@2.2.2:
+    optional: true
+
+  lefthook@2.2.2:
     optionalDependencies:
-      lefthook-darwin-arm64: 2.2.1
-      lefthook-darwin-x64: 2.2.1
-      lefthook-freebsd-arm64: 2.2.1
-      lefthook-freebsd-x64: 2.2.1
-      lefthook-linux-arm64: 2.2.1
-      lefthook-linux-x64: 2.2.1
-      lefthook-openbsd-arm64: 2.2.1
-      lefthook-openbsd-x64: 2.2.1
-      lefthook-windows-arm64: 2.2.1
-      lefthook-windows-x64: 2.2.1
+      lefthook-android-arm64: 2.2.2
+      lefthook-darwin-arm64: 2.2.2
+      lefthook-darwin-x64: 2.2.2
+      lefthook-freebsd-arm64: 2.2.2
+      lefthook-freebsd-x64: 2.2.2
+      lefthook-linux-arm64: 2.2.2
+      lefthook-linux-x64: 2.2.2
+      lefthook-openbsd-arm64: 2.2.2
+      lefthook-openbsd-x64: 2.2.2
+      lefthook-windows-arm64: 2.2.2
+      lefthook-windows-x64: 2.2.2
 
   levn@0.4.1:
     dependencies:
@@ -4261,12 +4270,12 @@ snapshots:
     dependencies:
       semver: 7.8.5
 
-  miniflare@5.20261012.0-beta(@types/node@26.6.5):
+  miniflare@5.20261019.2-beta(@types/node@26.6.5):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.35.5(@types/node@26.6.5)
       undici: 7.30.1
-      workerd: 1.20261012.1
+      workerd: 1.20261019.1
       ws: 8.21.0
       youch: 4.1.0-beta.10
     transitivePeerDependencies:
@@ -4494,13 +4503,13 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typescript-eslint@8.71.2(eslint@10.12.0)(typescript@6.0.3):
+  typescript-eslint@8.72.0(eslint@10.13.0)(typescript@6.0.3):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 8.71.2(@typescript-eslint/parser@8.71.2(eslint@10.12.0)(typescript@6.0.3))(eslint@10.12.0)(typescript@6.0.3)
-      '@typescript-eslint/parser': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
-      '@typescript-eslint/typescript-estree': 8.71.2(typescript@6.0.3)
-      '@typescript-eslint/utils': 8.71.2(eslint@10.12.0)(typescript@6.0.3)
-      eslint: 10.12.0
+      '@typescript-eslint/eslint-plugin': 8.72.0(@typescript-eslint/parser@8.72.0(eslint@10.13.0)(typescript@6.0.3))(eslint@10.13.0)(typescript@6.0.3)
+      '@typescript-eslint/parser': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
+      '@typescript-eslint/typescript-estree': 8.72.0(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.72.0(eslint@10.13.0)(typescript@6.0.3)
+      eslint: 10.13.0
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
@@ -4613,24 +4622,24 @@ snapshots:
 
   word-wrap@1.2.5: {}
 
-  workerd@1.20261012.1:
+  workerd@1.20261019.1:
     optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20261012.1
-      '@cloudflare/workerd-darwin-arm64': 1.20261012.1
-      '@cloudflare/workerd-linux-64': 1.20261012.1
-      '@cloudflare/workerd-linux-arm64': 1.20261012.1
-      '@cloudflare/workerd-windows-64': 1.20261012.1
+      '@cloudflare/workerd-darwin-64': 1.20261019.1
+      '@cloudflare/workerd-darwin-arm64': 1.20261019.1
+      '@cloudflare/workerd-linux-64': 1.20261019.1
+      '@cloudflare/workerd-linux-arm64': 1.20261019.1
+      '@cloudflare/workerd-windows-64': 1.20261019.1
 
-  wrangler@4.151.0(@types/node@26.6.5):
+  wrangler@4.152.0(@types/node@26.6.5):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
-      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261012.1)
+      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261019.1)
       blake3-wasm: 2.1.5
       esbuild: 0.28.2
-      miniflare: 5.20261012.0-beta(@types/node@26.6.5)
+      miniflare: 5.20261019.2-beta(@types/node@26.6.5)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
-      workerd: 1.20261012.1
+      workerd: 1.20261019.1
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:
@@ -4657,4 +4666,4 @@ snapshots:
       cookie: 1.1.1
       youch-core: 0.3.3
 
-  zod@4.6.6: {}
+  zod@4.6.7: {}
