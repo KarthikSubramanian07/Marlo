@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-20",
+  "generated": "2026-10-29",
   "commit": null,
   "renderer": "browser",
   "interval": "wilson-95",
@@ -46,15 +46,15 @@
           "label": "Routed engine, leave one out",
           "description": "For each case, the routing is recomputed from every other case of the rule with the table's own routeRule, and the case is decided by the engine chosen without it.",
           "truePositives": 134,
-          "falsePositives": 8,
+          "falsePositives": 7,
           "falseNegatives": 41,
-          "trueNegatives": 364,
+          "trueNegatives": 365,
           "precision": {
-            "value": 0.9437,
-            "low": 0.8928,
-            "high": 0.9712,
+            "value": 0.9504,
+            "low": 0.9011,
+            "high": 0.9757,
             "successes": 134,
-            "trials": 142
+            "trials": 141
           },
           "recall": {
             "value": 0.7657,
@@ -64,10 +64,10 @@
             "trials": 175
           },
           "falsePositiveRate": {
-            "value": 0.0215,
-            "low": 0.0109,
-            "high": 0.0419,
-            "successes": 8,
+            "value": 0.0188,
+            "low": 0.0091,
+            "high": 0.0383,
+            "successes": 7,
             "trials": 372
           }
         },
@@ -75,22 +75,22 @@
           "id": "routed-in-sample",
           "label": "Routed engine, in sample",
           "description": "The published routing, chosen from every case including the one being scored. Optimistic by construction, and kept only for comparison.",
-          "truePositives": 144,
+          "truePositives": 145,
           "falsePositives": 0,
-          "falseNegatives": 31,
+          "falseNegatives": 30,
           "trueNegatives": 372,
           "precision": {
             "value": 1,
-            "low": 0.974,
+            "low": 0.9742,
             "high": 1,
-            "successes": 144,
-            "trials": 144
+            "successes": 145,
+            "trials": 145
           },
           "recall": {
-            "value": 0.8229,
-            "low": 0.7595,
-            "high": 0.8723,
-            "successes": 144,
+            "value": 0.8286,
+            "low": 0.7658,
+            "high": 0.8772,
+            "successes": 145,
             "trials": 175
           },
           "falsePositiveRate": {
@@ -105,22 +105,22 @@
           "id": "majority",
           "label": "Majority of engines",
           "description": "A rule fails when at least two of the engines claiming it fail it.",
-          "truePositives": 135,
+          "truePositives": 136,
           "falsePositives": 5,
-          "falseNegatives": 40,
+          "falseNegatives": 39,
           "trueNegatives": 367,
           "precision": {
-            "value": 0.9643,
-            "low": 0.9191,
-            "high": 0.9847,
-            "successes": 135,
-            "trials": 140
+            "value": 0.9645,
+            "low": 0.9197,
+            "high": 0.9848,
+            "successes": 136,
+            "trials": 141
           },
           "recall": {
-            "value": 0.7714,
-            "low": 0.7038,
-            "high": 0.8274,
-            "successes": 135,
+            "value": 0.7771,
+            "low": 0.7099,
+            "high": 0.8325,
+            "successes": 136,
             "trials": 175
           },
           "falsePositiveRate": {
@@ -165,22 +165,22 @@
           "id": "single-axe-core",
           "label": "axe-core alone",
           "description": "axe-core on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
-          "truePositives": 133,
+          "truePositives": 134,
           "falsePositives": 3,
-          "falseNegatives": 42,
+          "falseNegatives": 41,
           "trueNegatives": 369,
           "precision": {
-            "value": 0.9779,
-            "low": 0.9372,
+            "value": 0.9781,
+            "low": 0.9376,
             "high": 0.9925,
-            "successes": 133,
-            "trials": 136
+            "successes": 134,
+            "trials": 137
           },
           "recall": {
-            "value": 0.76,
-            "low": 0.6916,
-            "high": 0.8173,
-            "successes": 133,
+            "value": 0.7657,
+            "low": 0.6977,
+            "high": 0.8223,
+            "successes": 134,
             "trials": 175
           },
           "falsePositiveRate": {
@@ -294,15 +294,15 @@
           "label": "Routed engine, leave one out",
           "description": "For each case, the routing is recomputed from every other case of the rule with the table's own routeRule, and the case is decided by the engine chosen without it.",
           "truePositives": 153,
-          "falsePositives": 8,
+          "falsePositives": 7,
           "falseNegatives": 57,
-          "trueNegatives": 470,
+          "trueNegatives": 471,
           "precision": {
-            "value": 0.9503,
-            "low": 0.905,
-            "high": 0.9746,
+            "value": 0.9563,
+            "low": 0.9125,
+            "high": 0.9786,
             "successes": 153,
-            "trials": 161
+            "trials": 160
           },
           "recall": {
             "value": 0.7286,
@@ -312,10 +312,10 @@
             "trials": 210
           },
           "falsePositiveRate": {
-            "value": 0.0167,
-            "low": 0.0085,
-            "high": 0.0327,
-            "successes": 8,
+            "value": 0.0146,
+            "low": 0.0071,
+            "high": 0.0299,
+            "successes": 7,
             "trials": 478
           }
         },
@@ -323,22 +323,22 @@
           "id": "routed-in-sample",
           "label": "Routed engine, in sample",
           "description": "The published routing, chosen from every case including the one being scored. Optimistic by construction, and kept only for comparison.",
-          "truePositives": 163,
+          "truePositives": 164,
           "falsePositives": 0,
-          "falseNegatives": 47,
+          "falseNegatives": 46,
           "trueNegatives": 478,
           "precision": {
             "value": 1,
-            "low": 0.977,
+            "low": 0.9771,
             "high": 1,
-            "successes": 163,
-            "trials": 163
+            "successes": 164,
+            "trials": 164
           },
           "recall": {
-            "value": 0.7762,
-            "low": 0.7151,
-            "high": 0.8273,
-            "successes": 163,
+            "value": 0.781,
+            "low": 0.7202,
+            "high": 0.8316,
+            "successes": 164,
             "trials": 210
           },
           "falsePositiveRate": {
@@ -353,22 +353,22 @@
           "id": "majority",
           "label": "Majority of engines",
           "description": "A rule fails when at least two of the engines claiming it fail it.",
-          "truePositives": 149,
+          "truePositives": 150,
           "falsePositives": 5,
-          "falseNegatives": 61,
+          "falseNegatives": 60,
           "trueNegatives": 473,
           "precision": {
-            "value": 0.9675,
-            "low": 0.9263,
+            "value": 0.9677,
+            "low": 0.9267,
             "high": 0.9861,
-            "successes": 149,
-            "trials": 154
+            "successes": 150,
+            "trials": 155
           },
           "recall": {
-            "value": 0.7095,
-            "low": 0.6448,
-            "high": 0.7667,
-            "successes": 149,
+            "value": 0.7143,
+            "low": 0.6498,
+            "high": 0.7711,
+            "successes": 150,
             "trials": 210
           },
           "falsePositiveRate": {
@@ -413,22 +413,22 @@
           "id": "single-axe-core",
           "label": "axe-core alone",
           "description": "axe-core on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
-          "truePositives": 147,
+          "truePositives": 148,
           "falsePositives": 3,
-          "falseNegatives": 63,
+          "falseNegatives": 62,
           "trueNegatives": 475,
           "precision": {
-            "value": 0.98,
-            "low": 0.9429,
+            "value": 0.9801,
+            "low": 0.9432,
             "high": 0.9932,
-            "successes": 147,
-            "trials": 150
+            "successes": 148,
+            "trials": 151
           },
           "recall": {
-            "value": 0.7,
-            "low": 0.6349,
-            "high": 0.7579,
-            "successes": 147,
+            "value": 0.7048,
+            "low": 0.6398,
+            "high": 0.7623,
+            "successes": 148,
             "trials": 210
           },
           "falsePositiveRate": {
@@ -528,8 +528,8 @@
       "engines": ["marlo", "axe-core"],
       "cases": 483,
       "percentAgreement": 0.7598,
-      "kappa": 0.6542,
-      "kappaFailed": 0.7926
+      "kappa": 0.6543,
+      "kappaFailed": 0.7881
     },
     {
       "engines": ["marlo", "alfa"],
@@ -548,9 +548,9 @@
     {
       "engines": ["axe-core", "alfa"],
       "cases": 521,
-      "percentAgreement": 0.8253,
-      "kappa": 0.7403,
-      "kappaFailed": 0.9295
+      "percentAgreement": 0.8273,
+      "kappa": 0.7432,
+      "kappaFailed": 0.934
     },
     {
       "engines": ["axe-core", "htmlcs"],
