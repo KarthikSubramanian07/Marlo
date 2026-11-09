@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "esbuild": "0.28.2",
-    "turndown": "7.2.4",
+    "turndown": "7.2.5",
     "turndown-plugin-gfm": "1.0.2"
   }
 }
