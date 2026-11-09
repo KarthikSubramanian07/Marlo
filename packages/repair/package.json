@@ -46,7 +46,7 @@
     "@trymarlo/report": "workspace:*",
     "@trymarlo/rules": "workspace:*",
     "@trymarlo/schema": "workspace:*",
-    "parse5": "8.0.1"
+    "parse5": "8.1.0"
   },
   "publishConfig": {
     "access": "public"
