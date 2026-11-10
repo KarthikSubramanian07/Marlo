@@ -4,11 +4,14 @@
  * Peer engine adapters, and the hand-written mapping from each engine's rule
  * identifiers to ACT rule identifiers.
  *
- * The mapping is the point of this package. No accessibility engine publishes one:
- * checked, not assumed, and recorded in RESEARCH.md §2. axe-core carries an `ACT` tag
- * on 85 of its 105 rules and no ACT identifiers anywhere. Alfa's rules carry WCAG
- * criteria, WCAG techniques and European Accessibility Act references, never an ACT
- * rule. HTML CodeSniffer carries WCAG technique codes.
+ * The mapping is the point of this package. When RESEARCH.md §2 was written no engine
+ * published one. That is no longer true of axe-core: 4.14.0 carries an `actIds` field
+ * on 56 of its 105 rules, naming 52 distinct ACT rules, and an `ACT` tag on 26
+ * (counted from the installed package on 2026-11-10). The entries here are still
+ * derived from the corpus rather than copied from that field, and the two have not
+ * been reconciled rule by rule. Alfa's rules carry WCAG criteria, WCAG techniques and
+ * European Accessibility Act references, never an ACT rule. HTML CodeSniffer carries
+ * WCAG technique codes.
  *
  * Two rules no adapter may break, both enforced by `assembleReport` rather than by
  * each adapter remembering:
