@@ -1,7 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { computeCoverage, findRule } from '@trymarlo/act';
 import type { ActRuleId, CalibrationTable, ScanReport } from '@trymarlo/schema';
-import { CalibrationTable as CalibrationTableSchema, formatCoverage } from '@trymarlo/schema';
+import {
+  CalibrationTable as CalibrationTableSchema,
+  formatCoverage,
+  formatCriteriaWithoutActRule,
+} from '@trymarlo/schema';
 import { IMPLEMENTED_RULES } from '@trymarlo/rules';
 import { StaticRenderer } from '@trymarlo/render';
 import { TABLE_BY_RENDERER, locateTable, scan } from '@trymarlo/cli';
@@ -167,6 +171,11 @@ export function renderForModel(report: ScanReport): string {
     .map((r) => `${r.actRuleId} (${r.engine})`);
 
   lines.push(`Coverage: ${formatCoverage(report.coverage)}.`);
+  const unexamined = formatCriteriaWithoutActRule(report.coverage);
+  if (unexamined !== null) {
+    lines.push('');
+    lines.push(`NOT EXAMINED: ${unexamined}. A report to a person must say so.`);
+  }
 
   if (notEvaluated.length > 0) {
     lines.push('');
@@ -189,7 +198,8 @@ export function renderForModel(report: ScanReport): string {
   if (findings.length === 0) {
     lines.push(
       'No violations found among the rules that were evaluated. That is not the same as an ' +
-        'accessible page: see the coverage fraction above and the rules not evaluated.',
+        'accessible page: see the coverage fraction, the criteria no scan examines, and the ' +
+        'rules not evaluated, all above.',
     );
   } else {
     lines.push(`${String(findings.length)} finding(s).`);
@@ -341,6 +351,8 @@ export async function callTool(
           '',
           'Automation reaches a minority of WCAG regardless of coverage. A clean result from ',
           'this server is evidence about the rules that were evaluated and nothing more.',
+          '',
+          `${formatCriteriaWithoutActRule(coverage) ?? 'Every WCAG 2.2 level A and AA criterion has a published ACT rule'}.`,
           '',
           `Rules: ${IMPLEMENTED_RULES.join(' ')}`,
         ].join('\n'),

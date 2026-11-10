@@ -157,6 +157,18 @@ describe('the pull request body', () => {
     expect(renderPullRequestBody(body())).toContain('35 of 94');
   });
 
+  it('names the criteria no scan examines when the coverage carries them, and only then', () => {
+    const base = body();
+    const withGap = body({
+      coverage: { ...base.coverage, criteriaWithoutActRule: { of: 55, criteria: ['2.5.8'] } },
+    });
+    expect(renderPullRequestBody(withGap)).toContain(
+      '**Not examined.** 1 of the 55 WCAG 2.2 level A and AA success criteria have no published ' +
+        'ACT rule',
+    );
+    expect(renderPullRequestBody(base)).not.toContain('Not examined.');
+  });
+
   it('says how to reject the whole thing, one fix, and future ones', () => {
     // Not politeness. Pull request remediation is opt-in per D-011, and a pull request that
     // does not say how to refuse it is not opt-in in practice.

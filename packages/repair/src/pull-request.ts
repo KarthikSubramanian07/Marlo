@@ -210,6 +210,7 @@ function mergeCoverage(reports: readonly FixReport[]): Coverage {
       calibrated: 0,
       unmeasurable: [],
       notEvaluated: [],
+      criteriaWithoutActRule: null,
     };
   }
   const notEvaluated = new Map<string, Set<string>>();

@@ -43,5 +43,6 @@ export {
   ratio,
   strictAccuracyOf,
 } from './accuracy.js';
+export { CRITERIA_WITHOUT_ACT_RULE, WCAG22_A_AA_CRITERIA } from './wcag.js';
 export type { CoverageInput } from './coverage.js';
 export { UnknownRuleError, computeCoverage, describeGap } from './coverage.js';

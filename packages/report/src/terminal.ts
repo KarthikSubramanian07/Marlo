@@ -1,5 +1,9 @@
 import type { Coverage, Finding, ScanReport, Severity } from '@trymarlo/schema';
-import { SEVERITY_PRESENTATION, formatCoverage } from '@trymarlo/schema';
+import {
+  SEVERITY_PRESENTATION,
+  formatCoverage,
+  formatCriteriaWithoutActRule,
+} from '@trymarlo/schema';
 
 /**
  * The terminal surface. One of the two things developers judge Marlo by.
@@ -113,6 +117,11 @@ export function renderTerminal(report: ScanReport, options: TerminalOptions): st
 
     if (page.findings.length === 0) {
       out.push(`  ${paint('no findings', ANSI.green)} for the rules that were evaluated.`);
+      // A clean page is where a criterion no rule examines gets read as a pass, so the
+      // limit is pointed at here and not only in the summary.
+      if (formatCriteriaWithoutActRule(report.coverage) !== null) {
+        out.push(dim('  Criteria with no ACT rule were not examined. The summary names them.'));
+      }
       out.push('');
       continue;
     }
@@ -213,6 +222,11 @@ function renderSummary(report: ScanReport, options: TerminalOptions): string {
       `   ${String(totals.notEvaluated)} not evaluated   ${String(totals.errored)} crashed`,
   );
   lines.push(`  coverage: ${formatCoverage(report.coverage)}`);
+
+  const unexamined = formatCriteriaWithoutActRule(report.coverage);
+  if (unexamined !== null) {
+    lines.push(`  ${paint('not examined', ANSI.yellow)}: ${unexamined}.`);
+  }
 
   if (report.coverage.unmeasurable.length > 0) {
     lines.push(

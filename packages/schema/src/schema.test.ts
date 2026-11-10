@@ -20,6 +20,7 @@ import {
   SuccessCriterion,
   Verification as VerificationSchema,
   formatCoverage,
+  formatCriteriaWithoutActRule,
   isFullyVerified,
   isVerifiedFix,
   parseEnvironment,
@@ -305,6 +306,7 @@ describe('coverage cannot be stated without its denominator', () => {
     calibrated: 33,
     unmeasurable: ['kb1m8s'],
     notEvaluated: [{ actRuleId: 'afw4f7', missing: ['layout'] }],
+    criteriaWithoutActRule: { of: 55, criteria: ['2.4.11', '2.5.8'] },
   };
 
   it('formats as a fraction', () => {
@@ -330,6 +332,28 @@ describe('coverage cannot be stated without its denominator', () => {
     // accuracy. They are named.
     expect(coverage.unmeasurable).toContain('kb1m8s');
     expect(coverage.calibrated).toBeLessThan(coverage.implemented);
+  });
+
+  it('states the criteria no scan examines as one sentence, with its denominator', () => {
+    expect(formatCriteriaWithoutActRule(coverage)).toBe(
+      '2 of the 55 WCAG 2.2 level A and AA success criteria have no published ACT rule, so no ' +
+        'scan examines them and a clean report is not a pass of any of them: 2.4.11, 2.5.8',
+    );
+  });
+
+  it('says nothing about those criteria when the report does not carry them', () => {
+    expect(formatCriteriaWithoutActRule({ ...coverage, criteriaWithoutActRule: null })).toBeNull();
+    expect(
+      formatCriteriaWithoutActRule({
+        ...coverage,
+        criteriaWithoutActRule: { of: 55, criteria: [] },
+      }),
+    ).toBeNull();
+  });
+
+  it('parses a report written before the field existed as carrying no list', () => {
+    const { criteriaWithoutActRule: _dropped, ...older } = coverage;
+    expect(CoverageSchema.parse(older).criteriaWithoutActRule).toBeNull();
   });
 });
 

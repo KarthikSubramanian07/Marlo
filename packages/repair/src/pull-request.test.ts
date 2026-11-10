@@ -504,6 +504,7 @@ describe('conflicts and bad input', () => {
         calibrated: 41,
         unmeasurable: [],
         notEvaluated: [{ actRuleId: '09o5cg', missing: ['layout', 'paint'] }],
+        criteriaWithoutActRule: null,
       },
     });
     const plan = planPullRequest({

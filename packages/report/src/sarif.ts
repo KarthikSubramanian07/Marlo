@@ -153,6 +153,10 @@ export function renderSarif(report: ScanReport): string {
               'act-rules-published': report.coverage.publishedActRules,
               'act-rules-calibrated': report.coverage.calibrated,
               'act-rules-unmeasurable': report.coverage.unmeasurable,
+              // Criteria no ACT rule reaches, so a SARIF consumer that finds no result
+              // for 2.5.8 knows it was never looked at rather than passed.
+              'wcag-criteria-without-act-rule':
+                report.coverage.criteriaWithoutActRule?.criteria ?? null,
               'calibration-generated': report.calibration.generated,
               'calibration-commit': report.calibration.commit,
               'corpus-retrieved': report.calibration.corpusRetrieved,

@@ -111,6 +111,31 @@ describe('what the tools return', () => {
     expect(textOf(result)).toContain('minority of WCAG');
   });
 
+  it('names the criteria no scan examines, in the coverage answer and in every scan', async () => {
+    // Issue #162. 2.5.8 Target Size has no ACT rule, so a clean scan read without this
+    // sentence is read as a pass of it.
+    const coverage = textOf(await callTool('marlo_coverage', {}, options));
+    expect(coverage).toContain('no published ACT rule');
+    expect(coverage).toContain('2.5.8');
+
+    const scanned = textOf(
+      await callTool(
+        'marlo_scan_html',
+        { html: '<html lang="en"><head><title>t</title></head><body><p>hi</p></body></html>' },
+        options,
+      ),
+    );
+    const notExamined = scanned.indexOf('NOT EXAMINED:');
+    expect(notExamined).toBeGreaterThan(-1);
+    expect(scanned).toContain('2.4.11');
+    // A limit, so it is stated before anything that could read as a result.
+    const verdict = Math.max(
+      scanned.indexOf('No violations found'),
+      scanned.indexOf('finding(s).'),
+    );
+    expect(notExamined).toBeLessThan(verdict);
+  });
+
   it('puts what was not evaluated above what was found', async () => {
     // A page with both: an unnamed button, which fails, and the contrast rules, which cannot
     // be evaluated at all on a renderer with no layout.
