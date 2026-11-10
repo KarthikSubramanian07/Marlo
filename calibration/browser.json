@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-29",
+  "generated": "2026-11-10",
   "commit": null,
   "corpus": {
     "retrieved": "2026-07-29",
@@ -17,12 +17,12 @@
     {
       "id": "axe-core",
       "version": "4.14.0",
-      "mappedRules": 38
+      "mappedRules": 39
     },
     {
       "id": "alfa",
       "version": "0.120.0",
-      "mappedRules": 40
+      "mappedRules": 41
     },
     {
       "id": "htmlcs",
@@ -423,6 +423,202 @@
         "recall": 0,
         "f1": null,
         "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "marlo",
+      "engineVersion": "0.1.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 10
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "axe-core",
+      "engineVersion": "4.14.0",
+      "engineRuleIds": [
+        "scrollable-region-focusable"
+      ],
+      "mappingKind": "exact",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 2,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0
+      },
+      "act": {
+        "consistency": "consistent",
+        "automation": "automated",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 2,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 8,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "alfa",
+      "engineVersion": "0.120.0",
+      "engineRuleIds": [
+        "sia-r84"
+      ],
+      "mappingKind": "superset",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 2,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 1,
+          "failed": 2,
+          "cantTell": 0,
+          "inapplicable": 3
+        },
+        "errored": 0,
+        "unsupported": 0
+      },
+      "act": {
+        "consistency": "incorrect",
+        "automation": "automated",
+        "disallowed": 2
+      },
+      "strict": {
+        "truePositives": 2,
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "trueNegatives": 6,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": 0.5,
+        "recall": 1,
+        "f1": 0.6666666666666666,
+        "falsePositiveRate": 0.25
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "htmlcs",
+      "engineVersion": "2.5.1",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 10
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
       },
       "flatteredByProtocol": false
     },
@@ -9949,6 +10145,26 @@
         }
       ],
       "autoFixPermitted": true
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "chosen": "axe-core",
+      "reason": "sole-implementer",
+      "candidates": [
+        {
+          "engine": "axe-core",
+          "strictRecall": 1,
+          "strictPrecision": 1,
+          "consistency": "consistent"
+        },
+        {
+          "engine": "alfa",
+          "strictRecall": 1,
+          "strictPrecision": 0.5,
+          "consistency": "incorrect"
+        }
+      ],
+      "autoFixPermitted": false
     },
     {
       "actRuleId": "23a2a8",
