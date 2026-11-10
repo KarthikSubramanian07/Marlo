@@ -48,7 +48,8 @@ const SAMPLES = [
 /**
  * Bundles the playground and the bookmarklet into `out/try/`.
  *
- * `marlo:meta` is generated: rule names and success criteria from @trymarlo/act, severity from
+ * `marlo:meta` is generated: rule names and success criteria from @trymarlo/act, with the WCAG
+ * criteria no ACT rule reaches (DECISIONS.md D-017), severity from
  * the CLI's own table, and Marlo's measured precision per rule from calibration/browser.json,
  * because both surfaces run the rules in a browser.
  */
@@ -72,7 +73,7 @@ export async function buildTryBundles({ root, out, browserTable }) {
   ).version;
   const metaSource = `
 import { IMPLEMENTED_RULES } from '@trymarlo/rules';
-import { findRule } from '@trymarlo/act';
+import { CRITERIA_WITHOUT_ACT_RULE, WCAG22_A_AA_CRITERIA, findRule } from '@trymarlo/act';
 import { severityOf } from ${JSON.stringify(resolve(root, 'packages/cli/src/severity.ts'))};
 const PRECISION = ${JSON.stringify(precision)};
 const rules = {};
@@ -86,7 +87,8 @@ for (const id of IMPLEMENTED_RULES) {
     testCases: PRECISION[id] ? PRECISION[id].testCases : 0,
   };
 }
-export const META = { version: ${JSON.stringify(version)}, rules, samples: ${JSON.stringify(samples)} };
+const unexamined = { of: WCAG22_A_AA_CRITERIA.length, criteria: [...CRITERIA_WITHOUT_ACT_RULE] };
+export const META = { version: ${JSON.stringify(version)}, rules, unexamined, samples: ${JSON.stringify(samples)} };
 `;
   const workspace = {
     name: 'marlo-workspace',
