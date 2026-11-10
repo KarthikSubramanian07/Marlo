@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-29",
-  "commit": "5f655e3fe7bdd9abd73d56d72aa75f16b0978bab",
+  "generated": "2026-11-10",
+  "commit": "ac98b39e2b46ff0204853a614b372714a7229a50",
   "corpus": {
     "retrieved": "2026-07-29",
     "rules": 94,
@@ -17,12 +17,12 @@
     {
       "id": "axe-core",
       "version": "4.14.0",
-      "mappedRules": 38
+      "mappedRules": 39
     },
     {
       "id": "alfa",
       "version": "0.120.0",
-      "mappedRules": 40
+      "mappedRules": 41
     },
     {
       "id": "htmlcs",
@@ -421,6 +421,202 @@
         "recall": 0,
         "f1": null,
         "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "marlo",
+      "engineVersion": "0.1.0",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 10
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "axe-core",
+      "engineVersion": "4.14.0",
+      "engineRuleIds": [
+        "scrollable-region-focusable"
+      ],
+      "mappingKind": "exact",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0
+      },
+      "act": {
+        "consistency": "partial",
+        "automation": "automated",
+        "disallowed": 2
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 8,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": 0,
+        "f1": null,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "alfa",
+      "engineVersion": "0.120.0",
+      "engineRuleIds": [
+        "sia-r84"
+      ],
+      "mappingKind": "superset",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 2
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 6
+        },
+        "errored": 0,
+        "unsupported": 0
+      },
+      "act": {
+        "consistency": "partial",
+        "automation": "automated",
+        "disallowed": 2
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "trueNegatives": 8,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": 0,
+        "f1": null,
+        "falsePositiveRate": 0
+      },
+      "flatteredByProtocol": false
+    },
+    {
+      "actRuleId": "0ssw9k",
+      "engine": "htmlcs",
+      "engineVersion": "2.5.1",
+      "engineRuleIds": [],
+      "mappingKind": "none",
+      "testCaseCount": 10,
+      "matrix": {
+        "passed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "failed": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "inapplicable": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 0
+        },
+        "errored": 0,
+        "unsupported": 10
+      },
+      "act": {
+        "consistency": "unmapped",
+        "automation": "not-applicable",
+        "disallowed": 0
+      },
+      "strict": {
+        "truePositives": 0,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "trueNegatives": 0,
+        "cantTellOnFailed": 0,
+        "cantTellOnPassed": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "falsePositiveRate": null
       },
       "flatteredByProtocol": false
     },
@@ -9941,6 +10137,26 @@
       "autoFixPermitted": false
     },
     {
+      "actRuleId": "0ssw9k",
+      "chosen": "axe-core",
+      "reason": "uncalibrated",
+      "candidates": [
+        {
+          "engine": "axe-core",
+          "strictRecall": 0,
+          "strictPrecision": null,
+          "consistency": "partial"
+        },
+        {
+          "engine": "alfa",
+          "strictRecall": 0,
+          "strictPrecision": null,
+          "consistency": "partial"
+        }
+      ],
+      "autoFixPermitted": false
+    },
+    {
       "actRuleId": "23a2a8",
       "chosen": "axe-core",
       "reason": "best-measured",
@@ -11318,6 +11534,44 @@
             "f1": null,
             "falsePositiveRate": 0
           }
+        }
+      },
+      {
+        "actRuleId": "0ssw9k",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 3,
+          "inapplicable": 22
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "0ssw9k",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
         }
       },
       {
@@ -14998,6 +15252,16 @@
         "kappa": 0
       },
       {
+        "actRuleId": "0ssw9k",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 0.88,
+        "kappa": 0
+      },
+      {
         "actRuleId": "23a2a8",
         "engines": [
           "marlo",
@@ -16548,6 +16812,11 @@
             "pagesWhereItWouldFire": 17
           },
           {
+            "actRuleId": "0ssw9k",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
+          },
+          {
             "actRuleId": "23a2a8",
             "routedTo": "axe-core",
             "pagesWhereItWouldFire": 1
@@ -17073,6 +17342,44 @@
             "f1": null,
             "falsePositiveRate": 0
           }
+        }
+      },
+      {
+        "actRuleId": "0ssw9k",
+        "engine": "axe-core",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
+        }
+      },
+      {
+        "actRuleId": "0ssw9k",
+        "engine": "alfa",
+        "outcomes": {
+          "passed": 0,
+          "failed": 0,
+          "cantTell": 0,
+          "inapplicable": 25
+        },
+        "errored": 0,
+        "unsupported": 0,
+        "findings": 0,
+        "graded": {
+          "resolvedCells": 0,
+          "unresolvedCells": 25,
+          "cantTellTruth": 0,
+          "strict": null
         }
       },
       {
@@ -20753,6 +21060,16 @@
         "kappa": 0
       },
       {
+        "actRuleId": "0ssw9k",
+        "engines": [
+          "axe-core",
+          "alfa"
+        ],
+        "pages": 25,
+        "percentAgreement": 1,
+        "kappa": null
+      },
+      {
         "actRuleId": "23a2a8",
         "engines": [
           "marlo",
@@ -22301,6 +22618,11 @@
             "actRuleId": "09o5cg",
             "routedTo": "axe-core",
             "pagesWhereItWouldFire": 11
+          },
+          {
+            "actRuleId": "0ssw9k",
+            "routedTo": "axe-core",
+            "pagesWhereItWouldFire": 0
           },
           {
             "actRuleId": "23a2a8",

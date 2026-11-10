@@ -315,6 +315,15 @@ const ENTRIES: readonly MappingEntry[] = [
     note: 'f0/10 on the static renderer, for the same reason as afw4f7.',
   },
 
+  // Keyboard access. axe-core 4.14 tags this rule with the ACT id itself, in the
+  // `actIds` field of its rule metadata.
+  {
+    engineRuleId: 'scrollable-region-focusable',
+    actId: '0ssw9k',
+    kind: 'exact',
+    note: 'f2/2 p0 i0. Measured on the browser renderer, clean on all 10 examples. Inapplicable on all 10 on the static renderer, because happy-dom does not lay out and no element has a scroll size, so the static table shows recall 0 for the same reason as afw4f7.',
+  },
+
   // Landmarks. Weak, and labelled weak.
   {
     engineRuleId: 'landmark-one-main',

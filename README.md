@@ -25,12 +25,12 @@ Four engines, 513 official test case outcomes, one code path, no exemptions.
 
 | Engine           | Rules  | Precision | Recall    | False positives |
 | ---------------- | ------ | --------- | --------- | --------------- |
-| Alfa             | 40     | 0.964     | 0.835     | **1.5%**        |
-| axe-core         | 38     | 0.952     | 0.777     | 2.0%            |
+| Alfa             | 41     | 0.964     | 0.827     | **1.5%**        |
+| axe-core         | 39     | 0.952     | 0.768     | 1.9%            |
 | **Marlo**        | **41** | **0.894** | **0.733** | **4.4%**        |
 | HTML CodeSniffer | 12     | 0.684     | 0.366     | 9.4%            |
 
-Marlo is third of four. Alfa and axe-core are both more precise and more sensitive, and the router sends 17 rules to axe-core against 22 to Marlo's own engine.
+Marlo is third of four. Alfa and axe-core are both more precise and more sensitive, and the router sends 18 rules to axe-core against 22 to Marlo's own engine.
 
 Nobody edited that. Marlo's engine goes through the same harness, on the same corpus, with no special case, because a table where the author's own engine happened to win would be worth exactly nothing. That is [D-008](DECISIONS.md#d-008), and it is the reason to believe any other number here.
 
@@ -50,7 +50,7 @@ The table grades each engine on each rule. The router picks an engine per rule f
 
 Three things this says, and none of them flatters the design.
 
-**The routed engine's perfect precision was an artifact.** Held out, it falls to 0.939, and holding a single case out changes the router's choice on 16 of 709 cases across every routed rule. Routed this way, it scores below running Alfa everywhere on both precision and recall, though the intervals overlap.
+**The routed engine's perfect precision was an artifact.** Held out, it falls to 0.939, and holding a single case out changes the router's choice on 16 of 719 cases across every routed rule. Routed this way, it scores below running Alfa everywhere on both precision and recall, though the intervals overlap.
 
 **The product detects the union.** Because no engine may be silenced, a rule fails whenever any engine fails it, which gives the highest recall here and the highest false positive rate apart from HTML CodeSniffer alone. That trade is deliberate: a violation one engine can see is a violation, and the cost of reporting it is printed above rather than hidden.
 
@@ -64,8 +64,8 @@ Under Chromium, 590 test case outcomes are graded, because the layout cases beco
 
 | Engine, in Chromium | Rules  | Precision | Recall    | False positives |
 | ------------------- | ------ | --------- | --------- | --------------- |
-| axe-core            | 38     | 0.964     | 0.906     | 1.6%            |
-| Alfa                | 40     | 0.960     | 0.862     | 1.7%            |
+| axe-core            | 39     | 0.965     | 0.912     | 1.6%            |
+| Alfa                | 41     | 0.950     | 0.863     | 2.1%            |
 | **Marlo**           | **41** | **0.895** | **0.714** | **4.0%**        |
 | HTML CodeSniffer    | 12     | 0.622     | 0.394     | 13.0%           |
 

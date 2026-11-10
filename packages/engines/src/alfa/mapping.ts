@@ -318,6 +318,12 @@ const ENTRIES: readonly MappingEntry[] = [
     kind: 'partial',
     note: 'f0/5 p0 i0 ct8. Alfa R39 finds an image whose accessible name equals its filename and asks whether that is acceptable. cantTell on every applicable example, which is also what Marlo answers for this rule and for the same reason: whether a filename describes an image is a judgment.',
   },
+  {
+    engineRuleId: 'sia-r84',
+    actId: '0ssw9k',
+    kind: 'superset',
+    note: 'f2/2 p0 i2. Measured on the browser renderer. R84 cites the same requirements as the ACT rule (2.1.1, 2.1.3, G202) and catches both failing examples, and it also fails 2 of the 6 inapplicable ones, so its precision is 0.50 there. Inapplicable on all 10 on the static renderer, which does not lay out.',
+  },
 ];
 
 export const ALFA_MAPPING = buildMapping(ENTRIES);
