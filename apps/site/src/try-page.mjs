@@ -225,7 +225,7 @@ export function tryPage({ origin, repo, samples, escapeHtml, scribble }) {
         </div>
         <div class="wrap">
           <div id="mt-files"></div>
-          <div id="mt-results" class="try__results" aria-label="Findings"></div>
+          <div id="mt-results" class="try__results" role="region" aria-label="Findings"></div>
           <div class="try__actions try__actions--end">
             <button type="button" id="mt-download" class="btn btn-ghost" hidden>Download the report as JSON</button>
           </div>
@@ -290,7 +290,7 @@ export function tryPage({ origin, repo, samples, escapeHtml, scribble }) {
               <h3 class="row__title">Command line</h3>
               <div class="row__body prose">
                 <p>All four engines, routing, the invariant and SARIF. No network after install.</p>
-                <pre class="scroller"><code>git clone ${repo}.git
+                <pre class="scroller" tabindex="0" role="region" aria-label="Command line example, scrollable"><code>git clone ${repo}.git
 cd Marlo &amp;&amp; pnpm install &amp;&amp; pnpm build
 node packages/cli/dist/bin.js scan page.html</code></pre>
               </div>
@@ -299,14 +299,14 @@ node packages/cli/dist/bin.js scan page.html</code></pre>
               <h3 class="row__title">Docker</h3>
               <div class="row__body prose">
                 <p>The command line with nothing to install but Docker. Mount the folder to scan.</p>
-                <pre class="scroller"><code>${escapeHtml(docker)}</code></pre>
+                <pre class="scroller" tabindex="0" role="region" aria-label="Docker example, scrollable"><code>${escapeHtml(docker)}</code></pre>
               </div>
             </div>
             <div class="row">
               <h3 class="row__title">GitHub Action</h3>
               <div class="row__body prose">
                 <p>Read-only by default. Results land in the code scanning tab as SARIF.</p>
-                <pre class="scroller"><code>- uses: KarthikSubramanian07/Marlo/.github/actions/marlo@main</code></pre>
+                <pre class="scroller" tabindex="0" role="region" aria-label="GitHub Action example, scrollable"><code>- uses: KarthikSubramanian07/Marlo/.github/actions/marlo@main</code></pre>
                 <p><a class="textlink" href="${repo}/tree/main/.github/actions/marlo">Inputs and the opt-in pull request mode</a></p>
               </div>
             </div>
