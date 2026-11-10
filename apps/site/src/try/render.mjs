@@ -63,7 +63,11 @@ function ruleBlock(doc, rule, kind, onSelect, ruleHref) {
     locate.addEventListener('click', () => onSelect(verdict.target.selector));
     row.append(locate, el(doc, 'p', 'mt-verdict__message', verdict.message));
     if (verdict.target.snippet) {
-      row.append(el(doc, 'pre', 'mt-verdict__snippet', verdict.target.snippet));
+      const snippet = el(doc, 'pre', 'mt-verdict__snippet', verdict.target.snippet);
+      snippet.tabIndex = 0;
+      snippet.setAttribute('role', 'region');
+      snippet.setAttribute('aria-label', 'Markup snippet, scrollable');
+      row.append(snippet);
     }
     list.append(row);
   });
