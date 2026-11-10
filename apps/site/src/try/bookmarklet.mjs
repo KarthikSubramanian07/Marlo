@@ -42,10 +42,15 @@ function open() {
     root.append(style);
   }
 
+  const previouslyFocused =
+    document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
   const panel = document.createElement('section');
   panel.className = 'mt-panel';
   panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-modal', 'true');
   panel.setAttribute('aria-label', "Marlo's findings on this page");
+  panel.tabIndex = -1;
 
   const header = document.createElement('header');
   header.className = 'mt-panel__head';
@@ -79,13 +84,42 @@ function open() {
   root.append(panel);
   document.documentElement.append(host);
 
+  const focusables = () =>
+    [...panel.querySelectorAll('button, [href], summary, [tabindex]:not([tabindex="-1"])')].filter(
+      (node) => node instanceof HTMLElement && !node.hasAttribute('disabled'),
+    );
+
   const dismiss = () => {
     undo();
     host.remove();
     document.removeEventListener('keydown', onKey, true);
+    previouslyFocused?.focus();
   };
   const onKey = (event) => {
-    if (event.key === 'Escape') dismiss();
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      dismiss();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    const list = focusables();
+    if (list.length === 0) {
+      event.preventDefault();
+      panel.focus();
+      return;
+    }
+    const first = list[0];
+    const last = list[list.length - 1];
+    const active = root.activeElement;
+    if (event.shiftKey && (active === first || active === panel)) {
+      event.preventDefault();
+      last.focus();
+      return;
+    }
+    if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus();
+    }
   };
   close.addEventListener('click', dismiss);
   document.addEventListener('keydown', onKey, true);
