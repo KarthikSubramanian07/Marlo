@@ -4,8 +4,8 @@
   "marloVersion": "0.1.0",
   "startedAt": "<time>",
   "calibration": {
-    "generated": "2026-10-29",
-    "commit": "5f655e3fe7bdd9abd73d56d72aa75f16b0978bab",
+    "generated": "2026-11-10",
+    "commit": "ac98b39e2b46ff0204853a614b372714a7229a50",
     "corpusRetrieved": "2026-07-29"
   },
   "engines": [

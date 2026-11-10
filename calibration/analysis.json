@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-29",
-  "commit": "5f655e3fe7bdd9abd73d56d72aa75f16b0978bab",
+  "generated": "2026-11-10",
+  "commit": "ac98b39e2b46ff0204853a614b372714a7229a50",
   "renderer": "static",
   "interval": "wilson-95",
   "scopes": [
@@ -256,8 +256,8 @@
     {
       "id": "claimed",
       "description": "Every rule any engine claims and the router assigns, for comparing strategies over the widest set all four engines are measured on.",
-      "rules": 50,
-      "cases": 709,
+      "rules": 51,
+      "cases": 719,
       "strategies": [
         {
           "id": "scan-output",
@@ -265,8 +265,8 @@
           "description": "A rule fails on a page when any engine claiming it fails it, because the one-directional invariant forbids reporting clean once a peer has failed. At the level of a test case's outcome this is the union of the engines' failures.",
           "truePositives": 181,
           "falsePositives": 30,
-          "falseNegatives": 44,
-          "trueNegatives": 454,
+          "falseNegatives": 46,
+          "trueNegatives": 462,
           "precision": {
             "value": 0.8578,
             "low": 0.8043,
@@ -275,18 +275,18 @@
             "trials": 211
           },
           "recall": {
-            "value": 0.8044,
-            "low": 0.7477,
-            "high": 0.851,
+            "value": 0.7974,
+            "low": 0.7403,
+            "high": 0.8445,
             "successes": 181,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.062,
-            "low": 0.0438,
-            "high": 0.0871,
+            "value": 0.061,
+            "low": 0.043,
+            "high": 0.0857,
             "successes": 30,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -295,8 +295,8 @@
           "description": "For each case, the routing is recomputed from every other case of the rule with the table's own routeRule, and the case is decided by the engine chosen without it.",
           "truePositives": 158,
           "falsePositives": 10,
-          "falseNegatives": 67,
-          "trueNegatives": 474,
+          "falseNegatives": 69,
+          "trueNegatives": 482,
           "precision": {
             "value": 0.9405,
             "low": 0.8939,
@@ -305,18 +305,18 @@
             "trials": 168
           },
           "recall": {
-            "value": 0.7022,
-            "low": 0.6395,
-            "high": 0.7582,
+            "value": 0.696,
+            "low": 0.6333,
+            "high": 0.7522,
             "successes": 158,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.0207,
-            "low": 0.0113,
-            "high": 0.0376,
+            "value": 0.0203,
+            "low": 0.0111,
+            "high": 0.037,
             "successes": 10,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -325,8 +325,8 @@
           "description": "The published routing, chosen from every case including the one being scored. Optimistic by construction, and kept only for comparison.",
           "truePositives": 164,
           "falsePositives": 0,
-          "falseNegatives": 61,
-          "trueNegatives": 484,
+          "falseNegatives": 63,
+          "trueNegatives": 492,
           "precision": {
             "value": 1,
             "low": 0.9771,
@@ -335,18 +335,18 @@
             "trials": 164
           },
           "recall": {
-            "value": 0.7289,
-            "low": 0.6673,
-            "high": 0.7828,
+            "value": 0.7225,
+            "low": 0.6609,
+            "high": 0.7766,
             "successes": 164,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
             "value": 0,
             "low": 0,
-            "high": 0.0079,
+            "high": 0.0077,
             "successes": 0,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -355,8 +355,8 @@
           "description": "A rule fails when at least two of the engines claiming it fail it.",
           "truePositives": 150,
           "falsePositives": 10,
-          "falseNegatives": 75,
-          "trueNegatives": 474,
+          "falseNegatives": 77,
+          "trueNegatives": 482,
           "precision": {
             "value": 0.9375,
             "low": 0.8888,
@@ -365,18 +365,18 @@
             "trials": 160
           },
           "recall": {
-            "value": 0.6667,
-            "low": 0.6027,
-            "high": 0.725,
+            "value": 0.6608,
+            "low": 0.597,
+            "high": 0.7192,
             "successes": 150,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.0207,
-            "low": 0.0113,
-            "high": 0.0376,
+            "value": 0.0203,
+            "low": 0.0111,
+            "high": 0.037,
             "successes": 10,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -385,8 +385,8 @@
           "description": "Marlo on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
           "truePositives": 126,
           "falsePositives": 15,
-          "falseNegatives": 99,
-          "trueNegatives": 469,
+          "falseNegatives": 101,
+          "trueNegatives": 477,
           "precision": {
             "value": 0.8936,
             "low": 0.8319,
@@ -395,18 +395,18 @@
             "trials": 141
           },
           "recall": {
-            "value": 0.56,
-            "low": 0.4947,
-            "high": 0.6233,
+            "value": 0.5551,
+            "low": 0.49,
+            "high": 0.6183,
             "successes": 126,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.031,
-            "low": 0.0189,
-            "high": 0.0505,
+            "value": 0.0305,
+            "low": 0.0186,
+            "high": 0.0497,
             "successes": 15,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -415,8 +415,8 @@
           "description": "axe-core on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
           "truePositives": 139,
           "falsePositives": 7,
-          "falseNegatives": 86,
-          "trueNegatives": 477,
+          "falseNegatives": 88,
+          "trueNegatives": 485,
           "precision": {
             "value": 0.9521,
             "low": 0.9043,
@@ -425,18 +425,18 @@
             "trials": 146
           },
           "recall": {
-            "value": 0.6178,
-            "low": 0.5528,
-            "high": 0.6788,
+            "value": 0.6123,
+            "low": 0.5476,
+            "high": 0.6733,
             "successes": 139,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.0145,
-            "low": 0.007,
-            "high": 0.0295,
+            "value": 0.0142,
+            "low": 0.0069,
+            "high": 0.0291,
             "successes": 7,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -445,8 +445,8 @@
           "description": "Alfa on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
           "truePositives": 162,
           "falsePositives": 6,
-          "falseNegatives": 63,
-          "trueNegatives": 478,
+          "falseNegatives": 65,
+          "trueNegatives": 486,
           "precision": {
             "value": 0.9643,
             "low": 0.9243,
@@ -455,18 +455,18 @@
             "trials": 168
           },
           "recall": {
-            "value": 0.72,
-            "low": 0.658,
-            "high": 0.7746,
+            "value": 0.7137,
+            "low": 0.6517,
+            "high": 0.7685,
             "successes": 162,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.0124,
-            "low": 0.0057,
-            "high": 0.0268,
+            "value": 0.0122,
+            "low": 0.0056,
+            "high": 0.0263,
             "successes": 6,
-            "trials": 484
+            "trials": 492
           }
         },
         {
@@ -475,8 +475,8 @@
           "description": "HTML CodeSniffer on the rules it claims, reporting nothing on the rules it does not. A rule it could not evaluate on a case also counts as no detection, which is why this can differ from the table's per-rule figures, which leave such cases out.",
           "truePositives": 26,
           "falsePositives": 12,
-          "falseNegatives": 199,
-          "trueNegatives": 472,
+          "falseNegatives": 201,
+          "trueNegatives": 480,
           "precision": {
             "value": 0.6842,
             "low": 0.5254,
@@ -485,25 +485,25 @@
             "trials": 38
           },
           "recall": {
-            "value": 0.1156,
-            "low": 0.0801,
-            "high": 0.1639,
+            "value": 0.1145,
+            "low": 0.0794,
+            "high": 0.1625,
             "successes": 26,
-            "trials": 225
+            "trials": 227
           },
           "falsePositiveRate": {
-            "value": 0.0248,
-            "low": 0.0142,
-            "high": 0.0428,
+            "value": 0.0244,
+            "low": 0.014,
+            "high": 0.0421,
             "successes": 12,
-            "trials": 484
+            "trials": 492
           }
         }
       ]
     }
   ],
   "routingStability": {
-    "cases": 709,
+    "cases": 719,
     "casesWhereChoiceChanges": 16,
     "rulesWhereChoiceChanges": [
       "09o5cg",
@@ -547,10 +547,10 @@
     },
     {
       "engines": ["axe-core", "alfa"],
-      "cases": 508,
-      "percentAgreement": 0.7657,
-      "kappa": 0.6616,
-      "kappaFailed": 0.8271
+      "cases": 518,
+      "percentAgreement": 0.7703,
+      "kappa": 0.6689,
+      "kappaFailed": 0.8286
     },
     {
       "engines": ["axe-core", "htmlcs"],
