@@ -80,7 +80,7 @@ function ruleBlock(doc, rule, kind, onSelect, ruleHref) {
  * Fills `container` with the summary. `onSelect(selector)` is called when a reader asks
  * to see an element; `ruleHref(id)` gives the link for a rule.
  */
-export function renderResults(container, summary, { onSelect, ruleHref, durationMs }) {
+export function renderResults(container, summary, { onSelect, ruleHref, durationMs, unexamined }) {
   const doc = container.ownerDocument;
   container.replaceChildren();
 
@@ -127,6 +127,21 @@ export function renderResults(container, summary, { onSelect, ruleHref, duration
       `${summary.notExamined.map((r) => r.actRuleId).join(', ')}. ` +
       'This is not a pass: these rules did not run.';
     container.append(p);
+  }
+  // The same sentence `formatCriteriaWithoutActRule` gives the CLI, so a clean result here
+  // is not read as a pass of 2.5.8 Target Size either (DECISIONS.md D-017).
+  if (unexamined !== undefined && unexamined.criteria.length > 0) {
+    container.append(el(doc, 'h3', 'mt-section', 'Not examined by any scan'));
+    container.append(
+      el(
+        doc,
+        'p',
+        'mt-empty',
+        `${String(unexamined.criteria.length)} of the ${String(unexamined.of)} WCAG 2.2 level A ` +
+          'and AA success criteria have no published ACT rule, so no scan examines them and a ' +
+          `clean report is not a pass of any of them: ${unexamined.criteria.join(', ')}.`,
+      ),
+    );
   }
 }
 

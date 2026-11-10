@@ -1,5 +1,9 @@
 import type { PullRequestBody, VerifiedFix, Flag, Edit } from '@trymarlo/schema';
-import { SEVERITY_PRESENTATION, formatCoverage } from '@trymarlo/schema';
+import {
+  SEVERITY_PRESENTATION,
+  formatCoverage,
+  formatCriteriaWithoutActRule,
+} from '@trymarlo/schema';
 
 /**
  * The generated pull request body. The other thing developers judge Marlo by.
@@ -221,6 +225,11 @@ export function renderPullRequestBody(body: PullRequestBody): string {
     `Marlo covers ${formatCoverage(body.coverage)}. Of those, ${String(body.coverage.calibrated)} ` +
       'have measured accuracy against the official ACT test cases.',
   );
+  const unexamined = formatCriteriaWithoutActRule(body.coverage);
+  if (unexamined !== null) {
+    out.push('');
+    out.push(`**Not examined.** ${unexamined}.`);
+  }
   if (body.coverage.unmeasurable.length > 0) {
     out.push('');
     out.push(

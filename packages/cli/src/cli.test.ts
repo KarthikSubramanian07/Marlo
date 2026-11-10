@@ -196,6 +196,30 @@ describe('the terminal surface', () => {
     // And the reader is told where the numbers came from.
     expect(plain).toContain('calibration');
   });
+
+  it('points a clean page at the criteria no scan examines, and names them', async () => {
+    // Issue #162. A clean page is where 2.5.8 Target Size, which has no ACT rule, gets
+    // read as a pass, so the limit is stated there as well as in the summary.
+    const renderer = new StaticRenderer();
+    const report = await scan({
+      targets: [{ label: 'clean.html', html: CLEAN }],
+      renderer,
+      table,
+      marloVersion: '0.1.0-test',
+    });
+    await renderer.dispose();
+
+    // The fixture keeps findings some rules rightly raise, so its pages are emptied here to
+    // reach the branch a page with nothing to report takes.
+    const clean = { ...report, pages: report.pages.map((p) => ({ ...p, findings: [] })) };
+    const plain = renderTerminal(clean, { colour: false });
+    expect(plain).toContain('no findings');
+    const pointer = plain.indexOf('Criteria with no ACT rule were not examined');
+    const summary = plain.indexOf('  not examined: ');
+    expect(pointer).toBeGreaterThan(-1);
+    expect(summary).toBeGreaterThan(pointer);
+    expect(plain.slice(summary)).toContain('2.5.8');
+  });
 });
 
 describe('the marlo command', () => {

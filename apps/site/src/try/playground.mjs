@@ -81,6 +81,7 @@ function show(outcome) {
   const doc = frame.contentDocument;
   renderResults(results, outcome.summary, {
     durationMs: outcome.durationMs,
+    unexamined: META.unexamined,
     ruleHref: (id) => `https://act-rules.github.io/rules/${id}`,
     onSelect: (selector) => {
       undo();

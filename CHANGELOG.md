@@ -14,6 +14,8 @@ Nothing is published to a registry yet. There is no installable release, so ther
 
 ### Changed
 
+- Every report now names the 25 WCAG 2.2 level A and AA success criteria that no published ACT rule covers, among them 2.5.8 Target Size and 2.4.11 Focus Not Obscured, so a clean report is not read as a pass of them. The terminal, pull request body, SARIF, MCP server and playground print the same sentence, and the JSON report carries the list as `coverage.criteriaWithoutActRule`. No peer engine's check is reported for them, because none is measured. [D-017](DECISIONS.md#d-017-criteria-no-act-rule-reaches-are-named-on-every-report-and-no-peer-check-is-reported-for-them).
+
 - The packages are renamed from `@marlo/*` to `@trymarlo/*`, matching the site's address, because the `@marlo` scope on npm belongs to an unrelated account and nothing could have been published under it.
 
 ### Fixed

@@ -43,6 +43,22 @@ export const Coverage = z.object({
       missing: z.array(Capability),
     }),
   ),
+  /**
+   * WCAG 2.2 level A and AA success criteria that no published ACT rule maps to, and
+   * how many criteria that list was taken from. Marlo reports ACT rules only, so these
+   * are never examined, and a clean report is not a pass of any of them. Stated on the
+   * report rather than left to the reader, because 2.5.8 Target Size is among them and
+   * it is one of the failures most often found by hand (DECISIONS.md D-017).
+   *
+   * Null on a report written before the field existed, which says nothing either way.
+   */
+  criteriaWithoutActRule: z
+    .object({
+      of: z.number().int().positive(),
+      criteria: z.array(SuccessCriterion),
+    })
+    .nullable()
+    .default(null),
 });
 export type Coverage = z.infer<typeof Coverage>;
 
@@ -55,6 +71,22 @@ export type Coverage = z.infer<typeof Coverage>;
  */
 export function formatCoverage(coverage: Coverage): string {
   return `${String(coverage.implemented)} of ${String(coverage.publishedActRules)} published ACT rules`;
+}
+
+/**
+ * The criteria no scan examines, as the one sentence every surface states them in, or
+ * null when the report does not carry the list. Beside `formatCoverage` for the same
+ * reason: the terminal, the pull request body, SARIF and the MCP server cannot phrase
+ * the limit four ways, and one of them softening it is the defect this prevents.
+ */
+export function formatCriteriaWithoutActRule(coverage: Coverage): string | null {
+  const gap = coverage.criteriaWithoutActRule;
+  if (gap === null || gap.criteria.length === 0) return null;
+  return (
+    `${String(gap.criteria.length)} of the ${String(gap.of)} WCAG 2.2 level A and AA success ` +
+    'criteria have no published ACT rule, so no scan examines them and a clean report is not ' +
+    `a pass of any of them: ${gap.criteria.join(', ')}`
+  );
 }
 
 /**

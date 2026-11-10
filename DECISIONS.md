@@ -243,6 +243,16 @@ This does mean these rules can give different answers under the two renderers, w
 
 **Wrong if:** a rule using these helpers passes on the static renderer where it fails in a browser for any reason other than that exception, or uses them for anything other than leaving an element out. Either is a hidden false negative, and that rule declares `layout`.
 
+## D-017: Criteria no ACT rule reaches are named on every report, and no peer check is reported for them
+
+**Status:** accepted 2026-11-10. Settles issue #162.
+
+Marlo reports ACT rules only, because every number it publishes rests on official test cases. 25 of the 55 level A and AA success criteria in WCAG 2.2 have no published ACT rule in the corpus retrieved 2026-07-29, among them all six that WCAG 2.2 added at those levels: 2.4.11 Focus Not Obscured, 2.5.7 Dragging Movements, 2.5.8 Target Size, 3.2.6 Consistent Help, 3.3.7 Redundant Entry and 3.3.8 Accessible Authentication. A scan never examines them, and until now a report did not say so, so a clean report read as a pass of them. That is not hypothetical. A WCAG 2.2 AA pass over 54 repositories found 2.5.8 failing in 21 and 2.4.11 in 6, and axe-core's `target-size` caught only four of those 21 automatically.
+
+Two answers were on the table. Reporting a peer engine's findings for these criteria in a separate section with no confidence figure is what the evidence asks for, and it is refused for now: it publishes a finding no harness has measured, which is the defect this project exists to argue against, and a section without a number still reads as Marlo's word. Saying plainly that the criteria are not examined costs nothing and is true today, so that is what ships. `CRITERIA_WITHOUT_ACT_RULE` in `packages/act/src/wcag.ts` subtracts every criterion a published rule maps to from the WCAG 2.2 list, so the list shortens on its own when the corpus gains a rule. Every coverage figure carries it, `formatCriteriaWithoutActRule` in `@trymarlo/schema` is the one sentence that states it, and the terminal, the pull request body, SARIF, the MCP server and the playground all print that sentence.
+
+**Wrong if:** a real-page corpus is rated for one of these criteria, at which point a peer check for it can be measured and reported with its number, as any other rule is. Or a reader still takes a clean report as a pass of 2.5.8, which would mean the sentence is in the wrong place rather than missing.
+
 ---
 
 ## Working agreements

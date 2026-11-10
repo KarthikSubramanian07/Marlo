@@ -1,5 +1,6 @@
 import type { Capability, Coverage } from '@trymarlo/schema';
 import { PUBLISHED_ACT_RULE_COUNT, findRule } from './rules.js';
+import { CRITERIA_WITHOUT_ACT_RULE, WCAG22_A_AA_CRITERIA } from './wcag.js';
 
 /**
  * Coverage arithmetic.
@@ -93,6 +94,13 @@ export function computeCoverage(input: CoverageInput): Coverage {
       actRuleId: n.actRuleId,
       missing: [...n.missing],
     })),
+    // Every report carries the criteria no ACT rule reaches, because a clean report is
+    // otherwise read as a pass of them. The list does not depend on the input: it is a
+    // property of the corpus, not of what this run implemented.
+    criteriaWithoutActRule: {
+      of: WCAG22_A_AA_CRITERIA.length,
+      criteria: [...CRITERIA_WITHOUT_ACT_RULE],
+    },
   };
 }
 

@@ -9,7 +9,7 @@
  * A page whose content security policy forbids scripts from other origins will refuse to
  * load this file. That is the page's policy working, and the playground on /try/ remains.
  */
-import { evaluate, summarise } from './marlo.mjs';
+import { META, evaluate, summarise } from './marlo.mjs';
 import { highlight, renderResults } from './render.mjs';
 import { PANEL_CSS } from './panel-css.mjs';
 
@@ -73,6 +73,7 @@ function open() {
   let undo = () => {};
   renderResults(body, summary, {
     durationMs: outcome.durationMs,
+    unexamined: META.unexamined,
     ruleHref: (id) => `https://act-rules.github.io/rules/${id}`,
     onSelect: (selector) => {
       undo();

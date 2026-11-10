@@ -155,6 +155,7 @@ apps/demo/checkout.html
   ------------------------------------------------------------------------
   39 findings   0 fixed   0 flagged   2 not evaluated   0 crashed
   coverage: 41 of 94 published ACT rules
+  not examined: 25 of the 55 WCAG 2.2 level A and AA success criteria have no published ACT rule, so no scan examines them and a clean report is not a pass of any of them: 1.2.4, 1.3.2, 1.4.1, 1.4.11, 1.4.13, 2.2.2, 2.3.1, 2.4.3, 2.4.5, 2.4.11, 2.5.1, 2.5.2, 2.5.7, 2.5.8, 3.2.1, 3.2.2, 3.2.3, 3.2.4, 3.2.6, 3.3.2, 3.3.3, 3.3.4, 3.3.7, 3.3.8, 4.1.3.
   one-directional invariant enforced on 3 rule(s): a peer reported a failure the routed engine did not.
 ```
 
@@ -313,6 +314,7 @@ The playground and the bookmarklet run only Marlo's own engine, so they find les
 ## Where it will not help you
 
 - **It is not comprehensive and never says it is.** 41 of 94 published ACT rules, and automation reaches a minority of WCAG regardless.
+- **It does not examine a criterion no ACT rule covers.** That is 25 of the 55 level A and AA criteria in WCAG 2.2, including every one WCAG 2.2 added, such as 2.5.8 Target Size and 2.4.11 Focus Not Obscured. Every report names them, so a clean one is not read as a pass of them. Check those by hand. [D-017](DECISIONS.md#d-017-criteria-no-act-rule-reaches-are-named-on-every-report-and-no-peer-check-is-reported-for-them).
 - **It will not recolour your design.** Contrast is detected and located, never changed.
 - **It will not invent alt text.** Decorative images get an empty alt confidently. A description is written only where the page already supplies the meaning. Everything else comes back to you, because a confident wrong description is worse than an absent one: you can notice an absence. [D-009](DECISIONS.md#d-009).
 - **It cannot certify anything.** Nobody can. You get verified repair against named success criteria and a published error rate.
