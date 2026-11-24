@@ -359,6 +359,12 @@ A rule that measures badly still gets merged. It is published with its real numb
 
 ---
 
+## Citing it
+
+[CITATION.cff](CITATION.cff) holds the metadata, and GitHub turns it into the "Cite this repository" button. Cite the commit on `main` you took the numbers from, as well as the project, because a number quoted without its commit cannot be checked against anything. Every figure is generated from [calibration/table.json](calibration/table.json), which records the engine versions and the corpus date it was measured with. The commit it records is the branch commit the table was generated at, which a rebase merge replaces with a new hash, so quote the commit on `main` rather than that field.
+
+---
+
 ## Built on
 
 [axe-core](https://github.com/dequelabs/axe-core) (MPL-2.0, unmodified) · [Alfa](https://github.com/Siteimprove/alfa) (MIT) · [HTML CodeSniffer](https://github.com/squizlabs/HTML_CodeSniffer) (BSD-3-Clause) · [happy-dom](https://github.com/capricorn86/happy-dom) (MIT) · the [ACT-Rules Community corpus](https://act-rules.github.io) (W3C Software and Document Licence)
