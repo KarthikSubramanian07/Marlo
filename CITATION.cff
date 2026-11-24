@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: >-
+  If you use Marlo or its calibration tables in research, please cite it with
+  the metadata below, and name the commit on main the numbers came from.
+  Every published figure is regenerated from calibration/table.json, which
+  records the engine versions and the corpus date it was measured with.
+type: software
+title: 'Marlo: multi-engine accessibility testing with a published error rate'
+abstract: >-
+  Marlo runs several accessibility engines against a page and routes each
+  W3C ACT rule to the engine with the best measured accuracy on the ACT
+  Rules Community test cases. Precision, recall and the false positive rate
+  for every rule and engine are measured, published, and checked on every
+  change, together with results on two corpora of real pages.
+authors:
+  - family-names: Subramanian
+    given-names: Karthik
+repository-code: 'https://github.com/KarthikSubramanian07/Marlo'
+url: 'https://trymarlo.pages.dev'
+license: MIT
+version: 0.1.0
+keywords:
+  - accessibility
+  - WCAG
+  - ACT rules
+  - static analysis
+  - axe-core
+  - calibration
