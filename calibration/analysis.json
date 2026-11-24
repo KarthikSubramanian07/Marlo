@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-10",
-  "commit": "ac98b39e2b46ff0204853a614b372714a7229a50",
+  "generated": "2026-11-24",
+  "commit": "5c1cd67a9f864b838a4f62f147a1a430f25b83bb",
   "renderer": "static",
   "interval": "wilson-95",
   "scopes": [
